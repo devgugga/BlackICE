@@ -1,0 +1,121 @@
+services:
+  ldap:
+    image: dcm4che/slapd-dcm4chee:2.6.10-34.3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+    environment:
+      STORAGE_DIR: /storage/fs1
+    volumes:
+      - dcm4chee-ldap-data:/var/lib/openldap/openldap-data
+      - dcm4chee-slapd-conf:/etc/openldap/slapd.d
+    networks: [blackice]
+
+  # Backend de dados exigido pelo Keycloak nesta baseline (não citado nas
+  # Interfaces da Task 2, mas obrigatório: o compose oficial "secure" do
+  # dcm4chee-arc-light usa MariaDB como banco do Keycloak desde a série 5.3x,
+  # incluindo a versão do Keycloak pinada aqui — 25.0.6). Ver README.
+  mariadb:
+    image: mariadb:10.11.4
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${KEYCLOAK_DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+    volumes:
+      - dcm4chee-mysql-data:/var/lib/mysql
+    networks: [blackice]
+
+  keycloak:
+    image: dcm4che/keycloak:25.0.6
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+    ports:
+      - "8843:8843"
+    environment:
+      KC_HTTPS_PORT: 8843
+      KC_HOSTNAME: https://${DCM4CHEE_HOST}:8843
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: 'true'
+      # Keycloak 25.x usa KEYCLOAK_ADMIN/KEYCLOAK_ADMIN_PASSWORD para o bootstrap
+      # do admin do realm master (a partir do Keycloak 26 passou a ser
+      # KC_BOOTSTRAP_ADMIN_USERNAME/PASSWORD — não usar essas aqui).
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: mariadb
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_URL_HOST: mariadb
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      KC_LOG: file
+      # Nome do realm importado no primeiro startup. Default oficial é
+      # "dcm4che" (sem o segundo "e"); fixado para "dcm4chee" para casar com
+      # o nome do produto e com a verificação da Task 2.
+      REALM_NAME: dcm4chee
+      ARCHIVE_HOST: ${DCM4CHEE_HOST}
+      KEYCLOAK_WAIT_FOR: "ldap:389 mariadb:3306"
+    depends_on:
+      - ldap
+      - mariadb
+    volumes:
+      - dcm4chee-keycloak-data:/opt/keycloak/data
+    networks: [blackice]
+
+  # Postgres do DCM4CHEE (Archive). Nomeado "arc-db" (conforme Interfaces da
+  # Task 2) em vez do "db" oficial; para o Archive encontrá-lo é preciso
+  # apontar POSTGRES_HOST=arc-db explicitamente no serviço `arc` abaixo —
+  # o default embutido na imagem do Archive é o hostname "db".
+  arc-db:
+    image: dcm4che/postgres-dcm4chee:17.4-34
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+    environment:
+      POSTGRES_DB: ${DCM4CHEE_DB}
+      POSTGRES_USER: ${DCM4CHEE_DB_USER}
+      POSTGRES_PASSWORD: ${DCM4CHEE_DB_PASSWORD}
+    volumes:
+      - dcm4chee-db-data:/var/lib/postgresql/data
+    networks: [blackice]
+
+  arc:
+    image: dcm4che/dcm4chee-arc-psql:5.34.3-secure
+    environment:
+      POSTGRES_HOST: arc-db
+      POSTGRES_DB: ${DCM4CHEE_DB}
+      POSTGRES_USER: ${DCM4CHEE_DB_USER}
+      POSTGRES_PASSWORD: ${DCM4CHEE_DB_PASSWORD}
+      AUTH_SERVER_URL: https://keycloak:8843
+      UI_AUTH_SERVER_URL: https://${DCM4CHEE_HOST}:8843
+      REALM_NAME: dcm4chee
+      WILDFLY_CHOWN: /storage
+      WILDFLY_WAIT_FOR: "ldap:389 arc-db:5432 keycloak:8843"
+    depends_on:
+      - ldap
+      - keycloak
+      - arc-db
+    volumes:
+      - dcm4chee-wildfly-data:/opt/wildfly/standalone
+      - dcm4chee-storage:/storage
+    networks: [blackice]
+
+volumes:
+  dcm4chee-ldap-data:
+  dcm4chee-slapd-conf:
+  dcm4chee-mysql-data:
+  dcm4chee-keycloak-data:
+  dcm4chee-db-data:
+  dcm4chee-wildfly-data:
+  dcm4chee-storage:
+
+networks:
+  blackice:
+    external: true
+    name: blackice

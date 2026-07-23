@@ -29,7 +29,13 @@ A release 5.34.3 também publica os seguintes componentes para a sua stack Docke
   produto do Quarkus;
 - `dcm4che/keycloak:25.0.6` para o Keycloak obrigatório da baseline segura do
   BlackICE;
+- `mariadb:10.11.4` como banco do Keycloak — o compose *secure* oficial inclui este
+  5º serviço (o Keycloak não usa o Postgres do Archive). Confirmado ao subir a stack;
 - WildFly 39.0.1.Final como atualização interna da release do Archive.
+
+> **Atenção à versão do Keycloak:** a tag da **release 5.34.3** é `25.0.6` (confirmado
+> na página da release). O *wiki HEAD* do dcm4che pode exibir `26.0.6`, pois acompanha
+> o `master`, não a release fixada. Para a baseline do BlackICE vale a release: **25.0.6**.
 
 Essas versões são registradas como referências de compatibilidade da release, não como
 uma autorização para montar a infraestrutura sem definir persistência, segredos,
