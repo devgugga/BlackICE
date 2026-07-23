@@ -1,0 +1,7 @@
+# infra secrets
+infra/.env
+# node / vite
+frontend/node_modules/
+frontend/dist/
+# quarkus / maven
+backend/target/

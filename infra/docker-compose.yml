@@ -1,0 +1,37 @@
+services:
+  traefik:
+    image: traefik:v3.1
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--api.dashboard=true"
+      - "--api.insecure=true"   # dashboard em :8081 só para DEV
+    ports:
+      - "80:80"
+      - "8081:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks: [blackice]
+
+  product-db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: ${PRODUCT_DB}
+      POSTGRES_USER: ${PRODUCT_DB_USER}
+      POSTGRES_PASSWORD: ${PRODUCT_DB_PASSWORD}
+    volumes:
+      - product-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PRODUCT_DB_USER} -d ${PRODUCT_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks: [blackice]
+
+volumes:
+  product-db-data:
+
+networks:
+  blackice:
+    name: blackice
