@@ -3,8 +3,8 @@
 ## Versão fixada
 
 O BlackICE adota **DCM4CHEE Archive 5.34.3** como baseline da integração. A release
-foi publicada pelo projeto dcm4che em 24 de abril de 2026 e está marcada como
-`Latest` no repositório oficial.
+foi publicada pelo projeto dcm4che em **2026-04-24** e está marcada como `Latest` no
+repositório oficial.
 
 Para uma implantação Docker protegida que exponha a UI e os serviços REST, a imagem
 do Archive deve ser fixada em:
@@ -23,7 +23,10 @@ essa tag.
 A release 5.34.3 também publica os seguintes componentes para a sua stack Docker:
 
 - `dcm4che/slapd-dcm4chee:2.6.10-34.3` para a configuração LDAP;
-- uma das imagens `dcm4che/postgres-dcm4chee` listadas na release (PostgreSQL 11 a 17);
+- `dcm4che/postgres-dcm4chee:17.4-34` para o PostgreSQL do Archive — a release
+  publica imagens de PostgreSQL 11 a 17; o BlackICE fixa a **17.4-34** (mais recente
+  suportada) como baseline. Este é o Postgres **do DCM4CHEE**, distinto do banco de
+  produto do Quarkus;
 - `dcm4che/keycloak:25.0.6` para o Keycloak obrigatório da baseline segura do
   BlackICE;
 - WildFly 39.0.1.Final como atualização interna da release do Archive.

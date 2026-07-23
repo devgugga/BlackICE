@@ -8,11 +8,18 @@ Semântica DICOM: ver `docs/domains/dicom/` — este backend deve respeitá-la.
 
 - `quarkus-rest` (Jakarta REST) — API para o frontend Vue.
 - `quarkus-hibernate-orm-panache` + `quarkus-jdbc-postgresql` — domínio próprio.
-- `quarkus-oidc` — valida o Bearer token do Keycloak nos endpoints.
+- `quarkus-oidc` em **modo web-app (BFF)** — executa Authorization Code + PKCE,
+  guarda o token server-side e entrega ao browser só um cookie de sessão HttpOnly.
+  O token nunca vive no JavaScript. Ver
+  [`docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md`](../../superpowers/specs/2026-07-23-blackice-backend-frontend-design.md).
 - `quarkus-rest-client` (MicroProfile REST Client) — client tipado para o DICOMweb
   do DCM4CHEE (QIDO/WADO/STOW).
-- `quarkus-oidc-token-propagation` (ou filtro equivalente) — **propaga** o access
-  token do usuário nas chamadas ao DCM4CHEE.
+- **Identidade para o DCM4CHEE (a verificar na implementação):** no modo web-app
+  **não há bearer de entrada** — só o cookie. O access token da sessão é recuperado
+  server-side e usado na chamada DICOMweb. Como esse token tem *audience* do cliente
+  Quarkus e o archive valida contra o **seu próprio** cliente Keycloak, é preciso
+  **audience compartilhado** ou **token exchange** (`quarkus-oidc-token-propagation`
+  expõe `exchange-token`). Decisão de config Keycloak vai ao gate humano.
 
 ## Fronteira de responsabilidade (crítico)
 
@@ -28,9 +35,12 @@ Semântica DICOM: ver `docs/domains/dicom/` — este backend deve respeitá-la.
 ## Autenticação e propagação de token
 
 - Endpoints protegidos com `@Authenticated`/roles do Keycloak via `quarkus-oidc`.
-- Ao chamar o DCM4CHEE, **encaminhe o token do usuário** (token propagation) — não
-  use uma credencial de serviço fixa para ações que representam um usuário, senão a
-  auditoria do archive perde o autor real.
+- Ao chamar o DCM4CHEE, **encaminhe a identidade do usuário** (propagação ou token
+  exchange — ver Extensões acima) — nunca uma credencial de serviço fixa para ações
+  que representam um usuário, senão a auditoria do archive perde o autor real.
+- **CSRF (obrigatório no BFF):** como a sessão é cookie HttpOnly, todo endpoint que
+  muda estado (STOW, criar/editar laudo) precisa de proteção CSRF — cookies
+  `SameSite` + filtro CSRF do Quarkus.
 
 ## Modelagem de laudo (MVP)
 
