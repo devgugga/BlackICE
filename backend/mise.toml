@@ -1,0 +1,5 @@
+# Toolchain do BlackICE — fixada para todos os agents/ferramentas.
+# Java: distribuição Temurin. Maven e Java rodam via mise (não JDK/Maven do sistema).
+[tools]
+java = "temurin-21"
+maven = "3"
