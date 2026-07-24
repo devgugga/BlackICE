@@ -84,8 +84,12 @@ limpa onde ela ainda não existe.
   `https://localhost:8843/realms/dcm4chee`.
 - Admin console do Keycloak (realm master): `https://localhost:8843/admin`
   (usuário `admin`, senha em `KEYCLOAK_ADMIN_PASSWORD` no `.env`).
-- Archive (WildFly): HTTP `http://localhost:8080/dcm4chee-arc`, HTTPS
-  `https://localhost:8443/dcm4chee-arc`, Admin Console `http://localhost:9990`.
+- Archive (WildFly): **sem porta publicada no host** (invariante: DCM4CHEE
+  nunca exposto ao browser — só o Quarkus fala DICOMweb com ele pela rede
+  interna). Dentro da rede `blackice` responde em `http://arc:8080/dcm4chee-arc`
+  (HTTP), `https://arc:8443/dcm4chee-arc` (HTTPS) e admin console `:9990` — use
+  `docker compose exec arc ...` para alcançá-los; NÃO adicione `ports:` ao
+  serviço `arc`.
 - AE Title padrão: `DCM4CHEE`. Usuários pré-configurados no realm:
   `root`/`changeit`, `admin`/`changeit`, `user`/`changeit` (senhas fixas do
   realm importado pela imagem — trocar antes de qualquer uso além de dev
