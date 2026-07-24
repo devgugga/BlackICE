@@ -114,8 +114,3 @@ volumes:
   dcm4chee-db-data:
   dcm4chee-wildfly-data:
   dcm4chee-storage:
-
-networks:
-  blackice:
-    external: true
-    name: blackice

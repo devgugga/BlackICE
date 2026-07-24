@@ -30,7 +30,10 @@ https://github.com/dcm4che-dockerfiles/keycloak-quarkus).
 Conforme `docs/architecture/dcm4chee-archive.md` (baseline 5.34.3). Nenhuma tag
 usa `latest`.
 
-Anexado à rede externa `blackice` criada por `infra/docker-compose.yml`.
+Anexado à rede `blackice`, definida no compose base `infra/docker-compose.yml`
+(sempre incluído com `-f` nas invocações). Este arquivo apenas referencia a
+rede — não a declara como `external`, para não quebrar o bring-up numa máquina
+limpa onde ela ainda não existe.
 
 ## Desvios em relação ao compose oficial (documentados)
 

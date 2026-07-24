@@ -180,7 +180,8 @@ Compose adaptado do oficial (wiki "Run secured archive services on a single host
 https://github.com/dcm4che/dcm4chee-arc-light/wiki/Running-on-Docker
 
 Tags pinadas conforme docs/architecture/dcm4chee-archive.md (baseline 5.34.3).
-Anexado à rede externa `blackice` criada por infra/docker-compose.yml.
+Anexado à rede `blackice`, definida no compose base infra/docker-compose.yml
+(referência apenas, sem `external: true`).
 ```
 
 - [ ] **Step 5: Subir a stack (ordem: ldap → keycloak → arc-db → arc)**
@@ -635,26 +636,28 @@ git commit -m "feat(frontend): guarda de rota via /api/me e shell autenticado"
 **Files:**
 - Create: `backend/src/main/docker/Dockerfile.jvm` (se não gerado), rótulos Traefik no compose
 - Create: `frontend/Dockerfile` (build estático servido pelo Traefik ou nginx)
-- Modify: `infra/docker-compose.yml` (serviços `backend` e `frontend` com labels Traefik)
+- Create: `infra/docker-compose.app.yml` (serviços `backend` e `frontend` com labels Traefik)
+- Modify: `infra/docker-compose.yml` (compatibilidade do provider Docker do Traefik)
 
 **Interfaces:**
 - Consumes: tudo anterior.
 - Produces: um único host `http://blackice.localhost` → `/api/*` no Quarkus, `/` no SPA; login OIDC ponta-a-ponta funcionando.
 
-- [ ] **Step 1: Adicionar `backend` e `frontend` ao compose com labels Traefik**
+- [ ] **Step 1: Adicionar `backend` e `frontend` ao compose complementar com labels Traefik**
 
 ```yaml
   backend:
     build: ../backend
     environment:
+      QUARKUS_OIDC_AUTH_SERVER_URL: https://keycloak:8843/realms/dcm4chee
       QUARKUS_OIDC_SECRET: ${QUARKUS_OIDC_SECRET}
-      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://product-db:5432/${PRODUCT_DB}
+      QUARKUS_OIDC_ENCRYPTION_SECRET: ${QUARKUS_OIDC_ENCRYPTION_SECRET}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`${APP_HOST}`) && PathPrefix(`/api`)"
       - "traefik.http.routers.api.entrypoints=web"
       - "traefik.http.services.api.loadbalancer.server.port=8080"
-    depends_on: [product-db, keycloak]
+    depends_on: [keycloak]
     networks: [blackice]
 
   frontend:
@@ -700,9 +703,9 @@ Expected: sem erro.
 
 Run:
 ```bash
-cd infra && docker compose -f docker-compose.yml -f dcm4chee/docker-compose.dcm4chee.yml up -d --build backend frontend
+cd infra && docker compose -f docker-compose.yml -f dcm4chee/docker-compose.dcm4chee.yml -f docker-compose.app.yml up -d --build backend frontend
 ```
-Expected: `backend` e `frontend` sobem e são healthy.
+Expected: `backend` e `frontend` ficam `Up`; `product-db` permanece `healthy`.
 
 - [ ] **Step 5: Verificar `/api/me` anônimo pela borda (mesma origem)**
 
@@ -718,7 +721,7 @@ Expected: `401` (sem cookie).
 5. Keycloak volta para `/api/*` → Quarkus seta o **cookie de sessão HttpOnly** → redireciona para `/`.
 6. `HomeView` chama `/api/me` → 200 → mostra "Autenticado como dr.teste".
 
-Expected: passo 6 exibe o username. **Verifique no DevTools que o cookie de sessão é `HttpOnly` e que NÃO há access token no `localStorage`/`sessionStorage`** (invariante BFF).
+Expected: passo 6 exibe o username; `/api/me` inclui a role `auth`. **Verifique no DevTools que o cookie de sessão é `HttpOnly` e que NÃO há access token no `localStorage`/`sessionStorage`** (invariante BFF).
 
 - [ ] **Step 7: Commit**
 

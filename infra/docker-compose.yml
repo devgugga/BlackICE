@@ -1,8 +1,32 @@
 services:
+  # Sidecar de compatibilidade: o cliente Docker embutido no provider.docker
+  # do Traefik v3.1/v3.5 faz a chamada de bootstrap SEMPRE em /v1.24/... e não
+  # expõe config nem respeita DOCKER_API_VERSION para mudar isso (verificado
+  # empiricamente — ver Task 6 report). O dockerd deste host (Docker Desktop,
+  # API mínima 1.40) responde 400 Bad Request a qualquer versão abaixo do
+  # mínimo, em vez de negociar como daemons mais antigos faziam. Sem este
+  # proxy, o Traefik nunca consegue falar com o socket e nenhum label é
+  # descoberto. O proxy reescreve o prefixo de versão da URL para 1.43 (>=
+  # mínimo, <= versão do daemon) antes de repassar ao socket real.
+  docker-proxy:
+    image: nginx:1.27-alpine
+    volumes:
+      - "/var/run/docker.sock:/hostsock/docker.sock:ro"
+      - "./docker-proxy/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "docker-proxy-sock:/shared"
+    # O socket que este nginx escuta vive num volume nomeado que sobrevive a
+    # `down`/reboot/restart do Docker Desktop. Sem remover o arquivo antigo
+    # antes, o bind() falha com EADDRINUSE e o Traefik volta a não descobrir
+    # nada (mesmo bug documentado no Task 6 report, reintroduzido por reuso
+    # de volume). Limpa o socket obsoleto antes de subir o nginx de verdade.
+    entrypoint: ["sh", "-c", "rm -f /shared/docker.sock && exec /docker-entrypoint.sh nginx -g 'daemon off;'"]
+    networks: [blackice]
+
   traefik:
     image: traefik:v3.1
     command:
       - "--providers.docker=true"
+      - "--providers.docker.endpoint=unix:///shared/docker.sock"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       - "--api.dashboard=true"
@@ -11,7 +35,9 @@ services:
       - "80:80"
       - "8081:8080"
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "docker-proxy-sock:/shared"
+    depends_on:
+      - docker-proxy
     networks: [blackice]
 
   product-db:
@@ -31,6 +57,7 @@ services:
 
 volumes:
   product-db-data:
+  docker-proxy-sock:
 
 networks:
   blackice:
