@@ -65,7 +65,7 @@ limpa onde ela ainda não existe.
 5. **Credenciais e hostname parametrizados via `infra/.env`** (`DCM4CHEE_HOST`,
    `KEYCLOAK_ADMIN_PASSWORD`, `DCM4CHEE_DB*`, `KEYCLOAK_DB*`) em vez dos
    valores fixos (`secret`/`pacs`/`changeit`) do exemplo oficial, seguindo o
-padrão já usado por `PRODUCT_DB*` em `infra/compose.yml`.
+   padrão já usado por `PRODUCT_DB*` em `infra/compose.yml`.
 6. **Sem colisão de porta com o resto da stack.** Traefik usa `80` e `8081`;
    nenhum serviço do DCM4CHEE usa essas portas. Todas as portas do compose
    oficial (`389`, `636`, `3306`, `8843`, `5432`, `8080`, `8443`, `9990`,
@@ -118,6 +118,3 @@ docker compose -f infra/compose.yml -f infra/dcm4chee/compose.yml -f infra/compo
 ```
 Esperado: `401` (QIDO exige Bearer token — confirma que o DICOMweb está de pé
 e protegido).
-
-Ver `.superpowers/sdd/task-2-report.md` para as saídas reais dessas
-verificações.

@@ -49,11 +49,13 @@ metadados/rendered.
 ## Autenticação (Keycloak / OIDC)
 
 - O DCM4CHEE protegido por Keycloak espera **Bearer token** OIDC.
-- O token do usuário deve ser **propagado** na chamada DICOMweb (ex.: o backend
-  encaminha o access token recebido do frontend). Não use credenciais de serviço
-  fixas para ações que representam um usuário — quebra a auditoria.
-- CORS: se o browser chamar DICOMweb direto, o servidor precisa liberar os headers;
-  se passar pelo backend (proxy), o CORS é entre browser↔backend.
+- No BlackICE, o browser envia ao Quarkus somente o cookie de sessão `HttpOnly`
+  same-origin; o access token é inacessível ao JavaScript.
+- O Quarkus recupera o access token da sessão OIDC server-side e o propaga (ou
+  troca) ao chamar o DCM4CHEE. Não use credenciais de serviço fixas para ações que
+  representam um usuário — quebra a auditoria.
+- O browser não chama o Archive diretamente: toda chamada DICOMweb passa pelo
+  Quarkus, e o CORS relevante é entre browser e backend.
 
 ## Erros comuns (o revisor sinaliza)
 

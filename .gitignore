@@ -12,5 +12,5 @@ apps/backend/target/
 # isolated implementation worktrees
 .worktrees/
 
-# editor (apenas .vscode do root; frontend/.vscode e do template Vite)
+# editor (apenas .vscode do root; apps/frontend/.vscode é do template Vite)
 /.vscode/

@@ -13,10 +13,10 @@ do Archive deve ser fixada em:
 dcm4che/dcm4chee-arc-psql:5.34.3-secure
 ```
 
-Nunca use a tag mutável `latest` em ambiente reproduzível. Ainda não há um manifesto
-de infraestrutura neste repositório; portanto, esta é a baseline arquitetural. Quando
-o Docker Compose ou outro provisionamento for criado, ele deve referenciar exatamente
-essa tag.
+Nunca use a tag mutável `latest` em ambiente reproduzível. A infraestrutura atual é
+composta pelos manifests `infra/compose.yml`, `infra/dcm4chee/compose.yml` e
+`infra/compose.apps.yml`. O manifest do Archive materializa a baseline 5.34.3 ao
+referenciar exatamente a tag `5.34.3-secure`.
 
 ## Ecossistema publicado com a release
 

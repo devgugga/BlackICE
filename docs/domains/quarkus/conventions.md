@@ -21,17 +21,20 @@ regra geral.
 - `quarkus-rest` (Jakarta REST) — API para o frontend Vue.
 - `quarkus-hibernate-orm-panache` + `quarkus-jdbc-postgresql` — domínio próprio.
 - `quarkus-oidc` em **modo web-app (BFF)** — executa Authorization Code + PKCE,
-  guarda o token server-side e entrega ao browser só um cookie de sessão HttpOnly.
-  O token nunca vive no JavaScript. Ver
+  guarda estado e tokens em cookies criptografados HttpOnly no browser. Com
+  `split-tokens`, os tokens são distribuídos entre cookies; não existe store
+  server-side. O access token nunca é acessível ao JavaScript. Ver
   [`docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md`](../../superpowers/specs/2026-07-23-blackice-backend-frontend-design.md).
 - `quarkus-rest-client` (MicroProfile REST Client) — client tipado para o DICOMweb
   do DCM4CHEE (QIDO/WADO/STOW).
 - **Identidade para o DCM4CHEE (a verificar na implementação):** no modo web-app
   **não há bearer de entrada** — só o cookie. O access token da sessão é recuperado
-  server-side e usado na chamada DICOMweb. Como esse token tem *audience* do cliente
+  pelo Quarkus a partir dos cookies criptografados durante o processamento no
+  servidor e usado na chamada DICOMweb. Como esse token tem *audience* do cliente
   Quarkus e o archive valida contra o **seu próprio** cliente Keycloak, é preciso
-  **audience compartilhado** ou **token exchange** (`quarkus-oidc-token-propagation`
-  expõe `exchange-token`). Decisão de config Keycloak vai ao gate humano.
+  **audience compartilhado** ou **token exchange**
+  (`quarkus-oidc-token-propagation` expõe `exchange-token`). Decisão de config
+  Keycloak vai ao gate humano.
 
 ## Fronteira de responsabilidade (crítico)
 
