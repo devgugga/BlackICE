@@ -1,61 +1,55 @@
-# blackice-backend
+# Backend BlackICE
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Backend de produto e BFF do BlackICE, implementado com Quarkus e Java 21. Ele
+mantém o domínio próprio, integra a autenticação OIDC e acessa o DCM4CHEE apenas
+por DICOMweb.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## Toolchain
 
-## Running the application in dev mode
+O `mise.toml` fixa Temurin Java 21 e Maven 3:
 
-You can run your application in dev mode that enables live coding using:
-
-```shell script
-./mvnw quarkus:dev
+```powershell
+mise install
+mise exec -- java -version
+mise exec -- mvn -version
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+## Testar e construir
 
-## Packaging and running the application
-
-The application can be packaged using:
-
-```shell script
-./mvnw package
+```powershell
+mise exec -- mvn test
+mise exec -- mvn package
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+## Desenvolvimento
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+Copie `.env.example` para `.env`, defina os dois segredos e carregue essas
+variáveis no shell. Depois execute:
 
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
+```powershell
+mise exec -- mvn quarkus:dev
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+As variáveis OIDC usadas pela configuração atual são:
 
-## Creating a native executable
+- `QUARKUS_OIDC_SECRET`: secret do client `blackice-quarkus`;
+- `QUARKUS_OIDC_ENCRYPTION_SECRET`: chave de ao menos 32 caracteres para
+  criptografar o estado da sessão;
+- `QUARKUS_OIDC_AUTH_SERVER_URL`: override opcional do issuer configurado em
+  `application.properties`.
 
-You can create a native executable using:
+Não versione `.env` nem segredos.
 
-```shell script
-./mvnw package -Dnative
-```
+## Organização
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+O código é organizado em `src/main/java/dev/blackice/features/<name>/`. Rotas,
+DTOs e colaboradores ficam dentro da feature, e os testes espelham o pacote em
+`src/test/java`. Não crie pacotes técnicos globais.
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
+Leia a [estrutura canônica](../../docs/architecture/project-structure.md) antes
+de adicionar uma feature e as
+[convenções Quarkus](../../docs/domains/quarkus/conventions.md) antes de alterar
+integrações OIDC ou DICOMweb.
 
-You can then execute your native executable with: `./target/blackice-backend-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- REST ([guide](https://quarkus.io/guides/rest)): Build RESTful web services and APIs using Jakarta REST (formerly JAX-RS)
-- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
-- SmallRye Health ([guide](https://quarkus.io/guides/smallrye-health)): Monitor service health
-- OpenID Connect ([guide](https://quarkus.io/guides/security-openid-connect)): Secure applications with OpenID Connect and OAuth 2.0 using bearer tokens and authorization code flow
+O browser recebe somente o cookie de sessão HttpOnly do BFF. Tokens OIDC não
+devem ser expostos ao JavaScript.

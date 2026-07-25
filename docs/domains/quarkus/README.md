@@ -1,8 +1,9 @@
 # Domain Pack: Quarkus ✗ (project-scoped)
 
 Fonte da verdade sobre o **backend Quarkus** do BlackICE. **Não é reutilizável:**
-o projeto real usa Django. Este pack fica para trás quando o conhecimento DICOM/Vue
-for copiado para outro projeto.
+é project-scoped porque descreve decisões específicas do BlackICE/Quarkus. Este
+pack fica para trás quando o conhecimento DICOM/Vue for copiado para outro
+projeto.
 
 ## Documentos
 

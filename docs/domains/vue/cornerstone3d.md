@@ -18,8 +18,9 @@ vazar memória.
 ## Fluxo de montagem (padrão)
 
 1. `init()` do core e dos tools **uma vez** na inicialização do app.
-2. Configure o `dicom-image-loader` com o **header de autenticação** (Bearer token
-   OIDC) via `beforeSend`/config — senão o WADO-RS do DCM4CHEE retorna 401.
+2. Configure o `dicom-image-loader` para o caminho WADO estreito de mesma origem
+   proxied pelo Quarkus. A sessão BFF segue no cookie HttpOnly; nenhum access
+   token é lido ou injetado pelo JavaScript.
 3. Monte `imageId`s a partir de **WADO-RS** (nunca de QIDO — QIDO é só metadado).
    A lista de instâncias/frames vem de uma query QIDO; os pixels vêm de WADO.
 4. No componente: `onMounted` → pega a `<div>` via `ref`, cria/pega a
@@ -47,7 +48,7 @@ binding do mouse, não recriando o viewport.
 ## Checklist de revisão
 
 - [ ] `imageId` construído a partir de WADO-RS (não QIDO)?
-- [ ] Token OIDC injetado no loader (`beforeSend`)?
+- [ ] Loader usa o proxy WADO de mesma origem, sem token no JavaScript?
 - [ ] Objetos Cornerstone fora da reatividade (`shallowRef`/`markRaw`)?
 - [ ] `onUnmounted` destrói rendering engine/viewport e limpa listeners?
 - [ ] `init()` do core/tools chamado uma vez, não por componente?

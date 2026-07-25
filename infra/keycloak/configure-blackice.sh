@@ -20,7 +20,7 @@ set -a; . "$ENV_FILE"; set +a
 : "${QUARKUS_OIDC_SECRET:?defina QUARKUS_OIDC_SECRET em infra/.env}"
 : "${APP_HOST:?defina APP_HOST em infra/.env}"
 
-DC="docker compose -f $ROOT/infra/docker-compose.yml -f $ROOT/infra/dcm4chee/docker-compose.dcm4chee.yml"
+DC="docker compose -f $ROOT/infra/compose.yml -f $ROOT/infra/dcm4chee/compose.yml -f $ROOT/infra/compose.apps.yml"
 
 $DC exec -T \
   -e QUARKUS_OIDC_SECRET="$QUARKUS_OIDC_SECRET" \

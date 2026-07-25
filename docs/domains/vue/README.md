@@ -1,8 +1,9 @@
 # Domain Pack: Vue ♻️
 
 Fonte da verdade sobre o **frontend Vue 3 + Vite** e o **viewer Cornerstone3D**.
-**Reutilizável:** o viewer é agnóstico ao backend (fala DICOMweb direto), então
-transfere para outros projetos de imagem médica.
+**Reutilizável:** o viewer consome uma interface DICOMweb compatível e pode ser
+adaptado a outros projetos de imagem médica. No BlackICE, ele usa o caminho WADO
+estreito proxied pelo Quarkus; o browser não acessa o DCM4CHEE diretamente.
 
 ## Documentos
 

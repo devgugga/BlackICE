@@ -21,6 +21,20 @@ PACS (Picture Archiving and Communication System) de portfólio/aprendizado.
 MVP (4 fluxos ponta-a-ponta): (1) ingestão via STOW-RS, (2) worklist + busca via
 QIDO-RS, (3) viewer do estudo com Cornerstone3D, (4) laudos + autenticação.
 
+## Estrutura do repositório
+
+`docs/architecture/project-structure.md` é a fonte canônica operacional. Leia-a
+antes de criar ou mover código.
+
+- `apps/backend/`: API/BFF Quarkus.
+- `apps/frontend/`: SPA Vue 3 + Vite.
+- `infra/`: composição e configuração operacional local.
+- `docs/`: arquitetura, Domain Packs e registros históricos.
+
+Não crie novas pastas raiz de aplicação nem camadas técnicas globais como
+`controller/`, `service/` e `repository/`. As receitas completas para features
+Quarkus e Vue estão no documento canônico.
+
 ## Arquitetura de agentes: "Domain Packs"
 
 O conhecimento vive **uma vez**, em markdown neutro, e é reaproveitado por todas

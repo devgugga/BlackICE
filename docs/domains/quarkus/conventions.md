@@ -4,6 +4,18 @@ O Quarkus é o backend **de produto**: domínio próprio (metadados de negócio,
 laudos, permissões) em PostgreSQL, consumindo o DCM4CHEE **só via DICOMweb**.
 Semântica DICOM: ver `docs/domains/dicom/` — este backend deve respeitá-la.
 
+## Estrutura feature-first
+
+O backend é organizado por feature em
+`dev.blackice.features.<name>`. Rotas, DTOs e colaboradores permanecem junto da
+feature; testes espelham esse pacote em `src/test/java`. Não crie pacotes
+técnicos globais `controller/`, `service/` ou `repository/`.
+
+A estrutura operacional e a receita para adicionar uma feature estão em
+[`docs/architecture/project-structure.md`](../../architecture/project-structure.md).
+Este Domain Pack mantém as convenções específicas de Quarkus sem duplicar a
+regra geral.
+
 ## Extensões e papéis
 
 - `quarkus-rest` (Jakarta REST) — API para o frontend Vue.
