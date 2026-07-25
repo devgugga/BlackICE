@@ -30,7 +30,7 @@ https://github.com/dcm4che-dockerfiles/keycloak-quarkus).
 Conforme `docs/architecture/dcm4chee-archive.md` (baseline 5.34.3). Nenhuma tag
 usa `latest`.
 
-Anexado à rede `blackice`, definida no compose base `infra/docker-compose.yml`
+Anexado à rede `blackice`, definida no compose base `infra/compose.yml`
 (sempre incluído com `-f` nas invocações). Este arquivo apenas referencia a
 rede — não a declara como `external`, para não quebrar o bring-up numa máquina
 limpa onde ela ainda não existe.
@@ -65,7 +65,7 @@ limpa onde ela ainda não existe.
 5. **Credenciais e hostname parametrizados via `infra/.env`** (`DCM4CHEE_HOST`,
    `KEYCLOAK_ADMIN_PASSWORD`, `DCM4CHEE_DB*`, `KEYCLOAK_DB*`) em vez dos
    valores fixos (`secret`/`pacs`/`changeit`) do exemplo oficial, seguindo o
-   padrão já usado por `PRODUCT_DB*` em `infra/docker-compose.yml`.
+padrão já usado por `PRODUCT_DB*` em `infra/compose.yml`.
 6. **Sem colisão de porta com o resto da stack.** Traefik usa `80` e `8081`;
    nenhum serviço do DCM4CHEE usa essas portas. Todas as portas do compose
    oficial (`389`, `636`, `3306`, `8843`, `5432`, `8080`, `8443`, `9990`,
@@ -98,7 +98,7 @@ limpa onde ela ainda não existe.
 ## Subir a stack
 
 ```bash
-cd infra && docker compose -f docker-compose.yml -f dcm4chee/docker-compose.dcm4chee.yml up -d
+docker compose -f infra/compose.yml -f infra/dcm4chee/compose.yml -f infra/compose.apps.yml up -d
 ```
 
 Ordem de dependência (`depends_on`): `ldap`/`mariadb` → `keycloak` → `arc-db`
@@ -113,7 +113,7 @@ curl -sk https://localhost:8843/realms/dcm4chee/.well-known/openid-configuration
 Esperado: JSON com `"issuer":"https://localhost:8843/realms/dcm4chee"`.
 
 ```bash
-docker compose -f infra/docker-compose.yml -f infra/dcm4chee/docker-compose.dcm4chee.yml \
+docker compose -f infra/compose.yml -f infra/dcm4chee/compose.yml -f infra/compose.apps.yml \
   exec arc curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies
 ```
 Esperado: `401` (QIDO exige Bearer token — confirma que o DICOMweb está de pé
