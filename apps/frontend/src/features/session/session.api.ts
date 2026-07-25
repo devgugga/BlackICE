@@ -1,8 +1,4 @@
-export interface SessionResponse {
-  subject: string;
-  username: string;
-  roles: string[];
-}
+import type { SessionResponse } from '@/features/session/session.types';
 
 export async function fetchSession(): Promise<SessionResponse | null> {
   const res = await fetch('/api/me', { credentials: 'include' });

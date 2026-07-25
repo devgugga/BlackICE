@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
-import { fetchSession } from '../lib/session';
+import HomePage from '@/features/home/HomePage.vue';
+import { fetchSession } from '@/features/session/session.api';
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [{ path: '/', name: 'home', component: HomeView, meta: { protected: true } }],
+  routes: [{ path: '/', name: 'home', component: HomePage, meta: { protected: true } }],
 });
 
 router.beforeEach(async (to) => {

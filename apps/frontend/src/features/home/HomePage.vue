@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { fetchSession } from '../lib/session';
+import { fetchSession } from '@/features/session/session.api';
 const username = ref<string>('');
 onMounted(async () => { username.value = (await fetchSession())?.username ?? ''; });
 </script>
