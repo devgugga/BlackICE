@@ -1,10 +1,10 @@
 # infra secrets
 infra/.env
 # node / vite
-frontend/node_modules/
-frontend/dist/
+apps/frontend/node_modules/
+apps/frontend/dist/
 # quarkus / maven
-backend/target/
+apps/backend/target/
 
 # superpowers sdd scratch (briefs, reports, ledger, review diffs)
 .superpowers/

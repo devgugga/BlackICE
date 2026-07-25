@@ -1,7 +1,7 @@
 services:
   backend:
     build:
-      context: ../backend
+      context: ../apps/backend
       dockerfile: src/main/docker/Dockerfile.jvm
     environment:
       # Split frontchannel/backchannel (ver Task 6 no AGENTS/brief): dentro da
@@ -24,7 +24,7 @@ services:
     networks: [blackice]
 
   frontend:
-    build: ../frontend
+    build: ../apps/frontend
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.spa.rule=Host(`${APP_HOST}`)"
