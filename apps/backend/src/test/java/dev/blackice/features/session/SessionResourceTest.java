@@ -1,11 +1,11 @@
-package dev.blackice.api;
+package dev.blackice.features.session;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 
 @QuarkusTest
-class MeResourceTest {
+class SessionResourceTest {
 
     @Test
     void anonimo_recebe_401() {

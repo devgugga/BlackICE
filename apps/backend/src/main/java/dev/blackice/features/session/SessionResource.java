@@ -1,4 +1,4 @@
-package dev.blackice.api;
+package dev.blackice.features.session;
 
 import io.quarkus.security.Authenticated;
 import io.quarkus.security.identity.SecurityIdentity;
@@ -11,7 +11,7 @@ import java.util.List;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 @Path("/api")
-public class MeResource {
+public class SessionResource {
 
     @Inject SecurityIdentity identity;
     @Inject JsonWebToken jwt;   // token da sessao web-app, server-side
