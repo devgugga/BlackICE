@@ -9,5 +9,8 @@ backend/target/
 # superpowers sdd scratch (briefs, reports, ledger, review diffs)
 .superpowers/
 
+# isolated implementation worktrees
+.worktrees/
+
 # editor (apenas .vscode do root; frontend/.vscode e do template Vite)
 /.vscode/
