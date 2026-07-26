@@ -18,7 +18,7 @@
 - **Escopo é por client, nunca por realm.** Só `blackice-quarkus` recebe `login_theme`. O realm `dcm4chee` mantém `loginTheme: j4care` para o Archive.
 - **Nenhum webfont, nenhum recurso externo.** Só `system-ui` e `ui-monospace`.
 - **Tokens (valores exatos):** `--bi-bg:#06080b` · `--bi-surface:#0d1117` · `--bi-field:#080b0f` · `--bi-border:#1a222e` · `--bi-border-in:#1e2735` · `--bi-text:#e6edf5` · `--bi-text-dim:#8b98a9` · `--bi-text-mute:#4e5a6b` · `--bi-accent:#56c8e8` · `--bi-accent-ink:#04161e` · `--bi-radius:6px` · `--bi-radius-lg:10px` · `--bi-space-1:6px` · `--bi-space-2:18px` · `--bi-space-3:32px`.
-- **O acento aparece em exatamente três lugares:** metade do wordmark, a régua sob ele, e a borda do campo em foco. Nada mais.
+- **O acento saturado aparece em exatamente três lugares:** metade do wordmark, a régua sob ele, e a borda do campo em foco. Nada mais. A textura de fundo (grid e brilho) usa o mesmo RGB a 5–11% de opacidade; isso é textura, não acento, e não conta para essa regra.
 - **Fundo nunca é `#000`.**
 - **Ambiente:** todos os comandos assumem a stack de pé (`infra-keycloak-1` rodando). No Git Bash, exportar `MSYS_NO_PATHCONV=1` antes de qualquer `docker exec` com caminho absoluto, senão o Git Bash converte `/opt/...` em `C:/Program Files/Git/opt/...`.
 - **Commits:** seguir a convenção do repositório — gitmoji + descrição curta em português, sem trailer de co-autor.
