@@ -125,8 +125,10 @@ E substituir o bloco `volumes:` do serviço `keycloak` por:
     volumes:
       - dcm4chee-keycloak-data:/opt/keycloak/data
       # Tema de login do BlackICE. Read-only: o Keycloak não escreve aqui.
-      # O caminho é relativo a infra/dcm4chee/, onde este arquivo vive.
-      - "../keycloak/themes/blackice:/opt/keycloak/themes/blackice:ro"
+      # O caminho é relativo ao diretório de trabalho do `docker compose`
+      # (infra/), não ao diretório deste arquivo — Compose resolve binds
+      # relativos ao cwd/--project-directory, não por-arquivo.
+      - "./keycloak/themes/blackice:/opt/keycloak/themes/blackice:ro"
 ```
 
 - [ ] **Step 6: Aplicar o tema só ao client, no script de configuração**
