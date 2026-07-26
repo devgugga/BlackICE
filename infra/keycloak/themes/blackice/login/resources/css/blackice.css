@@ -1,5 +1,178 @@
-/* SENTINELA — prova que a folha do tema está sendo servida e empilhada.
-   Substituída inteiramente na Task 3. */
-#kc-header-wrapper {
-  outline: 3px dashed magenta;
+/* Tema de login BlackICE. Empilhado sobre o styles.css do keycloak.v2,
+   que continua sendo servido antes deste (ver theme.properties). */
+
+:root {
+  --bi-bg:         #06080b;
+  --bi-surface:    #0d1117;
+  --bi-field:      #080b0f;
+  --bi-border:     #1a222e;
+  --bi-border-in:  #1e2735;
+  --bi-text:       #e6edf5;
+  --bi-text-dim:   #8b98a9;
+  --bi-text-mute:  #4e5a6b;
+  --bi-accent:     #56c8e8;
+  --bi-accent-ink: #04161e;
+
+  --bi-radius:     6px;
+  --bi-radius-lg:  10px;
+  --bi-space-1:    6px;
+  --bi-space-2:    18px;
+  --bi-space-3:    32px;
+
+  --bi-font:       system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bi-mono:       ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* --- fundo: grid técnico apagado + brilho frio no topo.
+       O fundo NÃO é preto puro: #06080b tem azul dentro. --- */
+.login-pf body {
+  background: var(--bi-bg);
+  background-image:
+    radial-gradient(720px 380px at 50% -14%, rgba(86, 200, 232, .11), transparent 64%),
+    linear-gradient(rgba(86, 200, 232, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(86, 200, 232, .05) 1px, transparent 1px);
+  background-size: 100% 100%, 44px 44px, 44px 44px;
+  background-attachment: fixed;
+  color: var(--bi-text);
+  font-family: var(--bi-font);
+}
+
+.pf-v5-c-login__container { grid-template-columns: 26rem; }
+
+/* --- wordmark (markup vem do message bundle) --- */
+#kc-header-wrapper { padding: 62px 10px 26px; text-align: center; }
+
+.bi-wm {
+  display: block;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  color: var(--bi-text);
+  line-height: 1;
+}
+.bi-wm-ice { color: var(--bi-accent); }
+
+/* acento 2 de 3: a régua */
+.bi-wm::after {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 1px;
+  background: var(--bi-accent);
+  opacity: .85;
+  margin: 15px auto 0;
+}
+
+.bi-exp {
+  display: block;
+  margin-top: 13px;
+  font-family: var(--bi-mono);
+  font-size: 8.5px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--bi-text-mute);
+  line-height: 1.9;
+}
+
+/* --- card --- */
+.pf-v5-c-login__main {
+  background: var(--bi-surface);
+  border: 1px solid var(--bi-border);
+  border-radius: var(--bi-radius-lg);
+  padding: var(--bi-space-3);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .04);
+}
+
+.pf-v5-c-login__main-header { padding: 0 0 var(--bi-space-2); }
+.pf-v5-c-login__main-header h1 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--bi-text-dim);
+  text-align: center;
+}
+
+/* --- campos --- */
+.pf-v5-c-form__group + .pf-v5-c-form__group { margin-top: var(--bi-space-2); }
+
+.pf-v5-c-form__label-text {
+  font-family: var(--bi-mono);
+  font-size: 9.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--bi-text-dim);
+}
+
+/* A borda mora no <span class="pf-v5-c-form-control">, que envolve o <input>. */
+.pf-v5-c-form-control {
+  --pf-v5-c-form-control--BackgroundColor: var(--bi-field);
+  --pf-v5-c-form-control--BorderTopColor: var(--bi-border-in);
+  --pf-v5-c-form-control--BorderRightColor: var(--bi-border-in);
+  --pf-v5-c-form-control--BorderBottomColor: var(--bi-border-in);
+  --pf-v5-c-form-control--BorderLeftColor: var(--bi-border-in);
+  --pf-v5-c-form-control--Color: var(--bi-text);
+  background: var(--bi-field);
+  border: 1px solid var(--bi-border-in);
+  border-radius: var(--bi-radius);
+  height: 40px;
+  padding: 0 13px;
+}
+.pf-v5-c-form-control::before,
+.pf-v5-c-form-control::after { border: 0; }
+
+.pf-v5-c-form-control > input {
+  background: transparent;
+  border: 0;
+  color: var(--bi-text);
+  font-size: 13px;
+  width: 100%;
+}
+.pf-v5-c-form-control > input:-webkit-autofill {
+  -webkit-text-fill-color: var(--bi-text);
+  -webkit-box-shadow: 0 0 0 40px var(--bi-field) inset;
+}
+
+/* acento 3 de 3: o foco */
+.pf-v5-c-form-control:focus-within {
+  border-color: var(--bi-accent);
+  box-shadow: 0 0 0 3px rgba(86, 200, 232, .11);
+}
+
+.pf-v5-c-input-group { background: transparent; gap: var(--bi-space-1); }
+.pf-v5-c-input-group .pf-v5-c-button.pf-m-control {
+  background: var(--bi-field);
+  border: 1px solid var(--bi-border-in);
+  border-radius: var(--bi-radius);
+  color: var(--bi-text-dim);
+}
+
+/* --- botão --- */
+#kc-login {
+  background: var(--bi-accent);
+  border: 0;
+  border-radius: var(--bi-radius);
+  color: var(--bi-accent-ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  height: 42px;
+  margin-top: var(--bi-space-1);
+}
+#kc-login:hover { background: #6fd3ee; }
+
+/* --- rodapé --- */
+.pf-v5-c-login__main-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-family: var(--bi-mono);
+  font-size: 8.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--bi-text-mute);
+}
+
+/* --- erros --- */
+.pf-v5-c-alert.pf-m-inline {
+  background: rgba(248, 113, 113, .08);
+  border: 1px solid rgba(248, 113, 113, .3);
+  border-radius: var(--bi-radius);
+  color: #fca5a5;
 }
