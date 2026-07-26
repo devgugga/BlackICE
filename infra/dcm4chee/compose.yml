@@ -60,11 +60,23 @@ services:
       REALM_NAME: dcm4chee
       ARCHIVE_HOST: ${DCM4CHEE_HOST}
       KEYCLOAK_WAIT_FOR: "ldap:389 mariadb:3306"
+      # DEV-ONLY: a imagem roda `kc.sh start` (modo produção), que cacheia temas
+      # e templates. Sem estas três, editar theme.properties ou CSS não surte
+      # efeito até um restart do container (~21s). Num deploy real, remover as
+      # três e assar o tema dentro da imagem em vez de bind-montar.
+      KC_SPI_THEME_CACHE_THEMES: 'false'
+      KC_SPI_THEME_CACHE_TEMPLATES: 'false'
+      KC_SPI_THEME_STATIC_MAX_AGE: '-1'
     depends_on:
       - ldap
       - mariadb
     volumes:
       - dcm4chee-keycloak-data:/opt/keycloak/data
+      # Tema de login do BlackICE. Read-only: o Keycloak não escreve aqui.
+      # O caminho é relativo ao diretório de trabalho do `docker compose`
+      # (infra/), não ao diretório deste arquivo — Compose resolve binds
+      # relativos ao cwd/--project-directory, não por-arquivo.
+      - "./keycloak/themes/blackice:/opt/keycloak/themes/blackice:ro"
     networks: [blackice]
 
   # Postgres do DCM4CHEE (Archive). Nomeado "arc-db" (conforme Interfaces da

@@ -71,5 +71,24 @@ if [ -z "$(curl -k -s -H "$AH" "$api/users?username=dr.teste&exact=true" | grep 
   echo "usuário dr.teste: criado"
 else echo "usuário dr.teste: já existe"; fi
 
+# 4) tema de login SÓ neste client (o realm segue em j4care, para o Archive).
+#    Não há endpoint de patch parcial: é preciso GET da representação inteira,
+#    mexer no atributo e PUT de volta. jq não existe nesta imagem; python3 sim.
+#    Para REMOVER o atributo é preciso mandar "" — omitir a chave devolve 204
+#    e não apaga nada.
+CUR=$(curl -k -s -H "$AH" "$api/clients/$CID" | python3 -c 'import sys,json;print(json.load(sys.stdin).get("attributes",{}).get("login_theme",""))')
+if [ "$CUR" != "blackice" ]; then
+  curl -k -s -H "$AH" "$api/clients/$CID" > /tmp/client.json
+  python3 -c '
+import json
+c = json.load(open("/tmp/client.json"))
+c.setdefault("attributes", {})["login_theme"] = "blackice"
+json.dump(c, open("/tmp/client.json", "w"))
+'
+  curl -k -s -H "$AH" -H "Content-Type: application/json" -X PUT "$api/clients/$CID" -d @/tmp/client.json >/dev/null
+  rm -f /tmp/client.json
+  echo "login_theme=blackice no client blackice-quarkus: aplicado"
+else echo "login_theme=blackice: já aplicado"; fi
+
 echo "OK: config base pronta. Roles NÃO atribuídas (gate humano — ver README)."
 INNER
