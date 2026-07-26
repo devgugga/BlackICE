@@ -45,8 +45,8 @@ de quatro decisões, não de enfeite:
    Duas camadas, não uma. Preto puro chapado é o denunciador nº 1 de tema amador.
 2. **O acento saturado aparece três vezes.** Metade do wordmark, uma régua de
    34px sob ele, e a borda do campo em foco. Espalhar vira neon. A textura de
-   fundo descrita abaixo usa o mesmo RGB a 5% de opacidade — isso é textura, não
-   acento, e não conta para essa regra.
+   fundo descrita abaixo usa o mesmo RGB a 5–11% de opacidade — isso é textura,
+   não acento, e não conta para essa regra.
 3. **O ritmo é fixo.** Campo de 40px de altura, respiro de 18px entre campos,
    padding de 32px no card.
 4. **A assinatura é texto, não enfeite.** "Intrusion Countermeasures

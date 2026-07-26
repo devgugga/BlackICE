@@ -55,6 +55,41 @@ Isso confirma: **audience compartilhado funciona** e a role **`auth` autoriza
 DICOMweb**. `directAccessGrants` foi **revertido para `false`** após o teste — o BFF
 não deve permitir password grant no fluxo real.
 
+## Tema de login `blackice`
+
+Vive em `infra/keycloak/themes/blackice/login/`, bind-montado read-only em
+`/opt/keycloak/themes/blackice`. Tema filho de `keycloak.v2` (PatternFly v5), sem
+nenhum template FreeMarker copiado — o que economiza um diff a cada upgrade.
+
+- **Texto** (wordmark, assinatura, rótulos em PT-BR) vem de
+  `messages/messages_en.properties`. `loginTitleHtml` é chave de mensagem, e o
+  `kcSanitize` desta build preserva `<span>` com `class` — por isso o wordmark é
+  texto real, e não `content:` em CSS.
+- **Aparência** vem de `resources/css/blackice.css`, que define os tokens `--bi-*`
+  do produto.
+
+### Três armadilhas
+
+1. **`styles=` substitui a lista do pai, não concatena.** Por isso o
+   `theme.properties` re-lista `css/styles.css` (arquivo do `keycloak.v2`, não
+   nosso) antes do nosso. Nunca criar um `styles.css` neste tema: isso sombreia o
+   do pai e perde os ajustes dele — é o bug que o tema `j4care` tem.
+2. **O escopo é por client.** `login_theme=blackice` está no client
+   `blackice-quarkus`, aplicado pelo `configure-blackice.sh`. O realm segue em
+   `loginTheme: j4care`, que é o que o login do Archive usa. Para **remover** o
+   atributo é preciso enviar `""` no PUT — omitir a chave devolve 204 sem apagar.
+3. **Cache de tema.** A imagem roda `kc.sh start` (modo produção) e cacheia temas
+   e templates. As três env `KC_SPI_THEME_*` no compose desligam isso; sem elas,
+   editar CSS não surte efeito até um restart. São **dev-only**: num deploy real,
+   remover e assar o tema na imagem.
+
+### Idioma
+
+O conteúdo do bundle é PT-BR num arquivo chamado `messages_en.properties`, de
+propósito. O realm tem `internationalizationEnabled: false`, então `en` é o único
+bundle consultado. Ligar i18n de verdade é setting de realm e adicionaria seletor
+de idioma também no login do Archive.
+
 ## Como aplicar
 
 ```sh
