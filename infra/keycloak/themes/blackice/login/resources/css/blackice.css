@@ -21,6 +21,24 @@
 
   --bi-font:       system-ui, -apple-system, "Segoe UI", sans-serif;
   --bi-mono:       ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Redefinir as custom properties de fonte do PatternFly para usar apenas sistema/local fonts */
+  --pf-v5-global--FontFamily--text: var(--bi-font);
+  --pf-v5-global--FontFamily--text--vf: var(--bi-font);
+  --pf-v5-global--FontFamily--heading: var(--bi-font);
+  --pf-v5-global--FontFamily--heading--vf: var(--bi-font);
+  --pf-v5-global--FontFamily--monospace: var(--bi-mono);
+  --pf-v5-global--FontFamily--monospace--vf: var(--bi-mono);
+}
+
+/* Nenhum webfont: o PatternFly declara RedHatDisplay/RedHatText via @font-face
+   e as aplica em .pf-v5-c-title e afins. Estas regras re-declaram font-family
+   onde é preciso, vencem por vir depois, e cobrem os elementos diretos do PF. */
+.login-pf body,
+.login-pf input,
+.login-pf button,
+.login-pf .pf-v5-c-title {
+  font-family: var(--bi-font);
 }
 
 /* --- fundo: grid técnico apagado + brilho frio no topo.
@@ -84,7 +102,7 @@
 }
 
 .pf-v5-c-login__main-header { padding: 0 0 var(--bi-space-2); }
-.pf-v5-c-login__main-header h1 {
+.pf-v5-c-login__main-header h1.pf-v5-c-title {
   font-size: 15px;
   font-weight: 500;
   color: var(--bi-text-dim);
