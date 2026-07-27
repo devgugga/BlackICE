@@ -84,3 +84,16 @@ ao fim de cada fase. Specs em `docs/superpowers/specs/`.
   revisor de domínio antes do gate.
 - Não coloque pixel data no banco do Quarkus; guarde referências (UIDs) + dados
   de negócio (laudos).
+
+## graphify
+
+This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+
+When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
+
+Guidance (optional):
+- For codebase questions, consider `graphify query "<question>"` when graphify-out/graph.json exists. `graphify path "<A>" "<B>"` and `graphify explain "<concept>"` can provide focused relationship and concept views.
+- You may instead use other appropriate approaches, including direct source browsing, targeted search, and project documentation.
+- Dirty graphify-out/ files are expected after hooks or incremental updates; they do not prevent using Graphify when it is helpful.
+- If graphify-out/wiki/index.md exists, consider it for broad navigation; consider GRAPH_REPORT.md for broad architecture review or when focused graph queries are insufficient.
+- After modifying code, consider `graphify update .` to keep the graph current (AST-only, no API cost).

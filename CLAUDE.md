@@ -28,3 +28,13 @@ domínio — `dicom-*`, `vue-*`, `quarkus-*` — e faça a skill referenciar
 Os subagentes Codex vivem em `.codex/agents/*.toml` (formato próprio) e apontam
 para os **mesmos** `docs/domains/`. Ao editar conhecimento, edite só os docs —
 ambos os lados herdam. Ao criar um subagente novo, espelhe nos dois formatos.
+
+## graphify
+
+This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+
+Guidance (optional):
+- For codebase questions, consider `graphify query "<question>"` when graphify-out/graph.json exists. `graphify path "<A>" "<B>"` and `graphify explain "<concept>"` can provide focused relationship and concept views.
+- You may instead use other appropriate approaches, including direct source browsing, targeted search, and project documentation.
+- If graphify-out/wiki/index.md exists, consider it for broad navigation; consider GRAPH_REPORT.md for broad architecture review or when focused graph queries are insufficient.
+- After modifying code, consider `graphify update .` to keep the graph current (AST-only, no API cost).
