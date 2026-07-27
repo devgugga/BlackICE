@@ -253,6 +253,9 @@
 .pf-v5-c-form-control > input {
   background: transparent;
   border: 0;
+  /* O wrapper já fornece o indicador de foco; neutralizar o outline do input
+     evita uma segunda moldura branca, inclusive com gerenciadores de senha. */
+  outline: none;
   color: var(--bi-text);
   font-size: 13px;
   width: 100%;
