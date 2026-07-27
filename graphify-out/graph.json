@@ -18,6 +18,19 @@
         "source_file": "AGENTS.md"
       },
       {
+        "id": "domain_pack_knowledge_model",
+        "label": "Domain Pack Knowledge Model",
+        "nodes": [
+          "docs_domains_dicom_dicom_domain_pack",
+          "docs_domains_quarkus_quarkus_domain_pack",
+          "docs_domains_vue_vue_domain_pack"
+        ],
+        "relation": "form",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "docs/domains/README.md"
+      },
+      {
         "id": "dicomweb_operation_roles",
         "label": "DICOMweb Operation Roles",
         "nodes": [
@@ -31,17 +44,17 @@
         "source_file": "docs/domains/dicom/dicomweb.md"
       },
       {
-        "id": "domain_pack_knowledge_model",
-        "label": "Domain Pack Knowledge Model",
+        "id": "keycloak_login_quality",
+        "label": "Keycloak login quality workflow",
         "nodes": [
-          "docs_domains_dicom_dicom_domain_pack",
-          "docs_domains_quarkus_quarkus_domain_pack",
-          "docs_domains_vue_vue_domain_pack"
+          "docs_superpowers_plans_2026_07_26_keycloak_login_theme_blackice_login_theme",
+          "docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_accessibility",
+          "docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_playwright_keycloak_theme_regression"
         ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "docs/domains/README.md"
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "docs/superpowers/plans/2026-07-27-keycloak-theme-e2e-ui-regression.md"
       },
       {
         "id": "blackice_mvp_architecture",
@@ -75,19 +88,6 @@
         "source_file": "infra/README.md"
       },
       {
-        "id": "keycloak_login_quality",
-        "label": "Keycloak login quality workflow",
-        "nodes": [
-          "docs_superpowers_plans_2026_07_26_keycloak_login_theme_blackice_login_theme",
-          "docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_accessibility",
-          "docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_playwright_keycloak_theme_regression"
-        ],
-        "relation": "participate_in",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "docs/superpowers/plans/2026-07-27-keycloak-theme-e2e-ui-regression.md"
-      },
-      {
         "id": "apps_frontend_public_icons_icon_sprite_collection",
         "label": "Frontend icon sprite collection",
         "nodes": [
@@ -102,6 +102,19 @@
         "confidence": "EXTRACTED",
         "confidence_score": 1.0,
         "source_file": "apps/frontend/public/icons.svg"
+      },
+      {
+        "id": "graphify_skill_variants",
+        "label": "Graphify skill variants",
+        "nodes": [
+          "agents_skills_graphify_skill_graphify_workflow",
+          "claude_skills_graphify_skill_graphify_workflow",
+          "docs_architecture_graphify_local_tooling"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.95,
+        "source_file": "docs/architecture/graphify.md"
       }
     ]
   },
@@ -116,9 +129,10 @@
         "kind": "file"
       },
       "_origin": "ast",
+      "community": 8,
+      "norm_label": "mvnw",
       "id": "apps_backend_mvnw",
-      "community": 7,
-      "norm_label": "mvnw"
+      "community_name": "mvnw"
     },
     {
       "label": "mvnw script",
@@ -130,9 +144,10 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
+      "community": 8,
+      "norm_label": "mvnw script",
       "id": "apps_backend_mvnw__entry",
-      "community": 7,
-      "norm_label": "mvnw script"
+      "community_name": "mvnw"
     },
     {
       "label": "native_path()",
@@ -144,9 +159,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "community": 8,
+      "norm_label": "native_path()",
       "id": "apps_backend_mvnw_native_path",
-      "community": 7,
-      "norm_label": "native_path()"
+      "community_name": "mvnw"
     },
     {
       "label": "set_java_home()",
@@ -158,9 +174,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "community": 8,
+      "norm_label": "set_java_home()",
       "id": "apps_backend_mvnw_set_java_home",
-      "community": 7,
-      "norm_label": "set_java_home()"
+      "community_name": "mvnw"
     },
     {
       "label": "hash_string()",
@@ -172,9 +189,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "community": 8,
+      "norm_label": "hash_string()",
       "id": "apps_backend_mvnw_hash_string",
-      "community": 7,
-      "norm_label": "hash_string()"
+      "community_name": "mvnw"
     },
     {
       "label": "verbose()",
@@ -186,9 +204,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "community": 8,
+      "norm_label": "verbose()",
       "id": "apps_backend_mvnw_verbose",
-      "community": 7,
-      "norm_label": "verbose()"
+      "community_name": "mvnw"
     },
     {
       "label": "die()",
@@ -200,9 +219,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "community": 8,
+      "norm_label": "die()",
       "id": "apps_backend_mvnw_die",
-      "community": 7,
-      "norm_label": "die()"
+      "community_name": "mvnw"
     },
     {
       "label": "trim()",
@@ -214,9 +234,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "community": 8,
+      "norm_label": "trim()",
       "id": "apps_backend_mvnw_trim",
-      "community": 7,
-      "norm_label": "trim()"
+      "community_name": "mvnw"
     },
     {
       "label": "exec_maven()",
@@ -228,9 +249,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "community": 8,
+      "norm_label": "exec_maven()",
       "id": "apps_backend_mvnw_exec_maven",
-      "community": 7,
-      "norm_label": "exec_maven()"
+      "community_name": "mvnw"
     },
     {
       "label": "clean()",
@@ -242,9 +264,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
+      "community": 8,
+      "norm_label": "clean()",
       "id": "apps_backend_mvnw_clean",
-      "community": 7,
-      "norm_label": "clean()"
+      "community_name": "mvnw"
     },
     {
       "label": "dev.blackice:blackice-backend",
@@ -255,9 +278,10 @@
       "source_location": "L1",
       "version": "1.0.0-SNAPSHOT",
       "_origin": "ast",
+      "community": 66,
+      "norm_label": "dev.blackice:blackice-backend",
       "id": "pkg_dev_blackice_blackice_backend",
-      "community": 60,
-      "norm_label": "dev.blackice:blackice-backend"
+      "community_name": "dev.blackice:blackice-backend"
     },
     {
       "label": "SessionResource.java",
@@ -265,9 +289,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": "sessionresource.java",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource",
-      "community": 5,
-      "norm_label": "sessionresource.java"
+      "community_name": "SessionResource.java"
     },
     {
       "label": "SessionResource",
@@ -275,9 +300,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L13",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": "sessionresource",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource",
-      "community": 5,
-      "norm_label": "sessionresource"
+      "community_name": "SessionResource.java"
     },
     {
       "label": "Path",
@@ -285,9 +311,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": "path",
       "id": "path",
-      "community": 5,
-      "norm_label": "path"
+      "community_name": "SessionResource.java"
     },
     {
       "label": "SecurityIdentity",
@@ -295,9 +322,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": "securityidentity",
       "id": "securityidentity",
-      "community": 5,
-      "norm_label": "securityidentity"
+      "community_name": "SessionResource.java"
     },
     {
       "label": "JsonWebToken",
@@ -305,9 +333,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": "jsonwebtoken",
       "id": "jsonwebtoken",
-      "community": 5,
-      "norm_label": "jsonwebtoken"
+      "community_name": "SessionResource.java"
     },
     {
       "label": ".me()",
@@ -315,9 +344,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L20",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": ".me()",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_me",
-      "community": 5,
-      "norm_label": ".me()"
+      "community_name": "SessionResource.java"
     },
     {
       "label": "Response",
@@ -325,9 +355,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": "response",
       "id": "response",
-      "community": 5,
-      "norm_label": "response"
+      "community_name": "SessionResource.java"
     },
     {
       "label": "GET",
@@ -335,9 +366,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": "get",
       "id": "get",
-      "community": 5,
-      "norm_label": "get"
+      "community_name": "SessionResource.java"
     },
     {
       "label": "PermitAll",
@@ -345,9 +377,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": "permitall",
       "id": "permitall",
-      "community": 5,
-      "norm_label": "permitall"
+      "community_name": "SessionResource.java"
     },
     {
       "label": ".login()",
@@ -355,9 +388,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L35",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": ".login()",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_login",
-      "community": 5,
-      "norm_label": ".login()"
+      "community_name": "SessionResource.java"
     },
     {
       "label": "Authenticated",
@@ -365,9 +399,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": "authenticated",
       "id": "authenticated",
-      "community": 5,
-      "norm_label": "authenticated"
+      "community_name": "SessionResource.java"
     },
     {
       "label": "SessionResponse.java",
@@ -375,9 +410,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResponse.java",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": "sessionresponse.java",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresponse",
-      "community": 5,
-      "norm_label": "sessionresponse.java"
+      "community_name": "SessionResource.java"
     },
     {
       "label": "SessionResponse",
@@ -385,9 +421,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResponse.java",
       "source_location": "L5",
       "_origin": "ast",
+      "community": 6,
+      "norm_label": "sessionresponse",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresponse_sessionresponse",
-      "community": 5,
-      "norm_label": "sessionresponse"
+      "community_name": "SessionResource.java"
     },
     {
       "label": "SessionResourceTest.java",
@@ -395,9 +432,10 @@
       "source_file": "apps/backend/src/test/java/dev/blackice/features/session/SessionResourceTest.java",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest",
       "community": 12,
-      "norm_label": "sessionresourcetest.java"
+      "norm_label": "sessionresourcetest.java",
+      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest",
+      "community_name": "SessionResourceTest.java"
     },
     {
       "label": "SessionResourceTest",
@@ -405,9 +443,10 @@
       "source_file": "apps/backend/src/test/java/dev/blackice/features/session/SessionResourceTest.java",
       "source_location": "L7",
       "_origin": "ast",
-      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest",
       "community": 12,
-      "norm_label": "sessionresourcetest"
+      "norm_label": "sessionresourcetest",
+      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest",
+      "community_name": "SessionResourceTest.java"
     },
     {
       "label": "QuarkusTest",
@@ -415,9 +454,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "id": "quarkustest",
       "community": 12,
-      "norm_label": "quarkustest"
+      "norm_label": "quarkustest",
+      "id": "quarkustest",
+      "community_name": "SessionResourceTest.java"
     },
     {
       "label": ".anonimo_recebe_401()",
@@ -425,9 +465,10 @@
       "source_file": "apps/backend/src/test/java/dev/blackice/features/session/SessionResourceTest.java",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest_anonimo_recebe_401",
       "community": 12,
-      "norm_label": ".anonimo_recebe_401()"
+      "norm_label": ".anonimo_recebe_401()",
+      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest_anonimo_recebe_401",
+      "community_name": "SessionResourceTest.java"
     },
     {
       "label": "Test",
@@ -435,9 +476,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "id": "test",
       "community": 12,
-      "norm_label": "test"
+      "norm_label": "test",
+      "id": "test",
+      "community_name": "SessionResourceTest.java"
     },
     {
       "label": "keycloak-login.spec.ts",
@@ -445,9 +487,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 11,
+      "norm_label": "keycloak-login.spec.ts",
       "id": "apps_frontend_e2e_keycloak_login_spec",
-      "community": 10,
-      "norm_label": "keycloak-login.spec.ts"
+      "community_name": "keycloak-login.spec.ts"
     },
     {
       "label": "openBlackiceLogin()",
@@ -455,9 +498,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L12",
       "_origin": "ast",
+      "community": 11,
+      "norm_label": "openblackicelogin()",
       "id": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin",
-      "community": 10,
-      "norm_label": "openblackicelogin()"
+      "community_name": "keycloak-login.spec.ts"
     },
     {
       "label": "requiredBox()",
@@ -465,9 +509,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L33",
       "_origin": "ast",
+      "community": 11,
+      "norm_label": "requiredbox()",
       "id": "apps_frontend_e2e_keycloak_login_spec_requiredbox",
-      "community": 10,
-      "norm_label": "requiredbox()"
+      "community_name": "keycloak-login.spec.ts"
     },
     {
       "label": "expectVerticallyCentered()",
@@ -475,9 +520,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L44",
       "_origin": "ast",
+      "community": 11,
+      "norm_label": "expectverticallycentered()",
       "id": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered",
-      "community": 10,
-      "norm_label": "expectverticallycentered()"
+      "community_name": "keycloak-login.spec.ts"
     },
     {
       "label": "screenshotLoginCard()",
@@ -485,9 +531,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L64",
       "_origin": "ast",
+      "community": 11,
+      "norm_label": "screenshotlogincard()",
       "id": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard",
-      "community": 10,
-      "norm_label": "screenshotlogincard()"
+      "community_name": "keycloak-login.spec.ts"
     },
     {
       "label": "showInvalidCredentials()",
@@ -495,9 +542,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L119",
       "_origin": "ast",
+      "community": 11,
+      "norm_label": "showinvalidcredentials()",
       "id": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials",
-      "community": 10,
-      "norm_label": "showinvalidcredentials()"
+      "community_name": "keycloak-login.spec.ts"
     },
     {
       "label": "package.json",
@@ -505,9 +553,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "apps_frontend_package",
       "community": 3,
-      "norm_label": "package.json"
+      "norm_label": "package.json",
+      "id": "apps_frontend_package",
+      "community_name": "package.json"
     },
     {
       "label": "name",
@@ -515,9 +564,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L2",
       "_origin": "ast",
-      "id": "apps_frontend_package_name",
       "community": 3,
-      "norm_label": "name"
+      "norm_label": "name",
+      "id": "apps_frontend_package_name",
+      "community_name": "package.json"
     },
     {
       "label": "private",
@@ -525,9 +575,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L3",
       "_origin": "ast",
-      "id": "apps_frontend_package_private",
       "community": 3,
-      "norm_label": "private"
+      "norm_label": "private",
+      "id": "apps_frontend_package_private",
+      "community_name": "package.json"
     },
     {
       "label": "version",
@@ -535,9 +586,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L4",
       "_origin": "ast",
-      "id": "apps_frontend_package_version",
       "community": 3,
-      "norm_label": "version"
+      "norm_label": "version",
+      "id": "apps_frontend_package_version",
+      "community_name": "package.json"
     },
     {
       "label": "type",
@@ -545,9 +597,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "apps_frontend_package_type",
       "community": 3,
-      "norm_label": "type"
+      "norm_label": "type",
+      "id": "apps_frontend_package_type",
+      "community_name": "package.json"
     },
     {
       "label": "scripts",
@@ -555,9 +608,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "apps_frontend_package_scripts",
       "community": 3,
-      "norm_label": "scripts"
+      "norm_label": "scripts",
+      "id": "apps_frontend_package_scripts",
+      "community_name": "package.json"
     },
     {
       "label": "dev",
@@ -565,9 +619,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "id": "apps_frontend_package_scripts_dev",
       "community": 3,
-      "norm_label": "dev"
+      "norm_label": "dev",
+      "id": "apps_frontend_package_scripts_dev",
+      "community_name": "package.json"
     },
     {
       "label": "build",
@@ -575,9 +630,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "apps_frontend_package_scripts_build",
       "community": 3,
-      "norm_label": "build"
+      "norm_label": "build",
+      "id": "apps_frontend_package_scripts_build",
+      "community_name": "package.json"
     },
     {
       "label": "preview",
@@ -585,9 +641,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "apps_frontend_package_scripts_preview",
       "community": 3,
-      "norm_label": "preview"
+      "norm_label": "preview",
+      "id": "apps_frontend_package_scripts_preview",
+      "community_name": "package.json"
     },
     {
       "label": "test",
@@ -595,9 +652,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "apps_frontend_package_scripts_test",
       "community": 3,
-      "norm_label": "test"
+      "norm_label": "test",
+      "id": "apps_frontend_package_scripts_test",
+      "community_name": "package.json"
     },
     {
       "label": "test:e2e:keycloak",
@@ -605,9 +663,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "apps_frontend_package_scripts_test_e2e_keycloak",
       "community": 3,
-      "norm_label": "test:e2e:keycloak"
+      "norm_label": "test:e2e:keycloak",
+      "id": "apps_frontend_package_scripts_test_e2e_keycloak",
+      "community_name": "package.json"
     },
     {
       "label": "dependencies",
@@ -615,9 +674,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L13",
       "_origin": "ast",
+      "community": 3,
+      "norm_label": "dependencies",
       "id": "apps_frontend_package_dependencies",
-      "community": 3,
-      "norm_label": "dependencies"
+      "community_name": "package.json"
     },
     {
       "label": "vue",
@@ -625,9 +685,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L14",
       "_origin": "ast",
+      "community": 3,
+      "norm_label": "vue",
       "id": "apps_frontend_package_dependencies_vue",
-      "community": 3,
-      "norm_label": "vue"
+      "community_name": "package.json"
     },
     {
       "label": "vue",
@@ -635,9 +696,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L14",
       "_origin": "ast",
-      "id": "vue",
       "community": 3,
-      "norm_label": "vue"
+      "norm_label": "vue",
+      "id": "vue",
+      "community_name": "package.json"
     },
     {
       "label": "vue-router",
@@ -645,9 +707,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "apps_frontend_package_dependencies_vue_router",
       "community": 3,
-      "norm_label": "vue-router"
+      "norm_label": "vue-router",
+      "id": "apps_frontend_package_dependencies_vue_router",
+      "community_name": "package.json"
     },
     {
       "label": "vue-router",
@@ -655,9 +718,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "vue_router",
       "community": 3,
-      "norm_label": "vue-router"
+      "norm_label": "vue-router",
+      "id": "vue_router",
+      "community_name": "package.json"
     },
     {
       "label": "devDependencies",
@@ -665,9 +729,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L17",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "devdependencies",
       "id": "apps_frontend_package_devdependencies",
-      "community": 2,
-      "norm_label": "devdependencies"
+      "community_name": "devDependencies"
     },
     {
       "label": "@playwright/test",
@@ -675,9 +740,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L18",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "@playwright/test",
       "id": "apps_frontend_package_devdependencies_playwright_test",
-      "community": 2,
-      "norm_label": "@playwright/test"
+      "community_name": "devDependencies"
     },
     {
       "label": "@playwright/test",
@@ -685,9 +751,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L18",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "@playwright/test",
       "id": "playwright_test",
-      "community": 2,
-      "norm_label": "@playwright/test"
+      "community_name": "devDependencies"
     },
     {
       "label": "@types/node",
@@ -695,9 +762,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L19",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "@types/node",
       "id": "apps_frontend_package_devdependencies_types_node",
-      "community": 2,
-      "norm_label": "@types/node"
+      "community_name": "devDependencies"
     },
     {
       "label": "@types/node",
@@ -705,9 +773,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L19",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "@types/node",
       "id": "types_node",
-      "community": 2,
-      "norm_label": "@types/node"
+      "community_name": "devDependencies"
     },
     {
       "label": "@vitejs/plugin-vue",
@@ -715,9 +784,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L20",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "@vitejs/plugin-vue",
       "id": "apps_frontend_package_devdependencies_vitejs_plugin_vue",
-      "community": 2,
-      "norm_label": "@vitejs/plugin-vue"
+      "community_name": "devDependencies"
     },
     {
       "label": "@vitejs/plugin-vue",
@@ -725,9 +795,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L20",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "@vitejs/plugin-vue",
       "id": "vitejs_plugin_vue",
-      "community": 2,
-      "norm_label": "@vitejs/plugin-vue"
+      "community_name": "devDependencies"
     },
     {
       "label": "@vue/tsconfig",
@@ -735,9 +806,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L21",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "@vue/tsconfig",
       "id": "apps_frontend_package_devdependencies_vue_tsconfig",
-      "community": 2,
-      "norm_label": "@vue/tsconfig"
+      "community_name": "devDependencies"
     },
     {
       "label": "@vue/tsconfig",
@@ -745,9 +817,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L21",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "@vue/tsconfig",
       "id": "vue_tsconfig",
-      "community": 2,
-      "norm_label": "@vue/tsconfig"
+      "community_name": "devDependencies"
     },
     {
       "label": "typescript",
@@ -755,9 +828,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L22",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "typescript",
       "id": "apps_frontend_package_devdependencies_typescript",
-      "community": 2,
-      "norm_label": "typescript"
+      "community_name": "devDependencies"
     },
     {
       "label": "typescript",
@@ -765,9 +839,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L22",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "typescript",
       "id": "typescript",
-      "community": 2,
-      "norm_label": "typescript"
+      "community_name": "devDependencies"
     },
     {
       "label": "vite",
@@ -775,9 +850,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L23",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "vite",
       "id": "apps_frontend_package_devdependencies_vite",
-      "community": 2,
-      "norm_label": "vite"
+      "community_name": "devDependencies"
     },
     {
       "label": "vite",
@@ -785,9 +861,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L23",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "vite",
       "id": "vite",
-      "community": 2,
-      "norm_label": "vite"
+      "community_name": "devDependencies"
     },
     {
       "label": "vitest",
@@ -795,9 +872,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L24",
       "_origin": "ast",
+      "community": 2,
+      "norm_label": "vitest",
       "id": "apps_frontend_package_devdependencies_vitest",
-      "community": 2,
-      "norm_label": "vitest"
+      "community_name": "devDependencies"
     },
     {
       "label": "vitest",
@@ -805,9 +883,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L24",
       "_origin": "ast",
-      "id": "vitest",
       "community": 2,
-      "norm_label": "vitest"
+      "norm_label": "vitest",
+      "id": "vitest",
+      "community_name": "devDependencies"
     },
     {
       "label": "vue-tsc",
@@ -815,9 +894,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L25",
       "_origin": "ast",
-      "id": "apps_frontend_package_devdependencies_vue_tsc",
       "community": 2,
-      "norm_label": "vue-tsc"
+      "norm_label": "vue-tsc",
+      "id": "apps_frontend_package_devdependencies_vue_tsc",
+      "community_name": "devDependencies"
     },
     {
       "label": "vue-tsc",
@@ -825,9 +905,10 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L25",
       "_origin": "ast",
-      "id": "vue_tsc",
       "community": 2,
-      "norm_label": "vue-tsc"
+      "norm_label": "vue-tsc",
+      "id": "vue_tsc",
+      "community_name": "devDependencies"
     },
     {
       "label": "playwright.config.ts",
@@ -835,9 +916,10 @@
       "source_file": "apps/frontend/playwright.config.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 22,
+      "norm_label": "playwright.config.ts",
       "id": "apps_frontend_playwright_config",
-      "community": 23,
-      "norm_label": "playwright.config.ts"
+      "community_name": "playwright.config.ts"
     },
     {
       "label": "isCi",
@@ -845,9 +927,10 @@
       "source_file": "apps/frontend/playwright.config.ts",
       "source_location": "L3",
       "_origin": "ast",
+      "community": 22,
+      "norm_label": "isci",
       "id": "apps_frontend_playwright_config_isci",
-      "community": 23,
-      "norm_label": "isci"
+      "community_name": "playwright.config.ts"
     },
     {
       "label": "App.vue",
@@ -855,9 +938,10 @@
       "source_file": "apps/frontend/src/app/App.vue",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 50,
+      "norm_label": "app.vue",
       "id": "apps_frontend_src_app_app",
-      "community": 47,
-      "norm_label": "app.vue"
+      "community_name": "App.vue"
     },
     {
       "label": "index.ts",
@@ -865,9 +949,10 @@
       "source_file": "apps/frontend/src/app/router/index.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 24,
+      "norm_label": "index.ts",
       "id": "apps_frontend_src_app_router_index",
-      "community": 25,
-      "norm_label": "index.ts"
+      "community_name": "index.ts"
     },
     {
       "label": "router",
@@ -875,9 +960,10 @@
       "source_file": "apps/frontend/src/app/router/index.ts",
       "source_location": "L5",
       "_origin": "ast",
+      "community": 24,
+      "norm_label": "router",
       "id": "apps_frontend_src_app_router_index_router",
-      "community": 25,
-      "norm_label": "router"
+      "community_name": "index.ts"
     },
     {
       "label": "HomePage.vue",
@@ -885,9 +971,10 @@
       "source_file": "apps/frontend/src/features/home/HomePage.vue",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 25,
+      "norm_label": "homepage.vue",
       "id": "apps_frontend_src_features_home_homepage",
-      "community": 26,
-      "norm_label": "homepage.vue"
+      "community_name": "HomePage.vue"
     },
     {
       "label": "username",
@@ -895,9 +982,10 @@
       "source_file": "apps/frontend/src/features/home/HomePage.vue",
       "source_location": "L4",
       "_origin": "ast",
+      "community": 25,
+      "norm_label": "username",
       "id": "apps_frontend_src_features_home_homepage_username",
-      "community": 26,
-      "norm_label": "username"
+      "community_name": "HomePage.vue"
     },
     {
       "label": "session.api.spec.ts",
@@ -905,9 +993,10 @@
       "source_file": "apps/frontend/src/features/session/session.api.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 51,
+      "norm_label": "session.api.spec.ts",
       "id": "apps_frontend_src_features_session_session_api_spec",
-      "community": 48,
-      "norm_label": "session.api.spec.ts"
+      "community_name": "session.api.spec.ts"
     },
     {
       "label": "session.api.ts",
@@ -915,9 +1004,10 @@
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 26,
+      "norm_label": "session.api.ts",
       "id": "apps_frontend_src_features_session_session_api",
-      "community": 27,
-      "norm_label": "session.api.ts"
+      "community_name": "session.api.ts"
     },
     {
       "label": "fetchSession()",
@@ -925,9 +1015,10 @@
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "source_location": "L3",
       "_origin": "ast",
+      "community": 26,
+      "norm_label": "fetchsession()",
       "id": "apps_frontend_src_features_session_session_api_fetchsession",
-      "community": 27,
-      "norm_label": "fetchsession()"
+      "community_name": "session.api.ts"
     },
     {
       "label": "session.types.ts",
@@ -935,9 +1026,10 @@
       "source_file": "apps/frontend/src/features/session/session.types.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 27,
+      "norm_label": "session.types.ts",
       "id": "apps_frontend_src_features_session_session_types",
-      "community": 28,
-      "norm_label": "session.types.ts"
+      "community_name": "session.types.ts"
     },
     {
       "label": "SessionResponse",
@@ -945,9 +1037,10 @@
       "source_file": "apps/frontend/src/features/session/session.types.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 27,
+      "norm_label": "sessionresponse",
       "id": "apps_frontend_src_features_session_session_types_sessionresponse",
-      "community": 28,
-      "norm_label": "sessionresponse"
+      "community_name": "session.types.ts"
     },
     {
       "label": "main.ts",
@@ -955,9 +1048,10 @@
       "source_file": "apps/frontend/src/main.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 52,
+      "norm_label": "main.ts",
       "id": "apps_frontend_src_main",
-      "community": 49,
-      "norm_label": "main.ts"
+      "community_name": "main.ts"
     },
     {
       "label": "tsconfig.app.json",
@@ -965,9 +1059,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app",
       "community": 1,
-      "norm_label": "tsconfig.app.json"
+      "norm_label": "tsconfig.app.json",
+      "id": "apps_frontend_tsconfig_app",
+      "community_name": "compilerOptions"
     },
     {
       "label": "extends",
@@ -975,9 +1070,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L2",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_extends",
       "community": 1,
-      "norm_label": "extends"
+      "norm_label": "extends",
+      "id": "apps_frontend_tsconfig_app_extends",
+      "community_name": "compilerOptions"
     },
     {
       "label": "@vue/tsconfig/tsconfig.dom.json",
@@ -985,9 +1081,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L2",
       "_origin": "ast",
-      "id": "ref_vue_tsconfig_tsconfig_dom_json",
       "community": 1,
-      "norm_label": "@vue/tsconfig/tsconfig.dom.json"
+      "norm_label": "@vue/tsconfig/tsconfig.dom.json",
+      "id": "ref_vue_tsconfig_tsconfig_dom_json",
+      "community_name": "compilerOptions"
     },
     {
       "label": "compilerOptions",
@@ -995,9 +1092,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L3",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_compileroptions",
       "community": 1,
-      "norm_label": "compileroptions"
+      "norm_label": "compileroptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions",
+      "community_name": "compilerOptions"
     },
     {
       "label": "baseUrl",
@@ -1005,9 +1103,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L4",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_compileroptions_baseurl",
       "community": 1,
-      "norm_label": "baseurl"
+      "norm_label": "baseurl",
+      "id": "apps_frontend_tsconfig_app_compileroptions_baseurl",
+      "community_name": "compilerOptions"
     },
     {
       "label": "ignoreDeprecations",
@@ -1015,9 +1114,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_compileroptions_ignoredeprecations",
       "community": 1,
-      "norm_label": "ignoredeprecations"
+      "norm_label": "ignoredeprecations",
+      "id": "apps_frontend_tsconfig_app_compileroptions_ignoredeprecations",
+      "community_name": "compilerOptions"
     },
     {
       "label": "paths",
@@ -1025,9 +1125,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_compileroptions_paths",
       "community": 1,
-      "norm_label": "paths"
+      "norm_label": "paths",
+      "id": "apps_frontend_tsconfig_app_compileroptions_paths",
+      "community_name": "compilerOptions"
     },
     {
       "label": "tsBuildInfoFile",
@@ -1035,9 +1136,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L9",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_compileroptions_tsbuildinfofile",
       "community": 1,
-      "norm_label": "tsbuildinfofile"
+      "norm_label": "tsbuildinfofile",
+      "id": "apps_frontend_tsconfig_app_compileroptions_tsbuildinfofile",
+      "community_name": "compilerOptions"
     },
     {
       "label": "types",
@@ -1045,9 +1147,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_compileroptions_types",
       "community": 1,
-      "norm_label": "types"
+      "norm_label": "types",
+      "id": "apps_frontend_tsconfig_app_compileroptions_types",
+      "community_name": "compilerOptions"
     },
     {
       "label": "vite/client",
@@ -1055,9 +1158,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "ref_vite_client",
       "community": 1,
-      "norm_label": "vite/client"
+      "norm_label": "vite/client",
+      "id": "ref_vite_client",
+      "community_name": "compilerOptions"
     },
     {
       "label": "allowArbitraryExtensions",
@@ -1065,9 +1169,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_compileroptions_allowarbitraryextensions",
       "community": 1,
-      "norm_label": "allowarbitraryextensions"
+      "norm_label": "allowarbitraryextensions",
+      "id": "apps_frontend_tsconfig_app_compileroptions_allowarbitraryextensions",
+      "community_name": "compilerOptions"
     },
     {
       "label": "noUnusedLocals",
@@ -1075,9 +1180,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L14",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_compileroptions_nounusedlocals",
       "community": 1,
-      "norm_label": "nounusedlocals"
+      "norm_label": "nounusedlocals",
+      "id": "apps_frontend_tsconfig_app_compileroptions_nounusedlocals",
+      "community_name": "compilerOptions"
     },
     {
       "label": "noUnusedParameters",
@@ -1085,9 +1191,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_compileroptions_nounusedparameters",
       "community": 1,
-      "norm_label": "nounusedparameters"
+      "norm_label": "nounusedparameters",
+      "id": "apps_frontend_tsconfig_app_compileroptions_nounusedparameters",
+      "community_name": "compilerOptions"
     },
     {
       "label": "erasableSyntaxOnly",
@@ -1095,9 +1202,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_compileroptions_erasablesyntaxonly",
       "community": 1,
-      "norm_label": "erasablesyntaxonly"
+      "norm_label": "erasablesyntaxonly",
+      "id": "apps_frontend_tsconfig_app_compileroptions_erasablesyntaxonly",
+      "community_name": "compilerOptions"
     },
     {
       "label": "noFallthroughCasesInSwitch",
@@ -1105,9 +1213,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L17",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_compileroptions_nofallthroughcasesinswitch",
       "community": 1,
-      "norm_label": "nofallthroughcasesinswitch"
+      "norm_label": "nofallthroughcasesinswitch",
+      "id": "apps_frontend_tsconfig_app_compileroptions_nofallthroughcasesinswitch",
+      "community_name": "compilerOptions"
     },
     {
       "label": "include",
@@ -1115,9 +1224,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_app_include",
       "community": 1,
-      "norm_label": "include"
+      "norm_label": "include",
+      "id": "apps_frontend_tsconfig_app_include",
+      "community_name": "compilerOptions"
     },
     {
       "label": "src/**/*.ts",
@@ -1125,9 +1235,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "ref_src_ts",
       "community": 1,
-      "norm_label": "src/**/*.ts"
+      "norm_label": "src/**/*.ts",
+      "id": "ref_src_ts",
+      "community_name": "compilerOptions"
     },
     {
       "label": "src/**/*.tsx",
@@ -1135,9 +1246,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "ref_src_tsx",
       "community": 1,
-      "norm_label": "src/**/*.tsx"
+      "norm_label": "src/**/*.tsx",
+      "id": "ref_src_tsx",
+      "community_name": "compilerOptions"
     },
     {
       "label": "src/**/*.vue",
@@ -1145,9 +1257,10 @@
       "source_file": "apps/frontend/tsconfig.app.json",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "ref_src_vue",
       "community": 1,
-      "norm_label": "src/**/*.vue"
+      "norm_label": "src/**/*.vue",
+      "id": "ref_src_vue",
+      "community_name": "compilerOptions"
     },
     {
       "label": "tsconfig.json",
@@ -1155,9 +1268,10 @@
       "source_file": "apps/frontend/tsconfig.json",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig",
       "community": 17,
-      "norm_label": "tsconfig.json"
+      "norm_label": "tsconfig.json",
+      "id": "apps_frontend_tsconfig",
+      "community_name": "tsconfig.json"
     },
     {
       "label": "files",
@@ -1165,9 +1279,10 @@
       "source_file": "apps/frontend/tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_files",
       "community": 17,
-      "norm_label": "files"
+      "norm_label": "files",
+      "id": "apps_frontend_tsconfig_files",
+      "community_name": "tsconfig.json"
     },
     {
       "label": "references",
@@ -1175,9 +1290,10 @@
       "source_file": "apps/frontend/tsconfig.json",
       "source_location": "L3",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_references",
       "community": 17,
-      "norm_label": "references"
+      "norm_label": "references",
+      "id": "apps_frontend_tsconfig_references",
+      "community_name": "tsconfig.json"
     },
     {
       "label": "tsconfig.node.json",
@@ -1185,9 +1301,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node",
       "community": 0,
-      "norm_label": "tsconfig.node.json"
+      "norm_label": "tsconfig.node.json",
+      "id": "apps_frontend_tsconfig_node",
+      "community_name": "compilerOptions"
     },
     {
       "label": "compilerOptions",
@@ -1195,9 +1312,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L2",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions",
       "community": 0,
-      "norm_label": "compileroptions"
+      "norm_label": "compileroptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions",
+      "community_name": "compilerOptions"
     },
     {
       "label": "tsBuildInfoFile",
@@ -1205,9 +1323,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L3",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_tsbuildinfofile",
       "community": 0,
-      "norm_label": "tsbuildinfofile"
+      "norm_label": "tsbuildinfofile",
+      "id": "apps_frontend_tsconfig_node_compileroptions_tsbuildinfofile",
+      "community_name": "compilerOptions"
     },
     {
       "label": "target",
@@ -1215,9 +1334,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L4",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_target",
       "community": 0,
-      "norm_label": "target"
+      "norm_label": "target",
+      "id": "apps_frontend_tsconfig_node_compileroptions_target",
+      "community_name": "compilerOptions"
     },
     {
       "label": "lib",
@@ -1225,9 +1345,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_lib",
       "community": 0,
-      "norm_label": "lib"
+      "norm_label": "lib",
+      "id": "apps_frontend_tsconfig_node_compileroptions_lib",
+      "community_name": "compilerOptions"
     },
     {
       "label": "ES2023",
@@ -1235,9 +1356,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "ref_es2023",
       "community": 0,
-      "norm_label": "es2023"
+      "norm_label": "es2023",
+      "id": "ref_es2023",
+      "community_name": "compilerOptions"
     },
     {
       "label": "types",
@@ -1245,9 +1367,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_types",
       "community": 0,
-      "norm_label": "types"
+      "norm_label": "types",
+      "id": "apps_frontend_tsconfig_node_compileroptions_types",
+      "community_name": "compilerOptions"
     },
     {
       "label": "node",
@@ -1255,9 +1378,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "ref_node",
       "community": 0,
-      "norm_label": "node"
+      "norm_label": "node",
+      "id": "ref_node",
+      "community_name": "compilerOptions"
     },
     {
       "label": "skipLibCheck",
@@ -1265,9 +1389,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L7",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_skiplibcheck",
       "community": 0,
-      "norm_label": "skiplibcheck"
+      "norm_label": "skiplibcheck",
+      "id": "apps_frontend_tsconfig_node_compileroptions_skiplibcheck",
+      "community_name": "compilerOptions"
     },
     {
       "label": "module",
@@ -1275,9 +1400,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_module",
       "community": 0,
-      "norm_label": "module"
+      "norm_label": "module",
+      "id": "apps_frontend_tsconfig_node_compileroptions_module",
+      "community_name": "compilerOptions"
     },
     {
       "label": "allowImportingTsExtensions",
@@ -1285,9 +1411,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_allowimportingtsextensions",
       "community": 0,
-      "norm_label": "allowimportingtsextensions"
+      "norm_label": "allowimportingtsextensions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_allowimportingtsextensions",
+      "community_name": "compilerOptions"
     },
     {
       "label": "verbatimModuleSyntax",
@@ -1295,9 +1422,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_verbatimmodulesyntax",
       "community": 0,
-      "norm_label": "verbatimmodulesyntax"
+      "norm_label": "verbatimmodulesyntax",
+      "id": "apps_frontend_tsconfig_node_compileroptions_verbatimmodulesyntax",
+      "community_name": "compilerOptions"
     },
     {
       "label": "moduleDetection",
@@ -1305,9 +1433,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_moduledetection",
       "community": 0,
-      "norm_label": "moduledetection"
+      "norm_label": "moduledetection",
+      "id": "apps_frontend_tsconfig_node_compileroptions_moduledetection",
+      "community_name": "compilerOptions"
     },
     {
       "label": "noEmit",
@@ -1315,9 +1444,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L14",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_noemit",
       "community": 0,
-      "norm_label": "noemit"
+      "norm_label": "noemit",
+      "id": "apps_frontend_tsconfig_node_compileroptions_noemit",
+      "community_name": "compilerOptions"
     },
     {
       "label": "noUnusedLocals",
@@ -1325,9 +1455,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L17",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_nounusedlocals",
       "community": 0,
-      "norm_label": "nounusedlocals"
+      "norm_label": "nounusedlocals",
+      "id": "apps_frontend_tsconfig_node_compileroptions_nounusedlocals",
+      "community_name": "compilerOptions"
     },
     {
       "label": "noUnusedParameters",
@@ -1335,9 +1466,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L18",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_nounusedparameters",
       "community": 0,
-      "norm_label": "nounusedparameters"
+      "norm_label": "nounusedparameters",
+      "id": "apps_frontend_tsconfig_node_compileroptions_nounusedparameters",
+      "community_name": "compilerOptions"
     },
     {
       "label": "erasableSyntaxOnly",
@@ -1345,9 +1477,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_erasablesyntaxonly",
       "community": 0,
-      "norm_label": "erasablesyntaxonly"
+      "norm_label": "erasablesyntaxonly",
+      "id": "apps_frontend_tsconfig_node_compileroptions_erasablesyntaxonly",
+      "community_name": "compilerOptions"
     },
     {
       "label": "noFallthroughCasesInSwitch",
@@ -1355,9 +1488,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L20",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_compileroptions_nofallthroughcasesinswitch",
       "community": 0,
-      "norm_label": "nofallthroughcasesinswitch"
+      "norm_label": "nofallthroughcasesinswitch",
+      "id": "apps_frontend_tsconfig_node_compileroptions_nofallthroughcasesinswitch",
+      "community_name": "compilerOptions"
     },
     {
       "label": "include",
@@ -1365,9 +1499,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "apps_frontend_tsconfig_node_include",
       "community": 0,
-      "norm_label": "include"
+      "norm_label": "include",
+      "id": "apps_frontend_tsconfig_node_include",
+      "community_name": "compilerOptions"
     },
     {
       "label": "vite.config.ts",
@@ -1375,9 +1510,10 @@
       "source_file": "apps/frontend/tsconfig.node.json",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "ref_vite_config_ts",
       "community": 0,
-      "norm_label": "vite.config.ts"
+      "norm_label": "vite.config.ts",
+      "id": "ref_vite_config_ts",
+      "community_name": "compilerOptions"
     },
     {
       "label": "vite.config.ts",
@@ -1385,9 +1521,10 @@
       "source_file": "apps/frontend/vite.config.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "community": 53,
+      "norm_label": "vite.config.ts",
       "id": "apps_frontend_vite_config",
-      "community": 50,
-      "norm_label": "vite.config.ts"
+      "community_name": "vite.config.ts"
     },
     {
       "label": "configure-blackice.sh",
@@ -1399,9 +1536,10 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "id": "infra_keycloak_configure_blackice",
       "community": 34,
-      "norm_label": "configure-blackice.sh"
+      "norm_label": "configure-blackice.sh",
+      "id": "infra_keycloak_configure_blackice",
+      "community_name": "configure-blackice.sh"
     },
     {
       "label": "configure-blackice.sh script",
@@ -1413,22 +1551,10 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "id": "infra_keycloak_configure_blackice_sh__entry",
       "community": 34,
-      "norm_label": "configure-blackice.sh script"
-    },
-    {
-      "label": "Graphify",
-      "file_type": "concept",
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "agents_skills_graphify_skill_graphify",
-      "community": 11,
-      "norm_label": "graphify"
+      "norm_label": "configure-blackice.sh script",
+      "id": "infra_keycloak_configure_blackice_sh__entry",
+      "community_name": "configure-blackice.sh"
     },
     {
       "label": "Graphify Add and Watch",
@@ -1439,9 +1565,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_skills_graphify_references_add_watch_graphify_add_and_watch",
       "community": 36,
-      "norm_label": "graphify add and watch"
+      "norm_label": "graphify add and watch",
+      "id": "agents_skills_graphify_references_add_watch_graphify_add_and_watch",
+      "community_name": "Graphify Add and Watch"
     },
     {
       "label": "Graphify Exports",
@@ -1452,9 +1579,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_skills_graphify_references_exports_graphify_exports",
       "community": 37,
-      "norm_label": "graphify exports"
+      "norm_label": "graphify exports",
+      "id": "agents_skills_graphify_references_exports_graphify_exports",
+      "community_name": "Graphify Exports"
     },
     {
       "label": "Semantic Extraction",
@@ -1465,9 +1593,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 38,
+      "norm_label": "semantic extraction",
       "id": "agents_skills_graphify_references_extraction_spec_semantic_extraction",
-      "community": 11,
-      "norm_label": "semantic extraction"
+      "community_name": "Semantic Extraction"
     },
     {
       "label": "Cross-repository Merge",
@@ -1478,9 +1607,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 39,
+      "norm_label": "cross-repository merge",
       "id": "agents_skills_graphify_references_github_and_merge_cross_repo_merge",
-      "community": 11,
-      "norm_label": "cross-repository merge"
+      "community_name": "Cross-repository Merge"
     },
     {
       "label": "Graphify Hooks",
@@ -1491,9 +1621,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 40,
+      "norm_label": "graphify hooks",
       "id": "agents_skills_graphify_references_hooks_graphify_hooks",
-      "community": 38,
-      "norm_label": "graphify hooks"
+      "community_name": "Graphify Hooks"
     },
     {
       "label": "Graphify Query",
@@ -1504,9 +1635,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 41,
+      "norm_label": "graphify query",
       "id": "agents_skills_graphify_references_query_graphify_query",
-      "community": 39,
-      "norm_label": "graphify query"
+      "community_name": "Graphify Query"
     },
     {
       "label": "Graphify Transcription",
@@ -1517,22 +1649,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 42,
+      "norm_label": "graphify transcription",
       "id": "agents_skills_graphify_references_transcribe_graphify_transcription",
-      "community": 11,
-      "norm_label": "graphify transcription"
-    },
-    {
-      "label": "Incremental Extraction",
-      "file_type": "concept",
-      "source_file": ".agents/skills/graphify/references/update.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "agents_skills_graphify_references_update_incremental_extraction",
-      "community": 11,
-      "norm_label": "incremental extraction"
+      "community_name": "Graphify Transcription"
     },
     {
       "label": "DICOM Domain Reviewer",
@@ -1543,9 +1663,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_agents_dicom_dicom_domain_reviewer_dicom_domain_reviewer",
       "community": 18,
-      "norm_label": "dicom domain reviewer"
+      "norm_label": "dicom domain reviewer",
+      "id": "claude_agents_dicom_dicom_domain_reviewer_dicom_domain_reviewer",
+      "community_name": "DICOM Domain Reviewer"
     },
     {
       "label": "Quarkus Backend",
@@ -1556,9 +1677,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_agents_quarkus_quarkus_backend_quarkus_backend",
       "community": 18,
-      "norm_label": "quarkus backend"
+      "norm_label": "quarkus backend",
+      "id": "claude_agents_quarkus_quarkus_backend_quarkus_backend",
+      "community_name": "DICOM Domain Reviewer"
     },
     {
       "label": "DICOM Viewer Frontend",
@@ -1569,9 +1691,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_agents_vue_dicom_viewer_frontend_dicom_viewer_frontend",
       "community": 18,
-      "norm_label": "dicom viewer frontend"
+      "norm_label": "dicom viewer frontend",
+      "id": "claude_agents_vue_dicom_viewer_frontend_dicom_viewer_frontend",
+      "community_name": "DICOM Domain Reviewer"
     },
     {
       "label": "BlackICE Skills",
@@ -1582,22 +1705,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 61,
+      "norm_label": "blackice skills",
       "id": "claude_skills_readme_blackice_skills",
-      "community": 55,
-      "norm_label": "blackice skills"
-    },
-    {
-      "label": "Graphify",
-      "file_type": "concept",
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "claude_skills_graphify_skill_graphify",
-      "community": 13,
-      "norm_label": "graphify"
+      "community_name": "BlackICE Skills"
     },
     {
       "label": "Graphify Add and Watch",
@@ -1608,9 +1719,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 54,
+      "norm_label": "graphify add and watch",
       "id": "claude_skills_graphify_references_add_watch_graphify_add_and_watch",
-      "community": 51,
-      "norm_label": "graphify add and watch"
+      "community_name": "Graphify Add and Watch"
     },
     {
       "label": "Graphify Exports",
@@ -1621,9 +1733,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 55,
+      "norm_label": "graphify exports",
       "id": "claude_skills_graphify_references_exports_graphify_exports",
-      "community": 52,
-      "norm_label": "graphify exports"
+      "community_name": "Graphify Exports"
     },
     {
       "label": "Semantic Extraction",
@@ -1634,9 +1747,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 56,
+      "norm_label": "semantic extraction",
       "id": "claude_skills_graphify_references_extraction_spec_semantic_extraction",
-      "community": 13,
-      "norm_label": "semantic extraction"
+      "community_name": "Semantic Extraction"
     },
     {
       "label": "Cross-repository Merge",
@@ -1647,9 +1761,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 57,
+      "norm_label": "cross-repository merge",
       "id": "claude_skills_graphify_references_github_and_merge_cross_repo_merge",
-      "community": 13,
-      "norm_label": "cross-repository merge"
+      "community_name": "Cross-repository Merge"
     },
     {
       "label": "Graphify Hooks",
@@ -1660,9 +1775,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 58,
+      "norm_label": "graphify hooks",
       "id": "claude_skills_graphify_references_hooks_graphify_hooks",
-      "community": 53,
-      "norm_label": "graphify hooks"
+      "community_name": "Graphify Hooks"
     },
     {
       "label": "Graphify Query",
@@ -1673,9 +1789,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 59,
+      "norm_label": "graphify query",
       "id": "claude_skills_graphify_references_query_graphify_query",
-      "community": 54,
-      "norm_label": "graphify query"
+      "community_name": "Graphify Query"
     },
     {
       "label": "Graphify Transcription",
@@ -1686,22 +1803,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 60,
+      "norm_label": "graphify transcription",
       "id": "claude_skills_graphify_references_transcribe_graphify_transcription",
-      "community": 13,
-      "norm_label": "graphify transcription"
-    },
-    {
-      "label": "Incremental Extraction",
-      "file_type": "concept",
-      "source_file": ".claude/skills/graphify/references/update.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "claude_skills_graphify_references_update_incremental_extraction",
-      "community": 13,
-      "norm_label": "incremental extraction"
+      "community_name": "Graphify Transcription"
     },
     {
       "label": "BlackICE PACS",
@@ -1712,9 +1817,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 9,
+      "norm_label": "blackice pacs",
       "id": "agents_blackice_pacs",
-      "community": 8,
-      "norm_label": "blackice pacs"
+      "community_name": "Quarkus Product Backend"
     },
     {
       "label": "DCM4CHEE Archive",
@@ -1725,9 +1831,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 9,
+      "norm_label": "dcm4chee archive",
       "id": "agents_dcm4chee_archive",
-      "community": 8,
-      "norm_label": "dcm4chee archive"
+      "community_name": "Quarkus Product Backend"
     },
     {
       "label": "Quarkus Product Backend",
@@ -1738,9 +1845,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 9,
+      "norm_label": "quarkus product backend",
       "id": "agents_quarkus_product_backend",
-      "community": 8,
-      "norm_label": "quarkus product backend"
+      "community_name": "Quarkus Product Backend"
     },
     {
       "label": "Vue SPA",
@@ -1751,9 +1859,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 9,
+      "norm_label": "vue spa",
       "id": "agents_vue_spa",
-      "community": 8,
-      "norm_label": "vue spa"
+      "community_name": "Quarkus Product Backend"
     },
     {
       "label": "Keycloak OIDC SSO",
@@ -1764,9 +1873,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 9,
+      "norm_label": "keycloak oidc sso",
       "id": "agents_keycloak_oidc",
-      "community": 8,
-      "norm_label": "keycloak oidc sso"
+      "community_name": "Quarkus Product Backend"
     },
     {
       "label": "Domain Packs",
@@ -1777,9 +1887,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 14,
+      "norm_label": "domain packs",
       "id": "agents_domain_packs",
-      "community": 15,
-      "norm_label": "domain packs"
+      "community_name": "Domain Packs"
     },
     {
       "label": "DICOM Invariants",
@@ -1790,9 +1901,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 21,
+      "norm_label": "dicom invariants",
       "id": "agents_dicom_invariants",
-      "community": 22,
-      "norm_label": "dicom invariants"
+      "community_name": "DICOM Invariants"
     },
     {
       "label": "Human Validation Gate",
@@ -1803,9 +1915,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 21,
+      "norm_label": "human validation gate",
       "id": "agents_human_gate",
-      "community": 22,
-      "norm_label": "human validation gate"
+      "community_name": "DICOM Invariants"
     },
     {
       "label": "Claude-Codex Agent Portability",
@@ -1816,9 +1929,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 14,
+      "norm_label": "claude-codex agent portability",
       "id": "claude_codex_agent_portability",
-      "community": 15,
-      "norm_label": "claude-codex agent portability"
+      "community_name": "Domain Packs"
     },
     {
       "label": "BlackICE Architecture",
@@ -1829,9 +1943,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_blackice_architecture",
       "community": 35,
-      "norm_label": "blackice architecture"
+      "norm_label": "blackice architecture",
+      "id": "readme_blackice_architecture",
+      "community_name": "BlackICE Architecture"
     },
     {
       "label": "Graphify Knowledge Graph",
@@ -1842,9 +1957,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_graphify_knowledge_graph",
       "community": 35,
-      "norm_label": "graphify knowledge graph"
+      "norm_label": "graphify knowledge graph",
+      "id": "readme_graphify_knowledge_graph",
+      "community_name": "BlackICE Architecture"
     },
     {
       "label": "Backend BFF",
@@ -1855,9 +1971,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 10,
+      "norm_label": "backend bff",
       "id": "apps_backend_readme_backend_bff",
-      "community": 9,
-      "norm_label": "backend bff"
+      "community_name": "BFF Session Contract"
     },
     {
       "label": "HttpOnly Session Cookie",
@@ -1868,9 +1985,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 10,
+      "norm_label": "httponly session cookie",
       "id": "apps_backend_readme_http_only_session_cookie",
-      "community": 9,
-      "norm_label": "httponly session cookie"
+      "community_name": "BFF Session Contract"
     },
     {
       "label": "Frontend SPA",
@@ -1881,9 +1999,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 10,
+      "norm_label": "frontend spa",
       "id": "apps_frontend_readme_frontend_spa",
-      "community": 9,
-      "norm_label": "frontend spa"
+      "community_name": "BFF Session Contract"
     },
     {
       "label": "Keycloak Login E2E Contract",
@@ -1894,9 +2013,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 10,
+      "norm_label": "keycloak login e2e contract",
       "id": "apps_frontend_readme_login_e2e_contract",
-      "community": 9,
-      "norm_label": "keycloak login e2e contract"
+      "community_name": "BFF Session Contract"
     },
     {
       "label": "BFF Session Contract",
@@ -1907,9 +2027,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 10,
+      "norm_label": "bff session contract",
       "id": "apps_frontend_readme_bff_session_contract",
-      "community": 9,
-      "norm_label": "bff session contract"
+      "community_name": "BFF Session Contract"
     },
     {
       "label": "Vue Mount Point",
@@ -1920,9 +2041,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 43,
+      "norm_label": "vue mount point",
       "id": "apps_frontend_index_html_vue_mount_point",
-      "community": 40,
-      "norm_label": "vue mount point"
+      "community_name": "Vue Mount Point"
     },
     {
       "label": "DCM4CHEE 5.34.3 Baseline",
@@ -1933,9 +2055,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_dcm4chee_archive_baseline_5_34_3",
       "community": 19,
-      "norm_label": "dcm4chee 5.34.3 baseline"
+      "norm_label": "dcm4chee 5.34.3 baseline",
+      "id": "docs_architecture_dcm4chee_archive_baseline_5_34_3",
+      "community_name": "DCM4CHEE 5.34.3 Baseline"
     },
     {
       "label": "Secure Archive Deployment",
@@ -1946,48 +2069,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_dcm4chee_archive_secure_deployment",
       "community": 19,
-      "norm_label": "secure archive deployment"
-    },
-    {
-      "label": "Graphify Local Engineering Tool",
-      "file_type": "concept",
-      "source_file": "docs/architecture/graphify.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "docs_architecture_graphify_local_engineering_tool",
-      "community": 20,
-      "norm_label": "graphify local engineering tool"
-    },
-    {
-      "label": "Graphify CLI 0.9.28",
-      "file_type": "concept",
-      "source_file": "docs/architecture/graphify.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "docs_architecture_graphify_graphify_cli_0_9_28",
-      "community": 20,
-      "norm_label": "graphify cli 0.9.28"
-    },
-    {
-      "label": "Graphify Corpus Security",
-      "file_type": "rationale",
-      "source_file": "docs/architecture/graphify.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "docs_architecture_graphify_corpus_security",
-      "community": 20,
-      "norm_label": "graphify corpus security"
+      "norm_label": "secure archive deployment",
+      "id": "docs_architecture_dcm4chee_archive_secure_deployment",
+      "community_name": "DCM4CHEE 5.34.3 Baseline"
     },
     {
       "label": "BlackICE Monorepo Structure",
@@ -1998,9 +2083,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_project_structure_monorepo",
       "community": 16,
-      "norm_label": "blackice monorepo structure"
+      "norm_label": "blackice monorepo structure",
+      "id": "docs_architecture_project_structure_monorepo",
+      "community_name": "Feature-First Architecture"
     },
     {
       "label": "Feature-First Architecture",
@@ -2011,9 +2097,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_project_structure_feature_first",
       "community": 16,
-      "norm_label": "feature-first architecture"
+      "norm_label": "feature-first architecture",
+      "id": "docs_architecture_project_structure_feature_first",
+      "community_name": "Feature-First Architecture"
     },
     {
       "label": "HTTP Contract Boundary",
@@ -2024,9 +2111,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 9,
+      "norm_label": "http contract boundary",
       "id": "docs_architecture_project_structure_http_contract_boundary",
-      "community": 8,
-      "norm_label": "http contract boundary"
+      "community_name": "Quarkus Product Backend"
     },
     {
       "label": "Domain Packs Single Source of Truth",
@@ -2037,9 +2125,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 14,
+      "norm_label": "domain packs single source of truth",
       "id": "docs_domains_domain_packs_single_source_of_truth",
-      "community": 15,
-      "norm_label": "domain packs single source of truth"
+      "community_name": "Domain Packs"
     },
     {
       "label": "DICOM Domain Pack",
@@ -2050,9 +2139,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "dicom domain pack",
       "id": "docs_domains_dicom_dicom_domain_pack",
-      "community": 6,
-      "norm_label": "dicom domain pack"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "DICOMweb Verbs",
@@ -2063,9 +2153,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "dicomweb verbs",
       "id": "docs_domains_dicom_dicomweb_dicomweb_verbs",
-      "community": 6,
-      "norm_label": "dicomweb verbs"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "QIDO-RS",
@@ -2076,9 +2167,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "qido-rs",
       "id": "docs_domains_dicom_dicomweb_qido_rs",
-      "community": 6,
-      "norm_label": "qido-rs"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "WADO-RS",
@@ -2089,9 +2181,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "wado-rs",
       "id": "docs_domains_dicom_dicomweb_wado_rs",
-      "community": 6,
-      "norm_label": "wado-rs"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "STOW-RS",
@@ -2102,9 +2195,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "stow-rs",
       "id": "docs_domains_dicom_dicomweb_stow_rs",
-      "community": 6,
-      "norm_label": "stow-rs"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "User Token Propagation",
@@ -2115,9 +2209,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 9,
+      "norm_label": "user token propagation",
       "id": "docs_domains_dicom_dicomweb_user_token_propagation",
-      "community": 8,
-      "norm_label": "user token propagation"
+      "community_name": "Quarkus Product Backend"
     },
     {
       "label": "DICOM Patient Study Series Instance Hierarchy",
@@ -2128,9 +2223,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 13,
+      "norm_label": "dicom patient study series instance hierarchy",
       "id": "docs_domains_dicom_semantics_dicom_hierarchy",
-      "community": 14,
-      "norm_label": "dicom patient study series instance hierarchy"
+      "community_name": "DICOM Patient Study Series Instance Hierarchy"
     },
     {
       "label": "DICOM UID Identity",
@@ -2141,9 +2237,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 13,
+      "norm_label": "dicom uid identity",
       "id": "docs_domains_dicom_semantics_dicom_uid_identity",
-      "community": 14,
-      "norm_label": "dicom uid identity"
+      "community_name": "DICOM Patient Study Series Instance Hierarchy"
     },
     {
       "label": "Patient Identity with Issuer",
@@ -2154,9 +2251,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 13,
+      "norm_label": "patient identity with issuer",
       "id": "docs_domains_dicom_semantics_patient_identity",
-      "community": 14,
-      "norm_label": "patient identity with issuer"
+      "community_name": "DICOM Patient Study Series Instance Hierarchy"
     },
     {
       "label": "Transfer Syntax Preservation",
@@ -2167,9 +2265,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 13,
+      "norm_label": "transfer syntax preservation",
       "id": "docs_domains_dicom_semantics_transfer_syntax",
-      "community": 14,
-      "norm_label": "transfer syntax preservation"
+      "community_name": "DICOM Patient Study Series Instance Hierarchy"
     },
     {
       "label": "Quarkus Domain Pack",
@@ -2180,9 +2279,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "quarkus domain pack",
       "id": "docs_domains_quarkus_quarkus_domain_pack",
-      "community": 6,
-      "norm_label": "quarkus domain pack"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "Quarkus BFF",
@@ -2193,9 +2293,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "quarkus bff",
       "id": "docs_domains_quarkus_conventions_quarkus_bff",
-      "community": 6,
-      "norm_label": "quarkus bff"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "Report Model",
@@ -2206,9 +2307,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 13,
+      "norm_label": "report model",
       "id": "docs_domains_quarkus_conventions_report_model",
-      "community": 14,
-      "norm_label": "report model"
+      "community_name": "DICOM Patient Study Series Instance Hierarchy"
     },
     {
       "label": "CSRF Protection",
@@ -2219,9 +2321,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "csrf protection",
       "id": "docs_domains_quarkus_conventions_csrf_protection",
-      "community": 6,
-      "norm_label": "csrf protection"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "Vue Domain Pack",
@@ -2232,9 +2335,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "vue domain pack",
       "id": "docs_domains_vue_vue_domain_pack",
-      "community": 6,
-      "norm_label": "vue domain pack"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "Vue Feature-First Conventions",
@@ -2245,9 +2349,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_domains_vue_conventions_vue_feature_first",
       "community": 16,
-      "norm_label": "vue feature-first conventions"
+      "norm_label": "vue feature-first conventions",
+      "id": "docs_domains_vue_conventions_vue_feature_first",
+      "community_name": "Feature-First Architecture"
     },
     {
       "label": "Vue BFF Session",
@@ -2258,9 +2363,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 10,
+      "norm_label": "vue bff session",
       "id": "docs_domains_vue_conventions_bff_session",
-      "community": 9,
-      "norm_label": "vue bff session"
+      "community_name": "BFF Session Contract"
     },
     {
       "label": "Cornerstone3D Viewer",
@@ -2271,9 +2377,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "cornerstone3d viewer",
       "id": "docs_domains_vue_cornerstone3d_cornerstone3d_viewer",
-      "community": 6,
-      "norm_label": "cornerstone3d viewer"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "WADO-RS Image Loader",
@@ -2284,9 +2391,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "wado-rs image loader",
       "id": "docs_domains_vue_cornerstone3d_wado_image_loader",
-      "community": 6,
-      "norm_label": "wado-rs image loader"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "Cornerstone Lifecycle Cleanup",
@@ -2297,9 +2405,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "cornerstone lifecycle cleanup",
       "id": "docs_domains_vue_cornerstone3d_cornerstone_lifecycle",
-      "community": 6,
-      "norm_label": "cornerstone lifecycle cleanup"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "Historical Specs and Plans",
@@ -2310,9 +2419,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_historical_records",
       "community": 16,
-      "norm_label": "historical specs and plans"
+      "norm_label": "historical specs and plans",
+      "id": "docs_superpowers_historical_records",
+      "community_name": "Feature-First Architecture"
     },
     {
       "label": "Codex Subagents Implementation Plan",
@@ -2323,9 +2433,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 14,
+      "norm_label": "codex subagents implementation plan",
       "id": "docs_superpowers_plans_2026_07_23_codex_subagents_codex_subagents_plan",
-      "community": 15,
-      "norm_label": "codex subagents implementation plan"
+      "community_name": "Domain Packs"
     },
     {
       "label": "DCM4CHEE 5.34.3 Documentation Plan",
@@ -2336,9 +2447,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_plans_2026_07_23_dcm4chee_5_34_3_dcm4chee_baseline_plan",
       "community": 19,
-      "norm_label": "dcm4chee 5.34.3 documentation plan"
+      "norm_label": "dcm4chee 5.34.3 documentation plan",
+      "id": "docs_superpowers_plans_2026_07_23_dcm4chee_5_34_3_dcm4chee_baseline_plan",
+      "community_name": "DCM4CHEE 5.34.3 Baseline"
     },
     {
       "label": "Foundation Stack and Auth Plan",
@@ -2349,9 +2461,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 7,
+      "norm_label": "foundation stack and auth plan",
       "id": "docs_superpowers_plans_2026_07_23_plano_0_fundacao_foundation_plan",
-      "community": 6,
-      "norm_label": "foundation stack and auth plan"
+      "community_name": "DICOMweb Verbs"
     },
     {
       "label": "Feature-first monorepo structure",
@@ -2362,9 +2475,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_plans_2026_07_25_project_structure_monorepo_feature_first",
       "community": 30,
-      "norm_label": "feature-first monorepo structure"
+      "norm_label": "feature-first monorepo structure",
+      "id": "docs_superpowers_plans_2026_07_25_project_structure_monorepo_feature_first",
+      "community_name": "Feature-first monorepo structure"
     },
     {
       "label": "Canonical three-file Compose configuration",
@@ -2375,9 +2489,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_plans_2026_07_25_project_structure_canonical_infrastructure_compose",
       "community": 29,
-      "norm_label": "canonical three-file compose configuration"
+      "norm_label": "canonical three-file compose configuration",
+      "id": "docs_superpowers_plans_2026_07_25_project_structure_canonical_infrastructure_compose",
+      "community_name": "Canonical three-file Compose configuration"
     },
     {
       "label": "BlackICE Keycloak login theme",
@@ -2388,9 +2503,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "blackice keycloak login theme",
       "id": "docs_superpowers_plans_2026_07_26_keycloak_login_theme_blackice_login_theme",
-      "community": 4,
-      "norm_label": "blackice keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "Project-scoped Graphify integration",
@@ -2401,9 +2517,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_plans_2026_07_27_graphify_project_integration_graphify_project_integration",
       "community": 31,
-      "norm_label": "project-scoped graphify integration"
+      "norm_label": "project-scoped graphify integration",
+      "id": "docs_superpowers_plans_2026_07_27_graphify_project_integration_graphify_project_integration",
+      "community_name": "Project-scoped Graphify integration"
     },
     {
       "label": "Focus outline accessibility",
@@ -2414,9 +2531,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_accessibility",
       "community": 32,
-      "norm_label": "focus outline accessibility"
+      "norm_label": "focus outline accessibility",
+      "id": "docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_accessibility",
+      "community_name": "Focus outline accessibility"
     },
     {
       "label": "Playwright Keycloak theme UI regression",
@@ -2427,9 +2545,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "playwright keycloak theme ui regression",
       "id": "docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_playwright_keycloak_theme_regression",
-      "community": 4,
-      "norm_label": "playwright keycloak theme ui regression"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "DCM4CHEE Archive 5.34.3",
@@ -2440,9 +2559,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 20,
+      "norm_label": "dcm4chee archive 5.34.3",
       "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_dcm4chee_archive",
-      "community": 21,
-      "norm_label": "dcm4chee archive 5.34.3"
+      "community_name": "DCM4CHEE Archive 5.34.3"
     },
     {
       "label": "Quarkus product backend",
@@ -2453,9 +2573,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 20,
+      "norm_label": "quarkus product backend",
       "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_quarkus_product_backend",
-      "community": 21,
-      "norm_label": "quarkus product backend"
+      "community_name": "DCM4CHEE Archive 5.34.3"
     },
     {
       "label": "Vue 3 Vite authenticated SPA",
@@ -2466,9 +2587,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "vue 3 vite authenticated spa",
       "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_vue_spa",
-      "community": 4,
-      "norm_label": "vue 3 vite authenticated spa"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "Cornerstone3D viewer",
@@ -2479,9 +2601,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "cornerstone3d viewer",
       "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_cornerstone3d_viewer",
-      "community": 4,
-      "norm_label": "cornerstone3d viewer"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "Keycloak OIDC SSO",
@@ -2492,9 +2615,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 62,
+      "norm_label": "keycloak oidc sso",
       "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_keycloak_oidc_sso",
-      "community": 56,
-      "norm_label": "keycloak oidc sso"
+      "community_name": "Keycloak OIDC SSO"
     },
     {
       "label": "Curated DICOMweb product API",
@@ -2505,9 +2629,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 20,
+      "norm_label": "curated dicomweb product api",
       "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_dicomweb_product_api",
-      "community": 21,
-      "norm_label": "curated dicomweb product api"
+      "community_name": "DCM4CHEE Archive 5.34.3"
     },
     {
       "label": "Narrow WADO viewer path",
@@ -2518,9 +2643,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "narrow wado viewer path",
       "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_narrow_wado_path",
-      "community": 4,
-      "norm_label": "narrow wado viewer path"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "BFF OIDC session cookie",
@@ -2531,9 +2657,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "bff oidc session cookie",
       "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_bff_oidc_session",
-      "community": 4,
-      "norm_label": "bff oidc session cookie"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "Quarkus CSRF protection",
@@ -2544,9 +2671,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "quarkus csrf protection",
       "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_csrf_protection",
-      "community": 4,
-      "norm_label": "quarkus csrf protection"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "Feature-first application architecture",
@@ -2557,9 +2685,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_07_25_project_structure_design_feature_first_architecture",
       "community": 30,
-      "norm_label": "feature-first application architecture"
+      "norm_label": "feature-first application architecture",
+      "id": "docs_superpowers_specs_2026_07_25_project_structure_design_feature_first_architecture",
+      "community_name": "Feature-first monorepo structure"
     },
     {
       "label": "keycloak.v2 child theme",
@@ -2570,9 +2699,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "keycloak.v2 child theme",
       "id": "docs_superpowers_specs_2026_07_26_keycloak_login_theme_design_keycloak_v2_child_theme",
-      "community": 4,
-      "norm_label": "keycloak.v2 child theme"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "Local Graphify CLI workflow",
@@ -2583,9 +2713,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_07_27_graphify_project_integration_design_graphify_local_cli",
       "community": 31,
-      "norm_label": "local graphify cli workflow"
+      "norm_label": "local graphify cli workflow",
+      "id": "docs_superpowers_specs_2026_07_27_graphify_project_integration_design_graphify_local_cli",
+      "community_name": "Project-scoped Graphify integration"
     },
     {
       "label": "Single visible focus indicator",
@@ -2596,9 +2727,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_07_27_keycloak_input_focus_outline_design_single_focus_indicator",
       "community": 32,
-      "norm_label": "single visible focus indicator"
+      "norm_label": "single visible focus indicator",
+      "id": "docs_superpowers_specs_2026_07_27_keycloak_input_focus_outline_design_single_focus_indicator",
+      "community_name": "Focus outline accessibility"
     },
     {
       "label": "Hybrid UI regression strategy",
@@ -2609,9 +2741,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "hybrid ui regression strategy",
       "id": "docs_superpowers_specs_2026_07_27_keycloak_theme_e2e_ui_regression_design_hybrid_ui_regression_strategy",
-      "community": 4,
-      "norm_label": "hybrid ui regression strategy"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "Three-file Compose stack",
@@ -2622,9 +2755,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_readme_three_compose_files",
       "community": 29,
-      "norm_label": "three-file compose stack"
+      "norm_label": "three-file compose stack",
+      "id": "infra_readme_three_compose_files",
+      "community_name": "Canonical three-file Compose configuration"
     },
     {
       "label": "Backend OIDC frontchannel-backchannel split",
@@ -2635,9 +2769,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "backend oidc frontchannel-backchannel split",
       "id": "infra_compose_apps_backend_frontchannel_backchannel_oidc",
-      "community": 4,
-      "norm_label": "backend oidc frontchannel-backchannel split"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "Frontend SPA service",
@@ -2648,9 +2783,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 63,
+      "norm_label": "frontend spa service",
       "id": "infra_compose_apps_frontend_spa_service",
-      "community": 57,
-      "norm_label": "frontend spa service"
+      "community_name": "Frontend SPA service"
     },
     {
       "label": "Docker API compatibility proxy",
@@ -2661,9 +2797,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_compose_docker_api_compatibility_proxy",
       "community": 33,
-      "norm_label": "docker api compatibility proxy"
+      "norm_label": "docker api compatibility proxy",
+      "id": "infra_compose_docker_api_compatibility_proxy",
+      "community_name": "Docker API compatibility proxy"
     },
     {
       "label": "Traefik Docker label routing",
@@ -2674,9 +2811,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_compose_traefik_routing",
       "community": 33,
-      "norm_label": "traefik docker label routing"
+      "norm_label": "traefik docker label routing",
+      "id": "infra_compose_traefik_routing",
+      "community_name": "Docker API compatibility proxy"
     },
     {
       "label": "Product PostgreSQL database",
@@ -2687,9 +2825,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 64,
+      "norm_label": "product postgresql database",
       "id": "infra_compose_product_postgres_database",
-      "community": 58,
-      "norm_label": "product postgresql database"
+      "community_name": "Product PostgreSQL database"
     },
     {
       "label": "Secure DCM4CHEE archive stack",
@@ -2700,9 +2839,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 65,
+      "norm_label": "secure dcm4chee archive stack",
       "id": "infra_dcm4chee_readme_secure_archive_stack",
-      "community": 59,
-      "norm_label": "secure dcm4chee archive stack"
+      "community_name": "Secure DCM4CHEE archive stack"
     },
     {
       "label": "DCM4CHEE Keycloak service",
@@ -2713,9 +2853,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "dcm4chee keycloak service",
       "id": "infra_dcm4chee_compose_keycloak_service",
-      "community": 4,
-      "norm_label": "dcm4chee keycloak service"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "DCM4CHEE Archive service",
@@ -2726,9 +2867,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "dcm4chee archive service",
       "id": "infra_dcm4chee_compose_archive_service",
-      "community": 4,
-      "norm_label": "dcm4chee archive service"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "Shared DICOMweb audience",
@@ -2739,9 +2881,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "shared dicomweb audience",
       "id": "infra_keycloak_readme_shared_audience",
-      "community": 4,
-      "norm_label": "shared dicomweb audience"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "blackice-quarkus confidential client",
@@ -2752,9 +2895,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 5,
+      "norm_label": "blackice-quarkus confidential client",
       "id": "infra_keycloak_readme_blackice_quarkus_client",
-      "community": 4,
-      "norm_label": "blackice-quarkus confidential client"
+      "community_name": "BlackICE Keycloak login theme"
     },
     {
       "label": "BlackICE Favicon",
@@ -2765,9 +2909,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 23,
+      "norm_label": "blackice favicon",
       "id": "apps_frontend_public_favicon_blackice_favicon",
-      "community": 24,
-      "norm_label": "blackice favicon"
+      "community_name": "BlackICE Favicon"
     },
     {
       "label": "Lightning Bolt",
@@ -2778,9 +2923,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 23,
+      "norm_label": "lightning bolt",
       "id": "apps_frontend_public_favicon_lightning_bolt",
-      "community": 24,
-      "norm_label": "lightning bolt"
+      "community_name": "BlackICE Favicon"
     },
     {
       "label": "Bluesky icon",
@@ -2791,9 +2937,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 44,
+      "norm_label": "bluesky icon",
       "id": "apps_frontend_public_icons_bluesky_icon",
-      "community": 41,
-      "norm_label": "bluesky icon"
+      "community_name": "Bluesky icon"
     },
     {
       "label": "Discord icon",
@@ -2804,9 +2951,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 45,
+      "norm_label": "discord icon",
       "id": "apps_frontend_public_icons_discord_icon",
-      "community": 42,
-      "norm_label": "discord icon"
+      "community_name": "Discord icon"
     },
     {
       "label": "Documentation icon",
@@ -2817,9 +2965,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 46,
+      "norm_label": "documentation icon",
       "id": "apps_frontend_public_icons_documentation_icon",
-      "community": 43,
-      "norm_label": "documentation icon"
+      "community_name": "Documentation icon"
     },
     {
       "label": "GitHub icon",
@@ -2830,9 +2979,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 47,
+      "norm_label": "github icon",
       "id": "apps_frontend_public_icons_github_icon",
-      "community": 44,
-      "norm_label": "github icon"
+      "community_name": "GitHub icon"
     },
     {
       "label": "Social icon",
@@ -2843,9 +2993,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 48,
+      "norm_label": "social icon",
       "id": "apps_frontend_public_icons_social_icon",
-      "community": 45,
-      "norm_label": "social icon"
+      "community_name": "Social icon"
     },
     {
       "label": "X icon",
@@ -2856,9 +3007,290 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
+      "community": 49,
+      "norm_label": "x icon",
       "id": "apps_frontend_public_icons_x_icon",
-      "community": 46,
-      "norm_label": "x icon"
+      "community_name": "X icon"
+    },
+    {
+      "label": "Graphify workflow",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "graphify workflow",
+      "id": "agents_skills_graphify_skill_graphify_workflow",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Semantic extraction",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "semantic extraction",
+      "id": "agents_skills_graphify_skill_semantic_extraction",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Incremental update",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "incremental update",
+      "id": "agents_skills_graphify_skill_incremental_update",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Cluster-only refresh",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "cluster-only refresh",
+      "id": "agents_skills_graphify_skill_cluster_only",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Incremental re-extraction runbook",
+      "file_type": "document",
+      "source_file": ".agents/skills/graphify/references/update.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "incremental re-extraction runbook",
+      "id": "agents_skills_graphify_references_update_incremental_update",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Incremental merge integrity",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/references/update.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "incremental merge integrity",
+      "id": "agents_skills_graphify_references_update_merge_integrity",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Cluster-only refresh",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/references/update.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "cluster-only refresh",
+      "id": "agents_skills_graphify_references_update_cluster_only",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Graphify workflow",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "graphify workflow",
+      "id": "claude_skills_graphify_skill_graphify_workflow",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Semantic extraction",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "semantic extraction",
+      "id": "claude_skills_graphify_skill_semantic_extraction",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Incremental update",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "incremental update",
+      "id": "claude_skills_graphify_skill_incremental_update",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Cluster-only refresh",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "cluster-only refresh",
+      "id": "claude_skills_graphify_skill_cluster_only",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Incremental re-extraction runbook",
+      "file_type": "document",
+      "source_file": ".claude/skills/graphify/references/update.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "incremental re-extraction runbook",
+      "id": "claude_skills_graphify_references_update_incremental_update",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Incremental merge integrity",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/references/update.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "incremental merge integrity",
+      "id": "claude_skills_graphify_references_update_merge_integrity",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Cluster-only refresh",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/references/update.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 4,
+      "norm_label": "cluster-only refresh",
+      "id": "claude_skills_graphify_references_update_cluster_only",
+      "community_name": "Incremental re-extraction runbook"
+    },
+    {
+      "label": "Graphify local engineering tooling",
+      "file_type": "concept",
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 15,
+      "norm_label": "graphify local engineering tooling",
+      "id": "docs_architecture_graphify_local_tooling",
+      "community_name": "Graphify CLI 0.9.28 baseline"
+    },
+    {
+      "label": "Graphify CLI 0.9.28 baseline",
+      "file_type": "concept",
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "source_url": "https://github.com/safishamsi/graphify/releases/tag/v0.9.28",
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 15,
+      "norm_label": "graphify cli 0.9.28 baseline",
+      "id": "docs_architecture_graphify_cli_baseline_0928",
+      "community_name": "Graphify CLI 0.9.28 baseline"
+    },
+    {
+      "label": "Project-scoped installation",
+      "file_type": "concept",
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 15,
+      "norm_label": "project-scoped installation",
+      "id": "docs_architecture_graphify_project_scoped_install",
+      "community_name": "Graphify CLI 0.9.28 baseline"
+    },
+    {
+      "label": "Incremental update routes",
+      "file_type": "concept",
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 28,
+      "norm_label": "incremental update routes",
+      "id": "docs_architecture_graphify_incremental_routes",
+      "community_name": "Incremental update routes"
+    },
+    {
+      "label": "Graphify 0.9.28 integrity workarounds",
+      "file_type": "concept",
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 28,
+      "norm_label": "graphify 0.9.28 integrity workarounds",
+      "id": "docs_architecture_graphify_integrity_workarounds",
+      "community_name": "Incremental update routes"
+    },
+    {
+      "label": "Graphify security and authority limits",
+      "file_type": "concept",
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 15,
+      "norm_label": "graphify security and authority limits",
+      "id": "docs_architecture_graphify_security_authority",
+      "community_name": "Graphify CLI 0.9.28 baseline"
     }
   ],
   "links": [
@@ -2869,9 +3301,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw",
-      "target": "apps_backend_mvnw__entry",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw__entry"
     },
     {
       "relation": "defines",
@@ -2880,9 +3312,9 @@
       "source_location": "L165",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw",
-      "target": "apps_backend_mvnw_clean",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_clean"
     },
     {
       "relation": "defines",
@@ -2891,9 +3323,9 @@
       "source_location": "L95",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw",
-      "target": "apps_backend_mvnw_die",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_die"
     },
     {
       "relation": "defines",
@@ -2902,9 +3334,9 @@
       "source_location": "L148",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw",
-      "target": "apps_backend_mvnw_exec_maven",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_exec_maven"
     },
     {
       "relation": "defines",
@@ -2913,9 +3345,9 @@
       "source_location": "L82",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw",
-      "target": "apps_backend_mvnw_hash_string",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_hash_string"
     },
     {
       "relation": "defines",
@@ -2924,9 +3356,9 @@
       "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw",
-      "target": "apps_backend_mvnw_native_path",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_native_path"
     },
     {
       "relation": "defines",
@@ -2935,9 +3367,9 @@
       "source_location": "L45",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw",
-      "target": "apps_backend_mvnw_set_java_home",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_set_java_home"
     },
     {
       "relation": "defines",
@@ -2946,9 +3378,9 @@
       "source_location": "L100",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw",
-      "target": "apps_backend_mvnw_trim",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_trim"
     },
     {
       "relation": "defines",
@@ -2957,9 +3389,9 @@
       "source_location": "L93",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw",
-      "target": "apps_backend_mvnw_verbose",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_verbose"
     },
     {
       "relation": "calls",
@@ -2969,9 +3401,9 @@
       "weight": 1.0,
       "context": "call",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw__entry",
-      "target": "apps_backend_mvnw_clean",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_clean"
     },
     {
       "relation": "calls",
@@ -2981,9 +3413,9 @@
       "weight": 1.0,
       "context": "call",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw__entry",
-      "target": "apps_backend_mvnw_die",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_die"
     },
     {
       "relation": "calls",
@@ -2993,9 +3425,9 @@
       "weight": 1.0,
       "context": "call",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw__entry",
-      "target": "apps_backend_mvnw_exec_maven",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_exec_maven"
     },
     {
       "relation": "calls",
@@ -3005,9 +3437,9 @@
       "weight": 1.0,
       "context": "call",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw__entry",
-      "target": "apps_backend_mvnw_set_java_home",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_set_java_home"
     },
     {
       "relation": "calls",
@@ -3017,9 +3449,9 @@
       "weight": 1.0,
       "context": "call",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw__entry",
-      "target": "apps_backend_mvnw_verbose",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_verbose"
     },
     {
       "relation": "calls",
@@ -3029,9 +3461,9 @@
       "weight": 1.0,
       "context": "call",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_mvnw_exec_maven",
-      "target": "apps_backend_mvnw_die",
-      "confidence_score": 1.0
+      "target": "apps_backend_mvnw_die"
     },
     {
       "relation": "contains",
@@ -3040,9 +3472,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource",
-      "target": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource"
     },
     {
       "relation": "imports",
@@ -3052,9 +3484,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource",
-      "target": "authenticated",
-      "confidence_score": 1.0
+      "target": "authenticated"
     },
     {
       "relation": "imports",
@@ -3064,9 +3496,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource",
-      "target": "get",
-      "confidence_score": 1.0
+      "target": "get"
     },
     {
       "relation": "imports",
@@ -3076,9 +3508,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource",
-      "target": "jsonwebtoken",
-      "confidence_score": 1.0
+      "target": "jsonwebtoken"
     },
     {
       "relation": "imports",
@@ -3088,9 +3520,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource",
-      "target": "path",
-      "confidence_score": 1.0
+      "target": "path"
     },
     {
       "relation": "imports",
@@ -3100,9 +3532,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource",
-      "target": "permitall",
-      "confidence_score": 1.0
+      "target": "permitall"
     },
     {
       "relation": "imports",
@@ -3112,9 +3544,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource",
-      "target": "response",
-      "confidence_score": 1.0
+      "target": "response"
     },
     {
       "relation": "imports",
@@ -3124,9 +3556,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource",
-      "target": "securityidentity",
-      "confidence_score": 1.0
+      "target": "securityidentity"
     },
     {
       "relation": "method",
@@ -3135,9 +3567,9 @@
       "source_location": "L35",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource",
-      "target": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_login",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_login"
     },
     {
       "relation": "method",
@@ -3146,9 +3578,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource",
-      "target": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_me",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_me"
     },
     {
       "relation": "references",
@@ -3158,9 +3590,9 @@
       "weight": 1.0,
       "context": "field",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource",
-      "target": "jsonwebtoken",
-      "confidence_score": 1.0
+      "target": "jsonwebtoken"
     },
     {
       "relation": "references",
@@ -3170,9 +3602,9 @@
       "weight": 1.0,
       "context": "attribute",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource",
-      "target": "path",
-      "confidence_score": 1.0
+      "target": "path"
     },
     {
       "relation": "references",
@@ -3182,9 +3614,9 @@
       "weight": 1.0,
       "context": "field",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource",
-      "target": "securityidentity",
-      "confidence_score": 1.0
+      "target": "securityidentity"
     },
     {
       "relation": "references",
@@ -3194,9 +3626,9 @@
       "weight": 1.0,
       "context": "attribute",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_login",
-      "target": "path",
-      "confidence_score": 1.0
+      "target": "path"
     },
     {
       "relation": "references",
@@ -3206,9 +3638,9 @@
       "weight": 1.0,
       "context": "attribute",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_me",
-      "target": "path",
-      "confidence_score": 1.0
+      "target": "path"
     },
     {
       "relation": "calls",
@@ -3230,9 +3662,9 @@
       "weight": 1.0,
       "context": "attribute",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_me",
-      "target": "get",
-      "confidence_score": 1.0
+      "target": "get"
     },
     {
       "relation": "references",
@@ -3242,9 +3674,9 @@
       "weight": 1.0,
       "context": "attribute",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_me",
-      "target": "permitall",
-      "confidence_score": 1.0
+      "target": "permitall"
     },
     {
       "relation": "references",
@@ -3254,9 +3686,9 @@
       "weight": 1.0,
       "context": "return_type",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_me",
-      "target": "response",
-      "confidence_score": 1.0
+      "target": "response"
     },
     {
       "relation": "references",
@@ -3266,9 +3698,9 @@
       "weight": 1.0,
       "context": "return_type",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_login",
-      "target": "response",
-      "confidence_score": 1.0
+      "target": "response"
     },
     {
       "relation": "references",
@@ -3278,9 +3710,9 @@
       "weight": 1.0,
       "context": "attribute",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_login",
-      "target": "get",
-      "confidence_score": 1.0
+      "target": "get"
     },
     {
       "relation": "references",
@@ -3290,9 +3722,9 @@
       "weight": 1.0,
       "context": "attribute",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_login",
-      "target": "authenticated",
-      "confidence_score": 1.0
+      "target": "authenticated"
     },
     {
       "relation": "contains",
@@ -3301,9 +3733,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_main_java_dev_blackice_features_session_sessionresponse",
-      "target": "apps_backend_src_main_java_dev_blackice_features_session_sessionresponse_sessionresponse",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_main_java_dev_blackice_features_session_sessionresponse_sessionresponse"
     },
     {
       "relation": "contains",
@@ -3312,9 +3744,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest",
-      "target": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest"
     },
     {
       "relation": "imports",
@@ -3324,9 +3756,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest",
-      "target": "quarkustest",
-      "confidence_score": 1.0
+      "target": "quarkustest"
     },
     {
       "relation": "imports",
@@ -3336,9 +3768,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest",
-      "target": "test",
-      "confidence_score": 1.0
+      "target": "test"
     },
     {
       "relation": "method",
@@ -3347,9 +3779,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest",
-      "target": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest_anonimo_recebe_401",
-      "confidence_score": 1.0
+      "target": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest_anonimo_recebe_401"
     },
     {
       "relation": "references",
@@ -3359,9 +3791,9 @@
       "weight": 1.0,
       "context": "attribute",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest",
-      "target": "quarkustest",
-      "confidence_score": 1.0
+      "target": "quarkustest"
     },
     {
       "relation": "references",
@@ -3371,9 +3803,9 @@
       "weight": 1.0,
       "context": "attribute",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest_anonimo_recebe_401",
-      "target": "test",
-      "confidence_score": 1.0
+      "target": "test"
     },
     {
       "relation": "contains",
@@ -3382,9 +3814,9 @@
       "source_location": "L44",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_e2e_keycloak_login_spec",
-      "target": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered",
-      "confidence_score": 1.0
+      "target": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered"
     },
     {
       "relation": "contains",
@@ -3393,9 +3825,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_e2e_keycloak_login_spec",
-      "target": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin",
-      "confidence_score": 1.0
+      "target": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin"
     },
     {
       "relation": "contains",
@@ -3404,9 +3836,9 @@
       "source_location": "L33",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_e2e_keycloak_login_spec",
-      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox",
-      "confidence_score": 1.0
+      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox"
     },
     {
       "relation": "contains",
@@ -3415,9 +3847,9 @@
       "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_e2e_keycloak_login_spec",
-      "target": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard",
-      "confidence_score": 1.0
+      "target": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard"
     },
     {
       "relation": "contains",
@@ -3426,9 +3858,9 @@
       "source_location": "L119",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_e2e_keycloak_login_spec",
-      "target": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials",
-      "confidence_score": 1.0
+      "target": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials"
     },
     {
       "relation": "calls",
@@ -3438,9 +3870,9 @@
       "source_location": "L120",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials",
-      "target": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin",
-      "confidence_score": 1.0
+      "target": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin"
     },
     {
       "relation": "calls",
@@ -3450,9 +3882,9 @@
       "source_location": "L50",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered",
-      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox",
-      "confidence_score": 1.0
+      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox"
     },
     {
       "relation": "calls",
@@ -3462,9 +3894,9 @@
       "source_location": "L68",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard",
-      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox",
-      "confidence_score": 1.0
+      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox"
     },
     {
       "relation": "contains",
@@ -3473,9 +3905,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package",
-      "target": "apps_frontend_package_dependencies",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_dependencies"
     },
     {
       "relation": "contains",
@@ -3484,9 +3916,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package",
-      "target": "apps_frontend_package_devdependencies",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_devdependencies"
     },
     {
       "relation": "contains",
@@ -3495,9 +3927,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package",
-      "target": "apps_frontend_package_name",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_name"
     },
     {
       "relation": "contains",
@@ -3506,9 +3938,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package",
-      "target": "apps_frontend_package_private",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_private"
     },
     {
       "relation": "contains",
@@ -3517,9 +3949,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package",
-      "target": "apps_frontend_package_scripts",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_scripts"
     },
     {
       "relation": "contains",
@@ -3528,9 +3960,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package",
-      "target": "apps_frontend_package_type",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_type"
     },
     {
       "relation": "contains",
@@ -3539,9 +3971,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package",
-      "target": "apps_frontend_package_version",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_version"
     },
     {
       "relation": "contains",
@@ -3550,9 +3982,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_scripts",
-      "target": "apps_frontend_package_scripts_build",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_scripts_build"
     },
     {
       "relation": "contains",
@@ -3561,9 +3993,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_scripts",
-      "target": "apps_frontend_package_scripts_dev",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_scripts_dev"
     },
     {
       "relation": "contains",
@@ -3572,9 +4004,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_scripts",
-      "target": "apps_frontend_package_scripts_preview",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_scripts_preview"
     },
     {
       "relation": "contains",
@@ -3583,9 +4015,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_scripts",
-      "target": "apps_frontend_package_scripts_test",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_scripts_test"
     },
     {
       "relation": "contains",
@@ -3594,9 +4026,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_scripts",
-      "target": "apps_frontend_package_scripts_test_e2e_keycloak",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_scripts_test_e2e_keycloak"
     },
     {
       "relation": "contains",
@@ -3605,9 +4037,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_dependencies",
-      "target": "apps_frontend_package_dependencies_vue",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_dependencies_vue"
     },
     {
       "relation": "contains",
@@ -3616,9 +4048,9 @@
       "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_dependencies",
-      "target": "apps_frontend_package_dependencies_vue_router",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_dependencies_vue_router"
     },
     {
       "relation": "imports",
@@ -3628,9 +4060,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_dependencies_vue",
-      "target": "vue",
-      "confidence_score": 1.0
+      "target": "vue"
     },
     {
       "relation": "imports",
@@ -3640,9 +4072,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_dependencies_vue_router",
-      "target": "vue_router",
-      "confidence_score": 1.0
+      "target": "vue_router"
     },
     {
       "relation": "contains",
@@ -3651,9 +4083,9 @@
       "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies",
-      "target": "apps_frontend_package_devdependencies_playwright_test",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_devdependencies_playwright_test"
     },
     {
       "relation": "contains",
@@ -3662,9 +4094,9 @@
       "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies",
-      "target": "apps_frontend_package_devdependencies_types_node",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_devdependencies_types_node"
     },
     {
       "relation": "contains",
@@ -3673,9 +4105,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies",
-      "target": "apps_frontend_package_devdependencies_typescript",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_devdependencies_typescript"
     },
     {
       "relation": "contains",
@@ -3684,9 +4116,9 @@
       "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies",
-      "target": "apps_frontend_package_devdependencies_vite",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_devdependencies_vite"
     },
     {
       "relation": "contains",
@@ -3695,9 +4127,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies",
-      "target": "apps_frontend_package_devdependencies_vitejs_plugin_vue",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_devdependencies_vitejs_plugin_vue"
     },
     {
       "relation": "contains",
@@ -3706,9 +4138,9 @@
       "source_location": "L24",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies",
-      "target": "apps_frontend_package_devdependencies_vitest",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_devdependencies_vitest"
     },
     {
       "relation": "contains",
@@ -3717,9 +4149,9 @@
       "source_location": "L25",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies",
-      "target": "apps_frontend_package_devdependencies_vue_tsc",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_devdependencies_vue_tsc"
     },
     {
       "relation": "contains",
@@ -3728,9 +4160,9 @@
       "source_location": "L21",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies",
-      "target": "apps_frontend_package_devdependencies_vue_tsconfig",
-      "confidence_score": 1.0
+      "target": "apps_frontend_package_devdependencies_vue_tsconfig"
     },
     {
       "relation": "imports",
@@ -3740,9 +4172,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies_playwright_test",
-      "target": "playwright_test",
-      "confidence_score": 1.0
+      "target": "playwright_test"
     },
     {
       "relation": "imports",
@@ -3752,9 +4184,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies_types_node",
-      "target": "types_node",
-      "confidence_score": 1.0
+      "target": "types_node"
     },
     {
       "relation": "imports",
@@ -3764,9 +4196,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies_vitejs_plugin_vue",
-      "target": "vitejs_plugin_vue",
-      "confidence_score": 1.0
+      "target": "vitejs_plugin_vue"
     },
     {
       "relation": "imports",
@@ -3776,9 +4208,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies_vue_tsconfig",
-      "target": "vue_tsconfig",
-      "confidence_score": 1.0
+      "target": "vue_tsconfig"
     },
     {
       "relation": "imports",
@@ -3788,9 +4220,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies_typescript",
-      "target": "typescript",
-      "confidence_score": 1.0
+      "target": "typescript"
     },
     {
       "relation": "imports",
@@ -3800,9 +4232,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies_vite",
-      "target": "vite",
-      "confidence_score": 1.0
+      "target": "vite"
     },
     {
       "relation": "imports",
@@ -3812,9 +4244,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies_vitest",
-      "target": "vitest",
-      "confidence_score": 1.0
+      "target": "vitest"
     },
     {
       "relation": "imports",
@@ -3824,9 +4256,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_package_devdependencies_vue_tsc",
-      "target": "vue_tsc",
-      "confidence_score": 1.0
+      "target": "vue_tsc"
     },
     {
       "relation": "contains",
@@ -3835,9 +4267,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_playwright_config",
-      "target": "apps_frontend_playwright_config_isci",
-      "confidence_score": 1.0
+      "target": "apps_frontend_playwright_config_isci"
     },
     {
       "relation": "contains",
@@ -3846,9 +4278,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_src_app_router_index",
-      "target": "apps_frontend_src_app_router_index_router",
-      "confidence_score": 1.0
+      "target": "apps_frontend_src_app_router_index_router"
     },
     {
       "relation": "contains",
@@ -3857,9 +4289,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_src_features_home_homepage",
-      "target": "apps_frontend_src_features_home_homepage_username",
-      "confidence_score": 1.0
+      "target": "apps_frontend_src_features_home_homepage_username"
     },
     {
       "relation": "contains",
@@ -3868,9 +4300,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_src_features_session_session_api",
-      "target": "apps_frontend_src_features_session_session_api_fetchsession",
-      "confidence_score": 1.0
+      "target": "apps_frontend_src_features_session_session_api_fetchsession"
     },
     {
       "relation": "contains",
@@ -3879,9 +4311,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_src_features_session_session_types",
-      "target": "apps_frontend_src_features_session_session_types_sessionresponse",
-      "confidence_score": 1.0
+      "target": "apps_frontend_src_features_session_session_types_sessionresponse"
     },
     {
       "relation": "contains",
@@ -3890,9 +4322,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app",
-      "target": "apps_frontend_tsconfig_app_compileroptions",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_compileroptions"
     },
     {
       "relation": "contains",
@@ -3901,9 +4333,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app",
-      "target": "apps_frontend_tsconfig_app_extends",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_extends"
     },
     {
       "relation": "contains",
@@ -3912,9 +4344,9 @@
       "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app",
-      "target": "apps_frontend_tsconfig_app_include",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_include"
     },
     {
       "relation": "extends",
@@ -3924,9 +4356,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app",
-      "target": "ref_vue_tsconfig_tsconfig_dom_json",
-      "confidence_score": 1.0
+      "target": "ref_vue_tsconfig_tsconfig_dom_json"
     },
     {
       "relation": "contains",
@@ -3935,9 +4367,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_compileroptions",
-      "target": "apps_frontend_tsconfig_app_compileroptions_allowarbitraryextensions",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_compileroptions_allowarbitraryextensions"
     },
     {
       "relation": "contains",
@@ -3946,9 +4378,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_compileroptions",
-      "target": "apps_frontend_tsconfig_app_compileroptions_baseurl",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_compileroptions_baseurl"
     },
     {
       "relation": "contains",
@@ -3957,9 +4389,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_compileroptions",
-      "target": "apps_frontend_tsconfig_app_compileroptions_erasablesyntaxonly",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_compileroptions_erasablesyntaxonly"
     },
     {
       "relation": "contains",
@@ -3968,9 +4400,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_compileroptions",
-      "target": "apps_frontend_tsconfig_app_compileroptions_ignoredeprecations",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_compileroptions_ignoredeprecations"
     },
     {
       "relation": "contains",
@@ -3979,9 +4411,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_compileroptions",
-      "target": "apps_frontend_tsconfig_app_compileroptions_nofallthroughcasesinswitch",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_compileroptions_nofallthroughcasesinswitch"
     },
     {
       "relation": "contains",
@@ -3990,9 +4422,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_compileroptions",
-      "target": "apps_frontend_tsconfig_app_compileroptions_nounusedlocals",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_compileroptions_nounusedlocals"
     },
     {
       "relation": "contains",
@@ -4001,9 +4433,9 @@
       "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_compileroptions",
-      "target": "apps_frontend_tsconfig_app_compileroptions_nounusedparameters",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_compileroptions_nounusedparameters"
     },
     {
       "relation": "contains",
@@ -4012,9 +4444,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_compileroptions",
-      "target": "apps_frontend_tsconfig_app_compileroptions_paths",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_compileroptions_paths"
     },
     {
       "relation": "contains",
@@ -4023,9 +4455,9 @@
       "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_compileroptions",
-      "target": "apps_frontend_tsconfig_app_compileroptions_tsbuildinfofile",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_compileroptions_tsbuildinfofile"
     },
     {
       "relation": "contains",
@@ -4034,9 +4466,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_compileroptions",
-      "target": "apps_frontend_tsconfig_app_compileroptions_types",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_app_compileroptions_types"
     },
     {
       "relation": "extends",
@@ -4046,9 +4478,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_compileroptions_types",
-      "target": "ref_vite_client",
-      "confidence_score": 1.0
+      "target": "ref_vite_client"
     },
     {
       "relation": "extends",
@@ -4058,9 +4490,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_include",
-      "target": "ref_src_ts",
-      "confidence_score": 1.0
+      "target": "ref_src_ts"
     },
     {
       "relation": "extends",
@@ -4070,9 +4502,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_include",
-      "target": "ref_src_tsx",
-      "confidence_score": 1.0
+      "target": "ref_src_tsx"
     },
     {
       "relation": "extends",
@@ -4082,9 +4514,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_app_include",
-      "target": "ref_src_vue",
-      "confidence_score": 1.0
+      "target": "ref_src_vue"
     },
     {
       "relation": "contains",
@@ -4093,9 +4525,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig",
-      "target": "apps_frontend_tsconfig_files",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_files"
     },
     {
       "relation": "contains",
@@ -4104,9 +4536,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig",
-      "target": "apps_frontend_tsconfig_references",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_references"
     },
     {
       "relation": "contains",
@@ -4115,9 +4547,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node",
-      "target": "apps_frontend_tsconfig_node_compileroptions",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions"
     },
     {
       "relation": "contains",
@@ -4126,9 +4558,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node",
-      "target": "apps_frontend_tsconfig_node_include",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_include"
     },
     {
       "relation": "contains",
@@ -4137,9 +4569,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_allowimportingtsextensions",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_allowimportingtsextensions"
     },
     {
       "relation": "contains",
@@ -4148,9 +4580,9 @@
       "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_erasablesyntaxonly",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_erasablesyntaxonly"
     },
     {
       "relation": "contains",
@@ -4159,9 +4591,9 @@
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_lib",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_lib"
     },
     {
       "relation": "contains",
@@ -4170,9 +4602,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_module",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_module"
     },
     {
       "relation": "contains",
@@ -4181,9 +4613,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_moduledetection",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_moduledetection"
     },
     {
       "relation": "contains",
@@ -4192,9 +4624,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_noemit",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_noemit"
     },
     {
       "relation": "contains",
@@ -4203,9 +4635,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_nofallthroughcasesinswitch",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_nofallthroughcasesinswitch"
     },
     {
       "relation": "contains",
@@ -4214,9 +4646,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_nounusedlocals",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_nounusedlocals"
     },
     {
       "relation": "contains",
@@ -4225,9 +4657,9 @@
       "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_nounusedparameters",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_nounusedparameters"
     },
     {
       "relation": "contains",
@@ -4236,9 +4668,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_skiplibcheck",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_skiplibcheck"
     },
     {
       "relation": "contains",
@@ -4247,9 +4679,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_target",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_target"
     },
     {
       "relation": "contains",
@@ -4258,9 +4690,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_tsbuildinfofile",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_tsbuildinfofile"
     },
     {
       "relation": "contains",
@@ -4269,9 +4701,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_types",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_types"
     },
     {
       "relation": "contains",
@@ -4280,9 +4712,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions",
-      "target": "apps_frontend_tsconfig_node_compileroptions_verbatimmodulesyntax",
-      "confidence_score": 1.0
+      "target": "apps_frontend_tsconfig_node_compileroptions_verbatimmodulesyntax"
     },
     {
       "relation": "extends",
@@ -4292,9 +4724,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions_lib",
-      "target": "ref_es2023",
-      "confidence_score": 1.0
+      "target": "ref_es2023"
     },
     {
       "relation": "extends",
@@ -4304,9 +4736,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_compileroptions_types",
-      "target": "ref_node",
-      "confidence_score": 1.0
+      "target": "ref_node"
     },
     {
       "relation": "extends",
@@ -4316,9 +4748,9 @@
       "weight": 1.0,
       "context": "import",
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "apps_frontend_tsconfig_node_include",
-      "target": "ref_vite_config_ts",
-      "confidence_score": 1.0
+      "target": "ref_vite_config_ts"
     },
     {
       "relation": "contains",
@@ -4327,49 +4759,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "infra_keycloak_configure_blackice",
-      "target": "infra_keycloak_configure_blackice_sh__entry",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "agents_skills_graphify_skill_graphify",
-      "target": "agents_skills_graphify_references_extraction_spec_semantic_extraction"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "agents_skills_graphify_skill_graphify",
-      "target": "agents_skills_graphify_references_github_and_merge_cross_repo_merge"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "agents_skills_graphify_skill_graphify",
-      "target": "agents_skills_graphify_references_transcribe_graphify_transcription"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "agents_skills_graphify_skill_graphify",
-      "target": "agents_skills_graphify_references_update_incremental_extraction"
+      "target": "infra_keycloak_configure_blackice_sh__entry"
     },
     {
       "relation": "references",
@@ -4390,46 +4782,6 @@
       "weight": 1.0,
       "source": "claude_agents_vue_dicom_viewer_frontend_dicom_viewer_frontend",
       "target": "claude_agents_dicom_dicom_domain_reviewer_dicom_domain_reviewer"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "claude_skills_graphify_skill_graphify",
-      "target": "claude_skills_graphify_references_extraction_spec_semantic_extraction"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "claude_skills_graphify_skill_graphify",
-      "target": "claude_skills_graphify_references_github_and_merge_cross_repo_merge"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "claude_skills_graphify_skill_graphify",
-      "target": "claude_skills_graphify_references_transcribe_graphify_transcription"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "claude_skills_graphify_skill_graphify",
-      "target": "claude_skills_graphify_references_update_incremental_extraction"
     },
     {
       "relation": "conceptually_related_to",
@@ -4640,26 +4992,6 @@
       "weight": 1.0,
       "source": "docs_superpowers_plans_2026_07_23_dcm4chee_5_34_3_dcm4chee_baseline_plan",
       "target": "docs_architecture_dcm4chee_archive_baseline_5_34_3"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/architecture/graphify.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_architecture_graphify_corpus_security",
-      "target": "docs_architecture_graphify_local_engineering_tool"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/architecture/graphify.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_architecture_graphify_local_engineering_tool",
-      "target": "docs_architecture_graphify_graphify_cli_0_9_28"
     },
     {
       "relation": "conceptually_related_to",
@@ -5060,6 +5392,186 @@
       "weight": 1.0,
       "source": "apps_frontend_public_favicon_blackice_favicon",
       "target": "apps_frontend_public_favicon_lightning_bolt"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "agents_skills_graphify_skill_graphify_workflow",
+      "target": "agents_skills_graphify_skill_cluster_only"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "agents_skills_graphify_skill_graphify_workflow",
+      "target": "agents_skills_graphify_skill_incremental_update"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "agents_skills_graphify_skill_graphify_workflow",
+      "target": "agents_skills_graphify_skill_semantic_extraction"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "agents_skills_graphify_skill_graphify_workflow",
+      "target": "claude_skills_graphify_skill_graphify_workflow"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "agents_skills_graphify_skill_incremental_update",
+      "target": "agents_skills_graphify_references_update_incremental_update"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/references/update.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "agents_skills_graphify_references_update_incremental_update",
+      "target": "agents_skills_graphify_references_update_cluster_only"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/references/update.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "agents_skills_graphify_references_update_incremental_update",
+      "target": "agents_skills_graphify_references_update_merge_integrity"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".agents/skills/graphify/references/update.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "agents_skills_graphify_references_update_incremental_update",
+      "target": "claude_skills_graphify_references_update_incremental_update"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "claude_skills_graphify_skill_graphify_workflow",
+      "target": "claude_skills_graphify_skill_cluster_only"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "claude_skills_graphify_skill_graphify_workflow",
+      "target": "claude_skills_graphify_skill_incremental_update"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "claude_skills_graphify_skill_graphify_workflow",
+      "target": "claude_skills_graphify_skill_semantic_extraction"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "claude_skills_graphify_skill_incremental_update",
+      "target": "claude_skills_graphify_references_update_incremental_update"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/references/update.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "claude_skills_graphify_references_update_incremental_update",
+      "target": "claude_skills_graphify_references_update_cluster_only"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/references/update.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "claude_skills_graphify_references_update_incremental_update",
+      "target": "claude_skills_graphify_references_update_merge_integrity"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_architecture_graphify_local_tooling",
+      "target": "docs_architecture_graphify_cli_baseline_0928"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_architecture_graphify_local_tooling",
+      "target": "docs_architecture_graphify_security_authority"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_architecture_graphify_cli_baseline_0928",
+      "target": "docs_architecture_graphify_project_scoped_install"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_architecture_graphify_incremental_routes",
+      "target": "docs_architecture_graphify_integrity_workarounds"
     }
   ],
   "hyperedges": [
@@ -5078,6 +5590,19 @@
       "source_file": "AGENTS.md"
     },
     {
+      "id": "domain_pack_knowledge_model",
+      "label": "Domain Pack Knowledge Model",
+      "nodes": [
+        "docs_domains_dicom_dicom_domain_pack",
+        "docs_domains_quarkus_quarkus_domain_pack",
+        "docs_domains_vue_vue_domain_pack"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/domains/README.md"
+    },
+    {
       "id": "dicomweb_operation_roles",
       "label": "DICOMweb Operation Roles",
       "nodes": [
@@ -5091,17 +5616,17 @@
       "source_file": "docs/domains/dicom/dicomweb.md"
     },
     {
-      "id": "domain_pack_knowledge_model",
-      "label": "Domain Pack Knowledge Model",
+      "id": "keycloak_login_quality",
+      "label": "Keycloak login quality workflow",
       "nodes": [
-        "docs_domains_dicom_dicom_domain_pack",
-        "docs_domains_quarkus_quarkus_domain_pack",
-        "docs_domains_vue_vue_domain_pack"
+        "docs_superpowers_plans_2026_07_26_keycloak_login_theme_blackice_login_theme",
+        "docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_accessibility",
+        "docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_playwright_keycloak_theme_regression"
       ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/domains/README.md"
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/superpowers/plans/2026-07-27-keycloak-theme-e2e-ui-regression.md"
     },
     {
       "id": "blackice_mvp_architecture",
@@ -5135,19 +5660,6 @@
       "source_file": "infra/README.md"
     },
     {
-      "id": "keycloak_login_quality",
-      "label": "Keycloak login quality workflow",
-      "nodes": [
-        "docs_superpowers_plans_2026_07_26_keycloak_login_theme_blackice_login_theme",
-        "docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_accessibility",
-        "docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_playwright_keycloak_theme_regression"
-      ],
-      "relation": "participate_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "docs/superpowers/plans/2026-07-27-keycloak-theme-e2e-ui-regression.md"
-    },
-    {
       "id": "apps_frontend_public_icons_icon_sprite_collection",
       "label": "Frontend icon sprite collection",
       "nodes": [
@@ -5162,7 +5674,20 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/frontend/public/icons.svg"
+    },
+    {
+      "id": "graphify_skill_variants",
+      "label": "Graphify skill variants",
+      "nodes": [
+        "agents_skills_graphify_skill_graphify_workflow",
+        "claude_skills_graphify_skill_graphify_workflow",
+        "docs_architecture_graphify_local_tooling"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs/architecture/graphify.md"
     }
   ],
-  "built_at_commit": "bd1789df1abd0bc7ec312f0c969ba48654995310"
+  "built_at_commit": "f5319ecbbf6109d54d242069bb39bf3db05f0ddb"
 }

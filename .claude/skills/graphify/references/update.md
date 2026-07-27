@@ -37,7 +37,7 @@ r = json.loads(Path('graphify-out/.graphify_incremental.json').read_text(encodin
 Path('graphify-out/.graphify_detect.json').write_text(json.dumps({
     'files': r.get('new_files', {}),
     'all_files': r.get('files', {}),
-    'total_files': r.get('new_total', 0),
+    'total_files': r.get('total_files', sum(len(v) for v in r.get('files', {}).values())),
     'total_words': r.get('total_words', 0),
     'skipped_sensitive': r.get('skipped_sensitive', []),
     'needs_graph': True,
@@ -109,12 +109,18 @@ prune = list(deleted) or None
 # directed=IS_DIRECTED: replace IS_DIRECTED with True if --directed was given, else
 # False. Without it a --directed --update silently rebuilds undirected and collapses
 # reciprocal A<->B edges (#1392).
+#
+# Project-scoped Graphify 0.9.28 workaround: build_merge's default dedup pass can
+# remove node IDs without remapping hyperedge members. Keep provenance IDs intact
+# during incremental merge; the full build remains responsible for its own dedup.
+# Revalidate and remove this override when upgrading Graphify.
 G = build_merge(
     [new_extraction],
     graph_path='graphify-out/graph.json',
     prune_sources=prune,
     root='INPUT_PATH',
     directed=IS_DIRECTED,
+    dedup=False,
 )
 print(f'[graphify update] Merged: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges')
 

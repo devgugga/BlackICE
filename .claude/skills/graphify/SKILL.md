@@ -504,6 +504,15 @@ tokens = {'input': extraction.get('input_tokens', 0), 'output': extraction.get('
 # LABELS - replace these with the names you chose above
 labels = LABELS_DICT
 
+# Deterministic quality gate: placeholder/reused labels make the report and HTML
+# misleading. Stop before writing either artifact and redo Step 5 (or use the
+# self-contained cluster-only flow) when multiple communities collapse to one name.
+if len(communities) > 1 and len(set(labels.values())) <= 1:
+    raise SystemExit(
+        'Refusing to generate report/HTML with non-distinct community labels. '
+        'Redo Step 5 labels or run graphify cluster-only .'
+    )
+
 # Regenerate questions with real community labels (labels affect question phrasing)
 questions = suggest_questions(G, communities, labels)
 

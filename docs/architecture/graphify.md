@@ -63,12 +63,36 @@ graphify path "HomePage" "SessionResource"
 
 ## Atualizar
 
-Após mudanças relevantes, atualize o grafo e confira se o hook está instalado:
+Há duas rotas de atualização, com escopos diferentes:
+
+- Para mudanças somente de código, `graphify update .` e os hooks instalados
+  por `graphify hook install` fazem a atualização AST local, sem LLM. O hook
+  pós-commit ignora mudanças somente de documentação e imagens; ele é uma
+  manutenção incremental de código, não uma reextração semântica completa.
+- Para documentação, imagens ou uma mudança mista, use a skill no agente:
+  `$graphify . --update` no Codex ou `/graphify . --update` no Claude Code.
+  Essa rota segue o fluxo incremental completo, incluindo a extração semântica
+  dos arquivos de conteúdo alterados e a regeneração dos artefatos.
+
+Confira a instalação do hook quando precisar da manutenção automática de código:
 
 ```powershell
-graphify update .
 graphify hook status
 ```
+
+### Workarounds project-scoped do Graphify 0.9.28
+
+O runbook incremental versionado aplica dois ajustes locais de integridade:
+
+- conserva o total do corpus em `total_files`, embora apenas os arquivos
+  alterados sigam para extração;
+- chama `build_merge(..., dedup=False)` para preservar IDs de proveniência e
+  membros de hiperarestas; o dedup padrão da versão 0.9.28 remove IDs sem
+  remapear esses membros.
+
+Esses ajustes não mudam o full build. Ao atualizar o Graphify, revalidar ambos
+contra a nova versão e remover os workarounds quando a correção upstream tornar
+cada um desnecessário.
 
 ## Arquivos versionados e locais
 
