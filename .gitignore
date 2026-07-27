@@ -18,5 +18,7 @@ apps/backend/target/
 # graphify local-only state; portable graphify-out/ artifacts are versioned
 graphify-out/cost.json
 graphify-out/cache/
+graphify-out/.graphify_python
+graphify-out/.graphify_root
 *.graphify-bak
 *.graphify.log

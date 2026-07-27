@@ -73,9 +73,11 @@ graphify hook status
 ## Arquivos versionados e locais
 
 Versionar os artefatos portáveis de `graphify-out/`. Não versionar `cost.json`,
-`cache/`, logs ou backups. O `.graphifyignore` evita que a própria saída do
-Graphify e evidências que não são conhecimento arquitetural retornem ao corpus;
-o `.claudeignore` evita injetar essa saída gerada no cache de prompts.
+`cache/`, logs, backups, `.graphify_python` ou `.graphify_root`: os dois últimos
+guardam caminhos locais do interpretador e do checkout. O `.graphifyignore`
+evita que a própria saída do Graphify e evidências que não são conhecimento
+arquitetural retornem ao corpus; o `.claudeignore` evita injetar essa saída
+gerada no cache de prompts.
 
 ## Segurança e autoridade
 
