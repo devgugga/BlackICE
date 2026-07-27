@@ -60,6 +60,7 @@
   justify-content: center;
   min-height: 100vh;
   height: auto;
+  padding: 24px;
 }
 
 .login-pf body::before {
@@ -88,11 +89,43 @@
   min-height: 0;
   flex: 0 0 auto;
   padding: 0;
+  /* largura DEFINIDA: sem isto o bloco encolhe para o conteúdo, o `100%` do
+     container resolve contra uma largura indefinida e a coluna do grid cai
+     para o tamanho do texto — o card ficava com menos da metade da tampa. */
+  width: 100%;
+  max-width: 23rem;
 }
 
-#kc-header { position: relative; z-index: 1; }
+/* #kc-header e .pf-v5-c-login são IRMÃOS dentro do body: o wordmark não tem
+   como entrar no <main> do card sem sobrescrever template FreeMarker, que este
+   tema evita de propósito. Em vez disso os dois são pintados como UMA caixa
+   contínua — o header é a tampa, o card é o corpo. Mesma largura, bordas que se
+   encontram, cantos arredondados só nas pontas externas. */
+#kc-header {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 23rem;
+  background: var(--bi-surface);
+  border: 1px solid var(--bi-border);
+  border-bottom: 0;
+  border-radius: var(--bi-radius-lg) var(--bi-radius-lg) 0 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04);
+}
 
-.pf-v5-c-login__container { grid-template-columns: 23rem; }
+/* O container é grid no PatternFly, mas tem um único filho — e a trilha trata
+   qualquer porcentagem como indefinida, caindo para o tamanho do conteúdo (o
+   card encolhia para menos da metade da tampa). Em block o <main> simplesmente
+   preenche a largura, e ela encolhe sozinha em telas estreitas. */
+.pf-v5-c-login__container {
+  display: block;
+  width: 100%;
+  max-width: 23rem;
+  /* o PatternFly reserva 98px laterais aqui; enquanto o container ocupava a
+     largura da tela isso passava despercebido, mas com ele limitado à largura
+     da caixa o card perdia 196px e ficava com menos da metade da tampa */
+  padding: 0;
+}
 
 /* --- wordmark (markup vem do message bundle) ---
    O styles.css do keycloak.v2 tira o header do fluxo (position:absolute +
@@ -101,7 +134,7 @@
 #kc-header-wrapper {
   position: static;
   transform: none;
-  padding: 0 0 22px;
+  padding: var(--bi-space-3) var(--bi-space-3) 26px;
   text-align: center;
 }
 
@@ -141,12 +174,15 @@
 }
 
 /* --- card --- */
+/* corpo da caixa: continua o #kc-header, sem borda no topo e sem cantos
+   arredondados em cima, para a emenda desaparecer */
 .pf-v5-c-login__main {
   background: var(--bi-surface);
   border: 1px solid var(--bi-border);
-  border-radius: var(--bi-radius-lg);
-  padding: var(--bi-space-3);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .04);
+  border-top: 0;
+  border-radius: 0 0 var(--bi-radius-lg) var(--bi-radius-lg);
+  padding: 0 var(--bi-space-3) var(--bi-space-3);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .55);
 }
 
 /* O PatternFly reserva 48px laterais no corpo do card, o que estrangula os
@@ -252,6 +288,9 @@
   border-radius: 0 var(--bi-radius) var(--bi-radius) 0;
   color: var(--bi-text-dim);
 }
+/* O PatternFly desenha o contorno deste botão num ::after de 1px em #f0f0f0 —
+   pensado para fundo claro, vira uma borda branca sobre o card escuro. */
+.pf-v5-c-input-group .pf-v5-c-button.pf-m-control::after { border: 0; }
 .pf-v5-c-input-group .pf-v5-c-button.pf-m-control:hover { color: var(--bi-text); }
 
 /* --- botão --- */
