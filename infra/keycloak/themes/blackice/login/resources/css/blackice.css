@@ -250,6 +250,16 @@
 .pf-v5-c-form-control::before,
 .pf-v5-c-form-control::after { border: 0; }
 
+/* O PatternFly aplica padding-top: 6px ao status icon: o container fica
+   centralizado, mas o glifo termina 3px abaixo do centro do campo. Tornar o
+   status icon um flex container sem esse padding centraliza o filho sem
+   alterar o markup nativo do Keycloak. */
+.pf-v5-c-form-control__icon.pf-m-status {
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+}
+
 .pf-v5-c-form-control > input {
   background: transparent;
   border: 0;
@@ -337,5 +347,12 @@
 }
 .pf-v5-c-alert.pf-m-inline .pf-v5-c-alert__title,
 .pf-v5-c-alert.pf-m-inline .pf-v5-c-alert__icon {
+  color: #fca5a5;
+}
+
+/* O vermelho padrão do PatternFly (#c9190b) perde contraste no card escuro.
+   Usamos a mesma cor clara já aplicada aos alertas inline do tema. */
+.pf-v5-c-form-control__icon.pf-m-status,
+.pf-v5-c-helper-text__item.pf-m-error {
   color: #fca5a5;
 }
