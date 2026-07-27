@@ -203,6 +203,13 @@
   border-radius: var(--bi-radius);
   height: 40px;
   padding: 0 13px;
+  /* O PatternFly usa grid com align-items:start aqui, e o <input> fica com a
+     altura do texto (~31px) encostado no topo de uma moldura de 40px: o cursor
+     nasce alto e qualquer ícone que o navegador ou um gerenciador de senhas
+     injete no campo ancora desalinhado. Em flex centralizado, o input preenche
+     a moldura. */
+  display: flex;
+  align-items: center;
 }
 .pf-v5-c-form-control::before,
 .pf-v5-c-form-control::after { border: 0; }
@@ -213,6 +220,10 @@
   color: var(--bi-text);
   font-size: 13px;
   width: 100%;
+  /* o respiro lateral é do wrapper; o input preenche o resto */
+  height: 100%;
+  padding: 0;
+  min-width: 0;
 }
 .pf-v5-c-form-control > input:-webkit-autofill {
   -webkit-text-fill-color: var(--bi-text);
