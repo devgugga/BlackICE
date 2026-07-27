@@ -41,30 +41,78 @@
   font-family: var(--bi-font);
 }
 
-/* --- fundo: grid técnico apagado + brilho frio no topo.
-       O fundo NÃO é preto puro: #06080b tem azul dentro. --- */
+/* --- fundo: cor chapada no body; a textura vai num overlay separado.
+       O fundo NÃO é preto puro: #06080b tem azul dentro.
+       A textura NÃO pode ir no próprio body: ela precisa de mask-image para
+       esmaecer nas bordas, e mask no body mascararia o card junto. --- */
+/* O #kc-header e o .pf-v5-c-login são IRMÃOS dentro do body, e o segundo
+   reserva 100% da altura. É por isso que o keycloak.v2 tira o header do fluxo:
+   sem isso, ele empurra o card para fora do centro e a página passa a rolar.
+   Em vez de sobrepor, centralizamos o par: o body vira o eixo, e o bloco de
+   login encolhe para o seu conteúdo. */
 .login-pf body {
   background: var(--bi-bg);
-  background-image:
-    radial-gradient(720px 380px at 50% -14%, rgba(86, 200, 232, .11), transparent 64%),
-    linear-gradient(rgba(86, 200, 232, .05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(86, 200, 232, .05) 1px, transparent 1px);
-  background-size: 100% 100%, 44px 44px, 44px 44px;
-  background-attachment: fixed;
   color: var(--bi-text);
   font-family: var(--bi-font);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  height: auto;
 }
 
-.pf-v5-c-login__container { grid-template-columns: 26rem; }
+.login-pf body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(720px 380px at 50% -10%, rgba(86, 200, 232, .10), transparent 64%),
+    linear-gradient(rgba(86, 200, 232, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(86, 200, 232, .045) 1px, transparent 1px);
+  background-size: 100% 100%, 44px 44px, 44px 44px;
+  -webkit-mask-image: radial-gradient(circle at 50% 42%, #000 8%, transparent 66%);
+  mask-image: radial-gradient(circle at 50% 42%, #000 8%, transparent 66%);
+}
 
-/* --- wordmark (markup vem do message bundle) --- */
-#kc-header-wrapper { padding: 62px 10px 26px; text-align: center; }
+/* o conteúdo fica acima do overlay de textura; a altura sai do conteúdo,
+   porque quem centraliza agora é o body */
+.pf-v5-c-login {
+  position: relative;
+  z-index: 1;
+  height: auto;
+  /* o PatternFly reserva a altura da viewport aqui; sem zerar o min-height o
+     bloco não encolhe e o par header+card deixa de caber centralizado */
+  min-height: 0;
+  flex: 0 0 auto;
+  padding: 0;
+}
+
+#kc-header { position: relative; z-index: 1; }
+
+.pf-v5-c-login__container { grid-template-columns: 23rem; }
+
+/* --- wordmark (markup vem do message bundle) ---
+   O styles.css do keycloak.v2 tira o header do fluxo (position:absolute +
+   translateX) e o prende no topo da página, longe do card. Devolvemos ao
+   fluxo para que ele fique colado acima do card, como no design. */
+#kc-header-wrapper {
+  position: static;
+  transform: none;
+  padding: 0 0 22px;
+  text-align: center;
+}
 
 .bi-wm {
   display: block;
   font-size: 25px;
   font-weight: 600;
   letter-spacing: .13em;
+  /* letter-spacing acrescenta espaço DEPOIS da última letra; sem isto o
+     wordmark centralizado parece deslocado ~2px à esquerda. */
+  text-indent: .13em;
   color: var(--bi-text);
   line-height: 1;
 }
@@ -101,16 +149,38 @@
   box-shadow: 0 24px 60px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .04);
 }
 
-.pf-v5-c-login__main-header { padding: 0 0 var(--bi-space-2); }
+/* O PatternFly reserva 48px laterais no corpo do card, o que estrangula os
+   campos dentro do nosso card mais estreito. O respiro é do card (padding
+   var(--bi-space-3)), não do corpo. */
+.pf-v5-c-login__main-body { padding: 0; }
+
+/* O wordmark acima do card já identifica a tela; o design não repete um
+   título dentro dele. Mantido para leitor de tela em vez de display:none,
+   para a página não ficar sem <h1>. */
+.pf-v5-c-login__main-header { padding: 0; }
 .pf-v5-c-login__main-header h1.pf-v5-c-title {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--bi-text-dim);
-  text-align: center;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-/* --- campos --- */
+/* --- campos ---
+   O PatternFly põe `display:grid; gap:24px` no formulário, e o
+   #kc-form-options (vazio nesta configuração de realm, mas sempre presente no
+   template) consome uma célula inteira mais um gap — o vão morto entre a senha
+   e o botão. Em block, um filho vazio ocupa zero. Se algum dia o realm ligar
+   "lembrar-me" ou "esqueci a senha", esse bloco ganha conteúdo e precisará da
+   própria margem. */
+#kc-form-login { display: block; }
+
 .pf-v5-c-form__group + .pf-v5-c-form__group { margin-top: var(--bi-space-2); }
+#kc-form-buttons { margin-top: 26px; }
 
 .pf-v5-c-form__label-text {
   font-family: var(--bi-mono);
@@ -155,13 +225,23 @@
   box-shadow: 0 0 0 3px rgba(86, 200, 232, .11);
 }
 
-.pf-v5-c-input-group { background: transparent; gap: var(--bi-space-1); }
+/* O campo de senha vem embrulhado num input-group com o botão "mostrar senha".
+   Com gap, o botão vira uma caixa solta ao lado e o campo encolhe visivelmente
+   em relação ao de usuário. Encostados e com as bordas unidas, os dois leem
+   como um controle só, da mesma largura do campo acima. */
+.pf-v5-c-input-group { background: transparent; gap: 0; }
+.pf-v5-c-input-group > .pf-v5-c-form-control {
+  flex: 1;
+  border-radius: var(--bi-radius) 0 0 var(--bi-radius);
+  border-right: 0;
+}
 .pf-v5-c-input-group .pf-v5-c-button.pf-m-control {
   background: var(--bi-field);
   border: 1px solid var(--bi-border-in);
-  border-radius: var(--bi-radius);
+  border-radius: 0 var(--bi-radius) var(--bi-radius) 0;
   color: var(--bi-text-dim);
 }
+.pf-v5-c-input-group .pf-v5-c-button.pf-m-control:hover { color: var(--bi-text); }
 
 /* --- botão --- */
 /* acento 4 de 4: o preenchimento do botão primário */
@@ -177,9 +257,12 @@
 }
 #kc-login:hover { background: #6fd3ee; }
 
-/* --- rodapé --- */
+/* --- rodapé ---
+   Nesta configuração de realm o <footer> vem sempre presente e sempre vazio
+   (sem cadastro, sem provedor social). Com margem, ele adicionaria espaço morto
+   ao pé do card. A margem só entra quando houver conteúdo de verdade. */
 .pf-v5-c-login__main-footer {
-  margin-top: 24px;
+  margin-top: 0;
   text-align: center;
   font-family: var(--bi-mono);
   font-size: 8.5px;
@@ -188,10 +271,18 @@
   color: var(--bi-text-mute);
 }
 
-/* --- erros --- */
+/* --- erros ---
+   O PatternFly pinta o título e o ícone do alerta com um vermelho escuro
+   (#a30000), pensado para fundo claro — sobre o card escuro ele fica quase
+   ilegível. Ambos precisam da cor clara explicitamente; herdar do contêiner
+   não basta. */
 .pf-v5-c-alert.pf-m-inline {
   background: rgba(248, 113, 113, .08);
   border: 1px solid rgba(248, 113, 113, .3);
   border-radius: var(--bi-radius);
+  color: #fca5a5;
+}
+.pf-v5-c-alert.pf-m-inline .pf-v5-c-alert__title,
+.pf-v5-c-alert.pf-m-inline .pf-v5-c-alert__icon {
   color: #fca5a5;
 }
