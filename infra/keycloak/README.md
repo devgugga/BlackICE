@@ -90,6 +90,20 @@ propósito. O realm tem `internationalizationEnabled: false`, então `en` é o �
 bundle consultado. Ligar i18n de verdade é setting de realm e adicionaria seletor
 de idioma também no login do Archive.
 
+### Como desfazer
+
+Remover os arquivos do tema e o bind mount **não basta**: o atributo
+`login_theme=blackice` fica gravado no client `blackice-quarkus`, que vive no
+banco do Keycloak (volume `dcm4chee-keycloak-data`), não no disco. Sem o tema em
+`/opt/keycloak/themes/blackice`, o client fica apontando para um tema inexistente.
+
+É preciso desfazer pela Admin REST, do mesmo jeito que `configure-blackice.sh`
+aplica: GET da representação inteira do client, setar `login_theme: ""` no
+atributo e PUT de volta. Omitir a chave `login_theme` no PUT devolve `204` mas
+**não apaga** o atributo — só um valor vazio explícito remove (ver comentário na
+seção 4 de `configure-blackice.sh`, linhas 77-78). Feito isso, o client volta a
+herdar `loginTheme: j4care` do realm.
+
 ## Como aplicar
 
 ```sh
