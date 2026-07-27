@@ -78,6 +78,11 @@ else echo "usuário dr.teste: já existe"; fi
 #    e não apaga nada.
 CUR=$(curl -k -s -H "$AH" "$api/clients/$CID" | python3 -c 'import sys,json;print(json.load(sys.stdin).get("attributes",{}).get("login_theme",""))')
 if [ "$CUR" != "blackice" ]; then
+  # /tmp/client.json carrega a representação completa do client, incluindo o
+  # `secret`. Com set -eu, se o python3 abaixo falhar o script aborta antes de
+  # chegar num rm -f no fim do bloco, deixando o segredo no container; o trap
+  # garante a limpeza em qualquer saída (sucesso ou erro).
+  trap 'rm -f /tmp/client.json' EXIT
   curl -k -s -H "$AH" "$api/clients/$CID" > /tmp/client.json
   python3 -c '
 import json
@@ -86,7 +91,6 @@ c.setdefault("attributes", {})["login_theme"] = "blackice"
 json.dump(c, open("/tmp/client.json", "w"))
 '
   curl -k -s -H "$AH" -H "Content-Type: application/json" -X PUT "$api/clients/$CID" -d @/tmp/client.json >/dev/null
-  rm -f /tmp/client.json
   echo "login_theme=blackice no client blackice-quarkus: aplicado"
 else echo "login_theme=blackice: já aplicado"; fi
 

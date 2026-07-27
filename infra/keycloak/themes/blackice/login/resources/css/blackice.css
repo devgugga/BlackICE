@@ -70,7 +70,7 @@
 }
 .bi-wm-ice { color: var(--bi-accent); }
 
-/* acento 2 de 3: a régua */
+/* acento 2 de 4: a régua */
 .bi-wm::after {
   content: "";
   display: block;
@@ -149,7 +149,7 @@
   -webkit-box-shadow: 0 0 0 40px var(--bi-field) inset;
 }
 
-/* acento 3 de 3: o foco */
+/* acento 3 de 4: o foco */
 .pf-v5-c-form-control:focus-within {
   border-color: var(--bi-accent);
   box-shadow: 0 0 0 3px rgba(86, 200, 232, .11);
@@ -164,6 +164,7 @@
 }
 
 /* --- botão --- */
+/* acento 4 de 4: o preenchimento do botão primário */
 #kc-login {
   background: var(--bi-accent);
   border: 0;
