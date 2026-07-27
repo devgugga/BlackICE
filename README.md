@@ -20,6 +20,12 @@ QIDO-RS, visualização WADO-RS e laudos autenticados.
 Antes de criar ou mover código, leia a
 [estrutura canônica](docs/architecture/project-structure.md).
 
+## Graphify
+
+O grafo compartilhado do repositório fica em `graphify-out/`. Agentes devem
+consultá-lo antes de fazer buscas amplas no código; o uso, a atualização e a
+política de versionamento estão no [guia do Graphify](docs/architecture/graphify.md).
+
 ## Pré-requisitos
 
 - Git;

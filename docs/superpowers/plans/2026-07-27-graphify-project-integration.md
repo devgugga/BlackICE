@@ -346,18 +346,19 @@ git check-ignore -v graphify-out/cache/stat-index.json
 git check-ignore graphify-out/graph.json
 git check-ignore graphify-out/GRAPH_REPORT.md
 git check-ignore graphify-out/graph.html
-graphify detect .
+uv tool run --from "graphifyy==0.9.28" python -c "from graphify.detect import detect; from pathlib import Path; result=detect(Path('.')); print('categorias:', {kind: len(paths) for kind, paths in result['files'].items()}); print('total_files:', result['total_files']); print('ignored:', result['ignored']); print('pruned_noise_dirs:', result['pruned_noise_dirs']); print('skipped_sensitive:', result['skipped_sensitive']); print('walk_errors:', result['walk_errors'])"
 rg -n "graphify-out|graphify query|0\\.9\\.28" README.md docs/architecture/graphify.md docs/architecture/project-structure.md
 ```
 
 Expected: cost and cache are ignored with the new `.gitignore` lines; the three
-portable outputs are not ignored; detection includes Java, Vue/TypeScript,
-configuration, and Markdown while excluding local ignored paths; all
-documentation entry points resolve.
+portable outputs are not ignored. The official `graphify.detect.detect(Path('.'))`
+API reports code and document categories (including Java, Vue/TypeScript,
+configuration, and Markdown), skips sensitive files and excludes local ignored
+paths; all documentation entry points resolve.
 
 - [ ] **Step 8: Pass the Task 2 review and create its focused commit**
 
-Present the ignore checks, `graphify detect .` summary, and documentation diff.
+Present the ignore checks, the official detection API summary, and documentation diff.
 After independent approval, commit with:
 
 ```powershell
@@ -395,13 +396,14 @@ installed during Task 1 are discovered only by a new agent session.
 - [ ] **Step 2: Confirm the detected corpus before generation**
 
 ```powershell
-graphify detect .
+uv tool run --from "graphifyy==0.9.28" python -c "from graphify.detect import detect; from pathlib import Path; result=detect(Path('.')); print('categorias:', {kind: len(paths) for kind, paths in result['files'].items()}); print('total_files:', result['total_files']); print('ignored:', result['ignored']); print('pruned_noise_dirs:', result['pruned_noise_dirs']); print('skipped_sensitive:', result['skipped_sensitive']); print('walk_errors:', result['walk_errors'])"
 ```
 
-Expected: the detector reports the backend Java, frontend Vue/TypeScript,
-tracked configuration formats, and Markdown documentation. It does not report
-`infra/.env`, `.git/`, `.worktrees/`, `.superpowers/`, `node_modules/`,
-`target/`, `dist/`, `graphify-out/`, or the PNG regression snapshots.
+Expected: the official detector API reports the backend Java, frontend
+Vue/TypeScript, tracked configuration formats, and Markdown documentation. Its
+ignored/pruned/sensitive output excludes `.superpowers/`, `node_modules/`,
+`target/`, `dist/`, `graphify-out/`, the PNG regression snapshots, and sensitive
+environment files; `walk_errors` is empty.
 
 - [ ] **Step 3: Invoke full extraction through the installed Codex skill**
 

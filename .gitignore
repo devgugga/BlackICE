@@ -14,3 +14,9 @@ apps/backend/target/
 
 # editor (apenas .vscode do root; apps/frontend/.vscode é do template Vite)
 /.vscode/
+
+# graphify local-only state; portable graphify-out/ artifacts are versioned
+graphify-out/cost.json
+graphify-out/cache/
+*.graphify-bak
+*.graphify.log

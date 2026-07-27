@@ -1,0 +1,9 @@
+# Never recursively index Graphify's own generated corpus.
+graphify-out/
+
+# Visual-regression evidence is not source or architecture knowledge.
+apps/frontend/e2e/**/*.png
+
+# Installer safety backups and local diagnostics are not canonical input.
+*.graphify-bak
+*.graphify.log
