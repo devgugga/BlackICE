@@ -22,3 +22,13 @@ graphify-out/.graphify_python
 graphify-out/.graphify_root
 *.graphify-bak
 *.graphify.log
+
+# Graphify assistant hooks embed this machine's executable path. Recreate them
+# locally with .graphify/setup.ps1; only portable agent instructions are tracked.
+.codex/hooks.json
+.claude/settings.json
+
+# python cache
+__pycache__/
+*.py[cod]
+

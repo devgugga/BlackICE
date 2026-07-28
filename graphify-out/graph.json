@@ -102,19 +102,6 @@
         "confidence": "EXTRACTED",
         "confidence_score": 1.0,
         "source_file": "apps/frontend/public/icons.svg"
-      },
-      {
-        "id": "graphify_skill_variants",
-        "label": "Graphify skill variants",
-        "nodes": [
-          "agents_skills_graphify_skill_graphify_workflow",
-          "claude_skills_graphify_skill_graphify_workflow",
-          "docs_architecture_graphify_local_tooling"
-        ],
-        "relation": "participate_in",
-        "confidence": "INFERRED",
-        "confidence_score": 0.95,
-        "source_file": "docs/architecture/graphify.md"
       }
     ]
   },
@@ -129,10 +116,10 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "mvnw",
-      "id": "apps_backend_mvnw",
-      "community_name": "mvnw"
+      "community_name": "mvnw",
+      "id": "apps_backend_mvnw"
     },
     {
       "label": "mvnw script",
@@ -144,10 +131,10 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "mvnw script",
-      "id": "apps_backend_mvnw__entry",
-      "community_name": "mvnw"
+      "community_name": "mvnw",
+      "id": "apps_backend_mvnw__entry"
     },
     {
       "label": "native_path()",
@@ -159,10 +146,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "native_path()",
-      "id": "apps_backend_mvnw_native_path",
-      "community_name": "mvnw"
+      "community_name": "mvnw",
+      "id": "apps_backend_mvnw_native_path"
     },
     {
       "label": "set_java_home()",
@@ -174,10 +161,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "set_java_home()",
-      "id": "apps_backend_mvnw_set_java_home",
-      "community_name": "mvnw"
+      "community_name": "mvnw",
+      "id": "apps_backend_mvnw_set_java_home"
     },
     {
       "label": "hash_string()",
@@ -189,10 +176,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "hash_string()",
-      "id": "apps_backend_mvnw_hash_string",
-      "community_name": "mvnw"
+      "community_name": "mvnw",
+      "id": "apps_backend_mvnw_hash_string"
     },
     {
       "label": "verbose()",
@@ -204,10 +191,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "verbose()",
-      "id": "apps_backend_mvnw_verbose",
-      "community_name": "mvnw"
+      "community_name": "mvnw",
+      "id": "apps_backend_mvnw_verbose"
     },
     {
       "label": "die()",
@@ -219,10 +206,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "die()",
-      "id": "apps_backend_mvnw_die",
-      "community_name": "mvnw"
+      "community_name": "mvnw",
+      "id": "apps_backend_mvnw_die"
     },
     {
       "label": "trim()",
@@ -234,10 +221,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "trim()",
-      "id": "apps_backend_mvnw_trim",
-      "community_name": "mvnw"
+      "community_name": "mvnw",
+      "id": "apps_backend_mvnw_trim"
     },
     {
       "label": "exec_maven()",
@@ -249,10 +236,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "exec_maven()",
-      "id": "apps_backend_mvnw_exec_maven",
-      "community_name": "mvnw"
+      "community_name": "mvnw",
+      "id": "apps_backend_mvnw_exec_maven"
     },
     {
       "label": "clean()",
@@ -264,10 +251,10 @@
         "kind": "bash_function"
       },
       "_origin": "ast",
-      "community": 8,
+      "community": 9,
       "norm_label": "clean()",
-      "id": "apps_backend_mvnw_clean",
-      "community_name": "mvnw"
+      "community_name": "mvnw",
+      "id": "apps_backend_mvnw_clean"
     },
     {
       "label": "dev.blackice:blackice-backend",
@@ -278,10 +265,10 @@
       "source_location": "L1",
       "version": "1.0.0-SNAPSHOT",
       "_origin": "ast",
-      "community": 66,
+      "community": 69,
       "norm_label": "dev.blackice:blackice-backend",
-      "id": "pkg_dev_blackice_blackice_backend",
-      "community_name": "dev.blackice:blackice-backend"
+      "community_name": "dev.blackice:blackice-backend",
+      "id": "pkg_dev_blackice_blackice_backend"
     },
     {
       "label": "SessionResource.java",
@@ -289,10 +276,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "sessionresource.java",
-      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource"
     },
     {
       "label": "SessionResource",
@@ -300,10 +287,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "sessionresource",
-      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource"
     },
     {
       "label": "Path",
@@ -311,10 +298,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "path",
-      "id": "path",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "path"
     },
     {
       "label": "SecurityIdentity",
@@ -322,10 +309,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "securityidentity",
-      "id": "securityidentity",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "securityidentity"
     },
     {
       "label": "JsonWebToken",
@@ -333,10 +320,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "jsonwebtoken",
-      "id": "jsonwebtoken",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "jsonwebtoken"
     },
     {
       "label": ".me()",
@@ -344,10 +331,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": ".me()",
-      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_me",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_me"
     },
     {
       "label": "Response",
@@ -355,10 +342,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "response",
-      "id": "response",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "response"
     },
     {
       "label": "GET",
@@ -366,10 +353,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "get",
-      "id": "get",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "get"
     },
     {
       "label": "PermitAll",
@@ -377,10 +364,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "permitall",
-      "id": "permitall",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "permitall"
     },
     {
       "label": ".login()",
@@ -388,10 +375,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": ".login()",
-      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_login",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_login"
     },
     {
       "label": "Authenticated",
@@ -399,10 +386,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "authenticated",
-      "id": "authenticated",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "authenticated"
     },
     {
       "label": "SessionResponse.java",
@@ -410,10 +397,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResponse.java",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "sessionresponse.java",
-      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresponse",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresponse"
     },
     {
       "label": "SessionResponse",
@@ -421,10 +408,10 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResponse.java",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 6,
+      "community": 5,
       "norm_label": "sessionresponse",
-      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresponse_sessionresponse",
-      "community_name": "SessionResource.java"
+      "community_name": "SessionResource.java",
+      "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresponse_sessionresponse"
     },
     {
       "label": "SessionResourceTest.java",
@@ -432,10 +419,10 @@
       "source_file": "apps/backend/src/test/java/dev/blackice/features/session/SessionResourceTest.java",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 12,
+      "community": 15,
       "norm_label": "sessionresourcetest.java",
-      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest",
-      "community_name": "SessionResourceTest.java"
+      "community_name": "SessionResourceTest.java",
+      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest"
     },
     {
       "label": "SessionResourceTest",
@@ -443,10 +430,10 @@
       "source_file": "apps/backend/src/test/java/dev/blackice/features/session/SessionResourceTest.java",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 12,
+      "community": 15,
       "norm_label": "sessionresourcetest",
-      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest",
-      "community_name": "SessionResourceTest.java"
+      "community_name": "SessionResourceTest.java",
+      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest"
     },
     {
       "label": "QuarkusTest",
@@ -454,10 +441,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 12,
+      "community": 15,
       "norm_label": "quarkustest",
-      "id": "quarkustest",
-      "community_name": "SessionResourceTest.java"
+      "community_name": "SessionResourceTest.java",
+      "id": "quarkustest"
     },
     {
       "label": ".anonimo_recebe_401()",
@@ -465,10 +452,10 @@
       "source_file": "apps/backend/src/test/java/dev/blackice/features/session/SessionResourceTest.java",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 12,
+      "community": 15,
       "norm_label": ".anonimo_recebe_401()",
-      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest_anonimo_recebe_401",
-      "community_name": "SessionResourceTest.java"
+      "community_name": "SessionResourceTest.java",
+      "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest_anonimo_recebe_401"
     },
     {
       "label": "Test",
@@ -476,10 +463,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 12,
+      "community": 15,
       "norm_label": "test",
-      "id": "test",
-      "community_name": "SessionResourceTest.java"
+      "community_name": "SessionResourceTest.java",
+      "id": "test"
     },
     {
       "label": "keycloak-login.spec.ts",
@@ -487,10 +474,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 13,
       "norm_label": "keycloak-login.spec.ts",
-      "id": "apps_frontend_e2e_keycloak_login_spec",
-      "community_name": "keycloak-login.spec.ts"
+      "community_name": "keycloak-login.spec.ts",
+      "id": "apps_frontend_e2e_keycloak_login_spec"
     },
     {
       "label": "openBlackiceLogin()",
@@ -498,10 +485,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 11,
+      "community": 13,
       "norm_label": "openblackicelogin()",
-      "id": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin",
-      "community_name": "keycloak-login.spec.ts"
+      "community_name": "keycloak-login.spec.ts",
+      "id": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin"
     },
     {
       "label": "requiredBox()",
@@ -509,10 +496,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 11,
+      "community": 13,
       "norm_label": "requiredbox()",
-      "id": "apps_frontend_e2e_keycloak_login_spec_requiredbox",
-      "community_name": "keycloak-login.spec.ts"
+      "community_name": "keycloak-login.spec.ts",
+      "id": "apps_frontend_e2e_keycloak_login_spec_requiredbox"
     },
     {
       "label": "expectVerticallyCentered()",
@@ -520,10 +507,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 11,
+      "community": 13,
       "norm_label": "expectverticallycentered()",
-      "id": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered",
-      "community_name": "keycloak-login.spec.ts"
+      "community_name": "keycloak-login.spec.ts",
+      "id": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered"
     },
     {
       "label": "screenshotLoginCard()",
@@ -531,10 +518,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L64",
       "_origin": "ast",
-      "community": 11,
+      "community": 13,
       "norm_label": "screenshotlogincard()",
-      "id": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard",
-      "community_name": "keycloak-login.spec.ts"
+      "community_name": "keycloak-login.spec.ts",
+      "id": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard"
     },
     {
       "label": "showInvalidCredentials()",
@@ -542,10 +529,10 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L119",
       "_origin": "ast",
-      "community": 11,
+      "community": 13,
       "norm_label": "showinvalidcredentials()",
-      "id": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials",
-      "community_name": "keycloak-login.spec.ts"
+      "community_name": "keycloak-login.spec.ts",
+      "id": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials"
     },
     {
       "label": "package.json",
@@ -555,8 +542,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "package.json",
-      "id": "apps_frontend_package",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package"
     },
     {
       "label": "name",
@@ -566,8 +553,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "name",
-      "id": "apps_frontend_package_name",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_name"
     },
     {
       "label": "private",
@@ -577,8 +564,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "private",
-      "id": "apps_frontend_package_private",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_private"
     },
     {
       "label": "version",
@@ -588,8 +575,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "version",
-      "id": "apps_frontend_package_version",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_version"
     },
     {
       "label": "type",
@@ -599,8 +586,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "type",
-      "id": "apps_frontend_package_type",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_type"
     },
     {
       "label": "scripts",
@@ -610,8 +597,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "scripts",
-      "id": "apps_frontend_package_scripts",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_scripts"
     },
     {
       "label": "dev",
@@ -621,8 +608,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "dev",
-      "id": "apps_frontend_package_scripts_dev",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_scripts_dev"
     },
     {
       "label": "build",
@@ -632,8 +619,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "build",
-      "id": "apps_frontend_package_scripts_build",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_scripts_build"
     },
     {
       "label": "preview",
@@ -643,8 +630,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "preview",
-      "id": "apps_frontend_package_scripts_preview",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_scripts_preview"
     },
     {
       "label": "test",
@@ -654,8 +641,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "test",
-      "id": "apps_frontend_package_scripts_test",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_scripts_test"
     },
     {
       "label": "test:e2e:keycloak",
@@ -665,8 +652,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "test:e2e:keycloak",
-      "id": "apps_frontend_package_scripts_test_e2e_keycloak",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_scripts_test_e2e_keycloak"
     },
     {
       "label": "dependencies",
@@ -676,8 +663,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "dependencies",
-      "id": "apps_frontend_package_dependencies",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_dependencies"
     },
     {
       "label": "vue",
@@ -687,8 +674,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "vue",
-      "id": "apps_frontend_package_dependencies_vue",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_dependencies_vue"
     },
     {
       "label": "vue",
@@ -698,8 +685,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "vue",
-      "id": "vue",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "vue"
     },
     {
       "label": "vue-router",
@@ -709,8 +696,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "vue-router",
-      "id": "apps_frontend_package_dependencies_vue_router",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "apps_frontend_package_dependencies_vue_router"
     },
     {
       "label": "vue-router",
@@ -720,8 +707,8 @@
       "_origin": "ast",
       "community": 3,
       "norm_label": "vue-router",
-      "id": "vue_router",
-      "community_name": "package.json"
+      "community_name": "package.json",
+      "id": "vue_router"
     },
     {
       "label": "devDependencies",
@@ -731,8 +718,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "devdependencies",
-      "id": "apps_frontend_package_devdependencies",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "apps_frontend_package_devdependencies"
     },
     {
       "label": "@playwright/test",
@@ -742,8 +729,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "@playwright/test",
-      "id": "apps_frontend_package_devdependencies_playwright_test",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "apps_frontend_package_devdependencies_playwright_test"
     },
     {
       "label": "@playwright/test",
@@ -753,8 +740,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "@playwright/test",
-      "id": "playwright_test",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "playwright_test"
     },
     {
       "label": "@types/node",
@@ -764,8 +751,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "@types/node",
-      "id": "apps_frontend_package_devdependencies_types_node",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "apps_frontend_package_devdependencies_types_node"
     },
     {
       "label": "@types/node",
@@ -775,8 +762,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "@types/node",
-      "id": "types_node",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "types_node"
     },
     {
       "label": "@vitejs/plugin-vue",
@@ -786,8 +773,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "@vitejs/plugin-vue",
-      "id": "apps_frontend_package_devdependencies_vitejs_plugin_vue",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "apps_frontend_package_devdependencies_vitejs_plugin_vue"
     },
     {
       "label": "@vitejs/plugin-vue",
@@ -797,8 +784,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "@vitejs/plugin-vue",
-      "id": "vitejs_plugin_vue",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "vitejs_plugin_vue"
     },
     {
       "label": "@vue/tsconfig",
@@ -808,8 +795,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "@vue/tsconfig",
-      "id": "apps_frontend_package_devdependencies_vue_tsconfig",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "apps_frontend_package_devdependencies_vue_tsconfig"
     },
     {
       "label": "@vue/tsconfig",
@@ -819,8 +806,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "@vue/tsconfig",
-      "id": "vue_tsconfig",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "vue_tsconfig"
     },
     {
       "label": "typescript",
@@ -830,8 +817,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "typescript",
-      "id": "apps_frontend_package_devdependencies_typescript",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "apps_frontend_package_devdependencies_typescript"
     },
     {
       "label": "typescript",
@@ -841,8 +828,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "typescript",
-      "id": "typescript",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "typescript"
     },
     {
       "label": "vite",
@@ -852,8 +839,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "vite",
-      "id": "apps_frontend_package_devdependencies_vite",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "apps_frontend_package_devdependencies_vite"
     },
     {
       "label": "vite",
@@ -863,8 +850,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "vite",
-      "id": "vite",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "vite"
     },
     {
       "label": "vitest",
@@ -874,8 +861,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "vitest",
-      "id": "apps_frontend_package_devdependencies_vitest",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "apps_frontend_package_devdependencies_vitest"
     },
     {
       "label": "vitest",
@@ -885,8 +872,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "vitest",
-      "id": "vitest",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "vitest"
     },
     {
       "label": "vue-tsc",
@@ -896,8 +883,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "vue-tsc",
-      "id": "apps_frontend_package_devdependencies_vue_tsc",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "apps_frontend_package_devdependencies_vue_tsc"
     },
     {
       "label": "vue-tsc",
@@ -907,8 +894,8 @@
       "_origin": "ast",
       "community": 2,
       "norm_label": "vue-tsc",
-      "id": "vue_tsc",
-      "community_name": "devDependencies"
+      "community_name": "devDependencies",
+      "id": "vue_tsc"
     },
     {
       "label": "playwright.config.ts",
@@ -916,10 +903,10 @@
       "source_file": "apps/frontend/playwright.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 22,
+      "community": 24,
       "norm_label": "playwright.config.ts",
-      "id": "apps_frontend_playwright_config",
-      "community_name": "playwright.config.ts"
+      "community_name": "playwright.config.ts",
+      "id": "apps_frontend_playwright_config"
     },
     {
       "label": "isCi",
@@ -927,10 +914,10 @@
       "source_file": "apps/frontend/playwright.config.ts",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 22,
+      "community": 24,
       "norm_label": "isci",
-      "id": "apps_frontend_playwright_config_isci",
-      "community_name": "playwright.config.ts"
+      "community_name": "playwright.config.ts",
+      "id": "apps_frontend_playwright_config_isci"
     },
     {
       "label": "App.vue",
@@ -938,10 +925,10 @@
       "source_file": "apps/frontend/src/app/App.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 50,
+      "community": 53,
       "norm_label": "app.vue",
-      "id": "apps_frontend_src_app_app",
-      "community_name": "App.vue"
+      "community_name": "App.vue",
+      "id": "apps_frontend_src_app_app"
     },
     {
       "label": "index.ts",
@@ -949,10 +936,10 @@
       "source_file": "apps/frontend/src/app/router/index.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 24,
+      "community": 26,
       "norm_label": "index.ts",
-      "id": "apps_frontend_src_app_router_index",
-      "community_name": "index.ts"
+      "community_name": "index.ts",
+      "id": "apps_frontend_src_app_router_index"
     },
     {
       "label": "router",
@@ -960,10 +947,10 @@
       "source_file": "apps/frontend/src/app/router/index.ts",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 24,
+      "community": 26,
       "norm_label": "router",
-      "id": "apps_frontend_src_app_router_index_router",
-      "community_name": "index.ts"
+      "community_name": "index.ts",
+      "id": "apps_frontend_src_app_router_index_router"
     },
     {
       "label": "HomePage.vue",
@@ -971,10 +958,10 @@
       "source_file": "apps/frontend/src/features/home/HomePage.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 25,
+      "community": 27,
       "norm_label": "homepage.vue",
-      "id": "apps_frontend_src_features_home_homepage",
-      "community_name": "HomePage.vue"
+      "community_name": "HomePage.vue",
+      "id": "apps_frontend_src_features_home_homepage"
     },
     {
       "label": "username",
@@ -982,10 +969,10 @@
       "source_file": "apps/frontend/src/features/home/HomePage.vue",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 25,
+      "community": 27,
       "norm_label": "username",
-      "id": "apps_frontend_src_features_home_homepage_username",
-      "community_name": "HomePage.vue"
+      "community_name": "HomePage.vue",
+      "id": "apps_frontend_src_features_home_homepage_username"
     },
     {
       "label": "session.api.spec.ts",
@@ -993,10 +980,10 @@
       "source_file": "apps/frontend/src/features/session/session.api.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 51,
+      "community": 54,
       "norm_label": "session.api.spec.ts",
-      "id": "apps_frontend_src_features_session_session_api_spec",
-      "community_name": "session.api.spec.ts"
+      "community_name": "session.api.spec.ts",
+      "id": "apps_frontend_src_features_session_session_api_spec"
     },
     {
       "label": "session.api.ts",
@@ -1004,10 +991,10 @@
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 26,
+      "community": 28,
       "norm_label": "session.api.ts",
-      "id": "apps_frontend_src_features_session_session_api",
-      "community_name": "session.api.ts"
+      "community_name": "session.api.ts",
+      "id": "apps_frontend_src_features_session_session_api"
     },
     {
       "label": "fetchSession()",
@@ -1015,10 +1002,10 @@
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 26,
+      "community": 28,
       "norm_label": "fetchsession()",
-      "id": "apps_frontend_src_features_session_session_api_fetchsession",
-      "community_name": "session.api.ts"
+      "community_name": "session.api.ts",
+      "id": "apps_frontend_src_features_session_session_api_fetchsession"
     },
     {
       "label": "session.types.ts",
@@ -1026,10 +1013,10 @@
       "source_file": "apps/frontend/src/features/session/session.types.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
+      "community": 29,
       "norm_label": "session.types.ts",
-      "id": "apps_frontend_src_features_session_session_types",
-      "community_name": "session.types.ts"
+      "community_name": "session.types.ts",
+      "id": "apps_frontend_src_features_session_session_types"
     },
     {
       "label": "SessionResponse",
@@ -1037,10 +1024,10 @@
       "source_file": "apps/frontend/src/features/session/session.types.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
+      "community": 29,
       "norm_label": "sessionresponse",
-      "id": "apps_frontend_src_features_session_session_types_sessionresponse",
-      "community_name": "session.types.ts"
+      "community_name": "session.types.ts",
+      "id": "apps_frontend_src_features_session_session_types_sessionresponse"
     },
     {
       "label": "main.ts",
@@ -1048,10 +1035,10 @@
       "source_file": "apps/frontend/src/main.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 52,
+      "community": 55,
       "norm_label": "main.ts",
-      "id": "apps_frontend_src_main",
-      "community_name": "main.ts"
+      "community_name": "main.ts",
+      "id": "apps_frontend_src_main"
     },
     {
       "label": "tsconfig.app.json",
@@ -1061,8 +1048,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "tsconfig.app.json",
-      "id": "apps_frontend_tsconfig_app",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app"
     },
     {
       "label": "extends",
@@ -1072,8 +1059,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "extends",
-      "id": "apps_frontend_tsconfig_app_extends",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_extends"
     },
     {
       "label": "@vue/tsconfig/tsconfig.dom.json",
@@ -1083,8 +1070,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "@vue/tsconfig/tsconfig.dom.json",
-      "id": "ref_vue_tsconfig_tsconfig_dom_json",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "ref_vue_tsconfig_tsconfig_dom_json"
     },
     {
       "label": "compilerOptions",
@@ -1094,8 +1081,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "compileroptions",
-      "id": "apps_frontend_tsconfig_app_compileroptions",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions"
     },
     {
       "label": "baseUrl",
@@ -1105,8 +1092,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "baseurl",
-      "id": "apps_frontend_tsconfig_app_compileroptions_baseurl",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions_baseurl"
     },
     {
       "label": "ignoreDeprecations",
@@ -1116,8 +1103,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "ignoredeprecations",
-      "id": "apps_frontend_tsconfig_app_compileroptions_ignoredeprecations",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions_ignoredeprecations"
     },
     {
       "label": "paths",
@@ -1127,8 +1114,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "paths",
-      "id": "apps_frontend_tsconfig_app_compileroptions_paths",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions_paths"
     },
     {
       "label": "tsBuildInfoFile",
@@ -1138,8 +1125,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "tsbuildinfofile",
-      "id": "apps_frontend_tsconfig_app_compileroptions_tsbuildinfofile",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions_tsbuildinfofile"
     },
     {
       "label": "types",
@@ -1149,8 +1136,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "types",
-      "id": "apps_frontend_tsconfig_app_compileroptions_types",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions_types"
     },
     {
       "label": "vite/client",
@@ -1160,8 +1147,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "vite/client",
-      "id": "ref_vite_client",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "ref_vite_client"
     },
     {
       "label": "allowArbitraryExtensions",
@@ -1171,8 +1158,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "allowarbitraryextensions",
-      "id": "apps_frontend_tsconfig_app_compileroptions_allowarbitraryextensions",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions_allowarbitraryextensions"
     },
     {
       "label": "noUnusedLocals",
@@ -1182,8 +1169,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "nounusedlocals",
-      "id": "apps_frontend_tsconfig_app_compileroptions_nounusedlocals",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions_nounusedlocals"
     },
     {
       "label": "noUnusedParameters",
@@ -1193,8 +1180,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "nounusedparameters",
-      "id": "apps_frontend_tsconfig_app_compileroptions_nounusedparameters",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions_nounusedparameters"
     },
     {
       "label": "erasableSyntaxOnly",
@@ -1204,8 +1191,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "erasablesyntaxonly",
-      "id": "apps_frontend_tsconfig_app_compileroptions_erasablesyntaxonly",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions_erasablesyntaxonly"
     },
     {
       "label": "noFallthroughCasesInSwitch",
@@ -1215,8 +1202,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "nofallthroughcasesinswitch",
-      "id": "apps_frontend_tsconfig_app_compileroptions_nofallthroughcasesinswitch",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_compileroptions_nofallthroughcasesinswitch"
     },
     {
       "label": "include",
@@ -1226,8 +1213,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "include",
-      "id": "apps_frontend_tsconfig_app_include",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_app_include"
     },
     {
       "label": "src/**/*.ts",
@@ -1237,8 +1224,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "src/**/*.ts",
-      "id": "ref_src_ts",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "ref_src_ts"
     },
     {
       "label": "src/**/*.tsx",
@@ -1248,8 +1235,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "src/**/*.tsx",
-      "id": "ref_src_tsx",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "ref_src_tsx"
     },
     {
       "label": "src/**/*.vue",
@@ -1259,8 +1246,8 @@
       "_origin": "ast",
       "community": 1,
       "norm_label": "src/**/*.vue",
-      "id": "ref_src_vue",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "ref_src_vue"
     },
     {
       "label": "tsconfig.json",
@@ -1268,10 +1255,10 @@
       "source_file": "apps/frontend/tsconfig.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 17,
+      "community": 19,
       "norm_label": "tsconfig.json",
-      "id": "apps_frontend_tsconfig",
-      "community_name": "tsconfig.json"
+      "community_name": "tsconfig.json",
+      "id": "apps_frontend_tsconfig"
     },
     {
       "label": "files",
@@ -1279,10 +1266,10 @@
       "source_file": "apps/frontend/tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 17,
+      "community": 19,
       "norm_label": "files",
-      "id": "apps_frontend_tsconfig_files",
-      "community_name": "tsconfig.json"
+      "community_name": "tsconfig.json",
+      "id": "apps_frontend_tsconfig_files"
     },
     {
       "label": "references",
@@ -1290,10 +1277,10 @@
       "source_file": "apps/frontend/tsconfig.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 17,
+      "community": 19,
       "norm_label": "references",
-      "id": "apps_frontend_tsconfig_references",
-      "community_name": "tsconfig.json"
+      "community_name": "tsconfig.json",
+      "id": "apps_frontend_tsconfig_references"
     },
     {
       "label": "tsconfig.node.json",
@@ -1303,8 +1290,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "tsconfig.node.json",
-      "id": "apps_frontend_tsconfig_node",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node"
     },
     {
       "label": "compilerOptions",
@@ -1314,8 +1301,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "compileroptions",
-      "id": "apps_frontend_tsconfig_node_compileroptions",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions"
     },
     {
       "label": "tsBuildInfoFile",
@@ -1325,8 +1312,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "tsbuildinfofile",
-      "id": "apps_frontend_tsconfig_node_compileroptions_tsbuildinfofile",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_tsbuildinfofile"
     },
     {
       "label": "target",
@@ -1336,8 +1323,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "target",
-      "id": "apps_frontend_tsconfig_node_compileroptions_target",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_target"
     },
     {
       "label": "lib",
@@ -1347,8 +1334,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "lib",
-      "id": "apps_frontend_tsconfig_node_compileroptions_lib",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_lib"
     },
     {
       "label": "ES2023",
@@ -1358,8 +1345,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "es2023",
-      "id": "ref_es2023",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "ref_es2023"
     },
     {
       "label": "types",
@@ -1369,8 +1356,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "types",
-      "id": "apps_frontend_tsconfig_node_compileroptions_types",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_types"
     },
     {
       "label": "node",
@@ -1380,8 +1367,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "node",
-      "id": "ref_node",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "ref_node"
     },
     {
       "label": "skipLibCheck",
@@ -1391,8 +1378,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "skiplibcheck",
-      "id": "apps_frontend_tsconfig_node_compileroptions_skiplibcheck",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_skiplibcheck"
     },
     {
       "label": "module",
@@ -1402,8 +1389,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "module",
-      "id": "apps_frontend_tsconfig_node_compileroptions_module",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_module"
     },
     {
       "label": "allowImportingTsExtensions",
@@ -1413,8 +1400,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "allowimportingtsextensions",
-      "id": "apps_frontend_tsconfig_node_compileroptions_allowimportingtsextensions",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_allowimportingtsextensions"
     },
     {
       "label": "verbatimModuleSyntax",
@@ -1424,8 +1411,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "verbatimmodulesyntax",
-      "id": "apps_frontend_tsconfig_node_compileroptions_verbatimmodulesyntax",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_verbatimmodulesyntax"
     },
     {
       "label": "moduleDetection",
@@ -1435,8 +1422,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "moduledetection",
-      "id": "apps_frontend_tsconfig_node_compileroptions_moduledetection",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_moduledetection"
     },
     {
       "label": "noEmit",
@@ -1446,8 +1433,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "noemit",
-      "id": "apps_frontend_tsconfig_node_compileroptions_noemit",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_noemit"
     },
     {
       "label": "noUnusedLocals",
@@ -1457,8 +1444,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "nounusedlocals",
-      "id": "apps_frontend_tsconfig_node_compileroptions_nounusedlocals",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_nounusedlocals"
     },
     {
       "label": "noUnusedParameters",
@@ -1468,8 +1455,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "nounusedparameters",
-      "id": "apps_frontend_tsconfig_node_compileroptions_nounusedparameters",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_nounusedparameters"
     },
     {
       "label": "erasableSyntaxOnly",
@@ -1479,8 +1466,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "erasablesyntaxonly",
-      "id": "apps_frontend_tsconfig_node_compileroptions_erasablesyntaxonly",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_erasablesyntaxonly"
     },
     {
       "label": "noFallthroughCasesInSwitch",
@@ -1490,8 +1477,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "nofallthroughcasesinswitch",
-      "id": "apps_frontend_tsconfig_node_compileroptions_nofallthroughcasesinswitch",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_compileroptions_nofallthroughcasesinswitch"
     },
     {
       "label": "include",
@@ -1501,8 +1488,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "include",
-      "id": "apps_frontend_tsconfig_node_include",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "apps_frontend_tsconfig_node_include"
     },
     {
       "label": "vite.config.ts",
@@ -1512,8 +1499,8 @@
       "_origin": "ast",
       "community": 0,
       "norm_label": "vite.config.ts",
-      "id": "ref_vite_config_ts",
-      "community_name": "compilerOptions"
+      "community_name": "compilerOptions",
+      "id": "ref_vite_config_ts"
     },
     {
       "label": "vite.config.ts",
@@ -1521,10 +1508,10 @@
       "source_file": "apps/frontend/vite.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 53,
+      "community": 56,
       "norm_label": "vite.config.ts",
-      "id": "apps_frontend_vite_config",
-      "community_name": "vite.config.ts"
+      "community_name": "vite.config.ts",
+      "id": "apps_frontend_vite_config"
     },
     {
       "label": "configure-blackice.sh",
@@ -1536,10 +1523,10 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "community": 34,
+      "community": 37,
       "norm_label": "configure-blackice.sh",
-      "id": "infra_keycloak_configure_blackice",
-      "community_name": "configure-blackice.sh"
+      "community_name": "configure-blackice.sh",
+      "id": "infra_keycloak_configure_blackice"
     },
     {
       "label": "configure-blackice.sh script",
@@ -1551,10 +1538,10 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "community": 34,
+      "community": 37,
       "norm_label": "configure-blackice.sh script",
-      "id": "infra_keycloak_configure_blackice_sh__entry",
-      "community_name": "configure-blackice.sh"
+      "community_name": "configure-blackice.sh",
+      "id": "infra_keycloak_configure_blackice_sh__entry"
     },
     {
       "label": "Graphify Add and Watch",
@@ -1565,10 +1552,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 36,
+      "community": 39,
       "norm_label": "graphify add and watch",
-      "id": "agents_skills_graphify_references_add_watch_graphify_add_and_watch",
-      "community_name": "Graphify Add and Watch"
+      "community_name": "Graphify Add and Watch",
+      "id": "agents_skills_graphify_references_add_watch_graphify_add_and_watch"
     },
     {
       "label": "Graphify Exports",
@@ -1579,10 +1566,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 37,
+      "community": 40,
       "norm_label": "graphify exports",
-      "id": "agents_skills_graphify_references_exports_graphify_exports",
-      "community_name": "Graphify Exports"
+      "community_name": "Graphify Exports",
+      "id": "agents_skills_graphify_references_exports_graphify_exports"
     },
     {
       "label": "Semantic Extraction",
@@ -1593,10 +1580,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 38,
+      "community": 41,
       "norm_label": "semantic extraction",
-      "id": "agents_skills_graphify_references_extraction_spec_semantic_extraction",
-      "community_name": "Semantic Extraction"
+      "community_name": "Semantic Extraction",
+      "id": "agents_skills_graphify_references_extraction_spec_semantic_extraction"
     },
     {
       "label": "Cross-repository Merge",
@@ -1607,10 +1594,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 39,
+      "community": 42,
       "norm_label": "cross-repository merge",
-      "id": "agents_skills_graphify_references_github_and_merge_cross_repo_merge",
-      "community_name": "Cross-repository Merge"
+      "community_name": "Cross-repository Merge",
+      "id": "agents_skills_graphify_references_github_and_merge_cross_repo_merge"
     },
     {
       "label": "Graphify Hooks",
@@ -1621,10 +1608,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 40,
+      "community": 43,
       "norm_label": "graphify hooks",
-      "id": "agents_skills_graphify_references_hooks_graphify_hooks",
-      "community_name": "Graphify Hooks"
+      "community_name": "Graphify Hooks",
+      "id": "agents_skills_graphify_references_hooks_graphify_hooks"
     },
     {
       "label": "Graphify Query",
@@ -1635,10 +1622,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 41,
+      "community": 44,
       "norm_label": "graphify query",
-      "id": "agents_skills_graphify_references_query_graphify_query",
-      "community_name": "Graphify Query"
+      "community_name": "Graphify Query",
+      "id": "agents_skills_graphify_references_query_graphify_query"
     },
     {
       "label": "Graphify Transcription",
@@ -1649,10 +1636,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 42,
+      "community": 45,
       "norm_label": "graphify transcription",
-      "id": "agents_skills_graphify_references_transcribe_graphify_transcription",
-      "community_name": "Graphify Transcription"
+      "community_name": "Graphify Transcription",
+      "id": "agents_skills_graphify_references_transcribe_graphify_transcription"
     },
     {
       "label": "DICOM Domain Reviewer",
@@ -1663,10 +1650,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 20,
       "norm_label": "dicom domain reviewer",
-      "id": "claude_agents_dicom_dicom_domain_reviewer_dicom_domain_reviewer",
-      "community_name": "DICOM Domain Reviewer"
+      "community_name": "DICOM Domain Reviewer",
+      "id": "claude_agents_dicom_dicom_domain_reviewer_dicom_domain_reviewer"
     },
     {
       "label": "Quarkus Backend",
@@ -1677,10 +1664,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 20,
       "norm_label": "quarkus backend",
-      "id": "claude_agents_quarkus_quarkus_backend_quarkus_backend",
-      "community_name": "DICOM Domain Reviewer"
+      "community_name": "DICOM Domain Reviewer",
+      "id": "claude_agents_quarkus_quarkus_backend_quarkus_backend"
     },
     {
       "label": "DICOM Viewer Frontend",
@@ -1691,10 +1678,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
+      "community": 20,
       "norm_label": "dicom viewer frontend",
-      "id": "claude_agents_vue_dicom_viewer_frontend_dicom_viewer_frontend",
-      "community_name": "DICOM Domain Reviewer"
+      "community_name": "DICOM Domain Reviewer",
+      "id": "claude_agents_vue_dicom_viewer_frontend_dicom_viewer_frontend"
     },
     {
       "label": "BlackICE Skills",
@@ -1705,10 +1692,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 61,
+      "community": 64,
       "norm_label": "blackice skills",
-      "id": "claude_skills_readme_blackice_skills",
-      "community_name": "BlackICE Skills"
+      "community_name": "BlackICE Skills",
+      "id": "claude_skills_readme_blackice_skills"
     },
     {
       "label": "Graphify Add and Watch",
@@ -1719,10 +1706,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 54,
+      "community": 57,
       "norm_label": "graphify add and watch",
-      "id": "claude_skills_graphify_references_add_watch_graphify_add_and_watch",
-      "community_name": "Graphify Add and Watch"
+      "community_name": "Graphify Add and Watch",
+      "id": "claude_skills_graphify_references_add_watch_graphify_add_and_watch"
     },
     {
       "label": "Graphify Exports",
@@ -1733,10 +1720,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 55,
+      "community": 58,
       "norm_label": "graphify exports",
-      "id": "claude_skills_graphify_references_exports_graphify_exports",
-      "community_name": "Graphify Exports"
+      "community_name": "Graphify Exports",
+      "id": "claude_skills_graphify_references_exports_graphify_exports"
     },
     {
       "label": "Semantic Extraction",
@@ -1747,10 +1734,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 56,
+      "community": 59,
       "norm_label": "semantic extraction",
-      "id": "claude_skills_graphify_references_extraction_spec_semantic_extraction",
-      "community_name": "Semantic Extraction"
+      "community_name": "Semantic Extraction",
+      "id": "claude_skills_graphify_references_extraction_spec_semantic_extraction"
     },
     {
       "label": "Cross-repository Merge",
@@ -1761,10 +1748,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 60,
       "norm_label": "cross-repository merge",
-      "id": "claude_skills_graphify_references_github_and_merge_cross_repo_merge",
-      "community_name": "Cross-repository Merge"
+      "community_name": "Cross-repository Merge",
+      "id": "claude_skills_graphify_references_github_and_merge_cross_repo_merge"
     },
     {
       "label": "Graphify Hooks",
@@ -1775,10 +1762,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 58,
+      "community": 61,
       "norm_label": "graphify hooks",
-      "id": "claude_skills_graphify_references_hooks_graphify_hooks",
-      "community_name": "Graphify Hooks"
+      "community_name": "Graphify Hooks",
+      "id": "claude_skills_graphify_references_hooks_graphify_hooks"
     },
     {
       "label": "Graphify Query",
@@ -1789,10 +1776,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 62,
       "norm_label": "graphify query",
-      "id": "claude_skills_graphify_references_query_graphify_query",
-      "community_name": "Graphify Query"
+      "community_name": "Graphify Query",
+      "id": "claude_skills_graphify_references_query_graphify_query"
     },
     {
       "label": "Graphify Transcription",
@@ -1803,10 +1790,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 60,
+      "community": 63,
       "norm_label": "graphify transcription",
-      "id": "claude_skills_graphify_references_transcribe_graphify_transcription",
-      "community_name": "Graphify Transcription"
+      "community_name": "Graphify Transcription",
+      "id": "claude_skills_graphify_references_transcribe_graphify_transcription"
     },
     {
       "label": "BlackICE PACS",
@@ -1817,10 +1804,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 10,
       "norm_label": "blackice pacs",
-      "id": "agents_blackice_pacs",
-      "community_name": "Quarkus Product Backend"
+      "community_name": "Quarkus Product Backend",
+      "id": "agents_blackice_pacs"
     },
     {
       "label": "DCM4CHEE Archive",
@@ -1831,10 +1818,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 10,
       "norm_label": "dcm4chee archive",
-      "id": "agents_dcm4chee_archive",
-      "community_name": "Quarkus Product Backend"
+      "community_name": "Quarkus Product Backend",
+      "id": "agents_dcm4chee_archive"
     },
     {
       "label": "Quarkus Product Backend",
@@ -1845,10 +1832,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 10,
       "norm_label": "quarkus product backend",
-      "id": "agents_quarkus_product_backend",
-      "community_name": "Quarkus Product Backend"
+      "community_name": "Quarkus Product Backend",
+      "id": "agents_quarkus_product_backend"
     },
     {
       "label": "Vue SPA",
@@ -1859,10 +1846,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 10,
       "norm_label": "vue spa",
-      "id": "agents_vue_spa",
-      "community_name": "Quarkus Product Backend"
+      "community_name": "Quarkus Product Backend",
+      "id": "agents_vue_spa"
     },
     {
       "label": "Keycloak OIDC SSO",
@@ -1873,10 +1860,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 10,
       "norm_label": "keycloak oidc sso",
-      "id": "agents_keycloak_oidc",
-      "community_name": "Quarkus Product Backend"
+      "community_name": "Quarkus Product Backend",
+      "id": "agents_keycloak_oidc"
     },
     {
       "label": "Domain Packs",
@@ -1887,10 +1874,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 17,
       "norm_label": "domain packs",
-      "id": "agents_domain_packs",
-      "community_name": "Domain Packs"
+      "community_name": "Domain Packs",
+      "id": "agents_domain_packs"
     },
     {
       "label": "DICOM Invariants",
@@ -1901,10 +1888,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 21,
+      "community": 23,
       "norm_label": "dicom invariants",
-      "id": "agents_dicom_invariants",
-      "community_name": "DICOM Invariants"
+      "community_name": "DICOM Invariants",
+      "id": "agents_dicom_invariants"
     },
     {
       "label": "Human Validation Gate",
@@ -1915,10 +1902,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 21,
+      "community": 23,
       "norm_label": "human validation gate",
-      "id": "agents_human_gate",
-      "community_name": "DICOM Invariants"
+      "community_name": "DICOM Invariants",
+      "id": "agents_human_gate"
     },
     {
       "label": "Claude-Codex Agent Portability",
@@ -1929,10 +1916,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 17,
       "norm_label": "claude-codex agent portability",
-      "id": "claude_codex_agent_portability",
-      "community_name": "Domain Packs"
+      "community_name": "Domain Packs",
+      "id": "claude_codex_agent_portability"
     },
     {
       "label": "BlackICE Architecture",
@@ -1943,10 +1930,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 35,
+      "community": 38,
       "norm_label": "blackice architecture",
-      "id": "readme_blackice_architecture",
-      "community_name": "BlackICE Architecture"
+      "community_name": "BlackICE Architecture",
+      "id": "readme_blackice_architecture"
     },
     {
       "label": "Graphify Knowledge Graph",
@@ -1957,10 +1944,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 35,
+      "community": 38,
       "norm_label": "graphify knowledge graph",
-      "id": "readme_graphify_knowledge_graph",
-      "community_name": "BlackICE Architecture"
+      "community_name": "BlackICE Architecture",
+      "id": "readme_graphify_knowledge_graph"
     },
     {
       "label": "Backend BFF",
@@ -1971,10 +1958,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 12,
       "norm_label": "backend bff",
-      "id": "apps_backend_readme_backend_bff",
-      "community_name": "BFF Session Contract"
+      "community_name": "BFF Session Contract",
+      "id": "apps_backend_readme_backend_bff"
     },
     {
       "label": "HttpOnly Session Cookie",
@@ -1985,10 +1972,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 12,
       "norm_label": "httponly session cookie",
-      "id": "apps_backend_readme_http_only_session_cookie",
-      "community_name": "BFF Session Contract"
+      "community_name": "BFF Session Contract",
+      "id": "apps_backend_readme_http_only_session_cookie"
     },
     {
       "label": "Frontend SPA",
@@ -1999,10 +1986,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 12,
       "norm_label": "frontend spa",
-      "id": "apps_frontend_readme_frontend_spa",
-      "community_name": "BFF Session Contract"
+      "community_name": "BFF Session Contract",
+      "id": "apps_frontend_readme_frontend_spa"
     },
     {
       "label": "Keycloak Login E2E Contract",
@@ -2013,10 +2000,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 12,
       "norm_label": "keycloak login e2e contract",
-      "id": "apps_frontend_readme_login_e2e_contract",
-      "community_name": "BFF Session Contract"
+      "community_name": "BFF Session Contract",
+      "id": "apps_frontend_readme_login_e2e_contract"
     },
     {
       "label": "BFF Session Contract",
@@ -2027,10 +2014,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 12,
       "norm_label": "bff session contract",
-      "id": "apps_frontend_readme_bff_session_contract",
-      "community_name": "BFF Session Contract"
+      "community_name": "BFF Session Contract",
+      "id": "apps_frontend_readme_bff_session_contract"
     },
     {
       "label": "Vue Mount Point",
@@ -2041,10 +2028,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 43,
+      "community": 46,
       "norm_label": "vue mount point",
-      "id": "apps_frontend_index_html_vue_mount_point",
-      "community_name": "Vue Mount Point"
+      "community_name": "Vue Mount Point",
+      "id": "apps_frontend_index_html_vue_mount_point"
     },
     {
       "label": "DCM4CHEE 5.34.3 Baseline",
@@ -2055,10 +2042,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 21,
       "norm_label": "dcm4chee 5.34.3 baseline",
-      "id": "docs_architecture_dcm4chee_archive_baseline_5_34_3",
-      "community_name": "DCM4CHEE 5.34.3 Baseline"
+      "community_name": "DCM4CHEE 5.34.3 Baseline",
+      "id": "docs_architecture_dcm4chee_archive_baseline_5_34_3"
     },
     {
       "label": "Secure Archive Deployment",
@@ -2069,10 +2056,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 21,
       "norm_label": "secure archive deployment",
-      "id": "docs_architecture_dcm4chee_archive_secure_deployment",
-      "community_name": "DCM4CHEE 5.34.3 Baseline"
+      "community_name": "DCM4CHEE 5.34.3 Baseline",
+      "id": "docs_architecture_dcm4chee_archive_secure_deployment"
     },
     {
       "label": "BlackICE Monorepo Structure",
@@ -2083,10 +2070,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 18,
       "norm_label": "blackice monorepo structure",
-      "id": "docs_architecture_project_structure_monorepo",
-      "community_name": "Feature-First Architecture"
+      "community_name": "Feature-First Architecture",
+      "id": "docs_architecture_project_structure_monorepo"
     },
     {
       "label": "Feature-First Architecture",
@@ -2097,10 +2084,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 18,
       "norm_label": "feature-first architecture",
-      "id": "docs_architecture_project_structure_feature_first",
-      "community_name": "Feature-First Architecture"
+      "community_name": "Feature-First Architecture",
+      "id": "docs_architecture_project_structure_feature_first"
     },
     {
       "label": "HTTP Contract Boundary",
@@ -2111,10 +2098,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 10,
       "norm_label": "http contract boundary",
-      "id": "docs_architecture_project_structure_http_contract_boundary",
-      "community_name": "Quarkus Product Backend"
+      "community_name": "Quarkus Product Backend",
+      "id": "docs_architecture_project_structure_http_contract_boundary"
     },
     {
       "label": "Domain Packs Single Source of Truth",
@@ -2125,10 +2112,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 17,
       "norm_label": "domain packs single source of truth",
-      "id": "docs_domains_domain_packs_single_source_of_truth",
-      "community_name": "Domain Packs"
+      "community_name": "Domain Packs",
+      "id": "docs_domains_domain_packs_single_source_of_truth"
     },
     {
       "label": "DICOM Domain Pack",
@@ -2139,10 +2126,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "dicom domain pack",
-      "id": "docs_domains_dicom_dicom_domain_pack",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_dicom_dicom_domain_pack"
     },
     {
       "label": "DICOMweb Verbs",
@@ -2153,10 +2140,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "dicomweb verbs",
-      "id": "docs_domains_dicom_dicomweb_dicomweb_verbs",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_dicom_dicomweb_dicomweb_verbs"
     },
     {
       "label": "QIDO-RS",
@@ -2167,10 +2154,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "qido-rs",
-      "id": "docs_domains_dicom_dicomweb_qido_rs",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_dicom_dicomweb_qido_rs"
     },
     {
       "label": "WADO-RS",
@@ -2181,10 +2168,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "wado-rs",
-      "id": "docs_domains_dicom_dicomweb_wado_rs",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_dicom_dicomweb_wado_rs"
     },
     {
       "label": "STOW-RS",
@@ -2195,10 +2182,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "stow-rs",
-      "id": "docs_domains_dicom_dicomweb_stow_rs",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_dicom_dicomweb_stow_rs"
     },
     {
       "label": "User Token Propagation",
@@ -2209,10 +2196,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 9,
+      "community": 10,
       "norm_label": "user token propagation",
-      "id": "docs_domains_dicom_dicomweb_user_token_propagation",
-      "community_name": "Quarkus Product Backend"
+      "community_name": "Quarkus Product Backend",
+      "id": "docs_domains_dicom_dicomweb_user_token_propagation"
     },
     {
       "label": "DICOM Patient Study Series Instance Hierarchy",
@@ -2223,10 +2210,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 16,
       "norm_label": "dicom patient study series instance hierarchy",
-      "id": "docs_domains_dicom_semantics_dicom_hierarchy",
-      "community_name": "DICOM Patient Study Series Instance Hierarchy"
+      "community_name": "DICOM Patient Study Series Instance Hierarchy",
+      "id": "docs_domains_dicom_semantics_dicom_hierarchy"
     },
     {
       "label": "DICOM UID Identity",
@@ -2237,10 +2224,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 16,
       "norm_label": "dicom uid identity",
-      "id": "docs_domains_dicom_semantics_dicom_uid_identity",
-      "community_name": "DICOM Patient Study Series Instance Hierarchy"
+      "community_name": "DICOM Patient Study Series Instance Hierarchy",
+      "id": "docs_domains_dicom_semantics_dicom_uid_identity"
     },
     {
       "label": "Patient Identity with Issuer",
@@ -2251,10 +2238,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 16,
       "norm_label": "patient identity with issuer",
-      "id": "docs_domains_dicom_semantics_patient_identity",
-      "community_name": "DICOM Patient Study Series Instance Hierarchy"
+      "community_name": "DICOM Patient Study Series Instance Hierarchy",
+      "id": "docs_domains_dicom_semantics_patient_identity"
     },
     {
       "label": "Transfer Syntax Preservation",
@@ -2265,10 +2252,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 16,
       "norm_label": "transfer syntax preservation",
-      "id": "docs_domains_dicom_semantics_transfer_syntax",
-      "community_name": "DICOM Patient Study Series Instance Hierarchy"
+      "community_name": "DICOM Patient Study Series Instance Hierarchy",
+      "id": "docs_domains_dicom_semantics_transfer_syntax"
     },
     {
       "label": "Quarkus Domain Pack",
@@ -2279,10 +2266,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "quarkus domain pack",
-      "id": "docs_domains_quarkus_quarkus_domain_pack",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_quarkus_quarkus_domain_pack"
     },
     {
       "label": "Quarkus BFF",
@@ -2293,10 +2280,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "quarkus bff",
-      "id": "docs_domains_quarkus_conventions_quarkus_bff",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_quarkus_conventions_quarkus_bff"
     },
     {
       "label": "Report Model",
@@ -2307,10 +2294,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 13,
+      "community": 16,
       "norm_label": "report model",
-      "id": "docs_domains_quarkus_conventions_report_model",
-      "community_name": "DICOM Patient Study Series Instance Hierarchy"
+      "community_name": "DICOM Patient Study Series Instance Hierarchy",
+      "id": "docs_domains_quarkus_conventions_report_model"
     },
     {
       "label": "CSRF Protection",
@@ -2321,10 +2308,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "csrf protection",
-      "id": "docs_domains_quarkus_conventions_csrf_protection",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_quarkus_conventions_csrf_protection"
     },
     {
       "label": "Vue Domain Pack",
@@ -2335,10 +2322,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "vue domain pack",
-      "id": "docs_domains_vue_vue_domain_pack",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_vue_vue_domain_pack"
     },
     {
       "label": "Vue Feature-First Conventions",
@@ -2349,10 +2336,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 18,
       "norm_label": "vue feature-first conventions",
-      "id": "docs_domains_vue_conventions_vue_feature_first",
-      "community_name": "Feature-First Architecture"
+      "community_name": "Feature-First Architecture",
+      "id": "docs_domains_vue_conventions_vue_feature_first"
     },
     {
       "label": "Vue BFF Session",
@@ -2363,10 +2350,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 10,
+      "community": 12,
       "norm_label": "vue bff session",
-      "id": "docs_domains_vue_conventions_bff_session",
-      "community_name": "BFF Session Contract"
+      "community_name": "BFF Session Contract",
+      "id": "docs_domains_vue_conventions_bff_session"
     },
     {
       "label": "Cornerstone3D Viewer",
@@ -2377,10 +2364,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "cornerstone3d viewer",
-      "id": "docs_domains_vue_cornerstone3d_cornerstone3d_viewer",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_vue_cornerstone3d_cornerstone3d_viewer"
     },
     {
       "label": "WADO-RS Image Loader",
@@ -2391,10 +2378,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "wado-rs image loader",
-      "id": "docs_domains_vue_cornerstone3d_wado_image_loader",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_vue_cornerstone3d_wado_image_loader"
     },
     {
       "label": "Cornerstone Lifecycle Cleanup",
@@ -2405,10 +2392,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "cornerstone lifecycle cleanup",
-      "id": "docs_domains_vue_cornerstone3d_cornerstone_lifecycle",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_domains_vue_cornerstone3d_cornerstone_lifecycle"
     },
     {
       "label": "Historical Specs and Plans",
@@ -2419,10 +2406,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 16,
+      "community": 18,
       "norm_label": "historical specs and plans",
-      "id": "docs_superpowers_historical_records",
-      "community_name": "Feature-First Architecture"
+      "community_name": "Feature-First Architecture",
+      "id": "docs_superpowers_historical_records"
     },
     {
       "label": "Codex Subagents Implementation Plan",
@@ -2433,10 +2420,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 17,
       "norm_label": "codex subagents implementation plan",
-      "id": "docs_superpowers_plans_2026_07_23_codex_subagents_codex_subagents_plan",
-      "community_name": "Domain Packs"
+      "community_name": "Domain Packs",
+      "id": "docs_superpowers_plans_2026_07_23_codex_subagents_codex_subagents_plan"
     },
     {
       "label": "DCM4CHEE 5.34.3 Documentation Plan",
@@ -2447,10 +2434,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
+      "community": 21,
       "norm_label": "dcm4chee 5.34.3 documentation plan",
-      "id": "docs_superpowers_plans_2026_07_23_dcm4chee_5_34_3_dcm4chee_baseline_plan",
-      "community_name": "DCM4CHEE 5.34.3 Baseline"
+      "community_name": "DCM4CHEE 5.34.3 Baseline",
+      "id": "docs_superpowers_plans_2026_07_23_dcm4chee_5_34_3_dcm4chee_baseline_plan"
     },
     {
       "label": "Foundation Stack and Auth Plan",
@@ -2461,10 +2448,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 6,
       "norm_label": "foundation stack and auth plan",
-      "id": "docs_superpowers_plans_2026_07_23_plano_0_fundacao_foundation_plan",
-      "community_name": "DICOMweb Verbs"
+      "community_name": "DICOMweb Verbs",
+      "id": "docs_superpowers_plans_2026_07_23_plano_0_fundacao_foundation_plan"
     },
     {
       "label": "Feature-first monorepo structure",
@@ -2475,10 +2462,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 30,
+      "community": 33,
       "norm_label": "feature-first monorepo structure",
-      "id": "docs_superpowers_plans_2026_07_25_project_structure_monorepo_feature_first",
-      "community_name": "Feature-first monorepo structure"
+      "community_name": "Feature-first monorepo structure",
+      "id": "docs_superpowers_plans_2026_07_25_project_structure_monorepo_feature_first"
     },
     {
       "label": "Canonical three-file Compose configuration",
@@ -2489,10 +2476,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 29,
+      "community": 32,
       "norm_label": "canonical three-file compose configuration",
-      "id": "docs_superpowers_plans_2026_07_25_project_structure_canonical_infrastructure_compose",
-      "community_name": "Canonical three-file Compose configuration"
+      "community_name": "Canonical three-file Compose configuration",
+      "id": "docs_superpowers_plans_2026_07_25_project_structure_canonical_infrastructure_compose"
     },
     {
       "label": "BlackICE Keycloak login theme",
@@ -2503,10 +2490,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "blackice keycloak login theme",
-      "id": "docs_superpowers_plans_2026_07_26_keycloak_login_theme_blackice_login_theme",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "docs_superpowers_plans_2026_07_26_keycloak_login_theme_blackice_login_theme"
     },
     {
       "label": "Project-scoped Graphify integration",
@@ -2517,10 +2504,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 31,
+      "community": 34,
       "norm_label": "project-scoped graphify integration",
-      "id": "docs_superpowers_plans_2026_07_27_graphify_project_integration_graphify_project_integration",
-      "community_name": "Project-scoped Graphify integration"
+      "community_name": "Project-scoped Graphify integration",
+      "id": "docs_superpowers_plans_2026_07_27_graphify_project_integration_graphify_project_integration"
     },
     {
       "label": "Focus outline accessibility",
@@ -2531,10 +2518,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 35,
       "norm_label": "focus outline accessibility",
-      "id": "docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_accessibility",
-      "community_name": "Focus outline accessibility"
+      "community_name": "Focus outline accessibility",
+      "id": "docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_accessibility"
     },
     {
       "label": "Playwright Keycloak theme UI regression",
@@ -2545,10 +2532,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "playwright keycloak theme ui regression",
-      "id": "docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_playwright_keycloak_theme_regression",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_playwright_keycloak_theme_regression"
     },
     {
       "label": "DCM4CHEE Archive 5.34.3",
@@ -2559,10 +2546,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 22,
       "norm_label": "dcm4chee archive 5.34.3",
-      "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_dcm4chee_archive",
-      "community_name": "DCM4CHEE Archive 5.34.3"
+      "community_name": "DCM4CHEE Archive 5.34.3",
+      "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_dcm4chee_archive"
     },
     {
       "label": "Quarkus product backend",
@@ -2573,10 +2560,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 22,
       "norm_label": "quarkus product backend",
-      "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_quarkus_product_backend",
-      "community_name": "DCM4CHEE Archive 5.34.3"
+      "community_name": "DCM4CHEE Archive 5.34.3",
+      "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_quarkus_product_backend"
     },
     {
       "label": "Vue 3 Vite authenticated SPA",
@@ -2587,10 +2574,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "vue 3 vite authenticated spa",
-      "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_vue_spa",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_vue_spa"
     },
     {
       "label": "Cornerstone3D viewer",
@@ -2601,10 +2588,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "cornerstone3d viewer",
-      "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_cornerstone3d_viewer",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_cornerstone3d_viewer"
     },
     {
       "label": "Keycloak OIDC SSO",
@@ -2615,10 +2602,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 62,
+      "community": 65,
       "norm_label": "keycloak oidc sso",
-      "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_keycloak_oidc_sso",
-      "community_name": "Keycloak OIDC SSO"
+      "community_name": "Keycloak OIDC SSO",
+      "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_keycloak_oidc_sso"
     },
     {
       "label": "Curated DICOMweb product API",
@@ -2629,10 +2616,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 22,
       "norm_label": "curated dicomweb product api",
-      "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_dicomweb_product_api",
-      "community_name": "DCM4CHEE Archive 5.34.3"
+      "community_name": "DCM4CHEE Archive 5.34.3",
+      "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_dicomweb_product_api"
     },
     {
       "label": "Narrow WADO viewer path",
@@ -2643,10 +2630,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "narrow wado viewer path",
-      "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_narrow_wado_path",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_narrow_wado_path"
     },
     {
       "label": "BFF OIDC session cookie",
@@ -2657,10 +2644,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "bff oidc session cookie",
-      "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_bff_oidc_session",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_bff_oidc_session"
     },
     {
       "label": "Quarkus CSRF protection",
@@ -2671,10 +2658,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "quarkus csrf protection",
-      "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_csrf_protection",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_csrf_protection"
     },
     {
       "label": "Feature-first application architecture",
@@ -2685,10 +2672,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 30,
+      "community": 33,
       "norm_label": "feature-first application architecture",
-      "id": "docs_superpowers_specs_2026_07_25_project_structure_design_feature_first_architecture",
-      "community_name": "Feature-first monorepo structure"
+      "community_name": "Feature-first monorepo structure",
+      "id": "docs_superpowers_specs_2026_07_25_project_structure_design_feature_first_architecture"
     },
     {
       "label": "keycloak.v2 child theme",
@@ -2699,10 +2686,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "keycloak.v2 child theme",
-      "id": "docs_superpowers_specs_2026_07_26_keycloak_login_theme_design_keycloak_v2_child_theme",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "docs_superpowers_specs_2026_07_26_keycloak_login_theme_design_keycloak_v2_child_theme"
     },
     {
       "label": "Local Graphify CLI workflow",
@@ -2713,10 +2700,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 31,
+      "community": 34,
       "norm_label": "local graphify cli workflow",
-      "id": "docs_superpowers_specs_2026_07_27_graphify_project_integration_design_graphify_local_cli",
-      "community_name": "Project-scoped Graphify integration"
+      "community_name": "Project-scoped Graphify integration",
+      "id": "docs_superpowers_specs_2026_07_27_graphify_project_integration_design_graphify_local_cli"
     },
     {
       "label": "Single visible focus indicator",
@@ -2727,10 +2714,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 35,
       "norm_label": "single visible focus indicator",
-      "id": "docs_superpowers_specs_2026_07_27_keycloak_input_focus_outline_design_single_focus_indicator",
-      "community_name": "Focus outline accessibility"
+      "community_name": "Focus outline accessibility",
+      "id": "docs_superpowers_specs_2026_07_27_keycloak_input_focus_outline_design_single_focus_indicator"
     },
     {
       "label": "Hybrid UI regression strategy",
@@ -2741,10 +2728,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "hybrid ui regression strategy",
-      "id": "docs_superpowers_specs_2026_07_27_keycloak_theme_e2e_ui_regression_design_hybrid_ui_regression_strategy",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "docs_superpowers_specs_2026_07_27_keycloak_theme_e2e_ui_regression_design_hybrid_ui_regression_strategy"
     },
     {
       "label": "Three-file Compose stack",
@@ -2755,10 +2742,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 29,
+      "community": 32,
       "norm_label": "three-file compose stack",
-      "id": "infra_readme_three_compose_files",
-      "community_name": "Canonical three-file Compose configuration"
+      "community_name": "Canonical three-file Compose configuration",
+      "id": "infra_readme_three_compose_files"
     },
     {
       "label": "Backend OIDC frontchannel-backchannel split",
@@ -2769,10 +2756,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "backend oidc frontchannel-backchannel split",
-      "id": "infra_compose_apps_backend_frontchannel_backchannel_oidc",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "infra_compose_apps_backend_frontchannel_backchannel_oidc"
     },
     {
       "label": "Frontend SPA service",
@@ -2783,10 +2770,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 63,
+      "community": 66,
       "norm_label": "frontend spa service",
-      "id": "infra_compose_apps_frontend_spa_service",
-      "community_name": "Frontend SPA service"
+      "community_name": "Frontend SPA service",
+      "id": "infra_compose_apps_frontend_spa_service"
     },
     {
       "label": "Docker API compatibility proxy",
@@ -2797,10 +2784,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 33,
+      "community": 36,
       "norm_label": "docker api compatibility proxy",
-      "id": "infra_compose_docker_api_compatibility_proxy",
-      "community_name": "Docker API compatibility proxy"
+      "community_name": "Docker API compatibility proxy",
+      "id": "infra_compose_docker_api_compatibility_proxy"
     },
     {
       "label": "Traefik Docker label routing",
@@ -2811,10 +2798,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 33,
+      "community": 36,
       "norm_label": "traefik docker label routing",
-      "id": "infra_compose_traefik_routing",
-      "community_name": "Docker API compatibility proxy"
+      "community_name": "Docker API compatibility proxy",
+      "id": "infra_compose_traefik_routing"
     },
     {
       "label": "Product PostgreSQL database",
@@ -2825,10 +2812,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 64,
+      "community": 67,
       "norm_label": "product postgresql database",
-      "id": "infra_compose_product_postgres_database",
-      "community_name": "Product PostgreSQL database"
+      "community_name": "Product PostgreSQL database",
+      "id": "infra_compose_product_postgres_database"
     },
     {
       "label": "Secure DCM4CHEE archive stack",
@@ -2839,10 +2826,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 65,
+      "community": 68,
       "norm_label": "secure dcm4chee archive stack",
-      "id": "infra_dcm4chee_readme_secure_archive_stack",
-      "community_name": "Secure DCM4CHEE archive stack"
+      "community_name": "Secure DCM4CHEE archive stack",
+      "id": "infra_dcm4chee_readme_secure_archive_stack"
     },
     {
       "label": "DCM4CHEE Keycloak service",
@@ -2853,10 +2840,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "dcm4chee keycloak service",
-      "id": "infra_dcm4chee_compose_keycloak_service",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "infra_dcm4chee_compose_keycloak_service"
     },
     {
       "label": "DCM4CHEE Archive service",
@@ -2867,10 +2854,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "dcm4chee archive service",
-      "id": "infra_dcm4chee_compose_archive_service",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "infra_dcm4chee_compose_archive_service"
     },
     {
       "label": "Shared DICOMweb audience",
@@ -2881,10 +2868,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "shared dicomweb audience",
-      "id": "infra_keycloak_readme_shared_audience",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "infra_keycloak_readme_shared_audience"
     },
     {
       "label": "blackice-quarkus confidential client",
@@ -2895,10 +2882,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "blackice-quarkus confidential client",
-      "id": "infra_keycloak_readme_blackice_quarkus_client",
-      "community_name": "BlackICE Keycloak login theme"
+      "community_name": "BlackICE Keycloak login theme",
+      "id": "infra_keycloak_readme_blackice_quarkus_client"
     },
     {
       "label": "BlackICE Favicon",
@@ -2909,10 +2896,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 23,
+      "community": 25,
       "norm_label": "blackice favicon",
-      "id": "apps_frontend_public_favicon_blackice_favicon",
-      "community_name": "BlackICE Favicon"
+      "community_name": "BlackICE Favicon",
+      "id": "apps_frontend_public_favicon_blackice_favicon"
     },
     {
       "label": "Lightning Bolt",
@@ -2923,10 +2910,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 23,
+      "community": 25,
       "norm_label": "lightning bolt",
-      "id": "apps_frontend_public_favicon_lightning_bolt",
-      "community_name": "BlackICE Favicon"
+      "community_name": "BlackICE Favicon",
+      "id": "apps_frontend_public_favicon_lightning_bolt"
     },
     {
       "label": "Bluesky icon",
@@ -2937,10 +2924,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 44,
+      "community": 47,
       "norm_label": "bluesky icon",
-      "id": "apps_frontend_public_icons_bluesky_icon",
-      "community_name": "Bluesky icon"
+      "community_name": "Bluesky icon",
+      "id": "apps_frontend_public_icons_bluesky_icon"
     },
     {
       "label": "Discord icon",
@@ -2951,10 +2938,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 45,
+      "community": 48,
       "norm_label": "discord icon",
-      "id": "apps_frontend_public_icons_discord_icon",
-      "community_name": "Discord icon"
+      "community_name": "Discord icon",
+      "id": "apps_frontend_public_icons_discord_icon"
     },
     {
       "label": "Documentation icon",
@@ -2965,10 +2952,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 46,
+      "community": 49,
       "norm_label": "documentation icon",
-      "id": "apps_frontend_public_icons_documentation_icon",
-      "community_name": "Documentation icon"
+      "community_name": "Documentation icon",
+      "id": "apps_frontend_public_icons_documentation_icon"
     },
     {
       "label": "GitHub icon",
@@ -2979,10 +2966,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 50,
       "norm_label": "github icon",
-      "id": "apps_frontend_public_icons_github_icon",
-      "community_name": "GitHub icon"
+      "community_name": "GitHub icon",
+      "id": "apps_frontend_public_icons_github_icon"
     },
     {
       "label": "Social icon",
@@ -2993,10 +2980,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 48,
+      "community": 51,
       "norm_label": "social icon",
-      "id": "apps_frontend_public_icons_social_icon",
-      "community_name": "Social icon"
+      "community_name": "Social icon",
+      "id": "apps_frontend_public_icons_social_icon"
     },
     {
       "label": "X icon",
@@ -3007,66 +2994,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 49,
+      "community": 52,
       "norm_label": "x icon",
-      "id": "apps_frontend_public_icons_x_icon",
-      "community_name": "X icon"
-    },
-    {
-      "label": "Graphify workflow",
-      "file_type": "concept",
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 4,
-      "norm_label": "graphify workflow",
-      "id": "agents_skills_graphify_skill_graphify_workflow",
-      "community_name": "Incremental re-extraction runbook"
-    },
-    {
-      "label": "Semantic extraction",
-      "file_type": "concept",
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 4,
-      "norm_label": "semantic extraction",
-      "id": "agents_skills_graphify_skill_semantic_extraction",
-      "community_name": "Incremental re-extraction runbook"
-    },
-    {
-      "label": "Incremental update",
-      "file_type": "concept",
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 4,
-      "norm_label": "incremental update",
-      "id": "agents_skills_graphify_skill_incremental_update",
-      "community_name": "Incremental re-extraction runbook"
-    },
-    {
-      "label": "Cluster-only refresh",
-      "file_type": "concept",
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 4,
-      "norm_label": "cluster-only refresh",
-      "id": "agents_skills_graphify_skill_cluster_only",
-      "community_name": "Incremental re-extraction runbook"
+      "community_name": "X icon",
+      "id": "apps_frontend_public_icons_x_icon"
     },
     {
       "label": "Incremental re-extraction runbook",
@@ -3077,10 +3008,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 11,
       "norm_label": "incremental re-extraction runbook",
-      "id": "agents_skills_graphify_references_update_incremental_update",
-      "community_name": "Incremental re-extraction runbook"
+      "community_name": "Incremental re-extraction runbook",
+      "id": "agents_skills_graphify_references_update_incremental_update"
     },
     {
       "label": "Incremental merge integrity",
@@ -3091,10 +3022,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 11,
       "norm_label": "incremental merge integrity",
-      "id": "agents_skills_graphify_references_update_merge_integrity",
-      "community_name": "Incremental re-extraction runbook"
+      "community_name": "Incremental re-extraction runbook",
+      "id": "agents_skills_graphify_references_update_merge_integrity"
     },
     {
       "label": "Cluster-only refresh",
@@ -3105,66 +3036,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 11,
       "norm_label": "cluster-only refresh",
-      "id": "agents_skills_graphify_references_update_cluster_only",
-      "community_name": "Incremental re-extraction runbook"
-    },
-    {
-      "label": "Graphify workflow",
-      "file_type": "concept",
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 4,
-      "norm_label": "graphify workflow",
-      "id": "claude_skills_graphify_skill_graphify_workflow",
-      "community_name": "Incremental re-extraction runbook"
-    },
-    {
-      "label": "Semantic extraction",
-      "file_type": "concept",
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 4,
-      "norm_label": "semantic extraction",
-      "id": "claude_skills_graphify_skill_semantic_extraction",
-      "community_name": "Incremental re-extraction runbook"
-    },
-    {
-      "label": "Incremental update",
-      "file_type": "concept",
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 4,
-      "norm_label": "incremental update",
-      "id": "claude_skills_graphify_skill_incremental_update",
-      "community_name": "Incremental re-extraction runbook"
-    },
-    {
-      "label": "Cluster-only refresh",
-      "file_type": "concept",
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 4,
-      "norm_label": "cluster-only refresh",
-      "id": "claude_skills_graphify_skill_cluster_only",
-      "community_name": "Incremental re-extraction runbook"
+      "community_name": "Incremental re-extraction runbook",
+      "id": "agents_skills_graphify_references_update_cluster_only"
     },
     {
       "label": "Incremental re-extraction runbook",
@@ -3175,10 +3050,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 11,
       "norm_label": "incremental re-extraction runbook",
-      "id": "claude_skills_graphify_references_update_incremental_update",
-      "community_name": "Incremental re-extraction runbook"
+      "community_name": "Incremental re-extraction runbook",
+      "id": "claude_skills_graphify_references_update_incremental_update"
     },
     {
       "label": "Incremental merge integrity",
@@ -3189,10 +3064,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 11,
       "norm_label": "incremental merge integrity",
-      "id": "claude_skills_graphify_references_update_merge_integrity",
-      "community_name": "Incremental re-extraction runbook"
+      "community_name": "Incremental re-extraction runbook",
+      "id": "claude_skills_graphify_references_update_merge_integrity"
     },
     {
       "label": "Cluster-only refresh",
@@ -3203,13 +3078,27 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 11,
       "norm_label": "cluster-only refresh",
-      "id": "claude_skills_graphify_references_update_cluster_only",
-      "community_name": "Incremental re-extraction runbook"
+      "community_name": "Incremental re-extraction runbook",
+      "id": "claude_skills_graphify_references_update_cluster_only"
     },
     {
-      "label": "Graphify local engineering tooling",
+      "label": "Graphify",
+      "file_type": "document",
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 31,
+      "norm_label": "graphify",
+      "community_name": "Domain Packs",
+      "id": "docs_architecture_graphify_graphify"
+    },
+    {
+      "label": "Domain Packs",
       "file_type": "concept",
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
@@ -3217,41 +3106,42 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
-      "norm_label": "graphify local engineering tooling",
-      "id": "docs_architecture_graphify_local_tooling",
-      "community_name": "Graphify CLI 0.9.28 baseline"
+      "community": 31,
+      "norm_label": "domain packs",
+      "community_name": "Domain Packs",
+      "id": "docs_architecture_graphify_domain_packs"
     },
     {
-      "label": "Graphify CLI 0.9.28 baseline",
+      "label": "Graphify CLI",
       "file_type": "concept",
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
-      "source_url": "https://github.com/safishamsi/graphify/releases/tag/v0.9.28",
+      "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
-      "norm_label": "graphify cli 0.9.28 baseline",
-      "id": "docs_architecture_graphify_cli_baseline_0928",
-      "community_name": "Graphify CLI 0.9.28 baseline"
+      "community": 14,
+      "norm_label": "graphify cli",
+      "community_name": "Complete incremental update",
+      "id": "docs_architecture_graphify_graphify_cli"
     },
     {
       "label": "Project-scoped installation",
-      "file_type": "concept",
+      "file_type": "rationale",
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "rationale": "The installation is versioned and restricted to the project so the skill and instructions do not leak to other repositories.",
+      "community": 14,
       "norm_label": "project-scoped installation",
-      "id": "docs_architecture_graphify_project_scoped_install",
-      "community_name": "Graphify CLI 0.9.28 baseline"
+      "community_name": "Complete incremental update",
+      "id": "docs_architecture_graphify_project_scoped_installation"
     },
     {
-      "label": "Incremental update routes",
+      "label": "Graphify skill",
       "file_type": "concept",
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
@@ -3259,13 +3149,13 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
-      "norm_label": "incremental update routes",
-      "id": "docs_architecture_graphify_incremental_routes",
-      "community_name": "Incremental update routes"
+      "community": 14,
+      "norm_label": "graphify skill",
+      "community_name": "Complete incremental update",
+      "id": "docs_architecture_graphify_graphify_skill"
     },
     {
-      "label": "Graphify 0.9.28 integrity workarounds",
+      "label": "Complete incremental update",
       "file_type": "concept",
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
@@ -3273,13 +3163,13 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
-      "norm_label": "graphify 0.9.28 integrity workarounds",
-      "id": "docs_architecture_graphify_integrity_workarounds",
-      "community_name": "Incremental update routes"
+      "community": 14,
+      "norm_label": "complete incremental update",
+      "community_name": "Complete incremental update",
+      "id": "docs_architecture_graphify_complete_incremental_update"
     },
     {
-      "label": "Graphify security and authority limits",
+      "label": "Semantic extraction",
       "file_type": "concept",
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
@@ -3287,10 +3177,388 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
-      "norm_label": "graphify security and authority limits",
-      "id": "docs_architecture_graphify_security_authority",
-      "community_name": "Graphify CLI 0.9.28 baseline"
+      "community": 14,
+      "norm_label": "semantic extraction",
+      "community_name": "Complete incremental update",
+      "id": "docs_architecture_graphify_semantic_extraction"
+    },
+    {
+      "label": "Artifact regeneration",
+      "file_type": "concept",
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 14,
+      "norm_label": "artifact regeneration",
+      "community_name": "Complete incremental update",
+      "id": "docs_architecture_graphify_artifact_regeneration"
+    },
+    {
+      "label": "AST-only update",
+      "file_type": "concept",
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 30,
+      "norm_label": "ast-only update",
+      "community_name": "AST-only update",
+      "id": "docs_architecture_graphify_ast_only_update"
+    },
+    {
+      "label": "Graphify hook",
+      "file_type": "concept",
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 30,
+      "norm_label": "graphify hook",
+      "community_name": "AST-only update",
+      "id": "docs_architecture_graphify_graphify_hook"
+    },
+    {
+      "label": "Graphify skill",
+      "file_type": "document",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "graphify skill",
+      "id": "_agents_skills_graphify_skill_skill",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Community Labels",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "community labels",
+      "id": "_agents_skills_graphify_skill_community_labels",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Clustered Communities",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "clustered communities",
+      "id": "_agents_skills_graphify_skill_clustered_communities",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Current Community Summaries",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "current community summaries",
+      "id": "_agents_skills_graphify_skill_current_community_summaries",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Community Label Quality Gate",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "community label quality gate",
+      "id": "_agents_skills_graphify_skill_community_label_quality_gate",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Exact Community-Key Coverage",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "exact community-key coverage",
+      "id": "_agents_skills_graphify_skill_exact_community_key_coverage",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Placeholder Label Rejection",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "placeholder label rejection",
+      "id": "_agents_skills_graphify_skill_placeholder_label_rejection",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Non-Distinct Label Rejection",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "non-distinct label rejection",
+      "id": "_agents_skills_graphify_skill_non_distinct_label_rejection",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Community Membership Signatures",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "community membership signatures",
+      "id": "_agents_skills_graphify_skill_community_membership_signatures",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Automatic Label Reuse Invalidation",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "automatic label reuse invalidation",
+      "id": "_agents_skills_graphify_skill_automatic_label_reuse_invalidation",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Cluster-Only Workflow",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "cluster-only workflow",
+      "id": "_agents_skills_graphify_skill_cluster_only_workflow",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Fresh Human Label Choice",
+      "file_type": "concept",
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 7,
+      "norm_label": "fresh human label choice",
+      "id": "_agents_skills_graphify_skill_fresh_human_label_choice",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Graphify skill",
+      "file_type": "document",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "graphify skill",
+      "id": "_claude_skills_graphify_skill_skill",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Community Labels",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "community labels",
+      "id": "_claude_skills_graphify_skill_community_labels",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Clustered Communities",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "clustered communities",
+      "id": "_claude_skills_graphify_skill_clustered_communities",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Current Community Summaries",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "current community summaries",
+      "id": "_claude_skills_graphify_skill_current_community_summaries",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Community Label Quality Gate",
+      "file_type": "rationale",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "community label quality gate",
+      "id": "_claude_skills_graphify_skill_community_label_quality_gate",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Exact Community-Key Coverage",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "exact community-key coverage",
+      "id": "_claude_skills_graphify_skill_exact_community_key_coverage",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Placeholder Label Rejection",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "placeholder label rejection",
+      "id": "_claude_skills_graphify_skill_placeholder_label_rejection",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Non-Distinct Label Rejection",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "non-distinct label rejection",
+      "id": "_claude_skills_graphify_skill_non_distinct_label_rejection",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Community Membership Signatures",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "community membership signatures",
+      "id": "_claude_skills_graphify_skill_community_membership_signatures",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Automatic Label Reuse Invalidation",
+      "file_type": "rationale",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "automatic label reuse invalidation",
+      "id": "_claude_skills_graphify_skill_automatic_label_reuse_invalidation",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Cluster-Only Workflow",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "cluster-only workflow",
+      "id": "_claude_skills_graphify_skill_cluster_only_workflow",
+      "community_name": "Community Label Quality Gate"
+    },
+    {
+      "label": "Fresh Human Label Choice",
+      "file_type": "concept",
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 8,
+      "norm_label": "fresh human label choice",
+      "id": "_claude_skills_graphify_skill_fresh_human_label_choice",
+      "community_name": "Community Label Quality Gate"
     }
   ],
   "links": [
@@ -5394,56 +5662,6 @@
       "target": "apps_frontend_public_favicon_lightning_bolt"
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "agents_skills_graphify_skill_graphify_workflow",
-      "target": "agents_skills_graphify_skill_cluster_only"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "agents_skills_graphify_skill_graphify_workflow",
-      "target": "agents_skills_graphify_skill_incremental_update"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "agents_skills_graphify_skill_graphify_workflow",
-      "target": "agents_skills_graphify_skill_semantic_extraction"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "agents_skills_graphify_skill_graphify_workflow",
-      "target": "claude_skills_graphify_skill_graphify_workflow"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".agents/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "agents_skills_graphify_skill_incremental_update",
-      "target": "agents_skills_graphify_references_update_incremental_update"
-    },
-    {
       "relation": "implements",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -5474,46 +5692,6 @@
       "target": "claude_skills_graphify_references_update_incremental_update"
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "claude_skills_graphify_skill_graphify_workflow",
-      "target": "claude_skills_graphify_skill_cluster_only"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "claude_skills_graphify_skill_graphify_workflow",
-      "target": "claude_skills_graphify_skill_incremental_update"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "claude_skills_graphify_skill_graphify_workflow",
-      "target": "claude_skills_graphify_skill_semantic_extraction"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "claude_skills_graphify_skill_incremental_update",
-      "target": "claude_skills_graphify_references_update_incremental_update"
-    },
-    {
       "relation": "implements",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -5540,8 +5718,8 @@
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_architecture_graphify_local_tooling",
-      "target": "docs_architecture_graphify_cli_baseline_0928"
+      "source": "docs_architecture_graphify_graphify",
+      "target": "docs_architecture_graphify_domain_packs"
     },
     {
       "relation": "conceptually_related_to",
@@ -5550,28 +5728,278 @@
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_architecture_graphify_local_tooling",
-      "target": "docs_architecture_graphify_security_authority"
+      "source": "docs_architecture_graphify_graphify_cli",
+      "target": "docs_architecture_graphify_project_scoped_installation"
     },
     {
-      "relation": "implements",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_architecture_graphify_cli_baseline_0928",
-      "target": "docs_architecture_graphify_project_scoped_install"
+      "source": "docs_architecture_graphify_project_scoped_installation",
+      "target": "docs_architecture_graphify_graphify_skill"
     },
     {
-      "relation": "implements",
+      "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "weight": 1.0,
-      "source": "docs_architecture_graphify_incremental_routes",
-      "target": "docs_architecture_graphify_integrity_workarounds"
+      "source": "docs_architecture_graphify_graphify_skill",
+      "target": "docs_architecture_graphify_complete_incremental_update"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_architecture_graphify_complete_incremental_update",
+      "target": "docs_architecture_graphify_artifact_regeneration"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_architecture_graphify_complete_incremental_update",
+      "target": "docs_architecture_graphify_semantic_extraction"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/architecture/graphify.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_architecture_graphify_graphify_hook",
+      "target": "docs_architecture_graphify_ast_only_update"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_agents_skills_graphify_skill_skill",
+      "target": "_agents_skills_graphify_skill_community_labels"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_agents_skills_graphify_skill_community_labels",
+      "target": "_agents_skills_graphify_skill_clustered_communities"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_agents_skills_graphify_skill_community_labels",
+      "target": "_agents_skills_graphify_skill_current_community_summaries"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_agents_skills_graphify_skill_fresh_human_label_choice",
+      "target": "_agents_skills_graphify_skill_community_labels"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_agents_skills_graphify_skill_community_label_quality_gate",
+      "target": "_agents_skills_graphify_skill_clustered_communities"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_agents_skills_graphify_skill_community_label_quality_gate",
+      "target": "_agents_skills_graphify_skill_exact_community_key_coverage"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_agents_skills_graphify_skill_community_label_quality_gate",
+      "target": "_agents_skills_graphify_skill_non_distinct_label_rejection"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_agents_skills_graphify_skill_community_label_quality_gate",
+      "target": "_agents_skills_graphify_skill_placeholder_label_rejection"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_agents_skills_graphify_skill_community_membership_signatures",
+      "target": "_agents_skills_graphify_skill_automatic_label_reuse_invalidation"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_agents_skills_graphify_skill_automatic_label_reuse_invalidation",
+      "target": "_agents_skills_graphify_skill_cluster_only_workflow"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_agents_skills_graphify_skill_fresh_human_label_choice",
+      "target": "_agents_skills_graphify_skill_automatic_label_reuse_invalidation"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_claude_skills_graphify_skill_skill",
+      "target": "_claude_skills_graphify_skill_community_labels"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_claude_skills_graphify_skill_community_labels",
+      "target": "_claude_skills_graphify_skill_clustered_communities"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_claude_skills_graphify_skill_community_labels",
+      "target": "_claude_skills_graphify_skill_current_community_summaries"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_claude_skills_graphify_skill_fresh_human_label_choice",
+      "target": "_claude_skills_graphify_skill_community_labels"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_claude_skills_graphify_skill_community_label_quality_gate",
+      "target": "_claude_skills_graphify_skill_clustered_communities"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_claude_skills_graphify_skill_community_label_quality_gate",
+      "target": "_claude_skills_graphify_skill_exact_community_key_coverage"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_claude_skills_graphify_skill_community_label_quality_gate",
+      "target": "_claude_skills_graphify_skill_non_distinct_label_rejection"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_claude_skills_graphify_skill_community_label_quality_gate",
+      "target": "_claude_skills_graphify_skill_placeholder_label_rejection"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_claude_skills_graphify_skill_community_membership_signatures",
+      "target": "_claude_skills_graphify_skill_automatic_label_reuse_invalidation"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_claude_skills_graphify_skill_automatic_label_reuse_invalidation",
+      "target": "_claude_skills_graphify_skill_cluster_only_workflow"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/graphify/SKILL.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "_claude_skills_graphify_skill_fresh_human_label_choice",
+      "target": "_claude_skills_graphify_skill_automatic_label_reuse_invalidation"
     }
   ],
   "hyperedges": [
@@ -5674,20 +6102,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "apps/frontend/public/icons.svg"
-    },
-    {
-      "id": "graphify_skill_variants",
-      "label": "Graphify skill variants",
-      "nodes": [
-        "agents_skills_graphify_skill_graphify_workflow",
-        "claude_skills_graphify_skill_graphify_workflow",
-        "docs_architecture_graphify_local_tooling"
-      ],
-      "relation": "participate_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "docs/architecture/graphify.md"
     }
   ],
-  "built_at_commit": "f5319ecbbf6109d54d242069bb39bf3db05f0ddb"
+  "built_at_commit": "624b2c76eb4f21e6de38e02c6da241e12e720d25"
 }

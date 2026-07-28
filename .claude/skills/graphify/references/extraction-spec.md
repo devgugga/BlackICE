@@ -16,6 +16,13 @@ Rules:
 
 Code files: focus on semantic edges AST cannot find (call relationships, shared data, arch patterns).
   Do not re-extract imports - AST already has those.
+Configuration files routed through the document pipeline (properties, TOML, YAML,
+XML, Dockerfiles, shell/PowerShell, CSS/themes, nginx and similar): extract
+named services, endpoints, ports, authentication settings, build/runtime
+dependencies, deployment relationships and operational constraints. Treat
+placeholder credentials as sensitive values: never copy their contents into a
+node label, attribute or edge. Model what the setting controls, not its secret
+value.
 Doc/paper files: extract named concepts, entities, citations. For rationale (WHY decisions were made, trade-offs, design intent): store as a `rationale` attribute on the relevant concept node — do NOT create a separate rationale node or fragment node. Only create a node for something that is itself a named entity or concept. Use `file_type:"rationale"` for concept-like nodes (ideas, principles, mechanisms, design patterns). `file_type` MUST be one of exactly these six values: `code`, `document`, `paper`, `image`, `rationale`, `concept`. Any other value is invalid and will be rejected.
 Code files: when adding `calls` edges, source MUST be the caller (the function/class doing the calling), target MUST be the callee. Never reverse this direction. `calls` edges MUST stay within one language: a Python function cannot `calls` a JS/TS/Go/Rust/Java symbol and vice versa — cross-language call edges are phantom artifacts, never emit them.
 Image files: use vision to understand what the image IS - do not just OCR.

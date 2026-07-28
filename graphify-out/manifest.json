@@ -115,9 +115,9 @@
     "semantic_hash": "27f3ff517e3ef6a014139727d6a28543"
   },
   ".agents/skills/graphify/SKILL.md": {
-    "mtime": 1785173132.2226968,
-    "ast_hash": "44d74edc779e51fcdbc925255941f5f3",
-    "semantic_hash": "44d74edc779e51fcdbc925255941f5f3"
+    "mtime": 1785177093.560315,
+    "ast_hash": "16f3b0dab252013f4a4192c53044f3ad",
+    "semantic_hash": "16f3b0dab252013f4a4192c53044f3ad"
   },
   ".agents/skills/graphify/references/add-watch.md": {
     "mtime": 1785168564.4069486,
@@ -180,9 +180,9 @@
     "semantic_hash": "bf7589d375a9000288926cf72b6de2b9"
   },
   ".claude/skills/graphify/SKILL.md": {
-    "mtime": 1785173133.8544388,
-    "ast_hash": "2e14115929062fd9627ca575607e043c",
-    "semantic_hash": "2e14115929062fd9627ca575607e043c"
+    "mtime": 1785177094.7978532,
+    "ast_hash": "7183a1c37bff86a6b1baaf113bd12182",
+    "semantic_hash": "7183a1c37bff86a6b1baaf113bd12182"
   },
   ".claude/skills/graphify/references/add-watch.md": {
     "mtime": 1785168564.440004,
@@ -260,9 +260,9 @@
     "semantic_hash": "7e8d9981e9b676443376b6985026b7eb"
   },
   "docs/architecture/graphify.md": {
-    "mtime": 1785173135.3357508,
-    "ast_hash": "9dec243b0d83759ea87339dbbd3a93e9",
-    "semantic_hash": "9dec243b0d83759ea87339dbbd3a93e9"
+    "mtime": 1785174438.6424656,
+    "ast_hash": "bc077f6edf360e8a4b2022dc8ff95095",
+    "semantic_hash": "bc077f6edf360e8a4b2022dc8ff95095"
   },
   "docs/architecture/project-structure.md": {
     "mtime": 1785169498.5571637,

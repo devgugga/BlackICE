@@ -10,11 +10,10 @@ substitui a fonte, os Domain Packs nem a validação humana de decisões DICOM.
 
 O baseline do projeto é a CLI `0.9.28`; a versão registrada em cada
 `.graphify_version` das skills deve corresponder à CLI instalada. Confira o
-ambiente e instale a versão reproduzível:
+ambiente:
 
 ```powershell
 uv --version
-uv tool install "graphifyy==0.9.28"
 graphify --version
 ```
 
@@ -26,23 +25,24 @@ de alterar o baseline.
 
 ## Instalação project-scoped
 
-Execute no root do repositório. A instalação é versionada e restrita ao projeto,
-para que a skill e as instruções não vazem para outros repositórios:
+Execute no root do repositório:
 
 ```powershell
-graphify install --project
-graphify install --project --platform agents
-graphify claude install --project
-graphify codex install --project
-graphify hook install
+powershell -ExecutionPolicy Bypass -File .graphify/setup.ps1
 ```
 
-Em Graphify `0.9.28`, `graphify install --project --platform agents` é o comando
-que reproduz a skill em `.agents/skills/graphify`. Não usamos
-`--platform codex` para essa etapa: ele também cria `.codex/skills`, um diretório
-extra que não faz parte da política deste repositório. `graphify codex install
---project` continua sendo necessário para as instruções AGENTS e o hook do
-Codex; `graphify claude install --project` faz o equivalente para Claude.
+O script instala exatamente `graphifyy==0.9.28`, executa os quatro instaladores
+project-scoped recomendados, restaura do `HEAD` as skills BlackICE revisadas,
+valida seus checksums e instala os hooks locais. Ele recusa execução quando
+essas skills têm mudanças locais, para não apagar trabalho em andamento.
+
+Não execute os instaladores project-scoped isoladamente. Em `0.9.28`, eles
+substituem `SKILL.md` e todo o diretório `references/`, removendo silenciosamente
+os ajustes de integridade do BlackICE. Para conferir o overlay sem instalar:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .graphify/setup.ps1 -VerifyOnly
+```
 
 ## Gerar o grafo
 
@@ -58,18 +58,20 @@ base de código em largura:
 ```powershell
 graphify query "como o frontend obtém a sessão autenticada?"
 graphify explain "SessionResource"
-graphify path "HomePage" "SessionResource"
+graphify explain "HomePage"
 ```
 
 ## Atualizar
 
 Há duas rotas de atualização, com escopos diferentes:
 
-- Para mudanças somente de código, `graphify update .` e os hooks instalados
-  por `graphify hook install` fazem a atualização AST local, sem LLM. O hook
-  pós-commit ignora mudanças somente de documentação e imagens; ele é uma
-  manutenção incremental de código, não uma reextração semântica completa.
-- Para documentação, imagens ou uma mudança mista, use a skill no agente:
+- Em um checkout Git normal, mudanças somente de código podem usar
+  `graphify update .`; os hooks instalados também fazem essa atualização AST
+  local, sem LLM. O hook pós-commit ignora configuração, documentação e imagens.
+- Em linked worktrees, os hooks oficiais de `0.9.28` retornam sem atualizar o
+  grafo, embora `graphify hook status` ainda mostre `installed`. Antes de cada
+  commit de tarefa, a atualização pela skill é obrigatória nesse contexto.
+- Para configuração, documentação, imagens ou qualquer mudança mista, use a skill:
   `$graphify . --update` no Codex ou `/graphify . --update` no Claude Code.
   Essa rota segue o fluxo incremental completo, incluindo a extração semântica
   dos arquivos de conteúdo alterados e a regeneração dos artefatos.
@@ -90,6 +92,16 @@ O runbook incremental versionado aplica dois ajustes locais de integridade:
   membros de hiperarestas; o dedup padrão da versão 0.9.28 remove IDs sem
   remapear esses membros.
 
+Além disso:
+
+- `.graphify/project.py` acrescenta ao passe semântico configurações textuais
+  rastreadas que o detector oficial não classifica, mantendo `.env`, arquivos
+  sensíveis, builds e `graphify-out/` fora do corpus;
+- a etapa de comunidades exige keys exatas, rejeita placeholders/colapso de
+  labels e grava assinaturas de membresia para invalidar reuso automático;
+- `.graphify/setup.ps1` restaura e valida essas alterações depois de qualquer
+  instalação project-scoped.
+
 Esses ajustes não mudam o full build. Ao atualizar o Graphify, revalidar ambos
 contra a nova versão e remover os workarounds quando a correção upstream tornar
 cada um desnecessário.
@@ -103,6 +115,15 @@ evita que a própria saída do Graphify e evidências que não são conhecimento
 arquitetural retornem ao corpus; o `.claudeignore` evita injetar essa saída
 gerada no cache de prompts.
 
+Também não versionar `.codex/hooks.json` nem `.claude/settings.json`: o instalador
+oficial grava neles o caminho absoluto do executável desta máquina. O setup os
+regenera localmente. O caminho absoluto do merge driver fica somente em
+`.git/config`, que já é metadata local.
+
+Quando a extração semântica é feita pelo próprio agente, o Graphify 0.9.28 não
+recebe a telemetria de tokens do host; por isso `0 input · 0 output` no relatório
+significa “não registrado”, não custo real zero.
+
 ## Segurança e autoridade
 
 Não indexar `.env`, chaves, DSNs, dados de paciente ou pixel data. Confirmar
@@ -110,14 +131,11 @@ relações `INFERRED` e decisões DICOM na fonte canônica antes de utilizá-las
 
 ## Upgrade
 
-Ao atualizar, alinhe CLI e skills e só então regenere os artefatos:
-
-```powershell
-uv tool upgrade graphifyy
-```
-
-Reexecutar os quatro comandos de instalação project-scoped. Reexecutar
-`graphify hook install`. Regenerar/atualizar o grafo e revisar os diffs.
+Não execute `uv tool upgrade graphifyy` sem antes alterar deliberadamente o
+baseline do projeto. Para um upgrade: revisar as correções upstream, atualizar a
+versão e os checksums em `.graphify/setup.ps1`, regenerar as duas skills,
+reaplicar somente os workarounds ainda necessários, executar o setup e então
+reconstruir/revisar o grafo completo.
 
 ## Diagnóstico no Windows
 

@@ -54,6 +54,20 @@ wrappers herdam.
 Domínios atuais: `dicom/` (♻️ reutilizável), `vue/` (♻️ reutilizável),
 `quarkus/` (específico deste projeto — não transfere para outros backends).
 
+## Graphify
+
+Leia `docs/architecture/graphify.md` antes de instalar, atualizar ou regenerar o
+grafo. Use a skill project-scoped em `.agents/skills/graphify/` (Codex) ou seu
+mirror em `.claude/skills/graphify/` (Claude); não execute os instaladores
+oficiais isoladamente, pois `.graphify/setup.ps1` reaplica os ajustes validados
+para a versão fixada.
+
+Antes do commit de uma tarefa que altere código, configuração, documentação ou
+imagens, execute a atualização semântica `--update` pela skill e revise o diff de
+`graphify-out/`. Em linked worktrees essa etapa é obrigatoriamente manual: os
+hooks Git oficiais do Graphify 0.9.28 se desativam nesse contexto, mesmo quando
+`graphify hook status` informa que estão instalados.
+
 ## Invariantes de DICOM (resumo — detalhes em `docs/domains/dicom/`)
 
 Estas são regras de **correção de negócio**. Violá-las corrompe dados de paciente.

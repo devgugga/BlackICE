@@ -7,3 +7,7 @@ apps/frontend/e2e/**/*.png
 # Installer safety backups and local diagnostics are not canonical input.
 *.graphify-bak
 *.graphify.log
+
+# Claude mirrors the canonical project-scoped Graphify skill in .agents/.
+# Indexing both copies creates duplicate knowledge communities.
+.claude/skills/graphify/

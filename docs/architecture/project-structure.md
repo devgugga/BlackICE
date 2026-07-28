@@ -23,6 +23,7 @@ BlackICE/
 │  └─ superpowers/
 ├─ .claude/
 ├─ .codex/
+├─ .graphify/
 ├─ .agents/skills/graphify/
 ├─ .graphifyignore
 ├─ graphify-out/
@@ -43,6 +44,8 @@ BlackICE/
   engenharia e de agentes: respectivamente a skill compartilhada, a política do
   corpus e os artefatos portáveis do grafo. Não são código de aplicação nem
   infraestrutura de produção.
+- `.graphify/` contém somente o adaptador, os testes e o overlay reproduzível da
+  versão do Graphify fixada pelo projeto.
 
 Não crie outra pasta raiz de aplicação. Código de produto pertence a uma
 aplicação em `apps/`.

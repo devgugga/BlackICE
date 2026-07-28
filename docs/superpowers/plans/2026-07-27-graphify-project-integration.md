@@ -591,7 +591,7 @@ source facts.
 
 ```powershell
 graphify query "quais regras do BlackICE governam StudyInstanceUID e o uso de QIDO-RS, WADO-RS e STOW-RS?"
-graphify path "StudyInstanceUID" "DICOMweb"
+graphify explain "DICOM UID Identity"
 ```
 
 Expected: the response points to `docs/domains/dicom/` and distinguishes

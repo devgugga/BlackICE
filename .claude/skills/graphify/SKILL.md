@@ -109,9 +109,11 @@ If the import succeeds, print nothing and move straight to Step 2.
 ```bash
 $(cat graphify-out/.graphify_python) -c "
 import json
-from graphify.detect import detect
+import sys
 from pathlib import Path
-result = detect(Path('INPUT_PATH'))
+sys.path.insert(0, str(Path('.graphify').resolve()))
+from project import detect_project
+result = detect_project(Path('INPUT_PATH'))
 print(json.dumps(result, ensure_ascii=False))
 " > graphify-out/.graphify_detect.json
 ```
@@ -478,7 +480,7 @@ Substitute `IS_DIRECTED` and `INPUT_PATH` as in Step 4. If a `GRAPH HEALTH WARNI
 
 ### Step 5 - Label communities
 
-Read `graphify-out/.graphify_analysis.json`. For each community key, look at its node labels and write a 2-5 word plain-language name (e.g. "Attention Mechanism", "Training Pipeline", "Data Loading").
+Read `graphify-out/.graphify_analysis.json`. For each community key, look at its node labels and write a 2-5 word plain-language name (e.g. "Attention Mechanism", "Training Pipeline", "Data Loading"). Build `LABELS_DICT` from scratch from the current community summaries. Do not copy or adapt values from `.graphify_labels.json`; those labels may describe older community membership. The `.sig` sidecar is used by the native hook and `cluster-only` workflow to invalidate automatic reuse, not to reject a fresh human choice that happens to use the same text.
 
 Then regenerate the report and save the labels for the visualizer:
 
@@ -486,7 +488,7 @@ Then regenerate the report and save the labels for the visualizer:
 $(cat graphify-out/.graphify_python) -c "
 import sys, json
 from graphify.build import build_from_json
-from graphify.cluster import score_all
+from graphify.cluster import score_all, community_member_sigs
 from graphify.analyze import god_nodes, surprising_connections, suggest_questions
 from graphify.report import generate
 from pathlib import Path
@@ -501,24 +503,43 @@ communities = {int(k): v for k, v in analysis['communities'].items()}
 cohesion = {int(k): v for k, v in analysis['cohesion'].items()}
 tokens = {'input': extraction.get('input_tokens', 0), 'output': extraction.get('output_tokens', 0)}
 
-# LABELS - replace these with the names you chose above
+# LABELS - create this dict from scratch from the current analysis above
 labels = LABELS_DICT
 
-# Deterministic quality gate: placeholder/reused labels make the report and HTML
-# misleading. Stop before writing either artifact and redo Step 5 (or use the
-# self-contained cluster-only flow) when multiple communities collapse to one name.
+# Deterministic quality gate: labels must describe exactly the communities that
+# were just clustered. This mirrors the watch/cluster-only stale-label guard:
+# membership signatures bind a saved label to the members it actually named.
+if set(labels) != set(communities):
+    missing = sorted(set(communities) - set(labels))
+    extra = sorted(set(labels) - set(communities))
+    raise SystemExit(
+        f'Refusing to generate report/HTML with incomplete community labels '
+        f'(missing={missing}, extra={extra}). Redo Step 5 labels.'
+    )
+placeholders = [cid for cid, label in labels.items() if label == f'Community {cid}']
+if placeholders:
+    raise SystemExit(
+        f'Refusing to generate report/HTML with placeholder labels for '
+        f'communities {placeholders}. Redo Step 5 labels.'
+    )
 if len(communities) > 1 and len(set(labels.values())) <= 1:
     raise SystemExit(
         'Refusing to generate report/HTML with non-distinct community labels. '
         'Redo Step 5 labels or run graphify cluster-only .'
     )
+labels_path = Path('graphify-out/.graphify_labels.json')
+sig_path = labels_path.parent / (labels_path.name + '.sig')
+current_sigs = community_member_sigs(communities)
 
 # Regenerate questions with real community labels (labels affect question phrasing)
 questions = suggest_questions(G, communities, labels)
 
 report = generate(G, communities, cohesion, labels, analysis['gods'], analysis['surprises'], detection, tokens, 'INPUT_PATH', suggested_questions=questions)
 Path('graphify-out/GRAPH_REPORT.md').write_text(report, encoding=\"utf-8\")
-Path('graphify-out/.graphify_labels.json').write_text(json.dumps({str(k): v for k, v in labels.items()}, ensure_ascii=False), encoding=\"utf-8\")
+# Persist current signatures for native hook/cluster-only automatic reuse
+# invalidation. Fresh human labels are not compared with older label text.
+labels_path.write_text(json.dumps({str(k): v for k, v in labels.items()}, ensure_ascii=False), encoding=\"utf-8\")
+sig_path.write_text(json.dumps({str(k): v for k, v in current_sigs.items()}), encoding=\"utf-8\")
 print('Report updated with community labels')
 "
 ```
