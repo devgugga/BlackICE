@@ -233,11 +233,57 @@ Só depois do gate humano da Fase 1.
 
 ### Mecânica
 
-`kc.sh start --import-realm` importa qualquer realm do diretório de import que
-**ainda não exista**, substituindo os `${…}` a partir do env. Trocar `REALM_NAME`
-e reiniciar cria o realm `blackice` **ao lado** do `dcm4chee`, que fica intacto
-como rollback. Nenhum volume é removido; os estudos DICOM
-(`dcm4chee-storage`, `dcm4chee-db-data`) não são tocados.
+> **A mecânica original deste spec estava errada e foi substituída.** Eu havia
+> escrito que trocar `REALM_NAME` e reiniciar criaria o realm `blackice` **ao
+> lado** do `dcm4chee` via `--import-realm`. Isso **não funciona**, e a tentativa
+> **trava o boot do Keycloak**.
+>
+> Evidência: `/opt/keycloak/data/import/dcm4che-realm.json` embute **112 UUIDs
+> literais** em campos `"id"` que **não** são templados por `${REALM_NAME}` —
+> `name` e `containerId` são, `id` não. O primeiro deles é `defaultRole.id`
+> (`faded8f1-de97-4ea9-b460-f22facf354b3`), e `KEYCLOAK_ROLE.ID` é PK **global**,
+> não escopada por realm. O banco já tem essa linha, do import que criou o
+> `dcm4chee`:
+>
+> ```
+> ID                                    NAME                    REALM_ID
+> faded8f1-de97-4ea9-b460-f22facf354b3  default-roles-dcm4chee  dcm4chee
+> ```
+>
+> Importar o mesmo arquivo uma segunda vez sob **qualquer** outro `REALM_NAME`
+> colide nessa linha. `IGNORE_EXISTING` não salva: o importer pergunta "o realm
+> `blackice` já tem esse papel?" (não, é realm novo) e insere. A premissa só
+> valeria num banco vazio. Eu a inferi da semântica do `--import-realm` sem
+> testar contra um banco populado — o mesmo erro de método do
+> `tls.verification`.
+
+**O que substitui:** renomear o realm **in place** pela Admin REST.
+
+```
+PUT /auth/admin/realms/dcm4chee   {"realm":"blackice"}
+```
+
+Isso muda `REALM.NAME`. Nada é apagado: usuários, clients, protocol mappers,
+role mappings e o atributo `login_theme` continuam presos ao mesmo realm.
+Verificado após o rename: `blackice-quarkus`, `arc-audience`, `dr.teste`,
+`login_theme=blackice` e `dcm4chee-arc-rs` todos intactos.
+
+`REALM_NAME` no compose passa a **acompanhar** o nome real, para que o import de
+boot encontre o realm existente e não tente criar outro. Verificado: com
+`REALM_NAME: blackice` e o realm já renomeado, o Keycloak sobe em 25s sem
+colisão.
+
+A role padrão do realm mantém o nome antigo depois do rename e é renomeada
+junto, senão `default-roles-dcm4chee` continuaria aparecendo no claim
+`realm_access.roles` — exatamente o caminho que
+`quarkus.oidc.roles.role-claim-path` lê:
+
+```
+PUT /auth/admin/realms/blackice/roles/default-roles-dcm4chee  {"name":"default-roles-blackice", …}
+```
+
+Nenhum volume é removido; os estudos DICOM (`dcm4chee-storage`,
+`dcm4chee-db-data`) não são tocados.
 
 | Onde | Mudança |
 | :-- | :-- |
@@ -257,11 +303,26 @@ O realm novo nasce vazio de configuração nossa. É preciso re-rodar
 e `login_theme`) e **re-atribuir as realm roles no gate humano**: o script não
 atribui roles por decisão de projeto, e o realm novo não as herda.
 
+### Custo honesto (revisado)
+
+O rename **preserva** a configuração, então cai a maior parte do custo que este
+spec previa: não é preciso re-rodar o `configure-blackice.sh`, e os role mappings
+existentes sobrevivem. **Mas o gate humano da role continua**, porque a role
+`auth` nunca chegou a ser atribuída ao `dr.teste` neste ambiente — o rename
+preservou o que existia, e o que existia era só a role padrão.
+
 ### Reversão
 
-Voltar `REALM_NAME` para `dcm4chee` nos dois serviços e reiniciar. O realm antigo
-continua lá com tudo. Só apagar o `dcm4chee` depois que o gate humano confirmar a
-Fase 2 — e isso é decisão separada, não parte deste spec.
+`PUT /auth/admin/realms/blackice {"realm":"dcm4chee"}`, renomear a role padrão de
+volta, e voltar `REALM_NAME` nos dois serviços. Nenhum dado sai do lugar em
+nenhuma direção.
+
+> **O requisito de rollback mudou de forma, não de força.** Este spec dizia "o
+> realm `dcm4chee` continua existindo como escape hatch". Com o rename ele
+> **não** existe mais por esse nome (`/realms/dcm4chee` devolve 404) — é o mesmo
+> realm, com outro nome. O que o requisito realmente pedia (poder voltar sem
+> perder nada) é atendido, e melhor: não há realm duplicado para divergir, e
+> voltar não exige reconfigurar nada.
 
 ---
 

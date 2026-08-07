@@ -443,6 +443,30 @@ bash "$SCRATCH/assert-fase2.sh"
 
 Expected: **A**, **C** e **D** falham (realm `blackice` ainda não existe); **B** passa.
 
+> **Steps 3 e 4 foram refeitos em 2026-08-07.** A mecânica original — trocar `REALM_NAME` e deixar o `--import-realm` criar o realm `blackice` ao lado do `dcm4chee` — **trava o boot do Keycloak**. `dcm4che-realm.json` embute 112 UUIDs literais não templados por `${REALM_NAME}`, e `KEYCLOAK_ROLE.ID` é PK global: reimportar o mesmo arquivo sob outro nome colide sempre. Ver o spec para a evidência.
+>
+> **Os Steps 3 e 4 abaixo já foram executados pelo controller** (o rename era o teste que decidia a estratégia). O realm já se chama `blackice`, a role padrão já é `default-roles-blackice`, e o Keycloak já foi recriado e sobe limpo. Estão registrados aqui como o procedimento correto, não como trabalho pendente.
+
+- [ ] **Step 3 (FEITO): Renomear o realm in place e ajustar `REALM_NAME`**
+
+Pela Admin REST, de dentro do container `keycloak` (a base é `https://localhost:8843/auth` desde a Fase 1):
+
+```
+PUT /auth/admin/realms/dcm4chee  {"realm":"blackice"}
+PUT /auth/admin/realms/blackice/roles/default-roles-dcm4chee  {"name":"default-roles-blackice", …}
+```
+
+O segundo é necessário porque a role padrão mantém o nome antigo depois do rename, e ela viaja no claim `realm_access.roles` — o caminho que `quarkus.oidc.roles.role-claim-path` lê. Para o PUT da role, faça GET da representação inteira, troque só o `name` e mande de volta.
+
+Depois, em `infra/dcm4chee/compose.yml`, `REALM_NAME: blackice` nos serviços `keycloak` **e** `arc`, com o comentário explicando que este valor **acompanha** o nome real (ele não renomeia nada) e que trocá-lo sozinho quebra o boot.
+
+- [ ] **Step 4 (FEITO): Recriar keycloak e confirmar que o boot sobrevive**
+
+Este era o risco que podia afundar a estratégia: com o realm renomeado, o import de boot poderia não reconhecê-lo e tentar criar outro, recaindo na colisão. Verificado — sobe em 25s, container `running`, `/auth/realms/blackice/.well-known/openid-configuration` em 200.
+
+<details>
+<summary>Mecânica original (não funciona — mantida para registro)</summary>
+
 - [ ] **Step 3: Trocar o nome do realm nos dois serviços**
 
 Em `infra/dcm4chee/compose.yml`, serviço `keycloak`, substituir o valor de `REALM_NAME` e atualizar o comentário acima dele:
@@ -484,6 +508,8 @@ docker exec infra-keycloak-1 ls /opt/keycloak/data/import/
 ```
 
 O segundo comando confirma que `dcm4che-realm.json` ainda existe no volume — sem ele, `--import-realm` não tem o que importar.
+
+</details>
 
 - [ ] **Step 5: Apontar o script de configuração para o realm novo**
 
