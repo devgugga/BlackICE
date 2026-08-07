@@ -60,20 +60,23 @@ Mudança atômica: os estados intermediários quebram o login (mover o path do K
 - Consumes: nada (primeira tarefa).
 - Produces: Keycloak servindo em `http://blackice.localhost/auth` (browser) e `http://keycloak:8080/auth` (rede interna); Admin REST em `https://localhost:8843/auth/admin`. A Task 2 depende desses três endereços.
 
-- [ ] **Step 1: Capturar o baseline verde do E2E**
+- [ ] **Step 1: Confirmar o estado quebrado de partida — NÃO tente um baseline verde**
 
-Prova que o snapshot de pixel bate **antes** da mudança. Sem isso, um E2E vermelho depois é ambíguo.
+> **Este passo mudou em 2026-08-07 e o motivo importa.** O plano original mandava capturar um baseline verde do Playwright antes de mexer em nada. **Isso é impossível hoje**, e não por culpa desta mudança: o login está quebrado na `main`.
+>
+> `quarkus.oidc.tls.verification=none` é **inerte no Quarkus 3.37.4** (a propriedade migrou para o TLS registry). Depois do reset do ambiente, o Keycloak gerou um cert self-signed novo, e o backend não consegue completar o discovery: `PKIX path building failed`, `OIDC server is not available`, e `/api/login` responde **401 em vez de 302**. `curl -k` de dentro do container do backend devolve 200 no mesmo endereço, então não é rede — é validação de TLS ligada.
+>
+> **A Fase 1 é a correção**: ela move o backend para `http://keycloak:8080/auth/…`, sem TLS no caminho.
 
-De `apps/frontend`:
+Confirme o ponto de partida (esses valores entram no seu report):
 
 ```bash
-docker run --rm --network host -v "$PWD:/work" -w /work -e CI=true \
-  -e BLACKICE_E2E_URL=http://blackice.localhost \
-  mcr.microsoft.com/playwright:v1.62.0-noble \
-  npx playwright test e2e/keycloak-login.spec.ts
+curl -sS --max-redirs 0 -D - -o /dev/null http://blackice.localhost/api/login | head -1
 ```
 
-Expected: 4 passed (2 testes × 2 projects). Se já estiver vermelho, **pare** — conserte o baseline antes de seguir.
+Expected: `HTTP/1.1 401 Unauthorized`. Se vier `302`, o ambiente mudou desde o planejamento — **pare e reporte**, porque as expectativas do Step 3 dependem disto.
+
+**A referência do snapshot é o PNG commitado** em `apps/frontend/e2e/keycloak-login.spec.ts-snapshots/`, que está em git no commit `2e340a6`. Ele é a verdade; o Step 1 original só reconfirmava que ela ainda valia. Não rode o Playwright agora — sem login não há tela para fotografar.
 
 - [ ] **Step 2: Escrever o script de asserção da Fase 1**
 
@@ -139,7 +142,18 @@ Da raiz do repo:
 bash "$SCRATCH/assert-fase1.sh"
 ```
 
-Expected: FALHA em A, B e E (o path `/auth` ainda não existe → o `curl` devolve vazio ou 404) e em D (a linha `tls.verification` ainda está lá). C e F devem passar já. **Se A ou B passarem agora, algo está errado no entendimento do estado atual — pare e investigue.**
+Expected, com o motivo de cada falha — **leia com atenção, porque duas falham por razões diferentes do que parece**:
+
+| Asserção | Resultado | Por quê |
+| :-- | :-- | :-- |
+| A `issuer`/`authorization_endpoint` | FALHA | O path `/auth` ainda não existe: o `curl` devolve vazio |
+| B `Location` do `/api/login` | FALHA | **Não** porque falta o `/auth` — porque o backend responde **401**, sem `Location` nenhum. É o TLS quebrado descrito no Step 1, não a ausência do prefixo |
+| C SPA na raiz / `/api/me` | passa | Não dependem do OIDC |
+| D `tls.verification` removido | FALHA | A linha ainda está no arquivo |
+| E backchannel do Archive | FALHA | O path `/auth` ainda não existe na 8843 |
+| F Archive sem erro de OIDC | passa | O Archive valida token, e ninguém logou ainda |
+
+**Se A ou E passarem agora**, o ambiente não está no estado que este plano assume — pare e investigue. **Se B devolver 302** em vez de 401, alguém consertou o TLS por outro caminho: pare e reporte, porque isso muda o que a Fase 1 está corrigindo.
 
 - [ ] **Step 4: Mover o Keycloak para `/auth` e pô-lo atrás do Traefik**
 
@@ -296,7 +310,9 @@ DCM4CHEE_HOST=localhost
 
 - [ ] **Step 14: Rodar o E2E — o snapshot de pixel é a prova**
 
-De `apps/frontend`, o **mesmo** comando do Step 1:
+Esta é a **primeira** vez que o Playwright roda nesta tarefa (o Step 1 não pôde rodar — o login estava quebrado). O snapshot commitado é a referência.
+
+De `apps/frontend`:
 
 ```bash
 docker run --rm --network host -v "$PWD:/work" -w /work -e CI=true \
@@ -308,8 +324,20 @@ docker run --rm --network host -v "$PWD:/work" -w /work -e CI=true \
 Expected: 4 passed, **sem** `--update-snapshots`. Snapshot inalterado prova que a
 mudança foi puramente de transporte: mesmo tema, mesmo layout, outro endereço.
 
-**Se o snapshot falhar, não atualize a baseline.** Investigue: significa que algo
-visual mudou, e nada nesta fase deveria mudar pixel.
+**Se o snapshot falhar, não atualize a baseline.** Nada nesta fase deveria mudar pixel.
+
+Sem um baseline "antes" para comparar, use este procedimento para desambiguar — e **só** neste caso de falha:
+
+```bash
+# 1. guarde as mudanças de infra sem perdê-las
+git stash push -- infra/ apps/backend/src/main/resources/application.properties
+# 2. suba a stack no estado anterior e veja se o teste passava antes
+#    (vai falhar por 401 no login — o que já prova que a divergência NÃO é sua)
+# 3. restaure
+git stash pop
+```
+
+Se o teste não passava antes por causa do 401, a divergência de pixel é anterior à sua mudança: **reporte como DONE_WITH_CONCERNS** com as duas imagens (`test-results/playwright/`), não tente consertar.
 
 - [ ] **Step 15: GATE HUMANO — conferência no browser**
 

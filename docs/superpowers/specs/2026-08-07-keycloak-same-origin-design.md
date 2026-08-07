@@ -75,6 +75,11 @@ terceiro em lugar algum da URL**.
   `infra/dcm4chee/compose.yml`).
 - **O frontend não referencia o Keycloak.** Único acoplamento:
   `window.location.href = '/api/login'` em `apps/frontend/src/app/router/index.ts`.
+- **O login está QUEBRADO na `main` desde o reset do ambiente** (2026-08-07).
+  `quarkus.oidc.tls.verification=none` é inerte no Quarkus 3.37.4; o backend não
+  completa o discovery contra o cert self-signed novo do Keycloak e `/api/login`
+  devolve **401 em vez de 302**. Ver o bloco da `application.properties` na Fase 1
+  para a prova. A Fase 1 corrige isso ao remover o TLS do caminho.
 - `directAccessGrantsEnabled: false` no client `blackice-quarkus`.
 - Traefik v3.1 com um único entrypoint, `web:80`. Keycloak **não** está atrás
   dele; publica `8843:8843` direto no host.
@@ -160,11 +165,24 @@ quarkus.oidc.auth-server-url=http://blackice.localhost/auth/realms/dcm4chee
 e **apagar** `quarkus.oidc.tls.verification=none` junto com todo o bloco de
 comentário `ATENCAO - DEV/TEST APENAS` (linhas 8–12) e seu TODO.
 
-> Essa linha existe apenas por causa do cert self-signed sem SAN. Depois desta
-> fase o cert sai do caminho e a verificação de TLS deixa de ter o que
-> atrapalhar. A mudança deixa **apagar** um workaround de segurança em vez de
-> adicionar um — é o principal ganho colateral da Fase 1 e vale mais que a
-> estética.
+> **Essa linha não funciona (verificado empiricamente em 2026-08-07).**
+> `quarkus.oidc.tls.verification` é **inerte no Quarkus 3.37.4** — a propriedade
+> migrou para o TLS registry central. Prova: com a config commitada, o backend
+> falha com `PKIX path building failed` contra `https://keycloak:8843` e loga
+> `OIDC server is not available`; o mesmo container com
+> `quarkus.tls.trust-all=true` sobe limpo. E `curl -k` de dentro do container
+> devolve 200 no mesmo endereço, então não é rede — é validação de TLS ligada.
+>
+> Isto é um **defeito pré-existente na `main`**, não introduzido aqui: qualquer
+> `docker compose down -v` derruba o login, porque o Keycloak gera um cert
+> self-signed novo e nada no backend o aceita. O ambiente só parecia saudável
+> enquanto o volume antigo do Keycloak sobrevivia.
+>
+> **A Fase 1 é a correção**, não um enfeite: ela tira o TLS do caminho
+> backend↔Keycloak inteiramente (`http://keycloak:8080/auth/…`). A alternativa
+> seria configurar o TLS registry (`quarkus.tls.trust-all=true`) — trocar um
+> workaround morto por um vivo. Apagar a linha é o desfecho certo, e a razão é
+> mais forte que estética.
 
 > **Este valor é o de host (dev mode), e só.** `blackice.localhost` resolve para
 > `127.0.0.1`; de **dentro** do container `backend` isso é o próprio container,
