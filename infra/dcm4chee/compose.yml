@@ -41,7 +41,6 @@ services:
       - "8843:8843"
     environment:
       KC_HTTPS_PORT: 8843
-      KC_HOSTNAME: https://${DCM4CHEE_HOST}:8843
       KC_HOSTNAME_BACKCHANNEL_DYNAMIC: 'true'
       # Keycloak 25.x usa KEYCLOAK_ADMIN/KEYCLOAK_ADMIN_PASSWORD para o bootstrap
       # do admin do realm master (a partir do Keycloak 26 passou a ser
@@ -67,6 +66,20 @@ services:
       KC_SPI_THEME_CACHE_THEMES: 'false'
       KC_SPI_THEME_CACHE_TEMPLATES: 'false'
       KC_SPI_THEME_STATIC_MAX_AGE: '-1'
+      # Same-origin (spec 2026-08-07): o Keycloak passa a ser servido pelo
+      # Traefik em http://${APP_HOST}/auth. KC_HTTP_ENABLED liga o listener
+      # HTTP em :8080 na rede interna; o listener HTTPS 8843 continua vivo,
+      # porque é o backchannel do Archive.
+      # ATENÇÃO: KC_HTTP_RELATIVE_PATH é o root path do SERVIDOR INTEIRO —
+      # vale para a 8843 também. Todo consumidor precisa do /auth no endereço.
+      KC_HTTP_ENABLED: 'true'
+      KC_HTTP_RELATIVE_PATH: /auth
+      # URL completa é exigida por KC_HOSTNAME_BACKCHANNEL_DYNAMIC (hostname v2).
+      KC_HOSTNAME: http://${APP_HOST}/auth
+      # NÃO é o que faz o proxy funcionar: com hostname fixo, as frontend URLs
+      # saem dele, não dos headers. Isto é para o Keycloak confiar nos
+      # X-Forwarded-* do Traefik ao resolver IP do cliente e esquema.
+      KC_PROXY_HEADERS: xforwarded
     depends_on:
       - ldap
       - mariadb
@@ -79,6 +92,14 @@ services:
       # arquivo. Aqui isso é infra/, porque toda invocação no repo lista
       # infra/compose.yml primeiro.
       - "./keycloak/themes/blackice:/opt/keycloak/themes/blackice:ro"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.auth.rule=Host(`${APP_HOST}`) && PathPrefix(`/auth`)"
+      - "traefik.http.routers.auth.entrypoints=web"
+      # priority > 1 é obrigatório: o router `spa` é Host(${APP_HOST}) com
+      # priority=1 e casa com TUDO neste host, inclusive /auth.
+      - "traefik.http.routers.auth.priority=10"
+      - "traefik.http.services.auth.loadbalancer.server.port=8080"
     networks: [blackice]
 
   # Postgres do DCM4CHEE (Archive). Nomeado "arc-db" (conforme Interfaces da
@@ -106,8 +127,8 @@ services:
       POSTGRES_DB: ${DCM4CHEE_DB}
       POSTGRES_USER: ${DCM4CHEE_DB_USER}
       POSTGRES_PASSWORD: ${DCM4CHEE_DB_PASSWORD}
-      AUTH_SERVER_URL: https://keycloak:8843
-      UI_AUTH_SERVER_URL: https://${DCM4CHEE_HOST}:8843
+      AUTH_SERVER_URL: https://keycloak:8843/auth
+      UI_AUTH_SERVER_URL: https://${DCM4CHEE_HOST}:8843/auth
       REALM_NAME: dcm4chee
       WILDFLY_CHOWN: /storage
       WILDFLY_WAIT_FOR: "ldap:389 arc-db:5432 keycloak:8843"

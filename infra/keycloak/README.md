@@ -22,7 +22,10 @@ O cert do Keycloak é self-signed e **sem SAN** para `localhost`; a verificaçã
 hostname do `kcadm` rejeita. Usamos a **Admin REST via `curl -k`** (ignora
 cert/hostname), executada **dentro do container** `keycloak`, obtendo o token admin
 das vars `KEYCLOAK_ADMIN`/`KEYCLOAK_ADMIN_PASSWORD` do próprio container (nunca
-impressas). Keycloak roda só em **HTTPS na 8843**.
+impressas). O Keycloak serve **HTTP em :8080 na rede interna** (atrás do Traefik, em
+`http://${APP_HOST}/auth`) **e HTTPS na 8843** (backchannel do Archive e Admin
+REST). O root path do servidor é `/auth` — vale para os dois listeners, e por
+isso a base da Admin REST no script é `https://localhost:8843/auth`.
 
 ## Roles (gate humano) — decisão registrada
 

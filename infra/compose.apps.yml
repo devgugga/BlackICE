@@ -5,13 +5,17 @@ services:
       dockerfile: src/main/docker/Dockerfile.jvm
     environment:
       # Split frontchannel/backchannel (ver Task 6 no AGENTS/brief): dentro da
-      # rede docker "keycloak:8843" NÃO é alcançável pelo browser, então essa
+      # rede docker "keycloak:8080" NÃO é alcançável pelo browser, então essa
       # URL é só para o Quarkus falar com o Keycloak em backchannel (token
-      # exchange, discovery). O discovery document devolvido pelo Keycloak
-      # (KC_HOSTNAME=https://${DCM4CHEE_HOST}:8843 +
-      # KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true) já resolve o authorization_endpoint
-      # para o host voltado ao browser (localhost:8843) automaticamente.
-      QUARKUS_OIDC_AUTH_SERVER_URL: https://keycloak:8843/realms/dcm4chee
+      # exchange, discovery) — plain HTTP, sem TLS no caminho, same-origin
+      # (spec 2026-08-07). O discovery document devolvido pelo Keycloak usa
+      # KC_HOSTNAME=http://${APP_HOST}/auth (fixo) para as URLs voltadas ao
+      # browser, então o authorization_endpoint aponta para a origem do
+      # Traefik (${APP_HOST}/auth), não para este endereço interno.
+      # KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true é o que faz o backchannel em si
+      # resolver dinamicamente para o endereço que o chamador usou (aqui,
+      # keycloak:8080), em vez de herdar o KC_HOSTNAME fixo.
+      QUARKUS_OIDC_AUTH_SERVER_URL: http://keycloak:8080/auth/realms/dcm4chee
       QUARKUS_OIDC_SECRET: ${QUARKUS_OIDC_SECRET}
       QUARKUS_OIDC_ENCRYPTION_SECRET: ${QUARKUS_OIDC_ENCRYPTION_SECRET:?defina QUARKUS_OIDC_ENCRYPTION_SECRET em infra/.env}
     labels:

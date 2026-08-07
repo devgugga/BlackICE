@@ -29,7 +29,7 @@ $DC exec -T \
   -e REALM="dcm4chee" \
   keycloak sh <<'INNER'
 set -eu
-KB=https://localhost:8843
+KB=https://localhost:8843/auth
 api="$KB/admin/realms/$REALM"
 
 TOK=$(curl -k -s -X POST "$KB/realms/master/protocol/openid-connect/token" \
