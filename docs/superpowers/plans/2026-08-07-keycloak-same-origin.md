@@ -205,6 +205,10 @@ Em `infra/compose.apps.yml`, serviço `backend`, substituir a linha 14:
       QUARKUS_OIDC_AUTH_SERVER_URL: http://keycloak:8080/auth/realms/dcm4chee
 ```
 
+**E reescrever o bloco de comentário das linhas 6-13**, que descreve o mecanismo antigo e fica falso com esta mudança: ele cita `keycloak:8843`, `KC_HOSTNAME=https://${DCM4CHEE_HOST}:8843` e um `authorization_endpoint` resolvendo para `localhost:8843`. Preserve o *motivo* de a variável existir (o split frontchannel/backchannel continua sendo a razão) e corrija os detalhes: o backend alcança o Keycloak em `http://keycloak:8080/auth` na rede interna, sem TLS; as URLs voltadas ao browser saem do `KC_HOSTNAME` fixo, então o `authorization_endpoint` do discovery aponta para a origem do Traefik; e `KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true` é o que mantém o backchannel resolvendo pelo endereço de quem chamou.
+
+> Comentário que descreve o transporte errado é pior que comentário nenhum, e este fica exatamente em cima do mecanismo que a tarefa muda.
+
 - [ ] **Step 7: Apagar o workaround de TLS no backend**
 
 Em `apps/backend/src/main/resources/application.properties`, substituir as linhas 8-17 (o bloco de comentário `ATENCAO - DEV/TEST APENAS` inteiro, a `auth-server-url` e a `tls.verification`) por:
@@ -238,11 +242,20 @@ KB=https://localhost:8843/auth
 
 - [ ] **Step 9: Validar a sintaxe do Compose e subir**
 
-De `infra/`:
+> **Armadilha verificada em 2026-08-07.** `src/main/docker/Dockerfile.jvm` copia o `target/` **já construído** — ele não compila nada. Mudar `application.properties` e rodar `up -d --build` **não** coloca a mudança na imagem: o Maven nunca roda, e o layer do `target/` pode nem invalidar o cache. É preciso reconstruir o jar primeiro e forçar o build da imagem.
+
+De `apps/backend/`:
+
+```bash
+./mvnw package -DskipTests
+```
+
+Depois, de `infra/`:
 
 ```bash
 docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml config --quiet
-docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml up -d --build
+docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml build --no-cache backend
+docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml up -d
 ```
 
 Expected: `config --quiet` sem saída (sucesso); `up` recria `keycloak`, `arc` e `backend`. O Keycloak leva ~25s para responder.
@@ -504,10 +517,19 @@ Em `infra/compose.apps.yml`:
       QUARKUS_OIDC_AUTH_SERVER_URL: http://keycloak:8080/auth/realms/blackice
 ```
 
-Depois, de `infra/`:
+Depois, **reconstrua o jar antes da imagem** (mesma armadilha da Task 1 Step 9 — o Dockerfile copia `target/` pré-construído e não compila):
+
+De `apps/backend/`:
 
 ```bash
-docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml up -d --build backend
+./mvnw package -DskipTests
+```
+
+De `infra/`:
+
+```bash
+docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml build --no-cache backend
+docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml up -d backend
 ```
 
 - [ ] **Step 8: Rodar as asserções para vê-las passar**
