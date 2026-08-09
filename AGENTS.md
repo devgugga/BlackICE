@@ -68,6 +68,13 @@ imagens, execute a atualização semântica `--update` pela skill e revise o dif
 hooks Git oficiais do Graphify (verificado até 0.9.32) se desativam nesse contexto, mesmo quando
 `graphify hook status` informa que estão instalados.
 
+Em checkout normal, o hook pós-commit atualiza `graphify-out/` depois de um
+commit de código; o worktree fica sujo de propósito. Como esses artefatos são
+versionados, revise-os e faça um **segundo commit focado** para sincronizar o
+grafo. O hook ignora um commit que altere somente `graphify-out/`; não o
+desinstale nem tente ocultar esse diff sem autorização humana. Consulte
+`docs/architecture/graphify.md#fluxo-de-commits-com-o-hook`.
+
 ## Invariantes de DICOM (resumo — detalhes em `docs/domains/dicom/`)
 
 Estas são regras de **correção de negócio**. Violá-las corrompe dados de paciente.

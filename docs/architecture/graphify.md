@@ -93,6 +93,28 @@ Confira a instalação do hook quando precisar da manutenção automática de c�
 graphify hook status
 ```
 
+### Fluxo de commits com o hook
+
+Em checkout normal, `graphify hook install` instala um hook pós-commit que
+reconstrói a camada AST após commits de código. Por isso, alterações em
+`graphify-out/` depois do commit são comportamento esperado, não uma falha do
+Git nem artefatos a descartar.
+
+Como os artefatos portáveis de `graphify-out/` são versionados neste projeto, o
+protocolo é:
+
+1. Faça o commit da mudança de código.
+2. Aguarde o hook terminar, revise o diff de `graphify-out/` e valide que ele
+   representa a mudança.
+3. Faça um segundo commit, focado apenas na sincronização do grafo.
+
+O hook do Graphify ignora commits que alteram somente `graphify-out/`, evitando
+um loop de reconstrução. Ele continua ignorando documentação, configuração e
+imagens: para essas mudanças, ou para uma alteração mista, rode a atualização
+incremental pela skill antes de criar o commit de sincronização. Não desinstale
+ou altere o hook para obter um worktree limpo sem decisão explícita do humano;
+isso abandona o fluxo oficial de grafo compartilhado.
+
 ### Workarounds project-scoped do Graphify
 
 **Revalidados contra `0.9.32` em 2026-08-09: nenhum foi corrigido upstream, os

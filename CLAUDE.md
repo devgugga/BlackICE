@@ -39,3 +39,4 @@ Guidance (optional):
 - You may instead use other appropriate approaches, including direct source browsing, targeted search, and project documentation.
 - If graphify-out/wiki/index.md exists, consider it for broad navigation; consider GRAPH_REPORT.md for broad architecture review or when focused graph queries are insufficient.
 - After modifying code, consider `graphify update .` to keep the graph current (AST-only, no API cost).
+- A post-commit hook intentionally changes tracked `graphify-out/` artifacts after code commits; review and commit that graph synchronization separately. Follow the canonical protocol in `docs/architecture/graphify.md#fluxo-de-commits-com-o-hook`; do not disable the hook just to keep the worktree clean.

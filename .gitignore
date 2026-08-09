@@ -12,6 +12,9 @@ apps/backend/target/
 # isolated implementation worktrees
 .worktrees/
 
+# Serena keeps per-workspace caches, memories and local project settings.
+.serena/
+
 # editor (apenas .vscode do root; apps/frontend/.vscode é do template Vite)
 /.vscode/
 
