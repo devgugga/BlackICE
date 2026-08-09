@@ -1,9 +1,14 @@
 [CmdletBinding()]
 param(
-  [string]$EnvFile = (Join-Path $PSScriptRoot '..\\.env')
+  [string]$EnvFile
 )
 
 $ErrorActionPreference = 'Stop'
+$root = (Resolve-Path (Join-Path $PSScriptRoot '..\\..')).Path
+
+if ([string]::IsNullOrWhiteSpace($EnvFile)) {
+  $EnvFile = Join-Path $root 'infra/.env'
+}
 
 if (-not (Test-Path -LiteralPath $EnvFile -PathType Leaf)) {
   throw 'Arquivo de ambiente não encontrado.'
@@ -37,9 +42,9 @@ if (-not (Test-Path -LiteralPath $containerScript -PathType Leaf)) {
 
 Get-Content -LiteralPath $containerScript -Raw |
   & docker compose `
-    -f 'infra/compose.yml' `
-    -f 'infra/dcm4chee/compose.yml' `
-    -f 'infra/compose.apps.yml' `
+    -f (Join-Path $root 'infra/compose.yml') `
+    -f (Join-Path $root 'infra/dcm4chee/compose.yml') `
+    -f (Join-Path $root 'infra/compose.apps.yml') `
     exec -T `
     -e "QUARKUS_OIDC_SECRET=$($environment['QUARKUS_OIDC_SECRET'])" `
     -e "APP_ORIGIN=http://$($environment['APP_HOST'])" `
