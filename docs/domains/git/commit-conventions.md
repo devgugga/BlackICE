@@ -23,9 +23,14 @@ Este documento é a fonte de verdade para agentes que criam commits locais.
 
 1. Execute as validações relevantes e registre somente resultados comprovados.
 2. Antes de commitar arquivos versionados, atualize o Graphify conforme
-   `AGENTS.md` e `docs/architecture/graphify.md`, revise o diff de
-   `graphify-out/` e inclua apenas os artefatos portáveis que representem a
-   mudança.
+   `AGENTS.md` e `docs/architecture/graphify.md` e revise o diff de
+   `graphify-out/`.
+3. **Não julgue quais artefatos do Graphify são "portáveis".** Essa decisão já
+   está tomada no `.gitignore`: o que é estado local está ignorado, e todo
+   arquivo de `graphify-out/` que o Git rastreia é portável por definição.
+   Inclua **todos** os arquivos rastreados que a atualização modificou; na
+   dúvida, confirme com `git ls-files graphify-out/`. Nunca deixe um arquivo
+   rastreado modificado para trás — ele contamina o próximo commit.
 
 ## Mensagem do commit
 
@@ -69,6 +74,10 @@ Regras de conteúdo:
 - `Resultado` é um parágrafo corrido — o estado em que o repositório ficou e o
   que passa a ser possível a seguir. Não repita os bullets.
 - Negrito apenas em componentes e versões (`**Traefik v3.1**`), não para ênfase.
+- **Quebre toda linha em 76 colunas**, inclusive dentro de bullets e do
+  parágrafo de `Resultado`. Continuação de bullet indenta 2 espaços. Git não
+  reflui o corpo: uma linha longa vira uma linha longa em `git log`, no
+  `git blame` e em qualquer forge.
 
 ### Exemplo canônico
 
@@ -78,8 +87,8 @@ Regras de conteúdo:
 ### ✅ Novas funcionalidades
 
 * Scaffolding do monorepo com diretórios `backend/`, `frontend/` e `infra/`.
-* Orquestração da infraestrutura via `docker-compose.yml` com **Traefik v3.1**
-  e **PostgreSQL 17**.
+* Orquestração da infraestrutura via `docker-compose.yml` com
+  **Traefik v3.1** e **PostgreSQL 17**.
 
 ---
 
@@ -89,27 +98,29 @@ Regras de conteúdo:
   (same-origin).
 * **Traefik v3.1** como reverse proxy centralizado (porta 80, dashboard DEV
   em `:8081`).
-* **PostgreSQL 17** dedicado aos dados do produto Quarkus, isolado do archive
-  DCM4CHEE.
+* **PostgreSQL 17** dedicado aos dados do produto Quarkus, isolado do
+  archive DCM4CHEE.
 * Persistência via volume nomeado `product-db-data`.
 
 ---
 
 ### 🧼 Boas práticas e validações
 
-* `.gitignore` para artefatos de build (`node_modules/`, `dist/`, `target/`) e
-  segredos (`infra/.env`).
+* `.gitignore` para artefatos de build (`node_modules/`, `dist/`, `target/`)
+  e segredos (`infra/.env`).
 * `.env.example` como template seguro (`APP_HOST`, credenciais de produto,
   OIDC secret).
-* Healthcheck do PostgreSQL para garantir disponibilidade antes dos dependentes.
+* Healthcheck do PostgreSQL para garantir disponibilidade antes dos
+  dependentes.
 
 ---
 
 ### 🚀 Resultado
 
-A fundação de infraestrutura do BlackICE está pronta: rede Docker `blackice`,
-Traefik como borda, PostgreSQL do produto isolado e gestão de segredos via
-`.env`. Pronto para a integração dos serviços backend e frontend.
+A fundação de infraestrutura do BlackICE está pronta: rede Docker
+`blackice`, Traefik como borda, PostgreSQL do produto isolado e gestão de
+segredos via `.env`. Pronto para a integração dos serviços backend e
+frontend.
 ```
 
 ### Commit de sincronização do grafo
