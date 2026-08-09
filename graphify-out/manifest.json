@@ -30,9 +30,9 @@
     "semantic_hash": "42f3854edd48c8cd22c8bef246810290"
   },
   "apps/frontend/e2e/keycloak-login.spec.ts": {
-    "mtime": 1786299078.796763,
+    "mtime": 1786302692.6530964,
     "ast_hash": "7358c81caf66012d3b9597e2117120c0",
-    "semantic_hash": ""
+    "semantic_hash": "7358c81caf66012d3b9597e2117120c0"
   },
   "apps/frontend/package.json": {
     "mtime": 1785167077.0384023,
@@ -100,89 +100,89 @@
     "semantic_hash": "f6e21fcec8039563dd764edd5284b4ca"
   },
   "infra/keycloak/configure-blackice.sh": {
-    "mtime": 1786130967.7003849,
+    "mtime": 1786302692.6661015,
     "ast_hash": "6414b3919bca26dd12cdc03146f4ae97",
-    "semantic_hash": ""
+    "semantic_hash": "6414b3919bca26dd12cdc03146f4ae97"
   },
   ".agents/skills/graphify/SKILL.md": {
-    "mtime": 1786301837.3958397,
+    "mtime": 1786304984.8775253,
     "ast_hash": "ad39ff64c07b47f59fba57986381982c",
-    "semantic_hash": ""
+    "semantic_hash": "ad39ff64c07b47f59fba57986381982c"
   },
   ".agents/skills/graphify/references/add-watch.md": {
-    "mtime": 1786302284.0278094,
-    "ast_hash": "58c888b5ec0689a886543dd765c1acc9",
-    "semantic_hash": ""
+    "mtime": 1785758773.92404,
+    "ast_hash": "d59d027fe449f06aa03905a01184e779",
+    "semantic_hash": "d59d027fe449f06aa03905a01184e779"
   },
   ".agents/skills/graphify/references/exports.md": {
-    "mtime": 1786302284.0288079,
-    "ast_hash": "ecc0c36852fee4ba6280cdf2b9149039",
-    "semantic_hash": ""
+    "mtime": 1785758773.9250402,
+    "ast_hash": "9da2a2152e60a22f07f05fed5158f287",
+    "semantic_hash": "9da2a2152e60a22f07f05fed5158f287"
   },
   ".agents/skills/graphify/references/extraction-spec.md": {
-    "mtime": 1786301837.3968396,
+    "mtime": 1786304984.8775253,
     "ast_hash": "a67407cf6ac36de1f5325a5ec9091c37",
-    "semantic_hash": ""
+    "semantic_hash": "a67407cf6ac36de1f5325a5ec9091c37"
   },
   ".agents/skills/graphify/references/github-and-merge.md": {
-    "mtime": 1786302284.0298083,
-    "ast_hash": "aa0e7ef186392cad062e60483ca7dbbf",
-    "semantic_hash": ""
+    "mtime": 1785758773.941589,
+    "ast_hash": "cde13df085e4c492aeb7ba298a996d0d",
+    "semantic_hash": "cde13df085e4c492aeb7ba298a996d0d"
   },
   ".agents/skills/graphify/references/hooks.md": {
-    "mtime": 1786302284.0298083,
-    "ast_hash": "94a1d96efdc6c6d21b4287dc950a9c17",
-    "semantic_hash": ""
+    "mtime": 1785758773.942589,
+    "ast_hash": "aea24fe86e18fe8aeb304403032cfce7",
+    "semantic_hash": "aea24fe86e18fe8aeb304403032cfce7"
   },
   ".agents/skills/graphify/references/query.md": {
-    "mtime": 1786302284.0308082,
-    "ast_hash": "852ef14334d60a75ae666ea103d4c4f0",
-    "semantic_hash": ""
+    "mtime": 1785758773.942589,
+    "ast_hash": "3c46f8ad006874260614ed8657d02307",
+    "semantic_hash": "3c46f8ad006874260614ed8657d02307"
   },
   ".agents/skills/graphify/references/transcribe.md": {
-    "mtime": 1786302284.0318127,
-    "ast_hash": "5c6a9af05d12b5797b2fa8b9493dcc37",
-    "semantic_hash": ""
+    "mtime": 1785758773.9435892,
+    "ast_hash": "67b6a5fa6c0974e18f60db9f8932fbd8",
+    "semantic_hash": "67b6a5fa6c0974e18f60db9f8932fbd8"
   },
   ".agents/skills/graphify/references/update.md": {
-    "mtime": 1786301837.3968396,
+    "mtime": 1786304984.878911,
     "ast_hash": "1401b5a43349b5168df02cbb95955d40",
-    "semantic_hash": ""
+    "semantic_hash": "1401b5a43349b5168df02cbb95955d40"
   },
   ".claude/agents/dicom/dicom-domain-reviewer.md": {
     "mtime": 1784766494.701092,
     "ast_hash": "933e14111bed30a1d3d73c3cde14ed9c",
-    "semantic_hash": ""
+    "semantic_hash": "933e14111bed30a1d3d73c3cde14ed9c"
   },
   ".claude/agents/quarkus/quarkus-backend.md": {
     "mtime": 1786236932.7107763,
     "ast_hash": "ccadc6b3f94cf90e1ad8061e4e73fb70",
-    "semantic_hash": ""
+    "semantic_hash": "ccadc6b3f94cf90e1ad8061e4e73fb70"
   },
   ".claude/agents/vue/dicom-viewer-frontend.md": {
     "mtime": 1784766500.4574525,
     "ast_hash": "1ab45d0c1df2c602eb00f9874e2a0417",
-    "semantic_hash": ""
+    "semantic_hash": "1ab45d0c1df2c602eb00f9874e2a0417"
   },
   ".claude/skills/README.md": {
     "mtime": 1784766572.169518,
     "ast_hash": "b3dfde8ae75db1039002d01ddf1bd333",
-    "semantic_hash": ""
+    "semantic_hash": "b3dfde8ae75db1039002d01ddf1bd333"
   },
   "AGENTS.md": {
-    "mtime": 1786301889.1385164,
-    "ast_hash": "f68c5d9e473367d86f26db7bb86c8b68",
-    "semantic_hash": ""
+    "mtime": 1786305102.0900202,
+    "ast_hash": "717d5455b5a9ef97b941ccb7755ee0e9",
+    "semantic_hash": "717d5455b5a9ef97b941ccb7755ee0e9"
   },
   "CLAUDE.md": {
-    "mtime": 1786301878.598405,
-    "ast_hash": "befb3b235b83fa2adc944d97a89d88b2",
+    "mtime": 1786305978.971936,
+    "ast_hash": "fa4edd290da2f356bb8ad2e380c6154f",
     "semantic_hash": ""
   },
   "README.md": {
     "mtime": 1785241447.5567565,
     "ast_hash": "bad9fecccc4965dc9df5200bb8ac32bf",
-    "semantic_hash": ""
+    "semantic_hash": "bad9fecccc4965dc9df5200bb8ac32bf"
   },
   "apps/backend/README.md": {
     "mtime": 1785241447.5577462,
@@ -190,9 +190,9 @@
     "semantic_hash": "3137e59022d6ea534093b30b5ad9c889"
   },
   "apps/frontend/README.md": {
-    "mtime": 1786130507.2127798,
+    "mtime": 1786302692.6524773,
     "ast_hash": "55130e64e858d91354b74169397b4af1",
-    "semantic_hash": ""
+    "semantic_hash": "55130e64e858d91354b74169397b4af1"
   },
   "apps/frontend/index.html": {
     "mtime": 1784999802.5213826,
@@ -205,24 +205,24 @@
     "semantic_hash": "7e8d9981e9b676443376b6985026b7eb"
   },
   "docs/architecture/graphify.md": {
-    "mtime": 1786302257.5349274,
+    "mtime": 1786302692.6541018,
     "ast_hash": "03cd3d3b7f2ca9900d42ffd0b291b72a",
-    "semantic_hash": ""
+    "semantic_hash": "03cd3d3b7f2ca9900d42ffd0b291b72a"
   },
   "docs/architecture/project-structure.md": {
     "mtime": 1785241447.5632784,
     "ast_hash": "f9c8c97ba2bb478170514e922815f2e5",
-    "semantic_hash": ""
+    "semantic_hash": "f9c8c97ba2bb478170514e922815f2e5"
   },
   "docs/domains/README.md": {
-    "mtime": 1784766292.063601,
-    "ast_hash": "da9ad6ffa11f1200522e33f17643b8e5",
-    "semantic_hash": ""
+    "mtime": 1786304859.0666814,
+    "ast_hash": "5ffa84bf5cb4c788146133afbe2f5948",
+    "semantic_hash": "5ffa84bf5cb4c788146133afbe2f5948"
   },
   "docs/domains/dicom/README.md": {
     "mtime": 1784766301.9661531,
     "ast_hash": "4a5d6109e6a9e6448f6c83917bfe53d7",
-    "semantic_hash": ""
+    "semantic_hash": "4a5d6109e6a9e6448f6c83917bfe53d7"
   },
   "docs/domains/dicom/dicomweb.md": {
     "mtime": 1784999805.9418573,
@@ -232,7 +232,7 @@
   "docs/domains/dicom/semantics.md": {
     "mtime": 1784766327.6326904,
     "ast_hash": "02a40ba43ef63fb7dccb63a7b8c627af",
-    "semantic_hash": ""
+    "semantic_hash": "02a40ba43ef63fb7dccb63a7b8c627af"
   },
   "docs/domains/quarkus/README.md": {
     "mtime": 1784999805.1078503,
@@ -267,12 +267,12 @@
   "docs/superpowers/plans/2026-07-23-codex-subagents.md": {
     "mtime": 1784809993.3001108,
     "ast_hash": "77ab682e152bbc0f0a3e639c53f85ffc",
-    "semantic_hash": ""
+    "semantic_hash": "77ab682e152bbc0f0a3e639c53f85ffc"
   },
   "docs/superpowers/plans/2026-07-23-dcm4chee-5-34-3.md": {
     "mtime": 1784810811.1082952,
     "ast_hash": "cede95320bd18b1f2aa8e895297e9e63",
-    "semantic_hash": ""
+    "semantic_hash": "cede95320bd18b1f2aa8e895297e9e63"
   },
   "docs/superpowers/plans/2026-07-23-plano-0-fundacao.md": {
     "mtime": 1784937659.2780755,
@@ -292,7 +292,7 @@
   "docs/superpowers/plans/2026-07-27-graphify-project-integration.md": {
     "mtime": 1785238953.4618223,
     "ast_hash": "2f16f1a859ec382601c7f27fe7b511e5",
-    "semantic_hash": ""
+    "semantic_hash": "2f16f1a859ec382601c7f27fe7b511e5"
   },
   "docs/superpowers/plans/2026-07-27-keycloak-input-focus-outline.md": {
     "mtime": 1785167077.0424056,
@@ -307,12 +307,12 @@
   "docs/superpowers/specs/2026-07-22-blackice-pacs-decisions.md": {
     "mtime": 1784810809.675844,
     "ast_hash": "364a16a8d38a09db7c7e8c1ae8559f95",
-    "semantic_hash": ""
+    "semantic_hash": "364a16a8d38a09db7c7e8c1ae8559f95"
   },
   "docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md": {
     "mtime": 1784820243.6691477,
     "ast_hash": "56fadf33e5c7ae78506f93e3bfd93b70",
-    "semantic_hash": ""
+    "semantic_hash": "56fadf33e5c7ae78506f93e3bfd93b70"
   },
   "docs/superpowers/specs/2026-07-25-project-structure-design.md": {
     "mtime": 1784999801.8864174,
@@ -327,7 +327,7 @@
   "docs/superpowers/specs/2026-07-27-graphify-project-integration-design.md": {
     "mtime": 1785238953.4628224,
     "ast_hash": "ec36b6d69001d6cfddf737fa4001eaa7",
-    "semantic_hash": ""
+    "semantic_hash": "ec36b6d69001d6cfddf737fa4001eaa7"
   },
   "docs/superpowers/specs/2026-07-27-keycloak-input-focus-outline-design.md": {
     "mtime": 1785167077.0454082,
@@ -345,9 +345,9 @@
     "semantic_hash": "07fea77b905e449e092cd85500238781"
   },
   "infra/compose.apps.yml": {
-    "mtime": 1786130404.090489,
+    "mtime": 1786302692.6631024,
     "ast_hash": "c2950faf4f22c3a469271b20a7a8431c",
-    "semantic_hash": ""
+    "semantic_hash": "c2950faf4f22c3a469271b20a7a8431c"
   },
   "infra/compose.yml": {
     "mtime": 1784999804.6250777,
@@ -355,19 +355,19 @@
     "semantic_hash": "732dc6fc09f33a2bf3b2617bf440aa4e"
   },
   "infra/dcm4chee/README.md": {
-    "mtime": 1786298860.6296363,
+    "mtime": 1786302692.6641016,
     "ast_hash": "dcce736eda7f65c70d02e690320fe5fd",
-    "semantic_hash": ""
+    "semantic_hash": "dcce736eda7f65c70d02e690320fe5fd"
   },
   "infra/dcm4chee/compose.yml": {
-    "mtime": 1786298837.6549907,
-    "ast_hash": "e3677b5a1fb8fca242ced61c09c98c70",
-    "semantic_hash": ""
+    "mtime": 1786302692.6651042,
+    "ast_hash": "6a69c83ab5b7ecaa2ab5e93469139af2",
+    "semantic_hash": "6a69c83ab5b7ecaa2ab5e93469139af2"
   },
   "infra/keycloak/README.md": {
-    "mtime": 1786130542.253853,
+    "mtime": 1786302692.6661015,
     "ast_hash": "fa33a68b560b668f06e464f644071b5c",
-    "semantic_hash": ""
+    "semantic_hash": "fa33a68b560b668f06e464f644071b5c"
   },
   "apps/frontend/public/favicon.svg": {
     "mtime": 1784999802.5283818,
@@ -379,30 +379,45 @@
     "ast_hash": "21c7473c592c67dc87223d49892c8f0a",
     "semantic_hash": "21c7473c592c67dc87223d49892c8f0a"
   },
-  ".claude/.headroom_wrap_marker.json": {
-    "mtime": 1786296941.749186,
-    "ast_hash": "c1756668a15cbb1eb46842cbf5e7e85a",
-    "semantic_hash": ""
-  },
-  ".claude/settings.local.json": {
-    "mtime": 1786296941.7644303,
-    "ast_hash": "55555aef62962e1d959e24ed0458564b",
-    "semantic_hash": ""
-  },
   ".serena/project.yml": {
-    "mtime": 1786235860.6137471,
-    "ast_hash": "1468c3034e3119e7dde3758aa5b44643",
-    "semantic_hash": ""
+    "mtime": 1786303071.198407,
+    "ast_hash": "755eca16231842cb80952d018ed4de04",
+    "semantic_hash": "755eca16231842cb80952d018ed4de04"
   },
   "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md": {
-    "mtime": 1786298818.6416404,
-    "ast_hash": "9be7b594602ec8eaec1d14a366ada933",
-    "semantic_hash": ""
+    "mtime": 1786302692.655103,
+    "ast_hash": "de63121f46fd95ade315dc8ee5b83fa6",
+    "semantic_hash": "de63121f46fd95ade315dc8ee5b83fa6"
   },
   "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md": {
-    "mtime": 1786298795.2759416,
-    "ast_hash": "544cad43c584997dad3ae246e7da12d1",
-    "semantic_hash": ""
+    "mtime": 1786302692.655103,
+    "ast_hash": "2dc8d3565fdef6731c30bb9e4cfa59b1",
+    "semantic_hash": "2dc8d3565fdef6731c30bb9e4cfa59b1"
+  },
+  "docs/superpowers/plans/2026-08-09-commit-curator.md": {
+    "mtime": 1786304744.1200235,
+    "ast_hash": "23fecf94629f0de45ea1483d6b0d6fd1",
+    "semantic_hash": "23fecf94629f0de45ea1483d6b0d6fd1"
+  },
+  "docs/superpowers/specs/2026-08-09-commit-curator-design.md": {
+    "mtime": 1786303757.739677,
+    "ast_hash": "a195b5601141d638e1304ad806cb42e6",
+    "semantic_hash": "a195b5601141d638e1304ad806cb42e6"
+  },
+  ".claude/agents/git/commit-curator.md": {
+    "mtime": 1786304859.0656817,
+    "ast_hash": "f04746930681c97876cbf24e7be16469",
+    "semantic_hash": "f04746930681c97876cbf24e7be16469"
+  },
+  "docs/domains/git/README.md": {
+    "mtime": 1786304859.0636795,
+    "ast_hash": "7218545bcf9efdcff27c1acd1b682ed6",
+    "semantic_hash": "7218545bcf9efdcff27c1acd1b682ed6"
+  },
+  "docs/domains/git/commit-conventions.md": {
+    "mtime": 1786304859.0646803,
+    "ast_hash": "9f6d559b154f253666dd9e8b773791a8",
+    "semantic_hash": "9f6d559b154f253666dd9e8b773791a8"
   },
   "graphify-out/memory/query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do.md": {
     "mtime": 1785238953.476098,

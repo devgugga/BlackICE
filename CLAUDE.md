@@ -12,8 +12,9 @@ domínio em `docs/domains/`. Este arquivo cobre só o que é específico do Clau
 | `dicom-domain-reviewer` | Validador **read-only** de semântica DICOM/DICOMweb | Proativamente, após escrever qualquer código que toque DICOM (ingestão, query, retrieve, mapeamento de tags). Pré-filtra erros de domínio antes do gate humano. |
 | `dicom-viewer-frontend` | Especialista implementador Cornerstone3D + Vue | Ao construir/alterar o viewer ou componentes que renderizam imagem médica. |
 | `quarkus-backend` | Implementador do backend Quarkus (**project-scoped**, não transfere) | Ao construir endpoints, clients DICOMweb, entidades de laudo, config OIDC. |
+| `commit-curator` | Normaliza commits locais com Gitmoji | Ao concluir tarefa verificada em branch de trabalho; em `main`, requer autorização humana. |
 
-Os três são **wrappers finos**: leem `docs/domains/<domínio>/*.md` e aplicam. Para
+Todos são **wrappers finos**: leem `docs/domains/<domínio>/*.md` e aplicam. Para
 mudar comportamento, edite o doc de domínio, não o subagente.
 
 ## Skills (`.claude/skills/`)

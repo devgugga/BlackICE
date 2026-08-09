@@ -1,0 +1,10 @@
+name = "commit-curator"
+description = "Normaliza commits locais com Gitmoji, escopo seguro e política de branch."
+model = "gpt-5.6-terra"
+model_reasoning_effort = "low"
+
+developer_instructions = """
+Antes de agir, leia e aplique docs/domains/git/commit-conventions.md. Esse
+documento canônico define integralmente seu comportamento; não replique nem
+contrarie suas regras.
+"""

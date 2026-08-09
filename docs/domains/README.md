@@ -22,6 +22,7 @@ documentos — eles nunca duplicam o conteúdo.
 | `dicom/` | ♻️ sim | Semântica DICOM/DICOMweb (UIDs, hierarquia, STOW/QIDO/WADO). |
 | `vue/` | ♻️ sim | Vue 3 + Vite; viewer Cornerstone3D. |
 | `quarkus/` | ✗ project-scoped | Quarkus + Keycloak/OIDC + client DICOMweb. Não transfere. |
+| `git/` | ♻️ sim | Convenções para commits locais seguros, com Gitmoji e escopo controlado. |
 
 ## Como adicionar um domínio novo
 
