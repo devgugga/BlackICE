@@ -4,6 +4,49 @@
   "graph": {
     "hyperedges": [
       {
+        "id": "commit_curator_domain_pack_pattern",
+        "label": "Commit Curator Domain Pack Pattern",
+        "nodes": [
+          "docs_superpowers_plans_2026_08_09_commit_curator_commit_curator_agent",
+          "docs_superpowers_plans_2026_08_09_commit_curator_git_domain_pack",
+          "docs_superpowers_plans_2026_08_09_commit_curator_branch_commit_policy",
+          "docs_superpowers_plans_2026_08_09_commit_curator_graphify_commit_prerequisite"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md"
+      },
+      {
+        "id": "keycloak_cross_platform_configuration_flow",
+        "label": "Keycloak Cross-platform Configuration Flow",
+        "nodes": [
+          "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_shared_posix_configuration_core",
+          "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_cross_platform_launchers",
+          "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_three_file_compose_configuration",
+          "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_keycloak_admin_rest"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md"
+      },
+      {
+        "id": "manual_dicom_ingest_bff_flow",
+        "label": "Manual DICOM Ingest BFF Flow",
+        "nodes": [
+          "docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow",
+          "docs_superpowers_plans_2026_08_09_manual_dicom_import_frontend_ingest_workflow",
+          "docs_superpowers_plans_2026_08_09_manual_dicom_import_metadata_validation_and_study_grouping",
+          "docs_superpowers_plans_2026_08_09_manual_dicom_import_streaming_stow_rs_gateway",
+          "docs_superpowers_plans_2026_08_09_manual_dicom_import_csrf_and_oidc_protection"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md"
+      },
+      {
         "id": "blackice_product_architecture",
         "label": "BlackICE Product Architecture",
         "nodes": [
@@ -314,7 +357,7 @@
       "source_location": "L1",
       "version": "1.0.0-SNAPSHOT",
       "_origin": "ast",
-      "community": 111,
+      "community": 113,
       "community_name": "Coordenadas Maven backend",
       "norm_label": "dev.blackice:blackice-backend",
       "id": "pkg_dev_blackice_blackice_backend"
@@ -325,7 +368,7 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": "sessionresource.java",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource"
@@ -336,7 +379,7 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": "sessionresource",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource"
@@ -347,7 +390,7 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": "path",
       "id": "path"
@@ -358,7 +401,7 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": "securityidentity",
       "id": "securityidentity"
@@ -369,7 +412,7 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": "jsonwebtoken",
       "id": "jsonwebtoken"
@@ -380,7 +423,7 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": ".me()",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_me"
@@ -391,7 +434,7 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": "response",
       "id": "response"
@@ -402,7 +445,7 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": "get",
       "id": "get"
@@ -413,7 +456,7 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": "permitall",
       "id": "permitall"
@@ -424,7 +467,7 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": ".login()",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource_login"
@@ -435,7 +478,7 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": "authenticated",
       "id": "authenticated"
@@ -446,7 +489,7 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResponse.java",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": "sessionresponse.java",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresponse"
@@ -457,7 +500,7 @@
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResponse.java",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 6,
+      "community": 7,
       "community_name": "Recurso de sess\u00e3o Quarkus",
       "norm_label": "sessionresponse",
       "id": "apps_backend_src_main_java_dev_blackice_features_session_sessionresponse_sessionresponse"
@@ -468,7 +511,7 @@
       "source_file": "apps/backend/src/test/java/dev/blackice/features/session/SessionResourceTest.java",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 21,
+      "community": 23,
       "community_name": "Teste de recurso sess\u00e3o",
       "norm_label": "sessionresourcetest.java",
       "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest"
@@ -479,7 +522,7 @@
       "source_file": "apps/backend/src/test/java/dev/blackice/features/session/SessionResourceTest.java",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 21,
+      "community": 23,
       "community_name": "Teste de recurso sess\u00e3o",
       "norm_label": "sessionresourcetest",
       "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest"
@@ -490,7 +533,7 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 21,
+      "community": 23,
       "community_name": "Teste de recurso sess\u00e3o",
       "norm_label": "quarkustest",
       "id": "quarkustest"
@@ -501,7 +544,7 @@
       "source_file": "apps/backend/src/test/java/dev/blackice/features/session/SessionResourceTest.java",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 21,
+      "community": 23,
       "community_name": "Teste de recurso sess\u00e3o",
       "norm_label": ".anonimo_recebe_401()",
       "id": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest_anonimo_recebe_401"
@@ -512,7 +555,7 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 21,
+      "community": 23,
       "community_name": "Teste de recurso sess\u00e3o",
       "norm_label": "test",
       "id": "test"
@@ -523,7 +566,7 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 19,
+      "community": 20,
       "community_name": "Teste E2E Keycloak",
       "norm_label": "keycloak-login.spec.ts",
       "id": "apps_frontend_e2e_keycloak_login_spec"
@@ -534,7 +577,7 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 19,
+      "community": 20,
       "community_name": "Teste E2E Keycloak",
       "norm_label": "openblackicelogin()",
       "id": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin"
@@ -545,7 +588,7 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 19,
+      "community": 20,
       "community_name": "Teste E2E Keycloak",
       "norm_label": "requiredbox()",
       "id": "apps_frontend_e2e_keycloak_login_spec_requiredbox"
@@ -556,7 +599,7 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 19,
+      "community": 20,
       "community_name": "Teste E2E Keycloak",
       "norm_label": "expectverticallycentered()",
       "id": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered"
@@ -567,7 +610,7 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L70",
       "_origin": "ast",
-      "community": 19,
+      "community": 20,
       "community_name": "Teste E2E Keycloak",
       "norm_label": "screenshotlogincard()",
       "id": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard"
@@ -578,7 +621,7 @@
       "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
       "source_location": "L125",
       "_origin": "ast",
-      "community": 19,
+      "community": 20,
       "community_name": "Teste E2E Keycloak",
       "norm_label": "showinvalidcredentials()",
       "id": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials"
@@ -589,7 +632,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "package.json",
       "id": "apps_frontend_package"
@@ -600,7 +643,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "name",
       "id": "apps_frontend_package_name"
@@ -611,7 +654,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "private",
       "id": "apps_frontend_package_private"
@@ -622,7 +665,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "version",
       "id": "apps_frontend_package_version"
@@ -633,7 +676,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "type",
       "id": "apps_frontend_package_type"
@@ -644,7 +687,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "scripts",
       "id": "apps_frontend_package_scripts"
@@ -655,7 +698,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "dev",
       "id": "apps_frontend_package_scripts_dev"
@@ -666,7 +709,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "build",
       "id": "apps_frontend_package_scripts_build"
@@ -677,7 +720,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "preview",
       "id": "apps_frontend_package_scripts_preview"
@@ -688,7 +731,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "test",
       "id": "apps_frontend_package_scripts_test"
@@ -699,7 +742,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "test:e2e:keycloak",
       "id": "apps_frontend_package_scripts_test_e2e_keycloak"
@@ -710,7 +753,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "dependencies",
       "id": "apps_frontend_package_dependencies"
@@ -721,7 +764,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "vue",
       "id": "apps_frontend_package_dependencies_vue"
@@ -732,7 +775,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "vue",
       "id": "vue"
@@ -743,7 +786,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "vue-router",
       "id": "apps_frontend_package_dependencies_vue_router"
@@ -754,7 +797,7 @@
       "source_file": "apps/frontend/package.json",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 5,
+      "community": 6,
       "community_name": "Depend\u00eancias Vue da aplica\u00e7\u00e3o",
       "norm_label": "vue-router",
       "id": "vue_router"
@@ -952,7 +995,7 @@
       "source_file": "apps/frontend/playwright.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 46,
+      "community": 50,
       "community_name": "Configura\u00e7\u00e3o Playwright",
       "norm_label": "playwright.config.ts",
       "id": "apps_frontend_playwright_config"
@@ -963,7 +1006,7 @@
       "source_file": "apps/frontend/playwright.config.ts",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 46,
+      "community": 50,
       "community_name": "Configura\u00e7\u00e3o Playwright",
       "norm_label": "isci",
       "id": "apps_frontend_playwright_config_isci"
@@ -974,7 +1017,7 @@
       "source_file": "apps/frontend/src/app/App.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 84,
+      "community": 86,
       "community_name": "Aplica\u00e7\u00e3o Vue raiz",
       "norm_label": "app.vue",
       "id": "apps_frontend_src_app_app"
@@ -985,7 +1028,7 @@
       "source_file": "apps/frontend/src/app/router/index.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 48,
+      "community": 52,
       "community_name": "Roteador Vue",
       "norm_label": "index.ts",
       "id": "apps_frontend_src_app_router_index"
@@ -996,7 +1039,7 @@
       "source_file": "apps/frontend/src/app/router/index.ts",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 48,
+      "community": 52,
       "community_name": "Roteador Vue",
       "norm_label": "router",
       "id": "apps_frontend_src_app_router_index_router"
@@ -1007,7 +1050,7 @@
       "source_file": "apps/frontend/src/features/home/HomePage.vue",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 49,
+      "community": 53,
       "community_name": "P\u00e1gina inicial Vue",
       "norm_label": "homepage.vue",
       "id": "apps_frontend_src_features_home_homepage"
@@ -1018,7 +1061,7 @@
       "source_file": "apps/frontend/src/features/home/HomePage.vue",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 49,
+      "community": 53,
       "community_name": "P\u00e1gina inicial Vue",
       "norm_label": "username",
       "id": "apps_frontend_src_features_home_homepage_username"
@@ -1029,7 +1072,7 @@
       "source_file": "apps/frontend/src/features/session/session.api.spec.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 85,
+      "community": 87,
       "community_name": "Teste da API sess\u00e3o",
       "norm_label": "session.api.spec.ts",
       "id": "apps_frontend_src_features_session_session_api_spec"
@@ -1040,7 +1083,7 @@
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 50,
+      "community": 54,
       "community_name": "API de sess\u00e3o Vue",
       "norm_label": "session.api.ts",
       "id": "apps_frontend_src_features_session_session_api"
@@ -1051,7 +1094,7 @@
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 50,
+      "community": 54,
       "community_name": "API de sess\u00e3o Vue",
       "norm_label": "fetchsession()",
       "id": "apps_frontend_src_features_session_session_api_fetchsession"
@@ -1062,7 +1105,7 @@
       "source_file": "apps/frontend/src/features/session/session.types.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 51,
+      "community": 55,
       "community_name": "Tipos de sess\u00e3o Vue",
       "norm_label": "session.types.ts",
       "id": "apps_frontend_src_features_session_session_types"
@@ -1073,7 +1116,7 @@
       "source_file": "apps/frontend/src/features/session/session.types.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 51,
+      "community": 55,
       "community_name": "Tipos de sess\u00e3o Vue",
       "norm_label": "sessionresponse",
       "id": "apps_frontend_src_features_session_session_types_sessionresponse"
@@ -1084,7 +1127,7 @@
       "source_file": "apps/frontend/src/main.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 86,
+      "community": 88,
       "community_name": "Entrada principal Vue",
       "norm_label": "main.ts",
       "id": "apps_frontend_src_main"
@@ -1304,7 +1347,7 @@
       "source_file": "apps/frontend/tsconfig.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 33,
+      "community": 36,
       "community_name": "Refer\u00eancias TypeScript compartilhadas",
       "norm_label": "tsconfig.json",
       "id": "apps_frontend_tsconfig"
@@ -1315,7 +1358,7 @@
       "source_file": "apps/frontend/tsconfig.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 33,
+      "community": 36,
       "community_name": "Refer\u00eancias TypeScript compartilhadas",
       "norm_label": "files",
       "id": "apps_frontend_tsconfig_files"
@@ -1326,7 +1369,7 @@
       "source_file": "apps/frontend/tsconfig.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 33,
+      "community": 36,
       "community_name": "Refer\u00eancias TypeScript compartilhadas",
       "norm_label": "references",
       "id": "apps_frontend_tsconfig_references"
@@ -1557,7 +1600,7 @@
       "source_file": "apps/frontend/vite.config.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 87,
+      "community": 89,
       "community_name": "Configura\u00e7\u00e3o Vite",
       "norm_label": "vite.config.ts",
       "id": "apps_frontend_vite_config"
@@ -1568,7 +1611,7 @@
       "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 29,
       "community_name": "Commit Curator \u2014 Design",
       "norm_label": "2026-08-09-commit-curator.md",
       "id": "docs_superpowers_plans_2026_08_09_commit_curator"
@@ -1579,7 +1622,7 @@
       "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 29,
       "community_name": "Commit Curator \u2014 Design",
       "norm_label": "commit curator implementation plan",
       "id": "docs_superpowers_plans_2026_08_09_commit_curator_commit_curator_implementation_plan"
@@ -1590,7 +1633,7 @@
       "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 9,
+      "community": 29,
       "community_name": "Commit Curator \u2014 Design",
       "norm_label": "global constraints",
       "id": "docs_superpowers_plans_2026_08_09_commit_curator_global_constraints"
@@ -1601,7 +1644,7 @@
       "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 9,
+      "community": 29,
       "community_name": "Commit Curator \u2014 Design",
       "norm_label": "task 1: domain pack e wrappers de commit",
       "id": "docs_superpowers_plans_2026_08_09_commit_curator_task_1_domain_pack_e_wrappers_de_commit"
@@ -1612,7 +1655,7 @@
       "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
+      "community": 30,
       "community_name": "Bootstrap do Keycloak no Windows Implementation Plan",
       "norm_label": "2026-08-09-keycloak-windows-bootstrap.md",
       "id": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap"
@@ -1623,7 +1666,7 @@
       "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
+      "community": 30,
       "community_name": "Bootstrap do Keycloak no Windows Implementation Plan",
       "norm_label": "bootstrap do keycloak no windows implementation plan",
       "id": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_bootstrap_do_keycloak_no_windows_implementation_plan"
@@ -1634,7 +1677,7 @@
       "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 27,
+      "community": 30,
       "community_name": "Bootstrap do Keycloak no Windows Implementation Plan",
       "norm_label": "global constraints",
       "id": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_global_constraints"
@@ -1645,7 +1688,7 @@
       "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 27,
+      "community": 30,
       "community_name": "Bootstrap do Keycloak no Windows Implementation Plan",
       "norm_label": "task 1: launchers multiplataforma com nucleo unico",
       "id": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_task_1_launchers_multiplataforma_com_n\u00facleo_\u00fanico"
@@ -1656,20 +1699,24 @@
       "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 9,
+      "community": 5,
       "community_name": "Commit Curator \u2014 Design",
       "norm_label": "2026-08-09-commit-curator-design.md",
       "id": "docs_superpowers_specs_2026_08_09_commit_curator_design"
     },
     {
-      "label": "Commit Curator \u2014 Design",
+      "label": "Commit Curator Design",
       "file_type": "document",
       "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
-      "source_location": "L1",
+      "source_location": null,
       "_origin": "ast",
-      "community": 9,
+      "community": 5,
       "community_name": "Commit Curator \u2014 Design",
-      "norm_label": "commit curator \u2014 design",
+      "norm_label": "commit curator design",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
       "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_commit_curator_design"
     },
     {
@@ -1678,7 +1725,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 9,
+      "community": 5,
       "community_name": "Commit Curator \u2014 Design",
       "norm_label": "objetivo",
       "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_objetivo"
@@ -1689,7 +1736,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 9,
+      "community": 5,
       "community_name": "Commit Curator \u2014 Design",
       "norm_label": "arquitetura",
       "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_arquitetura"
@@ -1700,7 +1747,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 9,
+      "community": 5,
       "community_name": "Commit Curator \u2014 Design",
       "norm_label": "comportamento",
       "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_comportamento"
@@ -1711,7 +1758,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 9,
+      "community": 5,
       "community_name": "Commit Curator \u2014 Design",
       "norm_label": "modelos",
       "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_modelos"
@@ -1722,7 +1769,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
       "source_location": "L52",
       "_origin": "ast",
-      "community": 9,
+      "community": 5,
       "community_name": "Commit Curator \u2014 Design",
       "norm_label": "limites",
       "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_limites"
@@ -1733,7 +1780,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
       "source_location": "L58",
       "_origin": "ast",
-      "community": 9,
+      "community": 5,
       "community_name": "Commit Curator \u2014 Design",
       "norm_label": "validacao",
       "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_valida\u00e7\u00e3o"
@@ -1744,7 +1791,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-keycloak-windows-bootstrap-design.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 13,
+      "community": 14,
       "community_name": "Bootstrap do Keycloak no Windows \u2014 Design",
       "norm_label": "2026-08-09-keycloak-windows-bootstrap-design.md",
       "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design"
@@ -1755,7 +1802,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-keycloak-windows-bootstrap-design.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 13,
+      "community": 14,
       "community_name": "Bootstrap do Keycloak no Windows \u2014 Design",
       "norm_label": "bootstrap do keycloak no windows \u2014 design",
       "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_bootstrap_do_keycloak_no_windows_design"
@@ -1766,7 +1813,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-keycloak-windows-bootstrap-design.md",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 13,
+      "community": 14,
       "community_name": "Bootstrap do Keycloak no Windows \u2014 Design",
       "norm_label": "objetivo",
       "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_objetivo"
@@ -1777,7 +1824,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-keycloak-windows-bootstrap-design.md",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 13,
+      "community": 14,
       "community_name": "Bootstrap do Keycloak no Windows \u2014 Design",
       "norm_label": "decisao",
       "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_decis\u00e3o"
@@ -1788,7 +1835,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-keycloak-windows-bootstrap-design.md",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 13,
+      "community": 14,
       "community_name": "Bootstrap do Keycloak no Windows \u2014 Design",
       "norm_label": "fluxo",
       "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_fluxo"
@@ -1799,7 +1846,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-keycloak-windows-bootstrap-design.md",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 13,
+      "community": 14,
       "community_name": "Bootstrap do Keycloak no Windows \u2014 Design",
       "norm_label": "erros e seguranca",
       "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_erros_e_seguran\u00e7a"
@@ -1810,7 +1857,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-keycloak-windows-bootstrap-design.md",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 13,
+      "community": 14,
       "community_name": "Bootstrap do Keycloak no Windows \u2014 Design",
       "norm_label": "testes",
       "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_testes"
@@ -1821,7 +1868,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-keycloak-windows-bootstrap-design.md",
       "source_location": "L47",
       "_origin": "ast",
-      "community": 13,
+      "community": 14,
       "community_name": "Bootstrap do Keycloak no Windows \u2014 Design",
       "norm_label": "fora de escopo",
       "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_fora_de_escopo"
@@ -1832,7 +1879,7 @@
       "source_file": "graphify-out/memory/query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 22,
+      "community": 24,
       "community_name": "Consulta Graphify sess\u00e3o",
       "norm_label": "query_20260727_184232_como_o_frontend_vue_obtem_a_sessao_autenticada_do.md",
       "id": "graphify_out_memory_query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do"
@@ -1843,7 +1890,7 @@
       "source_file": "graphify-out/memory/query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do.md",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 22,
+      "community": 24,
       "community_name": "Consulta Graphify sess\u00e3o",
       "norm_label": "q: como o frontend vue obtem a sessao autenticada do backend?",
       "id": "graphify_out_memory_query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do_q_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do_backend"
@@ -1854,7 +1901,7 @@
       "source_file": "graphify-out/memory/query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do.md",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 22,
+      "community": 24,
       "community_name": "Consulta Graphify sess\u00e3o",
       "norm_label": "answer",
       "id": "graphify_out_memory_query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do_answer"
@@ -1865,7 +1912,7 @@
       "source_file": "graphify-out/memory/query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do.md",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 22,
+      "community": 24,
       "community_name": "Consulta Graphify sess\u00e3o",
       "norm_label": "outcome",
       "id": "graphify_out_memory_query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do_outcome"
@@ -1876,7 +1923,7 @@
       "source_file": "graphify-out/memory/query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do.md",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 22,
+      "community": 24,
       "community_name": "Consulta Graphify sess\u00e3o",
       "norm_label": "source nodes",
       "id": "graphify_out_memory_query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do_source_nodes"
@@ -1887,7 +1934,7 @@
       "source_file": "graphify-out/memory/query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 23,
+      "community": 25,
       "community_name": "Consulta Graphify DICOM",
       "norm_label": "query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid.md",
       "id": "graphify_out_memory_query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid"
@@ -1898,7 +1945,7 @@
       "source_file": "graphify-out/memory/query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid.md",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 23,
+      "community": 25,
       "community_name": "Consulta Graphify DICOM",
       "norm_label": "q: quais regras do blackice governam studyinstanceuid e os verbos dicomweb?",
       "id": "graphify_out_memory_query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid_q_quais_regras_do_blackice_governam_studyinstanceuid_e_os_verbos_dicomweb"
@@ -1909,7 +1956,7 @@
       "source_file": "graphify-out/memory/query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid.md",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 23,
+      "community": 25,
       "community_name": "Consulta Graphify DICOM",
       "norm_label": "answer",
       "id": "graphify_out_memory_query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid_answer"
@@ -1920,7 +1967,7 @@
       "source_file": "graphify-out/memory/query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid.md",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 23,
+      "community": 25,
       "community_name": "Consulta Graphify DICOM",
       "norm_label": "outcome",
       "id": "graphify_out_memory_query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid_outcome"
@@ -1931,7 +1978,7 @@
       "source_file": "graphify-out/memory/query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid.md",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 23,
+      "community": 25,
       "community_name": "Consulta Graphify DICOM",
       "norm_label": "source nodes",
       "id": "graphify_out_memory_query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid_source_nodes"
@@ -1942,7 +1989,7 @@
       "source_file": "graphify-out/memory/query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 24,
+      "community": 26,
       "community_name": "Consulta operacional Graphify",
       "norm_label": "query_20260727_184305_onde_ficam_as_instrucoes_operacionais_do_graphify.md",
       "id": "graphify_out_memory_query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify"
@@ -1953,7 +2000,7 @@
       "source_file": "graphify-out/memory/query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify.md",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 24,
+      "community": 26,
       "community_name": "Consulta operacional Graphify",
       "norm_label": "q: onde ficam as instrucoes operacionais do graphify no blackice?",
       "id": "graphify_out_memory_query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify_q_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify_no_blackice"
@@ -1964,7 +2011,7 @@
       "source_file": "graphify-out/memory/query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify.md",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 24,
+      "community": 26,
       "community_name": "Consulta operacional Graphify",
       "norm_label": "answer",
       "id": "graphify_out_memory_query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify_answer"
@@ -1975,7 +2022,7 @@
       "source_file": "graphify-out/memory/query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify.md",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 24,
+      "community": 26,
       "community_name": "Consulta operacional Graphify",
       "norm_label": "outcome",
       "id": "graphify_out_memory_query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify_outcome"
@@ -1986,7 +2033,7 @@
       "source_file": "graphify-out/memory/query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify.md",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 24,
+      "community": 26,
       "community_name": "Consulta operacional Graphify",
       "norm_label": "source nodes",
       "id": "graphify_out_memory_query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify_source_nodes"
@@ -1997,7 +2044,7 @@
       "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 17,
+      "community": 18,
       "community_name": "Plano Keycloak same-origin",
       "norm_label": "2026-08-07-keycloak-same-origin.md",
       "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin"
@@ -2008,7 +2055,7 @@
       "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 17,
+      "community": 18,
       "community_name": "Plano Keycloak same-origin",
       "norm_label": "keycloak same-origin \u2014 implementation plan",
       "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_keycloak_same_origin_implementation_plan"
@@ -2019,7 +2066,7 @@
       "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 17,
+      "community": 18,
       "community_name": "Plano Keycloak same-origin",
       "norm_label": "global constraints",
       "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_global_constraints"
@@ -2030,7 +2077,7 @@
       "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 17,
+      "community": 18,
       "community_name": "Plano Keycloak same-origin",
       "norm_label": "estrutura de arquivos",
       "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_estrutura_de_arquivos"
@@ -2041,7 +2088,7 @@
       "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 17,
+      "community": 18,
       "community_name": "Plano Keycloak same-origin",
       "norm_label": "task 1: fase 1 \u2014 keycloak same-origin sob `/auth`",
       "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_task_1_fase_1_keycloak_same_origin_sob_auth"
@@ -2052,7 +2099,7 @@
       "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
       "source_location": "L383",
       "_origin": "ast",
-      "community": 17,
+      "community": 18,
       "community_name": "Plano Keycloak same-origin",
       "norm_label": "task 2: fase 2 \u2014 renomear o realm para `blackice`",
       "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_task_2_fase_2_renomear_o_realm_para_blackice"
@@ -2063,7 +2110,7 @@
       "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
       "source_location": "L621",
       "_origin": "ast",
-      "community": 17,
+      "community": 18,
       "community_name": "Plano Keycloak same-origin",
       "norm_label": "self-review",
       "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_self_review"
@@ -2319,7 +2366,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 89,
+      "community": 91,
       "norm_label": "graphify add and watch",
       "community_name": "Comandos Graphify add watch",
       "_origin": "semantic",
@@ -2334,7 +2381,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 90,
+      "community": 92,
       "norm_label": "graphify exports",
       "community_name": "Exporta\u00e7\u00f5es Graphify",
       "_origin": "semantic",
@@ -2349,7 +2396,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 91,
+      "community": 93,
       "norm_label": "semantic extraction",
       "community_name": "Extra\u00e7\u00e3o sem\u00e2ntica Graphify",
       "_origin": "semantic",
@@ -2364,7 +2411,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 92,
+      "community": 94,
       "norm_label": "cross-repository merge",
       "community_name": "Merge Graphify entre reposit\u00f3rios",
       "_origin": "semantic",
@@ -2379,7 +2426,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 93,
+      "community": 95,
       "norm_label": "graphify hooks",
       "community_name": "Hooks Graphify",
       "_origin": "semantic",
@@ -2394,7 +2441,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 94,
+      "community": 96,
       "norm_label": "graphify query",
       "community_name": "Consultas Graphify",
       "_origin": "semantic",
@@ -2409,7 +2456,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 95,
+      "community": 97,
       "norm_label": "graphify transcription",
       "community_name": "Transcri\u00e7\u00e3o Graphify",
       "_origin": "semantic",
@@ -2424,7 +2471,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 45,
+      "community": 49,
       "norm_label": "backend bff",
       "community_name": "Sess\u00e3o BFF com cookie",
       "_origin": "semantic",
@@ -2439,7 +2486,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 45,
+      "community": 49,
       "norm_label": "httponly session cookie",
       "community_name": "Sess\u00e3o BFF com cookie",
       "_origin": "semantic",
@@ -2454,7 +2501,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 75,
+      "community": 77,
       "norm_label": "vue mount point",
       "community_name": "Ponto de montagem Vue",
       "_origin": "semantic",
@@ -2469,7 +2516,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 53,
+      "community": 57,
       "norm_label": "dcm4chee 5.34.3 baseline",
       "community_name": "Baseline DCM4CHEE seguro",
       "_origin": "semantic",
@@ -2484,7 +2531,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 53,
+      "community": 57,
       "norm_label": "secure archive deployment",
       "community_name": "Baseline DCM4CHEE seguro",
       "_origin": "semantic",
@@ -2499,7 +2546,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "dicomweb verbs",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2514,7 +2561,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "qido-rs",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2529,7 +2576,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "wado-rs",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2544,7 +2591,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "stow-rs",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2559,7 +2606,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 98,
+      "community": 100,
       "norm_label": "user token propagation",
       "community_name": "Propaga\u00e7\u00e3o de token usu\u00e1rio",
       "_origin": "semantic",
@@ -2574,7 +2621,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "quarkus domain pack",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2589,7 +2636,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "quarkus bff",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2604,7 +2651,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 16,
       "norm_label": "report model",
       "community_name": "Identidade e hierarquia DICOM",
       "_origin": "semantic",
@@ -2619,7 +2666,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "csrf protection",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2634,7 +2681,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "vue domain pack",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2649,7 +2696,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 101,
+      "community": 103,
       "norm_label": "vue feature-first conventions",
       "community_name": "Conven\u00e7\u00f5es feature-first Vue",
       "_origin": "semantic",
@@ -2664,7 +2711,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 100,
+      "community": 102,
       "norm_label": "vue bff session",
       "community_name": "Sess\u00e3o Vue via BFF",
       "_origin": "semantic",
@@ -2679,7 +2726,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "cornerstone3d viewer",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2694,7 +2741,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "wado-rs image loader",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2709,7 +2756,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "cornerstone lifecycle cleanup",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2724,7 +2771,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 102,
+      "community": 104,
       "norm_label": "historical specs and plans",
       "community_name": "Especifica\u00e7\u00f5es e planos hist\u00f3ricos",
       "_origin": "semantic",
@@ -2739,7 +2786,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 8,
+      "community": 9,
       "norm_label": "foundation stack and auth plan",
       "community_name": "Verbos e seguran\u00e7a DICOMweb",
       "_origin": "semantic",
@@ -2754,7 +2801,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 58,
+      "community": 62,
       "norm_label": "feature-first monorepo structure",
       "community_name": "Estrutura monorepo feature-first",
       "_origin": "semantic",
@@ -2769,7 +2816,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 61,
       "norm_label": "canonical three-file compose configuration",
       "community_name": "Stack Compose can\u00f4nico",
       "_origin": "semantic",
@@ -2784,7 +2831,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 26,
+      "community": 28,
       "norm_label": "blackice keycloak login theme",
       "community_name": "Tema Keycloak e Playwright",
       "_origin": "semantic",
@@ -2799,7 +2846,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 63,
       "norm_label": "focus outline accessibility",
       "community_name": "Acessibilidade do foco",
       "_origin": "semantic",
@@ -2814,7 +2861,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 26,
+      "community": 28,
       "norm_label": "playwright keycloak theme ui regression",
       "community_name": "Tema Keycloak e Playwright",
       "_origin": "semantic",
@@ -2829,7 +2876,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 58,
+      "community": 62,
       "norm_label": "feature-first application architecture",
       "community_name": "Estrutura monorepo feature-first",
       "_origin": "semantic",
@@ -2844,7 +2891,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 26,
+      "community": 28,
       "norm_label": "keycloak.v2 child theme",
       "community_name": "Tema Keycloak e Playwright",
       "_origin": "semantic",
@@ -2859,7 +2906,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 59,
+      "community": 63,
       "norm_label": "single visible focus indicator",
       "community_name": "Acessibilidade do foco",
       "_origin": "semantic",
@@ -2874,7 +2921,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 26,
+      "community": 28,
       "norm_label": "hybrid ui regression strategy",
       "community_name": "Tema Keycloak e Playwright",
       "_origin": "semantic",
@@ -2889,7 +2936,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 61,
       "norm_label": "three-file compose stack",
       "community_name": "Stack Compose can\u00f4nico",
       "_origin": "semantic",
@@ -2904,7 +2951,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 60,
+      "community": 64,
       "norm_label": "docker api compatibility proxy",
       "community_name": "Proxy Docker e Traefik",
       "_origin": "semantic",
@@ -2919,7 +2966,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 60,
+      "community": 64,
       "norm_label": "traefik docker label routing",
       "community_name": "Proxy Docker e Traefik",
       "_origin": "semantic",
@@ -2934,7 +2981,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 109,
+      "community": 111,
       "norm_label": "product postgresql database",
       "community_name": "Banco PostgreSQL de produto",
       "_origin": "semantic",
@@ -2949,7 +2996,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 51,
       "norm_label": "blackice favicon",
       "community_name": "Favicon BlackICE",
       "_origin": "semantic",
@@ -2964,7 +3011,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 51,
       "norm_label": "lightning bolt",
       "community_name": "Favicon BlackICE",
       "_origin": "semantic",
@@ -2979,7 +3026,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 77,
+      "community": 79,
       "norm_label": "bluesky icon",
       "community_name": "\u00cdcone Bluesky",
       "_origin": "semantic",
@@ -2994,7 +3041,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 78,
+      "community": 80,
       "norm_label": "discord icon",
       "community_name": "\u00cdcone Discord",
       "_origin": "semantic",
@@ -3009,7 +3056,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 79,
+      "community": 81,
       "norm_label": "documentation icon",
       "community_name": "\u00cdcone de documenta\u00e7\u00e3o",
       "_origin": "semantic",
@@ -3024,7 +3071,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 80,
+      "community": 82,
       "norm_label": "github icon",
       "community_name": "\u00cdcone GitHub",
       "_origin": "semantic",
@@ -3039,7 +3086,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 81,
+      "community": 83,
       "norm_label": "social icon",
       "community_name": "\u00cdcone social gen\u00e9rico",
       "_origin": "semantic",
@@ -3054,7 +3101,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 82,
+      "community": 84,
       "norm_label": "x icon",
       "community_name": "\u00cdcone X social",
       "_origin": "semantic",
@@ -3069,7 +3116,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 34,
+      "community": 37,
       "norm_label": "incremental re-extraction runbook",
       "community_name": "Runbook de atualiza\u00e7\u00e3o incremental",
       "_origin": "semantic",
@@ -3084,7 +3131,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 34,
+      "community": 37,
       "norm_label": "incremental merge integrity",
       "community_name": "Runbook de atualiza\u00e7\u00e3o incremental",
       "_origin": "semantic",
@@ -3099,7 +3146,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 34,
+      "community": 37,
       "norm_label": "cluster-only refresh",
       "community_name": "Runbook de atualiza\u00e7\u00e3o incremental",
       "_origin": "semantic",
@@ -3114,7 +3161,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "graphify skill",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3129,7 +3176,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "community labels",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3144,7 +3191,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "clustered communities",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3159,7 +3206,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "current community summaries",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3174,7 +3221,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "community label quality gate",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3189,7 +3236,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "exact community-key coverage",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3204,7 +3251,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "placeholder label rejection",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3219,7 +3266,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "non-distinct label rejection",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3234,7 +3281,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "community membership signatures",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3249,7 +3296,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "automatic label reuse invalidation",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3264,7 +3311,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "cluster-only workflow",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3279,7 +3326,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 8,
       "norm_label": "fresh human label choice",
       "community_name": "R\u00f3tulos de comunidade Graphify",
       "_origin": "semantic",
@@ -3294,7 +3341,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 31,
+      "community": 34,
       "norm_label": "graphify pipeline",
       "_origin": "semantic",
       "community_name": "Pipeline incremental Graphify",
@@ -3309,7 +3356,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 31,
+      "community": 34,
       "norm_label": "semantic extraction",
       "_origin": "semantic",
       "community_name": "Pipeline incremental Graphify",
@@ -3324,7 +3371,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 31,
+      "community": 34,
       "norm_label": "incremental update",
       "_origin": "semantic",
       "community_name": "Pipeline incremental Graphify",
@@ -3339,7 +3386,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 41,
+      "community": 44,
       "norm_label": "graph fragment schema",
       "_origin": "semantic",
       "community_name": "Esquema de fragmento Graphify",
@@ -3354,7 +3401,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 41,
+      "community": 44,
       "norm_label": "confidence rubric",
       "_origin": "semantic",
       "community_name": "Esquema de fragmento Graphify",
@@ -3369,7 +3416,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 43,
+      "community": 46,
       "norm_label": "incremental re-extraction",
       "_origin": "semantic",
       "community_name": "Reextra\u00e7\u00e3o incremental Graphify",
@@ -3384,7 +3431,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 43,
+      "community": 46,
       "norm_label": "replace on re-extract",
       "_origin": "semantic",
       "community_name": "Reextra\u00e7\u00e3o incremental Graphify",
@@ -3399,7 +3446,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "norm_label": "dicom domain review",
       "_origin": "semantic",
       "community_name": "Gates de dom\u00ednio DICOM",
@@ -3414,7 +3461,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "norm_label": "human semantic gate",
       "_origin": "semantic",
       "community_name": "Gates de dom\u00ednio DICOM",
@@ -3429,7 +3476,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "norm_label": "blackice quarkus backend",
       "_origin": "semantic",
       "community_name": "Gates de dom\u00ednio DICOM",
@@ -3444,7 +3491,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "norm_label": "dicomweb backend boundary",
       "_origin": "semantic",
       "community_name": "Gates de dom\u00ednio DICOM",
@@ -3459,7 +3506,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "norm_label": "cornerstone3d viewer",
       "_origin": "semantic",
       "community_name": "Gates de dom\u00ednio DICOM",
@@ -3474,7 +3521,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "norm_label": "vue reactivity boundary",
       "_origin": "semantic",
       "community_name": "Gates de dom\u00ednio DICOM",
@@ -3489,7 +3536,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 14,
+      "community": 15,
       "norm_label": "thin skill pattern",
       "_origin": "semantic",
       "community_name": "Gates de dom\u00ednio DICOM",
@@ -3504,7 +3551,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 112,
+      "community": 114,
       "norm_label": "blackice mvp",
       "_origin": "semantic",
       "community_name": "Fluxos MVP BlackICE",
@@ -3519,7 +3566,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 83,
+      "community": 85,
       "norm_label": "keycloak login e2e contract",
       "_origin": "semantic",
       "community_name": "Commit Curator \u2014 Design",
@@ -3535,7 +3582,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Portable source of truth for DICOM and DICOMweb semantics.",
-      "community": 15,
+      "community": 16,
       "norm_label": "dicom domain pack",
       "_origin": "semantic",
       "community_name": "Identidade e hierarquia DICOM",
@@ -3550,7 +3597,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 16,
       "norm_label": "dicom domain reviewer",
       "_origin": "semantic",
       "community_name": "Identidade e hierarquia DICOM",
@@ -3566,7 +3613,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Preserves clinical identity and interoperable DICOM data modeling.",
-      "community": 15,
+      "community": 16,
       "norm_label": "dicom patient study series instance hierarchy",
       "_origin": "semantic",
       "community_name": "Identidade e hierarquia DICOM",
@@ -3581,7 +3628,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
+      "community": 16,
       "norm_label": "studyinstanceuid",
       "_origin": "semantic",
       "community_name": "Identidade e hierarquia DICOM",
@@ -3597,7 +3644,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Study, Series, and SOP Instance UIDs are immutable identities supplied by acquisition or archive; only genuinely new DICOM objects require a registered-root generator.",
-      "community": 15,
+      "community": 16,
       "norm_label": "dicom uid identity",
       "_origin": "semantic",
       "community_name": "Identidade e hierarquia DICOM",
@@ -3613,7 +3660,7 @@
       "author": null,
       "contributor": null,
       "rationale": "PatientID is only unique within its issuer domain.",
-      "community": 99,
+      "community": 101,
       "norm_label": "patientid with issuerofpatientid",
       "_origin": "semantic",
       "community_name": "PatientID e issuer",
@@ -3628,7 +3675,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 54,
+      "community": 58,
       "norm_label": "dicom transfer syntax",
       "_origin": "semantic",
       "community_name": "Dados de pixel DICOM",
@@ -3644,7 +3691,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Avoid unnecessary re-encoding or lossy transcoding because diagnostic information can be irreversibly lost.",
-      "community": 54,
+      "community": 58,
       "norm_label": "pixel data preservation",
       "_origin": "semantic",
       "community_name": "Dados de pixel DICOM",
@@ -3659,7 +3706,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 103,
+      "community": 105,
       "norm_label": "codex subagent configuration",
       "_origin": "semantic",
       "community_name": "Configura\u00e7\u00e3o de subagentes Codex",
@@ -3675,7 +3722,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Agent definitions retain roles and boundaries while canonical domain knowledge remains in portable packs.",
-      "community": 15,
+      "community": 16,
       "norm_label": "domain pack wrappers",
       "_origin": "semantic",
       "community_name": "Identidade e hierarquia DICOM",
@@ -3690,7 +3737,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 56,
+      "community": 60,
       "norm_label": "dcm4chee 5.34.3 baseline",
       "_origin": "semantic",
       "community_name": "Pilha DCM4CHEE segura",
@@ -3705,7 +3752,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 35,
+      "community": 38,
       "norm_label": "graphify project integration",
       "_origin": "semantic",
       "community_name": "Integra\u00e7\u00e3o do projeto Graphify",
@@ -3721,7 +3768,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Graphify hooks and a merge driver maintain the portable graph after changes.",
-      "community": 35,
+      "community": 38,
       "norm_label": "incremental graph maintenance",
       "_origin": "semantic",
       "community_name": "Integra\u00e7\u00e3o do projeto Graphify",
@@ -3736,7 +3783,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 36,
+      "community": 39,
       "norm_label": "keycloak same-origin migration",
       "_origin": "semantic",
       "community_name": "Migra\u00e7\u00e3o Keycloak same-origin",
@@ -3751,7 +3798,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 36,
+      "community": 39,
       "norm_label": "authorization code with pkce",
       "_origin": "semantic",
       "community_name": "Migra\u00e7\u00e3o Keycloak same-origin",
@@ -3782,7 +3829,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 104,
+      "community": 106,
       "norm_label": "blackice pacs architecture decisions",
       "_origin": "semantic",
       "community_name": "Decis\u00f5es de arquitetura PACS",
@@ -3798,7 +3845,7 @@
       "author": null,
       "contributor": null,
       "rationale": "A single realm lets tokens issued for the BFF carry the Archive audience and preserve user attribution in DICOM audit trails.",
-      "community": 37,
+      "community": 40,
       "norm_label": "shared realm audience",
       "_origin": "semantic",
       "community_name": "Audi\u00eancia e autoriza\u00e7\u00e3o DICOMweb",
@@ -3813,7 +3860,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 35,
+      "community": 38,
       "norm_label": "graphify integration design",
       "_origin": "semantic",
       "community_name": "Integra\u00e7\u00e3o do projeto Graphify",
@@ -3828,7 +3875,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 36,
+      "community": 39,
       "norm_label": "keycloak same-origin design",
       "_origin": "semantic",
       "community_name": "Migra\u00e7\u00e3o Keycloak same-origin",
@@ -3858,7 +3905,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 108,
+      "community": 110,
       "norm_label": "frontend spa service",
       "_origin": "semantic",
       "community_name": "Servi\u00e7o SPA frontend",
@@ -3889,7 +3936,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 56,
+      "community": 60,
       "norm_label": "dcm4chee secure stack",
       "_origin": "semantic",
       "community_name": "Pilha DCM4CHEE segura",
@@ -4003,21 +4050,6 @@
       "id": "infra_dcm4chee_compose_traefik_auth_router"
     },
     {
-      "label": "Backend Container Build Artifacts",
-      "file_type": "document",
-      "source_file": "apps/backend/.dockerignore",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 65,
-      "norm_label": "backend container build artifacts",
-      "_origin": "semantic",
-      "community_name": "Artefatos de container backend",
-      "id": "apps_backend_dockerignore_backend_build_artifacts"
-    },
-    {
       "label": "URL Ingestion",
       "file_type": "concept",
       "source_file": ".agents/skills/graphify/references/add-watch.md",
@@ -4026,7 +4058,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 39,
+      "community": 42,
       "norm_label": "url ingestion",
       "_origin": "semantic",
       "community_name": "Monitoramento e ingest\u00e3o URL",
@@ -4041,7 +4073,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 39,
+      "community": 42,
       "norm_label": "folder watcher",
       "_origin": "semantic",
       "community_name": "Monitoramento e ingest\u00e3o URL",
@@ -4056,7 +4088,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 40,
+      "community": 43,
       "norm_label": "graph exports",
       "_origin": "semantic",
       "community_name": "Exporta\u00e7\u00f5es e servidor MCP",
@@ -4071,7 +4103,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 40,
+      "community": 43,
       "norm_label": "graphify mcp server",
       "_origin": "semantic",
       "community_name": "Exporta\u00e7\u00f5es e servidor MCP",
@@ -4086,7 +4118,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 63,
+      "community": 67,
       "norm_label": "cross-repository graph merge",
       "_origin": "semantic",
       "community_name": "Merge entre reposit\u00f3rios",
@@ -4101,7 +4133,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 30,
+      "community": 33,
       "norm_label": "post-commit graph hook",
       "_origin": "semantic",
       "community_name": "Commit Curator \u2014 Design",
@@ -4116,7 +4148,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 42,
+      "community": 45,
       "norm_label": "graph query",
       "_origin": "semantic",
       "community_name": "Consulta e expans\u00e3o Graphify",
@@ -4131,7 +4163,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 42,
+      "community": 45,
       "norm_label": "constrained query expansion",
       "_origin": "semantic",
       "community_name": "Consulta e expans\u00e3o Graphify",
@@ -4146,7 +4178,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 64,
+      "community": 68,
       "norm_label": "media transcription",
       "_origin": "semantic",
       "community_name": "Transcri\u00e7\u00e3o de m\u00eddia",
@@ -4161,56 +4193,11 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 88,
+      "community": 90,
       "norm_label": "claude code guidance",
       "_origin": "semantic",
       "community_name": "Commit Curator \u2014 Design",
       "id": "claude_claude_code_guidance"
-    },
-    {
-      "label": "Backend Ignore Rules",
-      "file_type": "concept",
-      "source_file": "apps/backend/.gitignore",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 66,
-      "norm_label": "backend ignore rules",
-      "_origin": "semantic",
-      "community_name": "Regras de ignore backend",
-      "id": "apps_backend_gitignore_backend_ignore_rules"
-    },
-    {
-      "label": "Frontend Docker Context Rules",
-      "file_type": "concept",
-      "source_file": "apps/frontend/.dockerignore",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 73,
-      "norm_label": "frontend docker context rules",
-      "_origin": "semantic",
-      "community_name": "Contexto Docker frontend",
-      "id": "apps_frontend_dockerignore_frontend_docker_context_rules"
-    },
-    {
-      "label": "Frontend Ignore Rules",
-      "file_type": "concept",
-      "source_file": "apps/frontend/.gitignore",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 74,
-      "norm_label": "frontend ignore rules",
-      "_origin": "semantic",
-      "community_name": "Regras de ignore frontend",
-      "id": "apps_frontend_gitignore_frontend_ignore_rules"
     },
     {
       "label": "Graphify Architecture",
@@ -4221,7 +4208,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 30,
+      "community": 33,
       "norm_label": "graphify architecture",
       "_origin": "semantic",
       "community_name": "Commit Curator \u2014 Design",
@@ -4236,7 +4223,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 30,
+      "community": 33,
       "norm_label": "project-scoped graphify setup",
       "_origin": "semantic",
       "community_name": "Commit Curator \u2014 Design",
@@ -4251,7 +4238,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 55,
+      "community": 59,
       "norm_label": "domain pack convention",
       "_origin": "semantic",
       "community_name": "Commit Curator \u2014 Design",
@@ -4266,7 +4253,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 55,
+      "community": 59,
       "norm_label": "git domain pack",
       "_origin": "semantic",
       "community_name": "Commit Curator \u2014 Design",
@@ -4282,9 +4269,9 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "id": "infra_keycloak_configure_blackice_container",
-      "community": 61,
-      "norm_label": "configure-blackice-container.sh"
+      "community": 65,
+      "norm_label": "configure-blackice-container.sh",
+      "id": "infra_keycloak_configure_blackice_container"
     },
     {
       "label": "configure-blackice-container.sh script",
@@ -4296,9 +4283,9 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "id": "infra_keycloak_configure_blackice_container_sh__entry",
-      "community": 61,
-      "norm_label": "configure-blackice-container.sh script"
+      "community": 65,
+      "norm_label": "configure-blackice-container.sh script",
+      "id": "infra_keycloak_configure_blackice_container_sh__entry"
     },
     {
       "label": "configure-blackice.ps1",
@@ -4306,9 +4293,9 @@
       "source_file": "infra/keycloak/configure-blackice.ps1",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "infra_keycloak_configure_blackice_ps1_infra_keycloak_configure_blackice",
-      "community": 110,
-      "norm_label": "configure-blackice.ps1"
+      "community": 112,
+      "norm_label": "configure-blackice.ps1",
+      "id": "infra_keycloak_configure_blackice_ps1_infra_keycloak_configure_blackice"
     },
     {
       "label": "configure-blackice.sh",
@@ -4320,9 +4307,9 @@
         "kind": "file"
       },
       "_origin": "ast",
-      "id": "infra_keycloak_configure_blackice_sh_infra_keycloak_configure_blackice",
-      "community": 62,
-      "norm_label": "configure-blackice.sh"
+      "community": 66,
+      "norm_label": "configure-blackice.sh",
+      "id": "infra_keycloak_configure_blackice_sh_infra_keycloak_configure_blackice"
     },
     {
       "label": "configure-blackice.sh script",
@@ -4334,9 +4321,9 @@
         "kind": "bash_entrypoint"
       },
       "_origin": "ast",
-      "id": "infra_keycloak_configure_blackice_sh__entry",
-      "community": 62,
-      "norm_label": "configure-blackice.sh script"
+      "community": 66,
+      "norm_label": "configure-blackice.sh script",
+      "id": "infra_keycloak_configure_blackice_sh__entry"
     },
     {
       "label": "configure-blackice.tests.ps1",
@@ -4344,9 +4331,9 @@
       "source_file": "infra/keycloak/configure-blackice.tests.ps1",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "infra_keycloak_configure_blackice_tests",
-      "community": 38,
-      "norm_label": "configure-blackice.tests.ps1"
+      "community": 41,
+      "norm_label": "configure-blackice.tests.ps1",
+      "id": "infra_keycloak_configure_blackice_tests"
     },
     {
       "label": "Assert-True()",
@@ -4354,9 +4341,9 @@
       "source_file": "infra/keycloak/configure-blackice.tests.ps1",
       "source_location": "L3",
       "_origin": "ast",
-      "id": "infra_keycloak_configure_blackice_tests_assert_true",
-      "community": 38,
-      "norm_label": "assert-true()"
+      "community": 41,
+      "norm_label": "assert-true()",
+      "id": "infra_keycloak_configure_blackice_tests_assert_true"
     },
     {
       "label": "global:docker()",
@@ -4364,9 +4351,9 @@
       "source_file": "infra/keycloak/configure-blackice.tests.ps1",
       "source_location": "L17",
       "_origin": "ast",
-      "id": "infra_keycloak_configure_blackice_tests_global_docker",
-      "community": 38,
-      "norm_label": "global:docker()"
+      "community": 41,
+      "norm_label": "global:docker()",
+      "id": "infra_keycloak_configure_blackice_tests_global_docker"
     },
     {
       "label": "Claude Commit Curator",
@@ -4377,9 +4364,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_agents_git_commit_curator_commit_curator",
-      "community": 18,
-      "norm_label": "claude commit curator"
+      "community": 19,
+      "norm_label": "claude commit curator",
+      "_origin": "semantic",
+      "id": "claude_agents_git_commit_curator_commit_curator"
     },
     {
       "label": "Commit Conventions Domain Pack",
@@ -4390,9 +4378,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_agents_git_commit_curator_commit_conventions",
-      "community": 18,
-      "norm_label": "commit conventions domain pack"
+      "community": 19,
+      "norm_label": "commit conventions domain pack",
+      "_origin": "semantic",
+      "id": "claude_agents_git_commit_curator_commit_conventions"
     },
     {
       "label": "Canonical Commit Body",
@@ -4403,9 +4392,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_agents_git_commit_curator_canonical_commit_body",
-      "community": 18,
-      "norm_label": "canonical commit body"
+      "community": 19,
+      "norm_label": "canonical commit body",
+      "_origin": "semantic",
+      "id": "claude_agents_git_commit_curator_canonical_commit_body"
     },
     {
       "label": "Graphify Output Exclusion",
@@ -4416,9 +4406,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claudeignore_graphify_output_exclusion",
-      "community": 96,
-      "norm_label": "graphify output exclusion"
+      "community": 98,
+      "norm_label": "graphify output exclusion",
+      "_origin": "semantic",
+      "id": "claudeignore_graphify_output_exclusion"
     },
     {
       "label": "Codex Commit Curator",
@@ -4429,9 +4420,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_commit_curator_commit_curator",
-      "community": 18,
-      "norm_label": "codex commit curator"
+      "community": 19,
+      "norm_label": "codex commit curator",
+      "_origin": "semantic",
+      "id": "codex_agents_commit_curator_commit_curator"
     },
     {
       "label": "GPT-5.6 Luna Model",
@@ -4442,9 +4434,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_commit_curator_luna_model",
-      "community": 18,
-      "norm_label": "gpt-5.6 luna model"
+      "community": 19,
+      "norm_label": "gpt-5.6 luna model",
+      "_origin": "semantic",
+      "id": "codex_agents_commit_curator_luna_model"
     },
     {
       "label": "DICOM Domain Reviewer",
@@ -4455,9 +4448,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_dicom_domain_reviewer_dicom_domain_reviewer",
       "community": 10,
-      "norm_label": "dicom domain reviewer"
+      "norm_label": "dicom domain reviewer",
+      "_origin": "semantic",
+      "id": "codex_agents_dicom_domain_reviewer_dicom_domain_reviewer"
     },
     {
       "label": "DICOM Semantics",
@@ -4468,9 +4462,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_dicom_domain_reviewer_dicom_semantics",
       "community": 10,
-      "norm_label": "dicom semantics"
+      "norm_label": "dicom semantics",
+      "_origin": "semantic",
+      "id": "codex_agents_dicom_domain_reviewer_dicom_semantics"
     },
     {
       "label": "DICOMweb Conventions",
@@ -4481,9 +4476,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_dicom_domain_reviewer_dicomweb",
       "community": 10,
-      "norm_label": "dicomweb conventions"
+      "norm_label": "dicomweb conventions",
+      "_origin": "semantic",
+      "id": "codex_agents_dicom_domain_reviewer_dicomweb"
     },
     {
       "label": "Human Semantic Gate",
@@ -4494,9 +4490,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_dicom_domain_reviewer_human_gate",
       "community": 10,
-      "norm_label": "human semantic gate"
+      "norm_label": "human semantic gate",
+      "_origin": "semantic",
+      "id": "codex_agents_dicom_domain_reviewer_human_gate"
     },
     {
       "label": "DICOM Viewer Frontend Agent",
@@ -4507,9 +4504,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_dicom_viewer_frontend_dicom_viewer_frontend",
       "community": 10,
-      "norm_label": "dicom viewer frontend agent"
+      "norm_label": "dicom viewer frontend agent",
+      "_origin": "semantic",
+      "id": "codex_agents_dicom_viewer_frontend_dicom_viewer_frontend"
     },
     {
       "label": "Cornerstone3D Viewer",
@@ -4520,9 +4518,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_dicom_viewer_frontend_cornerstone3d",
       "community": 10,
-      "norm_label": "cornerstone3d viewer"
+      "norm_label": "cornerstone3d viewer",
+      "_origin": "semantic",
+      "id": "codex_agents_dicom_viewer_frontend_cornerstone3d"
     },
     {
       "label": "Vue Conventions",
@@ -4533,9 +4532,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_dicom_viewer_frontend_vue_conventions",
       "community": 10,
-      "norm_label": "vue conventions"
+      "norm_label": "vue conventions",
+      "_origin": "semantic",
+      "id": "codex_agents_dicom_viewer_frontend_vue_conventions"
     },
     {
       "label": "Quarkus Backend Agent",
@@ -4546,9 +4546,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_quarkus_backend_quarkus_backend",
       "community": 10,
-      "norm_label": "quarkus backend agent"
+      "norm_label": "quarkus backend agent",
+      "_origin": "semantic",
+      "id": "codex_agents_quarkus_backend_quarkus_backend"
     },
     {
       "label": "DCM4CHEE DICOMweb Client",
@@ -4559,9 +4560,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_quarkus_backend_dcm4chee_dicomweb_client",
       "community": 10,
-      "norm_label": "dcm4chee dicomweb client"
+      "norm_label": "dcm4chee dicomweb client",
+      "_origin": "semantic",
+      "id": "codex_agents_quarkus_backend_dcm4chee_dicomweb_client"
     },
     {
       "label": "Quarkus Conventions",
@@ -4572,9 +4574,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_agents_quarkus_backend_quarkus_conventions",
       "community": 10,
-      "norm_label": "quarkus conventions"
+      "norm_label": "quarkus conventions",
+      "_origin": "semantic",
+      "id": "codex_agents_quarkus_backend_quarkus_conventions"
     },
     {
       "label": "Multi-Agent Feature",
@@ -4585,9 +4588,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_config_multi_agent",
-      "community": 52,
-      "norm_label": "multi-agent feature"
+      "community": 56,
+      "norm_label": "multi-agent feature",
+      "_origin": "semantic",
+      "id": "codex_config_multi_agent"
     },
     {
       "label": "Subagent Concurrency Limit",
@@ -4598,9 +4602,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "codex_config_subagent_concurrency",
-      "community": 52,
-      "norm_label": "subagent concurrency limit"
+      "community": 56,
+      "norm_label": "subagent concurrency limit",
+      "_origin": "semantic",
+      "id": "codex_config_subagent_concurrency"
     },
     {
       "label": "Graphify Merge Driver",
@@ -4611,9 +4616,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "gitattributes_graphify_merge_driver",
-      "community": 105,
-      "norm_label": "graphify merge driver"
+      "community": 107,
+      "norm_label": "graphify merge driver",
+      "_origin": "semantic",
+      "id": "gitattributes_graphify_merge_driver"
     },
     {
       "label": "Graphify Local State",
@@ -4624,9 +4630,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "gitignore_graphify_local_state",
-      "community": 106,
-      "norm_label": "graphify local state"
+      "community": 108,
+      "norm_label": "graphify local state",
+      "_origin": "semantic",
+      "id": "gitignore_graphify_local_state"
     },
     {
       "label": "Graphify 0.9.32",
@@ -4637,9 +4644,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "graphify_setup_graphify_version",
-      "community": 16,
-      "norm_label": "graphify 0.9.32"
+      "community": 17,
+      "norm_label": "graphify 0.9.32",
+      "_origin": "semantic",
+      "id": "graphify_setup_graphify_version"
     },
     {
       "label": "Canonical Graphify Skill Hashes",
@@ -4650,9 +4658,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "graphify_setup_canonical_skill_hashes",
-      "community": 16,
-      "norm_label": "canonical graphify skill hashes"
+      "community": 17,
+      "norm_label": "canonical graphify skill hashes",
+      "_origin": "semantic",
+      "id": "graphify_setup_canonical_skill_hashes"
     },
     {
       "label": "Linked Worktree Manual Graph Update",
@@ -4663,9 +4672,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "graphify_setup_linked_worktree_manual_update",
-      "community": 16,
-      "norm_label": "linked worktree manual graph update"
+      "community": 17,
+      "norm_label": "linked worktree manual graph update",
+      "_origin": "semantic",
+      "id": "graphify_setup_linked_worktree_manual_update"
     },
     {
       "label": "Graphify Output Recursion Exclusion",
@@ -4676,9 +4686,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "graphifyignore_graphify_output_recursion",
-      "community": 107,
-      "norm_label": "graphify output recursion exclusion"
+      "community": 109,
+      "norm_label": "graphify output recursion exclusion",
+      "_origin": "semantic",
+      "id": "graphifyignore_graphify_output_recursion"
     },
     {
       "label": "BlackICE PACS",
@@ -4689,9 +4700,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_blackice_pacs",
       "community": 1,
-      "norm_label": "blackice pacs"
+      "norm_label": "blackice pacs",
+      "_origin": "semantic",
+      "id": "agents_blackice_pacs"
     },
     {
       "label": "DCM4CHEE Archive",
@@ -4702,9 +4714,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_dcm4chee_archive",
       "community": 1,
-      "norm_label": "dcm4chee archive"
+      "norm_label": "dcm4chee archive",
+      "_origin": "semantic",
+      "id": "agents_dcm4chee_archive"
     },
     {
       "label": "Quarkus Product Backend",
@@ -4715,9 +4728,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_quarkus_product_backend",
       "community": 1,
-      "norm_label": "quarkus product backend"
+      "norm_label": "quarkus product backend",
+      "_origin": "semantic",
+      "id": "agents_quarkus_product_backend"
     },
     {
       "label": "Vue Authenticated SPA",
@@ -4728,9 +4742,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_vue_spa",
       "community": 1,
-      "norm_label": "vue authenticated spa"
+      "norm_label": "vue authenticated spa",
+      "_origin": "semantic",
+      "id": "agents_vue_spa"
     },
     {
       "label": "Keycloak OIDC SSO",
@@ -4741,9 +4756,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_keycloak_oidc",
       "community": 1,
-      "norm_label": "keycloak oidc sso"
+      "norm_label": "keycloak oidc sso",
+      "_origin": "semantic",
+      "id": "agents_keycloak_oidc"
     },
     {
       "label": "DICOMweb Operations",
@@ -4754,9 +4770,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_dicomweb_operations",
       "community": 1,
-      "norm_label": "dicomweb operations"
+      "norm_label": "dicomweb operations",
+      "_origin": "semantic",
+      "id": "agents_dicomweb_operations"
     },
     {
       "label": "Domain Packs",
@@ -4767,9 +4784,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_domain_packs",
-      "community": 18,
-      "norm_label": "domain packs"
+      "community": 19,
+      "norm_label": "domain packs",
+      "_origin": "semantic",
+      "id": "agents_domain_packs"
     },
     {
       "label": "DICOM Identity Invariants",
@@ -4780,9 +4798,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_dicom_identity_invariants",
       "community": 1,
-      "norm_label": "dicom identity invariants"
+      "norm_label": "dicom identity invariants",
+      "_origin": "semantic",
+      "id": "agents_dicom_identity_invariants"
     },
     {
       "label": "Human Business Gate",
@@ -4793,9 +4812,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "agents_human_business_gate",
       "community": 10,
-      "norm_label": "human business gate"
+      "norm_label": "human business gate",
+      "_origin": "semantic",
+      "id": "agents_human_business_gate"
     },
     {
       "label": "Evolution Backlog",
@@ -4806,9 +4826,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_evolution_backlog_evolution_backlog",
       "community": 1,
-      "norm_label": "evolution backlog"
+      "norm_label": "evolution backlog",
+      "_origin": "semantic",
+      "id": "docs_architecture_evolution_backlog_evolution_backlog"
     },
     {
       "label": "EVO-001 Async Ingestion",
@@ -4819,9 +4840,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_evolution_backlog_evo_001_async_ingestion",
       "community": 1,
-      "norm_label": "evo-001 async ingestion"
+      "norm_label": "evo-001 async ingestion",
+      "_origin": "semantic",
+      "id": "docs_architecture_evolution_backlog_evo_001_async_ingestion"
     },
     {
       "label": "EVO-002 Token Exchange",
@@ -4832,9 +4854,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_evolution_backlog_evo_002_token_exchange",
       "community": 1,
-      "norm_label": "evo-002 token exchange"
+      "norm_label": "evo-002 token exchange",
+      "_origin": "semantic",
+      "id": "docs_architecture_evolution_backlog_evo_002_token_exchange"
     },
     {
       "label": "EVO-003 Product RBAC",
@@ -4845,9 +4868,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_evolution_backlog_evo_003_product_rbac",
       "community": 1,
-      "norm_label": "evo-003 product rbac"
+      "norm_label": "evo-003 product rbac",
+      "_origin": "semantic",
+      "id": "docs_architecture_evolution_backlog_evo_003_product_rbac"
     },
     {
       "label": "EVO-004 Scheduled Clinical Workflow",
@@ -4858,9 +4882,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_evolution_backlog_evo_004_scheduled_workflow",
       "community": 1,
-      "norm_label": "evo-004 scheduled clinical workflow"
+      "norm_label": "evo-004 scheduled clinical workflow",
+      "_origin": "semantic",
+      "id": "docs_architecture_evolution_backlog_evo_004_scheduled_workflow"
     },
     {
       "label": "BlackICE Monorepo Structure",
@@ -4871,9 +4896,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_project_structure_monorepo_structure",
-      "community": 97,
-      "norm_label": "blackice monorepo structure"
+      "community": 99,
+      "norm_label": "blackice monorepo structure",
+      "_origin": "semantic",
+      "id": "docs_architecture_project_structure_monorepo_structure"
     },
     {
       "label": "Feature Colocation",
@@ -4884,9 +4910,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_project_structure_feature_colocation",
       "community": 1,
-      "norm_label": "feature colocation"
+      "norm_label": "feature colocation",
+      "_origin": "semantic",
+      "id": "docs_architecture_project_structure_feature_colocation"
     },
     {
       "label": "HTTP Contract Boundary",
@@ -4897,9 +4924,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_architecture_project_structure_http_contract_boundary",
       "community": 1,
-      "norm_label": "http contract boundary"
+      "norm_label": "http contract boundary",
+      "_origin": "semantic",
+      "id": "docs_architecture_project_structure_http_contract_boundary"
     },
     {
       "label": "Commit Policy",
@@ -4910,9 +4938,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_domains_git_commit_conventions_commit_policy",
-      "community": 16,
-      "norm_label": "commit policy"
+      "community": 17,
+      "norm_label": "commit policy",
+      "_origin": "semantic",
+      "id": "docs_domains_git_commit_conventions_commit_policy"
     },
     {
       "label": "Safe Commit Scope",
@@ -4923,9 +4952,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_domains_git_commit_conventions_safe_scope",
-      "community": 16,
-      "norm_label": "safe commit scope"
+      "community": 17,
+      "norm_label": "safe commit scope",
+      "_origin": "semantic",
+      "id": "docs_domains_git_commit_conventions_safe_scope"
     },
     {
       "label": "Graphify Commit Prerequisite",
@@ -4936,9 +4966,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_domains_git_commit_conventions_graphify_prerequisite",
-      "community": 16,
-      "norm_label": "graphify commit prerequisite"
+      "community": 17,
+      "norm_label": "graphify commit prerequisite",
+      "_origin": "semantic",
+      "id": "docs_domains_git_commit_conventions_graphify_prerequisite"
     },
     {
       "label": "Graph Synchronization Commit",
@@ -4949,9 +4980,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_domains_git_commit_conventions_graph_sync_commit",
-      "community": 16,
-      "norm_label": "graph synchronization commit"
+      "community": 17,
+      "norm_label": "graph synchronization commit",
+      "_origin": "semantic",
+      "id": "docs_domains_git_commit_conventions_graph_sync_commit"
     },
     {
       "label": "Keycloak Windows Bootstrap",
@@ -4962,9 +4994,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_keycloak_bootstrap",
       "community": 1,
-      "norm_label": "keycloak windows bootstrap"
+      "norm_label": "keycloak windows bootstrap",
+      "_origin": "semantic",
+      "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_keycloak_bootstrap"
     },
     {
       "label": "Container Admin REST Script",
@@ -4975,9 +5008,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_container_admin_rest_script",
       "community": 1,
-      "norm_label": "container admin rest script"
+      "norm_label": "container admin rest script",
+      "_origin": "semantic",
+      "id": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_container_admin_rest_script"
     },
     {
       "label": "Manual DICOM Import",
@@ -4988,9 +5022,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_manual_dicom_import",
       "community": 1,
-      "norm_label": "manual dicom import"
+      "norm_label": "manual dicom import",
+      "_origin": "semantic",
+      "id": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_manual_dicom_import"
     },
     {
       "label": "STOW-RS Per Study",
@@ -5001,9 +5036,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_stow_per_study",
       "community": 1,
-      "norm_label": "stow-rs per study"
+      "norm_label": "stow-rs per study",
+      "_origin": "semantic",
+      "id": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_stow_per_study"
     },
     {
       "label": "CSRF Double Submit Protection",
@@ -5014,9 +5050,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_csrf_protection",
       "community": 1,
-      "norm_label": "csrf double submit protection"
+      "norm_label": "csrf double submit protection",
+      "_origin": "semantic",
+      "id": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_csrf_protection"
     },
     {
       "label": "DICOM UID Validation",
@@ -5027,9 +5064,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_uid_validation",
       "community": 1,
-      "norm_label": "dicom uid validation"
+      "norm_label": "dicom uid validation",
+      "_origin": "semantic",
+      "id": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_uid_validation"
     },
     {
       "label": "Temurin Java 21 Toolchain",
@@ -5040,9 +5078,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_mise_java_temurin_21",
-      "community": 67,
-      "norm_label": "temurin java 21 toolchain"
+      "community": 70,
+      "norm_label": "temurin java 21 toolchain",
+      "_origin": "semantic",
+      "id": "apps_backend_mise_java_temurin_21"
     },
     {
       "label": "Maven 3 Toolchain",
@@ -5053,9 +5092,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_mise_maven_3",
-      "community": 68,
-      "norm_label": "maven 3 toolchain"
+      "community": 71,
+      "norm_label": "maven 3 toolchain",
+      "_origin": "semantic",
+      "id": "apps_backend_mise_maven_3"
     },
     {
       "label": "Maven Wrapper",
@@ -5066,9 +5106,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_mvnw_maven_wrapper",
-      "community": 44,
-      "norm_label": "maven wrapper"
+      "community": 48,
+      "norm_label": "maven wrapper",
+      "_origin": "semantic",
+      "id": "apps_backend_mvnw_maven_wrapper"
     },
     {
       "label": "Apache Maven 3.9.16 Distribution",
@@ -5079,9 +5120,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_mvn_wrapper_maven_wrapper_maven_distribution",
-      "community": 44,
-      "norm_label": "apache maven 3.9.16 distribution"
+      "community": 48,
+      "norm_label": "apache maven 3.9.16 distribution",
+      "_origin": "semantic",
+      "id": "apps_backend_mvn_wrapper_maven_wrapper_maven_distribution"
     },
     {
       "label": "OIDC BFF Configuration",
@@ -5092,9 +5134,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_src_main_resources_application_oidc_bff_configuration",
-      "community": 20,
-      "norm_label": "oidc bff configuration"
+      "community": 22,
+      "norm_label": "oidc bff configuration",
+      "_origin": "semantic",
+      "id": "apps_backend_src_main_resources_application_oidc_bff_configuration"
     },
     {
       "label": "Keycloak BlackICE Realm Endpoint",
@@ -5105,9 +5148,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_src_main_resources_application_keycloak_blackice_realm_endpoint",
-      "community": 20,
-      "norm_label": "keycloak blackice realm endpoint"
+      "community": 22,
+      "norm_label": "keycloak blackice realm endpoint",
+      "_origin": "semantic",
+      "id": "apps_backend_src_main_resources_application_keycloak_blackice_realm_endpoint"
     },
     {
       "label": "Encrypted HttpOnly Session Cookie",
@@ -5118,9 +5162,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_src_main_resources_application_http_only_token_cookie",
-      "community": 20,
-      "norm_label": "encrypted httponly session cookie"
+      "community": 22,
+      "norm_label": "encrypted httponly session cookie",
+      "_origin": "semantic",
+      "id": "apps_backend_src_main_resources_application_http_only_token_cookie"
     },
     {
       "label": "Realm Role Mapping",
@@ -5131,9 +5176,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_src_main_resources_application_realm_role_mapping",
-      "community": 20,
-      "norm_label": "realm role mapping"
+      "community": 22,
+      "norm_label": "realm role mapping",
+      "_origin": "semantic",
+      "id": "apps_backend_src_main_resources_application_realm_role_mapping"
     },
     {
       "label": "PKCE S256 Requirement",
@@ -5144,9 +5190,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_src_main_resources_application_pkce_s256",
-      "community": 20,
-      "norm_label": "pkce s256 requirement"
+      "community": 22,
+      "norm_label": "pkce s256 requirement",
+      "_origin": "semantic",
+      "id": "apps_backend_src_main_resources_application_pkce_s256"
     },
     {
       "label": "Quarkus JVM Container",
@@ -5157,9 +5204,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_src_main_docker_dockerfile_jvm_quarkus_jvm_container",
-      "community": 69,
-      "norm_label": "quarkus jvm container"
+      "community": 72,
+      "norm_label": "quarkus jvm container",
+      "_origin": "semantic",
+      "id": "apps_backend_src_main_docker_dockerfile_jvm_quarkus_jvm_container"
     },
     {
       "label": "Quarkus Legacy JAR Container",
@@ -5170,9 +5218,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_src_main_docker_dockerfile_legacy_jar_quarkus_legacy_jar_container",
-      "community": 70,
-      "norm_label": "quarkus legacy jar container"
+      "community": 73,
+      "norm_label": "quarkus legacy jar container",
+      "_origin": "semantic",
+      "id": "apps_backend_src_main_docker_dockerfile_legacy_jar_quarkus_legacy_jar_container"
     },
     {
       "label": "Quarkus Native Container",
@@ -5183,9 +5232,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_src_main_docker_dockerfile_native_quarkus_native_container",
-      "community": 72,
-      "norm_label": "quarkus native container"
+      "community": 47,
+      "norm_label": "quarkus native container",
+      "_origin": "semantic",
+      "id": "apps_backend_src_main_docker_dockerfile_native_quarkus_native_container"
     },
     {
       "label": "Quarkus Native Micro Container",
@@ -5196,9 +5246,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_backend_src_main_docker_dockerfile_native_micro_quarkus_native_micro_container",
-      "community": 71,
-      "norm_label": "quarkus native micro container"
+      "community": 74,
+      "norm_label": "quarkus native micro container",
+      "_origin": "semantic",
+      "id": "apps_backend_src_main_docker_dockerfile_native_micro_quarkus_native_micro_container"
     },
     {
       "label": "Vue SPA Build",
@@ -5209,9 +5260,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_frontend_dockerfile_vue_spa_build",
-      "community": 32,
-      "norm_label": "vue spa build"
+      "community": 35,
+      "norm_label": "vue spa build",
+      "_origin": "semantic",
+      "id": "apps_frontend_dockerfile_vue_spa_build"
     },
     {
       "label": "Nginx Static SPA Server",
@@ -5222,9 +5274,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_frontend_dockerfile_nginx_static_server",
-      "community": 32,
-      "norm_label": "nginx static spa server"
+      "community": 35,
+      "norm_label": "nginx static spa server",
+      "_origin": "semantic",
+      "id": "apps_frontend_dockerfile_nginx_static_server"
     },
     {
       "label": "Vue Router History Fallback",
@@ -5235,9 +5288,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_frontend_dockerfile_vue_router_history_fallback",
-      "community": 32,
-      "norm_label": "vue router history fallback"
+      "community": 35,
+      "norm_label": "vue router history fallback",
+      "_origin": "semantic",
+      "id": "apps_frontend_dockerfile_vue_router_history_fallback"
     },
     {
       "label": "Node 24 Toolchain",
@@ -5248,9 +5302,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "apps_frontend_mise_node_24",
-      "community": 76,
-      "norm_label": "node 24 toolchain"
+      "community": 78,
+      "norm_label": "node 24 toolchain",
+      "_origin": "semantic",
+      "id": "apps_frontend_mise_node_24"
     },
     {
       "label": "BlackICE Shared Realm",
@@ -5261,9 +5316,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_keycloak_readme_blackice_realm",
-      "community": 28,
-      "norm_label": "blackice shared realm"
+      "community": 31,
+      "norm_label": "blackice shared realm",
+      "_origin": "semantic",
+      "id": "infra_keycloak_readme_blackice_realm"
     },
     {
       "label": "blackice-quarkus Confidential BFF Client",
@@ -5274,9 +5330,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_keycloak_readme_blackice_quarkus_client",
-      "community": 28,
-      "norm_label": "blackice-quarkus confidential bff client"
+      "community": 31,
+      "norm_label": "blackice-quarkus confidential bff client",
+      "_origin": "semantic",
+      "id": "infra_keycloak_readme_blackice_quarkus_client"
     },
     {
       "label": "arc-audience Mapper",
@@ -5287,9 +5344,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_keycloak_readme_arc_audience_mapper",
-      "community": 28,
-      "norm_label": "arc-audience mapper"
+      "community": 31,
+      "norm_label": "arc-audience mapper",
+      "_origin": "semantic",
+      "id": "infra_keycloak_readme_arc_audience_mapper"
     },
     {
       "label": "dcm4chee-arc-rs DICOMweb Client",
@@ -5300,9 +5358,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_keycloak_readme_dcm4chee_arc_rs_client",
-      "community": 28,
-      "norm_label": "dcm4chee-arc-rs dicomweb client"
+      "community": 31,
+      "norm_label": "dcm4chee-arc-rs dicomweb client",
+      "_origin": "semantic",
+      "id": "infra_keycloak_readme_dcm4chee_arc_rs_client"
     },
     {
       "label": "auth Realm Role",
@@ -5313,9 +5372,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_keycloak_readme_auth_realm_role",
-      "community": 37,
-      "norm_label": "auth realm role"
+      "community": 40,
+      "norm_label": "auth realm role",
+      "_origin": "semantic",
+      "id": "infra_keycloak_readme_auth_realm_role"
     },
     {
       "label": "DICOMweb Authorization",
@@ -5326,9 +5386,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_keycloak_readme_dicomweb_authorization",
-      "community": 37,
-      "norm_label": "dicomweb authorization"
+      "community": 40,
+      "norm_label": "dicomweb authorization",
+      "_origin": "semantic",
+      "id": "infra_keycloak_readme_dicomweb_authorization"
     },
     {
       "label": "BlackICE Login Theme",
@@ -5339,9 +5400,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_keycloak_readme_blackice_login_theme",
-      "community": 25,
-      "norm_label": "blackice login theme"
+      "community": 27,
+      "norm_label": "blackice login theme",
+      "_origin": "semantic",
+      "id": "infra_keycloak_readme_blackice_login_theme"
     },
     {
       "label": "keycloak.v2 Parent Theme",
@@ -5352,9 +5414,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_keycloak_readme_keycloak_v2_parent_theme",
-      "community": 25,
-      "norm_label": "keycloak.v2 parent theme"
+      "community": 27,
+      "norm_label": "keycloak.v2 parent theme",
+      "_origin": "semantic",
+      "id": "infra_keycloak_readme_keycloak_v2_parent_theme"
     },
     {
       "label": "BlackICE Login Wordmark Messages",
@@ -5365,9 +5428,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_keycloak_themes_blackice_login_messages_messages_en_login_wordmark",
-      "community": 25,
-      "norm_label": "blackice login wordmark messages"
+      "community": 27,
+      "norm_label": "blackice login wordmark messages",
+      "_origin": "semantic",
+      "id": "infra_keycloak_themes_blackice_login_messages_messages_en_login_wordmark"
     },
     {
       "label": "BlackICE Login Visual Tokens",
@@ -5378,9 +5442,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_keycloak_themes_blackice_login_resources_css_blackice_blackice_login_visual_tokens",
-      "community": 25,
-      "norm_label": "blackice login visual tokens"
+      "community": 27,
+      "norm_label": "blackice login visual tokens",
+      "_origin": "semantic",
+      "id": "infra_keycloak_themes_blackice_login_resources_css_blackice_blackice_login_visual_tokens"
     },
     {
       "label": "BlackICE Theme Configuration",
@@ -5391,9 +5456,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_keycloak_themes_blackice_login_theme_blackice_theme_configuration",
-      "community": 25,
-      "norm_label": "blackice theme configuration"
+      "community": 27,
+      "norm_label": "blackice theme configuration",
+      "_origin": "semantic",
+      "id": "infra_keycloak_themes_blackice_login_theme_blackice_theme_configuration"
     },
     {
       "label": "Read-only Docker API Proxy",
@@ -5404,9 +5470,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_traefik_docker_api_proxy_nginx_docker_api_proxy",
-      "community": 29,
-      "norm_label": "read-only docker api proxy"
+      "community": 32,
+      "norm_label": "read-only docker api proxy",
+      "_origin": "semantic",
+      "id": "infra_traefik_docker_api_proxy_nginx_docker_api_proxy"
     },
     {
       "label": "Traefik Docker Provider",
@@ -5417,9 +5484,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_traefik_docker_api_proxy_nginx_traefik_docker_provider",
-      "community": 29,
-      "norm_label": "traefik docker provider"
+      "community": 32,
+      "norm_label": "traefik docker provider",
+      "_origin": "semantic",
+      "id": "infra_traefik_docker_api_proxy_nginx_traefik_docker_provider"
     },
     {
       "label": "Docker Daemon Socket",
@@ -5430,9 +5498,10 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_traefik_docker_api_proxy_nginx_docker_daemon_socket",
-      "community": 29,
-      "norm_label": "docker daemon socket"
+      "community": 32,
+      "norm_label": "docker daemon socket",
+      "_origin": "semantic",
+      "id": "infra_traefik_docker_api_proxy_nginx_docker_daemon_socket"
     },
     {
       "label": "Read-only Docker Discovery Endpoints",
@@ -5443,9 +5512,387 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "infra_traefik_docker_api_proxy_nginx_read_only_discovery_endpoints",
-      "community": 29,
-      "norm_label": "read-only docker discovery endpoints"
+      "community": 32,
+      "norm_label": "read-only docker discovery endpoints",
+      "_origin": "semantic",
+      "id": "infra_traefik_docker_api_proxy_nginx_read_only_discovery_endpoints"
+    },
+    {
+      "label": "Backend Container Build Artifacts",
+      "file_type": "document",
+      "source_file": "apps/backend/.dockerignore",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "apps_backend_dockerignore_backend_build_artifacts",
+      "community": 47,
+      "norm_label": "backend container build artifacts"
+    },
+    {
+      "label": "Backend Ignore Rules",
+      "file_type": "concept",
+      "source_file": "apps/backend/.gitignore",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "apps_backend_gitignore_backend_ignore_rules",
+      "community": 69,
+      "norm_label": "backend ignore rules"
+    },
+    {
+      "label": "Frontend Docker Context Rules",
+      "file_type": "concept",
+      "source_file": "apps/frontend/.dockerignore",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "apps_frontend_dockerignore_frontend_docker_context_rules",
+      "community": 75,
+      "norm_label": "frontend docker context rules"
+    },
+    {
+      "label": "Frontend Ignore Rules",
+      "file_type": "concept",
+      "source_file": "apps/frontend/.gitignore",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "apps_frontend_gitignore_frontend_ignore_rules",
+      "community": 76,
+      "norm_label": "frontend ignore rules"
+    },
+    {
+      "label": "Commit Curator Agent",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_commit_curator_commit_curator_agent",
+      "community": 5,
+      "norm_label": "commit curator agent"
+    },
+    {
+      "label": "Git Domain Pack",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_commit_curator_git_domain_pack",
+      "community": 5,
+      "norm_label": "git domain pack"
+    },
+    {
+      "label": "Branch Commit Policy",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_commit_curator_branch_commit_policy",
+      "community": 5,
+      "norm_label": "branch commit policy"
+    },
+    {
+      "label": "Graphify Commit Prerequisite",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_commit_curator_graphify_commit_prerequisite",
+      "community": 5,
+      "norm_label": "graphify commit prerequisite"
+    },
+    {
+      "label": "Keycloak Windows Bootstrap",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_keycloak_windows_bootstrap",
+      "community": 21,
+      "norm_label": "keycloak windows bootstrap"
+    },
+    {
+      "label": "Shared POSIX Configuration Core",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_shared_posix_configuration_core",
+      "community": 21,
+      "norm_label": "shared posix configuration core"
+    },
+    {
+      "label": "Cross-platform Launchers",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_cross_platform_launchers",
+      "community": 21,
+      "norm_label": "cross-platform launchers"
+    },
+    {
+      "label": "Keycloak Admin REST",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_keycloak_admin_rest",
+      "community": 21,
+      "norm_label": "keycloak admin rest"
+    },
+    {
+      "label": "Three-file Compose Configuration",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_three_file_compose_configuration",
+      "community": 21,
+      "norm_label": "three-file compose configuration"
+    },
+    {
+      "label": "Pester Contract Test",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_pester_contract_test",
+      "community": 21,
+      "norm_label": "pester contract test"
+    },
+    {
+      "label": "Manual DICOM Import",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_manual_dicom_import_manual_dicom_import",
+      "community": 13,
+      "norm_label": "manual dicom import"
+    },
+    {
+      "label": "Authenticated DICOM Ingest Flow",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow",
+      "community": 13,
+      "norm_label": "authenticated dicom ingest flow"
+    },
+    {
+      "label": "Metadata Validation and Study Grouping",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_manual_dicom_import_metadata_validation_and_study_grouping",
+      "community": 13,
+      "norm_label": "metadata validation and study grouping"
+    },
+    {
+      "label": "Streaming STOW-RS Gateway",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_manual_dicom_import_streaming_stow_rs_gateway",
+      "community": 13,
+      "norm_label": "streaming stow-rs gateway"
+    },
+    {
+      "label": "CSRF and OIDC Protection",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_manual_dicom_import_csrf_and_oidc_protection",
+      "community": 13,
+      "norm_label": "csrf and oidc protection"
+    },
+    {
+      "label": "DICOM UID Preservation",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_manual_dicom_import_dicom_uid_preservation",
+      "community": 13,
+      "norm_label": "dicom uid preservation"
+    },
+    {
+      "label": "Frontend Ingest Workflow",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_manual_dicom_import_frontend_ingest_workflow",
+      "community": 13,
+      "norm_label": "frontend ingest workflow"
+    },
+    {
+      "label": "Synthetic DICOM E2E",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_manual_dicom_import_synthetic_dicom_e2e",
+      "community": 13,
+      "norm_label": "synthetic dicom e2e"
+    },
+    {
+      "label": "DICOM Domain Review Gate",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_manual_dicom_import_dicom_domain_review_gate",
+      "community": 13,
+      "norm_label": "dicom domain review gate"
+    },
+    {
+      "label": "Durable Jobs EVO-001",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_plans_2026_08_09_manual_dicom_import_durable_jobs_evo_001",
+      "community": 13,
+      "norm_label": "durable jobs evo-001"
+    },
+    {
+      "label": "Portable Commit Curator",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_portable_commit_curator",
+      "community": 5,
+      "norm_label": "portable commit curator"
+    },
+    {
+      "label": "Commit Message Format",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_commit_message_format",
+      "community": 5,
+      "norm_label": "commit message format"
+    },
+    {
+      "label": "Non-coauthor Policy",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_non_coauthor_policy",
+      "community": 5,
+      "norm_label": "non-coauthor policy"
+    },
+    {
+      "label": "Branch-scoped Commit Authorization",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_branch_scoped_commit_authorization",
+      "community": 5,
+      "norm_label": "branch-scoped commit authorization"
+    },
+    {
+      "label": "Shared Domain Pack",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "docs_superpowers_specs_2026_08_09_commit_curator_design_shared_domain_pack",
+      "community": 5,
+      "norm_label": "shared domain pack"
     }
   ],
   "links": [
@@ -6930,17 +7377,6 @@
       "target": "docs_superpowers_plans_2026_08_09_commit_curator_global_constraints"
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
-      "source_location": null,
-      "weight": 1.0,
-      "_origin": "semantic",
-      "source": "docs_superpowers_plans_2026_08_09_commit_curator_commit_curator_implementation_plan",
-      "target": "docs_superpowers_specs_2026_08_09_commit_curator_design_commit_curator_design"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
@@ -6993,6 +7429,16 @@
       "_origin": "ast",
       "confidence_score": 1.0,
       "source": "docs_superpowers_specs_2026_08_09_commit_curator_design",
+      "target": "docs_superpowers_specs_2026_08_09_commit_curator_design_commit_curator_design"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_commit_curator_commit_curator_agent",
       "target": "docs_superpowers_specs_2026_08_09_commit_curator_design_commit_curator_design"
     },
     {
@@ -7049,6 +7495,16 @@
       "confidence_score": 1.0,
       "source": "docs_superpowers_specs_2026_08_09_commit_curator_design_commit_curator_design",
       "target": "docs_superpowers_specs_2026_08_09_commit_curator_design_objetivo"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_08_09_commit_curator_design_commit_curator_design",
+      "target": "docs_superpowers_specs_2026_08_09_commit_curator_design_portable_commit_curator"
     },
     {
       "relation": "contains",
@@ -8366,9 +8822,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "infra_keycloak_configure_blackice_container",
-      "target": "infra_keycloak_configure_blackice_container_sh__entry",
-      "confidence_score": 1.0
+      "target": "infra_keycloak_configure_blackice_container_sh__entry"
     },
     {
       "relation": "contains",
@@ -8377,9 +8833,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "infra_keycloak_configure_blackice_sh_infra_keycloak_configure_blackice",
-      "target": "infra_keycloak_configure_blackice_sh__entry",
-      "confidence_score": 1.0
+      "target": "infra_keycloak_configure_blackice_sh__entry"
     },
     {
       "relation": "contains",
@@ -8388,9 +8844,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "infra_keycloak_configure_blackice_tests",
-      "target": "infra_keycloak_configure_blackice_tests_assert_true",
-      "confidence_score": 1.0
+      "target": "infra_keycloak_configure_blackice_tests_assert_true"
     },
     {
       "relation": "contains",
@@ -8399,9 +8855,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "infra_keycloak_configure_blackice_tests",
-      "target": "infra_keycloak_configure_blackice_tests_global_docker",
-      "confidence_score": 1.0
+      "target": "infra_keycloak_configure_blackice_tests_global_docker"
     },
     {
       "relation": "implements",
@@ -8410,6 +8866,7 @@
       "source_file": ".claude/agents/git/commit-curator.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "claude_agents_git_commit_curator_commit_curator",
       "target": "claude_agents_git_commit_curator_canonical_commit_body"
     },
@@ -8420,6 +8877,7 @@
       "source_file": ".claude/agents/git/commit-curator.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "claude_agents_git_commit_curator_commit_curator",
       "target": "claude_agents_git_commit_curator_commit_conventions"
     },
@@ -8430,6 +8888,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_domain_packs",
       "target": "claude_agents_git_commit_curator_commit_conventions"
     },
@@ -8440,6 +8899,7 @@
       "source_file": ".codex/agents/commit-curator.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_agents_commit_curator_commit_curator",
       "target": "claude_agents_git_commit_curator_commit_conventions"
     },
@@ -8450,6 +8910,7 @@
       "source_file": ".codex/agents/commit-curator.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_agents_commit_curator_commit_curator",
       "target": "codex_agents_commit_curator_luna_model"
     },
@@ -8460,6 +8921,7 @@
       "source_file": ".codex/agents/dicom-domain-reviewer.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_agents_dicom_domain_reviewer_dicom_domain_reviewer",
       "target": "codex_agents_dicom_domain_reviewer_dicom_semantics"
     },
@@ -8470,6 +8932,7 @@
       "source_file": ".codex/agents/dicom-domain-reviewer.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_agents_dicom_domain_reviewer_dicom_domain_reviewer",
       "target": "codex_agents_dicom_domain_reviewer_dicomweb"
     },
@@ -8480,6 +8943,7 @@
       "source_file": ".codex/agents/dicom-domain-reviewer.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_agents_dicom_domain_reviewer_dicom_domain_reviewer",
       "target": "codex_agents_dicom_domain_reviewer_human_gate"
     },
@@ -8490,6 +8954,7 @@
       "source_file": ".codex/agents/quarkus-backend.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_agents_quarkus_backend_quarkus_backend",
       "target": "codex_agents_dicom_domain_reviewer_dicom_domain_reviewer"
     },
@@ -8500,6 +8965,7 @@
       "source_file": ".codex/agents/dicom-viewer-frontend.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_agents_dicom_viewer_frontend_dicom_viewer_frontend",
       "target": "codex_agents_dicom_domain_reviewer_dicomweb"
     },
@@ -8510,6 +8976,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_human_business_gate",
       "target": "codex_agents_dicom_domain_reviewer_human_gate"
     },
@@ -8520,6 +8987,7 @@
       "source_file": ".codex/agents/dicom-viewer-frontend.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_agents_dicom_viewer_frontend_dicom_viewer_frontend",
       "target": "codex_agents_dicom_viewer_frontend_cornerstone3d"
     },
@@ -8530,6 +8998,7 @@
       "source_file": ".codex/agents/dicom-viewer-frontend.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_agents_dicom_viewer_frontend_dicom_viewer_frontend",
       "target": "codex_agents_dicom_viewer_frontend_vue_conventions"
     },
@@ -8540,6 +9009,7 @@
       "source_file": ".codex/agents/quarkus-backend.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_agents_quarkus_backend_quarkus_backend",
       "target": "codex_agents_quarkus_backend_dcm4chee_dicomweb_client"
     },
@@ -8550,6 +9020,7 @@
       "source_file": ".codex/agents/quarkus-backend.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_agents_quarkus_backend_quarkus_backend",
       "target": "codex_agents_quarkus_backend_quarkus_conventions"
     },
@@ -8560,6 +9031,7 @@
       "source_file": ".codex/config.toml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "codex_config_multi_agent",
       "target": "codex_config_subagent_concurrency"
     },
@@ -8570,6 +9042,7 @@
       "source_file": ".graphify/setup.ps1",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "graphify_setup_graphify_version",
       "target": "graphify_setup_canonical_skill_hashes"
     },
@@ -8580,6 +9053,7 @@
       "source_file": ".graphify/setup.ps1",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "graphify_setup_linked_worktree_manual_update",
       "target": "graphify_setup_graphify_version"
     },
@@ -8590,6 +9064,7 @@
       "source_file": "docs/domains/git/commit-conventions.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_git_commit_conventions_graphify_prerequisite",
       "target": "graphify_setup_linked_worktree_manual_update"
     },
@@ -8600,6 +9075,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_blackice_pacs",
       "target": "agents_dcm4chee_archive"
     },
@@ -8610,6 +9086,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_blackice_pacs",
       "target": "agents_keycloak_oidc"
     },
@@ -8620,6 +9097,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_blackice_pacs",
       "target": "agents_quarkus_product_backend"
     },
@@ -8630,6 +9108,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_blackice_pacs",
       "target": "agents_vue_spa"
     },
@@ -8640,6 +9119,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_quarkus_product_backend",
       "target": "agents_dcm4chee_archive"
     },
@@ -8650,6 +9130,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_keycloak_oidc",
       "target": "agents_quarkus_product_backend"
     },
@@ -8660,6 +9141,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_quarkus_product_backend",
       "target": "agents_dicomweb_operations"
     },
@@ -8670,6 +9152,7 @@
       "source_file": "docs/architecture/project-structure.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_project_structure_feature_colocation",
       "target": "agents_quarkus_product_backend"
     },
@@ -8680,6 +9163,7 @@
       "source_file": "docs/architecture/project-structure.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_project_structure_http_contract_boundary",
       "target": "agents_quarkus_product_backend"
     },
@@ -8690,6 +9174,7 @@
       "source_file": "docs/architecture/project-structure.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_project_structure_feature_colocation",
       "target": "agents_vue_spa"
     },
@@ -8700,6 +9185,7 @@
       "source_file": "docs/architecture/project-structure.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_project_structure_http_contract_boundary",
       "target": "agents_vue_spa"
     },
@@ -8710,6 +9196,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-keycloak-windows-bootstrap-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_keycloak_bootstrap",
       "target": "agents_keycloak_oidc"
     },
@@ -8720,6 +9207,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_dicom_identity_invariants",
       "target": "agents_dicomweb_operations"
     },
@@ -8730,6 +9218,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-manual-dicom-import-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_stow_per_study",
       "target": "agents_dicomweb_operations"
     },
@@ -8740,6 +9229,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-manual-dicom-import-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_uid_validation",
       "target": "agents_dicom_identity_invariants"
     },
@@ -8750,6 +9240,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-manual-dicom-import-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_manual_dicom_import",
       "target": "docs_architecture_evolution_backlog_evolution_backlog"
     },
@@ -8760,6 +9251,7 @@
       "source_file": "docs/architecture/evolution-backlog.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_evolution_backlog_evo_001_async_ingestion",
       "target": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_manual_dicom_import"
     },
@@ -8770,6 +9262,7 @@
       "source_file": "docs/architecture/evolution-backlog.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_evolution_backlog_evo_002_token_exchange",
       "target": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_manual_dicom_import"
     },
@@ -8780,6 +9273,7 @@
       "source_file": "docs/architecture/evolution-backlog.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_evolution_backlog_evo_003_product_rbac",
       "target": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_manual_dicom_import"
     },
@@ -8790,6 +9284,7 @@
       "source_file": "docs/architecture/evolution-backlog.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_evolution_backlog_evo_004_scheduled_workflow",
       "target": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_manual_dicom_import"
     },
@@ -8800,6 +9295,7 @@
       "source_file": "docs/domains/git/commit-conventions.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_git_commit_conventions_commit_policy",
       "target": "docs_domains_git_commit_conventions_graphify_prerequisite"
     },
@@ -8810,6 +9306,7 @@
       "source_file": "docs/domains/git/commit-conventions.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_git_commit_conventions_commit_policy",
       "target": "docs_domains_git_commit_conventions_safe_scope"
     },
@@ -8820,6 +9317,7 @@
       "source_file": "docs/domains/git/commit-conventions.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_git_commit_conventions_graph_sync_commit",
       "target": "docs_domains_git_commit_conventions_commit_policy"
     },
@@ -8830,6 +9328,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-keycloak-windows-bootstrap-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_keycloak_bootstrap",
       "target": "docs_superpowers_specs_2026_08_09_keycloak_windows_bootstrap_design_container_admin_rest_script"
     },
@@ -8840,6 +9339,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-manual-dicom-import-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_manual_dicom_import",
       "target": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_csrf_protection"
     },
@@ -8850,6 +9350,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-manual-dicom-import-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_manual_dicom_import",
       "target": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_stow_per_study"
     },
@@ -8860,6 +9361,7 @@
       "source_file": "docs/superpowers/specs/2026-08-09-manual-dicom-import-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_manual_dicom_import",
       "target": "docs_superpowers_specs_2026_08_09_manual_dicom_import_design_uid_validation"
     },
@@ -8870,6 +9372,7 @@
       "source_file": "apps/backend/mvnw.cmd",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_backend_mvnw_maven_wrapper",
       "target": "apps_backend_mvn_wrapper_maven_wrapper_maven_distribution"
     },
@@ -8880,6 +9383,7 @@
       "source_file": "apps/backend/src/main/resources/application.properties",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_backend_src_main_resources_application_oidc_bff_configuration",
       "target": "apps_backend_src_main_resources_application_http_only_token_cookie"
     },
@@ -8890,6 +9394,7 @@
       "source_file": "apps/backend/src/main/resources/application.properties",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_backend_src_main_resources_application_oidc_bff_configuration",
       "target": "apps_backend_src_main_resources_application_keycloak_blackice_realm_endpoint"
     },
@@ -8900,6 +9405,7 @@
       "source_file": "apps/backend/src/main/resources/application.properties",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_backend_src_main_resources_application_oidc_bff_configuration",
       "target": "apps_backend_src_main_resources_application_pkce_s256"
     },
@@ -8910,8 +9416,19 @@
       "source_file": "apps/backend/src/main/resources/application.properties",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_backend_src_main_resources_application_oidc_bff_configuration",
       "target": "apps_backend_src_main_resources_application_realm_role_mapping"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "apps/backend/.dockerignore",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "apps_backend_dockerignore_backend_build_artifacts",
+      "target": "apps_backend_src_main_docker_dockerfile_native_quarkus_native_container"
     },
     {
       "relation": "implements",
@@ -8920,6 +9437,7 @@
       "source_file": "apps/frontend/Dockerfile",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_frontend_dockerfile_vue_spa_build",
       "target": "apps_frontend_dockerfile_nginx_static_server"
     },
@@ -8930,6 +9448,7 @@
       "source_file": "apps/frontend/Dockerfile",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_frontend_dockerfile_nginx_static_server",
       "target": "apps_frontend_dockerfile_vue_router_history_fallback"
     },
@@ -8940,6 +9459,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_blackice_realm",
       "target": "infra_keycloak_readme_blackice_quarkus_client"
     },
@@ -8950,6 +9470,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_blackice_realm",
       "target": "infra_keycloak_readme_dcm4chee_arc_rs_client"
     },
@@ -8960,6 +9481,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_arc_audience_mapper",
       "target": "infra_keycloak_readme_blackice_quarkus_client"
     },
@@ -8970,6 +9492,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_arc_audience_mapper",
       "target": "infra_keycloak_readme_dcm4chee_arc_rs_client"
     },
@@ -8980,6 +9503,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_auth_realm_role",
       "target": "infra_keycloak_readme_dicomweb_authorization"
     },
@@ -8990,6 +9514,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_blackice_login_theme",
       "target": "infra_keycloak_readme_keycloak_v2_parent_theme"
     },
@@ -9000,6 +9525,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_blackice_login_theme",
       "target": "infra_keycloak_themes_blackice_login_messages_messages_en_login_wordmark"
     },
@@ -9010,6 +9536,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_blackice_login_theme",
       "target": "infra_keycloak_themes_blackice_login_resources_css_blackice_blackice_login_visual_tokens"
     },
@@ -9020,6 +9547,7 @@
       "source_file": "infra/keycloak/themes/blackice/login/theme.properties",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_themes_blackice_login_theme_blackice_theme_configuration",
       "target": "infra_keycloak_themes_blackice_login_resources_css_blackice_blackice_login_visual_tokens"
     },
@@ -9030,6 +9558,7 @@
       "source_file": "infra/traefik/docker-api-proxy/nginx.conf",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_traefik_docker_api_proxy_nginx_docker_api_proxy",
       "target": "infra_traefik_docker_api_proxy_nginx_docker_daemon_socket"
     },
@@ -9040,6 +9569,7 @@
       "source_file": "infra/traefik/docker-api-proxy/nginx.conf",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_traefik_docker_api_proxy_nginx_docker_api_proxy",
       "target": "infra_traefik_docker_api_proxy_nginx_read_only_discovery_endpoints"
     },
@@ -9050,11 +9580,285 @@
       "source_file": "infra/traefik/docker-api-proxy/nginx.conf",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_traefik_docker_api_proxy_nginx_traefik_docker_provider",
       "target": "infra_traefik_docker_api_proxy_nginx_docker_api_proxy"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_commit_curator_commit_curator_agent",
+      "target": "docs_superpowers_plans_2026_08_09_commit_curator_git_domain_pack"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_commit_curator_commit_curator_agent",
+      "target": "docs_superpowers_plans_2026_08_09_commit_curator_graphify_commit_prerequisite"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_commit_curator_git_domain_pack",
+      "target": "docs_superpowers_plans_2026_08_09_commit_curator_branch_commit_policy"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_commit_curator_git_domain_pack",
+      "target": "docs_superpowers_specs_2026_08_09_commit_curator_design_shared_domain_pack"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_commit_curator_branch_commit_policy",
+      "target": "docs_superpowers_specs_2026_08_09_commit_curator_design_branch_scoped_commit_authorization"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_keycloak_windows_bootstrap",
+      "target": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_shared_posix_configuration_core"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_cross_platform_launchers",
+      "target": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_shared_posix_configuration_core"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_shared_posix_configuration_core",
+      "target": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_keycloak_admin_rest"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_cross_platform_launchers",
+      "target": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_three_file_compose_configuration"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_pester_contract_test",
+      "target": "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_cross_platform_launchers"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_manual_dicom_import_manual_dicom_import",
+      "target": "docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow",
+      "target": "docs_superpowers_plans_2026_08_09_manual_dicom_import_csrf_and_oidc_protection"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow",
+      "target": "docs_superpowers_plans_2026_08_09_manual_dicom_import_durable_jobs_evo_001"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow",
+      "target": "docs_superpowers_plans_2026_08_09_manual_dicom_import_metadata_validation_and_study_grouping"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow",
+      "target": "docs_superpowers_plans_2026_08_09_manual_dicom_import_streaming_stow_rs_gateway"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_manual_dicom_import_dicom_domain_review_gate",
+      "target": "docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_manual_dicom_import_frontend_ingest_workflow",
+      "target": "docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_manual_dicom_import_synthetic_dicom_e2e",
+      "target": "docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_08_09_manual_dicom_import_metadata_validation_and_study_grouping",
+      "target": "docs_superpowers_plans_2026_08_09_manual_dicom_import_dicom_uid_preservation"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_08_09_commit_curator_design_portable_commit_curator",
+      "target": "docs_superpowers_specs_2026_08_09_commit_curator_design_branch_scoped_commit_authorization"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_08_09_commit_curator_design_portable_commit_curator",
+      "target": "docs_superpowers_specs_2026_08_09_commit_curator_design_commit_message_format"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_08_09_commit_curator_design_portable_commit_curator",
+      "target": "docs_superpowers_specs_2026_08_09_commit_curator_design_non_coauthor_policy"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-08-09-commit-curator-design.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_08_09_commit_curator_design_portable_commit_curator",
+      "target": "docs_superpowers_specs_2026_08_09_commit_curator_design_shared_domain_pack"
     }
   ],
   "hyperedges": [
+    {
+      "id": "commit_curator_domain_pack_pattern",
+      "label": "Commit Curator Domain Pack Pattern",
+      "nodes": [
+        "docs_superpowers_plans_2026_08_09_commit_curator_commit_curator_agent",
+        "docs_superpowers_plans_2026_08_09_commit_curator_git_domain_pack",
+        "docs_superpowers_plans_2026_08_09_commit_curator_branch_commit_policy",
+        "docs_superpowers_plans_2026_08_09_commit_curator_graphify_commit_prerequisite"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-commit-curator.md"
+    },
+    {
+      "id": "keycloak_cross_platform_configuration_flow",
+      "label": "Keycloak Cross-platform Configuration Flow",
+      "nodes": [
+        "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_shared_posix_configuration_core",
+        "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_cross_platform_launchers",
+        "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_three_file_compose_configuration",
+        "docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_keycloak_admin_rest"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md"
+    },
+    {
+      "id": "manual_dicom_ingest_bff_flow",
+      "label": "Manual DICOM Ingest BFF Flow",
+      "nodes": [
+        "docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow",
+        "docs_superpowers_plans_2026_08_09_manual_dicom_import_frontend_ingest_workflow",
+        "docs_superpowers_plans_2026_08_09_manual_dicom_import_metadata_validation_and_study_grouping",
+        "docs_superpowers_plans_2026_08_09_manual_dicom_import_streaming_stow_rs_gateway",
+        "docs_superpowers_plans_2026_08_09_manual_dicom_import_csrf_and_oidc_protection"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-08-09-manual-dicom-import.md"
+    },
     {
       "id": "blackice_product_architecture",
       "label": "BlackICE Product Architecture",
@@ -9205,5 +10009,5 @@
       "source_file": "apps/frontend/public/icons.svg"
     }
   ],
-  "built_at_commit": "d1fd0e217bfc6873dcafafbf00c79b465a1075ac"
+  "built_at_commit": "6e5dbbd6be584ad78c359171db67276e4a8ceb94"
 }

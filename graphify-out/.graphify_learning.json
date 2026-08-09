@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T22:19:20.110551+00:00",
+  "generated_at": "2026-08-09T23:09:11.607124+00:00",
   "nodes": {
     "_claude_skills_graphify_skill_skill": {
       "code_fingerprint": "ed077dbec56c6e09704adeedc308ab3704fea3db0e2bb944ec353f0c11b38e4b",
@@ -12,7 +12,7 @@
           "q": "Onde ficam as instruções operacionais do Graphify no BlackICE?"
         }
       ],
-      "score": 0.737983746,
+      "score": 0.73739361,
       "source_file": ".claude/skills/graphify/SKILL.md",
       "status": "tentative",
       "uses": 1
@@ -28,7 +28,7 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.737977333,
+      "score": 0.737387202,
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "status": "tentative",
       "uses": 1
@@ -44,7 +44,7 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.737977333,
+      "score": 0.737387202,
       "source_file": "apps/frontend/src/features/home/HomePage.vue",
       "status": "tentative",
       "uses": 1
@@ -60,7 +60,7 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.737977333,
+      "score": 0.737387202,
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "status": "tentative",
       "uses": 1
@@ -76,7 +76,7 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.737977333,
+      "score": 0.737387202,
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "status": "tentative",
       "uses": 1
@@ -92,7 +92,7 @@
           "q": "Onde ficam as instruções operacionais do Graphify no BlackICE?"
         }
       ],
-      "score": 0.737983746,
+      "score": 0.73739361,
       "source_file": ".claude/skills/graphify/references/hooks.md",
       "status": "tentative",
       "uses": 1
@@ -108,7 +108,7 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.73797941,
+      "score": 0.737389277,
       "source_file": "docs/domains/dicom/dicomweb.md",
       "status": "tentative",
       "uses": 1
@@ -124,7 +124,7 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.73797941,
+      "score": 0.737389277,
       "source_file": "docs/domains/dicom/dicomweb.md",
       "status": "tentative",
       "uses": 1
@@ -140,7 +140,7 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.73797941,
+      "score": 0.737389277,
       "source_file": "docs/domains/dicom/dicomweb.md",
       "status": "tentative",
       "uses": 1
@@ -156,7 +156,7 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.73797941,
+      "score": 0.737389277,
       "source_file": "docs/domains/dicom/dicomweb.md",
       "status": "tentative",
       "uses": 1
@@ -172,7 +172,7 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.73797941,
+      "score": 0.737389277,
       "source_file": "docs/domains/dicom/semantics.md",
       "status": "tentative",
       "uses": 1

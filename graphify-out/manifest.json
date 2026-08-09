@@ -392,12 +392,12 @@
   "docs/superpowers/plans/2026-08-09-commit-curator.md": {
     "mtime": 1786310357.9730358,
     "ast_hash": "0b5abd33c576c8b6b77e18affeafc972",
-    "semantic_hash": ""
+    "semantic_hash": "0b5abd33c576c8b6b77e18affeafc972"
   },
   "docs/superpowers/specs/2026-08-09-commit-curator-design.md": {
     "mtime": 1786310355.1394987,
     "ast_hash": "38059362a0f428b09ef98b8bc525ce4c",
-    "semantic_hash": ""
+    "semantic_hash": "38059362a0f428b09ef98b8bc525ce4c"
   },
   ".claude/agents/git/commit-curator.md": {
     "mtime": 1786310345.2411528,
@@ -432,7 +432,7 @@
   "docs/superpowers/plans/2026-08-09-keycloak-windows-bootstrap.md": {
     "mtime": 1786309017.408485,
     "ast_hash": "cbcba7f726ecb5a40e6c9b37a0aa5b6a",
-    "semantic_hash": ""
+    "semantic_hash": "cbcba7f726ecb5a40e6c9b37a0aa5b6a"
   },
   "docs/superpowers/specs/2026-08-09-keycloak-windows-bootstrap-design.md": {
     "mtime": 1786308957.7022896,
@@ -568,5 +568,30 @@
     "mtime": 1784999804.635595,
     "ast_hash": "064dedc44d7d1c5366dfa2ed4f97659a",
     "semantic_hash": "064dedc44d7d1c5366dfa2ed4f97659a"
+  },
+  "apps/backend/.dockerignore": {
+    "mtime": 1784999802.4744928,
+    "ast_hash": "6919dc743d69515ea3a1c0b2756f3089",
+    "semantic_hash": "6919dc743d69515ea3a1c0b2756f3089"
+  },
+  "apps/backend/.gitignore": {
+    "mtime": 1784999802.4810033,
+    "ast_hash": "02a9dfa7a28d96f13363f672bf83d582",
+    "semantic_hash": "02a9dfa7a28d96f13363f672bf83d582"
+  },
+  "apps/frontend/.dockerignore": {
+    "mtime": 1784999802.5153732,
+    "ast_hash": "11fbd9962a1adcd421b22ebfb4d42672",
+    "semantic_hash": "11fbd9962a1adcd421b22ebfb4d42672"
+  },
+  "apps/frontend/.gitignore": {
+    "mtime": 1785167077.0294354,
+    "ast_hash": "e2056c993de38647bd7c5f0534a0c500",
+    "semantic_hash": "e2056c993de38647bd7c5f0534a0c500"
+  },
+  "docs/superpowers/plans/2026-08-09-manual-dicom-import.md": {
+    "mtime": 1786314681.6706312,
+    "ast_hash": "164a332551364240894baaf9a97a4491",
+    "semantic_hash": "164a332551364240894baaf9a97a4491"
   }
 }
