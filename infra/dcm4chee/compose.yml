@@ -55,24 +55,37 @@ services:
       KC_LOG: file
       # Nome do realm. Default oficial da imagem é "dcm4che"; era "dcm4chee".
       #
-      # ATENÇÃO — este valor NÃO renomeou o realm, e trocá-lo sozinho NÃO
+      # NUMA BASE VAZIA (cold start, volume novo) este valor basta: o
+      # --import-realm cria o realm já com o nome daqui.
+      #
+      # NUMA BASE JÁ POPULADA — o caso deste ambiente — trocá-lo sozinho NÃO
       # funciona (spec 2026-08-07, Fase 2). `--import-realm` importa
       # dcm4che-realm.json, que embute 112 UUIDs literais NÃO templados por
       # ${REALM_NAME} — entre eles `defaultRole.id`. Como KEYCLOAK_ROLE.ID é
       # PK global, importar o mesmo arquivo uma segunda vez sob outro nome
       # colide e trava o boot do Keycloak. Verificado empiricamente.
       #
-      # O realm foi renomeado IN PLACE pela Admin REST
+      # Por isso o realm foi renomeado IN PLACE pela Admin REST
       # (`PUT /admin/realms/<atual> {"realm":"blackice"}`), o que preserva
       # usuários, clients, mappers, role mappings e o login_theme. Este valor
       # só acompanha o nome real para que o import de boot encontre o realm já
-      # existente e não tente criar outro. Reverter = dois PUTs pela Admin
-      # REST — o realm (`PUT /admin/realms/blackice {"realm":"dcm4chee"}`) E a
-      # role padrão (`default-roles-blackice` -> `default-roles-dcm4chee`,
-      # GET a representação inteira, troque só o `name`, PUT de volta; ela
-      # viaja no claim `realm_access.roles`, lido por
-      # quarkus.oidc.roles.role-claim-path) — e voltar este valor. Nenhum
-      # dado é perdido no caminho.
+      # existente e não tente criar outro.
+      #
+      # REVERTER exige os CINCO passos (os dois primeiros sozinhos deixam o
+      # login quebrado) — receita completa na seção "Reversão" do spec
+      # docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md:
+      #   1. PUT /admin/realms/blackice {"realm":"dcm4chee"}
+      #   2. renomear a role padrão default-roles-blackice ->
+      #      default-roles-dcm4chee (GET a representação inteira, troque só o
+      #      `name`, PUT de volta; ela viaja no claim realm_access.roles,
+      #      lido por quarkus.oidc.roles.role-claim-path)
+      #   3. este valor, nos DOIS serviços (`keycloak` e `arc`)
+      #   4. REALM em infra/keycloak/configure-blackice.sh e o realm na URL de
+      #      QUARKUS_OIDC_AUTH_SERVER_URL em infra/compose.apps.yml
+      #   5. quarkus.oidc.auth-server-url na application.properties do backend
+      #      — e como o Dockerfile.jvm copia o target/ pré-buildado, isso pede
+      #      `./mvnw package` E `build --no-cache backend`, não só restart
+      # Nenhum dado é perdido no caminho.
       REALM_NAME: blackice
       ARCHIVE_HOST: ${DCM4CHEE_HOST}
       KEYCLOAK_WAIT_FOR: "ldap:389 mariadb:3306"

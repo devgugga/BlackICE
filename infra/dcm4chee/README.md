@@ -52,13 +52,16 @@ limpa onde ela ainda não existe.
 3. **`REALM_NAME=blackice`** setado em `keycloak` e `arc`. O nome padrão do
    realm importado no primeiro startup é `dcm4che`; foi `dcm4chee` até a
    Fase 2 do spec 2026-08-07, que renomeou o realm para `blackice` para tirar
-   o nome do produto de terceiro da URL de login. **A variável não renomeia o
-   realm** — o rename é feito IN PLACE pela Admin REST
-   (`PUT /admin/realms/<atual> {"realm":"blackice"}`); este valor só acompanha
-   o nome real para que o import de boot encontre o realm existente. Ver o
-   comentário em `infra/dcm4chee/compose.yml` para o porquê (o
-   `dcm4che-realm.json` embute UUIDs literais, então reimportar sob outro nome
-   colide). Precisa estar setado nos DOIS serviços (documentado no wiki
+   o nome do produto de terceiro da URL de login. **Numa base vazia (cold
+   start, volume novo) esta variável basta** — o import de boot cria o realm
+   já com este nome. **Numa base já populada ela não renomeia nada**: o rename
+   foi feito IN PLACE pela Admin REST
+   (`PUT /admin/realms/<atual> {"realm":"blackice"}`), e este valor só
+   acompanha o nome real para que o import de boot encontre o realm existente.
+   Ver o comentário em `infra/dcm4chee/compose.yml` para o porquê (o
+   `dcm4che-realm.json` embute 112 UUIDs literais, então reimportar sob outro
+   nome contra um realm já presente colide em `KEYCLOAK_ROLE.ID`) e para a
+   receita de reversão de 5 passos. Precisa estar setado nos DOIS serviços (documentado no wiki
    oficial), senão o Archive falha ao autorizar usuários via chamada REST
    out-of-band ao Keycloak.
 4. **Volumes nomeados do Docker em vez de bind mounts em `/var/local/...`.**
@@ -97,6 +100,15 @@ limpa onde ela ainda não existe.
   frontend URLs saem dele, não do endereço da requisição.
 - Admin console do Keycloak (realm master): `https://localhost:8843/auth/admin`
   (usuário `admin`, senha em `KEYCLOAK_ADMIN_PASSWORD` no `.env`).
+  ⚠️ **O admin console e a Admin REST também respondem pelo Traefik**, em
+  `http://blackice.localhost/auth/admin/...` — HTTP puro, no mesmo origin do
+  produto (medido: `/auth/admin/master/console/` devolve `200`). Não é
+  intencional e sim consequência de `KC_HTTP_RELATIVE_PATH` ser o root path do
+  servidor inteiro: o `PathPrefix(/auth)` do router carrega junto tudo que mora
+  sob `/auth`. Aceitável em dev local (a stack não sai do host e o Traefik já
+  roda com `--api.insecure=true`); antes de qualquer exposição além disso,
+  ver a linha correspondente na tabela de Riscos do spec
+  `docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md`.
 - Archive (WildFly): **sem porta publicada no host** (invariante: DCM4CHEE
   nunca exposto ao browser — só o Quarkus fala DICOMweb com ele pela rede
   interna). Dentro da rede `blackice` responde em `http://arc:8080/dcm4chee-arc`

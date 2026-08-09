@@ -24,6 +24,12 @@ async function openBlackiceLogin(page: Page): Promise<void> {
     );
   }
 
+  // O entregável do spec 2026-08-07 é a própria URL: same-origin, sob /auth,
+  // no realm blackice. Sem esta asserção nada no E2E pega uma regressão que
+  // devolva o login para https://localhost:8843/realms/dcm4chee/.
+  await expect(page).toHaveURL(
+    /^http:\/\/blackice\.localhost\/auth\/realms\/blackice\//,
+  );
   await expect(page).toHaveTitle('Acesso ao BlackICE');
   await expect(
     page.locator('link[href*="/login/blackice/css/blackice.css"]'),

@@ -4,7 +4,7 @@
 
 **Goal:** Tirar o Keycloak da barra de endereços — o login deixa de acontecer em `https://localhost:8843/realms/dcm4chee/…` (host estranho, porta, aviso de certificado, nome de produto de terceiro) e passa a acontecer em `http://blackice.localhost/auth/realms/blackice/…`.
 
-**Architecture:** Duas fases com gate humano entre elas. **Fase 1** põe o Keycloak atrás do Traefik no mesmo origin da aplicação, sob o path `/auth`, servindo HTTP na rede interna; o fluxo Authorization Code + PKCE e o `application-type=web-app` do `quarkus-oidc` ficam intactos. **Fase 2** troca o nome do realm de `dcm4chee` para `blackice`, criando o realm novo **ao lado** do antigo via `--import-realm`, sem apagar volume. Nenhuma linha de Java ou Vue muda.
+**Architecture:** Duas fases com gate humano entre elas. **Fase 1** põe o Keycloak atrás do Traefik no mesmo origin da aplicação, sob o path `/auth`, servindo HTTP na rede interna; o fluxo Authorization Code + PKCE e o `application-type=web-app` do `quarkus-oidc` ficam intactos. **Fase 2** troca o nome do realm de `dcm4chee` para `blackice` **renomeando-o in place** pela Admin REST, sem apagar volume (a mecânica original — criar o realm novo ao lado via `--import-realm` — trava o boot; ver o bloco antes do Step 3 da Task 2). Nenhuma linha de Java ou Vue muda.
 
 **Tech Stack:** Docker Compose (3 arquivos), Traefik v3.1, Keycloak 25.0.6 (`dcm4che/keycloak`, hostname feature **v2**), DCM4CHEE Archive 5.34.3, Quarkus (`quarkus-oidc`), Playwright.
 
@@ -395,7 +395,7 @@ Só depois do gate humano da Task 1.
 
 **Interfaces:**
 - Consumes: da Task 1 — Keycloak em `http://blackice.localhost/auth` (browser), `http://keycloak:8080/auth` (interno), Admin REST em `https://localhost:8843/auth/admin`.
-- Produces: realm `blackice` operante, com o realm `dcm4chee` preservado como rollback.
+- Produces: realm `blackice` operante — o **mesmo** realm renomeado in place, não um segundo realm. `dcm4chee` deixa de resolver; o rollback é a receita de 5 passos na seção "Reversão" do spec.
 
 - [ ] **Step 1: Escrever o script de asserção da Fase 2**
 
@@ -413,8 +413,11 @@ BASE=http://blackice.localhost
 chk "discovery do realm blackice" "200" \
   "$(curl -sS -o /dev/null -w '%{http_code}' "$BASE/auth/realms/blackice/.well-known/openid-configuration")"
 
-# B. o realm antigo continua lá (rollback preservado)
-chk "realm dcm4chee preservado" "200" \
+# B. o rename foi IN PLACE: o nome antigo não resolve mais
+#    (corrigido em 2026-08-07 — a versão original esperava 200 aqui, sob a
+#     premissa do realm criado "ao lado", que se provou impossível; ver o
+#     bloco antes do Step 3)
+chk "realm dcm4chee não existe mais" "404" \
   "$(curl -sS -o /dev/null -w '%{http_code}' "$BASE/auth/realms/dcm4chee/.well-known/openid-configuration")"
 
 # C. o login vai para o realm novo e NÃO contém a string dcm4chee
@@ -629,7 +632,7 @@ git commit -m "🔐 renomeia o realm para blackice, tirando dcm4chee da URL de l
 | Archive movido para o novo path | Task 1, Step 5; asserções E e F |
 | Admin REST sob `/auth` | Task 1, Step 8; provado no Step 11 |
 | `tls.verification=none` apagado | Task 1, Step 7; asserção D |
-| Realm novo ao lado do antigo, sem wipe | Task 2, Steps 3-4; asserção B |
+| Realm renomeado in place, sem wipe e sem perder configuração | Task 2, Steps 3-4; asserção B |
 | Roles re-atribuídas no gate humano | Task 2, Step 9 |
 | Audience do realm novo (falha silenciosa) | Task 2, Step 1 asserção D, Step 8 |
 | Snapshot Playwright como rede de segurança | Task 1, Steps 1 e 14; Task 2, Step 11 |

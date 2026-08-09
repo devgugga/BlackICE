@@ -91,7 +91,7 @@ terceiro em lugar algum da URL**.
 | Como esconder host/porta/cert | Keycloak atrás do Traefik, mesmo origin | Mantém Authorization Code + PKCE e o `web-app` do `quarkus-oidc` intactos |
 | Prefixo | `/auth` (path), **não** subdomínio | Subdomínio continuaria sendo outro origin no browser: resolveria cert e porta, não o "saí do produto" |
 | Como esconder `dcm4chee` | Renomear o realm para `blackice` | Ataca a raiz; mantém realm único, o audience mapper e a identidade por usuário chegando ao Archive |
-| Criação do realm novo | `--import-realm` com `REALM_NAME` trocado | Cria `blackice` **ao lado** de `dcm4chee`; sem wipe de volume, reversível por env |
+| Criação do realm novo | ~~`--import-realm` com `REALM_NAME` trocado~~ → **rename in place pela Admin REST** | A escolha original **não funciona**: `dcm4che-realm.json` embute 112 UUIDs literais não templados por `${REALM_NAME}`, e `KEYCLOAK_ROLE.ID` é PK global — reimportar sob outro nome numa base já populada colide e trava o boot. O rename (`PUT /admin/realms/<atual>`) preserva usuários, clients, mappers e role mappings. Ver "Reversão" |
 | Transporte Traefik→Keycloak | `KC_HTTP_ENABLED=true` (HTTP em :8080 na rede) | O 8843 HTTPS continua servindo o backchannel do Archive |
 
 ---
@@ -313,9 +313,26 @@ preservou o que existia, e o que existia era só a role padrão.
 
 ### Reversão
 
-`PUT /auth/admin/realms/blackice {"realm":"dcm4chee"}`, renomear a role padrão de
-volta, e voltar `REALM_NAME` nos dois serviços. Nenhum dado sai do lugar em
-nenhuma direção.
+Receita completa — **os cinco passos são obrigatórios**; fazer só os dois
+primeiros deixa o login quebrado:
+
+1. `PUT /auth/admin/realms/blackice {"realm":"dcm4chee"}` (Admin REST, de dentro
+   do container `keycloak`).
+2. Renomear a role padrão de volta: GET
+   `/auth/admin/realms/dcm4chee/roles/default-roles-blackice`, troque só o
+   `name` para `default-roles-dcm4chee`, PUT de volta. Ela viaja no claim
+   `realm_access.roles`, que é o que `quarkus.oidc.roles.role-claim-path` lê.
+3. `REALM_NAME: dcm4chee` nos **dois** serviços do
+   `infra/dcm4chee/compose.yml` — `keycloak` e `arc`.
+4. `REALM=dcm4chee` em `infra/keycloak/configure-blackice.sh`, e o realm na URL
+   de `QUARKUS_OIDC_AUTH_SERVER_URL` em `infra/compose.apps.yml`.
+5. `quarkus.oidc.auth-server-url` em
+   `apps/backend/src/main/resources/application.properties` — e como o
+   `Dockerfile.jvm` copia o `target/` pré-buildado em vez de compilar,
+   isso exige `./mvnw package` **e**
+   `docker compose … build --no-cache backend`, não só um restart.
+
+Nenhum dado sai do lugar em nenhuma direção.
 
 > **O requisito de rollback mudou de forma, não de força.** Este spec dizia "o
 > realm `dcm4chee` continua existindo como escape hatch". Com o rename ele
@@ -351,7 +368,10 @@ ao novo prefixo.
 
 **Fase 2**
 1. `GET .../auth/realms/blackice/.well-known/openid-configuration` responde 200.
-2. O realm `dcm4chee` continua existindo (rollback preservado).
+2. O realm `dcm4chee` **não** existe mais por esse nome — `GET
+   .../auth/realms/dcm4chee/.well-known/openid-configuration` responde `404`.
+   É o mesmo realm renomeado; o rollback está na receita da "Reversão" acima,
+   não num realm duplicado.
 3. `configure-blackice.sh` com `REALM=blackice` roda até `OK:`.
 4. Roles re-atribuídas — **gate humano**.
 5. Login ponta-a-ponta, e a URL da tela de login **não contém a string
@@ -383,7 +403,8 @@ ao novo prefixo.
 | **Backchannel do Archive quebrar pelo mesmo motivo** — o relative path vale para o listener HTTPS 8843 também | `AUTH_SERVER_URL`/`UI_AUTH_SERVER_URL` ganham `/auth` no mesmo commit; verificação 6 da Fase 1 é o teste |
 | HTTP puro entre browser e Keycloak | Ambiente local; o app já é HTTP. **Prod exige TLS no entrypoint do Traefik — é lá que se resolve, não voltando o Keycloak para 8843** |
 | Fase 2 deixar o Archive falando com o realm errado | `REALM_NAME` muda nos **dois** serviços no mesmo commit |
-| Import do realm novo não disparar (o import dir já existe no volume) | O entrypoint só copia o import se ausente, mas o `--import-realm` roda a cada start e pula realms existentes. Verificação 1 da Fase 2 confirma |
+| ~~Import do realm novo não disparar~~ → **o import do realm novo travar o boot** | Não é "não disparar": numa base já populada o `--import-realm` sob outro nome **colide** em `KEYCLOAK_ROLE.ID` (PK global) e o Keycloak não sobe. Por isso o rename é in place. Numa base **vazia** (cold start) o problema não existe: o import cria o realm já com o nome de `REALM_NAME` |
+| **`/auth` publica também o admin console e a Admin REST no origin do produto, em HTTP puro** — medido: `http://blackice.localhost/auth/admin/master/console/` responde `200`. `KC_HTTP_RELATIVE_PATH` é o root path do servidor inteiro, então o `PathPrefix(/auth)` do Traefik carrega junto tudo que mora sob ele | **Aceito conscientemente em dev local** (o Traefik já roda com `--api.insecure=true` e a stack não sai do host). Antes de qualquer exposição além de dev: TLS no entrypoint **e** estreitar a regra do router para os paths do fluxo de login (`/auth/realms`, `/auth/resources`), mantendo `/auth/admin` fora. Estreitar exige testar logout e backchannel — não foi feito nesta branch |
 | Roles esquecidas após a Fase 2 | Gate humano explícito; sem elas o login conclui e a autorização falha — sintoma visível, não silencioso |
 | `arc-audience` apontar para client inexistente no realm novo — **falha silenciosa**: login funciona, DICOMweb 403 muito depois | Verificação 6 da Fase 2, executável hoje |
 
