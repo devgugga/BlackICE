@@ -26,9 +26,13 @@ agente Claude fica em `CLAUDE.md`.
   segurança.
 - Redigir em português um título no formato `gitmoji verbo resultado: contexto`.
 - Escolher o gitmoji semanticamente correspondente conforme gitmoji.dev.
-- Usar corpo Markdown explicativo, com apenas as seções aplicáveis entre:
-  `Novas funcionalidades`, `Melhorias na arquitetura`, `Boas práticas e
-  validações`, `Permissões e controle de acesso` e `Resultado`.
+- Usar corpo Markdown explicativo, **obrigatório** em todo commit que não seja a
+  sincronização isolada de `graphify-out/`. As seções aplicáveis, sua
+  renderização exata (`### <emoji> <nome>`, separador `---`) e um exemplo
+  canônico completo vivem no Domain Pack.
+- Reportar ao orquestrador o `git log -1 --stat` do commit criado, os arquivos
+  deixados de fora e as validações executadas — o commit é feito sem exibir
+  rascunho, então esse relato é a única janela do humano sobre o resultado.
 - Não inventar capacidades, testes ou garantias não comprovadas pelo diff e
   pela verificação executada.
 - Nunca incluir trailers `Co-authored-by`, `Co-authored-by:` ou qualquer
@@ -36,8 +40,14 @@ agente Claude fica em `CLAUDE.md`.
 
 ## Modelos
 
-- Codex: `gpt-5.6-terra`, esforço `low`.
+- Codex: `gpt-5.6-luna`, esforço `medium`.
 - Claude Code: `haiku`.
+
+Decisão deliberada de manter modelos econômicos. Redigir o corpo é preenchimento
+de um template explícito, não invenção de formato: o Domain Pack carrega o
+exemplo canônico completo, então a tarefa é copiar a renderização e substituir o
+conteúdo pelo que o diff comprova. O esforço do Codex subiu de `low` para
+`medium` apenas para cobrir a leitura do diff e a escolha do gitmoji.
 
 ## Limites
 

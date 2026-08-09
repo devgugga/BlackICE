@@ -390,19 +390,19 @@
     "semantic_hash": "2dc8d3565fdef6731c30bb9e4cfa59b1"
   },
   "docs/superpowers/plans/2026-08-09-commit-curator.md": {
-    "mtime": 1786306890.9293165,
-    "ast_hash": "8da24bf4006477c803debaa0721775f2",
-    "semantic_hash": "8da24bf4006477c803debaa0721775f2"
+    "mtime": 1786310357.9730358,
+    "ast_hash": "0b5abd33c576c8b6b77e18affeafc972",
+    "semantic_hash": ""
   },
   "docs/superpowers/specs/2026-08-09-commit-curator-design.md": {
-    "mtime": 1786306890.9303155,
-    "ast_hash": "e43e09b5c1d760db5e558dba802b1bf0",
-    "semantic_hash": "e43e09b5c1d760db5e558dba802b1bf0"
+    "mtime": 1786310355.1394987,
+    "ast_hash": "38059362a0f428b09ef98b8bc525ce4c",
+    "semantic_hash": ""
   },
   ".claude/agents/git/commit-curator.md": {
-    "mtime": 1786306890.9240458,
-    "ast_hash": "990acc32b74982d50464421f7174a1ff",
-    "semantic_hash": "990acc32b74982d50464421f7174a1ff"
+    "mtime": 1786310345.2411528,
+    "ast_hash": "8b8b30d09fa894df0831e982b38721a4",
+    "semantic_hash": ""
   },
   "docs/domains/git/README.md": {
     "mtime": 1786306890.9280455,
@@ -410,9 +410,9 @@
     "semantic_hash": "882b214ff873b46ecf6ecb56a8830d3c"
   },
   "docs/domains/git/commit-conventions.md": {
-    "mtime": 1786306890.9280455,
-    "ast_hash": "b4ce249785bc475cbce40b577c57faeb",
-    "semantic_hash": "b4ce249785bc475cbce40b577c57faeb"
+    "mtime": 1786310325.802337,
+    "ast_hash": "b71bccd4810b370660747bf9d8cf2d17",
+    "semantic_hash": ""
   },
   "infra/keycloak/configure-blackice-container.sh": {
     "mtime": 1786309202.1506631,

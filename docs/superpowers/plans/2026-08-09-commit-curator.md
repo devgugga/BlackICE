@@ -8,6 +8,13 @@
 
 **Tech Stack:** Git, Markdown, YAML frontmatter, TOML e Gitmoji.
 
+> **Registro histórico — parcialmente superado.** Este plano descreve a
+> implementação original. As regras de corpo do commit e os modelos dos wrappers
+> foram revisados depois; a fonte atual é
+> `docs/domains/git/commit-conventions.md` e a decisão está em
+> `docs/superpowers/specs/2026-08-09-commit-curator-design.md`. Onde este plano
+> divergir, ele está desatualizado.
+
 ## Global Constraints
 
 - Em branches de trabalho, fazer commit local automático depois de uma tarefa verificada; nunca fazer push.
