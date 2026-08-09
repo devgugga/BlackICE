@@ -8,17 +8,17 @@ substitui a fonte, os Domain Packs nem a validação humana de decisões DICOM.
 
 ## Pré-requisitos e baseline
 
-O baseline do projeto é a CLI `0.9.28`; a versão registrada em cada
-`.graphify_version` das skills deve corresponder à CLI instalada. Confira o
-ambiente:
+O baseline do projeto é a CLI `0.9.32` (subiu de `0.9.28` em 2026-08-09); a
+versão registrada em cada `.graphify_version` das skills deve corresponder à CLI
+instalada. Confira o ambiente:
 
 ```powershell
 uv --version
 graphify --version
 ```
 
-Consulte o [README oficial](https://github.com/safishamsi/graphify/blob/v0.9.28/README.md),
-a [release 0.9.28](https://github.com/safishamsi/graphify/releases/tag/v0.9.28),
+Consulte o [README oficial](https://github.com/safishamsi/graphify/blob/v0.9.32/README.md),
+a [release 0.9.32](https://github.com/safishamsi/graphify/releases/tag/v0.9.32),
 a discussão de instalação project-scoped na [issue #817](https://github.com/safishamsi/graphify/issues/817)
 e a página de [releases](https://github.com/safishamsi/graphify/releases) antes
 de alterar o baseline.
@@ -31,18 +31,27 @@ Execute no root do repositório:
 powershell -ExecutionPolicy Bypass -File .graphify/setup.ps1
 ```
 
-O script instala exatamente `graphifyy==0.9.28`, executa os quatro instaladores
+O script instala exatamente `graphifyy==0.9.32`, executa os quatro instaladores
 project-scoped recomendados, restaura do `HEAD` as skills BlackICE revisadas,
 valida seus checksums e instala os hooks locais. Ele recusa execução quando
 essas skills têm mudanças locais, para não apagar trabalho em andamento.
 
-Não execute os instaladores project-scoped isoladamente. Em `0.9.28`, eles
+Não execute os instaladores project-scoped isoladamente. Em `0.9.32` — como em
+`0.9.28` — eles
 substituem `SKILL.md` e todo o diretório `references/`, removendo silenciosamente
 os ajustes de integridade do BlackICE. Para conferir o overlay sem instalar:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .graphify/setup.ps1 -VerifyOnly
 ```
+
+**Dois arquivos que o setup NÃO protege.** Os instaladores reescrevem a seção
+`## graphify` de `AGENTS.md` e de `CLAUDE.md`, trocando a redação **opcional**
+adotada por este projeto ("Guidance (optional)… You may instead use other
+appropriate approaches") por "Rules:" imperativo. Eles estão fora de
+`$CanonicalHashes` de propósito — são prosa do projeto, não overlay da skill.
+Depois de qualquer execução do setup, confira `git diff AGENTS.md CLAUDE.md` e
+restaure a redação opcional. Observado no bump para `0.9.32`.
 
 ## Gerar o grafo
 
@@ -68,9 +77,11 @@ Há duas rotas de atualização, com escopos diferentes:
 - Em um checkout Git normal, mudanças somente de código podem usar
   `graphify update .`; os hooks instalados também fazem essa atualização AST
   local, sem LLM. O hook pós-commit ignora configuração, documentação e imagens.
-- Em linked worktrees, os hooks oficiais de `0.9.28` retornam sem atualizar o
+- Em linked worktrees, os hooks oficiais retornam sem atualizar o
   grafo, embora `graphify hook status` ainda mostre `installed`. Antes de cada
   commit de tarefa, a atualização pela skill é obrigatória nesse contexto.
+  **Continua valendo em `0.9.32`** — `graphify/hooks.py` ainda compara
+  `--git-dir` com `--git-common-dir` e sai cedo quando diferem.
 - Para configuração, documentação, imagens ou qualquer mudança mista, use a skill:
   `$graphify . --update` no Codex ou `/graphify . --update` no Claude Code.
   Essa rota segue o fluxo incremental completo, incluindo a extração semântica
@@ -82,14 +93,21 @@ Confira a instalação do hook quando precisar da manutenção automática de c�
 graphify hook status
 ```
 
-### Workarounds project-scoped do Graphify 0.9.28
+### Workarounds project-scoped do Graphify
+
+**Revalidados contra `0.9.32` em 2026-08-09: nenhum foi corrigido upstream, os
+três continuam necessários.** As correções de hiperaresta estão previstas para
+`0.9.34` e as de label de comunidade para `0.9.36`. Os arquivos de skill de
+origem são byte-a-byte idênticos entre `0.9.28` e `0.9.32` (só
+`.graphify_version` muda), então o overlay se aplica sem reescrita e os
+checksums em `.graphify/setup.ps1` não precisaram ser recalculados.
 
 O runbook incremental versionado aplica dois ajustes locais de integridade:
 
 - conserva o total do corpus em `total_files`, embora apenas os arquivos
   alterados sigam para extração;
 - chama `build_merge(..., dedup=False)` para preservar IDs de proveniência e
-  membros de hiperarestas; o dedup padrão da versão 0.9.28 remove IDs sem
+  membros de hiperarestas; o dedup padrão remove IDs sem
   remapear esses membros.
 
 Além disso:
@@ -101,6 +119,14 @@ Além disso:
   labels e grava assinaturas de membresia para invalidar reuso automático;
 - `.graphify/setup.ps1` restaura e valida essas alterações depois de qualquer
   instalação project-scoped.
+
+**Os checksums de `$CanonicalHashes` são hashes do conteúdo do blob Git (LF).**
+Este checkout usa `core.autocrlf=true`, então a árvore de trabalho tem CRLF e um
+`Get-FileHash` cru nunca bate — era por isso que o setup abortava antes de
+`graphify hook install` rodar, deixando o `post-commit` preso a um pin antigo. O
+`Get-NormalizedHash` do setup remove o CR antes do LF e compara conteúdo, não
+fim de linha; funciona igual num checkout Linux. **Não “conserte” isso
+regravando hashes da árvore de trabalho** — isso quebraria o inverso.
 
 Esses ajustes não mudam o full build. Ao atualizar o Graphify, revalidar ambos
 contra a nova versão e remover os workarounds quando a correção upstream tornar
@@ -120,7 +146,17 @@ oficial grava neles o caminho absoluto do executável desta máquina. O setup os
 regenera localmente. O caminho absoluto do merge driver fica somente em
 `.git/config`, que já é metadata local.
 
-Quando a extração semântica é feita pelo próprio agente, o Graphify 0.9.28 não
+Os instaladores também escrevem duas saídas **stock** que este projeto não
+versiona, porque não são a fonte da verdade e o setup as regenera:
+
+- `.codex/skills/graphify/` — cópia sem o overlay do BlackICE. A skill Codex
+  canônica é `.agents/skills/graphify/`, e é ela que `AGENTS.md` manda usar.
+- `.claude/CLAUDE.md` — ponteiro de três linhas para `.claude/skills/graphify/`,
+  fora dos caminhos que o Claude Code carrega (`./CLAUDE.md`, `~/.claude/CLAUDE.md`).
+
+Ambas estão no `.gitignore` desde `0.9.32`.
+
+Quando a extração semântica é feita pelo próprio agente, o Graphify não
 recebe a telemetria de tokens do host; por isso `0 input · 0 output` no relatório
 significa “não registrado”, não custo real zero.
 
@@ -132,10 +168,26 @@ relações `INFERRED` e decisões DICOM na fonte canônica antes de utilizá-las
 ## Upgrade
 
 Não execute `uv tool upgrade graphifyy` sem antes alterar deliberadamente o
-baseline do projeto. Para um upgrade: revisar as correções upstream, atualizar a
-versão e os checksums em `.graphify/setup.ps1`, regenerar as duas skills,
-reaplicar somente os workarounds ainda necessários, executar o setup e então
-reconstruir/revisar o grafo completo.
+baseline do projeto. A receita, na ordem:
+
+1. Revisar as correções upstream e decidir quais workarounds desta página caem.
+2. Atualizar `$ExpectedVersion` e, **se os arquivos de skill stock mudarem**, os
+   `$CanonicalHashes` em `.graphify/setup.ps1`. Compare os arquivos stock das
+   duas versões antes de recalcular: em `0.9.28 → 0.9.32` só `.graphify_version`
+   mudou, e recalcular teria sido ruído.
+3. Regenerar as duas skills e reaplicar somente os workarounds ainda necessários.
+4. Executar `.graphify/setup.ps1`.
+5. **Conferir `git diff AGENTS.md CLAUDE.md`** e restaurar a redação opcional —
+   os instaladores reescrevem a seção `## graphify` dos dois para "Rules:"
+   imperativo, e eles ficam fora de `$CanonicalHashes` de propósito.
+6. Conferir `graphify hook status` e o pin do `.git/hooks/post-commit`: ele
+   guarda o caminho absoluto do interpretador, que pode ter ficado de outra
+   máquina ou outro perfil de usuário. `hook uninstall` + `hook install`
+   corrigem. O `hook uninstall` apaga o `.gitattributes` versionado e o
+   `install` o recria — confira o diff antes de commitar.
+7. Reconstruir/revisar o grafo completo, **com a árvore de trabalho limpa**: um
+   full build indexa o que está em disco, então rodá-lo sobre mudanças não
+   commitadas grava no grafo um estado que nunca vira commit.
 
 ## Diagnóstico no Windows
 

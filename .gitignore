@@ -28,6 +28,13 @@ graphify-out/.graphify_root
 .codex/hooks.json
 .claude/settings.json
 
+# Saídas dos instaladores project-scoped do Graphify que NÃO são a fonte da
+# verdade deste projeto. As skills revisadas ficam em .agents/skills/graphify/
+# (Codex) e .claude/skills/graphify/ (Claude); estas duas são cópias stock que o
+# setup regenera a cada execução. Ver docs/architecture/graphify.md.
+.codex/skills/
+.claude/CLAUDE.md
+
 # python cache
 __pycache__/
 *.py[cod]

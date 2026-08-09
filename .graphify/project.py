@@ -1,10 +1,14 @@
-"""BlackICE project adapter for Graphify 0.9.28 file detection.
+"""BlackICE project adapter for Graphify file detection.
 
 Graphify's native detector deliberately supports a bounded set of formats.
 BlackICE also treats tracked operational configuration as architecture
 knowledge, so this adapter routes safe text configuration through the semantic
 ``document`` pipeline. Keep this module small and remove it when upstream
 detection covers the same corpus.
+
+Baseline: revalidated against Graphify 0.9.32 on 2026-08-09 — the five private
+symbols imported below still exist, ``tests/test_project.py`` passes, and the
+native detector still misses the tracked configuration corpus.
 """
 
 from __future__ import annotations

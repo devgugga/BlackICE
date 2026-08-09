@@ -5,7 +5,7 @@ param(
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
-$ExpectedVersion = "0.9.28"
+$ExpectedVersion = "0.9.32"
 $CanonicalHashes = [ordered]@{
     ".agents/skills/graphify/SKILL.md" = "edf8e4bfd1fe644142a0af06495bf6a52a6b9c714c2d74f757fc784d1f53aa4f"
     ".agents/skills/graphify/references/update.md" = "e2eb607e8112206209974353c458f850dcbcaca86a1f2d94adc10e205f77607c"
@@ -26,6 +26,31 @@ function Invoke-Checked {
     }
 }
 
+# The recorded hashes are of the Git blob content (LF). This repo is checked out
+# with core.autocrlf=true, so the working tree has CRLF and a raw Get-FileHash
+# never matches — which used to abort setup before `graphify hook install` ever
+# ran. Strip CR before LF so the guard checks content, not line endings, and
+# stays valid on a Linux checkout too.
+function Get-NormalizedHash {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    $Bytes = [System.IO.File]::ReadAllBytes($Path)
+    $Normalized = [System.Collections.Generic.List[byte]]::new($Bytes.Length)
+    for ($i = 0; $i -lt $Bytes.Length; $i++) {
+        if ($Bytes[$i] -eq 13 -and ($i + 1) -lt $Bytes.Length -and $Bytes[$i + 1] -eq 10) {
+            continue
+        }
+        $Normalized.Add($Bytes[$i])
+    }
+
+    $Sha = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        return (($Sha.ComputeHash($Normalized.ToArray()) | ForEach-Object { $_.ToString("x2") }) -join "")
+    } finally {
+        $Sha.Dispose()
+    }
+}
+
 function Assert-CanonicalSkills {
     param([Parameter(Mandatory = $true)][string]$Root)
 
@@ -34,7 +59,7 @@ function Assert-CanonicalSkills {
         if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
             throw "Missing canonical Graphify file: $($Entry.Key)"
         }
-        $Actual = (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
+        $Actual = Get-NormalizedHash -Path $Path
         if ($Actual -ne $Entry.Value) {
             throw "Checksum mismatch for $($Entry.Key). Restore the repository version."
         }
@@ -88,8 +113,11 @@ Invoke-Checked $Graphify install --project --platform agents
 Invoke-Checked $Graphify claude install --project
 Invoke-Checked $Graphify codex install --project
 
-# The 0.9.28 installer replaces SKILL.md and references/. Restore the reviewed,
+# The installer replaces SKILL.md and references/. Restore the reviewed,
 # versioned BlackICE copies immediately, then prove that the overlay is intact.
+# Verified for the 0.9.28 -> 0.9.32 bump: the stock skill files are byte-identical
+# across the two releases (only .graphify_version changes), so the overlay applies
+# unchanged and $CanonicalHashes did not need recomputing.
 Invoke-Checked git restore --source=HEAD -- @CanonicalPaths
 Assert-CanonicalSkills -Root $Root
 
@@ -100,7 +128,7 @@ Invoke-Checked $Graphify hook install
 $GitDir = (& git rev-parse --git-dir).Trim()
 $GitCommonDir = (& git rev-parse --git-common-dir).Trim()
 if ($GitDir -ne $GitCommonDir) {
-    Write-Warning "Linked worktree detected. Graphify 0.9.28 Git hooks skip linked worktrees; run the project skill with --update before every task commit."
+    Write-Warning "Linked worktree detected. Graphify $ExpectedVersion Git hooks still skip linked worktrees (hooks.py compares --git-dir with --git-common-dir); run the project skill with --update before every task commit."
 }
 
 Write-Host "Graphify $ExpectedVersion installed; project overrides and local hooks verified."
