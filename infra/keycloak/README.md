@@ -114,9 +114,19 @@ herdar `loginTheme: j4care` do realm.
 
 ## Como aplicar
 
+No Bash:
+
 ```sh
-bash infra/keycloak/configure-blackice.sh   # cria client + mapper + usuário
-# depois, atribua a role auth ao dr.teste (comando acima)
+bash infra/keycloak/configure-blackice.sh
 ```
 
-Pré-requisito: a stack do Keycloak/Archive de pé (ver `infra/dcm4chee/`).
+No PowerShell:
+
+```powershell
+pwsh -File infra/keycloak/configure-blackice.ps1
+```
+
+Os dois launchers exigem Docker Desktop/CLI disponível, `infra/.env` com
+`QUARKUS_OIDC_SECRET` e `APP_HOST`, e a stack do Keycloak/Archive em execução
+(ver `infra/dcm4chee/`). O launcher PowerShell é nativo e não requer WSL nem Git
+Bash. Depois, atribua a role `auth` ao `dr.teste` (comando acima).
