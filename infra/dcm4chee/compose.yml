@@ -53,10 +53,27 @@ services:
       KC_DB_USERNAME: keycloak
       KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
       KC_LOG: file
-      # Nome do realm importado no primeiro startup. Default oficial é
-      # "dcm4che" (sem o segundo "e"); fixado para "dcm4chee" para casar com
-      # o nome do produto e com a verificação da Task 2.
-      REALM_NAME: dcm4chee
+      # Nome do realm. Default oficial da imagem é "dcm4che"; era "dcm4chee".
+      #
+      # ATENÇÃO — este valor NÃO renomeou o realm, e trocá-lo sozinho NÃO
+      # funciona (spec 2026-08-07, Fase 2). `--import-realm` importa
+      # dcm4che-realm.json, que embute 112 UUIDs literais NÃO templados por
+      # ${REALM_NAME} — entre eles `defaultRole.id`. Como KEYCLOAK_ROLE.ID é
+      # PK global, importar o mesmo arquivo uma segunda vez sob outro nome
+      # colide e trava o boot do Keycloak. Verificado empiricamente.
+      #
+      # O realm foi renomeado IN PLACE pela Admin REST
+      # (`PUT /admin/realms/<atual> {"realm":"blackice"}`), o que preserva
+      # usuários, clients, mappers, role mappings e o login_theme. Este valor
+      # só acompanha o nome real para que o import de boot encontre o realm já
+      # existente e não tente criar outro. Reverter = dois PUTs pela Admin
+      # REST — o realm (`PUT /admin/realms/blackice {"realm":"dcm4chee"}`) E a
+      # role padrão (`default-roles-blackice` -> `default-roles-dcm4chee`,
+      # GET a representação inteira, troque só o `name`, PUT de volta; ela
+      # viaja no claim `realm_access.roles`, lido por
+      # quarkus.oidc.roles.role-claim-path) — e voltar este valor. Nenhum
+      # dado é perdido no caminho.
+      REALM_NAME: blackice
       ARCHIVE_HOST: ${DCM4CHEE_HOST}
       KEYCLOAK_WAIT_FOR: "ldap:389 mariadb:3306"
       # DEV-ONLY: a imagem roda `kc.sh start` (modo produção), que cacheia temas
@@ -129,7 +146,10 @@ services:
       POSTGRES_PASSWORD: ${DCM4CHEE_DB_PASSWORD}
       AUTH_SERVER_URL: https://keycloak:8843/auth
       UI_AUTH_SERVER_URL: https://${DCM4CHEE_HOST}:8843/auth
-      REALM_NAME: dcm4chee
+      # Tem de casar com o REALM_NAME do serviço `keycloak` acima — provider-url
+      # é ${env.AUTH_SERVER_URL}/realms/${env.REALM_NAME}, resolvido a cada
+      # boot; um mismatch quebra a validação de token do Archive em silêncio.
+      REALM_NAME: blackice
       WILDFLY_CHOWN: /storage
       WILDFLY_WAIT_FOR: "ldap:389 arc-db:5432 keycloak:8843"
     depends_on:

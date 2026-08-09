@@ -53,7 +53,7 @@ foreach ($attempt in 1..30) {
     $rootStatus -eq '200' -and
     $meStatus -eq '401' -and
     $loginStatus -eq '302' -and
-    $location -match '^http://blackice\.localhost/auth/realms/dcm4chee/protocol/openid-connect/auth\?'
+    $location -match '^http://blackice\.localhost/auth/realms/blackice/protocol/openid-connect/auth\?'
   ) {
     $isReady = $true
     break
@@ -92,7 +92,7 @@ criam snapshots ausentes.
 O job deve:
 
 1. em `infra/`, subir a stack com `docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml up -d --build`;
-2. aguardar, sem seguir redirects, `/ = 200`, `/api/me = 401` sem sessão e `/api/login = 302` com `Location` para `http://blackice.localhost/auth/realms/dcm4chee/protocol/openid-connect/auth?...`;
+2. aguardar, sem seguir redirects, `/ = 200`, `/api/me = 401` sem sessão e `/api/login = 302` com `Location` para `http://blackice.localhost/auth/realms/blackice/protocol/openid-connect/auth?...`;
 3. em `apps/frontend/`, executar `npm ci`;
 4. executar o E2E com `CI=true` dentro de `mcr.microsoft.com/playwright:v1.62.0-noble`;
 5. publicar `apps/frontend/playwright-report/` e `apps/frontend/test-results/playwright/` em falhas;

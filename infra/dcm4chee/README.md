@@ -49,12 +49,18 @@ limpa onde ela ainda não existe.
    (confirmado no README oficial da imagem
    `dcm4che-dockerfiles/dcm4chee-arc-psql`) — sem isso o Archive não
    encontraria o banco.
-3. **`REALM_NAME=dcm4chee`** setado em `keycloak` e `arc`. O nome padrão do
-   realm importado no primeiro startup é `dcm4che` (sem o segundo "e"); foi
-   sobrescrito para `dcm4chee` para casar com o nome do produto e com a
-   verificação do Passo 6 da Task 2. Precisa estar setado nos DOIS serviços
-   (documentado no wiki oficial), senão o Archive falha ao autorizar usuários
-   via chamada REST out-of-band ao Keycloak.
+3. **`REALM_NAME=blackice`** setado em `keycloak` e `arc`. O nome padrão do
+   realm importado no primeiro startup é `dcm4che`; foi `dcm4chee` até a
+   Fase 2 do spec 2026-08-07, que renomeou o realm para `blackice` para tirar
+   o nome do produto de terceiro da URL de login. **A variável não renomeia o
+   realm** — o rename é feito IN PLACE pela Admin REST
+   (`PUT /admin/realms/<atual> {"realm":"blackice"}`); este valor só acompanha
+   o nome real para que o import de boot encontre o realm existente. Ver o
+   comentário em `infra/dcm4chee/compose.yml` para o porquê (o
+   `dcm4che-realm.json` embute UUIDs literais, então reimportar sob outro nome
+   colide). Precisa estar setado nos DOIS serviços (documentado no wiki
+   oficial), senão o Archive falha ao autorizar usuários via chamada REST
+   out-of-band ao Keycloak.
 4. **Volumes nomeados do Docker em vez de bind mounts em `/var/local/...`.**
    O compose oficial usa bind mounts para paths Linux (`/var/local/dcm4chee-arc/...`,
    `/etc/localtime`, `/etc/timezone`) que não existem no host Windows deste
@@ -78,11 +84,18 @@ limpa onde ela ainda não existe.
 
 ## Portas e acesso
 
-- Keycloak (HTTPS, certificado autoassinado padrão da imagem):
-  `https://localhost:8843` — use `curl -k` ou aceite o aviso do browser.
-- Realm importado: **`dcm4chee`**. Issuer esperado:
-  `https://localhost:8843/realms/dcm4chee`.
-- Admin console do Keycloak (realm master): `https://localhost:8843/admin`
+- Keycloak, caminho do browser (Fase 1 do spec 2026-08-07): servido
+  **same-origin** pelo Traefik em `http://blackice.localhost/auth`. Sem porta,
+  sem host diferente, sem aviso de certificado.
+- Keycloak, listener HTTPS direto: `https://localhost:8843/auth` (certificado
+  autoassinado padrão da imagem — use `curl -k`). É o backchannel do Archive;
+  o browser não passa mais por aqui.
+  **`KC_HTTP_RELATIVE_PATH=/auth` é o root path do servidor inteiro**, então o
+  `/auth` vale também para a 8843.
+- Realm: **`blackice`**. O issuer anunciado é `http://blackice.localhost/auth/realms/blackice`
+  mesmo quando você consulta pela 8843 — `KC_HOSTNAME` é fixo, então as
+  frontend URLs saem dele, não do endereço da requisição.
+- Admin console do Keycloak (realm master): `https://localhost:8843/auth/admin`
   (usuário `admin`, senha em `KEYCLOAK_ADMIN_PASSWORD` no `.env`).
 - Archive (WildFly): **sem porta publicada no host** (invariante: DCM4CHEE
   nunca exposto ao browser — só o Quarkus fala DICOMweb com ele pela rede
@@ -108,9 +121,18 @@ subir — aguarde e faça polling do log em vez de assumir falha.
 ## Verificação
 
 ```bash
-curl -sk https://localhost:8843/realms/dcm4chee/.well-known/openid-configuration | head -c 300
+curl -sk https://localhost:8843/auth/realms/blackice/.well-known/openid-configuration | head -c 300
 ```
-Esperado: JSON com `"issuer":"https://localhost:8843/realms/dcm4chee"`.
+Esperado: JSON com `"issuer":"http://blackice.localhost/auth/realms/blackice"` —
+o issuer é o mesmo pelos dois listeners (ver "Portas e acesso" acima).
+
+O caminho que o browser usa de fato, pelo Traefik:
+
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" \
+  http://blackice.localhost/auth/realms/blackice/.well-known/openid-configuration
+```
+Esperado: `200`.
 
 ```bash
 docker compose -f infra/compose.yml -f infra/dcm4chee/compose.yml -f infra/compose.apps.yml \

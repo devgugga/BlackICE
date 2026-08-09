@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Configura o realm `dcm4chee` do Keycloak para o BFF do BlackICE.
+# Configura o realm `blackice` do Keycloak para o BFF do BlackICE.
 #
 # Roda no HOST; carrega infra/.env (QUARKUS_OIDC_SECRET, APP_HOST) e executa a
 # Admin REST via `curl -k` DENTRO do container keycloak.
@@ -26,7 +26,7 @@ $DC exec -T \
   -e QUARKUS_OIDC_SECRET="$QUARKUS_OIDC_SECRET" \
   -e APP_ORIGIN="http://${APP_HOST}" \
   -e ARC_CLIENT="dcm4chee-arc-rs" \
-  -e REALM="dcm4chee" \
+  -e REALM="blackice" \
   keycloak sh <<'INNER'
 set -eu
 KB=https://localhost:8843/auth

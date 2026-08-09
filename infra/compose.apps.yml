@@ -15,7 +15,7 @@ services:
       # KC_HOSTNAME_BACKCHANNEL_DYNAMIC=true é o que faz o backchannel em si
       # resolver dinamicamente para o endereço que o chamador usou (aqui,
       # keycloak:8080), em vez de herdar o KC_HOSTNAME fixo.
-      QUARKUS_OIDC_AUTH_SERVER_URL: http://keycloak:8080/auth/realms/dcm4chee
+      QUARKUS_OIDC_AUTH_SERVER_URL: http://keycloak:8080/auth/realms/blackice
       QUARKUS_OIDC_SECRET: ${QUARKUS_OIDC_SECRET}
       QUARKUS_OIDC_ENCRYPTION_SECRET: ${QUARKUS_OIDC_ENCRYPTION_SECRET:?defina QUARKUS_OIDC_ENCRYPTION_SECRET em infra/.env}
     labels:

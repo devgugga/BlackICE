@@ -1,9 +1,14 @@
-# Config Keycloak do BlackICE (realm `dcm4chee`)
+# Config Keycloak do BlackICE (realm `blackice`)
 
-Configuração aplicada ao **mesmo realm** que o Archive usa (`dcm4chee`) — condição
-para o **audience compartilhado** (ver
-[design](../../docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md)),
-que evita token exchange.
+Configuração aplicada ao **mesmo realm** que o Archive usa. Esse realm chamava-se
+`dcm4chee` e foi renomeado in place para `blackice` pelo spec 2026-08-07 (Task 2,
+Fase 2), para que o nome do produto de terceiro não aparecesse na URL de login. A
+condição que importa não mudou: **um único realm** para os dois, sustentando o
+**audience compartilhado** (ver
+[design](../../docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md)).
+Isso continua sendo o que impede um realm separado — um token emitido por outro
+realm não valida no Archive, e trocar para service account custaria a atribuição
+por usuário no audit trail DICOM — e evita token exchange.
 
 ## O que `configure-blackice.sh` cria (idempotente)
 
@@ -29,7 +34,7 @@ isso a base da Admin REST no script é `https://localhost:8843/auth`.
 
 ## Roles (gate humano) — decisão registrada
 
-O realm `dcm4chee` tem, de custom, só **`auth`** e **`root`** (o resto é built-in do
+O realm `blackice` tem, de custom, só **`auth`** e **`root`** (o resto é built-in do
 Keycloak; `dcm4chee-arc-rs` não expõe client-roles). Decisão: **`dr.teste` recebe a
 role `auth`** (usuário autenticado normal, papel realista de radiologista).
 
