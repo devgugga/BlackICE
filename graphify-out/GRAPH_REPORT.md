@@ -1,16 +1,21 @@
-# Graph Report - C:\Users\gusgo\Projects\BlackICE  (2026-08-09)
+# Graph Report - BlackICE  (2026-08-09)
 
 ## Corpus Check
-- 111 files · ~66,869 words
+- 85 files · ~61,781 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 352 nodes · 300 edges · 89 communities (35 shown, 54 thin omitted)
-- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 14 edges (avg confidence: 0.86)
+- 370 nodes · 313 edges · 93 communities (38 shown, 55 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 14 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
+## Graph Freshness
+- Built from commit: `8f152f6a`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
+
 ## Community Hubs (Navigation)
-- Fluxo de commit Graphify
+- Commit Curator — Design
 - Design same-origin Keycloak
 - Configuração TypeScript Node
 - Configuração TypeScript Aplicação
@@ -26,7 +31,7 @@
 - Plano Keycloak same-origin
 - Pipeline incremental Graphify
 - Teste E2E Keycloak
-- Arquitetura autenticada BlackICE
+- Bootstrap do Keycloak no Windows — Design
 - Teste de recurso sessão
 - Consulta Graphify sessão
 - Consulta Graphify DICOM
@@ -60,7 +65,7 @@
 - Estrutura monorepo feature-first
 - Acessibilidade do foco
 - Proxy Docker e Traefik
-- Configuração automatizada Keycloak
+- configure-blackice.sh script
 - Merge entre repositórios
 - Transcrição de mídia
 - Execução multiagente
@@ -94,18 +99,20 @@
 - Banco PostgreSQL de produto
 - Coordenadas Maven backend
 - Fluxos MVP BlackICE
+- Bootstrap do Keycloak no Windows Implementation Plan
+- configure-blackice-container.sh
 
 ## God Nodes (most connected - your core abstractions)
 1. `compilerOptions` - 15 edges
 2. `compilerOptions` - 11 edges
-3. `Commit Curator Design` - 11 edges
+3. `Commit Curator — Design` - 11 edges
 4. `BlackICE — Login same-origin: tirar o Keycloak da barra de endereços` - 10 edges
 5. `Fase 1 — Same-origin atrás do Traefik` - 8 edges
-6. `SessionResource` - 6 edges
-7. `scripts` - 6 edges
-8. `Commit Curator Implementation Plan` - 6 edges
-9. `Keycloak Service` - 6 edges
-10. `Commit Conventions` - 6 edges
+6. `Bootstrap do Keycloak no Windows — Design` - 7 edges
+7. `SessionResource` - 6 edges
+8. `scripts` - 6 edges
+9. `Commit Curator Implementation Plan` - 6 edges
+10. `Keycloak Service` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Codex DICOM Reviewer Agent` --semantically_similar_to--> `DICOM Domain Review`  [INFERRED] [semantically similar]
@@ -134,11 +141,11 @@
 - **Canonical BlackICE Compose stack** — infra_readme_three_compose_files, infra_compose_traefik_routing, infra_compose_product_postgres_database [EXTRACTED 1.00]
 - **Frontend icon sprite collection** — apps_frontend_public_icons_bluesky_icon, apps_frontend_public_icons_discord_icon, apps_frontend_public_icons_documentation_icon, apps_frontend_public_icons_github_icon, apps_frontend_public_icons_social_icon, apps_frontend_public_icons_x_icon [EXTRACTED 1.00]
 
-## Communities (89 total, 54 thin omitted)
+## Communities (93 total, 55 thin omitted)
 
-### Community 0 - "Fluxo de commit Graphify"
-Cohesion: 0.12
-Nodes (22): Post-Commit Graph Hook, Claude Commit Curator Agent, Codex Commit Curator Agent, Domain Packs, Graphify Commit Workflow, BlackICE Agent Guidance, Claude Code Guidance, Graphify Architecture (+14 more)
+### Community 0 - "Commit Curator — Design"
+Cohesion: 0.09
+Nodes (27): Post-Commit Graph Hook, Claude Commit Curator Agent, Codex Commit Curator Agent, Domain Packs, Graphify Commit Workflow, BlackICE Agent Guidance, Quarkus OIDC BFF Session, Vue SPA Nginx Delivery (+19 more)
 
 ### Community 1 - "Design same-origin Keycloak"
 Cohesion: 0.09
@@ -200,9 +207,9 @@ Nodes (6): Graphify Pipeline, Incremental Update, Semantic Extraction, Graphify 
 Cohesion: 0.53
 Nodes (5): expectVerticallyCentered(), openBlackiceLogin(), requiredBox(), screenshotLoginCard(), showInvalidCredentials()
 
-### Community 16 - "Arquitetura autenticada BlackICE"
-Cohesion: 0.50
-Nodes (5): Quarkus OIDC BFF Session, Vue SPA Nginx Delivery, Frontend Node Toolchain, Keycloak Login E2E Contract, BlackICE Monorepo Structure
+### Community 16 - "Bootstrap do Keycloak no Windows — Design"
+Cohesion: 0.25
+Nodes (7): Bootstrap do Keycloak no Windows — Design, Decisão, Erros e segurança, Fluxo, Fora de escopo, Objetivo, Testes
 
 ### Community 17 - "Teste de recurso sessão"
 Cohesion: 0.60
@@ -256,20 +263,24 @@ Nodes (3): Authorization Code with PKCE, Keycloak Same-Origin Migration, Keycloa
 Cohesion: 0.67
 Nodes (3): Shared Realm Audience, blackice-quarkus Client, DICOMweb Authorization
 
+### Community 89 - "Bootstrap do Keycloak no Windows Implementation Plan"
+Cohesion: 0.50
+Nodes (3): Bootstrap do Keycloak no Windows Implementation Plan, Global Constraints, Task 1: Launchers multiplataforma com núcleo único
+
 ## Knowledge Gaps
-- **178 isolated node(s):** `dev.blackice:blackice-backend`, `name`, `private`, `version`, `type` (+173 more)
+- **186 isolated node(s):** `dev.blackice:blackice-backend`, `name`, `private`, `version`, `type` (+181 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **54 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **55 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `devDependencies` connect `Dependências de desenvolvimento Frontend` to `Dependências Vue da aplicação`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **What connects `dev.blackice:blackice-backend`, `name`, `private` to the rest of the system?**
-  _178 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Fluxo de commit Graphify` be split into smaller, more focused modules?**
-  _Cohesion score 0.11594202898550725 - nodes in this community are weakly interconnected._
+  _186 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Commit Curator — Design` be split into smaller, more focused modules?**
+  _Cohesion score 0.09359605911330049 - nodes in this community are weakly interconnected._
 - **Should `Design same-origin Keycloak` be split into smaller, more focused modules?**
   _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
 - **Should `Configuração TypeScript Node` be split into smaller, more focused modules?**
