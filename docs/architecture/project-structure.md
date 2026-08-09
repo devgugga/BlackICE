@@ -38,6 +38,9 @@ BlackICE/
 - `infra/` contém somente composição e configuração operacional local.
 - `docs/` contém arquitetura, Domain Packs e registros históricos de specs e
   planos.
+- `docs/architecture/evolution-backlog.md` registra melhorias adiadas, seus
+  gatilhos de retomada e a spec de origem; não autoriza implementação sem
+  priorização humana.
 - `.claude/` e `.codex/` são pontos de descoberta específicos das ferramentas.
   Seus wrappers apontam para o conhecimento neutro em `docs/domains/`.
 - `.agents/skills/graphify/`, `.graphifyignore` e `graphify-out/` são tooling de

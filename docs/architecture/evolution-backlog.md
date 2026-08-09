@@ -1,0 +1,17 @@
+# Backlog de evolução do BlackICE
+
+Este documento registra melhorias conscientemente adiadas para manter os MVPs
+focados. Um item aqui não é dívida esquecida nem autorização para implementação:
+o humano precisa priorizá-lo antes que um agente altere o produto.
+
+Ao adicionar ou atualizar um item, registre o motivo do adiamento, um gatilho
+objetivo para reconsiderá-lo e a especificação que originou a decisão. Specs devem
+referenciar o ID daqui em vez de duplicar toda a justificativa.
+
+| ID | Status | Evolução | Por que ficou fora do MVP | Gatilho para reconsiderar | Origem |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `EVO-001` | Pós-MVP | Jobs assíncronos para ingestão: fila persistente, worker, armazenamento temporário seguro, retomada, idempotência, retentativas e lotes grandes | O MVP usa lotes locais de demonstração e processamento síncrono; persistência de DICOM temporário amplia segurança, operação e limpeza | Uploads de vários GB, timeouts frequentes, necessidade de continuar após fechar o navegador ou SLA de retomada | [Importação manual DICOM](../superpowers/specs/2026-08-09-manual-dicom-import-design.md) |
+| `EVO-002` | Condicional | Token exchange para chamadas ao DCM4CHEE | O mapper `arc-audience` já preserva identidade e auditoria dentro do mesmo domínio de confiança, sem round-trip adicional | Archive em outro realm/domínio, novos serviços internos ou requisito de audience estritamente confinada | [Importação manual DICOM](../superpowers/specs/2026-08-09-manual-dicom-import-design.md) |
+| `EVO-003` | Pós-MVP | RBAC de produto com permissões como `study:ingest`, independentes das roles técnicas DICOM | A role existente `auth` é suficiente para a primeira vertical slice | Perfis distintos de recepção, técnico, radiologista e administrador ou políticas de autorização próprias do produto | [Importação manual DICOM](../superpowers/specs/2026-08-09-manual-dicom-import-design.md) |
+| `EVO-004` | Pós-MVP | Fluxo clínico agendado: integração RIS/HIS, Modality Worklist, MPPS, provisionamento de modalidades, C-STORE direto e Storage Commitment | O MVP demonstra importação manual via DICOMweb sem modalidade física e não deve reimplementar serviços DIMSE do DCM4CHEE | Integração com modalidade simulada ou real, agenda clínica ou demonstração completa de Scheduled Workflow | [Importação manual DICOM](../superpowers/specs/2026-08-09-manual-dicom-import-design.md) |
+

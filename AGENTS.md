@@ -98,6 +98,17 @@ paciente são **apresentadas nos gates** para aprovação humana, nunca auto-dec
 Loop: brainstorming → plano em fases → implementação por subagentes → gate humano
 ao fim de cada fase. Specs em `docs/superpowers/specs/`.
 
+## Backlog de evolução
+
+Antes de planejar uma feature, consulte
+`docs/architecture/evolution-backlog.md`. Quando uma melhoria relevante for
+adiada para manter um MVP focado, crie ou atualize uma entrada com ID, motivo,
+gatilho objetivo de retomada e spec de origem. A spec referencia o ID central em
+vez de duplicar a justificativa.
+
+Um item no backlog **não autoriza sua implementação**. Agentes devem apresentá-lo
+ao humano para priorização antes de alterar código, configuração ou escopo.
+
 ## Convenções gerais
 
 - Commits pequenos e focados; não commitar sem pedido explícito do humano.
