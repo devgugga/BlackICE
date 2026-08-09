@@ -34,8 +34,7 @@ Este documento é a fonte de verdade para agentes que criam commits locais.
 
 ## Mensagem do commit
 
-1. Consulte [Gitmoji](https://gitmoji.dev/) e escolha o emoji cujo significado
-   publicado corresponde à mudança.
+1. Escolha o gitmoji pela tabela da seção seguinte. Ela decide; não delibere.
 2. Use o **caractere literal** do emoji (`🎉`), nunca o shortcode (`:tada:`).
 3. Crie o commit diretamente; não exiba nem proponha a mensagem para aprovação.
 4. Escreva em português um título no formato:
@@ -46,6 +45,33 @@ Este documento é a fonte de verdade para agentes que criam commits locais.
 
 5. Não invente capacidades, testes ou garantias não demonstrados pelo diff e
    pelas validações executadas.
+
+### Escolha do gitmoji
+
+Casos recorrentes deste repositório. **Se uma linha se aplica, use-a** — não
+pondere alternativas. Só consulte [Gitmoji](https://gitmoji.dev/) quando
+nenhuma linha servir, e então use o significado publicado lá.
+
+| Gitmoji | Quando |
+| :-- | :-- |
+| `📝` | Qualquer mudança só de `.md` — docs, specs, planos, Domain Packs, corpo de agente. |
+| `✨` | Capacidade nova em código executável. |
+| `🐛` | Correção de bug. |
+| `♻️` | Refatoração sem mudança de comportamento observável. |
+| `🔧` | Configuração: compose, `.env`, `.gitignore`, scripts de infra. |
+| `🔐` | Auth, OIDC, Keycloak, realms, escopos, segredos. |
+| `✅` | Adicionar ou corrigir testes. |
+| `🚚` | Mover ou renomear arquivos e diretórios. |
+| `⬆️` | Subir versão de dependência ou baseline de ferramenta. |
+| `🕸️` | Sincronização do grafo do Graphify (ver a regra própria adiante). |
+
+**Desempate — classifique pelo efeito da mudança, não pelo assunto dela.** Um
+commit que altera somente arquivos `.md` é `📝` mesmo que o texto descreva uma
+funcionalidade nova, um bug ou uma regra de segurança. `✨`, `🐛` e `🔐` exigem
+que o comportamento do sistema tenha mudado, não só a descrição dele.
+
+Quando o diff cruza categorias, escolha pela mudança que domina o commit. Se
+duas dominam em igual medida, o escopo está grande demais: divida.
 
 ### Corpo (obrigatório)
 
