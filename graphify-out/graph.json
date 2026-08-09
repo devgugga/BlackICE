@@ -107,6 +107,391 @@
   },
   "nodes": [
     {
+      "label": "keycloak-login.spec.ts",
+      "file_type": "code",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "apps_frontend_e2e_keycloak_login_spec",
+      "community": 13,
+      "community_name": "keycloak-login.spec.ts",
+      "norm_label": "keycloak-login.spec.ts"
+    },
+    {
+      "label": "openBlackiceLogin()",
+      "file_type": "code",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin",
+      "community": 13,
+      "community_name": "keycloak-login.spec.ts",
+      "norm_label": "openblackicelogin()"
+    },
+    {
+      "label": "requiredBox()",
+      "file_type": "code",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "apps_frontend_e2e_keycloak_login_spec_requiredbox",
+      "community": 13,
+      "community_name": "keycloak-login.spec.ts",
+      "norm_label": "requiredbox()"
+    },
+    {
+      "label": "expectVerticallyCentered()",
+      "file_type": "code",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered",
+      "community": 13,
+      "community_name": "keycloak-login.spec.ts",
+      "norm_label": "expectverticallycentered()"
+    },
+    {
+      "label": "screenshotLoginCard()",
+      "file_type": "code",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L70",
+      "_origin": "ast",
+      "id": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard",
+      "community": 13,
+      "community_name": "keycloak-login.spec.ts",
+      "norm_label": "screenshotlogincard()"
+    },
+    {
+      "label": "showInvalidCredentials()",
+      "file_type": "code",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L125",
+      "_origin": "ast",
+      "id": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials",
+      "community": 13,
+      "community_name": "keycloak-login.spec.ts",
+      "norm_label": "showinvalidcredentials()"
+    },
+    {
+      "label": "2026-08-07-keycloak-same-origin.md",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin",
+      "community": 71,
+      "community_name": "Keycloak same-origin \u2014 Implementation Plan",
+      "norm_label": "2026-08-07-keycloak-same-origin.md"
+    },
+    {
+      "label": "Keycloak same-origin \u2014 Implementation Plan",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_keycloak_same_origin_implementation_plan",
+      "community": 71,
+      "community_name": "Keycloak same-origin \u2014 Implementation Plan",
+      "norm_label": "keycloak same-origin \u2014 implementation plan"
+    },
+    {
+      "label": "Global Constraints",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_global_constraints",
+      "community": 71,
+      "community_name": "Keycloak same-origin \u2014 Implementation Plan",
+      "norm_label": "global constraints"
+    },
+    {
+      "label": "Estrutura de arquivos",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_estrutura_de_arquivos",
+      "community": 71,
+      "community_name": "Keycloak same-origin \u2014 Implementation Plan",
+      "norm_label": "estrutura de arquivos"
+    },
+    {
+      "label": "Task 1: Fase 1 \u2014 Keycloak same-origin sob `/auth`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_task_1_fase_1_keycloak_same_origin_sob_auth",
+      "community": 71,
+      "community_name": "Keycloak same-origin \u2014 Implementation Plan",
+      "norm_label": "task 1: fase 1 \u2014 keycloak same-origin sob `/auth`"
+    },
+    {
+      "label": "Task 2: Fase 2 \u2014 renomear o realm para `blackice`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L383",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_task_2_fase_2_renomear_o_realm_para_blackice",
+      "community": 71,
+      "community_name": "Keycloak same-origin \u2014 Implementation Plan",
+      "norm_label": "task 2: fase 2 \u2014 renomear o realm para `blackice`"
+    },
+    {
+      "label": "Self-review",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L621",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_self_review",
+      "community": 71,
+      "community_name": "Keycloak same-origin \u2014 Implementation Plan",
+      "norm_label": "self-review"
+    },
+    {
+      "label": "2026-08-07-keycloak-same-origin-design.md",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "2026-08-07-keycloak-same-origin-design.md"
+    },
+    {
+      "label": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_blackice_login_same_origin_tirar_o_keycloak_da_barra_de_endere\u00e7os",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "blackice \u2014 login same-origin: tirar o keycloak da barra de enderecos"
+    },
+    {
+      "label": "Objetivo",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_objetivo",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "objetivo"
+    },
+    {
+      "label": "Estado atual (verificado em 2026-08-07, stack no ar)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_estado_atual_verificado_em_2026_08_07_stack_no_ar",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "estado atual (verificado em 2026-08-07, stack no ar)"
+    },
+    {
+      "label": "Decis\u00f5es",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L87",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_decis\u00f5es",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "decisoes"
+    },
+    {
+      "label": "Fase 1 \u2014 Same-origin atr\u00e1s do Traefik",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L99",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_1_same_origin_atr\u00e1s_do_traefik",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "fase 1 \u2014 same-origin atras do traefik"
+    },
+    {
+      "label": "Fluxo resultante",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L101",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fluxo_resultante",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "fluxo resultante"
+    },
+    {
+      "label": "`infra/dcm4chee/compose.yml`, servi\u00e7o `keycloak`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L111",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_infra_dcm4chee_compose_yml_servi\u00e7o_keycloak",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "`infra/dcm4chee/compose.yml`, servico `keycloak`"
+    },
+    {
+      "label": "`infra/dcm4chee/compose.yml`, servi\u00e7o `arc`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L145",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_infra_dcm4chee_compose_yml_servi\u00e7o_arc",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "`infra/dcm4chee/compose.yml`, servico `arc`"
+    },
+    {
+      "label": "`apps/backend/src/main/resources/application.properties`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L159",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_apps_backend_src_main_resources_application_properties",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "`apps/backend/src/main/resources/application.properties`"
+    },
+    {
+      "label": "`infra/compose.apps.yml`, servi\u00e7o `backend`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L199",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_infra_compose_apps_yml_servi\u00e7o_backend",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "`infra/compose.apps.yml`, servico `backend`"
+    },
+    {
+      "label": "`infra/keycloak/configure-blackice.sh`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L208",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_infra_keycloak_configure_blackice_sh",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "`infra/keycloak/configure-blackice.sh`"
+    },
+    {
+      "label": "O que **n\u00e3o** muda na Fase 1",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L217",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_o_que_n\u00e3o_muda_na_fase_1",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "o que **nao** muda na fase 1"
+    },
+    {
+      "label": "Fase 2 \u2014 Renomear o realm para `blackice`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L230",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_2_renomear_o_realm_para_blackice",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "fase 2 \u2014 renomear o realm para `blackice`"
+    },
+    {
+      "label": "Mec\u00e2nica",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L234",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_mec\u00e2nica",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "mecanica"
+    },
+    {
+      "label": "Custo honesto",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L299",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_custo_honesto",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "custo honesto"
+    },
+    {
+      "label": "Custo honesto (revisado)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L306",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_custo_honesto_revisado",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "custo honesto (revisado)"
+    },
+    {
+      "label": "Revers\u00e3o",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L314",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_revers\u00e3o",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "reversao"
+    },
+    {
+      "label": "Verifica\u00e7\u00e3o",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L346",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_verifica\u00e7\u00e3o",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "verificacao"
+    },
+    {
+      "label": "Riscos",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L397",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_riscos",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "riscos"
+    },
+    {
+      "label": "Alternativas descartadas",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L411",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_alternativas_descartadas",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "alternativas descartadas"
+    },
+    {
+      "label": "Fora de escopo",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L436",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fora_de_escopo",
+      "community": 70,
+      "community_name": "BlackICE \u2014 Login same-origin: tirar o Keycloak da barra de endere\u00e7os",
+      "norm_label": "fora de escopo"
+    },
+    {
       "label": "mvnw",
       "file_type": "code",
       "source_file": "apps/backend/mvnw",
@@ -467,72 +852,6 @@
       "norm_label": "test",
       "community_name": "SessionResourceTest.java",
       "id": "test"
-    },
-    {
-      "label": "keycloak-login.spec.ts",
-      "file_type": "code",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 13,
-      "norm_label": "keycloak-login.spec.ts",
-      "community_name": "keycloak-login.spec.ts",
-      "id": "apps_frontend_e2e_keycloak_login_spec"
-    },
-    {
-      "label": "openBlackiceLogin()",
-      "file_type": "code",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L12",
-      "_origin": "ast",
-      "community": 13,
-      "norm_label": "openblackicelogin()",
-      "community_name": "keycloak-login.spec.ts",
-      "id": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin"
-    },
-    {
-      "label": "requiredBox()",
-      "file_type": "code",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L33",
-      "_origin": "ast",
-      "community": 13,
-      "norm_label": "requiredbox()",
-      "community_name": "keycloak-login.spec.ts",
-      "id": "apps_frontend_e2e_keycloak_login_spec_requiredbox"
-    },
-    {
-      "label": "expectVerticallyCentered()",
-      "file_type": "code",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L44",
-      "_origin": "ast",
-      "community": 13,
-      "norm_label": "expectverticallycentered()",
-      "community_name": "keycloak-login.spec.ts",
-      "id": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered"
-    },
-    {
-      "label": "screenshotLoginCard()",
-      "file_type": "code",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L64",
-      "_origin": "ast",
-      "community": 13,
-      "norm_label": "screenshotlogincard()",
-      "community_name": "keycloak-login.spec.ts",
-      "id": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard"
-    },
-    {
-      "label": "showInvalidCredentials()",
-      "file_type": "code",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L119",
-      "_origin": "ast",
-      "community": 13,
-      "norm_label": "showinvalidcredentials()",
-      "community_name": "keycloak-login.spec.ts",
-      "id": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials"
     },
     {
       "label": "package.json",
@@ -1555,6 +1874,7 @@
       "community": 39,
       "norm_label": "graphify add and watch",
       "community_name": "Graphify Add and Watch",
+      "_origin": "semantic",
       "id": "agents_skills_graphify_references_add_watch_graphify_add_and_watch"
     },
     {
@@ -1569,6 +1889,7 @@
       "community": 40,
       "norm_label": "graphify exports",
       "community_name": "Graphify Exports",
+      "_origin": "semantic",
       "id": "agents_skills_graphify_references_exports_graphify_exports"
     },
     {
@@ -1583,6 +1904,7 @@
       "community": 41,
       "norm_label": "semantic extraction",
       "community_name": "Semantic Extraction",
+      "_origin": "semantic",
       "id": "agents_skills_graphify_references_extraction_spec_semantic_extraction"
     },
     {
@@ -1597,6 +1919,7 @@
       "community": 42,
       "norm_label": "cross-repository merge",
       "community_name": "Cross-repository Merge",
+      "_origin": "semantic",
       "id": "agents_skills_graphify_references_github_and_merge_cross_repo_merge"
     },
     {
@@ -1611,6 +1934,7 @@
       "community": 43,
       "norm_label": "graphify hooks",
       "community_name": "Graphify Hooks",
+      "_origin": "semantic",
       "id": "agents_skills_graphify_references_hooks_graphify_hooks"
     },
     {
@@ -1625,6 +1949,7 @@
       "community": 44,
       "norm_label": "graphify query",
       "community_name": "Graphify Query",
+      "_origin": "semantic",
       "id": "agents_skills_graphify_references_query_graphify_query"
     },
     {
@@ -1639,6 +1964,7 @@
       "community": 45,
       "norm_label": "graphify transcription",
       "community_name": "Graphify Transcription",
+      "_origin": "semantic",
       "id": "agents_skills_graphify_references_transcribe_graphify_transcription"
     },
     {
@@ -1653,6 +1979,7 @@
       "community": 20,
       "norm_label": "dicom domain reviewer",
       "community_name": "DICOM Domain Reviewer",
+      "_origin": "semantic",
       "id": "claude_agents_dicom_dicom_domain_reviewer_dicom_domain_reviewer"
     },
     {
@@ -1667,6 +1994,7 @@
       "community": 20,
       "norm_label": "quarkus backend",
       "community_name": "DICOM Domain Reviewer",
+      "_origin": "semantic",
       "id": "claude_agents_quarkus_quarkus_backend_quarkus_backend"
     },
     {
@@ -1681,6 +2009,7 @@
       "community": 20,
       "norm_label": "dicom viewer frontend",
       "community_name": "DICOM Domain Reviewer",
+      "_origin": "semantic",
       "id": "claude_agents_vue_dicom_viewer_frontend_dicom_viewer_frontend"
     },
     {
@@ -1695,6 +2024,7 @@
       "community": 64,
       "norm_label": "blackice skills",
       "community_name": "BlackICE Skills",
+      "_origin": "semantic",
       "id": "claude_skills_readme_blackice_skills"
     },
     {
@@ -1709,6 +2039,7 @@
       "community": 57,
       "norm_label": "graphify add and watch",
       "community_name": "Graphify Add and Watch",
+      "_origin": "semantic",
       "id": "claude_skills_graphify_references_add_watch_graphify_add_and_watch"
     },
     {
@@ -1723,6 +2054,7 @@
       "community": 58,
       "norm_label": "graphify exports",
       "community_name": "Graphify Exports",
+      "_origin": "semantic",
       "id": "claude_skills_graphify_references_exports_graphify_exports"
     },
     {
@@ -1737,6 +2069,7 @@
       "community": 59,
       "norm_label": "semantic extraction",
       "community_name": "Semantic Extraction",
+      "_origin": "semantic",
       "id": "claude_skills_graphify_references_extraction_spec_semantic_extraction"
     },
     {
@@ -1751,6 +2084,7 @@
       "community": 60,
       "norm_label": "cross-repository merge",
       "community_name": "Cross-repository Merge",
+      "_origin": "semantic",
       "id": "claude_skills_graphify_references_github_and_merge_cross_repo_merge"
     },
     {
@@ -1765,6 +2099,7 @@
       "community": 61,
       "norm_label": "graphify hooks",
       "community_name": "Graphify Hooks",
+      "_origin": "semantic",
       "id": "claude_skills_graphify_references_hooks_graphify_hooks"
     },
     {
@@ -1779,6 +2114,7 @@
       "community": 62,
       "norm_label": "graphify query",
       "community_name": "Graphify Query",
+      "_origin": "semantic",
       "id": "claude_skills_graphify_references_query_graphify_query"
     },
     {
@@ -1793,6 +2129,7 @@
       "community": 63,
       "norm_label": "graphify transcription",
       "community_name": "Graphify Transcription",
+      "_origin": "semantic",
       "id": "claude_skills_graphify_references_transcribe_graphify_transcription"
     },
     {
@@ -1807,6 +2144,7 @@
       "community": 10,
       "norm_label": "blackice pacs",
       "community_name": "Quarkus Product Backend",
+      "_origin": "semantic",
       "id": "agents_blackice_pacs"
     },
     {
@@ -1821,6 +2159,7 @@
       "community": 10,
       "norm_label": "dcm4chee archive",
       "community_name": "Quarkus Product Backend",
+      "_origin": "semantic",
       "id": "agents_dcm4chee_archive"
     },
     {
@@ -1835,6 +2174,7 @@
       "community": 10,
       "norm_label": "quarkus product backend",
       "community_name": "Quarkus Product Backend",
+      "_origin": "semantic",
       "id": "agents_quarkus_product_backend"
     },
     {
@@ -1849,6 +2189,7 @@
       "community": 10,
       "norm_label": "vue spa",
       "community_name": "Quarkus Product Backend",
+      "_origin": "semantic",
       "id": "agents_vue_spa"
     },
     {
@@ -1863,6 +2204,7 @@
       "community": 10,
       "norm_label": "keycloak oidc sso",
       "community_name": "Quarkus Product Backend",
+      "_origin": "semantic",
       "id": "agents_keycloak_oidc"
     },
     {
@@ -1877,6 +2219,7 @@
       "community": 17,
       "norm_label": "domain packs",
       "community_name": "Domain Packs",
+      "_origin": "semantic",
       "id": "agents_domain_packs"
     },
     {
@@ -1891,6 +2234,7 @@
       "community": 23,
       "norm_label": "dicom invariants",
       "community_name": "DICOM Invariants",
+      "_origin": "semantic",
       "id": "agents_dicom_invariants"
     },
     {
@@ -1905,6 +2249,7 @@
       "community": 23,
       "norm_label": "human validation gate",
       "community_name": "DICOM Invariants",
+      "_origin": "semantic",
       "id": "agents_human_gate"
     },
     {
@@ -1919,6 +2264,7 @@
       "community": 17,
       "norm_label": "claude-codex agent portability",
       "community_name": "Domain Packs",
+      "_origin": "semantic",
       "id": "claude_codex_agent_portability"
     },
     {
@@ -1933,6 +2279,7 @@
       "community": 38,
       "norm_label": "blackice architecture",
       "community_name": "BlackICE Architecture",
+      "_origin": "semantic",
       "id": "readme_blackice_architecture"
     },
     {
@@ -1947,6 +2294,7 @@
       "community": 38,
       "norm_label": "graphify knowledge graph",
       "community_name": "BlackICE Architecture",
+      "_origin": "semantic",
       "id": "readme_graphify_knowledge_graph"
     },
     {
@@ -1961,6 +2309,7 @@
       "community": 12,
       "norm_label": "backend bff",
       "community_name": "BFF Session Contract",
+      "_origin": "semantic",
       "id": "apps_backend_readme_backend_bff"
     },
     {
@@ -1975,6 +2324,7 @@
       "community": 12,
       "norm_label": "httponly session cookie",
       "community_name": "BFF Session Contract",
+      "_origin": "semantic",
       "id": "apps_backend_readme_http_only_session_cookie"
     },
     {
@@ -1989,6 +2339,7 @@
       "community": 12,
       "norm_label": "frontend spa",
       "community_name": "BFF Session Contract",
+      "_origin": "semantic",
       "id": "apps_frontend_readme_frontend_spa"
     },
     {
@@ -2003,6 +2354,7 @@
       "community": 12,
       "norm_label": "keycloak login e2e contract",
       "community_name": "BFF Session Contract",
+      "_origin": "semantic",
       "id": "apps_frontend_readme_login_e2e_contract"
     },
     {
@@ -2017,6 +2369,7 @@
       "community": 12,
       "norm_label": "bff session contract",
       "community_name": "BFF Session Contract",
+      "_origin": "semantic",
       "id": "apps_frontend_readme_bff_session_contract"
     },
     {
@@ -2031,6 +2384,7 @@
       "community": 46,
       "norm_label": "vue mount point",
       "community_name": "Vue Mount Point",
+      "_origin": "semantic",
       "id": "apps_frontend_index_html_vue_mount_point"
     },
     {
@@ -2045,6 +2399,7 @@
       "community": 21,
       "norm_label": "dcm4chee 5.34.3 baseline",
       "community_name": "DCM4CHEE 5.34.3 Baseline",
+      "_origin": "semantic",
       "id": "docs_architecture_dcm4chee_archive_baseline_5_34_3"
     },
     {
@@ -2059,6 +2414,7 @@
       "community": 21,
       "norm_label": "secure archive deployment",
       "community_name": "DCM4CHEE 5.34.3 Baseline",
+      "_origin": "semantic",
       "id": "docs_architecture_dcm4chee_archive_secure_deployment"
     },
     {
@@ -2073,6 +2429,7 @@
       "community": 18,
       "norm_label": "blackice monorepo structure",
       "community_name": "Feature-First Architecture",
+      "_origin": "semantic",
       "id": "docs_architecture_project_structure_monorepo"
     },
     {
@@ -2087,6 +2444,7 @@
       "community": 18,
       "norm_label": "feature-first architecture",
       "community_name": "Feature-First Architecture",
+      "_origin": "semantic",
       "id": "docs_architecture_project_structure_feature_first"
     },
     {
@@ -2101,6 +2459,7 @@
       "community": 10,
       "norm_label": "http contract boundary",
       "community_name": "Quarkus Product Backend",
+      "_origin": "semantic",
       "id": "docs_architecture_project_structure_http_contract_boundary"
     },
     {
@@ -2115,6 +2474,7 @@
       "community": 17,
       "norm_label": "domain packs single source of truth",
       "community_name": "Domain Packs",
+      "_origin": "semantic",
       "id": "docs_domains_domain_packs_single_source_of_truth"
     },
     {
@@ -2129,6 +2489,7 @@
       "community": 6,
       "norm_label": "dicom domain pack",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_dicom_dicom_domain_pack"
     },
     {
@@ -2143,6 +2504,7 @@
       "community": 6,
       "norm_label": "dicomweb verbs",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_dicom_dicomweb_dicomweb_verbs"
     },
     {
@@ -2157,6 +2519,7 @@
       "community": 6,
       "norm_label": "qido-rs",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_dicom_dicomweb_qido_rs"
     },
     {
@@ -2171,6 +2534,7 @@
       "community": 6,
       "norm_label": "wado-rs",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_dicom_dicomweb_wado_rs"
     },
     {
@@ -2185,6 +2549,7 @@
       "community": 6,
       "norm_label": "stow-rs",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_dicom_dicomweb_stow_rs"
     },
     {
@@ -2199,6 +2564,7 @@
       "community": 10,
       "norm_label": "user token propagation",
       "community_name": "Quarkus Product Backend",
+      "_origin": "semantic",
       "id": "docs_domains_dicom_dicomweb_user_token_propagation"
     },
     {
@@ -2213,6 +2579,7 @@
       "community": 16,
       "norm_label": "dicom patient study series instance hierarchy",
       "community_name": "DICOM Patient Study Series Instance Hierarchy",
+      "_origin": "semantic",
       "id": "docs_domains_dicom_semantics_dicom_hierarchy"
     },
     {
@@ -2227,6 +2594,7 @@
       "community": 16,
       "norm_label": "dicom uid identity",
       "community_name": "DICOM Patient Study Series Instance Hierarchy",
+      "_origin": "semantic",
       "id": "docs_domains_dicom_semantics_dicom_uid_identity"
     },
     {
@@ -2241,6 +2609,7 @@
       "community": 16,
       "norm_label": "patient identity with issuer",
       "community_name": "DICOM Patient Study Series Instance Hierarchy",
+      "_origin": "semantic",
       "id": "docs_domains_dicom_semantics_patient_identity"
     },
     {
@@ -2255,6 +2624,7 @@
       "community": 16,
       "norm_label": "transfer syntax preservation",
       "community_name": "DICOM Patient Study Series Instance Hierarchy",
+      "_origin": "semantic",
       "id": "docs_domains_dicom_semantics_transfer_syntax"
     },
     {
@@ -2269,6 +2639,7 @@
       "community": 6,
       "norm_label": "quarkus domain pack",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_quarkus_quarkus_domain_pack"
     },
     {
@@ -2283,6 +2654,7 @@
       "community": 6,
       "norm_label": "quarkus bff",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_quarkus_conventions_quarkus_bff"
     },
     {
@@ -2297,6 +2669,7 @@
       "community": 16,
       "norm_label": "report model",
       "community_name": "DICOM Patient Study Series Instance Hierarchy",
+      "_origin": "semantic",
       "id": "docs_domains_quarkus_conventions_report_model"
     },
     {
@@ -2311,6 +2684,7 @@
       "community": 6,
       "norm_label": "csrf protection",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_quarkus_conventions_csrf_protection"
     },
     {
@@ -2325,6 +2699,7 @@
       "community": 6,
       "norm_label": "vue domain pack",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_vue_vue_domain_pack"
     },
     {
@@ -2339,6 +2714,7 @@
       "community": 18,
       "norm_label": "vue feature-first conventions",
       "community_name": "Feature-First Architecture",
+      "_origin": "semantic",
       "id": "docs_domains_vue_conventions_vue_feature_first"
     },
     {
@@ -2353,6 +2729,7 @@
       "community": 12,
       "norm_label": "vue bff session",
       "community_name": "BFF Session Contract",
+      "_origin": "semantic",
       "id": "docs_domains_vue_conventions_bff_session"
     },
     {
@@ -2367,6 +2744,7 @@
       "community": 6,
       "norm_label": "cornerstone3d viewer",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_vue_cornerstone3d_cornerstone3d_viewer"
     },
     {
@@ -2381,6 +2759,7 @@
       "community": 6,
       "norm_label": "wado-rs image loader",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_vue_cornerstone3d_wado_image_loader"
     },
     {
@@ -2395,6 +2774,7 @@
       "community": 6,
       "norm_label": "cornerstone lifecycle cleanup",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_domains_vue_cornerstone3d_cornerstone_lifecycle"
     },
     {
@@ -2409,6 +2789,7 @@
       "community": 18,
       "norm_label": "historical specs and plans",
       "community_name": "Feature-First Architecture",
+      "_origin": "semantic",
       "id": "docs_superpowers_historical_records"
     },
     {
@@ -2423,6 +2804,7 @@
       "community": 17,
       "norm_label": "codex subagents implementation plan",
       "community_name": "Domain Packs",
+      "_origin": "semantic",
       "id": "docs_superpowers_plans_2026_07_23_codex_subagents_codex_subagents_plan"
     },
     {
@@ -2437,6 +2819,7 @@
       "community": 21,
       "norm_label": "dcm4chee 5.34.3 documentation plan",
       "community_name": "DCM4CHEE 5.34.3 Baseline",
+      "_origin": "semantic",
       "id": "docs_superpowers_plans_2026_07_23_dcm4chee_5_34_3_dcm4chee_baseline_plan"
     },
     {
@@ -2451,6 +2834,7 @@
       "community": 6,
       "norm_label": "foundation stack and auth plan",
       "community_name": "DICOMweb Verbs",
+      "_origin": "semantic",
       "id": "docs_superpowers_plans_2026_07_23_plano_0_fundacao_foundation_plan"
     },
     {
@@ -2465,6 +2849,7 @@
       "community": 33,
       "norm_label": "feature-first monorepo structure",
       "community_name": "Feature-first monorepo structure",
+      "_origin": "semantic",
       "id": "docs_superpowers_plans_2026_07_25_project_structure_monorepo_feature_first"
     },
     {
@@ -2479,6 +2864,7 @@
       "community": 32,
       "norm_label": "canonical three-file compose configuration",
       "community_name": "Canonical three-file Compose configuration",
+      "_origin": "semantic",
       "id": "docs_superpowers_plans_2026_07_25_project_structure_canonical_infrastructure_compose"
     },
     {
@@ -2493,6 +2879,7 @@
       "community": 4,
       "norm_label": "blackice keycloak login theme",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "docs_superpowers_plans_2026_07_26_keycloak_login_theme_blackice_login_theme"
     },
     {
@@ -2507,6 +2894,7 @@
       "community": 34,
       "norm_label": "project-scoped graphify integration",
       "community_name": "Project-scoped Graphify integration",
+      "_origin": "semantic",
       "id": "docs_superpowers_plans_2026_07_27_graphify_project_integration_graphify_project_integration"
     },
     {
@@ -2521,6 +2909,7 @@
       "community": 35,
       "norm_label": "focus outline accessibility",
       "community_name": "Focus outline accessibility",
+      "_origin": "semantic",
       "id": "docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_accessibility"
     },
     {
@@ -2535,6 +2924,7 @@
       "community": 4,
       "norm_label": "playwright keycloak theme ui regression",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_playwright_keycloak_theme_regression"
     },
     {
@@ -2549,6 +2939,7 @@
       "community": 22,
       "norm_label": "dcm4chee archive 5.34.3",
       "community_name": "DCM4CHEE Archive 5.34.3",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_dcm4chee_archive"
     },
     {
@@ -2563,6 +2954,7 @@
       "community": 22,
       "norm_label": "quarkus product backend",
       "community_name": "DCM4CHEE Archive 5.34.3",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_quarkus_product_backend"
     },
     {
@@ -2577,6 +2969,7 @@
       "community": 4,
       "norm_label": "vue 3 vite authenticated spa",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_vue_spa"
     },
     {
@@ -2591,6 +2984,7 @@
       "community": 4,
       "norm_label": "cornerstone3d viewer",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_cornerstone3d_viewer"
     },
     {
@@ -2605,6 +2999,7 @@
       "community": 65,
       "norm_label": "keycloak oidc sso",
       "community_name": "Keycloak OIDC SSO",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_keycloak_oidc_sso"
     },
     {
@@ -2619,6 +3014,7 @@
       "community": 22,
       "norm_label": "curated dicomweb product api",
       "community_name": "DCM4CHEE Archive 5.34.3",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_dicomweb_product_api"
     },
     {
@@ -2633,6 +3029,7 @@
       "community": 4,
       "norm_label": "narrow wado viewer path",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_narrow_wado_path"
     },
     {
@@ -2647,6 +3044,7 @@
       "community": 4,
       "norm_label": "bff oidc session cookie",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_bff_oidc_session"
     },
     {
@@ -2661,6 +3059,7 @@
       "community": 4,
       "norm_label": "quarkus csrf protection",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_csrf_protection"
     },
     {
@@ -2675,6 +3074,7 @@
       "community": 33,
       "norm_label": "feature-first application architecture",
       "community_name": "Feature-first monorepo structure",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_25_project_structure_design_feature_first_architecture"
     },
     {
@@ -2689,6 +3089,7 @@
       "community": 4,
       "norm_label": "keycloak.v2 child theme",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_26_keycloak_login_theme_design_keycloak_v2_child_theme"
     },
     {
@@ -2703,6 +3104,7 @@
       "community": 34,
       "norm_label": "local graphify cli workflow",
       "community_name": "Project-scoped Graphify integration",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_27_graphify_project_integration_design_graphify_local_cli"
     },
     {
@@ -2717,6 +3119,7 @@
       "community": 35,
       "norm_label": "single visible focus indicator",
       "community_name": "Focus outline accessibility",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_27_keycloak_input_focus_outline_design_single_focus_indicator"
     },
     {
@@ -2731,6 +3134,7 @@
       "community": 4,
       "norm_label": "hybrid ui regression strategy",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "docs_superpowers_specs_2026_07_27_keycloak_theme_e2e_ui_regression_design_hybrid_ui_regression_strategy"
     },
     {
@@ -2745,6 +3149,7 @@
       "community": 32,
       "norm_label": "three-file compose stack",
       "community_name": "Canonical three-file Compose configuration",
+      "_origin": "semantic",
       "id": "infra_readme_three_compose_files"
     },
     {
@@ -2759,6 +3164,7 @@
       "community": 4,
       "norm_label": "backend oidc frontchannel-backchannel split",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "infra_compose_apps_backend_frontchannel_backchannel_oidc"
     },
     {
@@ -2773,6 +3179,7 @@
       "community": 66,
       "norm_label": "frontend spa service",
       "community_name": "Frontend SPA service",
+      "_origin": "semantic",
       "id": "infra_compose_apps_frontend_spa_service"
     },
     {
@@ -2787,6 +3194,7 @@
       "community": 36,
       "norm_label": "docker api compatibility proxy",
       "community_name": "Docker API compatibility proxy",
+      "_origin": "semantic",
       "id": "infra_compose_docker_api_compatibility_proxy"
     },
     {
@@ -2801,6 +3209,7 @@
       "community": 36,
       "norm_label": "traefik docker label routing",
       "community_name": "Docker API compatibility proxy",
+      "_origin": "semantic",
       "id": "infra_compose_traefik_routing"
     },
     {
@@ -2815,6 +3224,7 @@
       "community": 67,
       "norm_label": "product postgresql database",
       "community_name": "Product PostgreSQL database",
+      "_origin": "semantic",
       "id": "infra_compose_product_postgres_database"
     },
     {
@@ -2829,6 +3239,7 @@
       "community": 68,
       "norm_label": "secure dcm4chee archive stack",
       "community_name": "Secure DCM4CHEE archive stack",
+      "_origin": "semantic",
       "id": "infra_dcm4chee_readme_secure_archive_stack"
     },
     {
@@ -2843,6 +3254,7 @@
       "community": 4,
       "norm_label": "dcm4chee keycloak service",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "infra_dcm4chee_compose_keycloak_service"
     },
     {
@@ -2857,6 +3269,7 @@
       "community": 4,
       "norm_label": "dcm4chee archive service",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "infra_dcm4chee_compose_archive_service"
     },
     {
@@ -2871,6 +3284,7 @@
       "community": 4,
       "norm_label": "shared dicomweb audience",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "infra_keycloak_readme_shared_audience"
     },
     {
@@ -2885,6 +3299,7 @@
       "community": 4,
       "norm_label": "blackice-quarkus confidential client",
       "community_name": "BlackICE Keycloak login theme",
+      "_origin": "semantic",
       "id": "infra_keycloak_readme_blackice_quarkus_client"
     },
     {
@@ -2899,6 +3314,7 @@
       "community": 25,
       "norm_label": "blackice favicon",
       "community_name": "BlackICE Favicon",
+      "_origin": "semantic",
       "id": "apps_frontend_public_favicon_blackice_favicon"
     },
     {
@@ -2913,6 +3329,7 @@
       "community": 25,
       "norm_label": "lightning bolt",
       "community_name": "BlackICE Favicon",
+      "_origin": "semantic",
       "id": "apps_frontend_public_favicon_lightning_bolt"
     },
     {
@@ -2927,6 +3344,7 @@
       "community": 47,
       "norm_label": "bluesky icon",
       "community_name": "Bluesky icon",
+      "_origin": "semantic",
       "id": "apps_frontend_public_icons_bluesky_icon"
     },
     {
@@ -2941,6 +3359,7 @@
       "community": 48,
       "norm_label": "discord icon",
       "community_name": "Discord icon",
+      "_origin": "semantic",
       "id": "apps_frontend_public_icons_discord_icon"
     },
     {
@@ -2955,6 +3374,7 @@
       "community": 49,
       "norm_label": "documentation icon",
       "community_name": "Documentation icon",
+      "_origin": "semantic",
       "id": "apps_frontend_public_icons_documentation_icon"
     },
     {
@@ -2969,6 +3389,7 @@
       "community": 50,
       "norm_label": "github icon",
       "community_name": "GitHub icon",
+      "_origin": "semantic",
       "id": "apps_frontend_public_icons_github_icon"
     },
     {
@@ -2983,6 +3404,7 @@
       "community": 51,
       "norm_label": "social icon",
       "community_name": "Social icon",
+      "_origin": "semantic",
       "id": "apps_frontend_public_icons_social_icon"
     },
     {
@@ -2997,6 +3419,7 @@
       "community": 52,
       "norm_label": "x icon",
       "community_name": "X icon",
+      "_origin": "semantic",
       "id": "apps_frontend_public_icons_x_icon"
     },
     {
@@ -3011,6 +3434,7 @@
       "community": 11,
       "norm_label": "incremental re-extraction runbook",
       "community_name": "Incremental re-extraction runbook",
+      "_origin": "semantic",
       "id": "agents_skills_graphify_references_update_incremental_update"
     },
     {
@@ -3025,6 +3449,7 @@
       "community": 11,
       "norm_label": "incremental merge integrity",
       "community_name": "Incremental re-extraction runbook",
+      "_origin": "semantic",
       "id": "agents_skills_graphify_references_update_merge_integrity"
     },
     {
@@ -3039,6 +3464,7 @@
       "community": 11,
       "norm_label": "cluster-only refresh",
       "community_name": "Incremental re-extraction runbook",
+      "_origin": "semantic",
       "id": "agents_skills_graphify_references_update_cluster_only"
     },
     {
@@ -3053,6 +3479,7 @@
       "community": 11,
       "norm_label": "incremental re-extraction runbook",
       "community_name": "Incremental re-extraction runbook",
+      "_origin": "semantic",
       "id": "claude_skills_graphify_references_update_incremental_update"
     },
     {
@@ -3067,6 +3494,7 @@
       "community": 11,
       "norm_label": "incremental merge integrity",
       "community_name": "Incremental re-extraction runbook",
+      "_origin": "semantic",
       "id": "claude_skills_graphify_references_update_merge_integrity"
     },
     {
@@ -3081,6 +3509,7 @@
       "community": 11,
       "norm_label": "cluster-only refresh",
       "community_name": "Incremental re-extraction runbook",
+      "_origin": "semantic",
       "id": "claude_skills_graphify_references_update_cluster_only"
     },
     {
@@ -3095,6 +3524,7 @@
       "community": 31,
       "norm_label": "graphify",
       "community_name": "Domain Packs",
+      "_origin": "semantic",
       "id": "docs_architecture_graphify_graphify"
     },
     {
@@ -3109,6 +3539,7 @@
       "community": 31,
       "norm_label": "domain packs",
       "community_name": "Domain Packs",
+      "_origin": "semantic",
       "id": "docs_architecture_graphify_domain_packs"
     },
     {
@@ -3123,6 +3554,7 @@
       "community": 14,
       "norm_label": "graphify cli",
       "community_name": "Complete incremental update",
+      "_origin": "semantic",
       "id": "docs_architecture_graphify_graphify_cli"
     },
     {
@@ -3138,6 +3570,7 @@
       "community": 14,
       "norm_label": "project-scoped installation",
       "community_name": "Complete incremental update",
+      "_origin": "semantic",
       "id": "docs_architecture_graphify_project_scoped_installation"
     },
     {
@@ -3152,6 +3585,7 @@
       "community": 14,
       "norm_label": "graphify skill",
       "community_name": "Complete incremental update",
+      "_origin": "semantic",
       "id": "docs_architecture_graphify_graphify_skill"
     },
     {
@@ -3166,6 +3600,7 @@
       "community": 14,
       "norm_label": "complete incremental update",
       "community_name": "Complete incremental update",
+      "_origin": "semantic",
       "id": "docs_architecture_graphify_complete_incremental_update"
     },
     {
@@ -3180,6 +3615,7 @@
       "community": 14,
       "norm_label": "semantic extraction",
       "community_name": "Complete incremental update",
+      "_origin": "semantic",
       "id": "docs_architecture_graphify_semantic_extraction"
     },
     {
@@ -3194,6 +3630,7 @@
       "community": 14,
       "norm_label": "artifact regeneration",
       "community_name": "Complete incremental update",
+      "_origin": "semantic",
       "id": "docs_architecture_graphify_artifact_regeneration"
     },
     {
@@ -3208,6 +3645,7 @@
       "community": 30,
       "norm_label": "ast-only update",
       "community_name": "AST-only update",
+      "_origin": "semantic",
       "id": "docs_architecture_graphify_ast_only_update"
     },
     {
@@ -3222,6 +3660,7 @@
       "community": 30,
       "norm_label": "graphify hook",
       "community_name": "AST-only update",
+      "_origin": "semantic",
       "id": "docs_architecture_graphify_graphify_hook"
     },
     {
@@ -3235,8 +3674,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "graphify skill",
-      "id": "_agents_skills_graphify_skill_skill",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_skill"
     },
     {
       "label": "Community Labels",
@@ -3249,8 +3689,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "community labels",
-      "id": "_agents_skills_graphify_skill_community_labels",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_community_labels"
     },
     {
       "label": "Clustered Communities",
@@ -3263,8 +3704,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "clustered communities",
-      "id": "_agents_skills_graphify_skill_clustered_communities",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_clustered_communities"
     },
     {
       "label": "Current Community Summaries",
@@ -3277,8 +3719,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "current community summaries",
-      "id": "_agents_skills_graphify_skill_current_community_summaries",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_current_community_summaries"
     },
     {
       "label": "Community Label Quality Gate",
@@ -3291,8 +3734,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "community label quality gate",
-      "id": "_agents_skills_graphify_skill_community_label_quality_gate",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_community_label_quality_gate"
     },
     {
       "label": "Exact Community-Key Coverage",
@@ -3305,8 +3749,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "exact community-key coverage",
-      "id": "_agents_skills_graphify_skill_exact_community_key_coverage",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_exact_community_key_coverage"
     },
     {
       "label": "Placeholder Label Rejection",
@@ -3319,8 +3764,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "placeholder label rejection",
-      "id": "_agents_skills_graphify_skill_placeholder_label_rejection",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_placeholder_label_rejection"
     },
     {
       "label": "Non-Distinct Label Rejection",
@@ -3333,8 +3779,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "non-distinct label rejection",
-      "id": "_agents_skills_graphify_skill_non_distinct_label_rejection",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_non_distinct_label_rejection"
     },
     {
       "label": "Community Membership Signatures",
@@ -3347,8 +3794,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "community membership signatures",
-      "id": "_agents_skills_graphify_skill_community_membership_signatures",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_community_membership_signatures"
     },
     {
       "label": "Automatic Label Reuse Invalidation",
@@ -3361,8 +3809,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "automatic label reuse invalidation",
-      "id": "_agents_skills_graphify_skill_automatic_label_reuse_invalidation",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_automatic_label_reuse_invalidation"
     },
     {
       "label": "Cluster-Only Workflow",
@@ -3375,8 +3824,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "cluster-only workflow",
-      "id": "_agents_skills_graphify_skill_cluster_only_workflow",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_cluster_only_workflow"
     },
     {
       "label": "Fresh Human Label Choice",
@@ -3389,8 +3839,9 @@
       "contributor": null,
       "community": 7,
       "norm_label": "fresh human label choice",
-      "id": "_agents_skills_graphify_skill_fresh_human_label_choice",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_agents_skills_graphify_skill_fresh_human_label_choice"
     },
     {
       "label": "Graphify skill",
@@ -3403,8 +3854,9 @@
       "contributor": null,
       "community": 8,
       "norm_label": "graphify skill",
-      "id": "_claude_skills_graphify_skill_skill",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_skill"
     },
     {
       "label": "Community Labels",
@@ -3417,8 +3869,9 @@
       "contributor": null,
       "community": 8,
       "norm_label": "community labels",
-      "id": "_claude_skills_graphify_skill_community_labels",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_community_labels"
     },
     {
       "label": "Clustered Communities",
@@ -3431,8 +3884,9 @@
       "contributor": null,
       "community": 8,
       "norm_label": "clustered communities",
-      "id": "_claude_skills_graphify_skill_clustered_communities",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_clustered_communities"
     },
     {
       "label": "Current Community Summaries",
@@ -3445,8 +3899,9 @@
       "contributor": null,
       "community": 8,
       "norm_label": "current community summaries",
-      "id": "_claude_skills_graphify_skill_current_community_summaries",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_current_community_summaries"
     },
     {
       "label": "Community Label Quality Gate",
@@ -3459,8 +3914,9 @@
       "contributor": null,
       "community": 8,
       "norm_label": "community label quality gate",
-      "id": "_claude_skills_graphify_skill_community_label_quality_gate",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_community_label_quality_gate"
     },
     {
       "label": "Exact Community-Key Coverage",
@@ -3473,8 +3929,9 @@
       "contributor": null,
       "community": 8,
       "norm_label": "exact community-key coverage",
-      "id": "_claude_skills_graphify_skill_exact_community_key_coverage",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_exact_community_key_coverage"
     },
     {
       "label": "Placeholder Label Rejection",
@@ -3487,8 +3944,9 @@
       "contributor": null,
       "community": 8,
       "norm_label": "placeholder label rejection",
-      "id": "_claude_skills_graphify_skill_placeholder_label_rejection",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_placeholder_label_rejection"
     },
     {
       "label": "Non-Distinct Label Rejection",
@@ -3501,8 +3959,9 @@
       "contributor": null,
       "community": 8,
       "norm_label": "non-distinct label rejection",
-      "id": "_claude_skills_graphify_skill_non_distinct_label_rejection",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_non_distinct_label_rejection"
     },
     {
       "label": "Community Membership Signatures",
@@ -3515,8 +3974,9 @@
       "contributor": null,
       "community": 8,
       "norm_label": "community membership signatures",
-      "id": "_claude_skills_graphify_skill_community_membership_signatures",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_community_membership_signatures"
     },
     {
       "label": "Automatic Label Reuse Invalidation",
@@ -3529,8 +3989,9 @@
       "contributor": null,
       "community": 8,
       "norm_label": "automatic label reuse invalidation",
-      "id": "_claude_skills_graphify_skill_automatic_label_reuse_invalidation",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_automatic_label_reuse_invalidation"
     },
     {
       "label": "Cluster-Only Workflow",
@@ -3543,8 +4004,9 @@
       "contributor": null,
       "community": 8,
       "norm_label": "cluster-only workflow",
-      "id": "_claude_skills_graphify_skill_cluster_only_workflow",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_cluster_only_workflow"
     },
     {
       "label": "Fresh Human Label Choice",
@@ -3557,11 +4019,400 @@
       "contributor": null,
       "community": 8,
       "norm_label": "fresh human label choice",
-      "id": "_claude_skills_graphify_skill_fresh_human_label_choice",
-      "community_name": "Community Label Quality Gate"
+      "community_name": "Community Label Quality Gate",
+      "_origin": "semantic",
+      "id": "_claude_skills_graphify_skill_fresh_human_label_choice"
     }
   ],
   "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_frontend_e2e_keycloak_login_spec",
+      "target": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_frontend_e2e_keycloak_login_spec",
+      "target": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_frontend_e2e_keycloak_login_spec",
+      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_frontend_e2e_keycloak_login_spec",
+      "target": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_frontend_e2e_keycloak_login_spec",
+      "target": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L126",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials",
+      "target": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered",
+      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard",
+      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_plans_2026_08_07_keycloak_same_origin",
+      "target": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_keycloak_same_origin_implementation_plan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_keycloak_same_origin_implementation_plan",
+      "target": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_estrutura_de_arquivos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_keycloak_same_origin_implementation_plan",
+      "target": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_global_constraints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L621",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_keycloak_same_origin_implementation_plan",
+      "target": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_self_review",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_estrutura_de_arquivos",
+      "target": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_task_1_fase_1_keycloak_same_origin_sob_auth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-08-07-keycloak-same-origin.md",
+      "source_location": "L383",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_estrutura_de_arquivos",
+      "target": "docs_superpowers_plans_2026_08_07_keycloak_same_origin_task_2_fase_2_renomear_o_realm_para_blackice",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_blackice_login_same_origin_tirar_o_keycloak_da_barra_de_endere\u00e7os",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L411",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_blackice_login_same_origin_tirar_o_keycloak_da_barra_de_endere\u00e7os",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_alternativas_descartadas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_blackice_login_same_origin_tirar_o_keycloak_da_barra_de_endere\u00e7os",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_decis\u00f5es",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_blackice_login_same_origin_tirar_o_keycloak_da_barra_de_endere\u00e7os",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_estado_atual_verificado_em_2026_08_07_stack_no_ar",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_blackice_login_same_origin_tirar_o_keycloak_da_barra_de_endere\u00e7os",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_1_same_origin_atr\u00e1s_do_traefik",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L230",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_blackice_login_same_origin_tirar_o_keycloak_da_barra_de_endere\u00e7os",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_2_renomear_o_realm_para_blackice",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L436",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_blackice_login_same_origin_tirar_o_keycloak_da_barra_de_endere\u00e7os",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fora_de_escopo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_blackice_login_same_origin_tirar_o_keycloak_da_barra_de_endere\u00e7os",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_objetivo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L397",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_blackice_login_same_origin_tirar_o_keycloak_da_barra_de_endere\u00e7os",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_riscos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L346",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_blackice_login_same_origin_tirar_o_keycloak_da_barra_de_endere\u00e7os",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_verifica\u00e7\u00e3o",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L159",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_1_same_origin_atr\u00e1s_do_traefik",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_apps_backend_src_main_resources_application_properties",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_1_same_origin_atr\u00e1s_do_traefik",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fluxo_resultante",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L199",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_1_same_origin_atr\u00e1s_do_traefik",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_infra_compose_apps_yml_servi\u00e7o_backend",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L145",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_1_same_origin_atr\u00e1s_do_traefik",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_infra_dcm4chee_compose_yml_servi\u00e7o_arc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_1_same_origin_atr\u00e1s_do_traefik",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_infra_dcm4chee_compose_yml_servi\u00e7o_keycloak",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L208",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_1_same_origin_atr\u00e1s_do_traefik",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_infra_keycloak_configure_blackice_sh",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L217",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_1_same_origin_atr\u00e1s_do_traefik",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_o_que_n\u00e3o_muda_na_fase_1",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L299",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_2_renomear_o_realm_para_blackice",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_custo_honesto",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L306",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_2_renomear_o_realm_para_blackice",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_custo_honesto_revisado",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L234",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_2_renomear_o_realm_para_blackice",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_mec\u00e2nica",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-08-07-keycloak-same-origin-design.md",
+      "source_location": "L314",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_fase_2_renomear_o_realm_para_blackice",
+      "target": "docs_superpowers_specs_2026_08_07_keycloak_same_origin_design_revers\u00e3o",
+      "confidence_score": 1.0
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -4074,97 +4925,6 @@
       "confidence_score": 1.0,
       "source": "apps_backend_src_test_java_dev_blackice_features_session_sessionresourcetest_sessionresourcetest_anonimo_recebe_401",
       "target": "test"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L44",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_frontend_e2e_keycloak_login_spec",
-      "target": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_frontend_e2e_keycloak_login_spec",
-      "target": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L33",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_frontend_e2e_keycloak_login_spec",
-      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L64",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_frontend_e2e_keycloak_login_spec",
-      "target": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L119",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_frontend_e2e_keycloak_login_spec",
-      "target": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L120",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_frontend_e2e_keycloak_login_spec_showinvalidcredentials",
-      "target": "apps_frontend_e2e_keycloak_login_spec_openblackicelogin"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L50",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_frontend_e2e_keycloak_login_spec_expectverticallycentered",
-      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/frontend/e2e/keycloak-login.spec.ts",
-      "source_location": "L68",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "apps_frontend_e2e_keycloak_login_spec_screenshotlogincard",
-      "target": "apps_frontend_e2e_keycloak_login_spec_requiredbox"
     },
     {
       "relation": "contains",
@@ -5038,6 +5798,7 @@
       "source_file": ".claude/agents/quarkus/quarkus-backend.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "claude_agents_quarkus_quarkus_backend_quarkus_backend",
       "target": "claude_agents_dicom_dicom_domain_reviewer_dicom_domain_reviewer"
     },
@@ -5048,6 +5809,7 @@
       "source_file": ".claude/agents/vue/dicom-viewer-frontend.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "claude_agents_vue_dicom_viewer_frontend_dicom_viewer_frontend",
       "target": "claude_agents_dicom_dicom_domain_reviewer_dicom_domain_reviewer"
     },
@@ -5058,6 +5820,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_blackice_pacs",
       "target": "agents_dcm4chee_archive"
     },
@@ -5068,6 +5831,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_blackice_pacs",
       "target": "agents_quarkus_product_backend"
     },
@@ -5078,6 +5842,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_blackice_pacs",
       "target": "agents_vue_spa"
     },
@@ -5088,6 +5853,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_keycloak_oidc",
       "target": "agents_dcm4chee_archive"
     },
@@ -5098,6 +5864,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_quarkus_product_backend",
       "target": "agents_dcm4chee_archive"
     },
@@ -5108,6 +5875,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_keycloak_oidc",
       "target": "agents_quarkus_product_backend"
     },
@@ -5118,6 +5886,7 @@
       "source_file": "docs/architecture/project-structure.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_project_structure_http_contract_boundary",
       "target": "agents_quarkus_product_backend"
     },
@@ -5128,6 +5897,7 @@
       "source_file": "docs/architecture/project-structure.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_project_structure_http_contract_boundary",
       "target": "agents_vue_spa"
     },
@@ -5138,6 +5908,7 @@
       "source_file": "docs/domains/dicom/dicomweb.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_dicom_dicomweb_user_token_propagation",
       "target": "agents_keycloak_oidc"
     },
@@ -5148,6 +5919,7 @@
       "source_file": "CLAUDE.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "claude_codex_agent_portability",
       "target": "agents_domain_packs"
     },
@@ -5158,6 +5930,7 @@
       "source_file": "docs/domains/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_domain_packs_single_source_of_truth",
       "target": "agents_domain_packs"
     },
@@ -5168,6 +5941,7 @@
       "source_file": "AGENTS.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_dicom_invariants",
       "target": "agents_human_gate"
     },
@@ -5178,6 +5952,7 @@
       "source_file": "docs/superpowers/plans/2026-07-23-codex-subagents.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_plans_2026_07_23_codex_subagents_codex_subagents_plan",
       "target": "claude_codex_agent_portability"
     },
@@ -5188,6 +5963,7 @@
       "source_file": "README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "readme_blackice_architecture",
       "target": "readme_graphify_knowledge_graph"
     },
@@ -5198,6 +5974,7 @@
       "source_file": "apps/backend/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_backend_readme_backend_bff",
       "target": "apps_backend_readme_http_only_session_cookie"
     },
@@ -5208,6 +5985,7 @@
       "source_file": "apps/frontend/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_frontend_readme_bff_session_contract",
       "target": "apps_backend_readme_http_only_session_cookie"
     },
@@ -5218,6 +5996,7 @@
       "source_file": "apps/frontend/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_frontend_readme_frontend_spa",
       "target": "apps_frontend_readme_bff_session_contract"
     },
@@ -5228,6 +6007,7 @@
       "source_file": "apps/frontend/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_frontend_readme_frontend_spa",
       "target": "apps_frontend_readme_login_e2e_contract"
     },
@@ -5238,6 +6018,7 @@
       "source_file": "docs/domains/vue/conventions.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_vue_conventions_bff_session",
       "target": "apps_frontend_readme_bff_session_contract"
     },
@@ -5248,6 +6029,7 @@
       "source_file": "docs/architecture/dcm4chee-archive.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_dcm4chee_archive_baseline_5_34_3",
       "target": "docs_architecture_dcm4chee_archive_secure_deployment"
     },
@@ -5258,6 +6040,7 @@
       "source_file": "docs/superpowers/plans/2026-07-23-dcm4chee-5-34-3.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_plans_2026_07_23_dcm4chee_5_34_3_dcm4chee_baseline_plan",
       "target": "docs_architecture_dcm4chee_archive_baseline_5_34_3"
     },
@@ -5268,6 +6051,7 @@
       "source_file": "docs/architecture/project-structure.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_project_structure_monorepo",
       "target": "docs_architecture_project_structure_feature_first"
     },
@@ -5278,6 +6062,7 @@
       "source_file": "docs/superpowers/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_historical_records",
       "target": "docs_architecture_project_structure_monorepo"
     },
@@ -5288,6 +6073,7 @@
       "source_file": "docs/domains/vue/conventions.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_vue_conventions_vue_feature_first",
       "target": "docs_architecture_project_structure_feature_first"
     },
@@ -5298,6 +6084,7 @@
       "source_file": "docs/domains/dicom/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_dicom_dicom_domain_pack",
       "target": "docs_domains_dicom_dicomweb_dicomweb_verbs"
     },
@@ -5308,6 +6095,7 @@
       "source_file": "docs/domains/dicom/dicomweb.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_dicom_dicomweb_dicomweb_verbs",
       "target": "docs_domains_dicom_dicomweb_qido_rs"
     },
@@ -5318,6 +6106,7 @@
       "source_file": "docs/domains/dicom/dicomweb.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_dicom_dicomweb_dicomweb_verbs",
       "target": "docs_domains_dicom_dicomweb_stow_rs"
     },
@@ -5328,6 +6117,7 @@
       "source_file": "docs/domains/dicom/dicomweb.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_dicom_dicomweb_dicomweb_verbs",
       "target": "docs_domains_dicom_dicomweb_wado_rs"
     },
@@ -5338,6 +6128,7 @@
       "source_file": "docs/domains/quarkus/conventions.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_quarkus_conventions_quarkus_bff",
       "target": "docs_domains_dicom_dicomweb_dicomweb_verbs"
     },
@@ -5348,6 +6139,7 @@
       "source_file": "docs/domains/vue/cornerstone3d.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_vue_cornerstone3d_wado_image_loader",
       "target": "docs_domains_dicom_dicomweb_wado_rs"
     },
@@ -5358,6 +6150,7 @@
       "source_file": "docs/domains/dicom/semantics.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_dicom_semantics_dicom_uid_identity",
       "target": "docs_domains_dicom_semantics_dicom_hierarchy"
     },
@@ -5368,6 +6161,7 @@
       "source_file": "docs/domains/dicom/semantics.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_dicom_semantics_patient_identity",
       "target": "docs_domains_dicom_semantics_dicom_hierarchy"
     },
@@ -5378,6 +6172,7 @@
       "source_file": "docs/domains/dicom/semantics.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_dicom_semantics_transfer_syntax",
       "target": "docs_domains_dicom_semantics_dicom_hierarchy"
     },
@@ -5388,6 +6183,7 @@
       "source_file": "docs/domains/quarkus/conventions.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_quarkus_conventions_report_model",
       "target": "docs_domains_dicom_semantics_dicom_uid_identity"
     },
@@ -5398,6 +6194,7 @@
       "source_file": "docs/domains/quarkus/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_quarkus_quarkus_domain_pack",
       "target": "docs_domains_quarkus_conventions_quarkus_bff"
     },
@@ -5408,6 +6205,7 @@
       "source_file": "docs/domains/quarkus/conventions.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_quarkus_conventions_csrf_protection",
       "target": "docs_domains_quarkus_conventions_quarkus_bff"
     },
@@ -5418,6 +6216,7 @@
       "source_file": "docs/superpowers/plans/2026-07-23-plano-0-fundacao.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_plans_2026_07_23_plano_0_fundacao_foundation_plan",
       "target": "docs_domains_quarkus_conventions_quarkus_bff"
     },
@@ -5428,6 +6227,7 @@
       "source_file": "docs/domains/vue/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_vue_vue_domain_pack",
       "target": "docs_domains_vue_cornerstone3d_cornerstone3d_viewer"
     },
@@ -5438,6 +6238,7 @@
       "source_file": "docs/domains/vue/cornerstone3d.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_vue_cornerstone3d_cornerstone3d_viewer",
       "target": "docs_domains_vue_cornerstone3d_wado_image_loader"
     },
@@ -5448,6 +6249,7 @@
       "source_file": "docs/domains/vue/cornerstone3d.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_domains_vue_cornerstone3d_cornerstone_lifecycle",
       "target": "docs_domains_vue_cornerstone3d_cornerstone3d_viewer"
     },
@@ -5458,6 +6260,7 @@
       "source_file": "docs/superpowers/plans/2026-07-25-project-structure.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_plans_2026_07_25_project_structure_monorepo_feature_first",
       "target": "docs_superpowers_specs_2026_07_25_project_structure_design_feature_first_architecture"
     },
@@ -5468,6 +6271,7 @@
       "source_file": "docs/superpowers/plans/2026-07-25-project-structure.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_plans_2026_07_25_project_structure_canonical_infrastructure_compose",
       "target": "infra_readme_three_compose_files"
     },
@@ -5478,6 +6282,7 @@
       "source_file": "docs/superpowers/plans/2026-07-27-keycloak-theme-e2e-ui-regression.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_playwright_keycloak_theme_regression",
       "target": "docs_superpowers_plans_2026_07_26_keycloak_login_theme_blackice_login_theme"
     },
@@ -5488,6 +6293,7 @@
       "source_file": "docs/superpowers/specs/2026-07-26-keycloak-login-theme-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_07_26_keycloak_login_theme_design_keycloak_v2_child_theme",
       "target": "docs_superpowers_plans_2026_07_26_keycloak_login_theme_blackice_login_theme"
     },
@@ -5498,6 +6304,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_blackice_quarkus_client",
       "target": "docs_superpowers_plans_2026_07_26_keycloak_login_theme_blackice_login_theme"
     },
@@ -5508,6 +6315,7 @@
       "source_file": "docs/superpowers/specs/2026-07-27-graphify-project-integration-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_07_27_graphify_project_integration_design_graphify_local_cli",
       "target": "docs_superpowers_plans_2026_07_27_graphify_project_integration_graphify_project_integration"
     },
@@ -5518,6 +6326,7 @@
       "source_file": "docs/superpowers/specs/2026-07-27-keycloak-input-focus-outline-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_07_27_keycloak_input_focus_outline_design_single_focus_indicator",
       "target": "docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_accessibility"
     },
@@ -5528,6 +6337,7 @@
       "source_file": "docs/superpowers/specs/2026-07-27-keycloak-theme-e2e-ui-regression-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_07_27_keycloak_theme_e2e_ui_regression_design_hybrid_ui_regression_strategy",
       "target": "docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_playwright_keycloak_theme_regression"
     },
@@ -5538,6 +6348,7 @@
       "source_file": "docs/superpowers/specs/2026-07-22-blackice-pacs-decisions.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_quarkus_product_backend",
       "target": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_dcm4chee_archive"
     },
@@ -5548,6 +6359,7 @@
       "source_file": "docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_dicomweb_product_api",
       "target": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_dcm4chee_archive"
     },
@@ -5558,6 +6370,7 @@
       "source_file": "docs/superpowers/specs/2026-07-22-blackice-pacs-decisions.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_vue_spa",
       "target": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_cornerstone3d_viewer"
     },
@@ -5568,6 +6381,7 @@
       "source_file": "docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_bff_oidc_session",
       "target": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_vue_spa"
     },
@@ -5578,6 +6392,7 @@
       "source_file": "docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_narrow_wado_path",
       "target": "docs_superpowers_specs_2026_07_22_blackice_pacs_decisions_cornerstone3d_viewer"
     },
@@ -5588,6 +6403,7 @@
       "source_file": "docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_csrf_protection",
       "target": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_bff_oidc_session"
     },
@@ -5598,6 +6414,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_shared_audience",
       "target": "docs_superpowers_specs_2026_07_23_blackice_backend_frontend_design_bff_oidc_session"
     },
@@ -5608,6 +6425,7 @@
       "source_file": "infra/compose.apps.yml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_compose_apps_backend_frontchannel_backchannel_oidc",
       "target": "infra_dcm4chee_compose_keycloak_service"
     },
@@ -5618,6 +6436,7 @@
       "source_file": "infra/compose.yml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_compose_traefik_routing",
       "target": "infra_compose_docker_api_compatibility_proxy"
     },
@@ -5628,6 +6447,7 @@
       "source_file": "infra/dcm4chee/compose.yml",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_dcm4chee_compose_keycloak_service",
       "target": "infra_dcm4chee_compose_archive_service"
     },
@@ -5638,6 +6458,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_shared_audience",
       "target": "infra_dcm4chee_compose_archive_service"
     },
@@ -5648,6 +6469,7 @@
       "source_file": "infra/keycloak/README.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "infra_keycloak_readme_blackice_quarkus_client",
       "target": "infra_keycloak_readme_shared_audience"
     },
@@ -5658,6 +6480,7 @@
       "source_file": "apps/frontend/public/favicon.svg",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "apps_frontend_public_favicon_blackice_favicon",
       "target": "apps_frontend_public_favicon_lightning_bolt"
     },
@@ -5668,6 +6491,7 @@
       "source_file": ".agents/skills/graphify/references/update.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_skills_graphify_references_update_incremental_update",
       "target": "agents_skills_graphify_references_update_cluster_only"
     },
@@ -5678,6 +6502,7 @@
       "source_file": ".agents/skills/graphify/references/update.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_skills_graphify_references_update_incremental_update",
       "target": "agents_skills_graphify_references_update_merge_integrity"
     },
@@ -5688,6 +6513,7 @@
       "source_file": ".agents/skills/graphify/references/update.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "agents_skills_graphify_references_update_incremental_update",
       "target": "claude_skills_graphify_references_update_incremental_update"
     },
@@ -5698,6 +6524,7 @@
       "source_file": ".claude/skills/graphify/references/update.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "claude_skills_graphify_references_update_incremental_update",
       "target": "claude_skills_graphify_references_update_cluster_only"
     },
@@ -5708,6 +6535,7 @@
       "source_file": ".claude/skills/graphify/references/update.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "claude_skills_graphify_references_update_incremental_update",
       "target": "claude_skills_graphify_references_update_merge_integrity"
     },
@@ -5718,6 +6546,7 @@
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_graphify_graphify",
       "target": "docs_architecture_graphify_domain_packs"
     },
@@ -5728,6 +6557,7 @@
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_graphify_graphify_cli",
       "target": "docs_architecture_graphify_project_scoped_installation"
     },
@@ -5738,6 +6568,7 @@
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_graphify_project_scoped_installation",
       "target": "docs_architecture_graphify_graphify_skill"
     },
@@ -5748,6 +6579,7 @@
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_graphify_graphify_skill",
       "target": "docs_architecture_graphify_complete_incremental_update"
     },
@@ -5758,6 +6590,7 @@
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_graphify_complete_incremental_update",
       "target": "docs_architecture_graphify_artifact_regeneration"
     },
@@ -5768,6 +6601,7 @@
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_graphify_complete_incremental_update",
       "target": "docs_architecture_graphify_semantic_extraction"
     },
@@ -5778,6 +6612,7 @@
       "source_file": "docs/architecture/graphify.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "docs_architecture_graphify_graphify_hook",
       "target": "docs_architecture_graphify_ast_only_update"
     },
@@ -5788,6 +6623,7 @@
       "source_file": ".agents/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_agents_skills_graphify_skill_skill",
       "target": "_agents_skills_graphify_skill_community_labels"
     },
@@ -5798,6 +6634,7 @@
       "source_file": ".agents/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_agents_skills_graphify_skill_community_labels",
       "target": "_agents_skills_graphify_skill_clustered_communities"
     },
@@ -5808,6 +6645,7 @@
       "source_file": ".agents/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_agents_skills_graphify_skill_community_labels",
       "target": "_agents_skills_graphify_skill_current_community_summaries"
     },
@@ -5818,6 +6656,7 @@
       "source_file": ".agents/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_agents_skills_graphify_skill_fresh_human_label_choice",
       "target": "_agents_skills_graphify_skill_community_labels"
     },
@@ -5828,6 +6667,7 @@
       "source_file": ".agents/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_agents_skills_graphify_skill_community_label_quality_gate",
       "target": "_agents_skills_graphify_skill_clustered_communities"
     },
@@ -5838,6 +6678,7 @@
       "source_file": ".agents/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_agents_skills_graphify_skill_community_label_quality_gate",
       "target": "_agents_skills_graphify_skill_exact_community_key_coverage"
     },
@@ -5848,6 +6689,7 @@
       "source_file": ".agents/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_agents_skills_graphify_skill_community_label_quality_gate",
       "target": "_agents_skills_graphify_skill_non_distinct_label_rejection"
     },
@@ -5858,6 +6700,7 @@
       "source_file": ".agents/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_agents_skills_graphify_skill_community_label_quality_gate",
       "target": "_agents_skills_graphify_skill_placeholder_label_rejection"
     },
@@ -5868,6 +6711,7 @@
       "source_file": ".agents/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_agents_skills_graphify_skill_community_membership_signatures",
       "target": "_agents_skills_graphify_skill_automatic_label_reuse_invalidation"
     },
@@ -5878,6 +6722,7 @@
       "source_file": ".agents/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_agents_skills_graphify_skill_automatic_label_reuse_invalidation",
       "target": "_agents_skills_graphify_skill_cluster_only_workflow"
     },
@@ -5888,6 +6733,7 @@
       "source_file": ".agents/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_agents_skills_graphify_skill_fresh_human_label_choice",
       "target": "_agents_skills_graphify_skill_automatic_label_reuse_invalidation"
     },
@@ -5898,6 +6744,7 @@
       "source_file": ".claude/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_claude_skills_graphify_skill_skill",
       "target": "_claude_skills_graphify_skill_community_labels"
     },
@@ -5908,6 +6755,7 @@
       "source_file": ".claude/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_claude_skills_graphify_skill_community_labels",
       "target": "_claude_skills_graphify_skill_clustered_communities"
     },
@@ -5918,6 +6766,7 @@
       "source_file": ".claude/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_claude_skills_graphify_skill_community_labels",
       "target": "_claude_skills_graphify_skill_current_community_summaries"
     },
@@ -5928,6 +6777,7 @@
       "source_file": ".claude/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_claude_skills_graphify_skill_fresh_human_label_choice",
       "target": "_claude_skills_graphify_skill_community_labels"
     },
@@ -5938,6 +6788,7 @@
       "source_file": ".claude/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_claude_skills_graphify_skill_community_label_quality_gate",
       "target": "_claude_skills_graphify_skill_clustered_communities"
     },
@@ -5948,6 +6799,7 @@
       "source_file": ".claude/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_claude_skills_graphify_skill_community_label_quality_gate",
       "target": "_claude_skills_graphify_skill_exact_community_key_coverage"
     },
@@ -5958,6 +6810,7 @@
       "source_file": ".claude/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_claude_skills_graphify_skill_community_label_quality_gate",
       "target": "_claude_skills_graphify_skill_non_distinct_label_rejection"
     },
@@ -5968,6 +6821,7 @@
       "source_file": ".claude/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_claude_skills_graphify_skill_community_label_quality_gate",
       "target": "_claude_skills_graphify_skill_placeholder_label_rejection"
     },
@@ -5978,6 +6832,7 @@
       "source_file": ".claude/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_claude_skills_graphify_skill_community_membership_signatures",
       "target": "_claude_skills_graphify_skill_automatic_label_reuse_invalidation"
     },
@@ -5988,6 +6843,7 @@
       "source_file": ".claude/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_claude_skills_graphify_skill_automatic_label_reuse_invalidation",
       "target": "_claude_skills_graphify_skill_cluster_only_workflow"
     },
@@ -5998,6 +6854,7 @@
       "source_file": ".claude/skills/graphify/SKILL.md",
       "source_location": null,
       "weight": 1.0,
+      "_origin": "semantic",
       "source": "_claude_skills_graphify_skill_fresh_human_label_choice",
       "target": "_claude_skills_graphify_skill_automatic_label_reuse_invalidation"
     }
@@ -6104,5 +6961,5 @@
       "source_file": "apps/frontend/public/icons.svg"
     }
   ],
-  "built_at_commit": "624b2c76eb4f21e6de38e02c6da241e12e720d25"
+  "built_at_commit": "cdd94cce9fcb82dfb99c05b31c0288819ce79ad2"
 }

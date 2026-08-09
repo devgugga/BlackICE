@@ -22,6 +22,8 @@ graphify-out/.graphify_python
 graphify-out/.graphify_root
 *.graphify-bak
 *.graphify.log
+# backup datado que o rebuild grava antes de sobrescrever o grafo curado
+graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 
 # Graphify assistant hooks embed this machine's executable path. Recreate them
 # locally with .graphify/setup.ps1; only portable agent instructions are tracked.

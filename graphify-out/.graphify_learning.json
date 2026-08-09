@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T18:43:13.483285+00:00",
+  "generated_at": "2026-08-09T19:07:32.912631+00:00",
   "nodes": {
     "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource": {
       "code_fingerprint": "34f30cb58946c326b0770aa5777fad7523c57bb9e816f17d822a22ec228edcc6",
@@ -12,13 +12,13 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.999989117,
+      "score": 0.740251757,
       "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
       "status": "tentative",
       "uses": 1
     },
     "apps_frontend_readme_bff_session_contract": {
-      "code_fingerprint": "32fd2fea4153c6845ab13eb5b1006ae1325c32399896c300dc6dce417e1ae8bc",
+      "code_fingerprint": "4834d8f9400cf2c747a827a0a985146e2dd281b5fba6501c93e3e57024056f96",
       "label": "BFF Session Contract",
       "last": "2026-07-27T18:42:32.787677+00:00",
       "provenance": [
@@ -28,7 +28,7 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.999989117,
+      "score": 0.740251757,
       "source_file": "apps/frontend/README.md",
       "status": "tentative",
       "uses": 1
@@ -44,7 +44,7 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.999989117,
+      "score": 0.740251757,
       "source_file": "apps/frontend/src/features/home/HomePage.vue",
       "status": "tentative",
       "uses": 1
@@ -60,7 +60,7 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.999989117,
+      "score": 0.740251757,
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "status": "tentative",
       "uses": 1
@@ -76,13 +76,13 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.999989117,
+      "score": 0.740251757,
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "status": "tentative",
       "uses": 1
     },
     "docs_architecture_graphify_complete_incremental_update": {
-      "code_fingerprint": "079976c69b160de597042bbbd907672d83c038fddef2ebe31b2358f4b9c01182",
+      "code_fingerprint": "3660ad8828c0137fe143ca4a7314569f1a88bda4dcdad701ecbeb2464c5ae2d5",
       "label": "Complete incremental update",
       "last": "2026-07-27T18:43:05.282329+00:00",
       "provenance": [
@@ -92,7 +92,7 @@
           "q": "Onde ficam as instruções operacionais do Graphify no BlackICE?"
         }
       ],
-      "score": 0.999997807,
+      "score": 0.74025819,
       "source_file": "docs/architecture/graphify.md",
       "status": "tentative",
       "uses": 1
@@ -108,7 +108,7 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.999991931,
+      "score": 0.74025384,
       "source_file": "docs/domains/dicom/dicomweb.md",
       "status": "tentative",
       "uses": 1
@@ -124,7 +124,7 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.999991931,
+      "score": 0.74025384,
       "source_file": "docs/domains/dicom/dicomweb.md",
       "status": "tentative",
       "uses": 1
@@ -140,7 +140,7 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.999991931,
+      "score": 0.74025384,
       "source_file": "docs/domains/dicom/dicomweb.md",
       "status": "tentative",
       "uses": 1
@@ -156,13 +156,13 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.999991931,
+      "score": 0.74025384,
       "source_file": "docs/domains/dicom/dicomweb.md",
       "status": "tentative",
       "uses": 1
     },
     "docs_domains_dicom_semantics_dicom_uid_identity": {
-      "code_fingerprint": "7b3e5917f850323b95b8863bc8f23606a47c7d29b06ce1857d610c7e033a7f97",
+      "code_fingerprint": "6cceba0c5908912922f63aa5dff6e657b01bcfb3afbf9766aa9844bf770ed0d4",
       "label": "DICOM UID Identity",
       "last": "2026-07-27T18:42:43.310522+00:00",
       "provenance": [
@@ -172,13 +172,13 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.999991931,
+      "score": 0.74025384,
       "source_file": "docs/domains/dicom/semantics.md",
       "status": "tentative",
       "uses": 1
     },
     "docs_domains_dicom_semantics_patient_identity": {
-      "code_fingerprint": "7b3e5917f850323b95b8863bc8f23606a47c7d29b06ce1857d610c7e033a7f97",
+      "code_fingerprint": "6cceba0c5908912922f63aa5dff6e657b01bcfb3afbf9766aa9844bf770ed0d4",
       "label": "Patient Identity with Issuer",
       "last": "2026-07-27T18:42:43.310522+00:00",
       "provenance": [
@@ -188,7 +188,7 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.999991931,
+      "score": 0.74025384,
       "source_file": "docs/domains/dicom/semantics.md",
       "status": "tentative",
       "uses": 1
