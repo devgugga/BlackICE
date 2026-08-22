@@ -1,0 +1,17 @@
+package dev.blackice.features.ingest;
+
+public final class ArchiveUnavailableException extends RuntimeException {
+
+    public enum Reason { TIMEOUT, CONNECTION, HTTP_STATUS, INTERRUPTED }
+
+    private final Reason reason;
+
+    public ArchiveUnavailableException(Reason reason, Throwable cause) {
+        super(reason.name(), cause);
+        this.reason = reason;
+    }
+
+    public Reason reason() {
+        return reason;
+    }
+}

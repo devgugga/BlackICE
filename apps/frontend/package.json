@@ -8,7 +8,8 @@
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:e2e:keycloak": "playwright test e2e/keycloak-login.spec.ts"
+    "test:e2e:keycloak": "playwright test e2e/keycloak-login.spec.ts",
+    "test:e2e:ingest": "playwright test e2e/manual-dicom-import.spec.ts"
   },
   "dependencies": {
     "vue": "^3.5.39",

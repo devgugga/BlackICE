@@ -5,8 +5,11 @@ armazenamento e dos protocolos DICOM; o Quarkus implementa o domínio de produto
 e expõe um BFF autenticado por Keycloak; o Vue 3 entrega a interface e o viewer
 Cornerstone3D.
 
-O MVP cobre quatro fluxos ponta a ponta: ingestão STOW-RS, worklist e busca
-QIDO-RS, visualização WADO-RS e laudos autenticados.
+O MVP cobre quatro fluxos ponta a ponta:
+1. **Importação manual DICOM via STOW-RS** (upload autenticado no navegador via BFF Quarkus; modalidades clínicas em produção enviam C-STORE diretamente ao DCM4CHEE Archive);
+2. **Worklist e busca via QIDO-RS**;
+3. **Visualização WADO-RS** (viewer Cornerstone3D);
+4. **Laudos autenticados** (persistência no banco do produto).
 
 ## Mapa do monorepo
 

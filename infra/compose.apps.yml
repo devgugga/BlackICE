@@ -18,6 +18,8 @@ services:
       QUARKUS_OIDC_AUTH_SERVER_URL: http://keycloak:8080/auth/realms/blackice
       QUARKUS_OIDC_SECRET: ${QUARKUS_OIDC_SECRET}
       QUARKUS_OIDC_ENCRYPTION_SECRET: ${QUARKUS_OIDC_ENCRYPTION_SECRET:?defina QUARKUS_OIDC_ENCRYPTION_SECRET em infra/.env}
+      BLACKICE_DICOMWEB_BASE_URL: http://arc:8080/dcm4chee-arc/aets/DCM4CHEE/rs
+      QUARKUS_CSRF_TOKEN_SIGNATURE_KEY: ${QUARKUS_CSRF_TOKEN_SIGNATURE_KEY:?defina QUARKUS_CSRF_TOKEN_SIGNATURE_KEY em infra/.env}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`${APP_HOST}`) && PathPrefix(`/api`)"
@@ -25,6 +27,7 @@ services:
       - "traefik.http.services.api.loadbalancer.server.port=8080"
     depends_on:
       - keycloak
+      - arc
     networks: [blackice]
 
   frontend:

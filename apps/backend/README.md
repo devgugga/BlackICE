@@ -30,13 +30,27 @@ variáveis no shell. Depois execute:
 mise exec -- mvn quarkus:dev
 ```
 
-As variáveis OIDC usadas pela configuração atual são:
+As variáveis OIDC e DICOMweb usadas pela configuração atual são:
 
 - `QUARKUS_OIDC_SECRET`: secret do client `blackice-quarkus`;
 - `QUARKUS_OIDC_ENCRYPTION_SECRET`: chave de ao menos 32 caracteres para
   criptografar o estado da sessão;
 - `QUARKUS_OIDC_AUTH_SERVER_URL`: override opcional do issuer configurado em
-  `application.properties`.
+  `application.properties`;
+- `QUARKUS_CSRF_TOKEN_SIGNATURE_KEY`: chave de ao menos 32 caracteres para assinar
+  tokens CSRF emitidos por `/api/csrf`;
+- `BLACKICE_DICOMWEB_BASE_URL`: URL base do endpoint DICOMweb do DCM4CHEE Archive
+  (padrão `http://arc:8080/dcm4chee-arc/aets/DCM4CHEE/rs`).
+
+Propriedades configuráveis para importação DICOM:
+- `blackice.ingest.max-files` (padrão 500);
+- `blackice.ingest.max-total-bytes` (padrão 524288000 = 500 MB);
+- `blackice.ingest.max-concurrent-studies` (padrão 1);
+- `blackice.dicomweb.request-timeout` (padrão 60S).
+
+Dependências-chave da feature `ingest`:
+- `org.dcm4che:dcm4che-core:5.34.3`: parser de metadados DICOM (bulk-data excluído);
+- `io.quarkus:quarkus-rest-csrf`: proteção CSRF de endpoints mutantes.
 
 Não versione `.env` nem segredos.
 

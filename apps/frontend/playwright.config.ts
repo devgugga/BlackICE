@@ -4,7 +4,7 @@ const isCi = Boolean(process.env.CI);
 
 export default defineConfig({
   testDir: './e2e',
-  testMatch: 'keycloak-login.spec.ts',
+  testMatch: ['keycloak-login.spec.ts', 'manual-dicom-import.spec.ts'],
   fullyParallel: false,
   workers: isCi ? 1 : undefined,
   retries: isCi ? 1 : 0,

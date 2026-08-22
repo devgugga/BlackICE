@@ -17,7 +17,19 @@ mise exec -- npm ci
 ```powershell
 mise exec -- npm test
 mise exec -- npm run build
+mise exec -- npm run test:e2e:ingest
 ```
+
+A suíte de testes E2E de importação (`test:e2e:ingest`) valida o fluxo completo
+utilizando fixtures DICOM sintéticas geradas em memória, garantindo que nenhum
+dado real de paciente seja manipulado ou commitado.
+
+### Estados da interface de importação (`/ingest`):
+- `SELECTING`: seleção de múltiplos arquivos `.dcm`;
+- `READY`: arquivos validados localmente prontos para envio;
+- `UPLOADING`: barra de progresso determinada com opção de cancelamento;
+- `PROCESSING`: envio concluído, aguardando resposta STOW-RS do Archive;
+- `COMPLETE` / `ERROR` / `CANCELLED`: apresentação dos resultados detalhados por estudo e opção de nova importação.
 
 ## Desenvolvimento
 

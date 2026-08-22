@@ -68,4 +68,17 @@ json.dump(c, open("/tmp/client.json", "w"))
   echo "login_theme=blackice no client blackice-quarkus: aplicado"
 else echo "login_theme=blackice: já aplicado"; fi
 
-echo "OK: config base pronta. Roles NÃO atribuídas (gate humano — ver README)."
+# 5) role 'auth' para dr.teste
+UID_TEST=$(printf '%s' "$USERS" | grep -o '"id":"[^"]*"' | head -1 | sed 's/.*:"//;s/"//')
+if [ -z "$UID_TEST" ]; then
+  USERS=$(curl -f -k -s -H "$AH" "$api/users?username=dr.teste&exact=true")
+  UID_TEST=$(printf '%s' "$USERS" | grep -o '"id":"[^"]*"' | head -1 | sed 's/.*:"//;s/"//')
+fi
+USER_ROLES=$(curl -f -k -s -H "$AH" "$api/users/$UID_TEST/role-mappings/realm")
+if [ -z "$(printf '%s' "$USER_ROLES" | grep -o '"name":"auth"' || true)" ]; then
+  ROLE_AUTH=$(curl -k -s -H "$AH" "$api/roles/auth")
+  curl -k -s -H "$AH" -H "Content-Type: application/json" -X POST "$api/users/$UID_TEST/role-mappings/realm" -d "[$ROLE_AUTH]" >/dev/null
+  echo "role auth atribuída a dr.teste"
+else echo "role auth: já atribuída a dr.teste"; fi
+
+echo "OK: config base e role auth prontas."

@@ -7,6 +7,7 @@
 
     <properties>
         <compiler-plugin.version>3.15.0</compiler-plugin.version>
+        <dcm4che.version>5.34.3</dcm4che.version>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -16,6 +17,14 @@
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.5.6</surefire-plugin.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>www.dcm4che.org</id>
+            <name>dcm4che Repository</name>
+            <url>https://www.dcm4che.org/maven2</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -30,6 +39,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.dcm4che</groupId>
+            <artifactId>dcm4che-core</artifactId>
+            <version>${dcm4che.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest</artifactId>
@@ -52,7 +66,21 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-csrf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-junit5-mockito</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-test-security</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
