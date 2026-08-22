@@ -10,5 +10,5 @@ contrarie suas regras.
 
 O corpo do commit é obrigatório e o documento traz um exemplo canônico completo:
 siga a renderização dele à risca, trocando apenas o conteúdo pelo que o diff
-comprova. Não use `git log` como referência de formato.
+comprova. Não use git log como referência de formato.
 """

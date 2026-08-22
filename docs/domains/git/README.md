@@ -13,7 +13,7 @@ copiado com seus wrappers para outros repositórios.
 ## Quem consome este pack
 
 - Claude: `.claude/agents/git/commit-curator.md`
-- Codex: `.codex/agents/commit-curator.toml`
+- Codex: `.codex/agents/git/commit-curator.toml`
 
 Ambos são wrappers finos: leem e aplicam `commit-conventions.md`; regras de
 commit não são duplicadas nos agentes.

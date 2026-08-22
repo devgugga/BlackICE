@@ -13,7 +13,7 @@ projeto.
 ## Quem consome este pack
 
 - Claude: `.claude/agents/quarkus/quarkus-backend.md`
-- Codex: `.codex/agents/quarkus-backend.toml`
+- Codex: `.codex/agents/quarkus/quarkus-backend.toml`
 
 Especialista **implementador** do backend. As regras de **semântica DICOM** não
 estão aqui — estão em `docs/domains/dicom/`, que este backend também deve respeitar.

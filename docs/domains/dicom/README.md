@@ -14,7 +14,7 @@ ser copiado inteiro para outros projetos de imagem médica (ex.: o PACS em Djang
 ## Quem consome este pack
 
 - Claude: `.claude/agents/dicom/dicom-domain-reviewer.md`
-- Codex: `.codex/agents/dicom-domain-reviewer.toml`
+- Codex: `.codex/agents/dicom/dicom-domain-reviewer.toml`
 
 Ambos são revisores **read-only** de correção de domínio. Eles não implementam;
 apontam violações destas regras antes do gate humano.

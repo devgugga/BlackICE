@@ -1,13 +1,18 @@
-# Graph Report - .  (2026-08-09)
+# Graph Report - BlackICE  (2026-08-22)
 
 ## Corpus Check
-- 119 files · ~76,286 words
+- 96 files · ~72,613 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 438 nodes · 354 edges · 115 communities (47 shown, 68 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.86)
+- 468 nodes · 376 edges · 123 communities (51 shown, 72 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 8 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `cf4692a9`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - Keycloak Same Origin Design
@@ -20,7 +25,7 @@
 - Backend Session Endpoint
 - Graphify Label Validation
 - DICOMweb Application Foundation
-- DICOM Implementation Roles
+- Human Business Gate
 - Maven Wrapper Script
 - Same Origin Service Topology
 - Authenticated DICOM Ingestion
@@ -29,7 +34,7 @@
 - DICOM Identity Domain Pack
 - Graphify Commit Synchronization
 - Same Origin Implementation Plan
-- Commit Curator Domain Pack
+- Commit Conventions Domain Pack
 - Keycloak Login E2E Helpers
 - Cross Platform Keycloak Bootstrap
 - OIDC BFF Session Security
@@ -118,6 +123,14 @@
 - Product PostgreSQL Database
 - BlackICE Backend Artifact
 - BlackICE MVP Scope
+- Decisões
+- Global Constraints
+- Agentes Antigravity — desenho
+- Global Constraints
+- dicom-domain-reviewer/agent.md
+- dicom-viewer-frontend/agent.md
+- quarkus-backend/agent.md
+- commit-curator/agent.md
 
 ## God Nodes (most connected - your core abstractions)
 1. `compilerOptions` - 15 edges
@@ -132,8 +145,6 @@
 10. `scripts` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Human Business Gate` --semantically_similar_to--> `Human Semantic Gate`  [INFERRED] [semantically similar]
-  AGENTS.md → .codex/agents/dicom-domain-reviewer.toml
 - `Graphify Commit Prerequisite` --conceptually_related_to--> `Linked Worktree Manual Graph Update`  [INFERRED]
   docs/domains/git/commit-conventions.md → .graphify/setup.ps1
 - `DICOM UID Validation` --semantically_similar_to--> `DICOM Identity Invariants`  [INFERRED] [semantically similar]
@@ -142,6 +153,8 @@
   docs/superpowers/plans/2026-07-23-dcm4chee-5-34-3.md → infra/dcm4chee/README.md
 - `In-Place Keycloak Realm Rename` --rationale_for--> `Keycloak Service`  [EXTRACTED]
   docs/superpowers/plans/2026-08-07-keycloak-same-origin.md → infra/dcm4chee/compose.yml
+- `Feature Colocation` --conceptually_related_to--> `Quarkus Product Backend`  [EXTRACTED]
+  docs/architecture/project-structure.md → AGENTS.md
 
 ## Import Cycles
 - None detected.
@@ -162,7 +175,7 @@
 - **Canonical BlackICE Compose stack** — infra_readme_three_compose_files, infra_compose_traefik_routing, infra_compose_product_postgres_database [EXTRACTED 1.00]
 - **Frontend icon sprite collection** — apps_frontend_public_icons_bluesky_icon, apps_frontend_public_icons_discord_icon, apps_frontend_public_icons_documentation_icon, apps_frontend_public_icons_github_icon, apps_frontend_public_icons_social_icon, apps_frontend_public_icons_x_icon [EXTRACTED 1.00]
 
-## Communities (115 total, 68 thin omitted)
+## Communities (123 total, 72 thin omitted)
 
 ### Community 0 - "Keycloak Same Origin Design"
 Cohesion: 0.09
@@ -204,10 +217,6 @@ Nodes (12): Automatic Label Reuse Invalidation, Cluster-Only Workflow, Clustered
 Cohesion: 0.17
 Nodes (12): DICOMweb Verbs, QIDO-RS, STOW-RS, WADO-RS, CSRF Protection, Quarkus BFF, Quarkus Domain Pack, Cornerstone3D Viewer (+4 more)
 
-### Community 10 - "DICOM Implementation Roles"
-Cohesion: 0.18
-Nodes (11): Human Business Gate, DICOM Domain Reviewer, DICOM Semantics, DICOMweb Conventions, Human Semantic Gate, Cornerstone3D Viewer, DICOM Viewer Frontend Agent, Vue Conventions (+3 more)
-
 ### Community 11 - "Maven Wrapper Script"
 Cohesion: 0.33
 Nodes (6): mvnw script, clean(), die(), exec_maven(), set_java_home(), verbose()
@@ -240,9 +249,9 @@ Nodes (7): Commit Policy, Graph Synchronization Commit, Graphify Commit Prerequi
 Cohesion: 0.29
 Nodes (6): Estrutura de arquivos, Global Constraints, Keycloak same-origin — Implementation Plan, Self-review, Task 1: Fase 1 — Keycloak same-origin sob `/auth`, Task 2: Fase 2 — renomear o realm para `blackice`
 
-### Community 19 - "Commit Curator Domain Pack"
-Cohesion: 0.33
-Nodes (6): Domain Packs, Canonical Commit Body, Commit Conventions Domain Pack, Claude Commit Curator, Codex Commit Curator, GPT-5.6 Luna Model
+### Community 19 - "Commit Conventions Domain Pack"
+Cohesion: 0.50
+Nodes (4): Domain Packs, Canonical Commit Body, Commit Conventions Domain Pack, Claude Commit Curator
 
 ### Community 20 - "Keycloak Login E2E Helpers"
 Cohesion: 0.53
@@ -324,18 +333,38 @@ Nodes (3): Authorization Code with PKCE, Keycloak Same-Origin Migration, Keycloa
 Cohesion: 0.67
 Nodes (3): Shared Realm Audience, auth Realm Role, DICOMweb Authorization
 
+### Community 115 - "Decisões"
+Cohesion: 0.20
+Nodes (9): Alterações documentais previstas, Conhecimento neutro e wrappers, Decisões, Desenho — skill de autoria de agentes, Fora de escopo, Objetivo, Segurança, governança e validação, Seleção de modelo no momento da mudança (+1 more)
+
+### Community 116 - "Global Constraints"
+Cohesion: 0.29
+Nodes (6): Agent Authoring Skill Implementation Plan, Global Constraints, Task 1: Criar o Domain Pack canônico, Task 2: Criar wrappers de descoberta mínimos, Task 3: Integrar a convenção à documentação do repositório, Task 4: Validar a skill e as modificações
+
+### Community 117 - "Agentes Antigravity — desenho"
+Cohesion: 0.29
+Nodes (6): Agentes Antigravity — desenho, Configuração, Conhecimento e documentação, Escopo, Objetivo, Verificação
+
+### Community 118 - "Global Constraints"
+Cohesion: 0.33
+Nodes (5): Antigravity Agents Implementation Plan, Global Constraints, Task 1: Criar os wrappers Antigravity, Task 2: Documentar o ponto de descoberta, Task 3: Confirmar descoberta pelo Antigravity
+
+### Community 119 - "dicom-domain-reviewer/agent.md"
+Cohesion: 0.50
+Nodes (3): Antes de revisar, Papel, Revisão
+
 ## Knowledge Gaps
-- **237 isolated node(s):** `dev.blackice:blackice-backend`, `name`, `private`, `version`, `type` (+232 more)
+- **258 isolated node(s):** `dev.blackice:blackice-backend`, `name`, `private`, `version`, `type` (+253 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **68 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **72 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `devDependencies` connect `Frontend Development Dependencies` to `Frontend Package Configuration`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+  _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **What connects `dev.blackice:blackice-backend`, `name`, `private` to the rest of the system?**
-  _237 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _258 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Keycloak Same Origin Design` be split into smaller, more focused modules?**
   _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
 - **Should `BlackICE Architecture Principles` be split into smaller, more focused modules?**

@@ -8,8 +8,9 @@ documentos — eles nunca duplicam o conteúdo.
 ## Por que assim
 
 - **Portabilidade entre ferramentas.** Subagentes do Claude (markdown em
-  `.claude/agents/`) e do Codex (TOML em `.codex/agents/`) têm **formatos
-  diferentes e incompatíveis**. O que é portável é o markdown neutro daqui.
+  `.claude/agents/`), do Codex (TOML em `.codex/agents/`) e do Antigravity
+  (Markdown com YAML em `.agents/agents/`) têm **formatos diferentes e
+  incompatíveis**. O que é portável é o markdown neutro daqui.
 - **Reuso entre projetos.** Os packs marcados ♻️ transferem para outros projetos
   (ex.: o PACS em Django). Basta copiar a pasta do domínio e os wrappers; o
   conhecimento vai intacto.
@@ -31,9 +32,12 @@ documentos — eles nunca duplicam o conteúdo.
 2. Crie os wrappers que referenciam esses docs:
    - Claude subagente: `.claude/agents/<novo>/<nome>.md` (frontmatter + corpo que
      manda ler `docs/domains/<novo>/*.md`).
-   - Codex subagente: `.codex/agents/<nome>.toml` (`developer_instructions`
-     mandando ler os mesmos docs).
-3. Registre o subagente na tabela do `CLAUDE.md`.
+   - Codex subagente: `.codex/agents/<novo>/<nome>.toml`
+     (`developer_instructions` mandando ler os mesmos docs).
+   - Antigravity subagente: `.agents/agents/<nome>/agent.md` (frontmatter YAML +
+     corpo que manda ler os mesmos docs). Use uma pasta por agente: esse é o
+     layout oficialmente suportado para descoberta.
+3. Registre o subagente na tabela do `CLAUDE.md`, quando houver wrapper Claude.
 
 ## Como adicionar uma skill
 

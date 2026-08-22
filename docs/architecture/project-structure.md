@@ -23,8 +23,11 @@ BlackICE/
 │  └─ superpowers/
 ├─ .claude/
 ├─ .codex/
+├─ .agents/
+│  ├─ agents/
+│  └─ skills/
+│     └─ graphify/
 ├─ .graphify/
-├─ .agents/skills/graphify/
 ├─ .graphifyignore
 ├─ graphify-out/
 ├─ AGENTS.md
@@ -41,8 +44,9 @@ BlackICE/
 - `docs/architecture/evolution-backlog.md` registra melhorias adiadas, seus
   gatilhos de retomada e a spec de origem; não autoriza implementação sem
   priorização humana.
-- `.claude/` e `.codex/` são pontos de descoberta específicos das ferramentas.
-  Seus wrappers apontam para o conhecimento neutro em `docs/domains/`.
+- `.claude/`, `.codex/` e `.agents/agents/` são pontos de descoberta específicos,
+  respectivamente, para Claude, Codex e Antigravity. Seus wrappers apontam para
+  o conhecimento neutro em `docs/domains/`.
 - `.agents/skills/graphify/`, `.graphifyignore` e `graphify-out/` são tooling de
   engenharia e de agentes: respectivamente a skill compartilhada, a política do
   corpus e os artefatos portáveis do grafo. Não são código de aplicação nem

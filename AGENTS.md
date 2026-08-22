@@ -43,7 +43,8 @@ as ferramentas e (parte dele) por projetos futuros. Ver `docs/domains/README.md`
 ```
 docs/domains/<dominio>/   ← conhecimento portável (fonte da verdade)
 .claude/agents/<dominio>/ ← subagentes Claude (wrappers finos → leem os docs)
-.codex/agents/*.toml      ← subagentes Codex (wrappers finos → leem os docs)
+.codex/agents/<dominio>/  ← subagentes Codex (wrappers finos → leem os docs)
+.agents/agents/<nome>/    ← subagentes Antigravity (wrappers finos → leem os docs)
 .claude/skills/           ← skills Claude (workflows repetíveis; nomeadas por domínio)
 ```
 

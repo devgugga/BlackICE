@@ -16,6 +16,6 @@ estreito proxied pelo Quarkus; o browser não acessa o DCM4CHEE diretamente.
 ## Quem consome este pack
 
 - Claude: `.claude/agents/vue/dicom-viewer-frontend.md`
-- Codex: `.codex/agents/dicom-viewer-frontend.toml`
+- Codex: `.codex/agents/vue/dicom-viewer-frontend.toml`
 
 Ambos são especialistas **implementadores** do viewer/UI.
