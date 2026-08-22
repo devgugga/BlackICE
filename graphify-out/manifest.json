@@ -165,13 +165,13 @@
     "semantic_hash": "1ab45d0c1df2c602eb00f9874e2a0417"
   },
   ".claude/skills/README.md": {
-    "mtime": 1787424754.544317,
-    "ast_hash": "b3dfde8ae75db1039002d01ddf1bd333",
-    "semantic_hash": "b3dfde8ae75db1039002d01ddf1bd333"
+    "mtime": 1787427943.9314537,
+    "ast_hash": "e0baa46e48e323266433af786d950471",
+    "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1787426730.150197,
-    "ast_hash": "2f973fc1656bb47cf938242b25d48144",
+    "mtime": 1787427943.9304538,
+    "ast_hash": "7c33c75dcb00392bde09d1f071655348",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
@@ -210,13 +210,13 @@
     "semantic_hash": ""
   },
   "docs/architecture/project-structure.md": {
-    "mtime": 1787426191.7333686,
-    "ast_hash": "76b4907713dbe660cf5975fb337767c5",
+    "mtime": 1787427943.9304538,
+    "ast_hash": "a2b8008dd24ad7880b02d79899761bf3",
     "semantic_hash": ""
   },
   "docs/domains/README.md": {
-    "mtime": 1787426730.151197,
-    "ast_hash": "fd324bee3ef2031bae9b9f6b6c9429e3",
+    "mtime": 1787427943.9314537,
+    "ast_hash": "4d8ad6919dbb660aabb00bdb9b68c303",
     "semantic_hash": ""
   },
   "docs/domains/dicom/README.md": {
@@ -475,8 +475,8 @@
     "semantic_hash": ""
   },
   "docs/superpowers/plans/2026-08-22-agent-authoring-skill.md": {
-    "mtime": 1787427561.5686123,
-    "ast_hash": "14736de2ec269fde1a281efcfd4bd7cc",
+    "mtime": 1787427994.6715424,
+    "ast_hash": "6e2e2f9e8edb832a2fb35ace772b88d8",
     "semantic_hash": ""
   },
   "docs/superpowers/plans/2026-08-22-antigravity-agents.md": {
@@ -485,8 +485,8 @@
     "semantic_hash": ""
   },
   "docs/superpowers/specs/2026-08-22-agent-authoring-skill-design.md": {
-    "mtime": 1787427461.4325063,
-    "ast_hash": "645084168d008da7515223501bc85299",
+    "mtime": 1787427722.3562384,
+    "ast_hash": "83fd640abc76b5762d1207010a71421d",
     "semantic_hash": ""
   },
   "docs/superpowers/specs/2026-08-22-antigravity-agents-design.md": {
@@ -507,6 +507,41 @@
   "graphify-out/memory/query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify.md": {
     "mtime": 1787424754.5587277,
     "ast_hash": "1815b478fce847ecc0c681edc6e5e139",
+    "semantic_hash": ""
+  },
+  ".agents/skills/agent-authoring/SKILL.md": {
+    "mtime": 1787427914.1698284,
+    "ast_hash": "263437c378654f678175439379d49fb8",
+    "semantic_hash": ""
+  },
+  ".claude/skills/agent-authoring/SKILL.md": {
+    "mtime": 1787427914.16952,
+    "ast_hash": "263437c378654f678175439379d49fb8",
+    "semantic_hash": ""
+  },
+  "docs/domains/agent-authoring/README.md": {
+    "mtime": 1787427877.808256,
+    "ast_hash": "508c3e8b6ee2e22132864e47ea29242b",
+    "semantic_hash": ""
+  },
+  "docs/domains/agent-authoring/conventions.md": {
+    "mtime": 1787427877.808963,
+    "ast_hash": "e3775e41a3d44d44a02c44dd1ba27052",
+    "semantic_hash": ""
+  },
+  "docs/domains/agent-authoring/model-selection.md": {
+    "mtime": 1787427914.168164,
+    "ast_hash": "9643d026ff107335cf1b04b9eb5fb20f",
+    "semantic_hash": ""
+  },
+  "docs/domains/agent-authoring/platform-layouts.md": {
+    "mtime": 1787427877.808963,
+    "ast_hash": "530db6c9d6c850922f75a10b37485460",
+    "semantic_hash": ""
+  },
+  "docs/domains/agent-authoring/validation.md": {
+    "mtime": 1787427914.168164,
+    "ast_hash": "00070050bac6019eaf22aece260b612a",
     "semantic_hash": ""
   }
 }

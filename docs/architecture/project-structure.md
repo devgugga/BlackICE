@@ -26,6 +26,7 @@ BlackICE/
 ├─ .agents/
 │  ├─ agents/
 │  └─ skills/
+│     ├─ agent-authoring/
 │     └─ graphify/
 ├─ .graphify/
 ├─ .graphifyignore
@@ -47,6 +48,9 @@ BlackICE/
 - `.claude/`, `.codex/` e `.agents/agents/` são pontos de descoberta específicos,
   respectivamente, para Claude, Codex e Antigravity. Seus wrappers apontam para
   o conhecimento neutro em `docs/domains/`.
+- `.claude/skills/` e `.agents/skills/` descobrem workflows repetíveis. A primeira
+  é específica de Claude; a segunda é compartilhada por Codex e Antigravity.
+  Ambas são wrappers para o conhecimento neutro em `docs/domains/`.
 - `.agents/skills/graphify/`, `.graphifyignore` e `graphify-out/` são tooling de
   engenharia e de agentes: respectivamente a skill compartilhada, a política do
   corpus e os artefatos portáveis do grafo. Não são código de aplicação nem

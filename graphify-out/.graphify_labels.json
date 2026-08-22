@@ -121,5 +121,8 @@
   "119": "dicom-domain-reviewer/agent.md",
   "120": "dicom-viewer-frontend/agent.md",
   "121": "quarkus-backend/agent.md",
-  "122": "commit-curator/agent.md"
+  "122": "commit-curator/agent.md",
+  "123": "Convenções de autoria de agentes",
+  "124": ".agents/skills/agent-authoring/SKILL.md",
+  "125": ".claude/skills/agent-authoring/SKILL.md"
 }

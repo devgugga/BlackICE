@@ -46,6 +46,7 @@ docs/domains/<dominio>/   ← conhecimento portável (fonte da verdade)
 .codex/agents/<dominio>/  ← subagentes Codex (wrappers finos → leem os docs)
 .agents/agents/<nome>/    ← subagentes Antigravity (wrappers finos → leem os docs)
 .claude/skills/           ← skills Claude (workflows repetíveis; nomeadas por domínio)
+.agents/skills/           ← skills Codex/Antigravity (wrappers finos → leem os docs)
 ```
 
 **Regra de ouro:** um agente/skill nunca duplica conhecimento. Seu corpo diz
@@ -53,7 +54,8 @@ docs/domains/<dominio>/   ← conhecimento portável (fonte da verdade)
 wrappers herdam.
 
 Domínios atuais: `dicom/` (♻️ reutilizável), `vue/` (♻️ reutilizável),
-`quarkus/` (específico deste projeto — não transfere para outros backends).
+`quarkus/` (específico deste projeto — não transfere para outros backends),
+`git/` (♻️ reutilizável) e `agent-authoring/` (♻️ reutilizável).
 
 ## Graphify
 

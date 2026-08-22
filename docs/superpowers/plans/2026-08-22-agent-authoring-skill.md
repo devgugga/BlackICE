@@ -33,7 +33,7 @@
 - Consumes: a spec aprovada em `docs/superpowers/specs/2026-08-22-agent-authoring-skill-design.md` e a convenção em `docs/domains/README.md`.
 - Produces: regras canônicas que os dois `SKILL.md` referenciam por caminho absoluto no repositório.
 
-- [ ] **Step 1: Executar a checagem estrutural em estado RED**
+- [x] **Step 1: Executar a checagem estrutural em estado RED**
 
 Run:
 
@@ -43,11 +43,11 @@ test -f docs/domains/agent-authoring/model-selection.md
 
 Expected: falha com código diferente de zero, pois o pack ainda não existe.
 
-- [ ] **Step 2: Escrever os cinco documentos focados**
+- [x] **Step 2: Escrever os cinco documentos focados**
 
 Definir: escopo e limites; regra de wrapper fino; layouts e restrições de descoberta; pesquisa atual por fornecedor + roteamento pelo menor candidato elegível; e checklist de validação. Não listar modelos nem preços fixos.
 
-- [ ] **Step 3: Verificar que a estrutura ficou GREEN**
+- [x] **Step 3: Verificar que a estrutura ficou GREEN**
 
 Run:
 
@@ -69,7 +69,7 @@ Expected: código zero; cada documento canônico existe e não está vazio.
 - Consumes: todos os documentos de `docs/domains/agent-authoring/` criados na Task 1.
 - Produces: uma skill `agent-authoring` descobrível por Claude e uma compartilhada por Codex/Antigravity.
 
-- [ ] **Step 1: Executar a checagem estrutural em estado RED**
+- [x] **Step 1: Executar a checagem estrutural em estado RED**
 
 Run:
 
@@ -79,11 +79,11 @@ test -f .claude/skills/agent-authoring/SKILL.md && test -f .agents/skills/agent-
 
 Expected: falha com código diferente de zero, pois os wrappers ainda não existem.
 
-- [ ] **Step 2: Escrever wrappers com frontmatter válido**
+- [x] **Step 2: Escrever wrappers com frontmatter válido**
 
 Usar o mesmo nome e uma descrição discriminante. Cada corpo deverá dizer para ler e aplicar o Domain Pack antes de fazer pesquisa ou editar agentes; não deve repetir o fluxo de seleção nem valores de modelo.
 
-- [ ] **Step 3: Verificar frontmatter e ausência de cópia de política**
+- [x] **Step 3: Verificar frontmatter e ausência de cópia de política**
 
 Run:
 
@@ -110,11 +110,11 @@ Expected: código zero; ambos possuem frontmatter e não carregam uma escolha es
 - Consumes: os caminhos reais da Task 1 e da Task 2.
 - Produces: documentação de arquitetura que identifica o Domain Pack como fonte de verdade e os dois caminhos de descoberta.
 
-- [ ] **Step 1: Atualizar a árvore e a receita de criação**
+- [x] **Step 1: Atualizar a árvore e a receita de criação**
 
 Acrescentar `agent-authoring/` ao conjunto de Domain Packs, descrever `.agents/skills/` como descoberta compartilhada de Codex/Antigravity e explicar que `.claude/skills/` é o wrapper Claude. Não reintroduzir `.agents` como fonte de verdade.
 
-- [ ] **Step 2: Executar verificações de referências**
+- [x] **Step 2: Executar verificações de referências**
 
 Run:
 
@@ -138,7 +138,7 @@ Expected: código zero; a documentação aponta para o pack neutro, não para um
 - Consumes: todos os artefatos das Tasks 1–3.
 - Produces: evidência verificável de formato, referências e diff limpo.
 
-- [ ] **Step 1: Validar ambos os wrappers com o validador oficial de skills**
+- [x] **Step 1: Validar ambos os wrappers com o validador oficial de skills**
 
 Run:
 
@@ -150,7 +150,7 @@ python3 "$SKILL_CREATOR/scripts/quick_validate.py" .agents/skills/agent-authorin
 
 Expected: ambos concluem sem erros de nome, frontmatter ou scaffolding pendente.
 
-- [ ] **Step 2: Executar a auditoria de referências e de formatação**
+- [x] **Step 2: Executar a auditoria de referências e de formatação**
 
 Run:
 
@@ -161,7 +161,7 @@ git diff --check
 
 Expected: os dois wrappers referenciam apenas o pack e o diff não contém erro de espaço em branco.
 
-- [ ] **Step 3: Verificar descoberta local sem pressupor uma ferramenta ausente**
+- [x] **Step 3: Verificar descoberta local sem pressupor uma ferramenta ausente**
 
 Run somente os CLIs presentes:
 

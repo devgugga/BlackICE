@@ -1,16 +1,16 @@
 # Graph Report - BlackICE  (2026-08-22)
 
 ## Corpus Check
-- 96 files · ~72,613 words
+- 103 files · ~74,286 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 468 nodes · 376 edges · 123 communities (51 shown, 72 thin omitted)
+- 498 nodes · 407 edges · 126 communities (52 shown, 74 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 8 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cf4692a9`
+- Built from commit: `bb40dc9c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -131,6 +131,9 @@
 - dicom-viewer-frontend/agent.md
 - quarkus-backend/agent.md
 - commit-curator/agent.md
+- Convenções de autoria de agentes
+- .agents/skills/agent-authoring/SKILL.md
+- .claude/skills/agent-authoring/SKILL.md
 
 ## God Nodes (most connected - your core abstractions)
 1. `compilerOptions` - 15 edges
@@ -175,7 +178,7 @@
 - **Canonical BlackICE Compose stack** — infra_readme_three_compose_files, infra_compose_traefik_routing, infra_compose_product_postgres_database [EXTRACTED 1.00]
 - **Frontend icon sprite collection** — apps_frontend_public_icons_bluesky_icon, apps_frontend_public_icons_discord_icon, apps_frontend_public_icons_documentation_icon, apps_frontend_public_icons_github_icon, apps_frontend_public_icons_social_icon, apps_frontend_public_icons_x_icon [EXTRACTED 1.00]
 
-## Communities (123 total, 72 thin omitted)
+## Communities (126 total, 74 thin omitted)
 
 ### Community 0 - "Keycloak Same Origin Design"
 Cohesion: 0.09
@@ -353,10 +356,14 @@ Nodes (5): Antigravity Agents Implementation Plan, Global Constraints, Task 1: C
 Cohesion: 0.50
 Nodes (3): Antes de revisar, Papel, Revisão
 
+### Community 123 - "Convenções de autoria de agentes"
+Cohesion: 0.09
+Nodes (21): Convenções de autoria de agentes, Escopo e autorização, Fonte única de verdade, Forma de um wrapper, Fronteiras, Classificação e roteamento, Pesquisa obrigatória, Proposta e escalonamento (+13 more)
+
 ## Knowledge Gaps
-- **258 isolated node(s):** `dev.blackice:blackice-backend`, `name`, `private`, `version`, `type` (+253 more)
+- **276 isolated node(s):** `dev.blackice:blackice-backend`, `name`, `private`, `version`, `type` (+271 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **72 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **74 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -364,7 +371,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `devDependencies` connect `Frontend Development Dependencies` to `Frontend Package Configuration`?**
   _High betweenness centrality (0.003) - this node is a cross-community bridge._
 - **What connects `dev.blackice:blackice-backend`, `name`, `private` to the rest of the system?**
-  _258 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _276 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Keycloak Same Origin Design` be split into smaller, more focused modules?**
   _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
 - **Should `BlackICE Architecture Principles` be split into smaller, more focused modules?**

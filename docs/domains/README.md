@@ -2,8 +2,8 @@
 
 Este diretório é o **núcleo de conhecimento** do projeto. Cada subpasta é um
 "domain pack" autocontido, e é a **fonte única da verdade** para aquele domínio.
-Subagentes (Claude e Codex) e skills são apenas **wrappers finos** que leem estes
-documentos — eles nunca duplicam o conteúdo.
+Subagentes (Claude, Codex e Antigravity) e skills são apenas **wrappers finos**
+que leem estes documentos — eles nunca duplicam o conteúdo.
 
 ## Por que assim
 
@@ -24,6 +24,7 @@ documentos — eles nunca duplicam o conteúdo.
 | `vue/` | ♻️ sim | Vue 3 + Vite; viewer Cornerstone3D. |
 | `quarkus/` | ✗ project-scoped | Quarkus + Keycloak/OIDC + client DICOMweb. Não transfere. |
 | `git/` | ♻️ sim | Convenções para commits locais seguros, com Gitmoji e escopo controlado. |
+| `agent-authoring/` | ♻️ sim | Criação de agentes/skills, layouts e seleção econômica de modelos. |
 
 ## Como adicionar um domínio novo
 
@@ -42,9 +43,11 @@ documentos — eles nunca duplicam o conteúdo.
 ## Como adicionar uma skill
 
 Skills são workflows repetíveis que rodam no contexto principal (não isolado).
-Crie `.claude/skills/<dominio>-<verbo>/SKILL.md`, nomeada por domínio, e faça o
-corpo referenciar `docs/domains/<dominio>/`. Mantenha a skill fina — o passo-a-passo
-mora nela, mas as **regras** moram no domain pack.
+Crie o wrapper Claude em `.claude/skills/<dominio>-<verbo>/SKILL.md` e, quando o
+workflow também servir Codex/Antigravity, um wrapper espelhado em
+`.agents/skills/<dominio>-<verbo>/SKILL.md`. Ambos referenciam
+`docs/domains/<dominio>/`. Mantenha a skill fina — o passo-a-passo mora nela,
+mas as **regras** moram no Domain Pack.
 
 ## Regra de ouro
 
