@@ -155,9 +155,9 @@
     "semantic_hash": "e0baa46e48e323266433af786d950471"
   },
   "AGENTS.md": {
-    "mtime": 1787427943.9304538,
-    "ast_hash": "7c33c75dcb00392bde09d1f071655348",
-    "semantic_hash": "7c33c75dcb00392bde09d1f071655348"
+    "mtime": 1787490940.522526,
+    "ast_hash": "9f132b1b69515fc35b68cb9e1d111891",
+    "semantic_hash": "9f132b1b69515fc35b68cb9e1d111891"
   },
   "CLAUDE.md": {
     "mtime": 1787424754.5460663,
@@ -195,14 +195,14 @@
     "semantic_hash": "76f7890592fb2b5b6a0d3d404a98fa85"
   },
   "docs/architecture/project-structure.md": {
-    "mtime": 1787451173.5312603,
-    "ast_hash": "defcdc6c3f7c698496c5f9a3bb8f6e2a",
-    "semantic_hash": "defcdc6c3f7c698496c5f9a3bb8f6e2a"
+    "mtime": 1787490978.5103202,
+    "ast_hash": "a05c30cafde2d3c6492e8c37894919cf",
+    "semantic_hash": "a05c30cafde2d3c6492e8c37894919cf"
   },
   "docs/domains/README.md": {
-    "mtime": 1787427943.9314537,
-    "ast_hash": "4d8ad6919dbb660aabb00bdb9b68c303",
-    "semantic_hash": "4d8ad6919dbb660aabb00bdb9b68c303"
+    "mtime": 1787490940.5228329,
+    "ast_hash": "cef3ff6c271e9398589ea5cae6a0bc27",
+    "semantic_hash": "cef3ff6c271e9398589ea5cae6a0bc27"
   },
   "docs/domains/dicom/README.md": {
     "mtime": 1787426730.151197,
@@ -1133,5 +1133,205 @@
     "mtime": 1787424754.5475304,
     "ast_hash": "d4ac73fb21d600d39522c145c16d155d",
     "semantic_hash": "d4ac73fb21d600d39522c145c16d155d"
+  },
+  ".problem-catalog/package.json": {
+    "mtime": 1787489843.8453534,
+    "ast_hash": "0429a5fd95bf67ae1afd47a30612bf31",
+    "semantic_hash": "0429a5fd95bf67ae1afd47a30612bf31"
+  },
+  ".problem-catalog/src/catalog.js": {
+    "mtime": 1787490040.364056,
+    "ast_hash": "160c609e0d7caade3958da789cf0e83b",
+    "semantic_hash": "160c609e0d7caade3958da789cf0e83b"
+  },
+  ".problem-catalog/src/cli.js": {
+    "mtime": 1787490523.7596633,
+    "ast_hash": "1c56da03df179997daf9f738af0c7d82",
+    "semantic_hash": "1c56da03df179997daf9f738af0c7d82"
+  },
+  ".problem-catalog/src/generate-java.js": {
+    "mtime": 1787490426.4984999,
+    "ast_hash": "1644a5b216377d7423c76e5692f66ba9",
+    "semantic_hash": "1644a5b216377d7423c76e5692f66ba9"
+  },
+  ".problem-catalog/src/generate-markdown.js": {
+    "mtime": 1787490478.3828819,
+    "ast_hash": "bd19a47e76f7a49f85f687a17b8839bd",
+    "semantic_hash": "bd19a47e76f7a49f85f687a17b8839bd"
+  },
+  ".problem-catalog/src/generate-typescript.js": {
+    "mtime": 1787490578.2060733,
+    "ast_hash": "215ea2a783a0b81b89fe1b501bd26447",
+    "semantic_hash": "215ea2a783a0b81b89fe1b501bd26447"
+  },
+  ".problem-catalog/src/lock.js": {
+    "mtime": 1787490063.5855432,
+    "ast_hash": "b73e93affcec2f9f58f6b680df6f8550",
+    "semantic_hash": "b73e93affcec2f9f58f6b680df6f8550"
+  },
+  ".problem-catalog/src/naming.js": {
+    "mtime": 1787490398.9369323,
+    "ast_hash": "e90760ebbb2253844b658434892e1ac0",
+    "semantic_hash": "e90760ebbb2253844b658434892e1ac0"
+  },
+  ".problem-catalog/src/uuid-v5.js": {
+    "mtime": 1787489959.770139,
+    "ast_hash": "2e1e0fcd20ab20e9f010cdbb1e948f04",
+    "semantic_hash": "2e1e0fcd20ab20e9f010cdbb1e948f04"
+  },
+  ".problem-catalog/test/catalog.test.js": {
+    "mtime": 1787489905.789106,
+    "ast_hash": "bbc2102d88ff6a350385878cb5dc52be",
+    "semantic_hash": "bbc2102d88ff6a350385878cb5dc52be"
+  },
+  ".problem-catalog/test/cli.test.js": {
+    "mtime": 1787490615.6003325,
+    "ast_hash": "479ec743c407587cf7719d9f9d744cf7",
+    "semantic_hash": "479ec743c407587cf7719d9f9d744cf7"
+  },
+  ".problem-catalog/test/fixtures/golden/ProblemExtensions.java": {
+    "mtime": 1787490586.795671,
+    "ast_hash": "a8d12bcab40c8b907a6660aabe6ab9e7",
+    "semantic_hash": "a8d12bcab40c8b907a6660aabe6ab9e7"
+  },
+  ".problem-catalog/test/fixtures/golden/ProblemType.java": {
+    "mtime": 1787490586.795671,
+    "ast_hash": "95574f8f315fde916e4510c286beb848",
+    "semantic_hash": "95574f8f315fde916e4510c286beb848"
+  },
+  ".problem-catalog/test/fixtures/golden/problem-extensions.generated.ts": {
+    "mtime": 1787490586.795671,
+    "ast_hash": "5c6eafce6b702515ab10672e8d7311d4",
+    "semantic_hash": "5c6eafce6b702515ab10672e8d7311d4"
+  },
+  ".problem-catalog/test/fixtures/golden/problem-types.generated.ts": {
+    "mtime": 1787490586.795671,
+    "ast_hash": "155fd618536335d3cb77b68dcfcf8cdd",
+    "semantic_hash": "155fd618536335d3cb77b68dcfcf8cdd"
+  },
+  ".problem-catalog/test/fixtures/invalid-api-without-http.json": {
+    "mtime": 1787489863.6793604,
+    "ast_hash": "b4eb9762175179621f80aaf745a97d0b",
+    "semantic_hash": "b4eb9762175179621f80aaf745a97d0b"
+  },
+  ".problem-catalog/test/fixtures/invalid-client-with-http.json": {
+    "mtime": 1787489863.680475,
+    "ast_hash": "9c7da3fcb716a2fd518d6112b499bda4",
+    "semantic_hash": "9c7da3fcb716a2fd518d6112b499bda4"
+  },
+  ".problem-catalog/test/fixtures/valid-catalog.json": {
+    "mtime": 1787489863.6792958,
+    "ast_hash": "2a8785724fb30fde28adab4a75f39038",
+    "semantic_hash": "2a8785724fb30fde28adab4a75f39038"
+  },
+  ".problem-catalog/test/generation.test.js": {
+    "mtime": 1787490336.6652963,
+    "ast_hash": "4f04cc8a7996fdb92fc986a79ea098d7",
+    "semantic_hash": "4f04cc8a7996fdb92fc986a79ea098d7"
+  },
+  ".problem-catalog/test/lock.test.js": {
+    "mtime": 1787489932.1770906,
+    "ast_hash": "9b321737071700de009d2e3d9f1996b3",
+    "semantic_hash": "9b321737071700de009d2e3d9f1996b3"
+  },
+  ".problem-catalog/test/uuid-v5.test.js": {
+    "mtime": 1787489879.699293,
+    "ast_hash": "5a5f4565cf8bf4dfc57f493243aa5162",
+    "semantic_hash": "5a5f4565cf8bf4dfc57f493243aa5162"
+  },
+  "apps/backend/src/main/java/dev/blackice/shared/api/problem/generated/ProblemExtensions.java": {
+    "mtime": 1787490684.854175,
+    "ast_hash": "a8d12bcab40c8b907a6660aabe6ab9e7",
+    "semantic_hash": "a8d12bcab40c8b907a6660aabe6ab9e7"
+  },
+  "apps/backend/src/main/java/dev/blackice/shared/api/problem/generated/ProblemType.java": {
+    "mtime": 1787490684.854175,
+    "ast_hash": "b13c897f8f0328b862154887419ee7ac",
+    "semantic_hash": "b13c897f8f0328b862154887419ee7ac"
+  },
+  "apps/frontend/src/shared/api/problems/problem-extensions.generated.ts": {
+    "mtime": 1787490684.855175,
+    "ast_hash": "5c6eafce6b702515ab10672e8d7311d4",
+    "semantic_hash": "5c6eafce6b702515ab10672e8d7311d4"
+  },
+  "apps/frontend/src/shared/api/problems/problem-types.generated.ts": {
+    "mtime": 1787490684.855175,
+    "ast_hash": "9b03429ab24353ee58ff829253f19493",
+    "semantic_hash": "9b03429ab24353ee58ff829253f19493"
+  },
+  "docs/contracts/problems/catalog.json": {
+    "mtime": 1787490684.853175,
+    "ast_hash": "613625b620dec387abf4e2034a1772d2",
+    "semantic_hash": "613625b620dec387abf4e2034a1772d2"
+  },
+  "docs/contracts/problems/catalog.lock.json": {
+    "mtime": 1787490684.853175,
+    "ast_hash": "c2ea117cd017129123691bfe6856b5fd",
+    "semantic_hash": "c2ea117cd017129123691bfe6856b5fd"
+  },
+  "docs/contracts/problems/catalog.schema.json": {
+    "mtime": 1787490104.9158733,
+    "ast_hash": "e5baade8a27f71e69db5a16864475ab5",
+    "semantic_hash": "e5baade8a27f71e69db5a16864475ab5"
+  },
+  "docs/contracts/problems/extensions/dicom-validation-violations.schema.json": {
+    "mtime": 1787489988.7222407,
+    "ast_hash": "d2d0185dc2bf4a8e38cbdf1aac68e36c",
+    "semantic_hash": "d2d0185dc2bf4a8e38cbdf1aac68e36c"
+  },
+  ".agents/skills/problem-catalog/SKILL.md": {
+    "mtime": 1787490915.537805,
+    "ast_hash": "4ee1ef6d82c208468c1c0aad3326a7d7",
+    "semantic_hash": "4ee1ef6d82c208468c1c0aad3326a7d7"
+  },
+  ".claude/skills/problem-catalog/SKILL.md": {
+    "mtime": 1787490915.5366623,
+    "ast_hash": "4ee1ef6d82c208468c1c0aad3326a7d7",
+    "semantic_hash": "4ee1ef6d82c208468c1c0aad3326a7d7"
+  },
+  ".github/workflows/verify.yml": {
+    "mtime": 1787490924.3305647,
+    "ast_hash": "194cf50cb6b89ed32974ae0916b4a2b0",
+    "semantic_hash": "194cf50cb6b89ed32974ae0916b4a2b0"
+  },
+  ".problem-catalog/.gitignore": {
+    "mtime": 1787490279.2525883,
+    "ast_hash": "4fe79b6fb2d539633f983c74c8677ea9",
+    "semantic_hash": "4fe79b6fb2d539633f983c74c8677ea9"
+  },
+  ".problem-catalog/mise.toml": {
+    "mtime": 1787489843.8443778,
+    "ast_hash": "3795b0c464e180e961f9da0ac0c57461",
+    "semantic_hash": "3795b0c464e180e961f9da0ac0c57461"
+  },
+  ".problem-catalog/pnpm-lock.yaml": {
+    "mtime": 1787489939.0221035,
+    "ast_hash": "e3823704095b209d9d4e49bd79de9cb3",
+    "semantic_hash": "e3823704095b209d9d4e49bd79de9cb3"
+  },
+  "docs/contracts/problems/catalog.md": {
+    "mtime": 1787490684.854175,
+    "ast_hash": "9e1e08eca61bdc40c3340b1a7814a952",
+    "semantic_hash": "9e1e08eca61bdc40c3340b1a7814a952"
+  },
+  "docs/domains/problem-catalog/README.md": {
+    "mtime": 1787490833.1802826,
+    "ast_hash": "5e6b9d419e705afdf1f98e39883da6c6",
+    "semantic_hash": "5e6b9d419e705afdf1f98e39883da6c6"
+  },
+  "docs/domains/problem-catalog/classification.md": {
+    "mtime": 1787490854.1438968,
+    "ast_hash": "2ad9db1dc4276586d13e04f9c2ed3a4c",
+    "semantic_hash": "2ad9db1dc4276586d13e04f9c2ed3a4c"
+  },
+  "docs/domains/problem-catalog/registry.md": {
+    "mtime": 1787490881.8477578,
+    "ast_hash": "d0e3ee9c905bab94d2340a7ae70282f0",
+    "semantic_hash": "d0e3ee9c905bab94d2340a7ae70282f0"
+  },
+  "docs/domains/problem-catalog/security.md": {
+    "mtime": 1787490901.6552563,
+    "ast_hash": "a3a1c9a06d3991a0a942538dc049c618",
+    "semantic_hash": "a3a1c9a06d3991a0a942538dc049c618"
   }
 }
