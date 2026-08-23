@@ -14,6 +14,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Parser for DICOMweb STOW-RS JSON responses (PS3.18 / DICOM JSON model).
+ *
+ * <p>DICOM Invariant: Reads Referenced SOP Sequence (0008,1199) and Failed SOP Sequence (0008,1198).
+ * If a SOP UID appears in both sequences, the failure sequence takes precedence. Any submitted SOP UID
+ * omitted from both sequences is strictly classified as {@link StowInstanceResult.Status#UNCONFIRMED}.</p>
+ */
 @ApplicationScoped
 public class StowResponseParser {
 
@@ -34,6 +41,15 @@ public class StowResponseParser {
         this.objectMapper = Objects.requireNonNull(objectMapper, "objectMapper must not be null");
     }
 
+    /**
+     * Parses the archive STOW-RS response body against the submitted SOP Instance UIDs.
+     *
+     * @param studyInstanceUid exact Study Instance UID of the target study
+     * @param body raw DICOM JSON response string from the archive
+     * @param submittedSopUids set of SOP Instance UIDs that were submitted in the request
+     * @return the resolved {@link StowStudyResult} with per-instance outcomes
+     * @throws IllegalArgumentException if the response body cannot be parsed as valid JSON
+     */
     public StowStudyResult parse(String studyInstanceUid, String body, Set<String> submittedSopUids) {
         Objects.requireNonNull(studyInstanceUid, "studyInstanceUid must not be null");
         Objects.requireNonNull(submittedSopUids, "submittedSopUids must not be null");

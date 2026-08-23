@@ -9,10 +9,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Utility that formats an ordered list of DICOM instances into a standard streaming
+ * {@code multipart/related; type="application/dicom"} request body.
+ *
+ * <p>Memory Invariant: Uses {@link HttpRequest.BodyPublishers#ofFile(java.nio.file.Path)} to stream
+ * file parts directly from disk, preventing large DICOM pixel payloads from buffering into the JVM heap.</p>
+ */
 public final class MultipartRelatedBodyPublisher {
 
     private MultipartRelatedBodyPublisher() {}
 
+    /**
+     * Constructs a composite {@link HttpRequest.BodyPublisher} formatted with DICOMweb multipart boundaries.
+     *
+     * @param files validated DICOM files to stream
+     * @param boundary MIME boundary delimiter string
+     * @return a streaming body publisher for the HTTP client
+     * @throws FileNotFoundException if any instance file is missing on disk
+     */
     public static HttpRequest.BodyPublisher publish(
         List<ValidatedDicom> files,
         String boundary

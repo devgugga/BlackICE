@@ -1,8 +1,26 @@
 package dev.blackice.ingest.application.exception;
 
+/**
+ * Safe domain exception raised when the external DICOM archive cannot be reached or responds unexpectedly.
+ *
+ * <p>Security Invariant: Exception messages are constrained to the safe {@link Reason} name
+ * to prevent leaking raw payloads, patient identifiers, or backend URLs in stack traces.</p>
+ */
 public final class ArchiveUnavailableException extends RuntimeException {
 
-    public enum Reason { TIMEOUT, CONNECTION, HTTP_STATUS, INTERRUPTED }
+    /**
+     * Categorized reason for the archive unavailability.
+     */
+    public enum Reason {
+        /** The HTTP connection or request timed out. */
+        TIMEOUT,
+        /** Network connection to the archive could not be established. */
+        CONNECTION,
+        /** Archive returned an unexpected HTTP error status (5xx/4xx). */
+        HTTP_STATUS,
+        /** The execution thread was interrupted while waiting for the archive. */
+        INTERRUPTED
+    }
 
     private final Reason reason;
 
@@ -11,6 +29,11 @@ public final class ArchiveUnavailableException extends RuntimeException {
         this.reason = reason;
     }
 
+    /**
+     * Returns the structured reason for the failure.
+     *
+     * @return the failure reason enum
+     */
     public Reason reason() {
         return reason;
     }

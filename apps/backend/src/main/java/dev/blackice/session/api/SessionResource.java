@@ -10,13 +10,23 @@ import jakarta.ws.rs.core.Response;
 import java.util.List;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
+/**
+ * BFF session endpoints providing authentication state and login redirection for the SPA.
+ */
 @Path("/api")
 public class SessionResource {
 
     @Inject SecurityIdentity identity;
-    @Inject JsonWebToken jwt;   // Server-side token from the web-app session.
+    @Inject JsonWebToken jwt;
 
-    // The SPA needs a 401 instead of an OIDC redirect so its fetch client can handle anonymous access.
+    /**
+     * Checks the current session authentication status.
+     *
+     * <p>Returns 401 Unauthorized for anonymous callers (instead of an automatic OIDC redirect)
+     * so that the SPA route guard can programmatically decide navigation, and returns user metadata when authenticated.</p>
+     *
+     * @return 200 OK with {@link SessionResponse} if authenticated, or 401 Unauthorized if anonymous
+     */
     @GET @Path("/me") @PermitAll
     public Response me() {
         if (identity == null || identity.isAnonymous()) {
@@ -31,7 +41,11 @@ public class SessionResource {
         return Response.ok(new SessionResponse(subject, username, roles)).build();
     }
 
-    // Browser navigation to this endpoint triggers the OIDC redirect in web-app mode.
+    /**
+     * Initiates the OIDC authorization code flow in web-app mode and redirects to the SPA on success.
+     *
+     * @return 303 See Other redirect to {@code /}
+     */
     @GET @Path("/login") @Authenticated
     public Response login() {
         return Response.seeOther(java.net.URI.create("/")).build();
