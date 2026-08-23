@@ -53,8 +53,11 @@ class WorklistResourceTest {
     }
 
     @Test
-    void anonymous_get_receives_authentication_challenge() {
-        given().redirects().follow(false).when().get("/api/studies").then().statusCode(302);
+    void anonymous_get_receives_a_catalogued_authentication_problem() {
+        given().redirects().follow(false).when().get("/api/studies")
+            .then().statusCode(401)
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_AUTHENTICATION_REQUIRED"));
     }
 
     @Test

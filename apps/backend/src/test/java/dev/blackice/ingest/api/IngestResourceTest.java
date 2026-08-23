@@ -52,11 +52,13 @@ class IngestResourceTest {
     }
 
     @Test
-    void anonymous_request_receives_authentication_challenge() {
+    void anonymous_request_receives_a_catalogued_authentication_problem() {
         given().redirects().follow(false)
             .multiPart("files", "test.dcm", new byte[] {1, 2, 3}, "application/dicom")
             .when().post("/api/studies")
-            .then().statusCode(302);
+            .then().statusCode(401)
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_AUTHENTICATION_REQUIRED"));
     }
 
     @Test
@@ -73,13 +75,15 @@ class IngestResourceTest {
 
     @Test
     @TestSecurity(user = "dr.teste", roles = "auth")
-    void request_without_csrf_header_receives_400() {
+    void request_without_csrf_header_receives_a_catalogued_verification_problem() {
         String csrf = getCsrfToken();
         given()
             .cookie("csrf-token", csrf)
             .multiPart("files", "test.dcm", new byte[] {1, 2, 3}, "application/dicom")
             .when().post("/api/studies")
-            .then().statusCode(400);
+            .then().statusCode(403)
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_CSRF_INVALID"));
     }
 
     @Test

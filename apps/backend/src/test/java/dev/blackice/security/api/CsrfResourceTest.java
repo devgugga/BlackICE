@@ -5,16 +5,24 @@ import io.quarkus.test.security.TestSecurity;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.blankOrNullString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 
 @QuarkusTest
 class CsrfResourceTest {
 
     @Test
-    void anonymous_request_receives_authentication_challenge() {
+    void anonymous_request_receives_a_catalogued_authentication_problem() {
         given().redirects().follow(false)
             .when().get("/api/csrf")
-            .then().statusCode(302);
+            .then()
+            .statusCode(401)
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_AUTHENTICATION_REQUIRED"))
+            .body("status", equalTo(401))
+            .body("traceId", not(blankOrNullString()));
     }
 
     @Test
