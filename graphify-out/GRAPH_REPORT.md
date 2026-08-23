@@ -1,7 +1,7 @@
 # Graph Report - BlackICE  (2026-08-22)
 
 ## Corpus Check
-- 154 files · ~88,730 words
+- 154 files · ~89,824 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `bc376aa0`
+- Built from commit: `79793a69`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
