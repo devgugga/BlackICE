@@ -1,38 +1,49 @@
 import type { IngestResponse, UploadHandle } from '@/features/ingest/ingest.types';
-
-export class UploadError extends Error {
-  readonly status: number;
-  readonly response: IngestResponse | null;
-
-  constructor(status: number, response: IngestResponse | null = null, message?: string) {
-    super(message ?? `Upload failed with status ${status}`);
-    this.name = 'UploadError';
-    this.status = status;
-    this.response = response;
-  }
-}
+import {
+  apiErrorFromResponse,
+  apiErrorFromXhr,
+  clientError,
+} from '@/shared/api/problems/parse-problem';
 
 export function readCookie(cookies: string, name: string): string | null {
   const match = cookies.match(new RegExp(`(?:^|;\\s*)${name}=([^;]*)`));
   return match ? decodeURIComponent(match[1]) : null;
 }
 
+/**
+ * Obtém o token CSRF que as requisições mutantes precisam ecoar.
+ *
+ * <p>Um `204` sem cookie é falha local, não do servidor: ele cumpriu o
+ * contrato, mas o browser não guardou o cookie — daí `CLIENT_CSRF_COOKIE_MISSING`.
+ */
 export async function fetchCsrfToken(
   readCookies: () => string = () => document.cookie,
 ): Promise<string> {
-  const response = await fetch('/api/csrf', { credentials: 'include' });
-  if (!response.ok) {
-    throw new Error(`CSRF_TOKEN_FAILED:${response.status}`);
+  let response: Response;
+  try {
+    response = await fetch('/api/csrf', { credentials: 'include' });
+  } catch {
+    throw clientError('CLIENT_NETWORK_UNAVAILABLE');
   }
+
+  if (!response.ok) throw await apiErrorFromResponse(response);
+
   const token = readCookie(readCookies(), 'csrf-token');
   if (!token) {
-    throw new Error('CSRF_COOKIE_MISSING');
+    throw clientError('CLIENT_CSRF_COOKIE_MISSING', response.headers.get('X-Trace-ID') ?? undefined);
   }
   return token;
 }
 
 export type XhrFactory = () => XMLHttpRequest;
 
+/**
+ * Envia o lote por XHR, que é o que dá progresso de upload.
+ *
+ * <p>O caminho de erro usa o mesmo parser do `fetch`, então XHR e `fetch` não
+ * divergem. O cancelamento rejeita com `DOMException`/`AbortError` — nunca um
+ * `ApiError` — porque parar a pedido do usuário não é falha.
+ */
 export function uploadStudies(
   files: readonly File[],
   csrfToken: string,
@@ -62,35 +73,21 @@ export function uploadStudies(
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 300) {
         try {
-          const response = JSON.parse(xhr.responseText) as IngestResponse;
-          resolve(response);
+          resolve(JSON.parse(xhr.responseText) as IngestResponse);
         } catch {
-          reject(new UploadError(xhr.status, null, 'INVALID_JSON'));
+          reject(clientError(
+            'CLIENT_RESPONSE_INVALID',
+            xhr.getResponseHeader('X-Trace-ID') ?? undefined,
+          ));
         }
-      } else {
-        let parsed: IngestResponse | null = null;
-        try {
-          if (xhr.responseText) {
-            parsed = JSON.parse(xhr.responseText) as IngestResponse;
-          }
-        } catch {
-          parsed = null;
-        }
-        reject(new UploadError(xhr.status, parsed, `UPLOAD_FAILED:${xhr.status}`));
+        return;
       }
+      reject(apiErrorFromXhr(xhr));
     };
 
-    xhr.onerror = () => {
-      reject(new UploadError(0, null, 'NETWORK_ERROR'));
-    };
-
-    xhr.ontimeout = () => {
-      reject(new UploadError(0, null, 'TIMEOUT'));
-    };
-
-    xhr.onabort = () => {
-      reject(new UploadError(0, null, 'ABORTED'));
-    };
+    xhr.onerror = () => reject(clientError('CLIENT_NETWORK_UNAVAILABLE'));
+    xhr.ontimeout = () => reject(clientError('CLIENT_REQUEST_TIMEOUT'));
+    xhr.onabort = () => reject(new DOMException('The operation was aborted', 'AbortError'));
 
     xhr.send(formData);
   });

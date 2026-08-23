@@ -5,6 +5,23 @@ defineProps<{
   result: IngestResponse;
 }>();
 
+/**
+ * Texto para a razão interna de um estudo não armazenado, dentro de um
+ * resultado parcial. Distingue "não chegou ao Archive" de "o Archive respondeu
+ * e a resposta não pôde ser usada" — o segundo caso não pede reenvio cego.
+ */
+type StudyFailure = NonNullable<IngestResponse['studies'][number]['errorCode']>;
+
+const STUDY_FAILURE_LABELS: Record<StudyFailure, string> = {
+  TIMEOUT: 'Archive indisponível',
+  CONNECTION: 'Archive indisponível',
+  INTERRUPTED: 'Archive indisponível',
+  HTTP_STATUS: 'Resposta inesperada do Archive',
+  INVALID_RESPONSE: 'Resposta inesperada do Archive',
+};
+
+const studyFailureLabel = (code: StudyFailure) => STUDY_FAILURE_LABELS[code];
+
 const labels: Record<InstanceStatus, string> = {
   ACCEPTED: 'Armazenado',
   WARNING: 'Armazenado com aviso',
@@ -31,9 +48,9 @@ const labels: Record<InstanceStatus, string> = {
     <details v-for="study in result.studies" :key="study.studyInstanceUid">
       <summary>
         Estudo {{ study.studyInstanceUid }} —
-        {{ study.errorCode === 'ARCHIVE_UNAVAILABLE' ? 'Archive indisponível' : study.status }}
+        {{ study.errorCode ? studyFailureLabel(study.errorCode) : study.status }}
       </summary>
-      <p v-if="study.errorCode === 'ARCHIVE_UNAVAILABLE'">Archive indisponível</p>
+      <p v-if="study.errorCode">{{ studyFailureLabel(study.errorCode) }}</p>
       <ul>
         <li v-for="instance in study.instances" :key="instance.sopInstanceUid">
           {{ instance.sopInstanceUid }} — {{ labels[instance.status] }}

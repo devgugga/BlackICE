@@ -19,9 +19,15 @@ export interface IngestResponse {
       status: InstanceStatus;
       reason: number | null;
     }>;
-    errorCode: 'ARCHIVE_UNAVAILABLE' | null;
+    /**
+     * Razão interna pela qual o estudo não foi armazenado, presente apenas em
+     * resultados parciais. Não é um code do catálogo e não deve ser exibido:
+     * serve para diagnóstico, e a fronteira já traduziu a falha total.
+     */
+    errorCode: 'TIMEOUT' | 'CONNECTION' | 'INTERRUPTED' | 'HTTP_STATUS' | 'INVALID_RESPONSE' | null;
   }>;
   locallyRejectedFiles: Array<{
+    itemIndex: number;
     filename: string;
     code: string;
     message: string;

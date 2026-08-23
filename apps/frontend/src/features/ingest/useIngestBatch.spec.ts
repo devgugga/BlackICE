@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { useIngestBatch } from '@/features/ingest/useIngestBatch';
-import { UploadError } from '@/features/ingest/ingest.api';
+import { ApiError } from '@/shared/api/problems/api-error';
 import type { IngestResponse, UploadHandle } from '@/features/ingest/ingest.types';
 
 const mockResponse: IngestResponse = {
@@ -39,7 +39,7 @@ describe('useIngestBatch', () => {
     expect(batch.files.value).toEqual([]);
     expect(batch.progress.value).toBe(0);
     expect(batch.response.value).toBeNull();
-    expect(batch.errorCode.value).toBeNull();
+    expect(batch.error.value).toBeNull();
   });
 
   describe('addFiles e limites', () => {
@@ -191,11 +191,11 @@ describe('useIngestBatch', () => {
 
       expect(batch.phase.value).toBe('COMPLETE');
       expect(batch.response.value).toEqual(mockResponse);
-      expect(batch.errorCode.value).toBeNull();
+      expect(batch.error.value).toBeNull();
     });
 
     it('transita para ERROR quando fetchCsrfToken falhar', async () => {
-      const fetchCsrfToken = vi.fn().mockRejectedValue(new Error('CSRF_TOKEN_FAILED:401'));
+      const fetchCsrfToken = vi.fn().mockRejectedValue(new ApiError('API_AUTHENTICATION_REQUIRED'));
       const uploadStudies = vi.fn();
       const batch = useIngestBatch(
         { maxFiles: 500, maxTotalBytes: 524_288_000 },
@@ -206,27 +206,17 @@ describe('useIngestBatch', () => {
       await batch.start();
 
       expect(batch.phase.value).toBe('ERROR');
-      expect(batch.errorCode.value).toBe('CSRF_TOKEN_FAILED:401');
+      expect(batch.error.value).toMatchObject({ code: 'API_AUTHENTICATION_REQUIRED' });
       expect(uploadStudies).not.toHaveBeenCalled();
     });
 
-    it('transita para ERROR quando uploadStudies rejeitar com UploadError', async () => {
-      const partialResponse: IngestResponse = {
-        outcome: 'PARTIAL',
-        summary: {
-          received: 1,
-          locallyValid: 1,
-          locallyRejected: 0,
-          archiveAccepted: 0,
-          archiveRejected: 1,
-        },
-        studies: [],
-        locallyRejectedFiles: [],
-      };
-
+    it('guarda o ApiError catalogado, com violacoes, quando o lote e recusado', async () => {
       const fetchCsrfToken = vi.fn().mockResolvedValue('csrf-token-abc');
       const uploadStudies = vi.fn().mockReturnValue({
-        promise: Promise.reject(new UploadError(422, partialResponse, 'UPLOAD_FAILED:422')),
+        promise: Promise.reject(new ApiError('API_DICOM_VALIDATION_FAILED', {
+          traceId: '4bf92f3577b34da6a3ce929d0e0e4736',
+          violations: [{ itemIndex: 0, code: 'MALFORMED_DICOM', message: 'The file is not valid DICOM.' }],
+        })),
         abort: vi.fn(),
       });
 
@@ -239,8 +229,57 @@ describe('useIngestBatch', () => {
       await batch.start();
 
       expect(batch.phase.value).toBe('ERROR');
-      expect(batch.errorCode.value).toBe('UPLOAD_FAILED:422');
-      expect(batch.response.value).toEqual(partialResponse);
+      expect(batch.error.value).toMatchObject({
+        code: 'API_DICOM_VALIDATION_FAILED',
+        traceId: '4bf92f3577b34da6a3ce929d0e0e4736',
+      });
+      // O 422 nao carrega resultado: nada foi armazenado.
+      expect(batch.response.value).toBeNull();
+    });
+
+    it('nao repete o lote quando a politica do problema e NEVER', async () => {
+      const fetchCsrfToken = vi.fn().mockResolvedValue('csrf-token-abc');
+      const uploadStudies = vi.fn().mockReturnValue({
+        promise: Promise.reject(new ApiError('API_DICOM_VALIDATION_FAILED')),
+        abort: vi.fn(),
+      });
+
+      const batch = useIngestBatch(
+        { maxFiles: 500, maxTotalBytes: 524_288_000 },
+        { fetchCsrfToken, uploadStudies },
+      );
+
+      batch.addFiles([createFile('1.dcm')]);
+      await batch.start();
+      await batch.retry();
+
+      expect(uploadStudies).toHaveBeenCalledTimes(1);
+      expect(batch.phase.value).toBe('ERROR');
+    });
+
+    it('repete o lote preservado quando a politica e MANUAL', async () => {
+      const fetchCsrfToken = vi.fn().mockResolvedValue('csrf-token-abc');
+      const uploadStudies = vi.fn()
+        .mockReturnValueOnce({
+          promise: Promise.reject(new ApiError('API_ARCHIVE_UNAVAILABLE')),
+          abort: vi.fn(),
+        })
+        .mockReturnValueOnce({ promise: Promise.resolve(mockResponse), abort: vi.fn() });
+
+      const batch = useIngestBatch(
+        { maxFiles: 500, maxTotalBytes: 524_288_000 },
+        { fetchCsrfToken, uploadStudies },
+      );
+
+      batch.addFiles([createFile('1.dcm')]);
+      await batch.start();
+      expect(batch.phase.value).toBe('ERROR');
+
+      await batch.retry();
+
+      expect(uploadStudies).toHaveBeenCalledTimes(2);
+      expect(batch.phase.value).toBe('COMPLETE');
+      expect(batch.error.value).toBeNull();
     });
   });
 
@@ -251,7 +290,7 @@ describe('useIngestBatch', () => {
       const uploadStudies = vi.fn().mockImplementation(() => {
         const promise = new Promise<IngestResponse>((_, reject) => {
           abortFn.mockImplementation(() => {
-            reject(new UploadError(0, null, 'ABORTED'));
+            reject(new DOMException('The operation was aborted', 'AbortError'));
           });
         });
         return { promise, abort: abortFn };
@@ -297,7 +336,7 @@ describe('useIngestBatch', () => {
       expect(batch.files.value).toEqual([]);
       expect(batch.progress.value).toBe(0);
       expect(batch.response.value).toBeNull();
-      expect(batch.errorCode.value).toBeNull();
+      expect(batch.error.value).toBeNull();
     });
 
     it('reset aborta upload em andamento se executado durante UPLOADING', async () => {

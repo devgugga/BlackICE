@@ -1,6 +1,8 @@
 import { ref, readonly, type Ref } from 'vue';
 import type { IngestResponse, UploadHandle } from '@/features/ingest/ingest.types';
-import { fetchCsrfToken, uploadStudies, UploadError } from '@/features/ingest/ingest.api';
+import { fetchCsrfToken, uploadStudies } from '@/features/ingest/ingest.api';
+import { ApiError } from '@/shared/api/problems/api-error';
+import { isIntentionalAbort } from '@/shared/api/problems/parse-problem';
 
 export type IngestPhase =
   | 'SELECTING'
@@ -31,7 +33,8 @@ export interface IngestBatch {
   files: Readonly<Ref<readonly File[]>>;
   progress: Readonly<Ref<number>>;
   response: Readonly<Ref<IngestResponse | null>>;
-  errorCode: Readonly<Ref<string | null>>;
+  error: Readonly<Ref<ApiError | null>>;
+  retry(): Promise<void>;
   addFiles(incoming: readonly File[]): 'MAX_FILES' | 'MAX_TOTAL_BYTES' | null;
   removeFile(index: number): void;
   start(): Promise<void>;
@@ -57,7 +60,7 @@ export function useIngestBatch(
   const files = ref<readonly File[]>([]);
   const progress = ref<number>(0);
   const response = ref<IngestResponse | null>(null);
-  const errorCode = ref<string | null>(null);
+  const error = ref<ApiError | null>(null);
 
   let activeUpload: UploadHandle | null = null;
 
@@ -103,7 +106,7 @@ export function useIngestBatch(
 
     phase.value = 'UPLOADING';
     progress.value = 0;
-    errorCode.value = null;
+    error.value = null;
     response.value = null;
 
     try {
@@ -133,28 +136,34 @@ export function useIngestBatch(
       response.value = res;
       progress.value = 100;
       phase.value = 'COMPLETE';
-    } catch (err: unknown) {
+    } catch (caught: unknown) {
       if ((phase.value as IngestPhase) === 'CANCELLED') {
         return;
       }
 
-      if (err instanceof UploadError && err.message === 'ABORTED') {
+      // Cancelamento termina em CANCELLED, sem problema e sem log de erro.
+      if (isIntentionalAbort(caught)) {
         phase.value = 'CANCELLED';
         return;
       }
 
       phase.value = 'ERROR';
-      if (err instanceof UploadError) {
-        response.value = err.response ?? null;
-        errorCode.value = err.message;
-      } else if (err instanceof Error) {
-        errorCode.value = err.message;
-      } else {
-        errorCode.value = String(err);
-      }
+      error.value = caught instanceof ApiError ? caught : new ApiError('CLIENT_UNEXPECTED_ERROR');
     } finally {
       activeUpload = null;
     }
+  }
+
+  /**
+   * Repete o lote preservado depois de uma falha que admite retentativa.
+   *
+   * <p>Os arquivos continuam selecionados, então não é preciso pedi-los de novo.
+   */
+  async function retry(): Promise<void> {
+    if (phase.value !== 'ERROR' || files.value.length === 0) return;
+    if (error.value !== null && error.value.retryPolicy !== 'MANUAL') return;
+    phase.value = 'READY';
+    return start();
   }
 
   function cancel(): void {
@@ -176,7 +185,7 @@ export function useIngestBatch(
     files.value = [];
     progress.value = 0;
     response.value = null;
-    errorCode.value = null;
+    error.value = null;
     phase.value = 'SELECTING';
   }
 
@@ -185,10 +194,11 @@ export function useIngestBatch(
     files: readonly(files) as Readonly<Ref<readonly File[]>>,
     progress: readonly(progress) as Readonly<Ref<number>>,
     response: readonly(response) as unknown as Readonly<Ref<IngestResponse | null>>,
-    errorCode: readonly(errorCode) as Readonly<Ref<string | null>>,
+    error: readonly(error) as unknown as Readonly<Ref<ApiError | null>>,
     addFiles,
     removeFile,
     start,
+    retry,
     cancel,
     reset,
   };

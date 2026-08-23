@@ -1,5 +1,32 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { fetchCsrfToken, readCookie, uploadStudies, UploadError } from '@/features/ingest/ingest.api';
+import { fetchCsrfToken, readCookie, uploadStudies } from '@/features/ingest/ingest.api';
+import { ApiError } from '@/shared/api/problems/api-error';
+import { PROBLEM_TYPES } from '@/shared/api/problems/problem-types.generated';
+
+const TRACE_ID = '4bf92f3577b34da6a3ce929d0e0e4736';
+
+/** Corpo Problem Details bem formado para o code pedido. */
+function problemJson(code: keyof typeof PROBLEM_TYPES, extra: Record<string, unknown> = {}) {
+  const definition = PROBLEM_TYPES[code];
+  return JSON.stringify({
+    type: definition.type,
+    title: 'texto do operador',
+    status: 'httpStatus' in definition ? definition.httpStatus : 500,
+    detail: 'texto do operador',
+    code,
+    traceId: TRACE_ID,
+    ...extra,
+  });
+}
+
+function problemResponse(code: keyof typeof PROBLEM_TYPES): Response {
+  const definition = PROBLEM_TYPES[code];
+  const status = 'httpStatus' in definition ? definition.httpStatus : 500;
+  return new Response(problemJson(code), {
+    status,
+    headers: { 'Content-Type': 'application/problem+json', 'X-Trace-ID': TRACE_ID },
+  });
+}
 import type { IngestResponse } from '@/features/ingest/ingest.types';
 
 afterEach(() => {
@@ -19,6 +46,15 @@ class FakeXHR {
   upload = {
     onprogress: null as ((event: ProgressEvent) => void) | null,
   };
+
+  responseHeaders: Record<string, string> = {
+    'content-type': 'application/problem+json',
+    'x-trace-id': TRACE_ID,
+  };
+
+  getResponseHeader(name: string): string | null {
+    return this.responseHeaders[name.toLowerCase()] ?? null;
+  }
 
   onload: (() => void) | null = null;
   onerror: (() => void) | null = null;
@@ -126,20 +162,28 @@ describe('readCookie', () => {
 
 describe('fetchCsrfToken', () => {
   it('obtem token com sucesso quando requisicao 204 e cookie presente', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ status: 204, ok: true }));
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(null, { status: 204 })));
     const token = await fetchCsrfToken(() => 'csrf-token=secret-token-xyz');
     expect(token).toBe('secret-token-xyz');
     expect(fetch).toHaveBeenCalledWith('/api/csrf', { credentials: 'include' });
   });
 
-  it('lanca erro se requisicao falhar', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ status: 401, ok: false }));
-    await expect(fetchCsrfToken(() => 'csrf-token=token')).rejects.toThrow('CSRF_TOKEN_FAILED:401');
+  it('traduz falha do endpoint CSRF pelo parser compartilhado', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(problemResponse('API_AUTHENTICATION_REQUIRED')));
+    await expect(fetchCsrfToken(() => 'csrf-token=token'))
+      .rejects.toMatchObject({ code: 'API_AUTHENTICATION_REQUIRED', traceId: TRACE_ID });
   });
 
-  it('lanca erro se cookie csrf-token nao for retornado', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ status: 204, ok: true }));
-    await expect(fetchCsrfToken(() => 'other-cookie=abc')).rejects.toThrow('CSRF_COOKIE_MISSING');
+  it('reporta cookie ausente como falha local catalogada', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(null, { status: 204 })));
+    await expect(fetchCsrfToken(() => 'other-cookie=abc'))
+      .rejects.toMatchObject({ code: 'CLIENT_CSRF_COOKIE_MISSING', scope: 'CLIENT' });
+  });
+
+  it('traduz falha de rede no endpoint CSRF', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new TypeError('Failed to fetch')));
+    await expect(fetchCsrfToken(() => ''))
+      .rejects.toMatchObject({ code: 'CLIENT_NETWORK_UNAVAILABLE' });
   });
 });
 
@@ -209,7 +253,7 @@ describe('uploadStudies', () => {
     expect(result).toEqual(mockResponse);
   });
 
-  it('rejeita com UploadError se JSON em 200 for invalido', async () => {
+  it('trata JSON invalido em 200 como resposta fora do contrato', async () => {
     let fakeXhr!: FakeXHR;
     const files = [new File(['data'], 'test.dcm')];
 
@@ -218,11 +262,13 @@ describe('uploadStudies', () => {
       return fakeXhr as unknown as XMLHttpRequest;
     });
 
+    fakeXhr.responseHeaders['content-type'] = 'application/json';
     fakeXhr.respondWith(200, 'invalid json');
-    await expect(handle.promise).rejects.toThrow('INVALID_JSON');
+    await expect(handle.promise)
+      .rejects.toMatchObject({ code: 'CLIENT_RESPONSE_INVALID', traceId: TRACE_ID });
   });
 
-  it('rejeita com UploadError e corpo parseado em status 422/503', async () => {
+  it('expoe as violacoes do 422 catalogado', async () => {
     let fakeXhr!: FakeXHR;
     const files = [new File(['data'], 'test.dcm')];
 
@@ -231,18 +277,24 @@ describe('uploadStudies', () => {
       return fakeXhr as unknown as XMLHttpRequest;
     });
 
-    fakeXhr.respondWith(422, mockResponse);
+    fakeXhr.status = 422;
+    fakeXhr.responseText = problemJson('API_DICOM_VALIDATION_FAILED', {
+      violations: [{ itemIndex: 0, code: 'MALFORMED_DICOM', message: 'The file is not valid DICOM.' }],
+    });
+    fakeXhr.onload?.();
+
     await expect(handle.promise).rejects.toSatisfy((err: unknown) => {
-      expect(err).toBeInstanceOf(UploadError);
-      const uploadErr = err as UploadError;
-      expect(uploadErr.status).toBe(422);
-      expect(uploadErr.response).toEqual(mockResponse);
-      expect(uploadErr.message).toBe('UPLOAD_FAILED:422');
+      const error = err as ApiError;
+      expect(error).toBeInstanceOf(ApiError);
+      expect(error.code).toBe('API_DICOM_VALIDATION_FAILED');
+      expect(error.violations).toEqual([
+        { itemIndex: 0, code: 'MALFORMED_DICOM', message: 'The file is not valid DICOM.' },
+      ]);
       return true;
     });
   });
 
-  it('rejeita com UploadError quando resposta de erro nao for JSON', async () => {
+  it('traduz 503 catalogado do Archive', async () => {
     let fakeXhr!: FakeXHR;
     const files = [new File(['data'], 'test.dcm')];
 
@@ -251,18 +303,37 @@ describe('uploadStudies', () => {
       return fakeXhr as unknown as XMLHttpRequest;
     });
 
+    fakeXhr.status = 503;
+    fakeXhr.responseText = problemJson('API_ARCHIVE_UNAVAILABLE');
+    fakeXhr.onload?.();
+
+    await expect(handle.promise)
+      .rejects.toMatchObject({ code: 'API_ARCHIVE_UNAVAILABLE', retryPolicy: 'MANUAL' });
+  });
+
+  it('trata resposta de erro fora do contrato como falha local', async () => {
+    let fakeXhr!: FakeXHR;
+    const files = [new File(['data'], 'test.dcm')];
+
+    const handle = uploadStudies(files, 'csrf-123', () => {}, () => {
+      fakeXhr = new FakeXHR();
+      return fakeXhr as unknown as XMLHttpRequest;
+    });
+
+    fakeXhr.responseHeaders['content-type'] = 'text/plain';
     fakeXhr.respondWith(500, 'Internal Server Error');
     await expect(handle.promise).rejects.toSatisfy((err: unknown) => {
-      expect(err).toBeInstanceOf(UploadError);
-      const uploadErr = err as UploadError;
-      expect(uploadErr.status).toBe(500);
-      expect(uploadErr.response).toBeNull();
-      expect(uploadErr.message).toBe('UPLOAD_FAILED:500');
+      const error = err as ApiError;
+      expect(error).toBeInstanceOf(ApiError);
+      expect(error.code).toBe('CLIENT_RESPONSE_INVALID');
+      // O texto bruto do servidor nunca entra no erro.
+      expect(error.message).toBe('CLIENT_RESPONSE_INVALID');
+      expect(JSON.stringify(error)).not.toContain('Internal Server Error');
       return true;
     });
   });
 
-  it('rejeita com UploadError em erro de rede (onerror)', async () => {
+  it('traduz erro de rede em problema local catalogado', async () => {
     let fakeXhr!: FakeXHR;
     const files = [new File(['data'], 'test.dcm')];
 
@@ -272,16 +343,11 @@ describe('uploadStudies', () => {
     });
 
     fakeXhr.triggerError();
-    await expect(handle.promise).rejects.toSatisfy((err: unknown) => {
-      expect(err).toBeInstanceOf(UploadError);
-      const uploadErr = err as UploadError;
-      expect(uploadErr.status).toBe(0);
-      expect(uploadErr.message).toBe('NETWORK_ERROR');
-      return true;
-    });
+    await expect(handle.promise)
+      .rejects.toMatchObject({ code: 'CLIENT_NETWORK_UNAVAILABLE', scope: 'CLIENT' });
   });
 
-  it('rejeita com UploadError em timeout (ontimeout)', async () => {
+  it('traduz timeout em problema local catalogado', async () => {
     let fakeXhr!: FakeXHR;
     const files = [new File(['data'], 'test.dcm')];
 
@@ -291,16 +357,11 @@ describe('uploadStudies', () => {
     });
 
     fakeXhr.triggerTimeout();
-    await expect(handle.promise).rejects.toSatisfy((err: unknown) => {
-      expect(err).toBeInstanceOf(UploadError);
-      const uploadErr = err as UploadError;
-      expect(uploadErr.status).toBe(0);
-      expect(uploadErr.message).toBe('TIMEOUT');
-      return true;
-    });
+    await expect(handle.promise)
+      .rejects.toMatchObject({ code: 'CLIENT_REQUEST_TIMEOUT', scope: 'CLIENT' });
   });
 
-  it('permite abortar via handle.abort() e dispara onabort', async () => {
+  it('preserva o cancelamento como DOMException, nao como problema', async () => {
     let fakeXhr!: FakeXHR;
     const files = [new File(['data'], 'test.dcm')];
 
@@ -311,11 +372,11 @@ describe('uploadStudies', () => {
 
     handle.abort();
     expect(fakeXhr.aborted).toBe(true);
+    // Cancelamento é controle de fluxo: DOMException, nunca ApiError.
     await expect(handle.promise).rejects.toSatisfy((err: unknown) => {
-      expect(err).toBeInstanceOf(UploadError);
-      const uploadErr = err as UploadError;
-      expect(uploadErr.status).toBe(0);
-      expect(uploadErr.message).toBe('ABORTED');
+      expect(err).toBeInstanceOf(DOMException);
+      expect((err as DOMException).name).toBe('AbortError');
+      expect(err).not.toBeInstanceOf(ApiError);
       return true;
     });
   });
