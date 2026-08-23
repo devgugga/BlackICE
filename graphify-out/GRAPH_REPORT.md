@@ -1,16 +1,16 @@
 # Graph Report - BlackICE  (2026-08-22)
 
 ## Corpus Check
-- 138 files · ~84,218 words
+- 154 files · ~88,730 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 770 nodes · 966 edges · 140 communities (64 shown, 76 thin omitted)
-- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 97 edges (avg confidence: 0.79)
+- 827 nodes · 1110 edges · 153 communities (77 shown, 76 thin omitted)
+- Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 99 edges (avg confidence: 0.79)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `52617a47`
+- Built from commit: `bc376aa0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -21,7 +21,7 @@
 - Frontend TypeScript Configuration
 - devDependencies
 - Commit Curator Architecture
-- IngestResourceTest
+- .ingest
 - SessionResource.java
 - Graphify Label Validation
 - DICOMweb Application Foundation
@@ -38,7 +38,7 @@
 - Keycloak Login E2E Helpers
 - Cross Platform Keycloak Bootstrap
 - OIDC BFF Session Security
-- SessionResourceTest.java
+- IngestResult
 - Frontend Session Query
 - DICOM UID Query
 - Graphify Operations Query
@@ -51,7 +51,7 @@
 - Graphify Project Setup
 - Graphify Processing Pipeline
 - Vue SPA Nginx Serving
-- .ingest
+- UploadedDicom
 - Graphify Incremental Integrity
 - Graphify Integration Design
 - PKCE Same Origin Migration
@@ -134,31 +134,34 @@
 - Convenções de autoria de agentes
 - .agents/skills/agent-authoring/SKILL.md
 - .claude/skills/agent-authoring/SKILL.md
-- IngestService
+- Backend modular com Clean Architecture
 - StowResponseParser
 - ValidatedDicom
-- .ingest
+- CurrentAccessToken
 - useIngestBatch.ts
 - FakeXHR
 - IngestPage.vue
 - synthetic-dicom.ts
+- BackendArchitectureTest
 - CsrfResource.java
-- CsrfResourceTest.java
 - ingest.types.ts
 - useIngestBatch.spec.ts
 - IngestResult.vue
+- CsrfResourceTest.java
+- Global Constraints
+- SessionResourceTest.java
 
 ## God Nodes (most connected - your core abstractions)
-1. `files` - 20 edges
-2. `IngestService` - 16 edges
-3. `ValidatedDicom` - 16 edges
-4. `IngestServiceTest` - 16 edges
-5. `UploadedDicom` - 15 edges
-6. `compilerOptions` - 15 edges
-7. `IngestResourceTest` - 13 edges
-8. `DicomBatchValidator` - 12 edges
-9. `Code` - 12 edges
-10. `StowResponseParser` - 12 edges
+1. `ValidatedDicom` - 24 edges
+2. `UploadedDicom` - 23 edges
+3. `IngestResult` - 20 edges
+4. `files` - 20 edges
+5. `IngestStudiesUseCase` - 18 edges
+6. `ArchiveUnavailableException` - 17 edges
+7. `StowStudyResult` - 17 edges
+8. `IngestStudiesUseCaseTest` - 16 edges
+9. `compilerOptions` - 15 edges
+10. `StowInstanceResult` - 13 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Graphify Commit Prerequisite` --conceptually_related_to--> `Linked Worktree Manual Graph Update`  [INFERRED]
@@ -191,7 +194,7 @@
 - **Canonical BlackICE Compose stack** — infra_readme_three_compose_files, infra_compose_traefik_routing, infra_compose_product_postgres_database [EXTRACTED 1.00]
 - **Frontend icon sprite collection** — apps_frontend_public_icons_bluesky_icon, apps_frontend_public_icons_discord_icon, apps_frontend_public_icons_documentation_icon, apps_frontend_public_icons_github_icon, apps_frontend_public_icons_social_icon, apps_frontend_public_icons_x_icon [EXTRACTED 1.00]
 
-## Communities (140 total, 76 thin omitted)
+## Communities (153 total, 76 thin omitted)
 
 ### Community 0 - "Keycloak Same Origin Design"
 Cohesion: 0.09
@@ -217,9 +220,9 @@ Nodes (33): dependencies, vue, vue-router, devDependencies, @playwright/test, @t
 Cohesion: 0.13
 Nodes (16): Branch Commit Policy, Commit Curator Agent, Git Domain Pack, Graphify Commit Prerequisite, Arquitetura, Branch-scoped Commit Authorization, Commit Curator Design, Commit Message Format (+8 more)
 
-### Community 6 - "IngestResourceTest"
-Cohesion: 0.11
-Nodes (22): IngestExecution, IngestResponse, InstanceResult, Outcome, COMPLETE, FAILED, PARTIAL, StudyResult (+14 more)
+### Community 6 - ".ingest"
+Cohesion: 0.16
+Nodes (13): ArchiveUnavailableException, Reason, CONNECTION, HTTP_STATUS, INTERRUPTED, TIMEOUT, IngestStudiesUseCase, ApplicationScoped (+5 more)
 
 ### Community 7 - "SessionResource.java"
 Cohesion: 0.29
@@ -281,9 +284,9 @@ Nodes (6): Cross-platform Launchers, Keycloak Admin REST, Keycloak Windows Boots
 Cohesion: 0.40
 Nodes (5): Encrypted HttpOnly Session Cookie, Keycloak BlackICE Realm Endpoint, OIDC BFF Configuration, PKCE S256 Requirement, Realm Role Mapping
 
-### Community 23 - "SessionResourceTest.java"
-Cohesion: 0.60
-Nodes (3): QuarkusTest, Test, SessionResourceTest
+### Community 23 - "IngestResult"
+Cohesion: 0.07
+Nodes (36): IngestHttpStatusResolver, IngestResource, Inject, Path, Response, IngestResult, InstanceResult, Outcome (+28 more)
 
 ### Community 24 - "Frontend Session Query"
 Cohesion: 0.40
@@ -333,9 +336,9 @@ Nodes (3): Graphify Pipeline, Incremental Update, Semantic Extraction
 Cohesion: 0.67
 Nodes (3): Nginx Static SPA Server, Vue Router History Fallback, Vue SPA Build
 
-### Community 36 - ".ingest"
-Cohesion: 0.09
-Nodes (24): DicomBatchValidation, DicomBatchValidator, ApplicationScoped, ValidationException, Code, DUPLICATE_IDENTICAL, MALFORMED_DICOM, MISSING_SERIES_INSTANCE_UID (+16 more)
+### Community 36 - "UploadedDicom"
+Cohesion: 0.10
+Nodes (24): UploadedDicom, DicomBatchValidator, RejectedFile, Inject, DicomBatchValidation, Code, DUPLICATE_IDENTICAL, MALFORMED_DICOM (+16 more)
 
 ### Community 37 - "Graphify Incremental Integrity"
 Cohesion: 0.67
@@ -377,21 +380,21 @@ Nodes (3): Antes de revisar, Papel, Revisão
 Cohesion: 0.09
 Nodes (21): Convenções de autoria de agentes, Escopo e autorização, Fonte única de verdade, Forma de um wrapper, Fronteiras, Classificação e roteamento, Pesquisa obrigatória, Proposta e escalonamento (+13 more)
 
-### Community 126 - "IngestService"
-Cohesion: 0.11
-Nodes (16): ArchiveUnavailableException, Reason, CONNECTION, HTTP_STATUS, INTERRUPTED, TIMEOUT, DicomArchiveGateway, IngestService (+8 more)
+### Community 126 - "Backend modular com Clean Architecture"
+Cohesion: 0.18
+Nodes (10): Backend modular com Clean Architecture, Critérios de aceite, Decisão, Documentação de código, Fora de escopo, Limites e direção de dependências, Migração do fluxo de ingestão, Módulos de sessão e segurança (+2 more)
 
 ### Community 127 - "StowResponseParser"
-Cohesion: 0.15
-Nodes (12): HttpDicomArchiveGateway, ApplicationScoped, Inject, ApplicationScoped, Inject, StowResponseParser, BeforeEach, Test (+4 more)
+Cohesion: 0.20
+Nodes (8): ApplicationScoped, Inject, StowResponseParser, BeforeEach, Test, StowResponseParserTest, JsonNode, ObjectMapper
 
 ### Community 128 - "ValidatedDicom"
-Cohesion: 0.18
-Nodes (9): AfterEach, Override, MultipartRelatedBodyPublisher, ValidatedDicom, HttpDicomArchiveGatewayTest, BeforeEach, Test, BodyPublisher (+1 more)
+Cohesion: 0.11
+Nodes (18): AfterEach, DicomArchiveGateway, StowInstanceResult, StowStudyResult, ValidatedDicom, HttpDicomArchiveGateway, ApplicationScoped, Inject (+10 more)
 
-### Community 129 - ".ingest"
-Cohesion: 0.16
-Nodes (16): AccessTokenCredential, CurrentAccessToken, ApplicationScoped, IngestResource, Inject, Path, Response, CurrentAccessTokenTest (+8 more)
+### Community 129 - "CurrentAccessToken"
+Cohesion: 0.32
+Nodes (6): AccessTokenCredential, CurrentAccessToken, ApplicationScoped, Override, CurrentAccessTokenTest, Test
 
 ### Community 130 - "useIngestBatch.ts"
 Cohesion: 0.14
@@ -405,37 +408,49 @@ Nodes (4): batch, limitWarning, totalBytes, totalFiles
 Cohesion: 0.54
 Nodes (6): createSyntheticDicom(), element(), LONG_VR, paddedText(), text(), us()
 
-### Community 134 - "CsrfResource.java"
+### Community 134 - "BackendArchitectureTest"
+Cohesion: 0.36
+Nodes (3): BackendArchitectureTest, Test, JavaClasses
+
+### Community 135 - "CsrfResource.java"
 Cohesion: 0.48
 Nodes (5): CsrfResource, Authenticated, GET, Path, Response
-
-### Community 135 - "CsrfResourceTest.java"
-Cohesion: 0.48
-Nodes (4): CsrfResourceTest, QuarkusTest, Test, TestSecurity
 
 ### Community 136 - "ingest.types.ts"
 Cohesion: 0.29
 Nodes (5): IngestOutcome, IngestResponse, InstanceStatus, StudyStatus, UploadHandle
 
+### Community 140 - "CsrfResourceTest.java"
+Cohesion: 0.48
+Nodes (4): CsrfResourceTest, QuarkusTest, Test, TestSecurity
+
+### Community 141 - "Global Constraints"
+Cohesion: 0.25
+Nodes (7): Backend Modular Clean Architecture Implementation Plan, Global Constraints, Task 1: Criar a guarda arquitetural que falha contra a estrutura atual, Task 2: Migrar ingestão para portas e adaptadores, deixando a guarda verde, Task 3: Documentar as fronteiras no código sem comentários redundantes, Task 4: Atualizar a documentação operacional e fechar a verificação, Task 5: Detalhar o módulo de ingestão por responsabilidade
+
+### Community 142 - "SessionResourceTest.java"
+Cohesion: 0.60
+Nodes (3): QuarkusTest, Test, SessionResourceTest
+
 ## Knowledge Gaps
-- **314 isolated node(s):** `dev.blackice:blackice-backend`, `TIMEOUT`, `CONNECTION`, `HTTP_STATUS`, `INTERRUPTED` (+309 more)
+- **327 isolated node(s):** `dev.blackice:blackice-backend`, `TIMEOUT`, `CONNECTION`, `HTTP_STATUS`, `INTERRUPTED` (+322 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **76 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `IngestService` connect `IngestService` to `.ingest`, `.ingest`, `IngestResourceTest`?**
+- **Why does `IngestResult` connect `IngestResult` to `ValidatedDicom`, `UploadedDicom`, `.ingest`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **Why does `files` connect `.ingest` to `ValidatedDicom`, `IngestResourceTest`?**
+- **Why does `StowInstanceResult` connect `ValidatedDicom` to `UploadedDicom`, `StowResponseParser`, `.ingest`, `IngestResult`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **Why does `ValidatedDicom` connect `ValidatedDicom` to `.ingest`, `IngestService`?**
-  _High betweenness centrality (0.006) - this node is a cross-community bridge._
-- **Are the 8 inferred relationships involving `ValidatedDicom` (e.g. with `.validate()` and `.arquivo_inexistente_lanca_connection()`) actually correct?**
+- **Why does `UploadedDicom` connect `UploadedDicom` to `ValidatedDicom`, `.ingest`, `IngestResult`?**
+  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Are the 8 inferred relationships involving `ValidatedDicom` (e.g. with `.validate()` and `.connection_failure_throws_archive_unavailable_with_connection_reason()`) actually correct?**
   _`ValidatedDicom` has 8 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 7 inferred relationships involving `UploadedDicom` (e.g. with `.ingest()` and `.bytes_corrompidos_produzem_MALFORMED_DICOM()`) actually correct?**
+- **Are the 7 inferred relationships involving `UploadedDicom` (e.g. with `.ingest()` and `.corrupt_bytes_produce_malformed_dicom_issue()`) actually correct?**
   _`UploadedDicom` has 7 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 5 inferred relationships involving `IngestResult` (e.g. with `.partial_result_returns_200()` and `.total_local_rejection_returns_422()`) actually correct?**
+  _`IngestResult` has 5 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `dev.blackice:blackice-backend`, `TIMEOUT`, `CONNECTION` to the rest of the system?**
-  _314 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Keycloak Same Origin Design` be split into smaller, more focused modules?**
-  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
+  _327 weakly-connected nodes found - possible documentation gaps or missing edges._
