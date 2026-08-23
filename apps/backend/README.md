@@ -56,12 +56,26 @@ Não versione `.env` nem segredos.
 
 ## Organização
 
-O código é organizado em `src/main/java/dev/blackice/features/<name>/`. Rotas,
-DTOs e colaboradores ficam dentro da feature, e os testes espelham o pacote em
-`src/test/java`. Não crie pacotes técnicos globais.
+O código é organizado por módulo de negócio em
+`src/main/java/dev/blackice/<module>/`; os testes espelham os respectivos
+pacotes em `src/test/java`. Um módulo começa simples e só cria fronteiras
+internas quando há responsabilidade real: `api` para HTTP,
+`application`/`application.port` para casos de uso e contratos, e
+`infrastructure` para adaptadores externos. A direção é
+`api -> application <- infrastructure`.
+
+Quando um fluxo realmente precisar, `application` pode separar `input`,
+`usecase`, `validation`, `result` e `exception`. A ingestão usa essa divisão:
+o caso de uso devolve um resultado independente de HTTP e a API converte-o no
+status da resposta. Módulos menores permanecem planos até haver uma fronteira
+real.
+
+Não crie pacotes técnicos globais nem `shared` por antecipação. Um `domain/`
+pertence ao módulo e só surge quando existir regra de negócio pura independente
+de framework e I/O.
 
 Leia a [estrutura canônica](../../docs/architecture/project-structure.md) antes
-de adicionar uma feature e as
+de adicionar um módulo e as
 [convenções Quarkus](../../docs/domains/quarkus/conventions.md) antes de alterar
 integrações OIDC ou DICOMweb.
 

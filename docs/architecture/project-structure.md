@@ -61,25 +61,36 @@ BlackICE/
 Não crie outra pasta raiz de aplicação. Código de produto pertence a uma
 aplicação em `apps/`.
 
-## Estrutura atual das features
+## Estrutura atual dos módulos
 
-O backend possui a feature `session`:
+O backend é modular e possui `ingest`, `security` e `session`:
 
 ```text
 apps/backend/src/
-├─ main/
-│  ├─ java/dev/blackice/
-│  │  └─ features/
-│  │     └─ session/
-│  │        ├─ SessionResource.java
-│  │        └─ SessionResponse.java
-│  └─ resources/
-│     └─ application.properties
-└─ test/
-   └─ java/dev/blackice/
-      └─ features/
-         └─ session/
-            └─ SessionResourceTest.java
+├─ main/java/dev/blackice/
+│  ├─ ingest/
+│  │  ├─ api/
+│  │  ├─ application/
+│  │  │  ├─ input/
+│  │  │  ├─ usecase/
+│  │  │  ├─ validation/
+│  │  │  ├─ result/
+│  │  │  ├─ exception/
+│  │  │  └─ port/
+│  │  └─ infrastructure/
+│  │     ├─ dicom/
+│  │     └─ dicomweb/
+│  ├─ security/
+│  │  ├─ api/
+│  │  ├─ application/
+│  │  └─ infrastructure/oidc/
+│  └─ session/
+│     └─ api/
+└─ test/java/dev/blackice/
+   ├─ architecture/
+   ├─ ingest/
+   ├─ security/
+   └─ session/
 ```
 
 O frontend possui as features `session` e `home`, compostas pelo shell em
@@ -105,15 +116,25 @@ apps/frontend/src/
 
 ### Quarkus
 
-- Cada feature começa como um pacote plano e autocontido em
-  `dev.blackice.features.<name>`.
-- Resources, services, repositories, clients, entidades e DTOs ficam na feature
-  que os possui e só surgem quando necessários.
-- Uma feature não importa detalhes internos de outra. A integração entre
-  features exige uma interface pública explícita.
-- Testes espelham o pacote da feature sob `src/test/java`.
-- Não crie camadas globais `controller/`, `service/` ou `repository/`, nem
-  antecipe árvores `domain/application/infrastructure`.
+- Cada módulo de negócio começa em `dev.blackice.<module>` e só cria subpacotes
+  quando houver uma responsabilidade concreta.
+- `api` contém recursos, a adaptação HTTP e a política de status; `application`
+  contém casos de uso e modelos independentes de transporte;
+  `application.port` declara contratos consumidos pelo caso de uso;
+  `infrastructure` implementa portas e integra frameworks ou serviços.
+- Quando a responsabilidade justificar, `application` é organizado em
+  `input`, `usecase`, `validation`, `result` e `exception`. `ingest` usa essa
+  divisão porque valida DICOM, orquestra STOW e produz resultados próprios; um
+  módulo menor não deve criar esses pacotes por antecipação.
+- A direção é `api -> application <- infrastructure`. A aplicação não importa
+  HTTP ou implementações concretas; um módulo não importa a infraestrutura
+  interna de outro.
+- `domain` é interno ao módulo e só surge para regras puras, identidade ou
+  invariantes independentes de framework e I/O.
+- Testes espelham os pacotes de produção sob `src/test/java`; regras de
+  fronteira são verificadas em `dev.blackice.architecture`.
+- Não crie camadas globais `controller/`, `service/`, `repository`, `dto`,
+  `validator`, `exception` ou `shared`.
 
 ### Vue
 
@@ -135,19 +156,24 @@ apps/frontend/src/
 - Regras de domínio continuam nos [Domain Packs](../domains/README.md), sem
   duplicação em wrappers de agentes ou nesta página.
 
-## Adicionar feature Quarkus
+## Adicionar módulo Quarkus
 
-1. Crie `apps/backend/src/main/java/dev/blackice/features/<name>/`.
-2. Crie apenas os Resources, DTOs e colaboradores exigidos pelo primeiro fluxo,
-   todos dentro desse pacote.
-3. Crie o pacote espelhado
-   `apps/backend/src/test/java/dev/blackice/features/<name>/` e adicione o teste
-   do comportamento.
-4. Mantenha rotas e DTOs junto da feature. Se outra feature precisar integrar,
-   exponha uma interface pública explícita.
-5. Execute `mise exec -- mvn test` em `apps/backend/`.
+1. Crie `apps/backend/src/main/java/dev/blackice/<module>/` quando houver o
+   primeiro fluxo real.
+2. Comece com o pacote mais simples que explique a responsabilidade. Crie `api`,
+   `application`, `application.port`, `infrastructure` ou `domain` somente se a
+   fronteira correspondente existir. Dentro de `application`, crie `input`,
+   `usecase`, `validation`, `result` ou `exception` somente quando a separação
+   tornar o fluxo mais legível.
+3. Crie o pacote espelhado sob
+   `apps/backend/src/test/java/dev/blackice/<module>/` e teste o comportamento.
+4. Se outro módulo precisar integrar, exponha uma interface pública em
+   `application`; não importe detalhes de `infrastructure`.
+5. Atualize as regras ArchUnit se uma fronteira nova exigir proteção e execute
+   `mise exec -- mvn test -Dquarkus.http.test-port=8082` em `apps/backend/`
+   quando o dashboard Traefik local ocupar a porta padrão de teste.
 
-Não crie primeiro uma feature vazia nem distribua seu código em pacotes técnicos
+Não crie primeiro um módulo vazio nem distribua seu código em pacotes técnicos
 globais.
 
 ## Adicionar feature Vue

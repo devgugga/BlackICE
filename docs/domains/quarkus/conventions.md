@@ -4,17 +4,36 @@ O Quarkus é o backend **de produto**: domínio próprio (metadados de negócio,
 laudos, permissões) em PostgreSQL, consumindo o DCM4CHEE **só via DICOMweb**.
 Semântica DICOM: ver `docs/domains/dicom/` — este backend deve respeitá-la.
 
-## Estrutura feature-first
+## Estrutura modular
 
-O backend é organizado por feature em
-`dev.blackice.features.<name>`. Rotas, DTOs e colaboradores permanecem junto da
-feature; testes espelham esse pacote em `src/test/java`. Não crie pacotes
-técnicos globais `controller/`, `service/` ou `repository/`.
+O backend é organizado por módulo de negócio em `dev.blackice.<module>`. Um
+módulo começa simples e ganha subpacotes apenas quando eles expressam uma
+fronteira real: `api` para HTTP, `application` para o caso de uso,
+`application.port` para contratos que ele consome e `infrastructure` para os
+adaptadores. Quando o fluxo possuir responsabilidades distintas, `application`
+separa `input`, `usecase`, `validation`, `result` e `exception`; isso é interno
+ao módulo, não uma árvore técnica global. A direção é
+`api -> application <- infrastructure`; a aplicação não importa HTTP nem
+implementações concretas. A borda HTTP traduz `result` em status e payload.
 
-A estrutura operacional e a receita para adicionar uma feature estão em
+`domain/` é interno ao módulo e só existe para regras puras, identidades ou
+invariantes independentes de framework e I/O. Testes espelham o pacote em
+`src/test/java`. Não crie pacotes técnicos globais `controller/`, `service/` ou
+`repository/`, nem `shared` sem dois consumidores reais.
+
+A estrutura operacional e a receita para adicionar um módulo estão em
 [`docs/architecture/project-structure.md`](../../architecture/project-structure.md).
 Este Domain Pack mantém as convenções específicas de Quarkus sem duplicar a
 regra geral.
+
+## Java documentation and comments
+
+All Javadoc, code comments, test names and backend-generated messages must be
+written in English. Use Javadoc for public contracts, DICOM or security
+invariants, and non-obvious adapter behavior. Comments explain intent or a
+constraint that the code cannot express; do not narrate individual statements.
+Repository documentation remains in Portuguese unless its audience requires
+English.
 
 ## Extensões e papéis
 

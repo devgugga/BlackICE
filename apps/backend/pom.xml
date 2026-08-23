@@ -6,6 +6,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
+        <archunit.version>1.4.2</archunit.version>
         <compiler-plugin.version>3.15.0</compiler-plugin.version>
         <dcm4che.version>5.34.3</dcm4che.version>
         <maven.compiler.release>21</maven.compiler.release>
@@ -86,6 +87,12 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit-junit5</artifactId>
+            <version>${archunit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
