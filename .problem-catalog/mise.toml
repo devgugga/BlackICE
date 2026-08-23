@@ -1,0 +1,4 @@
+# Toolchain do tooling do catálogo de problemas — fixada e independente das apps.
+[tools]
+node = "24"
+pnpm = "11.22.0"

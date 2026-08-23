@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "namespaceUuid": "0b1f6e3a-9c2d-4f58-9a71-2d4c8e6f10b3",
+  "owners": ["platform", "security", "ingest", "worklist", "frontend"],
+  "entries": [
+    {
+      "type": "urn:uuid:cbe2c734-1873-570b-a498-a27a96ebadd4",
+      "code": "API_ARCHIVE_UNAVAILABLE",
+      "scope": "API",
+      "description": "Indisponibilidade temporária do Archive.",
+      "retryPolicy": "MANUAL",
+      "owner": "platform",
+      "extensionsSchemaRef": null,
+      "status": "active",
+      "replacedBy": null
+    }
+  ]
+}

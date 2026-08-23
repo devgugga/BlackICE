@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "namespaceUuid": "0b1f6e3a-9c2d-4f58-9a71-2d4c8e6f10b3",
+  "owners": ["platform", "security", "ingest", "worklist", "frontend"],
+  "entries": [
+    {
+      "type": "urn:uuid:850ffcf4-95bb-5902-90df-d06f1b9aeb2c",
+      "code": "CLIENT_NETWORK_UNAVAILABLE",
+      "scope": "CLIENT",
+      "description": "A requisição não alcançou o backend.",
+      "httpStatus": 503,
+      "title": "Network unavailable",
+      "detail": "The request did not reach the backend.",
+      "retryPolicy": "MANUAL",
+      "owner": "frontend",
+      "extensionsSchemaRef": null,
+      "status": "active",
+      "replacedBy": null
+    }
+  ]
+}

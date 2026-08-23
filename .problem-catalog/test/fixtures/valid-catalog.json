@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "namespaceUuid": "0b1f6e3a-9c2d-4f58-9a71-2d4c8e6f10b3",
+  "owners": ["platform", "security", "ingest", "worklist", "frontend"],
+  "entries": [
+    {
+      "type": "urn:uuid:cbe2c734-1873-570b-a498-a27a96ebadd4",
+      "code": "API_ARCHIVE_UNAVAILABLE",
+      "scope": "API",
+      "description": "Indisponibilidade temporária do Archive.",
+      "httpStatus": 503,
+      "title": "Archive unavailable",
+      "detail": "The imaging archive is temporarily unavailable.",
+      "retryPolicy": "MANUAL",
+      "owner": "platform",
+      "extensionsSchemaRef": null,
+      "status": "active",
+      "replacedBy": null
+    },
+    {
+      "type": "urn:uuid:d365af5c-a52e-549e-a322-cde01e2cba1e",
+      "code": "API_DICOM_VALIDATION_FAILED",
+      "scope": "API",
+      "description": "Nenhum arquivo do lote passou pela validação DICOM local.",
+      "httpStatus": 422,
+      "title": "DICOM validation failed",
+      "detail": "None of the uploaded files passed validation.",
+      "retryPolicy": "NEVER",
+      "owner": "ingest",
+      "extensionsSchemaRef": "dicom-validation-violations",
+      "status": "active",
+      "replacedBy": null
+    },
+    {
+      "type": "urn:uuid:47212223-d0b8-54f1-a288-d9781204bb9e",
+      "code": "API_SEARCH_INVALID",
+      "scope": "API",
+      "description": "Filtros de busca da Worklist recusados pela aplicação.",
+      "httpStatus": 400,
+      "title": "Invalid search",
+      "detail": "Review the supplied search filters.",
+      "retryPolicy": "NEVER",
+      "owner": "worklist",
+      "extensionsSchemaRef": null,
+      "status": "active",
+      "replacedBy": null
+    },
+    {
+      "type": "urn:uuid:a28f9550-6865-5a9c-94bf-98824b1c6775",
+      "code": "API_SEARCH_MALFORMED",
+      "scope": "API",
+      "description": "Entrada histórica substituída por API_SEARCH_INVALID.",
+      "httpStatus": 400,
+      "title": "Malformed search",
+      "detail": "Review the supplied search filters.",
+      "retryPolicy": "NEVER",
+      "owner": "worklist",
+      "extensionsSchemaRef": null,
+      "status": "deprecated",
+      "replacedBy": "API_SEARCH_INVALID"
+    },
+    {
+      "type": "urn:uuid:850ffcf4-95bb-5902-90df-d06f1b9aeb2c",
+      "code": "CLIENT_NETWORK_UNAVAILABLE",
+      "scope": "CLIENT",
+      "description": "A requisição não alcançou o backend.",
+      "retryPolicy": "MANUAL",
+      "owner": "frontend",
+      "extensionsSchemaRef": null,
+      "status": "active",
+      "replacedBy": null
+    }
+  ]
+}

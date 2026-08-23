@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blackice.dev/contracts/problems/catalog.schema.json",
+  "title": "Catálogo de problemas do BlackICE",
+  "description": "Estrutura do registry machine-readable de Problem Details RFC 9457. A validação semântica adicional (derivação UUIDv5, unicidade, ordenação, existência de extensão e lock) fica no tooling em .problem-catalog/.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "namespaceUuid", "owners", "entries"],
+  "properties": {
+    "schemaVersion": {
+      "description": "Versão da estrutura do documento raiz.",
+      "type": "integer",
+      "const": 1
+    },
+    "namespaceUuid": {
+      "description": "Namespace UUID criado uma única vez no bootstrap e nunca recalculado.",
+      "$ref": "#/$defs/uuid"
+    },
+    "owners": {
+      "description": "Lista fechada de owners autorizados a possuir entradas.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/owner" }
+    },
+    "entries": {
+      "description": "Problemas publicados, ordenados por code.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "owner": {
+      "enum": ["platform", "security", "ingest", "worklist", "frontend"]
+    },
+    "code": {
+      "description": "{SCOPE}_{SUBJECT}_{CONDITION} em UPPER_SNAKE_CASE.",
+      "type": "string",
+      "pattern": "^(API|CLIENT)_[A-Z0-9]+(?:_[A-Z0-9]+)+$"
+    },
+    "httpStatus": {
+      "description": "Status HTTP da resposta. Exclusivo de scope API.",
+      "type": "integer",
+      "minimum": 400,
+      "maximum": 599
+    },
+    "publicText": {
+      "description": "Texto público estável em inglês, nunca derivado de exceção.",
+      "type": "string",
+      "minLength": 1
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "code",
+        "scope",
+        "description",
+        "retryPolicy",
+        "owner",
+        "extensionsSchemaRef",
+        "status",
+        "replacedBy"
+      ],
+      "properties": {
+        "type": {
+          "description": "URN urn:uuid derivada mecanicamente do code; nunca informada à mão.",
+          "type": "string",
+          "pattern": "^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "code": { "$ref": "#/$defs/code" },
+        "scope": { "enum": ["API", "CLIENT"] },
+        "description": {
+          "description": "Significado interno em PT-BR. Não é texto público.",
+          "type": "string",
+          "minLength": 1
+        },
+        "httpStatus": { "$ref": "#/$defs/httpStatus" },
+        "title": { "$ref": "#/$defs/publicText" },
+        "detail": { "$ref": "#/$defs/publicText" },
+        "retryPolicy": {
+          "description": "AUTOMATIC é reservado e proibido nesta versão.",
+          "enum": ["NEVER", "MANUAL"]
+        },
+        "owner": { "$ref": "#/$defs/owner" },
+        "extensionsSchemaRef": {
+          "description": "Nome do schema em extensions/, sem sufixo, ou null.",
+          "type": ["string", "null"],
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "status": { "enum": ["active", "deprecated"] },
+        "replacedBy": {
+          "description": "Code substituto; obrigatoriamente null enquanto a entrada está ativa.",
+          "oneOf": [{ "$ref": "#/$defs/code" }, { "type": "null" }]
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "scope": { "const": "API" } }, "required": ["scope"] },
+          "then": {
+            "required": ["httpStatus", "title", "detail"],
+            "properties": {
+              "code": { "type": "string", "pattern": "^API_" },
+              "httpStatus": { "$ref": "#/$defs/httpStatus" },
+              "title": { "$ref": "#/$defs/publicText" },
+              "detail": { "$ref": "#/$defs/publicText" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "scope": { "const": "CLIENT" } }, "required": ["scope"] },
+          "then": {
+            "properties": {
+              "code": { "type": "string", "pattern": "^CLIENT_" },
+              "httpStatus": false,
+              "title": false,
+              "detail": false
+            }
+          }
+        },
+        {
+          "if": { "properties": { "status": { "const": "active" } }, "required": ["status"] },
+          "then": { "properties": { "replacedBy": { "type": "null" } } }
+        }
+      ]
+    }
+  }
+}

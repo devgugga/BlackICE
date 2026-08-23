@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blackice.dev/contracts/problems/extensions/dicom-validation-violations.schema.json",
+  "title": "Violações de validação DICOM",
+  "description": "Membros adicionais, no nível raiz do Problem Details, de API_DICOM_VALIDATION_FAILED. Não carrega filename: nomes de arquivo podem conter informação identificável. O consumidor associa itemIndex aos arquivos que já mantém localmente.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["violations"],
+  "properties": {
+    "violations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["itemIndex", "code", "message"],
+        "properties": {
+          "itemIndex": {
+            "description": "Posição do arquivo na ordem em que o upload foi recebido.",
+            "type": "integer",
+            "minimum": 0
+          },
+          "code": {
+            "description": "Código público de validação DICOM. É detalhe tipado da extensão, não um Problem Type.",
+            "enum": [
+              "MALFORMED_DICOM",
+              "MISSING_STUDY_INSTANCE_UID",
+              "MISSING_SERIES_INSTANCE_UID",
+              "MISSING_SOP_INSTANCE_UID",
+              "MISSING_SOP_CLASS_UID",
+              "DUPLICATE_IDENTICAL",
+              "SOP_UID_COLLISION"
+            ]
+          },
+          "message": {
+            "description": "Mensagem segura em inglês, estável e sem dados do paciente.",
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}
