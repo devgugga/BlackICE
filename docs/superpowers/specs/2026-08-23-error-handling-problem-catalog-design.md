@@ -1,7 +1,7 @@
 # Tratamento de erros e catálogo de problemas — Design
 
-**Data:** 2026-08-23  
-**Status:** design aprovado para implementação  
+**Data:** 2026-08-23
+**Status:** design aprovado para implementação
 **Escopo:** backend Quarkus, frontend Vue, contrato HTTP, TraceID, tooling e workflow de agentes
 
 ## Contexto
