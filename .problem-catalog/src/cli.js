@@ -9,20 +9,25 @@
  * Nenhum comando aceita UUID por parâmetro: a identidade é sempre derivada do
  * code dentro do namespace persistido no catálogo.
  */
-import { readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
 
 import {
   DEFAULT_PATHS,
+  OWNERS,
+  SCHEMA_VERSION,
   loadExtensionSchemas,
   loadSchema,
   normalizeCatalog,
   serializeCatalog,
   validateCatalog,
 } from './catalog.js';
+import { generateJava, generateJavaExtensions } from './generate-java.js';
+import { generateMarkdown } from './generate-markdown.js';
+import { generateTypeScript, generateTypeScriptExtensions } from './generate-typescript.js';
 import { compareLock, createLock, serializeLock } from './lock.js';
-import { deriveProblemUrn } from './uuid-v5.js';
+import { createNamespaceUuid, deriveProblemUrn } from './uuid-v5.js';
 
 const FORBIDDEN_FLAGS = ['--type', '--uuid', '--urn', '--id', '--namespace-uuid', '--namespace'];
 
@@ -39,6 +44,9 @@ const PATH_OPTIONS = {
   schema: { type: 'string' },
   lock: { type: 'string' },
   extensions: { type: 'string' },
+  markdown: { type: 'string' },
+  java: { type: 'string' },
+  typescript: { type: 'string' },
 };
 
 function resolvePaths(values) {
@@ -47,16 +55,91 @@ function resolvePaths(values) {
     schema: values.schema ? path.resolve(values.schema) : DEFAULT_PATHS.schema,
     lock: values.lock ? path.resolve(values.lock) : DEFAULT_PATHS.lock,
     extensionsDir: values.extensions ? path.resolve(values.extensions) : DEFAULT_PATHS.extensionsDir,
+    markdown: values.markdown ? path.resolve(values.markdown) : DEFAULT_PATHS.markdown,
+    javaDir: values.java ? path.resolve(values.java) : DEFAULT_PATHS.javaDir,
+    typescriptDir: values.typescript ? path.resolve(values.typescript) : DEFAULT_PATHS.typescriptDir,
   };
 }
 
-async function readJsonIfPresent(filePath) {
+/** Destino em disco de cada artefato produzido por `generateInMemory`. */
+export function generatedTargets(paths) {
+  return {
+    catalog: paths.catalog,
+    lock: paths.lock,
+    markdown: paths.markdown,
+    java: path.join(paths.javaDir, 'ProblemType.java'),
+    javaExtensions: path.join(paths.javaDir, 'ProblemExtensions.java'),
+    typescript: path.join(paths.typescriptDir, 'problem-types.generated.ts'),
+    typescriptExtensions: path.join(paths.typescriptDir, 'problem-extensions.generated.ts'),
+  };
+}
+
+/**
+ * Produz todos os artefatos como texto, sem tocar em disco.
+ *
+ * A saída é determinística: nenhuma entrada carrega timestamp, e a ordenação
+ * vem sempre do `code`.
+ */
+export async function generateInMemory(catalog, extensionSchemas) {
+  const normalized = normalizeCatalog(catalog);
+  return {
+    catalog: serializeCatalog(normalized),
+    lock: serializeLock(createLock(normalized, extensionSchemas)),
+    markdown: generateMarkdown(normalized, extensionSchemas),
+    java: generateJava(normalized),
+    javaExtensions: generateJavaExtensions(normalized, extensionSchemas),
+    typescript: generateTypeScript(normalized),
+    typescriptExtensions: generateTypeScriptExtensions(normalized, extensionSchemas),
+  };
+}
+
+/** Documento raiz vazio. O namespace nasce aqui e nunca é recalculado. */
+function bootstrapCatalog() {
+  return {
+    schemaVersion: SCHEMA_VERSION,
+    namespaceUuid: createNamespaceUuid(),
+    owners: [...OWNERS],
+    entries: [],
+  };
+}
+
+export async function generateWorkspace(paths) {
+  const { catalog, schema, extensionSchemas, lock } = await loadWorkspace(paths);
+  const source = catalog ?? bootstrapCatalog();
+  const normalized = normalizeCatalog(source);
+
+  const { errors } = validateCatalog(normalized, extensionSchemas, schema);
+  if (errors.length > 0) throw new ViolationError(errors);
+
+  if (lock !== null) {
+    const comparison = compareLock(lock, normalized, extensionSchemas);
+    if (!comparison.ok) throw new ViolationError(comparison.errors);
+  }
+
+  const generated = await generateInMemory(normalized, extensionSchemas);
+  const targets = generatedTargets(paths);
+
+  const written = [];
+  for (const [key, target] of Object.entries(targets)) {
+    await mkdir(path.dirname(target), { recursive: true });
+    if ((await readTextIfPresent(target)) !== generated[key]) written.push(target);
+    await writeFile(target, generated[key], 'utf8');
+  }
+  return { written, entries: normalized.entries.length };
+}
+
+async function readTextIfPresent(filePath) {
   try {
-    return JSON.parse(await readFile(filePath, 'utf8'));
+    return await readFile(filePath, 'utf8');
   } catch (error) {
     if (error.code === 'ENOENT') return null;
     throw error;
   }
+}
+
+async function readJsonIfPresent(filePath) {
+  const text = await readTextIfPresent(filePath);
+  return text === null ? null : JSON.parse(text);
 }
 
 /** Carrega catálogo, schema, extensões e lock a partir de um conjunto de paths. */
@@ -85,20 +168,20 @@ export async function checkWorkspace(paths) {
 
   errors.push(...validateCatalog(catalog, extensionSchemas, schema).errors);
 
-  const canonical = serializeCatalog(catalog);
-  if (canonical !== (await readFile(paths.catalog, 'utf8'))) {
-    errors.push('catalog.json não está na forma canônica; rode generate');
-    changedPaths.push(paths.catalog);
+  if (lock !== null) {
+    errors.push(...compareLock(lock, catalog, extensionSchemas).errors);
   }
 
-  if (lock === null) {
-    errors.push(`lock ausente em ${paths.lock}; rode generate`);
-    changedPaths.push(paths.lock);
-  } else {
-    errors.push(...compareLock(lock, catalog, extensionSchemas).errors);
-    if (serializeLock(createLock(catalog, extensionSchemas)) !== (await readFile(paths.lock, 'utf8'))) {
-      errors.push('catalog.lock.json divergente do catálogo; rode generate');
-      changedPaths.push(paths.lock);
+  // Comparação em memória: `check` nunca escreve.
+  const expected = await generateInMemory(catalog, extensionSchemas);
+  for (const [key, target] of Object.entries(generatedTargets(paths))) {
+    const actual = await readTextIfPresent(target);
+    if (actual === null) {
+      errors.push(`artefato ausente em ${target}; rode generate`);
+      changedPaths.push(target);
+    } else if (actual !== expected[key]) {
+      errors.push(`${target} divergente do catálogo; rode generate`);
+      changedPaths.push(target);
     }
   }
 
@@ -239,6 +322,18 @@ const COMMANDS = {
       const result = await checkWorkspace(paths);
       if (!result.ok) throw new ViolationError(result.errors);
       console.log('catálogo, lock e artefatos gerados estão consistentes');
+    },
+  },
+  generate: {
+    options: { ...PATH_OPTIONS },
+    async run(paths) {
+      const { written, entries } = await generateWorkspace(paths);
+      if (written.length === 0) {
+        console.log(`${entries} entradas: nenhum artefato mudou`);
+        return;
+      }
+      console.log(`${entries} entradas; artefatos atualizados:`);
+      for (const target of written) console.log(`  ${target}`);
     },
   },
   add: {

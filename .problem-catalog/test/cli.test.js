@@ -24,14 +24,25 @@ async function workspace(t) {
   await writeFile(catalogPath, `${JSON.stringify(catalog, null, 2)}\n`, 'utf8');
   await writeFile(lockPath, serializeLock(createLock(catalog, schemas)), 'utf8');
 
+  // Todo destino aponta para o diretório temporário: nenhum teste escreve no repositório.
+  const overrides = {
+    catalog: catalogPath,
+    lock: lockPath,
+    markdown: path.join(dir, 'catalog.md'),
+    java: path.join(dir, 'java'),
+    typescript: path.join(dir, 'ts'),
+  };
   const flags = [
     '--catalog', catalogPath,
     '--lock', lockPath,
+    '--markdown', overrides.markdown,
+    '--java', overrides.java,
+    '--typescript', overrides.typescript,
     '--schema', DEFAULT_PATHS.schema,
     '--extensions', DEFAULT_PATHS.extensionsDir,
   ];
   const read = async () => JSON.parse(await readFile(catalogPath, 'utf8'));
-  return { dir, catalogPath, lockPath, flags, read, paths: resolvePaths({ catalog: catalogPath, lock: lockPath }) };
+  return { dir, catalogPath, lockPath, flags, read, paths: resolvePaths(overrides) };
 }
 
 test('add deriva a URN a partir do code e do namespace persistido', async (t) => {
@@ -188,6 +199,7 @@ test('deprecate recusa deixar um ponteiro replacedBy sem destino ativo', async (
 
 test('check aprova espaço consistente e acusa deriva sem escrever', async (t) => {
   const ws = await workspace(t);
+  await main(['generate', ...ws.flags]);
 
   const green = await checkWorkspace(ws.paths);
   assert.deepEqual(green.errors, []);
