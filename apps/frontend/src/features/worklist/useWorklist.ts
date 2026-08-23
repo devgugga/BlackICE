@@ -1,5 +1,8 @@
 import { ref, readonly, type Ref } from 'vue';
-import { searchStudies, WorklistError } from './worklist.api';
+import { ApiError } from '@/shared/api/problems/api-error';
+import { isIntentionalAbort } from '@/shared/api/problems/parse-problem';
+
+import { searchStudies } from './worklist.api';
 import type { StudyPage, StudySearchParams, StudySummary, WorklistFilters } from './worklist.types';
 
 export type WorklistPhase = 'IDLE' | 'LOADING' | 'READY' | 'EMPTY' | 'ERROR';
@@ -15,21 +18,11 @@ export const EMPTY_FILTERS: WorklistFilters = {
   dateTo: '',
 };
 
-function isAbort(error: unknown): boolean {
-  if (error instanceof DOMException && error.name === 'AbortError') {
-    return true;
-  }
-  if (typeof error === 'object' && error !== null && 'name' in error && (error as { name?: unknown }).name === 'AbortError') {
-    return true;
-  }
-  return false;
-}
-
 export interface WorklistComposable {
   phase: Readonly<Ref<WorklistPhase>>;
   items: Readonly<Ref<readonly StudySummary[]>>;
   page: Readonly<Ref<StudyPage['page']>>;
-  errorCode: Readonly<Ref<string | null>>;
+  error: Readonly<Ref<ApiError | null>>;
   appliedFilters: Readonly<Ref<WorklistFilters>>;
   appliedOffset: Readonly<Ref<number>>;
   loadRecent(): Promise<void>;
@@ -53,7 +46,7 @@ export function useWorklist(api: SearchStudies = searchStudies): WorklistComposa
     hasPrevious: false,
     hasNext: false,
   });
-  const errorCode = ref<string | null>(null);
+  const error = ref<ApiError | null>(null);
   const appliedFilters = ref<WorklistFilters>({ ...EMPTY_FILTERS });
   const appliedOffset = ref<number>(0);
 
@@ -63,7 +56,7 @@ export function useWorklist(api: SearchStudies = searchStudies): WorklistComposa
     activeController = controller;
     const generation = ++activeGeneration;
     phase.value = 'LOADING';
-    errorCode.value = null;
+    error.value = null;
     appliedFilters.value = { ...filters };
     appliedOffset.value = offset;
     try {
@@ -72,10 +65,11 @@ export function useWorklist(api: SearchStudies = searchStudies): WorklistComposa
       items.value = result.items;
       page.value = result.page;
       phase.value = result.items.length === 0 ? 'EMPTY' : 'READY';
-    } catch (error) {
-      if (generation !== activeGeneration || isAbort(error)) return;
+    } catch (caught) {
+      // Cancelamento não é falha: a UI não muda de estado.
+      if (generation !== activeGeneration || isIntentionalAbort(caught)) return;
       phase.value = 'ERROR';
-      errorCode.value = error instanceof WorklistError ? error.code : 'NETWORK_ERROR';
+      error.value = caught instanceof ApiError ? caught : new ApiError('CLIENT_UNEXPECTED_ERROR');
     } finally {
       if (generation === activeGeneration) activeController = null;
     }
@@ -117,7 +111,7 @@ export function useWorklist(api: SearchStudies = searchStudies): WorklistComposa
     phase: readonly(phase) as Readonly<Ref<WorklistPhase>>,
     items: readonly(items) as Readonly<Ref<readonly StudySummary[]>>,
     page: readonly(page) as Readonly<Ref<StudyPage['page']>>,
-    errorCode: readonly(errorCode) as Readonly<Ref<string | null>>,
+    error: readonly(error) as unknown as Readonly<Ref<ApiError | null>>,
     appliedFilters: readonly(appliedFilters) as Readonly<Ref<WorklistFilters>>,
     appliedOffset: readonly(appliedOffset) as Readonly<Ref<number>>,
     loadRecent,

@@ -29,15 +29,3 @@ export interface StudySearchParams {
   limit: number;
   offset: number;
 }
-
-export class WorklistError extends Error {
-  readonly status: number;
-  readonly code: string;
-
-  constructor(status: number, code: string) {
-    super(code);
-    this.name = 'WorklistError';
-    this.status = status;
-    this.code = code;
-  }
-}

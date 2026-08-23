@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { useWorklist, EMPTY_FILTERS, PAGE_SIZE } from '@/features/worklist/useWorklist';
-import { WorklistError } from '@/features/worklist/worklist.api';
+import { ApiError } from '@/shared/api/problems/api-error';
 import type { StudyPage, StudySummary, WorklistFilters } from '@/features/worklist/worklist.types';
 
 afterEach(() => {
@@ -78,7 +78,7 @@ describe('useWorklist', () => {
       hasPrevious: false,
       hasNext: false,
     });
-    expect(worklist.errorCode.value).toBeNull();
+    expect(worklist.error.value).toBeNull();
     expect(worklist.appliedFilters.value).toEqual(EMPTY_FILTERS);
     expect(worklist.appliedOffset.value).toBe(0);
     expect(api).not.toHaveBeenCalled();
@@ -262,7 +262,7 @@ describe('useWorklist', () => {
 
   it('executa retry com os ultimos filtros e offset aplicados', async () => {
     const api = vi.fn()
-      .mockRejectedValueOnce(new WorklistError(503, 'ARCHIVE_UNAVAILABLE'))
+      .mockRejectedValueOnce(new ApiError('API_ARCHIVE_UNAVAILABLE'))
       .mockResolvedValueOnce(page({ offset: 0 }));
     const worklist = useWorklist(api);
 
@@ -270,7 +270,7 @@ describe('useWorklist', () => {
     await worklist.search(filter);
 
     expect(worklist.phase.value).toBe('ERROR');
-    expect(worklist.errorCode.value).toBe('ARCHIVE_UNAVAILABLE');
+    expect(worklist.error.value?.code).toBe('API_ARCHIVE_UNAVAILABLE');
 
     await worklist.retry();
 
@@ -279,28 +279,34 @@ describe('useWorklist', () => {
       expect.any(AbortSignal),
     );
     expect(worklist.phase.value).toBe('READY');
-    expect(worklist.errorCode.value).toBeNull();
+    expect(worklist.error.value).toBeNull();
   });
 
-  it('trata WorklistError preservando o errorCode seguro', async () => {
-    const api = vi.fn().mockRejectedValue(new WorklistError(400, 'INVALID_SEARCH'));
+  it('preserva o ApiError catalogado, com politica de retentativa', async () => {
+    const api = vi.fn().mockRejectedValue(new ApiError('API_SEARCH_INVALID'));
     const worklist = useWorklist(api);
 
     await worklist.search(EMPTY_FILTERS);
 
     expect(worklist.phase.value).toBe('ERROR');
-    expect(worklist.errorCode.value).toBe('INVALID_SEARCH');
+    expect(worklist.error.value).toMatchObject({
+      code: 'API_SEARCH_INVALID',
+      retryPolicy: 'NEVER',
+    });
     expect(worklist.items.value).toEqual([]);
   });
 
-  it('trata erro generico / rede como NETWORK_ERROR', async () => {
+  it('traduz falha inesperada em problema local catalogado', async () => {
     const api = vi.fn().mockRejectedValue(new TypeError('Failed to fetch'));
     const worklist = useWorklist(api);
 
     await worklist.loadRecent();
 
     expect(worklist.phase.value).toBe('ERROR');
-    expect(worklist.errorCode.value).toBe('NETWORK_ERROR');
+    expect(worklist.error.value).toMatchObject({
+      code: 'CLIENT_UNEXPECTED_ERROR',
+      scope: 'CLIENT',
+    });
     expect(worklist.items.value).toEqual([]);
   });
 
@@ -312,7 +318,7 @@ describe('useWorklist', () => {
     await worklist.loadRecent();
 
     expect(worklist.phase.value).not.toBe('ERROR');
-    expect(worklist.errorCode.value).toBeNull();
+    expect(worklist.error.value).toBeNull();
   });
 
   it('usa searchStudies como api padrao', () => {

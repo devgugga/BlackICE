@@ -1,7 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { mount, flushPromises } from '@vue/test-utils';
 import WorklistPage from '@/features/worklist/WorklistPage.vue';
-import { searchStudies, WorklistError } from '@/features/worklist/worklist.api';
+import { searchStudies } from '@/features/worklist/worklist.api';
+import { ApiError } from '@/shared/api/problems/api-error';
+import { PROBLEM_MESSAGES } from '@/shared/api/problems/problem-messages.pt-BR';
 import type { StudyPage, StudySummary } from '@/features/worklist/worklist.types';
 
 vi.mock('@/features/worklist/worklist.api', async (importOriginal) => {
@@ -210,13 +212,13 @@ describe('WorklistPage', () => {
   });
 
   it('exibe erro de Archive indisponível e permite Tentar novamente', async () => {
-    searchStudiesMock.mockRejectedValueOnce(new WorklistError(503, 'ARCHIVE_UNAVAILABLE'));
+    searchStudiesMock.mockRejectedValueOnce(new ApiError('API_ARCHIVE_UNAVAILABLE', { traceId: '4bf92f3577b34da6a3ce929d0e0e4736' }));
     const wrapper = mount(WorklistPage);
     await flushPromises();
 
     const alert = wrapper.find('[role="alert"]');
     expect(alert.exists()).toBe(true);
-    expect(alert.text()).toContain('Archive temporariamente indisponível');
+    expect(alert.text()).toContain(PROBLEM_MESSAGES.API_ARCHIVE_UNAVAILABLE);
 
     const retryButton = alert.find('button');
     expect(retryButton.text()).toContain('Tentar novamente');
@@ -229,24 +231,58 @@ describe('WorklistPage', () => {
     expect(wrapper.find('[data-testid="study-table"]').exists()).toBe(true);
   });
 
-  it('mapeia códigos de erro estáveis para mensagens em português', async () => {
+  it('usa o mapa central de mensagens para cada code catalogado', async () => {
     const errorCases = [
-      { code: 'INVALID_SEARCH', text: 'Verifique os filtros informados' },
-      { code: 'SEARCH_TOO_BROAD', text: 'filtros mais restritos' },
-      { code: 'ARCHIVE_INVALID_RESPONSE', text: 'Resposta inválida do Archive' },
-      { code: 'ARCHIVE_UNAVAILABLE', text: 'Archive temporariamente indisponível' },
-      { code: 'NETWORK_ERROR', text: 'temporariamente indisponível' },
-    ];
+      'API_SEARCH_INVALID',
+      'API_SEARCH_TOO_BROAD',
+      'API_ARCHIVE_RESPONSE_INVALID',
+      'API_ARCHIVE_UNAVAILABLE',
+      'CLIENT_NETWORK_UNAVAILABLE',
+    ] as const;
 
-    for (const { code, text } of errorCases) {
-      searchStudiesMock.mockRejectedValueOnce(new WorklistError(500, code));
+    for (const code of errorCases) {
+      searchStudiesMock.mockRejectedValueOnce(new ApiError(code));
       const wrapper = mount(WorklistPage);
       await flushPromises();
+
       const alert = wrapper.find('[role="alert"]');
       expect(alert.exists()).toBe(true);
-      expect(alert.text().toLowerCase()).toContain(text.toLowerCase());
-      expect(alert.find('button').text()).toContain('Tentar novamente');
+      expect(alert.text()).toContain(PROBLEM_MESSAGES[code]);
     }
+  });
+
+  it('oferece retentativa somente quando a politica e MANUAL', async () => {
+    searchStudiesMock.mockRejectedValueOnce(new ApiError('API_ARCHIVE_UNAVAILABLE'));
+    let wrapper = mount(WorklistPage);
+    await flushPromises();
+    expect(wrapper.find('[role="alert"]').find('button').exists()).toBe(true);
+
+    // API_SEARCH_INVALID tem retryPolicy NEVER: repetir a mesma busca nao ajuda.
+    searchStudiesMock.mockRejectedValueOnce(new ApiError('API_SEARCH_INVALID'));
+    wrapper = mount(WorklistPage);
+    await flushPromises();
+    expect(wrapper.find('[role="alert"]').find('button').exists()).toBe(false);
+  });
+
+  it('mostra o TraceID como referencia quando disponivel', async () => {
+    const traceId = '4bf92f3577b34da6a3ce929d0e0e4736';
+    searchStudiesMock.mockRejectedValueOnce(new ApiError('API_INTERNAL_ERROR', { traceId }));
+
+    const wrapper = mount(WorklistPage);
+    await flushPromises();
+
+    const alert = wrapper.find('[role="alert"]');
+    expect(alert.text()).toContain('Referência');
+    expect(alert.find('code').text()).toBe(traceId);
+  });
+
+  it('nunca renderiza o detail do backend', async () => {
+    searchStudiesMock.mockRejectedValueOnce(new ApiError('API_ARCHIVE_UNAVAILABLE'));
+
+    const wrapper = mount(WorklistPage);
+    await flushPromises();
+
+    expect(wrapper.text()).not.toContain('The imaging archive');
   });
 
   it('lida com paginação anterior e próxima', async () => {

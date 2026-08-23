@@ -1,5 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { searchStudies, WorklistError } from '@/features/worklist/worklist.api';
+import { searchStudies } from '@/features/worklist/worklist.api';
+import { ApiError } from '@/shared/api/problems/api-error';
+import { PROBLEM_TYPES } from '@/shared/api/problems/problem-types.generated';
 import type { StudyPage, StudySearchParams, WorklistFilters } from '@/features/worklist/worklist.types';
 
 afterEach(() => {
@@ -37,11 +39,25 @@ function okResponse(body: StudyPage): Response {
   });
 }
 
-function errorResponse(status: number, code: string, message = 'Error description'): Response {
-  return new Response(JSON.stringify({ code, message }), {
-    status,
-    headers: { 'Content-Type': 'application/json' },
-  });
+const TRACE_ID = '4bf92f3577b34da6a3ce929d0e0e4736';
+
+function errorResponse(code: keyof typeof PROBLEM_TYPES): Response {
+  const definition = PROBLEM_TYPES[code];
+  const status = 'httpStatus' in definition ? definition.httpStatus : 500;
+  return new Response(
+    JSON.stringify({
+      type: definition.type,
+      title: 'texto do operador',
+      status,
+      detail: 'texto do operador',
+      code,
+      traceId: TRACE_ID,
+    }),
+    {
+      status,
+      headers: { 'Content-Type': 'application/problem+json', 'X-Trace-ID': TRACE_ID },
+    },
+  );
 }
 
 function textResponse(status: number, text: string): Response {
@@ -126,46 +142,35 @@ describe('searchStudies', () => {
   });
 
   it.each([
-    [400, 'INVALID_SEARCH'],
-    [413, 'SEARCH_TOO_BROAD'],
-    [502, 'ARCHIVE_INVALID_RESPONSE'],
-    [503, 'ARCHIVE_UNAVAILABLE'],
-  ])('preserva status %s e código seguro %s', async (status, code) => {
-    const fetchFn = vi.fn().mockResolvedValue(errorResponse(status, code));
+    ['API_SEARCH_INVALID', 400],
+    ['API_SEARCH_TOO_BROAD', 413],
+    ['API_ARCHIVE_RESPONSE_INVALID', 502],
+    ['API_ARCHIVE_UNAVAILABLE', 503],
+  ] as const)('traduz %s em ApiError catalogado', async (code, status) => {
+    const fetchFn = vi.fn().mockResolvedValue(errorResponse(code));
     await expect(searchStudies(emptyParams, undefined, fetchFn))
-      .rejects.toMatchObject({ status, code });
+      .rejects.toMatchObject({ code, status, scope: 'API', traceId: TRACE_ID });
   });
 
-  it('lanca instancia de WorklistError com name e status corretos', async () => {
-    const fetchFn = vi.fn().mockResolvedValue(errorResponse(400, 'INVALID_SEARCH'));
+  it('lanca ApiError cuja message e apenas o code catalogado', async () => {
+    const fetchFn = vi.fn().mockResolvedValue(errorResponse('API_SEARCH_INVALID'));
     const promise = searchStudies(emptyParams, undefined, fetchFn);
-    await expect(promise).rejects.toThrow(WorklistError);
+
+    await expect(promise).rejects.toThrow(ApiError);
     await expect(promise).rejects.toSatisfy((err: unknown) => {
-      expect(err).toBeInstanceOf(WorklistError);
-      const error = err as WorklistError;
-      expect(error.name).toBe('WorklistError');
+      const error = err as ApiError;
+      expect(error.name).toBe('ApiError');
       expect(error.status).toBe(400);
-      expect(error.code).toBe('INVALID_SEARCH');
-      expect(error.message).toBe('INVALID_SEARCH');
+      expect(error.message).toBe('API_SEARCH_INVALID');
+      expect(error.retryPolicy).toBe('NEVER');
       return true;
     });
   });
 
-  it('retorna UNKNOWN_ERROR quando o corpo do erro não é JSON', async () => {
+  it('trata resposta fora do contrato como falha local', async () => {
     const fetchFn = vi.fn().mockResolvedValue(textResponse(500, '<html>500 Internal Error</html>'));
     await expect(searchStudies(emptyParams, undefined, fetchFn))
-      .rejects.toMatchObject({ status: 500, code: 'UNKNOWN_ERROR' });
-  });
-
-  it('retorna UNKNOWN_ERROR quando o corpo JSON não possui campo code válido', async () => {
-    const fetchFn = vi.fn().mockResolvedValue(
-      new Response(JSON.stringify({ unexpected: 'value' }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      }),
-    );
-    await expect(searchStudies(emptyParams, undefined, fetchFn))
-      .rejects.toMatchObject({ status: 500, code: 'UNKNOWN_ERROR' });
+      .rejects.toMatchObject({ code: 'CLIENT_RESPONSE_INVALID', scope: 'CLIENT' });
   });
 
   it('não vaza texto bruto da resposta no erro', async () => {
@@ -175,18 +180,17 @@ describe('searchStudies', () => {
       await searchStudies(emptyParams, undefined, fetchFn);
       expect.unreachable();
     } catch (err) {
-      expect(err).toBeInstanceOf(WorklistError);
-      const error = err as WorklistError;
-      expect(error.message).toBe('UNKNOWN_ERROR');
-      expect(error.code).toBe('UNKNOWN_ERROR');
+      const error = err as ApiError;
+      expect(error).toBeInstanceOf(ApiError);
+      expect(error.message).toBe('CLIENT_RESPONSE_INVALID');
       expect(JSON.stringify(error)).not.toContain(rawSensitiveBody);
     }
   });
 
-  it('propaga falha de rede do fetch', async () => {
-    const networkError = new TypeError('Failed to fetch');
-    const fetchFn = vi.fn().mockRejectedValue(networkError);
-    await expect(searchStudies(emptyParams, undefined, fetchFn)).rejects.toThrow('Failed to fetch');
+  it('traduz falha de rede em problema local catalogado', async () => {
+    const fetchFn = vi.fn().mockRejectedValue(new TypeError('Failed to fetch'));
+    await expect(searchStudies(emptyParams, undefined, fetchFn))
+      .rejects.toMatchObject({ code: 'CLIENT_NETWORK_UNAVAILABLE', scope: 'CLIENT' });
   });
 
   it('propaga cancelamento via AbortSignal', async () => {

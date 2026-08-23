@@ -1,23 +1,6 @@
+import { apiErrorFromResponse, clientError } from '@/shared/api/problems/parse-problem';
+
 import type { StudyPage, StudySearchParams } from './worklist.types';
-import { WorklistError } from './worklist.types';
-
-export { WorklistError };
-
-interface WorklistErrorBody {
-  code?: unknown;
-}
-
-async function safeError(response: Response): Promise<{ code: string }> {
-  try {
-    const data = (await response.json()) as WorklistErrorBody;
-    if (data && typeof data === 'object' && typeof data.code === 'string' && data.code.trim().length > 0) {
-      return { code: data.code.trim() };
-    }
-  } catch {
-    // Fall back to safe unknown error code without leaking raw text
-  }
-  return { code: 'UNKNOWN_ERROR' };
-}
 
 export async function searchStudies(
   params: StudySearchParams,
@@ -31,10 +14,20 @@ export async function searchStudies(
   query.set('limit', String(params.limit));
   query.set('offset', String(params.offset));
 
-  const response = await fetchFn(`/api/studies?${query}`, { credentials: 'include', signal });
-  if (!response.ok) {
-    const body = await safeError(response);
-    throw new WorklistError(response.status, body.code);
+  let response: Response;
+  try {
+    response = await fetchFn(`/api/studies?${query}`, { credentials: 'include', signal });
+  } catch (error) {
+    // O cancelamento é controle de fluxo e segue adiante como está.
+    if (error instanceof DOMException && error.name === 'AbortError') throw error;
+    throw clientError('CLIENT_NETWORK_UNAVAILABLE');
   }
-  return (await response.json()) as StudyPage;
+
+  if (!response.ok) throw await apiErrorFromResponse(response);
+
+  try {
+    return (await response.json()) as StudyPage;
+  } catch {
+    throw clientError('CLIENT_RESPONSE_INVALID', response.headers.get('X-Trace-ID') ?? undefined);
+  }
 }

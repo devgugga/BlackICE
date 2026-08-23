@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { problemMessage } from '@/shared/api/problems/problem-messages.pt-BR';
+
 import { useWorklist, EMPTY_FILTERS } from './useWorklist';
 import type { WorklistFilters as FiltersType } from './worklist.types';
 import WorklistFilters from './WorklistFilters.vue';
@@ -13,22 +15,16 @@ const hasAppliedFilters = computed(() =>
   Object.values(worklist.appliedFilters.value).some((value) => Boolean(value && value.trim())),
 );
 
-const errorMessage = computed(() => {
-  const code = worklist.errorCode.value;
-  switch (code) {
-    case 'INVALID_SEARCH':
-      return 'Filtros de busca inválidos. Verifique os filtros informados.';
-    case 'SEARCH_TOO_BROAD':
-      return 'A busca retornou muitos resultados. Especifique filtros mais restritos.';
-    case 'ARCHIVE_INVALID_RESPONSE':
-      return 'Resposta inválida do Archive.';
-    case 'ARCHIVE_UNAVAILABLE':
-      return 'Archive temporariamente indisponível.';
-    case 'NETWORK_ERROR':
-    default:
-      return 'Serviço temporariamente indisponível. Tente novamente mais tarde.';
-  }
-});
+// O texto vem do mapa central: a página controla layout e ação, nunca o
+// significado. O `detail` do backend, voltado a operadores, não é renderizado.
+const errorMessage = computed(() =>
+  worklist.error.value === null ? '' : problemMessage(worklist.error.value.code),
+);
+
+const errorTraceId = computed(() => worklist.error.value?.traceId ?? null);
+
+// Repetir a mesma busca só é oferecido quando o catálogo diz que ajuda.
+const allowsRetry = computed(() => worklist.error.value?.retryPolicy === 'MANUAL');
 
 async function handleSearch(): Promise<void> {
   await worklist.search(draftFilters.value);
@@ -82,7 +78,10 @@ onUnmounted(() => {
         class="error-message"
       >
         <p>{{ errorMessage }}</p>
-        <button type="button" @click="worklist.retry">
+        <p v-if="errorTraceId" class="error-reference">
+          Referência: <code>{{ errorTraceId }}</code>
+        </p>
+        <button v-if="allowsRetry" type="button" @click="worklist.retry">
           Tentar novamente
         </button>
       </div>
@@ -172,6 +171,16 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.75rem;
+}
+
+.error-message .error-reference {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.error-message .error-reference code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  user-select: all;
 }
 
 .error-message p {
