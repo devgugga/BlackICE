@@ -130,7 +130,7 @@ public class IngestStudiesUseCase {
                     studyUid,
                     IngestResult.StudyStatus.FAILED,
                     List.of(),
-                    "ARCHIVE_UNAVAILABLE"
+                    failureReason(attempt)
                 ));
             } else {
                 StowStudyResult result = attempt.result();
@@ -193,6 +193,17 @@ public class IngestStudiesUseCase {
         }
 
         return new IngestResult(outcome, summary, studyResults, locallyRejectedFiles);
+    }
+
+    /**
+     * Stable internal reason for a study that was not stored.
+     *
+     * <p>It is not a public code: the API boundary translates it into a
+     * catalogued problem. Keeping the reason distinguishes "never reached the
+     * archive" from "the archive answered but the response was unusable".
+     */
+    private static String failureReason(StudyAttempt attempt) {
+        return attempt.failure() != null ? attempt.failure().reason().name() : "UNKNOWN";
     }
 
     private StudyAttempt store(String studyUid, List<ValidatedDicom> files, String accessToken) {

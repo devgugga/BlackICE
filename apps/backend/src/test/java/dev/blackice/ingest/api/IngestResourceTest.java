@@ -173,7 +173,7 @@ class IngestResourceTest {
             IngestResult.Outcome.FAILED,
             new IngestResult.Summary(1, 1, 0, 0, 0),
             List.of(new IngestResult.StudyResult(
-                "1.2.840.113619.2.55.3", IngestResult.StudyStatus.FAILED, List.of(), "ARCHIVE_UNAVAILABLE")),
+                "1.2.840.113619.2.55.3", IngestResult.StudyStatus.FAILED, List.of(), "CONNECTION")),
             List.of()
         ));
 
@@ -190,6 +190,31 @@ class IngestResourceTest {
             .body("summary", nullValue())
             .body("violations", nullValue())
             .body("$", not(hasToString(containsString("1.2.840"))))
+            .body("traceId", not(blankOrNullString()));
+    }
+
+    @Test
+    @TestSecurity(user = "dr.teste", roles = "auth")
+    void an_archive_that_answered_with_an_unusable_body_is_not_reported_as_unavailable() {
+        String csrf = getCsrfToken();
+        when(accessToken.accessToken()).thenReturn("test-token");
+        when(useCase.ingest(anyList(), eq("test-token"))).thenReturn(new IngestResult(
+            IngestResult.Outcome.FAILED,
+            new IngestResult.Summary(1, 1, 0, 0, 0),
+            List.of(new IngestResult.StudyResult(
+                "1.2.840.113619.2.55.3", IngestResult.StudyStatus.FAILED, List.of(), "INVALID_RESPONSE")),
+            List.of()
+        ));
+
+        given()
+            .cookie("csrf-token", csrf)
+            .header("X-CSRF-TOKEN", csrf)
+            .multiPart("files", "test.dcm", new byte[] {1, 2, 3}, "application/dicom")
+            .when().post("/api/studies")
+            .then()
+            .statusCode(502)
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_ARCHIVE_RESPONSE_INVALID"))
             .body("traceId", not(blankOrNullString()));
     }
 

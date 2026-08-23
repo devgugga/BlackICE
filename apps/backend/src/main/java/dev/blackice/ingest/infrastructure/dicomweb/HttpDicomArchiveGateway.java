@@ -128,7 +128,9 @@ public class HttpDicomArchiveGateway implements DicomArchiveGateway {
         try {
             return parser.parse(studyInstanceUid, response.body(), submittedSopUids);
         } catch (Exception e) {
-            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.HTTP_STATUS, e);
+            // O archive respondeu 2xx: as instâncias podem já ter sido gravadas.
+            // Isso não é indisponibilidade, e tratá-lo como tal induziria reenvio.
+            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.INVALID_RESPONSE, e);
         }
     }
 }

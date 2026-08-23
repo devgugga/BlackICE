@@ -131,7 +131,7 @@ class IngestStudiesUseCaseTest {
         IngestResult.StudyResult study1 = studies.get(0);
         assertEquals("1.2.3", study1.studyInstanceUid());
         assertEquals(IngestResult.StudyStatus.FAILED, study1.status());
-        assertEquals("ARCHIVE_UNAVAILABLE", study1.errorCode());
+        assertEquals("CONNECTION", study1.errorCode());
         assertTrue(study1.instances().isEmpty());
 
         IngestResult.StudyResult study2 = studies.get(1);
@@ -178,10 +178,14 @@ class IngestStudiesUseCaseTest {
         assertEquals(0, summary.archiveAccepted());
         assertEquals(2, summary.archiveRejected());
 
+        // A razão interna de cada estudo é preservada: é ela que permite à
+        // fronteira distinguir indisponibilidade de resposta inutilizável.
         for (IngestResult.StudyResult study : result.studies()) {
             assertEquals(IngestResult.StudyStatus.FAILED, study.status());
-            assertEquals("ARCHIVE_UNAVAILABLE", study.errorCode());
         }
+        assertEquals(
+            List.of("CONNECTION", "TIMEOUT"),
+            result.studies().stream().map(IngestResult.StudyResult::errorCode).sorted().toList());
     }
 
     @Test

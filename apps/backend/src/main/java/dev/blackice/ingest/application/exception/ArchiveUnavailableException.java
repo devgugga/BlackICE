@@ -18,6 +18,14 @@ public final class ArchiveUnavailableException extends RuntimeException {
         CONNECTION,
         /** Archive returned an unexpected HTTP error status (5xx/4xx). */
         HTTP_STATUS,
+        /**
+         * The archive answered 2xx but the body could not be interpreted.
+         *
+         * <p>Distinct from {@link #TIMEOUT} and {@link #CONNECTION}: the request
+         * did reach the archive, which may already have stored the instances.
+         * Reporting it as unavailability would invite a duplicate re-upload.
+         */
+        INVALID_RESPONSE,
         /** The execution thread was interrupted while waiting for the archive. */
         INTERRUPTED
     }

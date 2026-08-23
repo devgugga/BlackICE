@@ -193,7 +193,7 @@ class HttpDicomArchiveGatewayTest {
     }
 
     @Test
-    void response_200_with_invalid_json_throws_http_status_failure() throws Exception {
+    void response_200_with_invalid_json_is_reported_as_invalid_response_not_unavailability() throws Exception {
         server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies/1.2.3", exchange -> {
             exchange.getRequestBody().transferTo(OutputStream.nullOutputStream());
             byte[] response = "corrupted-non-json-content".getBytes(StandardCharsets.UTF_8);
@@ -219,7 +219,9 @@ class HttpDicomArchiveGatewayTest {
             () -> gateway.storeStudy("1.2.3", files, "token")
         );
 
-        assertEquals(ArchiveUnavailableException.Reason.HTTP_STATUS, ex.reason());
+        // O archive respondeu 2xx: pode já ter gravado. Reportar indisponibilidade
+        // levaria o usuário a reenviar o lote e duplicar a ingestão.
+        assertEquals(ArchiveUnavailableException.Reason.INVALID_RESPONSE, ex.reason());
     }
 
     @Test
