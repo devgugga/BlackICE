@@ -15,11 +15,15 @@ import java.util.List;
 import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.blankOrNullString;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
@@ -92,9 +96,8 @@ class WorklistResourceTest {
             .body("page.hasNext", equalTo(false))
             .extract().response();
 
-        String requestId = response.header("X-Request-ID");
-        assertNotNull(requestId);
-        assertDoesNotThrow(() -> UUID.fromString(requestId));
+        assertNull(response.header("X-Request-ID"));
+        assertNotNull(response.header("X-Trace-ID"));
 
         verify(useCase, times(1)).search(any(), eq("user-token"));
     }
@@ -131,13 +134,14 @@ class WorklistResourceTest {
             .queryParam("dateFrom", "not-a-date")
             .when().get("/api/studies")
             .then().statusCode(400)
-            .body("code", equalTo("INVALID_SEARCH"))
-            .body("message", equalTo("Review the supplied search filters."))
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_SEARCH_INVALID"))
+            .body("detail", equalTo("Review the supplied search filters."))
+            .body("traceId", not(blankOrNullString()))
             .extract().response();
 
-        String requestId = response.header("X-Request-ID");
-        assertNotNull(requestId);
-        assertDoesNotThrow(() -> UUID.fromString(requestId));
+        assertNull(response.header("X-Request-ID"));
+        assertEquals(response.jsonPath().getString("traceId"), response.header("X-Trace-ID"));
     }
 
     @Test
@@ -148,8 +152,9 @@ class WorklistResourceTest {
             .queryParam("dateTo", "2026-08-01")
             .when().get("/api/studies")
             .then().statusCode(400)
-            .body("code", equalTo("INVALID_SEARCH"))
-            .body("message", equalTo("Review the supplied search filters."));
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_SEARCH_INVALID"))
+            .body("detail", equalTo("Review the supplied search filters."));
     }
 
     @Test
@@ -159,15 +164,17 @@ class WorklistResourceTest {
             .queryParam("patientName", "MARIA*")
             .when().get("/api/studies")
             .then().statusCode(400)
-            .body("code", equalTo("INVALID_SEARCH"))
-            .body("message", equalTo("Review the supplied search filters."));
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_SEARCH_INVALID"))
+            .body("detail", equalTo("Review the supplied search filters."));
 
         given()
             .queryParam("patientId", "123?")
             .when().get("/api/studies")
             .then().statusCode(400)
-            .body("code", equalTo("INVALID_SEARCH"))
-            .body("message", equalTo("Review the supplied search filters."));
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_SEARCH_INVALID"))
+            .body("detail", equalTo("Review the supplied search filters."));
     }
 
     @Test
@@ -177,8 +184,9 @@ class WorklistResourceTest {
             .queryParam("modality", "INVALID MODALITY!")
             .when().get("/api/studies")
             .then().statusCode(400)
-            .body("code", equalTo("INVALID_SEARCH"))
-            .body("message", equalTo("Review the supplied search filters."));
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_SEARCH_INVALID"))
+            .body("detail", equalTo("Review the supplied search filters."));
     }
 
     @Test
@@ -188,19 +196,41 @@ class WorklistResourceTest {
             .queryParam("limit", 0)
             .when().get("/api/studies")
             .then().statusCode(400)
-            .body("code", equalTo("INVALID_SEARCH"));
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_SEARCH_INVALID"));
 
         given()
             .queryParam("limit", 101)
             .when().get("/api/studies")
             .then().statusCode(400)
-            .body("code", equalTo("INVALID_SEARCH"));
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_SEARCH_INVALID"));
 
         given()
             .queryParam("offset", -1)
             .when().get("/api/studies")
             .then().statusCode(400)
-            .body("code", equalTo("INVALID_SEARCH"));
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_SEARCH_INVALID"));
+    }
+
+    @Test
+    @TestSecurity(user = "dr.teste", roles = "auth")
+    void an_unexpected_failure_is_not_disguised_as_archive_unavailability() {
+        when(accessToken.accessToken()).thenReturn("user-token");
+        when(useCase.search(any(), eq("user-token")))
+            .thenThrow(new RuntimeException("patient-secret"));
+
+        Response response = given()
+            .when().get("/api/studies")
+            .then().statusCode(500)
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_INTERNAL_ERROR"))
+            .body("detail", not(containsString("patient-secret")))
+            .body("traceId", not(blankOrNullString()))
+            .extract().response();
+
+        assertNull(response.header("X-Request-ID"));
     }
 
     @Test
@@ -213,13 +243,13 @@ class WorklistResourceTest {
         Response response = given()
             .when().get("/api/studies")
             .then().statusCode(413)
-            .body("code", equalTo("SEARCH_TOO_BROAD"))
-            .body("message", notNullValue())
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_SEARCH_TOO_BROAD"))
+            .body("traceId", not(blankOrNullString()))
             .extract().response();
 
-        String requestId = response.header("X-Request-ID");
-        assertNotNull(requestId);
-        assertDoesNotThrow(() -> UUID.fromString(requestId));
+        assertNull(response.header("X-Request-ID"));
+        assertEquals(response.jsonPath().getString("traceId"), response.header("X-Trace-ID"));
     }
 
     @Test
@@ -232,13 +262,13 @@ class WorklistResourceTest {
         Response response = given()
             .when().get("/api/studies")
             .then().statusCode(502)
-            .body("code", equalTo("ARCHIVE_INVALID_RESPONSE"))
-            .body("message", notNullValue())
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_ARCHIVE_RESPONSE_INVALID"))
+            .body("traceId", not(blankOrNullString()))
             .extract().response();
 
-        String requestId = response.header("X-Request-ID");
-        assertNotNull(requestId);
-        assertDoesNotThrow(() -> UUID.fromString(requestId));
+        assertNull(response.header("X-Request-ID"));
+        assertEquals(response.jsonPath().getString("traceId"), response.header("X-Trace-ID"));
     }
 
     @Test
@@ -251,13 +281,13 @@ class WorklistResourceTest {
         Response response = given()
             .when().get("/api/studies")
             .then().statusCode(502)
-            .body("code", equalTo("ARCHIVE_INVALID_RESPONSE"))
-            .body("message", notNullValue())
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_ARCHIVE_RESPONSE_INVALID"))
+            .body("traceId", not(blankOrNullString()))
             .extract().response();
 
-        String requestId = response.header("X-Request-ID");
-        assertNotNull(requestId);
-        assertDoesNotThrow(() -> UUID.fromString(requestId));
+        assertNull(response.header("X-Request-ID"));
+        assertEquals(response.jsonPath().getString("traceId"), response.header("X-Trace-ID"));
     }
 
     @Test
@@ -270,13 +300,13 @@ class WorklistResourceTest {
         Response response = given()
             .when().get("/api/studies")
             .then().statusCode(503)
-            .body("code", equalTo("ARCHIVE_UNAVAILABLE"))
-            .body("message", notNullValue())
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_ARCHIVE_UNAVAILABLE"))
+            .body("traceId", not(blankOrNullString()))
             .extract().response();
 
-        String requestId = response.header("X-Request-ID");
-        assertNotNull(requestId);
-        assertDoesNotThrow(() -> UUID.fromString(requestId));
+        assertNull(response.header("X-Request-ID"));
+        assertEquals(response.jsonPath().getString("traceId"), response.header("X-Trace-ID"));
     }
 
     @Test
@@ -289,12 +319,12 @@ class WorklistResourceTest {
         Response response = given()
             .when().get("/api/studies")
             .then().statusCode(503)
-            .body("code", equalTo("ARCHIVE_UNAVAILABLE"))
-            .body("message", notNullValue())
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_ARCHIVE_UNAVAILABLE"))
+            .body("traceId", not(blankOrNullString()))
             .extract().response();
 
-        String requestId = response.header("X-Request-ID");
-        assertNotNull(requestId);
-        assertDoesNotThrow(() -> UUID.fromString(requestId));
+        assertNull(response.header("X-Request-ID"));
+        assertEquals(response.jsonPath().getString("traceId"), response.header("X-Trace-ID"));
     }
 }
