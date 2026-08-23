@@ -1,24 +1,25 @@
-# Graph Report - .  (2026-08-22)
+# Graph Report - BlackICE  (2026-08-22)
 
 ## Corpus Check
-- cluster-only mode — file stats not available
+- 193 files · ~109,116 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 827 nodes · 1110 edges · 153 communities (77 shown, 76 thin omitted)
-- Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 99 edges (avg confidence: 0.79)
+- 1135 nodes · 1755 edges · 167 communities (91 shown, 76 thin omitted)
+- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 171 edges (avg confidence: 0.78)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5a07715d`
+- Built from commit: `dca3e974`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - IngestResult
-- UploadedDicom
-- ValidatedDicom
-- devDependencies
+- Code
 - .ingest
+- devDependencies
+- useWorklist.ts
 - Convenções de autoria de agentes
 - BlackICE — Login same-origin: tirar o Keycloak da barra de endereços
 - StowResponseParser
@@ -29,7 +30,7 @@
 - Commit Curator Design
 - SessionResource.java
 - Community Label Quality Gate
-- CurrentAccessToken
+- WorklistResourceTest
 - DICOMweb Verbs
 - FakeXHR
 - Backend modular com Clean Architecture
@@ -51,7 +52,7 @@
 - Keycloak same-origin — Implementation Plan
 - Global Constraints
 - Agentes Antigravity — desenho
-- keycloak-login.spec.ts
+- worklist.api.spec.ts
 - Cross-platform Launchers
 - Global Constraints
 - OIDC BFF Configuration
@@ -103,7 +104,7 @@
 - Feature-first monorepo structure
 - Focus outline accessibility
 - Docker API compatibility proxy
-- configure-blackice.sh
+- configure-blackice.sh script
 - configure-blackice-container.sh
 - Cross-Repository Graph Merge
 - Media Transcription
@@ -149,18 +150,24 @@
 - Product PostgreSQL database
 - dev.blackice:blackice-backend
 - BlackICE MVP
+- StudySearchRequest
+- HttpQidoStudyGatewayTest
+- .parse
+- Worklist e busca via QIDO-RS — design do MVP #2
+- Phase 1 — Backend QIDO vertical slice
+- useWorklist.spec.ts
 
 ## God Nodes (most connected - your core abstractions)
-1. `ValidatedDicom` - 24 edges
-2. `UploadedDicom` - 23 edges
-3. `IngestResult` - 20 edges
-4. `files` - 20 edges
-5. `IngestStudiesUseCase` - 18 edges
-6. `ArchiveUnavailableException` - 17 edges
-7. `StowStudyResult` - 17 edges
-8. `IngestStudiesUseCaseTest` - 16 edges
-9. `compilerOptions` - 15 edges
-10. `StowInstanceResult` - 13 edges
+1. `StudySearchRequest` - 28 edges
+2. `ValidatedDicom` - 24 edges
+3. `UploadedDicom` - 23 edges
+4. `IngestResult` - 20 edges
+5. `files` - 20 edges
+6. `WorklistResourceTest` - 19 edges
+7. `HttpQidoStudyGatewayTest` - 19 edges
+8. `IngestStudiesUseCase` - 18 edges
+9. `StudySummary` - 18 edges
+10. `QidoStudyResponseParser` - 18 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Graphify Commit Prerequisite` --conceptually_related_to--> `Linked Worktree Manual Graph Update`  [INFERRED]
@@ -193,27 +200,27 @@
 - **Canonical BlackICE Compose stack** — infra_readme_three_compose_files, infra_compose_traefik_routing, infra_compose_product_postgres_database [EXTRACTED 1.00]
 - **Frontend icon sprite collection** — apps_frontend_public_icons_bluesky_icon, apps_frontend_public_icons_discord_icon, apps_frontend_public_icons_documentation_icon, apps_frontend_public_icons_github_icon, apps_frontend_public_icons_social_icon, apps_frontend_public_icons_x_icon [EXTRACTED 1.00]
 
-## Communities (153 total, 76 thin omitted)
+## Communities (167 total, 76 thin omitted)
 
 ### Community 0 - "IngestResult"
 Cohesion: 0.07
-Nodes (36): IngestHttpStatusResolver, IngestResource, Inject, Path, Response, IngestResult, InstanceResult, Outcome (+28 more)
+Nodes (35): IngestHttpStatusResolver, IngestResource, Blocking, Inject, Logger, Path, Produces, Response (+27 more)
 
-### Community 1 - "UploadedDicom"
-Cohesion: 0.10
-Nodes (24): UploadedDicom, DicomBatchValidator, RejectedFile, Inject, DicomBatchValidation, Code, DUPLICATE_IDENTICAL, MALFORMED_DICOM (+16 more)
+### Community 1 - "Code"
+Cohesion: 0.20
+Nodes (10): RejectedFile, Code, DUPLICATE_IDENTICAL, MALFORMED_DICOM, MISSING_SERIES_INSTANCE_UID, MISSING_SOP_CLASS_UID, MISSING_SOP_INSTANCE_UID, MISSING_STUDY_INSTANCE_UID (+2 more)
 
-### Community 2 - "ValidatedDicom"
-Cohesion: 0.11
-Nodes (18): AfterEach, DicomArchiveGateway, StowInstanceResult, StowStudyResult, ValidatedDicom, HttpDicomArchiveGateway, ApplicationScoped, Inject (+10 more)
+### Community 2 - ".ingest"
+Cohesion: 0.06
+Nodes (41): ArchiveUnavailableException, Reason, CONNECTION, HTTP_STATUS, INTERRUPTED, TIMEOUT, UploadedDicom, DicomArchiveGateway (+33 more)
 
 ### Community 3 - "devDependencies"
-Cohesion: 0.06
-Nodes (33): dependencies, vue, vue-router, devDependencies, @playwright/test, @types/node, typescript, vite (+25 more)
+Cohesion: 0.05
+Nodes (39): dependencies, vue, vue-router, devDependencies, jsdom, @playwright/test, @types/node, typescript (+31 more)
 
-### Community 4 - ".ingest"
-Cohesion: 0.16
-Nodes (13): ArchiveUnavailableException, Reason, CONNECTION, HTTP_STATUS, INTERRUPTED, TIMEOUT, IngestStudiesUseCase, ApplicationScoped (+5 more)
+### Community 4 - "useWorklist.ts"
+Cohesion: 0.06
+Nodes (25): emit, EMPTY_FILTERS, PAGE_SIZE, SearchStudies, useWorklist(), WorklistComposable, WorklistPhase, safeError() (+17 more)
 
 ### Community 5 - "Convenções de autoria de agentes"
 Cohesion: 0.09
@@ -224,8 +231,8 @@ Cohesion: 0.09
 Nodes (21): Alternativas descartadas, `apps/backend/src/main/resources/application.properties`, BlackICE — Login same-origin: tirar o Keycloak da barra de endereços, Custo honesto, Custo honesto (revisado), Decisões, Estado atual (verificado em 2026-08-07, stack no ar), Fase 1 — Same-origin atrás do Traefik (+13 more)
 
 ### Community 7 - "StowResponseParser"
-Cohesion: 0.20
-Nodes (8): ApplicationScoped, Inject, StowResponseParser, BeforeEach, Test, StowResponseParserTest, JsonNode, ObjectMapper
+Cohesion: 0.15
+Nodes (12): HttpDicomArchiveGateway, ApplicationScoped, HttpClient, Inject, ApplicationScoped, Inject, JsonNode, ObjectMapper (+4 more)
 
 ### Community 8 - "Manual DICOM Import"
 Cohesion: 0.13
@@ -255,9 +262,9 @@ Nodes (9): Authenticated, GET, Path, Response, SessionResource, SessionResponse,
 Cohesion: 0.17
 Nodes (12): Automatic Label Reuse Invalidation, Cluster-Only Workflow, Clustered Communities, Community Label Quality Gate, Community Labels, Community Membership Signatures, Current Community Summaries, Exact Community-Key Coverage (+4 more)
 
-### Community 15 - "CurrentAccessToken"
-Cohesion: 0.32
-Nodes (6): AccessTokenCredential, CurrentAccessToken, ApplicationScoped, Override, CurrentAccessTokenTest, Test
+### Community 15 - "WorklistResourceTest"
+Cohesion: 0.06
+Nodes (36): AccessTokenCredential, AccessTokenProvider, CurrentAccessToken, ApplicationScoped, Override, WorklistErrorResponse, Blocking, GET (+28 more)
 
 ### Community 16 - "DICOMweb Verbs"
 Cohesion: 0.17
@@ -272,7 +279,7 @@ Cohesion: 0.33
 Nodes (6): mvnw script, clean(), die(), exec_maven(), set_java_home(), verbose()
 
 ### Community 20 - "BackendArchitectureTest"
-Cohesion: 0.36
+Cohesion: 0.28
 Nodes (3): BackendArchitectureTest, Test, JavaClasses
 
 ### Community 21 - "Keycloak Service"
@@ -292,8 +299,8 @@ Cohesion: 0.22
 Nodes (4): batch, limitWarning, totalBytes, totalFiles
 
 ### Community 25 - "synthetic-dicom.ts"
-Cohesion: 0.54
-Nodes (6): createSyntheticDicom(), element(), LONG_VR, paddedText(), text(), us()
+Cohesion: 0.40
+Nodes (7): createSyntheticDicom(), element(), LONG_VR, paddedText(), SyntheticDicomMetadata, text(), us()
 
 ### Community 26 - "Global Constraints"
 Cohesion: 0.25
@@ -339,9 +346,9 @@ Nodes (6): Agent Authoring Skill Implementation Plan, Global Constraints, Task 1
 Cohesion: 0.29
 Nodes (6): Agentes Antigravity — desenho, Configuração, Conhecimento e documentação, Escopo, Objetivo, Verificação
 
-### Community 37 - "keycloak-login.spec.ts"
-Cohesion: 0.53
-Nodes (5): expectVerticallyCentered(), openBlackiceLogin(), requiredBox(), screenshotLoginCard(), showInvalidCredentials()
+### Community 37 - "worklist.api.spec.ts"
+Cohesion: 0.22
+Nodes (8): expectVerticallyCentered(), openBlackiceLogin(), requiredBox(), screenshotLoginCard(), showInvalidCredentials(), emptyFilters, emptyParams, page
 
 ### Community 38 - "Cross-platform Launchers"
 Cohesion: 0.33
@@ -431,25 +438,49 @@ Nodes (3): Authorization Code with PKCE, Keycloak Same-Origin Migration, Keycloa
 Cohesion: 0.67
 Nodes (3): Shared Realm Audience, auth Realm Role, DICOMweb Authorization
 
+### Community 153 - "StudySearchRequest"
+Cohesion: 0.11
+Nodes (17): InvalidStudySearchException, StudySearchRequest, HttpQidoStudyGateway, ApplicationScoped, HttpClient, Inject, Override, ApplicationScoped (+9 more)
+
+### Community 154 - "HttpQidoStudyGatewayTest"
+Cohesion: 0.16
+Nodes (14): ArchiveSearchException, Reason, CONNECTION, HTTP_STATUS, INVALID_RESPONSE, QUERY_TOO_BROAD, TIMEOUT, HttpQidoStudyGatewayTest (+6 more)
+
+### Community 155 - ".parse"
+Cohesion: 0.14
+Nodes (12): ApplicationScoped, Inject, JsonNode, ObjectMapper, StudySummary, QidoStudyResponseParser, BeforeEach, ParameterizedTest (+4 more)
+
+### Community 156 - "Worklist e busca via QIDO-RS — design do MVP #2"
+Cohesion: 0.09
+Nodes (22): Arquitetura, Autenticação, privacidade e observabilidade, Backend, Backend, Buscar estudos, Contrato HTTP, Critérios de aceite, Desempenho e concorrência (+14 more)
+
+### Community 157 - "Phase 1 — Backend QIDO vertical slice"
+Cohesion: 0.09
+Nodes (21): Backend production, Backend tests, File Map, Frontend production and tests, Global Constraints, Integration and operational files, Phase 1 — Backend QIDO vertical slice, Phase 1 human gate (+13 more)
+
+### Community 158 - "useWorklist.spec.ts"
+Cohesion: 0.60
+Nodes (3): createStudy(), page(), pageWithPatient()
+
 ## Knowledge Gaps
-- **327 isolated node(s):** `Papel`, `Papel`, `Antes de revisar`, `Revisão`, `Papel` (+322 more)
+- **385 isolated node(s):** `dev.blackice:blackice-backend`, `TIMEOUT`, `CONNECTION`, `HTTP_STATUS`, `INTERRUPTED` (+380 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **76 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `IngestResult` connect `IngestResult` to `UploadedDicom`, `ValidatedDicom`, `.ingest`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **Why does `StowInstanceResult` connect `ValidatedDicom` to `IngestResult`, `UploadedDicom`, `.ingest`, `StowResponseParser`?**
-  _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **Why does `UploadedDicom` connect `UploadedDicom` to `IngestResult`, `ValidatedDicom`, `.ingest`?**
-  _High betweenness centrality (0.007) - this node is a cross-community bridge._
+- **Why does `AccessTokenProvider` connect `WorklistResourceTest` to `IngestResult`?**
+  _High betweenness centrality (0.046) - this node is a cross-community bridge._
+- **Why does `StudySearchRequest` connect `StudySearchRequest` to `HttpQidoStudyGatewayTest`, `WorklistResourceTest`?**
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
+- **Why does `StudySummary` connect `WorklistResourceTest` to `StudySearchRequest`, `HttpQidoStudyGatewayTest`, `.parse`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+- **Are the 8 inferred relationships involving `StudySearchRequest` (e.g. with `.invalidRequests()` and `.normalizes_filters_and_keeps_open_date_range()`) actually correct?**
+  _`StudySearchRequest` has 8 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 8 inferred relationships involving `ValidatedDicom` (e.g. with `.validate()` and `.connection_failure_throws_archive_unavailable_with_connection_reason()`) actually correct?**
   _`ValidatedDicom` has 8 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 7 inferred relationships involving `UploadedDicom` (e.g. with `.ingest()` and `.corrupt_bytes_produce_malformed_dicom_issue()`) actually correct?**
   _`UploadedDicom` has 7 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 5 inferred relationships involving `IngestResult` (e.g. with `.partial_result_returns_200()` and `.total_local_rejection_returns_422()`) actually correct?**
   _`IngestResult` has 5 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `Papel`, `Papel`, `Antes de revisar` to the rest of the system?**
-  _327 weakly-connected nodes found - possible documentation gaps or missing edges._

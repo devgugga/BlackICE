@@ -20,14 +20,14 @@
     "semantic_hash": "cc0ed69d0151231c7c1f3c29b3243488"
   },
   "apps/frontend/package.json": {
-    "mtime": 1787441809.6427946,
-    "ast_hash": "d1e55a2c3ca0ceca2ed1dc669aaa8e8c",
-    "semantic_hash": "d1e55a2c3ca0ceca2ed1dc669aaa8e8c"
+    "mtime": 1787450947.3727262,
+    "ast_hash": "661586629f1ce38e96261b6fa24bf9e7",
+    "semantic_hash": ""
   },
   "apps/frontend/playwright.config.ts": {
-    "mtime": 1787441806.4369607,
-    "ast_hash": "0479a16fe21b508784a90c66af6896f8",
-    "semantic_hash": "0479a16fe21b508784a90c66af6896f8"
+    "mtime": 1787450961.119856,
+    "ast_hash": "26338d7c5457d2a176450afbf1344e06",
+    "semantic_hash": ""
   },
   "apps/frontend/src/app/App.vue": {
     "mtime": 1787424754.5488229,
@@ -35,14 +35,14 @@
     "semantic_hash": "c21c69bde476e3e18bdf219e6c06803a"
   },
   "apps/frontend/src/app/router/index.ts": {
-    "mtime": 1787441720.2424648,
-    "ast_hash": "78355605659233e99a9e98ef64527acf",
-    "semantic_hash": "78355605659233e99a9e98ef64527acf"
+    "mtime": 1787450684.889674,
+    "ast_hash": "2b07a3be13f7bee683795bd18b26239e",
+    "semantic_hash": ""
   },
   "apps/frontend/src/features/home/HomePage.vue": {
-    "mtime": 1787441726.370142,
-    "ast_hash": "9fcdf878cbdc5ce6a521718bfb09b939",
-    "semantic_hash": "9fcdf878cbdc5ce6a521718bfb09b939"
+    "mtime": 1787450687.283516,
+    "ast_hash": "7ba3a15ac2845f8e03255941d97a2b3f",
+    "semantic_hash": ""
   },
   "apps/frontend/src/features/session/session.api.spec.ts": {
     "mtime": 1787424754.548932,
@@ -80,9 +80,9 @@
     "semantic_hash": "f9cb81ddcea69ffdab672fc8c48dca66"
   },
   "apps/frontend/vite.config.ts": {
-    "mtime": 1787424754.5490406,
-    "ast_hash": "e35a758d4f6a49a1e3642270c8d64e98",
-    "semantic_hash": "e35a758d4f6a49a1e3642270c8d64e98"
+    "mtime": 1787450634.979986,
+    "ast_hash": "49840aee010e5f7d67b7080f8a8a5c69",
+    "semantic_hash": ""
   },
   "infra/keycloak/configure-blackice.sh": {
     "mtime": 1787424754.5593915,
@@ -165,18 +165,18 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1787442025.4197621,
-    "ast_hash": "0e71f38fceb390b7336176dd89f76720",
+    "mtime": 1787451131.577177,
+    "ast_hash": "ee070aab73fe3f6cadb1497618ae3544",
     "semantic_hash": ""
   },
   "apps/backend/README.md": {
-    "mtime": 1787445006.8503497,
-    "ast_hash": "abfd339446a239fe97628a0beb604857",
+    "mtime": 1787451149.0270936,
+    "ast_hash": "9f5089d64b80d27d182d74373ec08ca6",
     "semantic_hash": ""
   },
   "apps/frontend/README.md": {
-    "mtime": 1787442017.2871737,
-    "ast_hash": "234496bcf9931d4b11ff4d638f72d620",
+    "mtime": 1787451182.9479923,
+    "ast_hash": "ac89a637494f58522b3e317a6aeeb4d0",
     "semantic_hash": ""
   },
   "apps/frontend/index.html": {
@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "docs/architecture/project-structure.md": {
-    "mtime": 1787445006.8503497,
-    "ast_hash": "55d1d68fbc1e964a1a454a933d40264a",
+    "mtime": 1787451173.5312603,
+    "ast_hash": "defcdc6c3f7c698496c5f9a3bb8f6e2a",
     "semantic_hash": ""
   },
   "docs/domains/README.md": {
@@ -425,9 +425,9 @@
     "semantic_hash": "c6871220489855f65d4c9edf3b65fc5a"
   },
   "docs/architecture/evolution-backlog.md": {
-    "mtime": 1787424754.549348,
-    "ast_hash": "b11fab7a2aabbc014f72eb705da2ac5f",
-    "semantic_hash": "b11fab7a2aabbc014f72eb705da2ac5f"
+    "mtime": 1787448004.928802,
+    "ast_hash": "acdfe21533be7788d7ded75ad5266ca7",
+    "semantic_hash": ""
   },
   "docs/superpowers/specs/2026-08-09-manual-dicom-import-design.md": {
     "mtime": 1787424754.5523264,
@@ -515,9 +515,9 @@
     "semantic_hash": ""
   },
   "apps/frontend/e2e/fixtures/synthetic-dicom.ts": {
-    "mtime": 1787441792.7698348,
-    "ast_hash": "a27aa1d47488f48dd082d6a399cb3e1f",
-    "semantic_hash": "a27aa1d47488f48dd082d6a399cb3e1f"
+    "mtime": 1787450969.3103385,
+    "ast_hash": "d38be454ea531da848aa876b24022034",
+    "semantic_hash": ""
   },
   "apps/frontend/e2e/manual-dicom-import.spec.ts": {
     "mtime": 1787441802.974383,
@@ -650,9 +650,9 @@
     "semantic_hash": "8324b29fd92e82c145903fbb3b041138"
   },
   "apps/backend/src/test/java/dev/blackice/architecture/BackendArchitectureTest.java": {
-    "mtime": 1787445389.6432073,
-    "ast_hash": "17f68fd1e72846fe57c9e8dd93ce48e7",
-    "semantic_hash": "17f68fd1e72846fe57c9e8dd93ce48e7"
+    "mtime": 1787450067.8570163,
+    "ast_hash": "48f8f5a82a638346a72f97b2fb9375e8",
+    "semantic_hash": ""
   },
   "apps/backend/src/test/java/dev/blackice/ingest/api/IngestResourceTest.java": {
     "mtime": 1787445389.6432073,
@@ -783,5 +783,215 @@
     "mtime": 1787445399.9235604,
     "ast_hash": "5be5550f92f32592f57ee49f98120382",
     "semantic_hash": "5be5550f92f32592f57ee49f98120382"
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/api/WorklistErrorResponse.java": {
+    "mtime": 1787450043.6634207,
+    "ast_hash": "6acfcb8b810ed275a094bdebc26f8187",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/api/WorklistResource.java": {
+    "mtime": 1787450047.552595,
+    "ast_hash": "f6c95e52f149f9a952ac222e294e76eb",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/api/package-info.java": {
+    "mtime": 1787450041.2637358,
+    "ast_hash": "cc35281d62d2155279e2e5561db18d59",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/exception/ArchiveSearchException.java": {
+    "mtime": 1787449782.4185724,
+    "ast_hash": "12b9f8afeb2ab40e48d29a1d826e65b3",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/exception/InvalidStudySearchException.java": {
+    "mtime": 1787449350.0605671,
+    "ast_hash": "234353085ca480eb37f58193bf50ecfe",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/exception/package-info.java": {
+    "mtime": 1787449402.1055665,
+    "ast_hash": "3de8cbdf6b8ab8b35931e982b48759fb",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/input/StudySearchRequest.java": {
+    "mtime": 1787449352.321437,
+    "ast_hash": "52930d539018299965690545021fb8d0",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/input/package-info.java": {
+    "mtime": 1787449393.4470658,
+    "ast_hash": "26217d17775d272e51945a2dda903786",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/port/StudyQueryGateway.java": {
+    "mtime": 1787449386.452743,
+    "ast_hash": "f0c87754f0d91df65b3fda2641c07574",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/port/package-info.java": {
+    "mtime": 1787449396.8508697,
+    "ast_hash": "4b479150aa34b654ea742bf76eb6f42d",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/result/StudyPage.java": {
+    "mtime": 1787449355.7822375,
+    "ast_hash": "b706813aac09e450e2f4038264f216a0",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/result/StudySummary.java": {
+    "mtime": 1787449354.1133337,
+    "ast_hash": "6302ad4326127b33621094152931b27f",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/result/package-info.java": {
+    "mtime": 1787449395.1709664,
+    "ast_hash": "0f1da9dd9841da02796919840eae81d9",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/usecase/SearchStudiesUseCase.java": {
+    "mtime": 1787449388.6403432,
+    "ast_hash": "6e26930b168a4a18d367f42d89896f05",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/application/usecase/package-info.java": {
+    "mtime": 1787449399.7067049,
+    "ast_hash": "eac7ab749d5053026224ce5884dbe150",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/infrastructure/dicomweb/HttpQidoStudyGateway.java": {
+    "mtime": 1787449803.1713698,
+    "ast_hash": "55640ea10554e8564a14bc8faa587da6",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/infrastructure/dicomweb/QidoQueryBuilder.java": {
+    "mtime": 1787449578.7423637,
+    "ast_hash": "3c6348c3199783aa77db1f0e2fc939a5",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/infrastructure/dicomweb/QidoStudyResponseParser.java": {
+    "mtime": 1787449616.117202,
+    "ast_hash": "db28c03515ea67cd0921731fb1bfe304",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/infrastructure/dicomweb/package-info.java": {
+    "mtime": 1787449573.8584816,
+    "ast_hash": "0fbe6396718d4d9dc224260a817ec654",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/main/java/dev/blackice/worklist/package-info.java": {
+    "mtime": 1787449390.620229,
+    "ast_hash": "cbad769a4b09dbab5f294b1f523ec633",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/test/java/dev/blackice/worklist/api/WorklistResourceTest.java": {
+    "mtime": 1787450022.240664,
+    "ast_hash": "1a607598b5d3bc9cb82664496f4db88d",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/test/java/dev/blackice/worklist/application/input/StudySearchRequestTest.java": {
+    "mtime": 1787449338.3922396,
+    "ast_hash": "4e95247e2e46c5aceb7499b2930eb752",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/test/java/dev/blackice/worklist/application/usecase/SearchStudiesUseCaseTest.java": {
+    "mtime": 1787449369.2434616,
+    "ast_hash": "0581b374afc0eff5a06d88f9f7c1c94f",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/test/java/dev/blackice/worklist/infrastructure/dicomweb/HttpQidoStudyGatewayTest.java": {
+    "mtime": 1787449771.9121814,
+    "ast_hash": "1f3c88bf11a42e61a11632110f2f54d9",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/test/java/dev/blackice/worklist/infrastructure/dicomweb/QidoQueryBuilderTest.java": {
+    "mtime": 1787449563.4302492,
+    "ast_hash": "d9818fe80949a9fa0e0225dd7e8bb043",
+    "semantic_hash": ""
+  },
+  "apps/backend/src/test/java/dev/blackice/worklist/infrastructure/dicomweb/QidoStudyResponseParserTest.java": {
+    "mtime": 1787449595.2984064,
+    "ast_hash": "a0d73178077d656bdbc219c90ec8aea0",
+    "semantic_hash": ""
+  },
+  "apps/frontend/e2e/worklist.spec.ts": {
+    "mtime": 1787451192.8453803,
+    "ast_hash": "05a8442eda428f17b906247d9bd6b8af",
+    "semantic_hash": ""
+  },
+  "apps/frontend/src/features/worklist/StudyList.vue": {
+    "mtime": 1787450670.4556284,
+    "ast_hash": "ad88e4dbffcc55f471d0f18f7e8b40da",
+    "semantic_hash": ""
+  },
+  "apps/frontend/src/features/worklist/StudyPagination.vue": {
+    "mtime": 1787450673.358436,
+    "ast_hash": "98ba00c6d80ec94ea0df69e727808120",
+    "semantic_hash": ""
+  },
+  "apps/frontend/src/features/worklist/WorklistFilters.vue": {
+    "mtime": 1787450662.4061618,
+    "ast_hash": "c2d1df3076a8aea16297e58996d47991",
+    "semantic_hash": ""
+  },
+  "apps/frontend/src/features/worklist/WorklistPage.spec.ts": {
+    "mtime": 1787450701.2635946,
+    "ast_hash": "fc3e2663606a6279dafb05f7f22fd92b",
+    "semantic_hash": ""
+  },
+  "apps/frontend/src/features/worklist/WorklistPage.vue": {
+    "mtime": 1787450718.3714705,
+    "ast_hash": "b09976de96abdd04c02b3d000678838f",
+    "semantic_hash": ""
+  },
+  "apps/frontend/src/features/worklist/useWorklist.spec.ts": {
+    "mtime": 1787450489.157542,
+    "ast_hash": "8af05e98e496589b6a020d7016556c2e",
+    "semantic_hash": ""
+  },
+  "apps/frontend/src/features/worklist/useWorklist.ts": {
+    "mtime": 1787450473.7214391,
+    "ast_hash": "c6353b95133b520a20ad070c8f3715a6",
+    "semantic_hash": ""
+  },
+  "apps/frontend/src/features/worklist/worklist.api.spec.ts": {
+    "mtime": 1787450343.2280228,
+    "ast_hash": "939f8a006f18d5c33cd18b972b744842",
+    "semantic_hash": ""
+  },
+  "apps/frontend/src/features/worklist/worklist.api.ts": {
+    "mtime": 1787450353.185444,
+    "ast_hash": "d324d56eda5e94d40488e374189ecf7a",
+    "semantic_hash": ""
+  },
+  "apps/frontend/src/features/worklist/worklist.types.ts": {
+    "mtime": 1787450364.5867817,
+    "ast_hash": "305333ca620db92a270e3d8ee3a604c6",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-08-22-worklist-qido-rs.md": {
+    "mtime": 1787448835.7340002,
+    "ast_hash": "10a5a8e1a2936b74809973ca423c2e82",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/specs/2026-08-22-worklist-qido-rs-design.md": {
+    "mtime": 1787448130.870395,
+    "ast_hash": "178daa5dc0800046a839c94870a4892d",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260727_184232_como_o_frontend_vue_obt\u00e9m_a_sess\u00e3o_autenticada_do.md": {
+    "mtime": 1787424754.5580182,
+    "ast_hash": "b809e7cdd876b84f8d06498bf7e3e015",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260727_184243_quais_regras_do_blackice_governam_studyinstanceuid.md": {
+    "mtime": 1787424754.5587277,
+    "ast_hash": "8d42f1828a77b4f5e0447cf42fef9eef",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260727_184305_onde_ficam_as_instru\u00e7\u00f5es_operacionais_do_graphify.md": {
+    "mtime": 1787424754.5587277,
+    "ast_hash": "1815b478fce847ecc0c681edc6e5e139",
+    "semantic_hash": ""
   }
 }
