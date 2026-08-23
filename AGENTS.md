@@ -55,7 +55,20 @@ wrappers herdam.
 
 Domínios atuais: `dicom/` (♻️ reutilizável), `vue/` (♻️ reutilizável),
 `quarkus/` (específico deste projeto — não transfere para outros backends),
-`git/` (♻️ reutilizável) e `agent-authoring/` (♻️ reutilizável).
+`git/` (♻️ reutilizável), `agent-authoring/` (♻️ reutilizável) e
+`problem-catalog/` (específico deste projeto).
+
+## Catálogo de problemas
+
+Todo erro JSON `4xx/5xx` sob `/api` é um tipo catalogado, em Problem Details
+RFC 9457. A política vive em `docs/domains/problem-catalog/`; o registry e os
+artefatos gerados, em `docs/contracts/problems/`; o tooling, em
+`.problem-catalog/`. Use a skill `problem-catalog` (`.claude/skills/` ou
+`.agents/skills/`) antes de classificar, reutilizar, criar ou depreciar um tipo.
+
+Nunca escreva um UUID à mão, nunca edite um arquivo gerado e nunca altere um
+campo imutável. Uma spec aprovada que enumere o tipo é o gate de `add`;
+depreciação e mudança de campo imutável exigem gate humano novo.
 
 ## Graphify
 

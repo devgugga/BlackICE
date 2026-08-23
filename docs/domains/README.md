@@ -25,6 +25,7 @@ que leem estes documentos — eles nunca duplicam o conteúdo.
 | `quarkus/` | ✗ project-scoped | Quarkus + Keycloak/OIDC + client DICOMweb. Não transfere. |
 | `git/` | ♻️ sim | Convenções para commits locais seguros, com Gitmoji e escopo controlado. |
 | `agent-authoring/` | ♻️ sim | Criação de agentes/skills, layouts e seleção econômica de modelos. |
+| `problem-catalog/` | ✗ project-scoped | Classificação, identidade, lock e segurança dos tipos de problema HTTP. |
 
 ## Como adicionar um domínio novo
 

@@ -19,8 +19,12 @@ BlackICE/
 │  └─ traefik/
 ├─ docs/
 │  ├─ architecture/
+│  ├─ contracts/
 │  ├─ domains/
 │  └─ superpowers/
+├─ .problem-catalog/
+├─ .github/
+│  └─ workflows/
 ├─ .claude/
 ├─ .codex/
 ├─ .agents/
@@ -45,6 +49,14 @@ BlackICE/
 - `docs/architecture/evolution-backlog.md` registra melhorias adiadas, seus
   gatilhos de retomada e a spec de origem; não autoriza implementação sem
   priorização humana.
+- `docs/contracts/` contém contratos publicados que atravessam backend e
+  frontend. `docs/contracts/problems/` é o registry de Problem Details: fonte
+  machine-readable, schema, lock e catálogo humano gerado.
+- `.problem-catalog/` é o tooling Node que valida esse registry e gera os
+  artefatos Java e TypeScript. É tooling de engenharia, como `.graphify/`, não
+  código de produto nem uma terceira aplicação.
+- `.github/workflows/verify.yml` executa a verificação do catálogo antes dos
+  builds do backend e do frontend.
 - `.claude/`, `.codex/` e `.agents/agents/` são pontos de descoberta específicos,
   respectivamente, para Claude, Codex e Antigravity. Seus wrappers apontam para
   o conhecimento neutro em `docs/domains/`.
@@ -86,6 +98,9 @@ apps/backend/src/
 │  │  └─ infrastructure/oidc/
 │  ├─ session/
 │  │  └─ api/
+│  ├─ shared/
+│  │  └─ api/problem/
+│  │     └─ generated/
 │  └─ worklist/
 │     ├─ api/
 │     ├─ application/
@@ -112,6 +127,9 @@ apps/frontend/src/
 │  ├─ App.vue
 │  └─ router/
 │     └─ index.ts
+├─ shared/
+│  └─ api/
+│     └─ problems/
 ├─ features/
 │  ├─ session/
 │  │  ├─ session.api.ts
@@ -161,7 +179,12 @@ apps/frontend/src/
 - Testes espelham os pacotes de produção sob `src/test/java`; regras de
   fronteira são verificadas em `dev.blackice.architecture`.
 - Não crie camadas globais `controller/`, `service/`, `repository`, `dto`,
-  `validator`, `exception` ou `shared`.
+  `validator` ou `exception`.
+- `dev.blackice.shared` existe por exceção justificada, não por antecipação: o
+  contrato de erro tem dois consumidores reais, `ingest` e `worklist`. Ele
+  hospeda apenas fronteira transversal e nunca regra de uma feature; mappers
+  específicos permanecem em `ingest.api`, `worklist.api` e nas demais features.
+  Um `shared` novo obedece à mesma prova de dois consumidores.
 
 ### Vue
 
@@ -222,6 +245,11 @@ Não crie features vazias para trabalho futuro.
 Código só pode migrar para `shared/` com ao menos dois consumidores reais. Até
 lá, ele pertence à feature que o utiliza. A promoção deve preservar uma
 responsabilidade clara; `shared/utils/` genérico não é uma arquitetura.
+
+`shared/api/problems/` é o caso já aprovado: o parser de Problem Details, os
+tipos gerados e o mapa de mensagens PT-BR são consumidos por `session`,
+`worklist` e `ingest`. Os arquivos `*.generated.ts` são saída de
+`.problem-catalog/` e não são editados à mão.
 
 ## Antipadrões
 

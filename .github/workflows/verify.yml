@@ -1,0 +1,50 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cada job instala sua própria toolchain: não existe mise.toml na raiz, e cada
+# projeto fixa Node, pnpm, Java e Maven no seu próprio diretório.
+jobs:
+  catalog:
+    name: catálogo de problemas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v3
+        with:
+          install: false
+          cache: true
+      - run: cd .problem-catalog && mise install
+      - run: cd .problem-catalog && mise exec -- pnpm install --frozen-lockfile
+      - run: cd .problem-catalog && mise exec -- pnpm test && mise exec -- pnpm check
+
+  backend:
+    name: backend Quarkus
+    # O catálogo é a fonte dos tipos gerados: se ele não valida, o build do
+    # backend não significa nada.
+    needs: catalog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v3
+        with:
+          install: false
+          cache: true
+      - run: cd apps/backend && mise install
+      - run: cd apps/backend && mise exec -- mvn test -Dquarkus.http.test-port=8082
+
+  frontend:
+    name: frontend Vue
+    needs: catalog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v3
+        with:
+          install: false
+          cache: true
+      - run: cd apps/frontend && mise install
+      - run: cd apps/frontend && mise exec -- pnpm install --frozen-lockfile && mise exec -- pnpm test && mise exec -- pnpm build
