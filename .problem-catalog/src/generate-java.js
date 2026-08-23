@@ -152,7 +152,18 @@ function recordComponents(schema, records) {
     .join(', ');
 }
 
-function extensionVariant(ref, schema, records) {
+/** Condição `appliesTo` de uma variante, a partir dos codes que a declaram. */
+function appliesToBody(codes) {
+  if (codes.length === 1) return [`            return type == ProblemType.${codes[0]};`];
+  return [
+    '            return switch (type) {',
+    ...codes.map((code) => `                case ${code} -> true;`),
+    '                default -> false;',
+    '            };',
+  ];
+}
+
+function extensionVariant(ref, schema, records, codes) {
   const name = pascalCase(ref);
   const components = recordComponents(schema, records);
   return {
@@ -160,6 +171,11 @@ function extensionVariant(ref, schema, records) {
     lines: [
       `    /** Membros adicionais definidos por extensions/${ref}.schema.json. */`,
       `    record ${name}(${components}) implements ProblemExtensions {`,
+      '',
+      '        @Override',
+      '        public boolean appliesTo(ProblemType type) {',
+      ...appliesToBody(codes),
+      '        }',
       '    }',
     ],
   };
@@ -174,8 +190,17 @@ export function generateJavaExtensions(catalog, extensionSchemas) {
     ),
   ].sort();
 
+  const codesByRef = new Map(
+    refs.map((ref) => [
+      ref,
+      catalog.entries.filter((entry) => entry.extensionsSchemaRef === ref).map((entry) => entry.code),
+    ]),
+  );
+
   const nested = new Map();
-  const variants = refs.map((ref) => extensionVariant(ref, extensionSchemas[ref].schema, nested));
+  const variants = refs.map((ref) =>
+    extensionVariant(ref, extensionSchemas[ref].schema, nested, codesByRef.get(ref)),
+  );
   const permits = ['None', ...variants.map((variant) => variant.name)]
     .map((name) => `ProblemExtensions.${name}`)
     .join(', ');
@@ -205,8 +230,16 @@ export function generateJavaExtensions(catalog, extensionSchemas) {
     `public sealed interface ProblemExtensions`,
     `        permits ${permits} {`,
     '',
-    '    /** Ausência de membros adicionais. */',
+    '    /** Indica se esta variante pertence ao tipo, conforme o catálogo. */',
+    '    boolean appliesTo(ProblemType type);',
+    '',
+    '    /** Ausência de membros adicionais; aceita por qualquer tipo. */',
     '    record None() implements ProblemExtensions {',
+    '',
+    '        @Override',
+    '        public boolean appliesTo(ProblemType type) {',
+    '            return true;',
+    '        }',
     '    }',
     '',
     '    /** Instância canônica para tipos sem extensão. */',

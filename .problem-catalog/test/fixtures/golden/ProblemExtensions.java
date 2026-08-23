@@ -18,8 +18,16 @@ import java.util.List;
 public sealed interface ProblemExtensions
         permits ProblemExtensions.None, ProblemExtensions.DicomValidationViolations {
 
-    /** Ausência de membros adicionais. */
+    /** Indica se esta variante pertence ao tipo, conforme o catálogo. */
+    boolean appliesTo(ProblemType type);
+
+    /** Ausência de membros adicionais; aceita por qualquer tipo. */
     record None() implements ProblemExtensions {
+
+        @Override
+        public boolean appliesTo(ProblemType type) {
+            return true;
+        }
     }
 
     /** Instância canônica para tipos sem extensão. */
@@ -29,6 +37,11 @@ public sealed interface ProblemExtensions
 
     /** Membros adicionais definidos por extensions/dicom-validation-violations.schema.json. */
     record DicomValidationViolations(List<Violation> violations) implements ProblemExtensions {
+
+        @Override
+        public boolean appliesTo(ProblemType type) {
+            return type == ProblemType.API_DICOM_VALIDATION_FAILED;
+        }
     }
 
     /** Item tipado de uma extensão do catálogo. */
