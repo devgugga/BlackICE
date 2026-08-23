@@ -13,7 +13,8 @@ onMounted(async () => {
   <main style="font-family: system-ui; padding: 2rem">
     <h1>BlackICE</h1>
     <p v-if="username">Autenticado como <strong>{{ username }}</strong>.</p>
-    <nav>
+    <nav style="display: flex; gap: 1rem;">
+      <RouterLink to="/studies">Worklist</RouterLink>
       <RouterLink to="/ingest">Importar DICOM</RouterLink>
     </nav>
   </main>

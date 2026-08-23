@@ -4,25 +4,27 @@ SPA do BlackICE construída com Vue 3, Vite e TypeScript.
 
 ## Toolchain
 
-O `mise.toml` fixa Node 24:
+O `mise.toml` fixa Node 24 e pnpm:
 
 ```powershell
 mise install
 mise exec -- node --version
-mise exec -- npm ci
+mise exec -- pnpm --version
+mise exec -- pnpm install --frozen-lockfile
 ```
 
 ## Testar e construir
 
 ```powershell
-mise exec -- npm test
-mise exec -- npm run build
-mise exec -- npm run test:e2e:ingest
+mise exec -- pnpm test
+mise exec -- pnpm build
+mise exec -- pnpm test:e2e:ingest
+mise exec -- pnpm test:e2e:worklist
 ```
 
-A suíte de testes E2E de importação (`test:e2e:ingest`) valida o fluxo completo
-utilizando fixtures DICOM sintéticas geradas em memória, garantindo que nenhum
-dado real de paciente seja manipulado ou commitado.
+A suíte de testes E2E valida os fluxos completos utilizando fixtures DICOM
+sintéticas geradas em memória, garantindo que nenhum dado real de paciente seja
+manipulado ou commitado.
 
 ### Estados da interface de importação (`/ingest`):
 - `SELECTING`: seleção de múltiplos arquivos `.dcm`;
@@ -31,15 +33,32 @@ dado real de paciente seja manipulado ou commitado.
 - `PROCESSING`: envio concluído, aguardando resposta STOW-RS do Archive;
 - `COMPLETE` / `ERROR` / `CANCELLED`: apresentação dos resultados detalhados por estudo e opção de nova importação.
 
+### Worklist e busca (`/studies`):
+A página de Worklist consome o endpoint `GET /api/studies` via BFF e apresenta
+estudos DICOM paginados com suporte a quatro filtros combináveis:
+- **Nome do paciente**: busca textual (ex.: `SILVA^JOAO`);
+- **ID do paciente**: identificador do paciente (suporta qualificação com issuer `ID^^^ISSUER`);
+- **Modalidade**: filtro por modalidade de estudo (ex.: `CT`, `MR`, `OT`, etc.);
+- **Intervalo de datas**: campos `Data inicial` e `Data final` (formato AAAA-MM-DD).
+
+A paginação é orientada a páginas de 20 itens (`limit=20`, `offset=0, 20, 40...`) com
+detecção de próxima página por busca de 21 registros, sem consultas adicionais de contagem
+(`count`), e timeout padrão de 10 segundos configurado em `blackice.worklist.request-timeout`.
+A interface adapta a visualização automaticamente: tabela em telas desktop (`study-table`)
+e cartões resumidos em telas móveis (`study-cards`).
+
+A evolução de estratégias de paginação (cursor/snapshot/projeção dedicada de leitura)
+é governada pelo item `EVO-005` do backlog de evolução.
+
 ## Desenvolvimento
 
 ```powershell
-mise exec -- npm run dev
+mise exec -- pnpm dev
 ```
 
-## E2E do tema de login do Keycloak
+## E2E na stack local
 
-O E2E consome uma stack BlackICE já ativa; ele não inicia, aguarda nem derruba
+Os testes E2E consomem uma stack BlackICE já ativa; eles não iniciam, aguardam nem derrubam
 serviços. A responsabilidade é da execução local ou do job de CI.
 
 Os manifests canônicos ficam em `infra/`: `compose.yml` (fundação
@@ -79,12 +98,13 @@ if (-not $isReady) {
 }
 ```
 
-Depois, a partir de `apps/frontend`, instale as dependências e compare sempre
+Depois, a partir de `apps/frontend`, instale as dependências e execute os testes
 na imagem Linux pinada — nunca no browser de um runner Linux arbitrário:
 
+### E2E do Tema de Login Keycloak
 ```powershell
 Set-Location ../apps/frontend
-mise exec -- npm ci
+mise exec -- pnpm install --frozen-lockfile
 docker run --rm --network host `
   -v "${PWD}:/work" `
   -w /work `
@@ -94,10 +114,35 @@ docker run --rm --network host `
   npx playwright test e2e/keycloak-login.spec.ts
 ```
 
+### E2E da Worklist e Importação Concorrente
+```powershell
+Set-Location ../apps/frontend
+mise exec -- pnpm install --frozen-lockfile
+docker run --rm --network host `
+  -v "${PWD}:/work" `
+  -w /work `
+  -e CI=true `
+  -e BLACKICE_E2E_URL=http://blackice.localhost `
+  mcr.microsoft.com/playwright:v1.62.0-noble `
+  npx playwright test e2e/worklist.spec.ts
+```
+
 O alvo padrão é `http://blackice.localhost`. Para outro ambiente, substitua o
-valor de `BLACKICE_E2E_URL` no comando Docker. Para atualizar baselines, use a
+valor de `BLACKICE_E2E_URL` no comando Docker. Para atualizar baselines visuais, use a
 mesma imagem pinada e acrescente `--update-snapshots`; execuções normais nunca
 criam snapshots ausentes.
+
+### Observação de Locks Concorrentes no Archive
+Durante a execução de operações concorrentes de importação (STOW-RS) e consulta (QIDO-RS),
+monitore a ausência de locks bloqueantes no PostgreSQL do Archive executando a partir de `infra/`:
+
+```bash
+docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml exec -T arc-db sh -lc \
+  'for sample in $(seq 1 20); do psql -At -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1 -c "SELECT count(*) FROM pg_locks WHERE NOT granted;"; sleep 0.5; done'
+```
+
+**Interpretação**: Todas as 20 linhas de saída devem ser `0`. Locks concedidos normais (`AccessShareLock`)
+são esperados; qualquer contagem não nula (`> 0`) indica contenção bloqueante que requer diagnóstico.
 
 ### Contrato para qualquer CI
 
@@ -105,8 +150,8 @@ O job deve:
 
 1. em `infra/`, subir a stack com `docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml up -d --build`;
 2. aguardar, sem seguir redirects, `/ = 200`, `/api/me = 401` sem sessão e `/api/login = 302` com `Location` para `http://blackice.localhost/auth/realms/blackice/protocol/openid-connect/auth?...`;
-3. em `apps/frontend/`, executar `npm ci`;
-4. executar o E2E com `CI=true` dentro de `mcr.microsoft.com/playwright:v1.62.0-noble`;
+3. em `apps/frontend/`, executar `pnpm install --frozen-lockfile`;
+4. executar os testes E2E com `CI=true` dentro de `mcr.microsoft.com/playwright:v1.62.0-noble`;
 5. publicar `apps/frontend/playwright-report/` e `apps/frontend/test-results/playwright/` em falhas;
 6. no cleanup do próprio job, em `infra/`, executar `docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml down`.
 

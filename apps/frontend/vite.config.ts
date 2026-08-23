@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig, configDefaults } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 
@@ -23,6 +23,7 @@ export default defineConfig({
     },
   },
   test: {
-    exclude: ['e2e/**'],
+    environment: 'jsdom',
+    exclude: [...configDefaults.exclude, 'e2e/**'],
   },
 })

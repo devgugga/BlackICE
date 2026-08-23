@@ -30,7 +30,22 @@ function us(group: number, tag: number, value: number): Buffer {
   return element(group, tag, 'US', data);
 }
 
-export function createSyntheticDicom(studyUid: string, seriesUid: string, sopUid: string): Buffer {
+export interface SyntheticDicomMetadata {
+  patientName?: string;
+  patientId?: string;
+  patientIdIssuer?: string;
+  studyDate?: string;
+  studyTime?: string;
+  modality?: string;
+  studyDescription?: string;
+}
+
+export function createSyntheticDicom(
+  studyUid: string,
+  seriesUid: string,
+  sopUid: string,
+  metadata: SyntheticDicomMetadata = {},
+): Buffer {
   const metaBody = Buffer.concat([
     element(0x0002, 0x0001, 'OB', Buffer.from([0, 1])),
     text(0x0002, 0x0002, 'UI', SECONDARY_CAPTURE),
@@ -41,16 +56,30 @@ export function createSyntheticDicom(studyUid: string, seriesUid: string, sopUid
   const metaLength = Buffer.alloc(4);
   metaLength.writeUInt32LE(metaBody.length);
 
-  const dataset = Buffer.concat([
+  const datasetElements: Buffer[] = [
     text(0x0008, 0x0016, 'UI', SECONDARY_CAPTURE),
     text(0x0008, 0x0018, 'UI', sopUid),
-    text(0x0008, 0x0020, 'DA', '20260809'),
-    text(0x0008, 0x0030, 'TM', '120000'),
+    text(0x0008, 0x0020, 'DA', (metadata.studyDate ?? '20260809').replace(/-/g, '')),
+    text(0x0008, 0x0030, 'TM', (metadata.studyTime ?? '120000').replace(/:/g, '')),
     text(0x0008, 0x0050, 'SH', 'SYNTHETIC'),
-    text(0x0008, 0x0060, 'CS', 'OT'),
+    text(0x0008, 0x0060, 'CS', metadata.modality ?? 'OT'),
     text(0x0008, 0x0064, 'CS', 'WSD'),
-    text(0x0010, 0x0010, 'PN', 'SYNTHETIC^BLACKICE'),
-    text(0x0010, 0x0020, 'LO', 'SYNTHETIC'),
+  ];
+
+  if (metadata.studyDescription) {
+    datasetElements.push(text(0x0008, 0x1030, 'LO', metadata.studyDescription));
+  }
+
+  datasetElements.push(
+    text(0x0010, 0x0010, 'PN', metadata.patientName ?? 'SYNTHETIC^BLACKICE'),
+    text(0x0010, 0x0020, 'LO', metadata.patientId ?? 'SYNTHETIC'),
+  );
+
+  if (metadata.patientIdIssuer) {
+    datasetElements.push(text(0x0010, 0x0021, 'LO', metadata.patientIdIssuer));
+  }
+
+  datasetElements.push(
     text(0x0020, 0x000d, 'UI', studyUid),
     text(0x0020, 0x000e, 'UI', seriesUid),
     text(0x0020, 0x0010, 'SH', 'TEST'),
@@ -65,7 +94,9 @@ export function createSyntheticDicom(studyUid: string, seriesUid: string, sopUid
     us(0x0028, 0x0102, 7),
     us(0x0028, 0x0103, 0),
     element(0x7fe0, 0x0010, 'OB', Buffer.from([0, 0])),
-  ]);
+  );
+
+  const dataset = Buffer.concat(datasetElements);
 
   return Buffer.concat([
     Buffer.alloc(128),

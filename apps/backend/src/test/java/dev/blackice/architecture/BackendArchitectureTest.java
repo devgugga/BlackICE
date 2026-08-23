@@ -54,4 +54,25 @@ class BackendArchitectureTest {
             .should().dependOnClassesThat().resideInAPackage("dev.blackice.ingest.infrastructure..")
             .check(classes);
     }
+
+    @Test
+    void worklist_application_has_no_production_classes_in_root_package() {
+        noClasses()
+            .should().resideInAPackage("dev.blackice.worklist.application")
+            .check(classes);
+    }
+
+    @Test
+    void worklist_module_does_not_consume_security_infrastructure() {
+        noClasses().that().resideInAPackage("dev.blackice.worklist..")
+            .should().dependOnClassesThat().resideInAPackage("dev.blackice.security.infrastructure..")
+            .check(classes);
+    }
+
+    @Test
+    void security_module_does_not_consume_worklist_infrastructure() {
+        noClasses().that().resideInAPackage("dev.blackice.security..")
+            .should().dependOnClassesThat().resideInAPackage("dev.blackice.worklist.infrastructure..")
+            .check(classes);
+    }
 }

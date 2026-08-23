@@ -42,15 +42,27 @@ As variáveis OIDC e DICOMweb usadas pela configuração atual são:
 - `BLACKICE_DICOMWEB_BASE_URL`: URL base do endpoint DICOMweb do DCM4CHEE Archive
   (padrão `http://arc:8080/dcm4chee-arc/aets/DCM4CHEE/rs`).
 
-Propriedades configuráveis para importação DICOM:
+Propriedades configuráveis para importação e busca DICOM:
 - `blackice.ingest.max-files` (padrão 500);
 - `blackice.ingest.max-total-bytes` (padrão 524288000 = 500 MB);
 - `blackice.ingest.max-concurrent-studies` (padrão 1);
-- `blackice.dicomweb.request-timeout` (padrão 60S).
+- `blackice.dicomweb.request-timeout` (padrão 60S);
+- `blackice.worklist.request-timeout` (padrão 10S).
 
-Dependências-chave da feature `ingest`:
+Dependências-chave das features `ingest` e `worklist`:
 - `org.dcm4che:dcm4che-core:5.34.3`: parser de metadados DICOM (bulk-data excluído);
 - `io.quarkus:quarkus-rest-csrf`: proteção CSRF de endpoints mutantes.
+
+Contrato `GET /api/studies` (Worklist):
+- Endpoint autenticado (`@RolesAllowed("auth")`) para consulta paginada de estudos via QIDO-RS;
+- Aceita quatro filtros opcionais combináveis: `patientName`, `patientId`, `modality`, `dateFrom`/`dateTo`, além de `limit` (padrão 20) e `offset` (padrão 0);
+- Devolve metadados curados (`StudyPage`) com `items` e metadados de página (`limit`, `offset`, `hasPrevious`, `hasNext`);
+- Traduz falhas em payloads de erro seguros `{ "code": "...", "message": "..." }` com identificador de correlação `X-Request-ID`.
+
+Regras operacionais e de verificação:
+- **Dados sintéticos**: Todos os testes e fixtures utilizam dados DICOM puramente sintéticos; nenhum dado real de paciente é permitido no repositório;
+- **Observação de locks**: Concorrência entre STOW-RS e QIDO-RS é verificada no PostgreSQL do Archive (`arc-db`) via consulta de locks bloqueantes (`SELECT count(*) FROM pg_locks WHERE NOT granted;`), onde todas as amostras devem retornar `0`;
+- **Evolução de paginação**: Estratégias futuras de cursor, snapshot ou projeções dedicadas de leitura são governadas pelo item `EVO-005` do backlog de evolução.
 
 Não versione `.env` nem segredos.
 

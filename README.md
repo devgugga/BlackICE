@@ -52,9 +52,9 @@ e configuração OIDC.
 ```powershell
 cd apps/frontend
 mise install
-mise exec -- npm ci
-mise exec -- npm test
-mise exec -- npm run build
+mise exec -- pnpm install --frozen-lockfile
+mise exec -- pnpm test
+mise exec -- pnpm build
 ```
 
 Consulte [o guia do frontend](apps/frontend/README.md) para desenvolvimento

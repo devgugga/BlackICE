@@ -63,7 +63,7 @@ aplicação em `apps/`.
 
 ## Estrutura atual dos módulos
 
-O backend é modular e possui `ingest`, `security` e `session`:
+O backend é modular e possui `ingest`, `security`, `session` e `worklist`:
 
 ```text
 apps/backend/src/
@@ -84,16 +84,26 @@ apps/backend/src/
 │  │  ├─ api/
 │  │  ├─ application/
 │  │  └─ infrastructure/oidc/
-│  └─ session/
-│     └─ api/
+│  ├─ session/
+│  │  └─ api/
+│  └─ worklist/
+│     ├─ api/
+│     ├─ application/
+│     │  ├─ input/
+│     │  ├─ usecase/
+│     │  ├─ result/
+│     │  ├─ exception/
+│     │  └─ port/
+│     └─ infrastructure/dicomweb/
 └─ test/java/dev/blackice/
    ├─ architecture/
    ├─ ingest/
    ├─ security/
-   └─ session/
+   ├─ session/
+   └─ worklist/
 ```
 
-O frontend possui as features `session` e `home`, compostas pelo shell em
+O frontend possui as features `session`, `home`, `ingest` e `worklist`, compostas pelo shell em
 `app/`:
 
 ```text
@@ -107,8 +117,25 @@ apps/frontend/src/
 │  │  ├─ session.api.ts
 │  │  ├─ session.api.spec.ts
 │  │  └─ session.types.ts
-│  └─ home/
-│     └─ HomePage.vue
+│  ├─ home/
+│  │  └─ HomePage.vue
+│  ├─ ingest/
+│  │  ├─ IngestPage.vue
+│  │  ├─ ingest.api.ts
+│  │  ├─ ingest.api.spec.ts
+│  │  ├─ ingest.types.ts
+│  │  └─ useIngestBatch.ts
+│  └─ worklist/
+│     ├─ WorklistPage.vue
+│     ├─ WorklistFilters.vue
+│     ├─ WorklistTable.vue
+│     ├─ WorklistCards.vue
+│     ├─ WorklistPagination.vue
+│     ├─ worklist.api.ts
+│     ├─ worklist.api.spec.ts
+│     ├─ worklist.types.ts
+│     ├─ useWorklist.ts
+│     └─ useWorklist.spec.ts
 └─ main.ts
 ```
 
@@ -185,7 +212,7 @@ globais.
 3. Registre a página no router em `apps/frontend/src/app/router/index.ts`; deixe
    a lógica de negócio na feature.
 4. Use imports internos com `@/`, inclusive entre o router e a página.
-5. Execute `mise exec -- npm test` e `mise exec -- npm run build` em
+5. Execute `mise exec -- pnpm test` e `mise exec -- pnpm build` em
    `apps/frontend/`.
 
 Não crie features vazias para trabalho futuro.
