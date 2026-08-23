@@ -1,8 +1,7 @@
-# Graph Report - BlackICE  (2026-08-22)
+# Graph Report - .  (2026-08-22)
 
 ## Corpus Check
-- 154 files · ~89,824 words
-- Verdict: corpus is large enough that graph structure adds value.
+- cluster-only mode — file stats not available
 
 ## Summary
 - 827 nodes · 1110 edges · 153 communities (77 shown, 76 thin omitted)
@@ -10,146 +9,146 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `79793a69`
+- Built from commit: `5a07715d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- Keycloak Same Origin Design
-- BlackICE Architecture Principles
-- Node TypeScript Configuration
-- Frontend TypeScript Configuration
-- devDependencies
-- Commit Curator Architecture
-- .ingest
-- SessionResource.java
-- Graphify Label Validation
-- DICOMweb Application Foundation
-- Human Business Gate
-- Maven Wrapper Script
-- Same Origin Service Topology
-- Authenticated DICOM Ingestion
-- Windows Keycloak Bootstrap Design
-- Domain Pack Boundaries
-- DICOM Identity Domain Pack
-- Graphify Commit Synchronization
-- Same Origin Implementation Plan
-- Commit Conventions Domain Pack
-- Keycloak Login E2E Helpers
-- Cross Platform Keycloak Bootstrap
-- OIDC BFF Session Security
 - IngestResult
-- Frontend Session Query
-- DICOM UID Query
-- Graphify Operations Query
-- BlackICE Login Theme
-- Login Theme Regression Tests
-- Commit Curator Implementation Plan
-- Windows Bootstrap Implementation Plan
-- Keycloak Client Configuration
-- Read Only Docker Proxy
-- Graphify Project Setup
-- Graphify Processing Pipeline
-- Vue SPA Nginx Serving
 - UploadedDicom
-- Graphify Incremental Integrity
-- Graphify Integration Design
-- PKCE Same Origin Migration
-- DICOMweb Realm Authorization
-- Graphify Watch Ingestion
-- Graphify Export Server
-- Graph Extraction Quality
-- Graph Query Expansion
-- Incremental Graph Replacement
-- Quarkus Container Artifacts
-- Maven Wrapper Distribution
-- Backend BFF Session
-- Playwright Test Configuration
-- BlackICE Favicon Asset
-- Vue Router Module
-- Home Page User
-- Session Response Types
-- Multi Agent Limits
-- Secure DCM4CHEE Deployment
-- DICOM Pixel Preservation
-- Git Domain Convention
-- DCM4CHEE Security Stack
-- Compose Stack Structure
-- Feature First Architecture
-- Keyboard Focus Accessibility
-- Traefik Docker Discovery
-- Container Realm Configuration
-- POSIX Realm Configuration
-- Cross Repository Merge
-- Media Content Transcription
-- Backend Ignore Configuration
-- Java Runtime Toolchain
-- Maven Build Toolchain
-- Quarkus JVM Image
-- Quarkus Legacy Image
-- Quarkus Native Image
-- Frontend Docker Context
-- Frontend Ignore Configuration
-- Vue Application Mount
-- Node Runtime Toolchain
-- Bluesky Social Icon
-- Discord Social Icon
-- Documentation Social Icon
-- GitHub Social Icon
-- Generic Social Icon
-- X Social Icon
-- Keycloak Login Contract
-- Claude Code Instructions
-- Graphify Add Watch Guide
-- Graphify Export Guide
-- Graphify Semantic Extraction
-- Graphify Merge Guide
-- Graphify Hook Guide
-- Graphify Query Guide
-- Graphify Transcription Guide
-- Graphify Output Exclusions
-- BlackICE Monorepo Layout
-- OIDC User Token Propagation
-- Patient Identifier Issuer
-- Vue BFF Authentication
-- Vue Feature Conventions
-- Historical Project Plans
-- Codex Agent Configuration
-- PACS Architecture Decisions
-- Graphify Merge Driver
-- Graphify Local Metadata
-- Graphify Recursion Exclusion
-- Frontend SPA Container
-- Product PostgreSQL Database
-- BlackICE Backend Artifact
-- BlackICE MVP Scope
-- Decisões
-- Global Constraints
-- Agentes Antigravity — desenho
-- Global Constraints
-- dicom-domain-reviewer/agent.md
-- dicom-viewer-frontend/agent.md
-- quarkus-backend/agent.md
-- commit-curator/agent.md
-- Convenções de autoria de agentes
-- .agents/skills/agent-authoring/SKILL.md
-- .claude/skills/agent-authoring/SKILL.md
-- Backend modular com Clean Architecture
-- StowResponseParser
 - ValidatedDicom
-- CurrentAccessToken
+- devDependencies
+- .ingest
+- Convenções de autoria de agentes
+- BlackICE — Login same-origin: tirar o Keycloak da barra de endereços
+- StowResponseParser
+- Manual DICOM Import
 - useIngestBatch.ts
+- compilerOptions
+- compilerOptions
+- Commit Curator Design
+- SessionResource.java
+- Community Label Quality Gate
+- CurrentAccessToken
+- DICOMweb Verbs
 - FakeXHR
+- Backend modular com Clean Architecture
+- mvnw
+- BackendArchitectureTest
+- Keycloak Service
+- Authenticated DICOM Ingest Flow
+- Decisões
 - IngestPage.vue
 - synthetic-dicom.ts
-- BackendArchitectureTest
-- CsrfResource.java
-- ingest.types.ts
-- useIngestBatch.spec.ts
-- IngestResult.vue
-- CsrfResourceTest.java
 - Global Constraints
+- Bootstrap do Keycloak no Windows — Design
+- DICOM Domain Review
+- CsrfResource.java
+- CsrfResourceTest.java
+- ingest.types.ts
+- DICOM Domain Pack
+- Commit Policy
+- Keycloak same-origin — Implementation Plan
+- Global Constraints
+- Agentes Antigravity — desenho
+- keycloak-login.spec.ts
+- Cross-platform Launchers
+- Global Constraints
+- OIDC BFF Configuration
 - SessionResourceTest.java
+- Q: Como o frontend Vue obtém a sessão autenticada do backend?
+- Q: Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?
+- Q: Onde ficam as instruções operacionais do Graphify no BlackICE?
+- BlackICE Login Theme
+- dicom-domain-reviewer/agent.md
+- Commit Conventions Domain Pack
+- BlackICE Keycloak login theme
+- Commit Curator Implementation Plan
+- Bootstrap do Keycloak no Windows Implementation Plan
+- arc-audience Mapper
+- Read-only Docker API Proxy
+- Graphify Architecture
+- Graphify Pipeline
+- dicom-viewer-frontend/agent.md
+- quarkus-backend/agent.md
+- Nginx Static SPA Server
+- useIngestBatch.spec.ts
+- Incremental re-extraction runbook
+- Graphify Project Integration
+- Keycloak Same-Origin Migration
+- DICOMweb Authorization
+- Folder Watcher
+- Graph Exports
+- Confidence Rubric
+- Graph Query
+- Incremental Re-extraction
+- commit-curator/agent.md
+- .agents/skills/agent-authoring/SKILL.md
+- Backend Container Build Artifacts
+- Apache Maven 3.9.16 Distribution
+- Backend BFF
+- playwright.config.ts
+- BlackICE Favicon
+- index.ts
+- HomePage.vue
+- IngestResult.vue
+- session.types.ts
+- .claude/skills/agent-authoring/SKILL.md
+- Multi-Agent Feature
+- DCM4CHEE 5.34.3 Baseline
+- Pixel Data Preservation
+- Git Domain Pack
+- DCM4CHEE 5.34.3 Baseline
+- Canonical three-file Compose configuration
+- Feature-first monorepo structure
+- Focus outline accessibility
+- Docker API compatibility proxy
+- configure-blackice.sh
+- configure-blackice-container.sh
+- Cross-Repository Graph Merge
+- Media Transcription
+- Human Business Gate
+- Backend Ignore Rules
+- Temurin Java 21 Toolchain
+- Maven 3 Toolchain
+- Quarkus JVM Container
+- Quarkus Legacy JAR Container
+- Quarkus Native Micro Container
+- Frontend Docker Context Rules
+- Frontend Ignore Rules
+- Vue Mount Point
+- Node 24 Toolchain
+- Bluesky icon
+- Discord icon
+- Documentation icon
+- GitHub icon
+- Social icon
+- X icon
+- Keycloak Login E2E Contract
+- Claude Code Guidance
+- Graphify Add and Watch
+- Graphify Exports
+- Semantic Extraction
+- Cross-repository Merge
+- Graphify Hooks
+- Graphify Query
+- Graphify Transcription
+- Graphify Output Exclusion
+- BlackICE Monorepo Structure
+- User Token Propagation
+- PatientID with IssuerOfPatientID
+- Vue BFF Session
+- Vue Feature-First Conventions
+- Historical Specs and Plans
+- Codex Subagent Configuration
+- BlackICE PACS Architecture Decisions
+- Graphify Merge Driver
+- Graphify Local State
+- Graphify Output Recursion Exclusion
+- Frontend SPA Service
+- Product PostgreSQL database
+- dev.blackice:blackice-backend
+- BlackICE MVP
 
 ## God Nodes (most connected - your core abstractions)
 1. `ValidatedDicom` - 24 edges
@@ -196,255 +195,255 @@
 
 ## Communities (153 total, 76 thin omitted)
 
-### Community 0 - "Keycloak Same Origin Design"
-Cohesion: 0.09
-Nodes (21): Alternativas descartadas, `apps/backend/src/main/resources/application.properties`, BlackICE — Login same-origin: tirar o Keycloak da barra de endereços, Custo honesto, Custo honesto (revisado), Decisões, Estado atual (verificado em 2026-08-07, stack no ar), Fase 1 — Same-origin atrás do Traefik (+13 more)
-
-### Community 1 - "BlackICE Architecture Principles"
-Cohesion: 0.13
-Nodes (20): BlackICE PACS, DCM4CHEE Archive, DICOM Identity Invariants, DICOMweb Operations, Keycloak OIDC SSO, Quarkus Product Backend, Vue Authenticated SPA, EVO-001 Async Ingestion (+12 more)
-
-### Community 2 - "Node TypeScript Configuration"
-Cohesion: 0.10
-Nodes (19): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, noEmit, noFallthroughCasesInSwitch (+11 more)
-
-### Community 3 - "Frontend TypeScript Configuration"
-Cohesion: 0.11
-Nodes (18): compilerOptions, allowArbitraryExtensions, baseUrl, erasableSyntaxOnly, ignoreDeprecations, noFallthroughCasesInSwitch, noUnusedLocals, noUnusedParameters (+10 more)
-
-### Community 4 - "devDependencies"
-Cohesion: 0.06
-Nodes (33): dependencies, vue, vue-router, devDependencies, @playwright/test, @types/node, typescript, vite (+25 more)
-
-### Community 5 - "Commit Curator Architecture"
-Cohesion: 0.13
-Nodes (16): Branch Commit Policy, Commit Curator Agent, Git Domain Pack, Graphify Commit Prerequisite, Arquitetura, Branch-scoped Commit Authorization, Commit Curator Design, Commit Message Format (+8 more)
-
-### Community 6 - ".ingest"
-Cohesion: 0.16
-Nodes (13): ArchiveUnavailableException, Reason, CONNECTION, HTTP_STATUS, INTERRUPTED, TIMEOUT, IngestStudiesUseCase, ApplicationScoped (+5 more)
-
-### Community 7 - "SessionResource.java"
-Cohesion: 0.29
-Nodes (9): Authenticated, GET, Path, Response, SessionResource, SessionResponse, JsonWebToken, PermitAll (+1 more)
-
-### Community 8 - "Graphify Label Validation"
-Cohesion: 0.17
-Nodes (12): Automatic Label Reuse Invalidation, Cluster-Only Workflow, Clustered Communities, Community Label Quality Gate, Community Labels, Community Membership Signatures, Current Community Summaries, Exact Community-Key Coverage (+4 more)
-
-### Community 9 - "DICOMweb Application Foundation"
-Cohesion: 0.17
-Nodes (12): DICOMweb Verbs, QIDO-RS, STOW-RS, WADO-RS, CSRF Protection, Quarkus BFF, Quarkus Domain Pack, Cornerstone3D Viewer (+4 more)
-
-### Community 11 - "Maven Wrapper Script"
-Cohesion: 0.33
-Nodes (6): mvnw script, clean(), die(), exec_maven(), set_java_home(), verbose()
-
-### Community 12 - "Same Origin Service Topology"
-Cohesion: 0.20
-Nodes (10): In-Place Keycloak Realm Rename, Backend BFF Service, OIDC Frontchannel Backchannel Split, DCM4CHEE Archive Service, DCM4CHEE Archive PostgreSQL Service, Keycloak Service, LDAP Service, Keycloak MariaDB Service (+2 more)
-
-### Community 13 - "Authenticated DICOM Ingestion"
-Cohesion: 0.20
-Nodes (10): Authenticated DICOM Ingest Flow, CSRF and OIDC Protection, DICOM Domain Review Gate, DICOM UID Preservation, Durable Jobs EVO-001, Frontend Ingest Workflow, Manual DICOM Import, Metadata Validation and Study Grouping (+2 more)
-
-### Community 14 - "Windows Keycloak Bootstrap Design"
-Cohesion: 0.25
-Nodes (7): Bootstrap do Keycloak no Windows — Design, Decisão, Erros e segurança, Fluxo, Fora de escopo, Objetivo, Testes
-
-### Community 15 - "Domain Pack Boundaries"
-Cohesion: 0.29
-Nodes (7): DICOM Domain Review, Human Semantic Gate, DICOMweb Backend Boundary, BlackICE Quarkus Backend, Cornerstone3D Viewer, Vue Reactivity Boundary, Thin Skill Pattern
-
-### Community 16 - "DICOM Identity Domain Pack"
-Cohesion: 0.29
-Nodes (7): DICOM Domain Pack, DICOM Domain Reviewer, DICOM Patient Study Series Instance Hierarchy, DICOM UID Identity, StudyInstanceUID, Report Model, Domain Pack Wrappers
-
-### Community 17 - "Graphify Commit Synchronization"
-Cohesion: 0.29
-Nodes (7): Commit Policy, Graph Synchronization Commit, Graphify Commit Prerequisite, Safe Commit Scope, Canonical Graphify Skill Hashes, Graphify 0.9.32, Linked Worktree Manual Graph Update
-
-### Community 18 - "Same Origin Implementation Plan"
-Cohesion: 0.29
-Nodes (6): Estrutura de arquivos, Global Constraints, Keycloak same-origin — Implementation Plan, Self-review, Task 1: Fase 1 — Keycloak same-origin sob `/auth`, Task 2: Fase 2 — renomear o realm para `blackice`
-
-### Community 19 - "Commit Conventions Domain Pack"
-Cohesion: 0.50
-Nodes (4): Domain Packs, Canonical Commit Body, Commit Conventions Domain Pack, Claude Commit Curator
-
-### Community 20 - "Keycloak Login E2E Helpers"
-Cohesion: 0.53
-Nodes (5): expectVerticallyCentered(), openBlackiceLogin(), requiredBox(), screenshotLoginCard(), showInvalidCredentials()
-
-### Community 21 - "Cross Platform Keycloak Bootstrap"
-Cohesion: 0.33
-Nodes (6): Cross-platform Launchers, Keycloak Admin REST, Keycloak Windows Bootstrap, Pester Contract Test, Shared POSIX Configuration Core, Three-file Compose Configuration
-
-### Community 22 - "OIDC BFF Session Security"
-Cohesion: 0.40
-Nodes (5): Encrypted HttpOnly Session Cookie, Keycloak BlackICE Realm Endpoint, OIDC BFF Configuration, PKCE S256 Requirement, Realm Role Mapping
-
-### Community 23 - "IngestResult"
+### Community 0 - "IngestResult"
 Cohesion: 0.07
 Nodes (36): IngestHttpStatusResolver, IngestResource, Inject, Path, Response, IngestResult, InstanceResult, Outcome (+28 more)
 
-### Community 24 - "Frontend Session Query"
-Cohesion: 0.40
-Nodes (4): Answer, Outcome, Q: Como o frontend Vue obtém a sessão autenticada do backend?, Source Nodes
-
-### Community 25 - "DICOM UID Query"
-Cohesion: 0.40
-Nodes (4): Answer, Outcome, Q: Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?, Source Nodes
-
-### Community 26 - "Graphify Operations Query"
-Cohesion: 0.40
-Nodes (4): Answer, Outcome, Q: Onde ficam as instruções operacionais do Graphify no BlackICE?, Source Nodes
-
-### Community 27 - "BlackICE Login Theme"
-Cohesion: 0.40
-Nodes (5): BlackICE Login Theme, keycloak.v2 Parent Theme, BlackICE Login Wordmark Messages, BlackICE Login Visual Tokens, BlackICE Theme Configuration
-
-### Community 28 - "Login Theme Regression Tests"
-Cohesion: 0.50
-Nodes (4): BlackICE Keycloak login theme, Playwright Keycloak theme UI regression, keycloak.v2 child theme, Hybrid UI regression strategy
-
-### Community 29 - "Commit Curator Implementation Plan"
-Cohesion: 0.50
-Nodes (3): Commit Curator Implementation Plan, Global Constraints, Task 1: Domain Pack e wrappers de commit
-
-### Community 30 - "Windows Bootstrap Implementation Plan"
-Cohesion: 0.50
-Nodes (3): Bootstrap do Keycloak no Windows Implementation Plan, Global Constraints, Task 1: Launchers multiplataforma com núcleo único
-
-### Community 31 - "Keycloak Client Configuration"
-Cohesion: 0.67
-Nodes (4): arc-audience Mapper, blackice-quarkus Confidential BFF Client, BlackICE Shared Realm, dcm4chee-arc-rs DICOMweb Client
-
-### Community 32 - "Read Only Docker Proxy"
-Cohesion: 0.50
-Nodes (4): Read-only Docker API Proxy, Docker Daemon Socket, Read-only Docker Discovery Endpoints, Traefik Docker Provider
-
-### Community 33 - "Graphify Project Setup"
-Cohesion: 0.67
-Nodes (3): Post-Commit Graph Hook, Graphify Architecture, Project-Scoped Graphify Setup
-
-### Community 34 - "Graphify Processing Pipeline"
-Cohesion: 0.67
-Nodes (3): Graphify Pipeline, Incremental Update, Semantic Extraction
-
-### Community 35 - "Vue SPA Nginx Serving"
-Cohesion: 0.67
-Nodes (3): Nginx Static SPA Server, Vue Router History Fallback, Vue SPA Build
-
-### Community 36 - "UploadedDicom"
+### Community 1 - "UploadedDicom"
 Cohesion: 0.10
 Nodes (24): UploadedDicom, DicomBatchValidator, RejectedFile, Inject, DicomBatchValidation, Code, DUPLICATE_IDENTICAL, MALFORMED_DICOM (+16 more)
 
-### Community 37 - "Graphify Incremental Integrity"
-Cohesion: 0.67
-Nodes (3): Cluster-only refresh, Incremental re-extraction runbook, Incremental merge integrity
-
-### Community 38 - "Graphify Integration Design"
-Cohesion: 0.67
-Nodes (3): Graphify Project Integration, Incremental Graph Maintenance, Graphify Integration Design
-
-### Community 39 - "PKCE Same Origin Migration"
-Cohesion: 0.67
-Nodes (3): Authorization Code with PKCE, Keycloak Same-Origin Migration, Keycloak Same-Origin Design
-
-### Community 40 - "DICOMweb Realm Authorization"
-Cohesion: 0.67
-Nodes (3): Shared Realm Audience, auth Realm Role, DICOMweb Authorization
-
-### Community 115 - "Decisões"
-Cohesion: 0.20
-Nodes (9): Alterações documentais previstas, Conhecimento neutro e wrappers, Decisões, Desenho — skill de autoria de agentes, Fora de escopo, Objetivo, Segurança, governança e validação, Seleção de modelo no momento da mudança (+1 more)
-
-### Community 116 - "Global Constraints"
-Cohesion: 0.29
-Nodes (6): Agent Authoring Skill Implementation Plan, Global Constraints, Task 1: Criar o Domain Pack canônico, Task 2: Criar wrappers de descoberta mínimos, Task 3: Integrar a convenção à documentação do repositório, Task 4: Validar a skill e as modificações
-
-### Community 117 - "Agentes Antigravity — desenho"
-Cohesion: 0.29
-Nodes (6): Agentes Antigravity — desenho, Configuração, Conhecimento e documentação, Escopo, Objetivo, Verificação
-
-### Community 118 - "Global Constraints"
-Cohesion: 0.33
-Nodes (5): Antigravity Agents Implementation Plan, Global Constraints, Task 1: Criar os wrappers Antigravity, Task 2: Documentar o ponto de descoberta, Task 3: Confirmar descoberta pelo Antigravity
-
-### Community 119 - "dicom-domain-reviewer/agent.md"
-Cohesion: 0.50
-Nodes (3): Antes de revisar, Papel, Revisão
-
-### Community 123 - "Convenções de autoria de agentes"
-Cohesion: 0.09
-Nodes (21): Convenções de autoria de agentes, Escopo e autorização, Fonte única de verdade, Forma de um wrapper, Fronteiras, Classificação e roteamento, Pesquisa obrigatória, Proposta e escalonamento (+13 more)
-
-### Community 126 - "Backend modular com Clean Architecture"
-Cohesion: 0.18
-Nodes (10): Backend modular com Clean Architecture, Critérios de aceite, Decisão, Documentação de código, Fora de escopo, Limites e direção de dependências, Migração do fluxo de ingestão, Módulos de sessão e segurança (+2 more)
-
-### Community 127 - "StowResponseParser"
-Cohesion: 0.20
-Nodes (8): ApplicationScoped, Inject, StowResponseParser, BeforeEach, Test, StowResponseParserTest, JsonNode, ObjectMapper
-
-### Community 128 - "ValidatedDicom"
+### Community 2 - "ValidatedDicom"
 Cohesion: 0.11
 Nodes (18): AfterEach, DicomArchiveGateway, StowInstanceResult, StowStudyResult, ValidatedDicom, HttpDicomArchiveGateway, ApplicationScoped, Inject (+10 more)
 
-### Community 129 - "CurrentAccessToken"
-Cohesion: 0.32
-Nodes (6): AccessTokenCredential, CurrentAccessToken, ApplicationScoped, Override, CurrentAccessTokenTest, Test
+### Community 3 - "devDependencies"
+Cohesion: 0.06
+Nodes (33): dependencies, vue, vue-router, devDependencies, @playwright/test, @types/node, typescript, vite (+25 more)
 
-### Community 130 - "useIngestBatch.ts"
+### Community 4 - ".ingest"
+Cohesion: 0.16
+Nodes (13): ArchiveUnavailableException, Reason, CONNECTION, HTTP_STATUS, INTERRUPTED, TIMEOUT, IngestStudiesUseCase, ApplicationScoped (+5 more)
+
+### Community 5 - "Convenções de autoria de agentes"
+Cohesion: 0.09
+Nodes (21): Convenções de autoria de agentes, Escopo e autorização, Fonte única de verdade, Forma de um wrapper, Fronteiras, Classificação e roteamento, Pesquisa obrigatória, Proposta e escalonamento (+13 more)
+
+### Community 6 - "BlackICE — Login same-origin: tirar o Keycloak da barra de endereços"
+Cohesion: 0.09
+Nodes (21): Alternativas descartadas, `apps/backend/src/main/resources/application.properties`, BlackICE — Login same-origin: tirar o Keycloak da barra de endereços, Custo honesto, Custo honesto (revisado), Decisões, Estado atual (verificado em 2026-08-07, stack no ar), Fase 1 — Same-origin atrás do Traefik (+13 more)
+
+### Community 7 - "StowResponseParser"
+Cohesion: 0.20
+Nodes (8): ApplicationScoped, Inject, StowResponseParser, BeforeEach, Test, StowResponseParserTest, JsonNode, ObjectMapper
+
+### Community 8 - "Manual DICOM Import"
+Cohesion: 0.13
+Nodes (20): BlackICE PACS, DCM4CHEE Archive, DICOM Identity Invariants, DICOMweb Operations, Keycloak OIDC SSO, Quarkus Product Backend, Vue Authenticated SPA, EVO-001 Async Ingestion (+12 more)
+
+### Community 9 - "useIngestBatch.ts"
 Cohesion: 0.14
 Nodes (12): fetchCsrfToken(), readCookie(), UploadError, uploadStudies(), XhrFactory, DEFAULT_API, DEFAULT_LIMITS, IngestApi (+4 more)
 
-### Community 132 - "IngestPage.vue"
-Cohesion: 0.22
-Nodes (4): batch, limitWarning, totalBytes, totalFiles
+### Community 10 - "compilerOptions"
+Cohesion: 0.10
+Nodes (19): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, noEmit, noFallthroughCasesInSwitch (+11 more)
 
-### Community 133 - "synthetic-dicom.ts"
-Cohesion: 0.54
-Nodes (6): createSyntheticDicom(), element(), LONG_VR, paddedText(), text(), us()
+### Community 11 - "compilerOptions"
+Cohesion: 0.11
+Nodes (18): compilerOptions, allowArbitraryExtensions, baseUrl, erasableSyntaxOnly, ignoreDeprecations, noFallthroughCasesInSwitch, noUnusedLocals, noUnusedParameters (+10 more)
 
-### Community 134 - "BackendArchitectureTest"
+### Community 12 - "Commit Curator Design"
+Cohesion: 0.13
+Nodes (16): Branch Commit Policy, Commit Curator Agent, Git Domain Pack, Graphify Commit Prerequisite, Arquitetura, Branch-scoped Commit Authorization, Commit Curator Design, Commit Message Format (+8 more)
+
+### Community 13 - "SessionResource.java"
+Cohesion: 0.29
+Nodes (9): Authenticated, GET, Path, Response, SessionResource, SessionResponse, JsonWebToken, PermitAll (+1 more)
+
+### Community 14 - "Community Label Quality Gate"
+Cohesion: 0.17
+Nodes (12): Automatic Label Reuse Invalidation, Cluster-Only Workflow, Clustered Communities, Community Label Quality Gate, Community Labels, Community Membership Signatures, Current Community Summaries, Exact Community-Key Coverage (+4 more)
+
+### Community 15 - "CurrentAccessToken"
+Cohesion: 0.32
+Nodes (6): AccessTokenCredential, CurrentAccessToken, ApplicationScoped, Override, CurrentAccessTokenTest, Test
+
+### Community 16 - "DICOMweb Verbs"
+Cohesion: 0.17
+Nodes (12): DICOMweb Verbs, QIDO-RS, STOW-RS, WADO-RS, CSRF Protection, Quarkus BFF, Quarkus Domain Pack, Cornerstone3D Viewer (+4 more)
+
+### Community 18 - "Backend modular com Clean Architecture"
+Cohesion: 0.18
+Nodes (10): Backend modular com Clean Architecture, Critérios de aceite, Decisão, Documentação de código, Fora de escopo, Limites e direção de dependências, Migração do fluxo de ingestão, Módulos de sessão e segurança (+2 more)
+
+### Community 19 - "mvnw"
+Cohesion: 0.33
+Nodes (6): mvnw script, clean(), die(), exec_maven(), set_java_home(), verbose()
+
+### Community 20 - "BackendArchitectureTest"
 Cohesion: 0.36
 Nodes (3): BackendArchitectureTest, Test, JavaClasses
 
-### Community 135 - "CsrfResource.java"
-Cohesion: 0.48
-Nodes (5): CsrfResource, Authenticated, GET, Path, Response
+### Community 21 - "Keycloak Service"
+Cohesion: 0.20
+Nodes (10): In-Place Keycloak Realm Rename, Backend BFF Service, OIDC Frontchannel Backchannel Split, DCM4CHEE Archive Service, DCM4CHEE Archive PostgreSQL Service, Keycloak Service, LDAP Service, Keycloak MariaDB Service (+2 more)
 
-### Community 136 - "ingest.types.ts"
-Cohesion: 0.29
-Nodes (5): IngestOutcome, IngestResponse, InstanceStatus, StudyStatus, UploadHandle
+### Community 22 - "Authenticated DICOM Ingest Flow"
+Cohesion: 0.20
+Nodes (10): Authenticated DICOM Ingest Flow, CSRF and OIDC Protection, DICOM Domain Review Gate, DICOM UID Preservation, Durable Jobs EVO-001, Frontend Ingest Workflow, Manual DICOM Import, Metadata Validation and Study Grouping (+2 more)
 
-### Community 140 - "CsrfResourceTest.java"
-Cohesion: 0.48
-Nodes (4): CsrfResourceTest, QuarkusTest, Test, TestSecurity
+### Community 23 - "Decisões"
+Cohesion: 0.20
+Nodes (9): Alterações documentais previstas, Conhecimento neutro e wrappers, Decisões, Desenho — skill de autoria de agentes, Fora de escopo, Objetivo, Segurança, governança e validação, Seleção de modelo no momento da mudança (+1 more)
 
-### Community 141 - "Global Constraints"
+### Community 24 - "IngestPage.vue"
+Cohesion: 0.22
+Nodes (4): batch, limitWarning, totalBytes, totalFiles
+
+### Community 25 - "synthetic-dicom.ts"
+Cohesion: 0.54
+Nodes (6): createSyntheticDicom(), element(), LONG_VR, paddedText(), text(), us()
+
+### Community 26 - "Global Constraints"
 Cohesion: 0.25
 Nodes (7): Backend Modular Clean Architecture Implementation Plan, Global Constraints, Task 1: Criar a guarda arquitetural que falha contra a estrutura atual, Task 2: Migrar ingestão para portas e adaptadores, deixando a guarda verde, Task 3: Documentar as fronteiras no código sem comentários redundantes, Task 4: Atualizar a documentação operacional e fechar a verificação, Task 5: Detalhar o módulo de ingestão por responsabilidade
 
-### Community 142 - "SessionResourceTest.java"
+### Community 27 - "Bootstrap do Keycloak no Windows — Design"
+Cohesion: 0.25
+Nodes (7): Bootstrap do Keycloak no Windows — Design, Decisão, Erros e segurança, Fluxo, Fora de escopo, Objetivo, Testes
+
+### Community 28 - "DICOM Domain Review"
+Cohesion: 0.29
+Nodes (7): DICOM Domain Review, Human Semantic Gate, DICOMweb Backend Boundary, BlackICE Quarkus Backend, Cornerstone3D Viewer, Vue Reactivity Boundary, Thin Skill Pattern
+
+### Community 29 - "CsrfResource.java"
+Cohesion: 0.48
+Nodes (5): CsrfResource, Authenticated, GET, Path, Response
+
+### Community 30 - "CsrfResourceTest.java"
+Cohesion: 0.48
+Nodes (4): CsrfResourceTest, QuarkusTest, Test, TestSecurity
+
+### Community 31 - "ingest.types.ts"
+Cohesion: 0.29
+Nodes (5): IngestOutcome, IngestResponse, InstanceStatus, StudyStatus, UploadHandle
+
+### Community 32 - "DICOM Domain Pack"
+Cohesion: 0.29
+Nodes (7): DICOM Domain Pack, DICOM Domain Reviewer, DICOM Patient Study Series Instance Hierarchy, DICOM UID Identity, StudyInstanceUID, Report Model, Domain Pack Wrappers
+
+### Community 33 - "Commit Policy"
+Cohesion: 0.29
+Nodes (7): Commit Policy, Graph Synchronization Commit, Graphify Commit Prerequisite, Safe Commit Scope, Canonical Graphify Skill Hashes, Graphify 0.9.32, Linked Worktree Manual Graph Update
+
+### Community 34 - "Keycloak same-origin — Implementation Plan"
+Cohesion: 0.29
+Nodes (6): Estrutura de arquivos, Global Constraints, Keycloak same-origin — Implementation Plan, Self-review, Task 1: Fase 1 — Keycloak same-origin sob `/auth`, Task 2: Fase 2 — renomear o realm para `blackice`
+
+### Community 35 - "Global Constraints"
+Cohesion: 0.29
+Nodes (6): Agent Authoring Skill Implementation Plan, Global Constraints, Task 1: Criar o Domain Pack canônico, Task 2: Criar wrappers de descoberta mínimos, Task 3: Integrar a convenção à documentação do repositório, Task 4: Validar a skill e as modificações
+
+### Community 36 - "Agentes Antigravity — desenho"
+Cohesion: 0.29
+Nodes (6): Agentes Antigravity — desenho, Configuração, Conhecimento e documentação, Escopo, Objetivo, Verificação
+
+### Community 37 - "keycloak-login.spec.ts"
+Cohesion: 0.53
+Nodes (5): expectVerticallyCentered(), openBlackiceLogin(), requiredBox(), screenshotLoginCard(), showInvalidCredentials()
+
+### Community 38 - "Cross-platform Launchers"
+Cohesion: 0.33
+Nodes (6): Cross-platform Launchers, Keycloak Admin REST, Keycloak Windows Bootstrap, Pester Contract Test, Shared POSIX Configuration Core, Three-file Compose Configuration
+
+### Community 39 - "Global Constraints"
+Cohesion: 0.33
+Nodes (5): Antigravity Agents Implementation Plan, Global Constraints, Task 1: Criar os wrappers Antigravity, Task 2: Documentar o ponto de descoberta, Task 3: Confirmar descoberta pelo Antigravity
+
+### Community 40 - "OIDC BFF Configuration"
+Cohesion: 0.40
+Nodes (5): Encrypted HttpOnly Session Cookie, Keycloak BlackICE Realm Endpoint, OIDC BFF Configuration, PKCE S256 Requirement, Realm Role Mapping
+
+### Community 41 - "SessionResourceTest.java"
 Cohesion: 0.60
 Nodes (3): QuarkusTest, Test, SessionResourceTest
 
+### Community 42 - "Q: Como o frontend Vue obtém a sessão autenticada do backend?"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: Como o frontend Vue obtém a sessão autenticada do backend?, Source Nodes
+
+### Community 43 - "Q: Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?, Source Nodes
+
+### Community 44 - "Q: Onde ficam as instruções operacionais do Graphify no BlackICE?"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: Onde ficam as instruções operacionais do Graphify no BlackICE?, Source Nodes
+
+### Community 45 - "BlackICE Login Theme"
+Cohesion: 0.40
+Nodes (5): BlackICE Login Theme, keycloak.v2 Parent Theme, BlackICE Login Wordmark Messages, BlackICE Login Visual Tokens, BlackICE Theme Configuration
+
+### Community 46 - "dicom-domain-reviewer/agent.md"
+Cohesion: 0.50
+Nodes (3): Antes de revisar, Papel, Revisão
+
+### Community 47 - "Commit Conventions Domain Pack"
+Cohesion: 0.50
+Nodes (4): Domain Packs, Canonical Commit Body, Commit Conventions Domain Pack, Claude Commit Curator
+
+### Community 48 - "BlackICE Keycloak login theme"
+Cohesion: 0.50
+Nodes (4): BlackICE Keycloak login theme, Playwright Keycloak theme UI regression, keycloak.v2 child theme, Hybrid UI regression strategy
+
+### Community 49 - "Commit Curator Implementation Plan"
+Cohesion: 0.50
+Nodes (3): Commit Curator Implementation Plan, Global Constraints, Task 1: Domain Pack e wrappers de commit
+
+### Community 50 - "Bootstrap do Keycloak no Windows Implementation Plan"
+Cohesion: 0.50
+Nodes (3): Bootstrap do Keycloak no Windows Implementation Plan, Global Constraints, Task 1: Launchers multiplataforma com núcleo único
+
+### Community 51 - "arc-audience Mapper"
+Cohesion: 0.67
+Nodes (4): arc-audience Mapper, blackice-quarkus Confidential BFF Client, BlackICE Shared Realm, dcm4chee-arc-rs DICOMweb Client
+
+### Community 52 - "Read-only Docker API Proxy"
+Cohesion: 0.50
+Nodes (4): Read-only Docker API Proxy, Docker Daemon Socket, Read-only Docker Discovery Endpoints, Traefik Docker Provider
+
+### Community 53 - "Graphify Architecture"
+Cohesion: 0.67
+Nodes (3): Post-Commit Graph Hook, Graphify Architecture, Project-Scoped Graphify Setup
+
+### Community 54 - "Graphify Pipeline"
+Cohesion: 0.67
+Nodes (3): Graphify Pipeline, Incremental Update, Semantic Extraction
+
+### Community 57 - "Nginx Static SPA Server"
+Cohesion: 0.67
+Nodes (3): Nginx Static SPA Server, Vue Router History Fallback, Vue SPA Build
+
+### Community 59 - "Incremental re-extraction runbook"
+Cohesion: 0.67
+Nodes (3): Cluster-only refresh, Incremental re-extraction runbook, Incremental merge integrity
+
+### Community 60 - "Graphify Project Integration"
+Cohesion: 0.67
+Nodes (3): Graphify Project Integration, Incremental Graph Maintenance, Graphify Integration Design
+
+### Community 61 - "Keycloak Same-Origin Migration"
+Cohesion: 0.67
+Nodes (3): Authorization Code with PKCE, Keycloak Same-Origin Migration, Keycloak Same-Origin Design
+
+### Community 62 - "DICOMweb Authorization"
+Cohesion: 0.67
+Nodes (3): Shared Realm Audience, auth Realm Role, DICOMweb Authorization
+
 ## Knowledge Gaps
-- **327 isolated node(s):** `dev.blackice:blackice-backend`, `TIMEOUT`, `CONNECTION`, `HTTP_STATUS`, `INTERRUPTED` (+322 more)
+- **327 isolated node(s):** `Papel`, `Papel`, `Antes de revisar`, `Revisão`, `Papel` (+322 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **76 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `IngestResult` connect `IngestResult` to `ValidatedDicom`, `UploadedDicom`, `.ingest`?**
+- **Why does `IngestResult` connect `IngestResult` to `UploadedDicom`, `ValidatedDicom`, `.ingest`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **Why does `StowInstanceResult` connect `ValidatedDicom` to `UploadedDicom`, `StowResponseParser`, `.ingest`, `IngestResult`?**
+- **Why does `StowInstanceResult` connect `ValidatedDicom` to `IngestResult`, `UploadedDicom`, `.ingest`, `StowResponseParser`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
-- **Why does `UploadedDicom` connect `UploadedDicom` to `ValidatedDicom`, `.ingest`, `IngestResult`?**
+- **Why does `UploadedDicom` connect `UploadedDicom` to `IngestResult`, `ValidatedDicom`, `.ingest`?**
   _High betweenness centrality (0.007) - this node is a cross-community bridge._
 - **Are the 8 inferred relationships involving `ValidatedDicom` (e.g. with `.validate()` and `.connection_failure_throws_archive_unavailable_with_connection_reason()`) actually correct?**
   _`ValidatedDicom` has 8 INFERRED edges - model-reasoned connections that need verification._
@@ -452,5 +451,5 @@ _Questions this graph is uniquely positioned to answer:_
   _`UploadedDicom` has 7 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 5 inferred relationships involving `IngestResult` (e.g. with `.partial_result_returns_200()` and `.total_local_rejection_returns_422()`) actually correct?**
   _`IngestResult` has 5 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `dev.blackice:blackice-backend`, `TIMEOUT`, `CONNECTION` to the rest of the system?**
+- **What connects `Papel`, `Papel`, `Antes de revisar` to the rest of the system?**
   _327 weakly-connected nodes found - possible documentation gaps or missing edges._
