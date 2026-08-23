@@ -14,6 +14,7 @@ import java.net.ConnectException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpConnectTimeoutException;
+import dev.blackice.shared.infrastructure.telemetry.W3cTraceContextInjector;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpTimeoutException;
@@ -34,6 +35,7 @@ public class HttpDicomArchiveGateway implements DicomArchiveGateway {
     private final Duration requestTimeout;
     private final StowResponseParser parser;
     private final HttpClient httpClient;
+    private final W3cTraceContextInjector traceContextInjector = new W3cTraceContextInjector();
 
     @Inject
     public HttpDicomArchiveGateway(
@@ -84,13 +86,14 @@ public class HttpDicomArchiveGateway implements DicomArchiveGateway {
             throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.CONNECTION, e);
         }
 
-        HttpRequest request = HttpRequest.newBuilder(uri)
+        HttpRequest.Builder builder = HttpRequest.newBuilder(uri)
             .timeout(requestTimeout)
             .header("Authorization", "Bearer " + accessToken)
             .header("Accept", "application/dicom+json")
             .header("Content-Type", "multipart/related; type=\"application/dicom\"; boundary=" + boundary)
-            .POST(bodyPublisher)
-            .build();
+            .POST(bodyPublisher);
+        traceContextInjector.inject(builder);
+        HttpRequest request = builder.build();
 
         HttpResponse<String> response;
         try {
@@ -109,11 +112,9 @@ public class HttpDicomArchiveGateway implements DicomArchiveGateway {
                 throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.TIMEOUT, e);
             }
             throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.CONNECTION, e);
-        } catch (ArchiveUnavailableException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.CONNECTION, e);
         }
+        // Sem catch genérico: um bug inesperado sobe para o fallback 500 da
+        // fronteira em vez de virar indisponibilidade do Archive.
 
         int statusCode = response.statusCode();
         if (statusCode < 200 || statusCode >= 300) {

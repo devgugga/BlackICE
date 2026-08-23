@@ -1,9 +1,17 @@
 package dev.blackice.shared.api.problem;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+
 import dev.blackice.shared.api.problem.generated.ProblemType;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.security.TestSecurity;
 import io.restassured.response.ValidatableResponse;
+import org.eclipse.microprofile.config.ConfigProvider;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -11,6 +19,8 @@ import static org.hamcrest.Matchers.blankOrNullString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 /**
  * Matriz HTTP da fronteira de erro.
@@ -155,12 +165,55 @@ class ApiProblemHttpTest {
             .header("X-Trace-ID", equalTo(TRACE_ID));
     }
 
+    /**
+     * O redirect de {@code /api/login} está fora do contrato de erro. Isso vale
+     * mesmo sem um servidor OIDC no ar: a rota nunca pode sair como Problem
+     * Details catalogado, senão o SPA a trataria como falha da API.
+     */
+    @Test
+    void the_login_route_never_produces_a_catalogued_problem() {
+        String contentType = given().redirects().follow(false)
+            .when().get("/api/login")
+            .then().extract().contentType();
+
+        assertFalse(contentType != null && contentType.contains("application/problem+json"),
+            "/api/login não pertence ao contrato de erro catalogado");
+    }
+
+    /**
+     * A verificação do redirect em si exige um servidor OIDC alcançável: sem ele
+     * o Quarkus não consegue montar a authorization request. O teste é pulado,
+     * não aprovado, quando o Keycloak não está no ar.
+     */
     @Test
     void the_login_route_keeps_its_intentional_oidc_redirect() {
+        assumeTrue(oidcServerIsReachable(), "Keycloak fora do ar: redirect OIDC não verificável");
+
         given().redirects().follow(false)
             .when().get("/api/login")
             .then()
             .statusCode(302)
             .header("location", not(blankOrNullString()));
+    }
+
+    private static boolean oidcServerIsReachable() {
+        String discovery = ConfigProvider.getConfig()
+            .getValue("quarkus.oidc.auth-server-url", String.class)
+            + "/.well-known/openid-configuration";
+        try {
+            HttpResponse<Void> response = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(2))
+                .build()
+                .send(HttpRequest.newBuilder(URI.create(discovery))
+                    .timeout(Duration.ofSeconds(2))
+                    .GET()
+                    .build(), HttpResponse.BodyHandlers.discarding());
+            return response.statusCode() == 200;
+        } catch (IOException | InterruptedException unreachable) {
+            if (unreachable instanceof InterruptedException) {
+                Thread.currentThread().interrupt();
+            }
+            return false;
+        }
     }
 }

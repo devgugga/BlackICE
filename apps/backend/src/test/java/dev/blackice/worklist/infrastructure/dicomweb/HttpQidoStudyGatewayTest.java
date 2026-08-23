@@ -3,6 +3,12 @@ package dev.blackice.worklist.infrastructure.dicomweb;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.SpanContext;
+import io.opentelemetry.api.trace.TraceFlags;
+import io.opentelemetry.api.trace.TraceState;
+import io.opentelemetry.context.Context;
+import io.opentelemetry.context.Scope;
 import dev.blackice.worklist.application.exception.ArchiveSearchException;
 import dev.blackice.worklist.application.input.StudySearchRequest;
 import dev.blackice.worklist.application.result.StudySummary;
@@ -26,6 +32,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -86,6 +93,21 @@ class HttpQidoStudyGatewayTest {
         assertTrue(URLDecoder.decode(rawQuery.get(), StandardCharsets.UTF_8).contains("limit=21"));
         assertEquals(1, result.size());
         assertEquals("1.2.3", result.get(0).studyInstanceUid());
+    }
+
+    @Test
+    void an_unexpected_bug_is_not_disguised_as_a_connection_failure() {
+        HttpClient broken = mock(HttpClient.class);
+        try {
+            when(broken.send(any(), any())).thenThrow(new IllegalStateException("bug interno"));
+        } catch (Exception unreachable) {
+            throw new AssertionError(unreachable);
+        }
+
+        HttpQidoStudyGateway gateway = new HttpQidoStudyGateway(
+            baseUrl, Duration.ofSeconds(2), new QidoQueryBuilder(), new QidoStudyResponseParser(), broken);
+
+        assertThrows(IllegalStateException.class, () -> gateway.search(request(), 21, "user-token"));
     }
 
     @Test

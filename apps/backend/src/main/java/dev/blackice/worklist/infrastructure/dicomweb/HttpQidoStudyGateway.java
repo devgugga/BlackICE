@@ -13,6 +13,7 @@ import java.net.ConnectException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpConnectTimeoutException;
+import dev.blackice.shared.infrastructure.telemetry.W3cTraceContextInjector;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpTimeoutException;
@@ -34,6 +35,7 @@ public class HttpQidoStudyGateway implements StudyQueryGateway {
     private final QidoQueryBuilder queryBuilder;
     private final QidoStudyResponseParser responseParser;
     private final HttpClient httpClient;
+    private final W3cTraceContextInjector traceContextInjector = new W3cTraceContextInjector();
 
     @Inject
     public HttpQidoStudyGateway(
@@ -74,12 +76,13 @@ public class HttpQidoStudyGateway implements StudyQueryGateway {
 
         URI uri = queryBuilder.build(baseUrl, request, fetchLimit);
 
-        HttpRequest httpRequest = HttpRequest.newBuilder(uri)
+        HttpRequest.Builder builder = HttpRequest.newBuilder(uri)
             .timeout(requestTimeout)
             .header("Authorization", "Bearer " + accessToken)
             .header("Accept", DICOM_JSON_MEDIA_TYPE)
-            .GET()
-            .build();
+            .GET();
+        traceContextInjector.inject(builder);
+        HttpRequest httpRequest = builder.build();
 
         HttpResponse<String> response;
         try {
@@ -96,11 +99,9 @@ public class HttpQidoStudyGateway implements StudyQueryGateway {
                 throw new ArchiveSearchException(ArchiveSearchException.Reason.TIMEOUT, e);
             }
             throw new ArchiveSearchException(ArchiveSearchException.Reason.CONNECTION, e);
-        } catch (ArchiveSearchException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ArchiveSearchException(ArchiveSearchException.Reason.CONNECTION, e);
         }
+        // Sem catch genérico: um bug inesperado sobe para o fallback 500 da
+        // fronteira em vez de virar indisponibilidade do Archive.
 
         int statusCode = response.statusCode();
         if (statusCode == 413) {

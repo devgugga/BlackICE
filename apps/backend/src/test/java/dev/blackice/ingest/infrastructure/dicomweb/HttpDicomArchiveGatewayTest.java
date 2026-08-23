@@ -2,6 +2,12 @@ package dev.blackice.ingest.infrastructure.dicomweb;
 
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpServer;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.SpanContext;
+import io.opentelemetry.api.trace.TraceFlags;
+import io.opentelemetry.api.trace.TraceState;
+import io.opentelemetry.context.Context;
+import io.opentelemetry.context.Scope;
 import dev.blackice.ingest.application.exception.ArchiveUnavailableException;
 import dev.blackice.ingest.application.result.StowInstanceResult;
 import dev.blackice.ingest.application.result.StowStudyResult;
@@ -39,6 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -64,6 +71,24 @@ class HttpDicomArchiveGatewayTest {
         if (server != null) {
             server.stop(0);
         }
+    }
+
+    @Test
+    void an_unexpected_bug_is_not_disguised_as_a_connection_failure() throws Exception {
+        Path file = createDicomFile("1.2.3", "1.2.3.1", "1.2.3.1.1", (byte) 9);
+        List<ValidatedDicom> files = List.of(new ValidatedDicom(
+            0, file, "f.dcm", Files.size(file), "1.2.3", "1.2.3.1", "1.2.3.1.1",
+            UID.SecondaryCaptureImageStorage, "h"));
+
+        HttpClient broken = org.mockito.Mockito.mock(HttpClient.class);
+        org.mockito.Mockito.when(broken.send(org.mockito.ArgumentMatchers.any(), org.mockito.ArgumentMatchers.any()))
+            .thenThrow(new IllegalStateException("bug interno"));
+
+        HttpDicomArchiveGateway gateway = new HttpDicomArchiveGateway(
+            baseUrl, Duration.ofSeconds(5), new StowResponseParser(), broken);
+
+        assertThrows(IllegalStateException.class,
+            () -> gateway.storeStudy("1.2.3", files, "test-user-token"));
     }
 
     @Test

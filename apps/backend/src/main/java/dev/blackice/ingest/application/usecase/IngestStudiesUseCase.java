@@ -200,13 +200,9 @@ public class IngestStudiesUseCase {
             StowStudyResult result = gateway.storeStudy(studyUid, files, accessToken);
             return new StudyAttempt(studyUid, result, null);
         } catch (ArchiveUnavailableException e) {
+            // Só a indisponibilidade conhecida vira tentativa falha do estudo.
+            // Um bug inesperado sobe e termina no fallback 500 da fronteira.
             return new StudyAttempt(studyUid, null, e);
-        } catch (Exception e) {
-            return new StudyAttempt(
-                studyUid,
-                null,
-                new ArchiveUnavailableException(ArchiveUnavailableException.Reason.CONNECTION, e)
-            );
         }
     }
 
@@ -224,10 +220,18 @@ public class IngestStudiesUseCase {
                 ));
             } catch (ExecutionException e) {
                 Throwable cause = e.getCause();
-                ArchiveUnavailableException ex = cause instanceof ArchiveUnavailableException aue
-                    ? aue
-                    : new ArchiveUnavailableException(ArchiveUnavailableException.Reason.CONNECTION, cause);
-                attempts.add(new StudyAttempt(task.studyInstanceUid(), null, ex));
+                if (cause instanceof ArchiveUnavailableException unavailable) {
+                    attempts.add(new StudyAttempt(task.studyInstanceUid(), null, unavailable));
+                    continue;
+                }
+                // Não disfarçar bug de indisponibilidade: relança preservando o tipo.
+                if (cause instanceof RuntimeException runtime) {
+                    throw runtime;
+                }
+                if (cause instanceof Error error) {
+                    throw error;
+                }
+                throw new IllegalStateException("falha inesperada ao armazenar estudo", cause);
             }
         }
         return attempts;
