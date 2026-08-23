@@ -101,8 +101,8 @@ class HttpDicomArchiveGatewayTest {
         Path file2 = createDicomFile("1.2.840.10008.1", "1.2.840.10008.1.1", "1.2.840.10008.1.1.2", (byte) 43);
 
         List<ValidatedDicom> files = List.of(
-            new ValidatedDicom(file1, "file1.dcm", Files.size(file1), "1.2.840.10008.1", "1.2.840.10008.1.1", "1.2.840.10008.1.1.1", UID.SecondaryCaptureImageStorage, "hash1"),
-            new ValidatedDicom(file2, "file2.dcm", Files.size(file2), "1.2.840.10008.1", "1.2.840.10008.1.1", "1.2.840.10008.1.1.2", UID.SecondaryCaptureImageStorage, "hash2")
+            new ValidatedDicom(0, file1, "file1.dcm", Files.size(file1), "1.2.840.10008.1", "1.2.840.10008.1.1", "1.2.840.10008.1.1.1", UID.SecondaryCaptureImageStorage, "hash1"),
+            new ValidatedDicom(0, file2, "file2.dcm", Files.size(file2), "1.2.840.10008.1", "1.2.840.10008.1.1", "1.2.840.10008.1.1.2", UID.SecondaryCaptureImageStorage, "hash2")
         );
 
         HttpDicomArchiveGateway gateway = new HttpDicomArchiveGateway(
@@ -147,7 +147,7 @@ class HttpDicomArchiveGatewayTest {
 
         Path file = createDicomFile("1.2.3", "1.2.3.1", "1.2.3.1.1", (byte) 1);
         List<ValidatedDicom> files = List.of(
-            new ValidatedDicom(file, "f.dcm", Files.size(file), "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
+            new ValidatedDicom(0, file, "f.dcm", Files.size(file), "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
         );
 
         HttpDicomArchiveGateway gateway = new HttpDicomArchiveGateway(
@@ -179,7 +179,7 @@ class HttpDicomArchiveGatewayTest {
 
         Path file = createDicomFile("1.2.3", "1.2.3.1", "1.2.3.1.1", (byte) 1);
         List<ValidatedDicom> files = List.of(
-            new ValidatedDicom(file, "f.dcm", Files.size(file), "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
+            new ValidatedDicom(0, file, "f.dcm", Files.size(file), "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
         );
 
         HttpDicomArchiveGateway gateway = new HttpDicomArchiveGateway(
@@ -212,7 +212,7 @@ class HttpDicomArchiveGatewayTest {
 
         Path file = createDicomFile("1.2.3", "1.2.3.1", "1.2.3.1.1", (byte) 1);
         List<ValidatedDicom> files = List.of(
-            new ValidatedDicom(file, "f.dcm", Files.size(file), "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
+            new ValidatedDicom(0, file, "f.dcm", Files.size(file), "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
         );
 
         HttpDicomArchiveGateway gateway = new HttpDicomArchiveGateway(
@@ -237,7 +237,7 @@ class HttpDicomArchiveGatewayTest {
 
         Path file = createDicomFile("1.2.3", "1.2.3.1", "1.2.3.1.1", (byte) 1);
         List<ValidatedDicom> files = List.of(
-            new ValidatedDicom(file, "f.dcm", Files.size(file), "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
+            new ValidatedDicom(0, file, "f.dcm", Files.size(file), "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
         );
 
         HttpDicomArchiveGateway gateway = new HttpDicomArchiveGateway(
@@ -259,7 +259,7 @@ class HttpDicomArchiveGatewayTest {
     void missing_file_throws_connection_failure() {
         Path nonexistent = tempDir.resolve("missing.dcm");
         List<ValidatedDicom> files = List.of(
-            new ValidatedDicom(nonexistent, "missing.dcm", 100, "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
+            new ValidatedDicom(0, nonexistent, "missing.dcm", 100, "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
         );
 
         HttpDicomArchiveGateway gateway = new HttpDicomArchiveGateway(
@@ -283,7 +283,7 @@ class HttpDicomArchiveGatewayTest {
         byte[] fileBytes = Files.readAllBytes(file1);
 
         List<ValidatedDicom> files = List.of(
-            new ValidatedDicom(file1, "f1.dcm", fileBytes.length, "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
+            new ValidatedDicom(0, file1, "f1.dcm", fileBytes.length, "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
         );
 
         String boundary = "test-boundary-123";

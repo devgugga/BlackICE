@@ -65,7 +65,8 @@ public class IngestStudiesUseCase {
         List<DicomValidationIssue> issues = validation.issues();
 
         List<IngestResult.RejectedFile> locallyRejectedFiles = issues.stream()
-            .map(issue -> new IngestResult.RejectedFile(issue.filename(), issue.code(), issue.message()))
+            .map(issue -> new IngestResult.RejectedFile(
+                issue.itemIndex(), issue.filename(), issue.code(), issue.message()))
             .toList();
 
         int locallyRejected = locallyRejectedFiles.size();

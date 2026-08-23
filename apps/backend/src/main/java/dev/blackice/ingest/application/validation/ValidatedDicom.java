@@ -7,6 +7,7 @@ import java.nio.file.Path;
  *
  * <p>DICOM Invariant: Extracted UIDs must be preserved as exact strings without mutation or generation.</p>
  *
+ * @param itemIndex position of the file in the order the upload was received
  * @param path filesystem path to the raw DICOM file
  * @param filename client-provided filename for logging and reporting
  * @param size byte size of the file
@@ -17,6 +18,7 @@ import java.nio.file.Path;
  * @param sha256 hex-encoded SHA-256 hash of the file bytes for duplicate/collision detection
  */
 public record ValidatedDicom(
+    int itemIndex,
     Path path,
     String filename,
     long size,

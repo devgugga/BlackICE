@@ -1,7 +1,11 @@
 package dev.blackice.ingest.api;
 
 import dev.blackice.ingest.application.input.UploadedDicom;
+import dev.blackice.shared.api.problem.ApiProblemFactory;
+import dev.blackice.shared.api.problem.ProblemResponseFactory;
+import dev.blackice.shared.api.problem.TraceContext;
 import dev.blackice.ingest.application.result.IngestResult;
+import dev.blackice.ingest.application.validation.DicomValidationIssue;
 import dev.blackice.ingest.application.result.StowInstanceResult;
 import dev.blackice.ingest.application.usecase.IngestStudiesUseCase;
 import dev.blackice.security.application.AccessTokenProvider;
@@ -21,11 +25,17 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.blankOrNullString;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasToString;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -120,10 +130,67 @@ class IngestResourceTest {
             .body("studies[0].studyInstanceUid", equalTo("1.2.3"))
             .extract().response();
 
-        String requestId = response.header("X-Request-ID");
-        assertNotNull(requestId);
-        assertDoesNotThrow(() -> UUID.fromString(requestId));
+        assertNull(response.header("X-Request-ID"));
+        assertNotNull(response.header("X-Trace-ID"));
         verify(useCase).ingest(anyList(), eq("test-token"));
+    }
+
+    @Test
+    @TestSecurity(user = "dr.teste", roles = "auth")
+    void batch_with_no_locally_valid_file_returns_catalogued_violations_without_filenames() {
+        String csrf = getCsrfToken();
+        when(accessToken.accessToken()).thenReturn("test-token");
+        when(useCase.ingest(anyList(), eq("test-token"))).thenReturn(new IngestResult(
+            IngestResult.Outcome.FAILED,
+            new IngestResult.Summary(1, 0, 1, 0, 0),
+            List.of(),
+            List.of(new IngestResult.RejectedFile(
+                0, "test.dcm", DicomValidationIssue.Code.MALFORMED_DICOM, "The file is not valid DICOM."))
+        ));
+
+        given()
+            .cookie("csrf-token", csrf)
+            .header("X-CSRF-TOKEN", csrf)
+            .multiPart("files", "test.dcm", new byte[] {1, 2, 3}, "application/dicom")
+            .when().post("/api/studies")
+            .then()
+            .statusCode(422)
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_DICOM_VALIDATION_FAILED"))
+            .body("violations[0].itemIndex", equalTo(0))
+            .body("violations[0].code", equalTo("MALFORMED_DICOM"))
+            .body("violations[0].message", equalTo("The file is not valid DICOM."))
+            .body("violations[0].filename", nullValue())
+            .body("traceId", not(blankOrNullString()));
+    }
+
+    @Test
+    @TestSecurity(user = "dr.teste", roles = "auth")
+    void batch_whose_valid_studies_all_fail_by_unavailability_returns_a_bare_503() {
+        String csrf = getCsrfToken();
+        when(accessToken.accessToken()).thenReturn("test-token");
+        when(useCase.ingest(anyList(), eq("test-token"))).thenReturn(new IngestResult(
+            IngestResult.Outcome.FAILED,
+            new IngestResult.Summary(1, 1, 0, 0, 0),
+            List.of(new IngestResult.StudyResult(
+                "1.2.840.113619.2.55.3", IngestResult.StudyStatus.FAILED, List.of(), "ARCHIVE_UNAVAILABLE")),
+            List.of()
+        ));
+
+        given()
+            .cookie("csrf-token", csrf)
+            .header("X-CSRF-TOKEN", csrf)
+            .multiPart("files", "test.dcm", new byte[] {1, 2, 3}, "application/dicom")
+            .when().post("/api/studies")
+            .then()
+            .statusCode(503)
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_ARCHIVE_UNAVAILABLE"))
+            .body("studies", nullValue())
+            .body("summary", nullValue())
+            .body("violations", nullValue())
+            .body("$", not(hasToString(containsString("1.2.840"))))
+            .body("traceId", not(blankOrNullString()));
     }
 
     @Test
@@ -135,14 +202,37 @@ class IngestResourceTest {
             .header("X-CSRF-TOKEN", csrf)
             .multiPart("dummy", "empty")
             .when().post("/api/studies")
-            .then().statusCode(400);
+            .then().statusCode(400)
+            .contentType("application/problem+json")
+            .body("code", equalTo("API_UPLOAD_EMPTY"))
+            .body("traceId", not(blankOrNullString()));
+    }
+
+    /** Fronteira real de problemas, com TraceID fixo, para os testes unitários. */
+    private static ProblemResponseFactory problemResponses() {
+        return new ProblemResponseFactory(new ApiProblemFactory(new TraceContext() {
+            @Override
+            public String traceId() {
+                return "4bf92f3577b34da6a3ce929d0e0e4736";
+            }
+
+            @Override
+            public String spanId() {
+                return "00f067aa0ba902b7";
+            }
+        }));
+    }
+
+    private static IngestResponseMapper mapper() {
+        return new IngestResponseMapper(problemResponses());
     }
 
     @Test
     void upload_of_501_mocked_files_returns_413_without_calling_use_case() {
         IngestStudiesUseCase mockUseCase = mock(IngestStudiesUseCase.class);
         AccessTokenProvider mockToken = mock(AccessTokenProvider.class);
-        IngestResource resource = new IngestResource(mockUseCase, mockToken, 500, 524288000L);
+        IngestResource resource = new IngestResource(
+            mockUseCase, mockToken, mapper(), problemResponses(), 500, 524288000L);
 
         List<FileUpload> files = new ArrayList<>();
         for (int i = 0; i < 501; i++) {
@@ -162,7 +252,8 @@ class IngestResourceTest {
     void upload_larger_than_500mb_returns_413_without_calling_use_case() {
         IngestStudiesUseCase mockUseCase = mock(IngestStudiesUseCase.class);
         AccessTokenProvider mockToken = mock(AccessTokenProvider.class);
-        IngestResource resource = new IngestResource(mockUseCase, mockToken, 500, 524288000L);
+        IngestResource resource = new IngestResource(
+            mockUseCase, mockToken, mapper(), problemResponses(), 500, 524288000L);
 
         FileUpload file = mock(FileUpload.class);
         when(file.size()).thenReturn(524288001L);

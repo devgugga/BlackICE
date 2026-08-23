@@ -116,6 +116,7 @@ class Dcm4cheDicomBatchValidatorTest {
         assertTrue(validation.validStudies().isEmpty());
         assertEquals(1, validation.issues().size());
         DicomValidationIssue issue = validation.issues().getFirst();
+        assertEquals(0, issue.itemIndex());
         assertEquals("corrupt.dcm", issue.filename());
         assertEquals(DicomValidationIssue.Code.MALFORMED_DICOM, issue.code());
     }
@@ -139,19 +140,23 @@ class Dcm4cheDicomBatchValidatorTest {
         assertTrue(validation.validStudies().isEmpty());
         assertEquals(4, validation.issues().size());
 
+        assertEquals(0, validation.issues().get(0).itemIndex());
         assertEquals("noStudy.dcm", validation.issues().get(0).filename());
         assertEquals(DicomValidationIssue.Code.MISSING_STUDY_INSTANCE_UID, validation.issues().get(0).code());
         assertEquals(
-            "Required UID is missing: MISSING_STUDY_INSTANCE_UID",
+            "Required DICOM attribute Study Instance UID is missing.",
             validation.issues().get(0).message()
         );
 
+        assertEquals(1, validation.issues().get(1).itemIndex());
         assertEquals("noSeries.dcm", validation.issues().get(1).filename());
         assertEquals(DicomValidationIssue.Code.MISSING_SERIES_INSTANCE_UID, validation.issues().get(1).code());
 
+        assertEquals(2, validation.issues().get(2).itemIndex());
         assertEquals("noSop.dcm", validation.issues().get(2).filename());
         assertEquals(DicomValidationIssue.Code.MISSING_SOP_INSTANCE_UID, validation.issues().get(2).code());
 
+        assertEquals(3, validation.issues().get(3).itemIndex());
         assertEquals("noSopClass.dcm", validation.issues().get(3).filename());
         assertEquals(DicomValidationIssue.Code.MISSING_SOP_CLASS_UID, validation.issues().get(3).code());
     }
@@ -177,6 +182,7 @@ class Dcm4cheDicomBatchValidatorTest {
 
         assertEquals(1, validation.issues().size());
         DicomValidationIssue issue = validation.issues().getFirst();
+        assertEquals(1, issue.itemIndex());
         assertEquals("duplicate.dcm", issue.filename());
         assertEquals(DicomValidationIssue.Code.DUPLICATE_IDENTICAL, issue.code());
     }
@@ -196,11 +202,45 @@ class Dcm4cheDicomBatchValidatorTest {
         assertTrue(validation.validStudies().isEmpty());
         assertEquals(2, validation.issues().size());
 
+        assertEquals(0, validation.issues().get(0).itemIndex());
         assertEquals("sop_v1.dcm", validation.issues().get(0).filename());
         assertEquals(DicomValidationIssue.Code.SOP_UID_COLLISION, validation.issues().get(0).code());
 
+        assertEquals(1, validation.issues().get(1).itemIndex());
         assertEquals("sop_v2.dcm", validation.issues().get(1).filename());
         assertEquals(DicomValidationIssue.Code.SOP_UID_COLLISION, validation.issues().get(1).code());
+    }
+
+    @Test
+    void issue_messages_never_carry_a_dicom_uid() throws Exception {
+        Path p1 = dicom("1.2.3", "1.2.3.1", "1.2.3.1.1", (byte) 1);
+        Path p2 = temp.resolve("collision.dcm");
+        Files.write(p2, changeLastByte(Files.readAllBytes(p1)));
+        Path duplicate = temp.resolve("dup.dcm");
+        Files.copy(p1, duplicate);
+        Path corrupt = temp.resolve("corrupt.dcm");
+        Files.write(corrupt, new byte[] {0x12, 0x34, 0x56});
+
+        DicomBatchValidation validation = validator.validate(List.of(
+            new UploadedDicom(p1, "a.dcm", Files.size(p1)),
+            new UploadedDicom(p2, "b.dcm", Files.size(p2)),
+            new UploadedDicom(duplicate, "c.dcm", Files.size(duplicate)),
+            new UploadedDicom(corrupt, "d.dcm", Files.size(corrupt))
+        ));
+
+        assertFalse(validation.issues().isEmpty());
+        for (DicomValidationIssue issue : validation.issues()) {
+            assertFalse(issue.message().contains("1.2.3"),
+                "mensagem publica carrega UID: " + issue.message());
+            assertFalse(issue.message().toLowerCase().contains("uid:"),
+                "mensagem publica carrega UID: " + issue.message());
+        }
+    }
+
+    private static byte[] changeLastByte(byte[] bytes) {
+        byte[] copy = bytes.clone();
+        copy[copy.length - 1] = (byte) (copy[copy.length - 1] ^ 0xFF);
+        return copy;
     }
 
     @Test

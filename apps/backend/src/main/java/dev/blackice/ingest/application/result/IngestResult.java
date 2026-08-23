@@ -36,7 +36,15 @@ public record IngestResult(
         Integer reason
     ) {}
 
+    /**
+     * A locally rejected file.
+     *
+     * <p>{@code filename} exists only in the 200 result, which the uploader
+     * already correlates with its own selection; it is never published in the
+     * problem extension, where {@code itemIndex} identifies the item instead.
+     */
     public record RejectedFile(
+        int itemIndex,
         String filename,
         DicomValidationIssue.Code code,
         String message

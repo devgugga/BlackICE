@@ -35,16 +35,14 @@ public class Dcm4cheDicomBatchValidator implements DicomBatchValidator {
         List<DicomValidationIssue> issues = new ArrayList<>();
         Map<String, List<ValidatedDicom>> candidatesBySopUid = new LinkedHashMap<>();
 
-        for (UploadedDicom upload : uploads) {
+        for (int itemIndex = 0; itemIndex < uploads.size(); itemIndex++) {
+            UploadedDicom upload = uploads.get(itemIndex);
             try (DicomInputStream in = new DicomInputStream(upload.path().toFile())) {
                 in.setIncludeBulkData(DicomInputStream.IncludeBulkData.NO);
                 Attributes ds = in.readDataset();
                 if (ds == null) {
-                    issues.add(new DicomValidationIssue(
-                        upload.filename(),
-                        DicomValidationIssue.Code.MALFORMED_DICOM,
-                        "DICOM file does not contain a dataset"
-                    ));
+                    issues.add(DicomValidationIssue.of(
+                        itemIndex, upload.filename(), DicomValidationIssue.Code.MALFORMED_DICOM));
                     continue;
                 }
 
@@ -55,6 +53,7 @@ public class Dcm4cheDicomBatchValidator implements DicomBatchValidator {
 
                 String sha256 = calculateSha256(upload.path());
                 ValidatedDicom validated = new ValidatedDicom(
+                    itemIndex,
                     upload.path(),
                     upload.filename(),
                     upload.size(),
@@ -67,13 +66,12 @@ public class Dcm4cheDicomBatchValidator implements DicomBatchValidator {
 
                 candidatesBySopUid.computeIfAbsent(sop, k -> new ArrayList<>()).add(validated);
             } catch (ValidationException e) {
-                issues.add(new DicomValidationIssue(upload.filename(), e.code, e.getMessage()));
+                issues.add(DicomValidationIssue.of(itemIndex, upload.filename(), e.code));
             } catch (Exception e) {
-                issues.add(new DicomValidationIssue(
-                    upload.filename(),
-                    DicomValidationIssue.Code.MALFORMED_DICOM,
-                    e.getMessage() != null ? e.getMessage() : "Error processing DICOM file"
-                ));
+                // A mensagem da exceção pode carregar caminho, UID ou conteúdo do
+                // arquivo: só o código estável atravessa a fronteira.
+                issues.add(DicomValidationIssue.of(
+                    itemIndex, upload.filename(), DicomValidationIssue.Code.MALFORMED_DICOM));
             }
         }
 
@@ -97,19 +95,14 @@ public class Dcm4cheDicomBatchValidator implements DicomBatchValidator {
                     retained.add(group.getFirst());
                     for (int i = 1; i < group.size(); i++) {
                         ValidatedDicom dup = group.get(i);
-                        issues.add(new DicomValidationIssue(
-                            dup.filename(),
-                            DicomValidationIssue.Code.DUPLICATE_IDENTICAL,
-                            "Identical duplicate DICOM file with SOPInstanceUID: " + entry.getKey()
-                        ));
+                        issues.add(DicomValidationIssue.of(
+                            dup.itemIndex(), dup.filename(), DicomValidationIssue.Code.DUPLICATE_IDENTICAL));
                     }
                 } else {
                     for (ValidatedDicom collision : group) {
-                        issues.add(new DicomValidationIssue(
-                            collision.filename(),
-                            DicomValidationIssue.Code.SOP_UID_COLLISION,
-                            "SOPInstanceUID collision with different content: " + entry.getKey()
-                        ));
+                        issues.add(DicomValidationIssue.of(
+                            collision.itemIndex(), collision.filename(),
+                            DicomValidationIssue.Code.SOP_UID_COLLISION));
                     }
                 }
             }
@@ -120,6 +113,9 @@ public class Dcm4cheDicomBatchValidator implements DicomBatchValidator {
             validStudies.computeIfAbsent(valid.studyInstanceUid(), k -> new ArrayList<>()).add(valid);
         }
 
+        // Ordenação estável pela posição recebida: o consumidor associa cada
+        // violação ao arquivo que ele mesmo selecionou.
+        issues.sort(java.util.Comparator.comparingInt(DicomValidationIssue::itemIndex));
         return new DicomBatchValidation(validStudies, issues);
     }
 
