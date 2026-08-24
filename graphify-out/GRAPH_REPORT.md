@@ -1,263 +1,287 @@
-# Graph Report - .  (2026-08-23)
+# Graph Report - .  (2026-08-24)
 
 ## Corpus Check
-- 281 files · ~148,711 words
+- 297 files · ~158,268 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1849 nodes · 2898 edges · 239 communities (138 shown, 101 thin omitted)
-- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 210 edges (avg confidence: 0.79)
+- 2082 nodes · 3383 edges · 261 communities (147 shown, 114 thin omitted)
+- Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 205 edges (avg confidence: 0.78)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
-- Ingest Resource Boundary
-- Worklist Search Input
-- Worklist Vue Components
-- Ingest Use Case and Failures
-- QIDO Study Gateway
-- Catalog Schema Entry Fields
-- API Problem Framework Coverage
-- Frontend Package Manifest
-- DICOM Violations Extension Schema
-- Generated Java ProblemType
-- QIDO Study Response Parser
-- Java and TypeScript Generators
-- STOW Gateway Port and Results
-- Agent Authoring Knowledge
-- Session and Probe Resources
-- Worklist Resource Tests
-- Catalog CLI Commands
-- HTTP Problem Matrix Tests
-- Catalog Loading and Validation
-- Worklist QIDO Design Spec
-- Worklist QIDO Implementation Plan
-- Keycloak Same-origin Design
-- DICOMweb Domain Knowledge
-- Catalog Lock Enforcement
-- Frontend Ingest Upload API
-- Node TypeScript Config
-- Golden ProblemType Fixture
-- DICOM Batch Validator Setup
-- Worklist Resource Boundary
-- App TypeScript Config
-- Problem Factory and Extensions
-- Generated Frontend Problem Types
-- Golden TypeScript Fixtures
-- Catalog Tooling Manifest
-- STOW Gateway Failure Reasons
-- DICOM Validation Issue Codes
-- Backend Architecture Guard
-- Access Token Provider
-- Catalog CLI Test Harness
-- API Problem Response Filter
-- UUIDv5 Identity Derivation
-- Catalog Schema Definitions
-- Keycloak and DCM4CHEE Infra
-- DICOM Validator Behaviour Tests
-- API Trace Response Filter
-- W3C Trace Propagation
-- E2E Login and Worklist Specs
-- Graphify Community Labeling
-- CI Verification and Toolchain
-- Catalog Schema Root
-- Problem Factory Trace Wiring
-- Ingest API Test Doubles
-- Catalog Entries Array Schema
-- Backend Clean Architecture Design
-- Problem Catalog Governance Docs
-- Backend Runtime Configuration
-- Maven Wrapper Script
-- STOW Gateway Trace Injection
-- Archive Search Failure Reasons
-- Synthetic DICOM E2E Fixtures
-- Catalog Entry Required Fields
-- Manual DICOM Import Plan
-- Agent Authoring Skill Design
-- Catalog Identity and Gates
-- Trace Filter Tests
-- Ingest Page Component
-- Catalog Markdown Generator
-- Golden ProblemExtensions Fixture
-- OIDC Session and CSRF Settings
-- Catalog Root Properties
-- Backend Architecture Plan
-- Commit Curator Design
-- Keycloak Windows Bootstrap Design
-- Contracts and Tooling Layout
-- DICOM Validation Ports
-- CSRF Resource Endpoint
-- CSRF Resource Tests
-- Session Resource Tests
-- Ingest Frontend Types
-- Keycloak Same-origin Plan
-- Agent Authoring Skill Plan
-- Antigravity Agents Design
-- Claude Subagent Wrappers
-- Client Scope Classification
-- Catalog Owner Definitions
-- Keycloak Theme Plans
-- Keycloak Bootstrap Launchers
-- Antigravity Agents Plan
-- Multipart Related Publisher
-- Api Problem Record
-- Worklist Composable Tests
-- Project Structure Rules
-- Session Query Note
-- DICOM UID Rules Query
-- Graphify Instructions Query
-- Antigravity DICOM Reviewer
-- Git and Graphify Packs
-- Catalog Entry Definition
-- Catalog Public Text Schema
-- Backend Modular Architecture Docs
-- Vue Frontend Domain Knowledge
-- Commit Curator Plan
-- Keycloak Bootstrap Plan
-- TraceID Propagation Plan
-- Problem Catalog Identity Design
-- Quarkus Problem Boundary Design
-- Antigravity Viewer Agent
-- Antigravity Quarkus Agent
-- Ingest Batch Composable Tests
-- TypeScript Project References
-- Claude Commit Curator
-- Graphify Update Runbook
-- DICOM Hierarchy Semantics
-- Historical Specs Index
-- Shared Problem Contract Plan
-- Catalog Lock Plan
-- Problem Code Generation Plan
-- Frontend Problem Parser Design
-- Graphify Watch and Ingest
-- Graphify Export Targets
-- Graphify Query Expansion
-- Graphify Incremental Merge
-- Graphify Setup Overlay
-- Antigravity Commit Curator
-- Codex Agent Authoring Skill
-- Maven Wrapper Distribution
-- Frontend Container Build
-- Playwright Configuration
-- BlackICE Favicon Asset
-- Frontend Router
-- Home Page Component
-- Ingest Result Component
-- Session Frontend Types
-- Claude Agent Authoring Skill
-- DICOM Violations Minimalism
-- Thin Wrapper Convention
-- Model Routing and Validation
-- Pixel Data and Transfer Syntax
-- Catalog Immutability Policy
-- Monorepo Structure Docs
-- Agent Platform Plans
-- Frontend Problem Parser Plan
-- Keycloak Admin REST Script
-- Backend and Worklist Designs
-- Shared Problem Contract Design
-- Generated Types Frontend Design
-- Keycloak Container Script
-- Keycloak Host Script
-- Antigravity Commit Agent File
-- Antigravity DICOM Reviewer File
-- Antigravity Viewer Agent File
-- Antigravity Quarkus Agent File
-- Graphify Extraction Spec
-- Graphify Repository Merge
-- Graphify Post-commit Hook
-- Graphify Media Transcription
-- Claude Skills Index
-- Codex DICOM Reviewer
-- Codex Commit Curator
-- Codex Quarkus Agent
-- Codex Viewer Agent
-- Codex Agent Configuration
-- AfterEach Hook
-- Graphify Commit Protocol
-- Backend Docker Ignore
-- Backend Git Ignore
-- Backend JVM Container
-- Backend Legacy JAR Container
-- Backend Native Micro Container
-- Backend Native Container
-- Jackson JsonNode
-- Jackson ObjectMapper
-- JUnit Test Annotation
-- Study Page Result
-- Frontend Docker Ignore
-- Frontend Git Ignore
-- Frontend Mount Point
-- Frontend Node Versions
-- Frontend Lockfile
-- Social Icon Sprite
-- Frontend Toolchain Readme
-- Ingest Interface States
-- Blocking Annotation
-- Claude Code Configuration
-- Graphify Add and Watch
-- Graphify Export Reference
-- Graphify Extraction Reference
-- Graphify Cross-repo Merge
-- Graphify Hooks Reference
-- Graphify Query Reference
-- Graphify Transcription Reference
-- Graphify Claude Ignore
-- Consumes Annotation
-- Agent Platform Layouts
-- PatientID Issuer Rule
-- Codex Subagent Notes
-- PACS Architecture Decisions
-- Shared Realm Audience
-- Graphify Integration Design
-- Commit Curator Note
-- Agent Authoring Note
-- Antigravity Agents Note
-- GET Annotation
-- Graphify Merge Driver
-- Graphify Local State
-- Graphify Recursion Exclusion
-- Logger Facility
-- Backend Maven Project
-- POST Annotation
-- Produces Annotation
-- QuarkusTest Annotation
-- RolesAllowed Annotation
-- TestSecurity Annotation
+- Gateway STOW-RS e Parsing
+- Ingestão Concorrente e Respostas
+- Falhas API e Ingestão
+- Endpoint Ingestão e Problemas
+- Testes Falhas API
+- Busca QIDO-RS e Domínio
+- Cliente Frontend Problemas DICOM
+- Interface Vue Worklist
+- Gateway QIDO-RS HTTP
+- Filtros API e Trace
+- Parser Respostas QIDO-RS
+- Dependências Frontend Vue
+- Esquema Violações DICOM
+- Tipos Problemas API
+- Geradores Contratos JavaScript
+- Autoria Agentes Domain Pack
+- Propagação Contexto Trace
+- Catálogo Problemas JavaScript
+- CLI Catálogo Problemas
+- Design Worklist QIDO-RS
+- Plano Implementação Worklist
+- Design Login Keycloak Same-Origin
+- Lock Catálogo Problemas
+- Configuração TypeScript Node
+- Tipos Problemas Golden
+- Endpoint Worklist HTTP
+- Configuração TypeScript Aplicação
+- Testes Validação DICOM
+- Probe Problemas HTTP
+- Tipos Problemas TypeScript
+- Dependências Ferramenta Catálogo
+- Testes Arquitetura Backend
+- Governança Catálogo Problemas
+- Configuração Projeto BlackICE
+- Provedor Token Acesso
+- CLI Geração Catálogo
+- Arquitetura Produto BlackICE
+- Resultados Ingestão
+- Testes Cliente Ingestão
+- Página Vue Ingestão
+- Estado Ingestão Frontend
+- Identidade UUIDv5 Problemas
+- Esquemas Problemas API
+- Infraestrutura Keycloak DCM4CHEE
+- Violações Validação DICOM
+- Sessão BFF OIDC
+- Testes Frontend Login Worklist
+- Arquitetura Integração DICOMweb
+- Rotulagem Comunidades Graphify
+- Validador DICOM DCM4CHEE
+- Cliente API Ingestão
+- Design Arquitetura Backend Modular
+- Governança Problemas e Rastreamento
+- Script Maven Wrapper
+- Porta Gateway STOW-RS
+- Erros Busca Arquivo
+- Tipos Problemas API
+- Esquema Campos Problema
+- Registro Problemas Catálogo
+- Fluxo Ingestão DICOM
+- Design Skill Autoria Agentes
+- Gerador Markdown Catálogo
+- Testes DICOM Validado
+- Esquema Metadados Catálogo
+- Plano Backend Modular
+- Design Commit Curator
+- Bootstrap Keycloak Windows
+- Modelos Validação DICOM
+- Resultado Instância STOW
+- Endpoint Token CSRF
+- Testes Endpoint CSRF
+- Testes Endpoint Sessão
+- Tipos Ingestão Frontend
+- Problemas Cliente e Registro
+- Esquema Catálogo Principal
+- Plano Login Keycloak
+- Plano Skill Autoria Agentes
+- Design Agentes Antigravity
+- Gate Arquitetura DICOM
+- Política Login OIDC
+- Configuração Operacional HTTP
+- Configuração Telemetria DICOMweb
+- Probe Externo Problemas
+- Backlog Evolução DICOM
+- Esquema Coleções Catálogo
+- Esquema Extensões Problemas
+- Categorias Domínio Frontend
+- Planos tema Keycloak
+- Bootstrap Keycloak multiplataforma
+- Implementação agentes Antigravity
+- Arquitetura modular monorepo
+- Resultado ingestão Vue
+- Testes composable worklist
+- Esquema status HTTP
+- Esquema proprietários catálogo
+- Política retry catálogo
+- Metadados catálogo problemas
+- Classificação problemas API
+- Consulta sessão Vue
+- Consulta regras DICOM
+- Consulta instruções Graphify
+- Agente revisor DICOM
+- Integração Graphify Git
+- Esquema entrada problemas
+- Esquema descrição problemas
+- Escopo problemas API
+- Status catálogo problemas
+- Tipo problema catalogado
+- Arquitetura backend Quarkus
+- Arquitetura frontend Vue DICOM
+- Plano curador commits
+- Plano bootstrap Keycloak Windows
+- Agente frontend visualizador DICOM
+- Agente backend Quarkus
+- Arquitetura Domain Packs
+- Testes lote ingestão
+- Configuração TypeScript frontend
+- Convenções commits Claude
+- Atualização incremental Graphify
+- Esquema UUID problemas
+- Hierarquia identidade DICOM
+- Planos integração Graphify
+- Resultados arquivo indisponível
+- Observador ingestão URL
+- Exportações servidor Graphify
+- Consultas grafo Graphify
+- Reextração incremental Graphify
+- Configuração skill Graphify
+- Agente curador commits
+- Skill autoria agentes
+- Wrapper Maven backend
+- Build SPA frontend
+- Configuração Playwright frontend
+- Favicon BlackICE
+- Roteamento SPA Vue
+- Página inicial Vue
+- Tipos sessão frontend
+- Skill autoria agentes Claude
+- Wrappers agentes finos
+- Roteamento modelos agentes
+- Preservação pixels DICOM
+- Imutabilidade catálogo problemas
+- Segurança logs rastreamento
+- Estrutura projeto monorepo
+- Planos autoria agentes
+- Migração contratos problemas
+- Script admin Keycloak
+- Especificações backend worklist
+- Validação DICOM problemas
+- Script configuração container Keycloak
+- Script configuração Keycloak
+- Wrapper agente curador
+- Wrapper revisor DICOM
+- Wrapper frontend DICOM
+- Wrapper backend Quarkus
+- Especificação extração semântica
+- Merge grafo entre repositórios
+- Hook Graphify pós-commit
+- Transcrição mídia Graphify
+- Skills Claude
+- Agente Codex revisor DICOM
+- Agente Codex commits
+- Agente Codex Quarkus
+- Agente Codex frontend DICOM
+- Configuração multiagente Codex
+- Provedor token acesso
+- Teste de ciclo AfterEach
+- Fluxo commits Graphify
+- Artefatos container backend
+- Regras exclusão backend
+- Toolchain Java Maven
+- Contêiner backend JVM
+- Contêiner JAR legado Quarkus
+- Contêiner micro nativo Quarkus
+- Contêiner backend nativo
+- Gateway arquivo DICOM
+- Validador lote DICOM
+- Resultado estudo STOW
+- DICOM enviado
+- DICOM validado
+- Logger falhas API
+- Mapeador JSON problemas
+- Tipo problema API
+- Logger mapeadores exceções
+- URI problema gerado
+- Resumo estudo QIDO
+- Teste ingestão HTTP
+- Anotação Consumes HTTP
+- Método HTTP POST
+- Anotação Produces HTTP
+- Anotação RolesAllowed HTTP
+- Injetor contexto W3C
+- Caso uso busca estudos
+- Página estudos worklist
+- Regras contexto Docker frontend
+- Regras exclusão frontend
+- Ponto montagem frontend
+- Versões Node pnpm
+- Dependências frontend
+- Ícones redes sociais
+- Estado bloqueante
+- Configuração Claude Code
+- Adição monitoramento Graphify
+- Exportações Graphify
+- Extração semântica
+- Mesclagem repositórios Graphify
+- Hooks Graphify
+- Consultas Graphify
+- Transcrição Graphify
+- Exclusão saída Graphify
+- Descoberta plataforma agentes
+- PatientID com issuer
+- Configuração subagentes Codex
+- Plano catálogo problemas
+- Decisões arquitetura PACS
+- Audiência realm compartilhado
+- Integração Graphify projeto
+- Curadoria commits
+- Criação skills agentes
+- Agentes Antigravity
+- Método HTTP GET
+- Driver merge Graphify
+- Estado local Git
+- Exclusão recursão Graphify
+- Nó JSON
+- Registro logs API
+- Módulo backend Quarkus
+- Teste Quarkus
+- Motivo operação
+- Roteador API HTTP
+- Supressão avisos compilador
+- Segurança testes
+- Fonte de valores
 
 ## God Nodes (most connected - your core abstractions)
-1. `ValidatedDicom` - 27 edges
-2. `ProblemType` - 24 edges
-3. `StudySearchRequest` - 22 edges
-4. `IngestResult` - 22 edges
-5. `WorklistResourceTest` - 20 edges
-6. `HttpQidoStudyGatewayTest` - 20 edges
-7. `IngestStudiesUseCase` - 19 edges
-8. `IngestResourceTest` - 18 edges
-9. `ApiProblemHttpTest` - 18 edges
-10. `QidoStudyResponseParser` - 16 edges
+1. `StowResponseParser` - 30 edges
+2. `HttpDicomArchiveGatewayTest` - 27 edges
+3. `IngestStudiesUseCase` - 27 edges
+4. `ProblemType` - 25 edges
+5. `IngestStudiesUseCaseTest` - 25 edges
+6. `IngestResourceTest` - 25 edges
+7. `StudySearchRequest` - 22 edges
+8. `WorklistResourceTest` - 22 edges
+9. `HttpQidoStudyGatewayTest` - 21 edges
+10. `ApiProblemHttpTest` - 21 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Forbidden Data In Error Surfaces` --semantically_similar_to--> `DICOM Business Invariants`  [INFERRED] [semantically similar]
-  docs/domains/problem-catalog/security.md → AGENTS.md
 - `DICOM Business Invariants` --semantically_similar_to--> `UUIDv5 Problem Identity`  [INFERRED] [semantically similar]
   AGENTS.md → docs/domains/problem-catalog/registry.md
+- `Forbidden Data In Error Surfaces` --semantically_similar_to--> `DICOM Business Invariants`  [INFERRED] [semantically similar]
+  docs/domains/problem-catalog/security.md → AGENTS.md
 - `Problem Catalog Skill (Codex and Antigravity)` --semantically_similar_to--> `Problem Catalog Skill (Claude)`  [INFERRED] [semantically similar]
   .agents/skills/problem-catalog/SKILL.md → .claude/skills/problem-catalog/SKILL.md
 - `Graphify project setup` --references--> `Graphify skill`  [EXTRACTED]
   .graphify/setup.ps1 → .agents/skills/graphify/SKILL.md
-- `DICOMweb Gateway Endpoint` --references--> `DCM4CHEE Archive Engine`  [INFERRED]
-  apps/backend/src/main/resources/application.properties → AGENTS.md
+- `Feature-first Frontend` --conceptually_related_to--> `Frontend BFF Session`  [INFERRED]
+  docs/domains/vue/conventions.md → apps/frontend/README.md
 
 ## Import Cycles
 - None detected.
 
 ## Hyperedges (group relationships)
-- **BFF Session Security Settings** — apps_backend_src_main_resources_application_oidc_bff_session, apps_backend_src_main_resources_application_pkce_required, apps_backend_src_main_resources_application_realm_roles_mapping, apps_backend_src_main_resources_application_csrf_token_endpoint [EXTRACTED 1.00]
+- **Local Trace Context Configuration** — apps_backend_src_main_resources_application_local_trace_telemetry, apps_backend_src_main_resources_application_tracecontext_only_propagation, apps_backend_src_main_resources_application_structured_trace_logging, apps_backend_src_main_resources_application_otlp_export_disabled [EXTRACTED 1.00]
+- **OIDC BFF Security Configuration** — apps_backend_src_main_resources_application_oidc_bff_authentication, apps_backend_src_main_resources_application_keycloak_oidc_provider, apps_backend_src_main_resources_application_secure_oidc_session_cookie, apps_backend_src_main_resources_application_pkce_s256, apps_backend_src_main_resources_application_api_login_oidc_policy [EXTRACTED 1.00]
+- **Ingest Payload Protection** — apps_backend_src_main_resources_application_ingest_operational_limits, apps_backend_src_main_resources_application_application_level_payload_rejection, apps_backend_src_main_resources_application_http_api_runtime [EXTRACTED 1.00]
+- **Problem Details Contract Implementation** — docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_problem_details_contract, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_problem_catalog, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_backend_problem_boundary, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_frontend_problem_parser [EXTRACTED 1.00]
+- **Trace Context Flow** — docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_w3c_traceparent, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_traceid_end_to_end, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_backend_problem_boundary, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_frontend_problem_parser [EXTRACTED 1.00]
+- **Unknown Archive Outcome Contract** — docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_uncertain_archive_outcome, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_api_archive_outcome_unknown, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_api_archive_unavailable [EXTRACTED 1.00]
+- **Atomic Problem Contract Migration** — docs_superpowers_plans_2026_08_23_error_handling_problem_catalog_implementation_plan, docs_superpowers_plans_2026_08_23_error_handling_problem_catalog_atomic_contract_migration, docs_superpowers_plans_2026_08_23_error_handling_problem_catalog_phased_delivery [EXTRACTED 1.00]
 - **Problem Catalog Governance Pack** — docs_domains_problem_catalog_readme_problem_catalog_domain_pack, docs_domains_problem_catalog_classification_decision_tree, docs_domains_problem_catalog_registry_code_grammar, docs_domains_problem_catalog_security_forbidden_data [EXTRACTED 1.00]
 - **Problem Classification Categories** — docs_domains_problem_catalog_classification_api_scope, docs_domains_problem_catalog_classification_client_scope, docs_domains_problem_catalog_classification_operation_result, docs_domains_problem_catalog_classification_user_cancellation [EXTRACTED 1.00]
 - **Catalog-Gated Verification Pipeline** — _github_workflows_verify_catalog_job, _github_workflows_verify_backend_job, _github_workflows_verify_frontend_job, docs_domains_problem_catalog_registry_continuous_verification [EXTRACTED 1.00]
-- **Generated cross-stack problem contract** — docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_problem_catalog, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_problem_types_generated, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_quarkus, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_vue_frontend [EXTRACTED 1.00]
-- **Problem contract flow** — docs_superpowers_plans_2026_08_23_error_handling_problem_catalog_problem_catalog, docs_superpowers_plans_2026_08_23_error_handling_problem_catalog_codegen, docs_superpowers_plans_2026_08_23_error_handling_problem_catalog_problem_type_java, docs_superpowers_plans_2026_08_23_error_handling_problem_catalog_problem_types_typescript [EXTRACTED 1.00]
 - **DICOMweb Operations** — docs_domains_dicom_dicomweb_qido_rs, docs_domains_dicom_dicomweb_wado_rs, docs_domains_dicom_dicomweb_stow_rs [EXTRACTED 1.00]
 - **Keycloak Login Theme Delivery** — docs_superpowers_plans_2026_07_26_keycloak_login_theme_keycloak_login_theme_plan, docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_plan, docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_theme_e2e_plan, docs_superpowers_specs_2026_07_26_keycloak_login_theme_design_keycloak_theme_design [INFERRED 0.85]
 - **BlackICE Keycloak login theme** — infra_keycloak_readme_blackice_keycloak_configuration, infra_keycloak_themes_blackice_login_messages_messages_en_blackice_login_messages, infra_keycloak_themes_blackice_login_resources_css_blackice_blackice_login_theme, infra_keycloak_themes_blackice_login_theme_blackice_theme_properties [EXTRACTED 1.00]
@@ -268,475 +292,503 @@
 - **DICOM Delivery Roles** — _claude_agents_dicom_dicom_domain_reviewer_dicom_domain_review, _claude_agents_quarkus_quarkus_backend_quarkus_backend, _claude_agents_vue_dicom_viewer_frontend_cornerstone_viewer [INFERRED 0.85]
 - **DICOM Patient Identity Safety** — docs_domains_dicom_semantics_dicom_patient_study_series_instance_hierarchy, docs_domains_dicom_semantics_dicom_uid_identity, docs_domains_dicom_semantics_patientid_with_issuer [EXTRACTED 1.00]
 
-## Communities (239 total, 101 thin omitted)
+## Communities (261 total, 114 thin omitted)
 
-### Community 0 - "Ingest Resource Boundary"
+### Community 0 - "Gateway STOW-RS e Parsing"
 Cohesion: 0.05
-Nodes (53): IngestResource, AccessTokenProvider, Blocking, Consumes, Inject, Logger, Path, POST (+45 more)
+Nodes (43): ArchiveUnavailableException, Reason, CONNECTION, HTTP_STATUS, INTERRUPTED, INVALID_RESPONSE, OUTCOME_UNKNOWN, TIMEOUT (+35 more)
 
-### Community 1 - "Worklist Search Input"
+### Community 1 - "Ingestão Concorrente e Respostas"
+Cohesion: 0.06
+Nodes (35): ApiProblemFactory, TaskExecutorFactory, IngestStudiesUseCase, InterruptState, ApplicationScoped, IngestResult, Inject, StudyAttempt (+27 more)
+
+### Community 2 - "Falhas API e Ingestão"
+Cohesion: 0.05
+Nodes (52): ApiProblem, IngestResponseMapper, ApplicationScoped, IngestResult, Inject, ProblemResponseFactory, ProblemType, Response (+44 more)
+
+### Community 3 - "Endpoint Ingestão e Problemas"
+Cohesion: 0.05
+Nodes (42): IngestResource, AccessTokenProvider, Blocking, Consumes, Inject, Logger, Path, POST (+34 more)
+
+### Community 4 - "Testes Falhas API"
+Cohesion: 0.07
+Nodes (22): ApiFailureLogCapture, Logger, Override, ApiProblemHttpTest, ProblemType, QuarkusTest, Test, TestSecurity (+14 more)
+
+### Community 5 - "Busca QIDO-RS e Domínio"
 Cohesion: 0.08
 Nodes (25): InvalidStudySearchException, StudySearchRequest, StudyQueryGateway, PageMetadata, StudyPage, StudySummary, ApplicationScoped, Inject (+17 more)
 
-### Community 2 - "Worklist Vue Components"
+### Community 6 - "Cliente Frontend Problemas DICOM"
 Cohesion: 0.06
-Nodes (25): emit, EMPTY_FILTERS, PAGE_SIZE, SearchStudies, useWorklist(), WorklistComposable, WorklistPhase, safeError() (+17 more)
+Nodes (40): createSyntheticDicom(), element(), LONG_VR, paddedText(), SyntheticDicomMetadata, text(), us(), ApiError (+32 more)
 
-### Community 3 - "Ingest Use Case and Failures"
+### Community 7 - "Interface Vue Worklist"
+Cohesion: 0.07
+Nodes (24): emit, EMPTY_FILTERS, PAGE_SIZE, SearchStudies, useWorklist(), WorklistComposable, WorklistPhase, searchStudies() (+16 more)
+
+### Community 8 - "Gateway QIDO-RS HTTP"
+Cohesion: 0.13
+Nodes (19): HttpQidoStudyGateway, ApplicationScoped, HttpClient, Inject, Override, StudySearchRequest, W3cTraceContextInjector, HttpQidoStudyGatewayTest (+11 more)
+
+### Community 9 - "Filtros API e Trace"
 Cohesion: 0.10
-Nodes (24): ArchiveUnavailableException, Reason, CONNECTION, HTTP_STATUS, INTERRUPTED, INVALID_RESPONSE, TIMEOUT, IngestStudiesUseCase (+16 more)
+Nodes (18): ApiProblemResponseFilter, ContainerRequestContext, ContainerResponseContext, Override, ProblemType, Provider, ApiTraceResponseFilter, ContainerRequestContext (+10 more)
 
-### Community 4 - "QIDO Study Gateway"
+### Community 10 - "Parser Respostas QIDO-RS"
 Cohesion: 0.14
-Nodes (19): HttpQidoStudyGateway, ApplicationScoped, HttpClient, Inject, Override, StudySearchRequest, HttpQidoStudyGatewayTest, AfterEach (+11 more)
+Nodes (12): InvalidResponseException, ApplicationScoped, Inject, JsonNode, ObjectMapper, QidoStudyResponseParser, BeforeEach, ParameterizedTest (+4 more)
 
-### Community 5 - "Catalog Schema Entry Fields"
-Cohesion: 0.05
-Nodes (41): $ref, description, minLength, type, $ref, properties, description, pattern (+33 more)
-
-### Community 6 - "API Problem Framework Coverage"
-Cohesion: 0.12
-Nodes (23): ApiJavaScriptRequestChecker, ApplicationScoped, Override, RoutingContext, ApiHttpFailureHandler, ApplicationScoped, Logger, ObjectMapper (+15 more)
-
-### Community 7 - "Frontend Package Manifest"
+### Community 11 - "Dependências Frontend Vue"
 Cohesion: 0.05
 Nodes (39): dependencies, vue, vue-router, devDependencies, jsdom, @playwright/test, @types/node, typescript (+31 more)
 
-### Community 8 - "DICOM Violations Extension Schema"
+### Community 12 - "Esquema Violações DICOM"
 Cohesion: 0.05
 Nodes (38): additionalProperties, description, enum, description, $id, description, minimum, type (+30 more)
 
-### Community 9 - "Generated Java ProblemType"
+### Community 13 - "Tipos Problemas API"
 Cohesion: 0.06
-Nodes (31): URI, ProblemScope, API, CLIENT, ProblemType, API_ACCESS_DENIED, API_ARCHIVE_RESPONSE_INVALID, API_ARCHIVE_UNAVAILABLE (+23 more)
+Nodes (31): ProblemScope, API, CLIENT, ProblemType, API_ACCESS_DENIED, API_ARCHIVE_OUTCOME_UNKNOWN, API_ARCHIVE_RESPONSE_INVALID, API_ARCHIVE_UNAVAILABLE (+23 more)
 
-### Community 10 - "QIDO Study Response Parser"
-Cohesion: 0.15
-Nodes (12): ApplicationScoped, Inject, StudySummary, QidoStudyResponseParser, BeforeEach, ParameterizedTest, Test, QidoStudyResponseParserTest (+4 more)
-
-### Community 11 - "Java and TypeScript Generators"
+### Community 14 - "Geradores Contratos JavaScript"
 Cohesion: 0.13
 Nodes (32): appliesToBody(), componentType(), constant(), deprecationTag(), extensionVariant(), generateJava(), generateJavaExtensions(), header() (+24 more)
 
-### Community 12 - "STOW Gateway Port and Results"
-Cohesion: 0.12
-Nodes (16): DicomArchiveGateway, Status, ACCEPTED, REJECTED, UNCONFIRMED, WARNING, StowInstanceResult, StowStudyResult (+8 more)
-
-### Community 13 - "Agent Authoring Knowledge"
+### Community 15 - "Autoria Agentes Domain Pack"
 Cohesion: 0.08
 Nodes (23): Agent authoring skill, Claude agent authoring skill, Convenções de autoria de agentes, Escopo e autorização, Fonte única de verdade, Forma de um wrapper, Fronteiras, Classificação e roteamento (+15 more)
 
-### Community 14 - "Session and Probe Resources"
-Cohesion: 0.17
-Nodes (18): Authenticated, GET, Path, Response, SessionResource, SessionResponse, ApiProblemProbeResource, Consumes (+10 more)
+### Community 16 - "Propagação Contexto Trace"
+Cohesion: 0.15
+Nodes (13): ContextAwareVirtualThreadExecutorFactory, ApplicationScoped, Override, W3cTraceContextInjector, QuarkusTest, Test, W3cTraceContextInjectorTest, Builder (+5 more)
 
-### Community 15 - "Worklist Resource Tests"
-Cohesion: 0.20
-Nodes (9): AccessTokenProvider, QuarkusTest, SearchStudiesUseCase, Test, TestSecurity, WorklistResourceTest, ArchiveSearchException, Response (+1 more)
-
-### Community 16 - "Catalog CLI Commands"
-Cohesion: 0.17
-Nodes (23): loadSchema(), SCHEMA_VERSION, serializeCatalog(), structuralValidator(), validateCatalog(), addEntry(), bootstrapCatalog(), buildEntry() (+15 more)
-
-### Community 17 - "HTTP Problem Matrix Tests"
-Cohesion: 0.19
-Nodes (7): ApiProblemHttpTest, ProblemType, QuarkusTest, Test, TestSecurity, HttpClient, ValidatableResponse
-
-### Community 18 - "Catalog Loading and Validation"
+### Community 17 - "Catálogo Problemas JavaScript"
 Cohesion: 0.12
-Nodes (21): API_KEY_ORDER, canonicalJson(), CLIENT_KEY_ORDER, CONTRACTS_DIR, fingerprint(), loadCatalog(), loadExtensionSchemas(), normalizeCatalog() (+13 more)
+Nodes (22): API_KEY_ORDER, canonicalJson(), CLIENT_KEY_ORDER, CONTRACTS_DIR, fingerprint(), loadCatalog(), loadExtensionSchemas(), normalizeCatalog() (+14 more)
 
-### Community 19 - "Worklist QIDO Design Spec"
+### Community 18 - "CLI Catálogo Problemas"
+Cohesion: 0.18
+Nodes (22): loadSchema(), serializeCatalog(), structuralValidator(), validateCatalog(), addEntry(), bootstrapCatalog(), buildEntry(), checkWorkspace() (+14 more)
+
+### Community 19 - "Design Worklist QIDO-RS"
 Cohesion: 0.09
 Nodes (22): Arquitetura, Autenticação, privacidade e observabilidade, Backend, Backend, Buscar estudos, Contrato HTTP, Critérios de aceite, Desempenho e concorrência (+14 more)
 
-### Community 20 - "Worklist QIDO Implementation Plan"
+### Community 20 - "Plano Implementação Worklist"
 Cohesion: 0.09
 Nodes (21): Backend production, Backend tests, File Map, Frontend production and tests, Global Constraints, Integration and operational files, Phase 1 — Backend QIDO vertical slice, Phase 1 human gate (+13 more)
 
-### Community 21 - "Keycloak Same-origin Design"
+### Community 21 - "Design Login Keycloak Same-Origin"
 Cohesion: 0.09
 Nodes (21): Alternativas descartadas, `apps/backend/src/main/resources/application.properties`, BlackICE — Login same-origin: tirar o Keycloak da barra de endereços, Custo honesto, Custo honesto (revisado), Decisões, Estado atual (verificado em 2026-08-07, stack no ar), Fase 1 — Same-origin atrás do Traefik (+13 more)
 
-### Community 22 - "DICOMweb Domain Knowledge"
-Cohesion: 0.12
-Nodes (21): BFF Session, Worklist Search, Archive Ecosystem, DCM4CHEE 5.34.3 Secure Baseline, Evolution Backlog, Worklist Pagination Evolution, OIDC Token Propagation, QIDO-RS (+13 more)
-
-### Community 23 - "Catalog Lock Enforcement"
+### Community 22 - "Lock Catálogo Problemas"
 Cohesion: 0.18
 Nodes (18): compareCodes(), assertAllowedTransition(), assertExtensionFingerprints(), assertImmutableFields(), assertNoRemovedEntries(), assertOnlyActiveToDeprecated(), compareLock(), createLock() (+10 more)
 
-### Community 24 - "Frontend Ingest Upload API"
-Cohesion: 0.14
-Nodes (12): fetchCsrfToken(), readCookie(), UploadError, uploadStudies(), XhrFactory, DEFAULT_API, DEFAULT_LIMITS, IngestApi (+4 more)
-
-### Community 25 - "Node TypeScript Config"
+### Community 23 - "Configuração TypeScript Node"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, noEmit, noFallthroughCasesInSwitch (+11 more)
 
-### Community 26 - "Golden ProblemType Fixture"
+### Community 24 - "Tipos Problemas Golden"
 Cohesion: 0.12
 Nodes (15): URI, ProblemScope, API, CLIENT, ProblemType, API_ARCHIVE_UNAVAILABLE, API_DICOM_VALIDATION_FAILED, API_SEARCH_INVALID (+7 more)
 
-### Community 27 - "DICOM Batch Validator Setup"
-Cohesion: 0.16
-Nodes (11): Dcm4cheDicomBatchValidator, ApplicationScoped, UploadedDicom, BeforeEach, AfterEach, BeforeEach, HttpServer, Attributes (+3 more)
-
-### Community 28 - "Worklist Resource Boundary"
+### Community 25 - "Endpoint Worklist HTTP"
 Cohesion: 0.20
 Nodes (13): AccessTokenProvider, Blocking, GET, Inject, Logger, Path, Produces, Response (+5 more)
 
-### Community 29 - "App TypeScript Config"
+### Community 26 - "Configuração TypeScript Aplicação"
 Cohesion: 0.11
 Nodes (18): compilerOptions, allowArbitraryExtensions, baseUrl, erasableSyntaxOnly, ignoreDeprecations, noFallthroughCasesInSwitch, noUnusedLocals, noUnusedParameters (+10 more)
 
-### Community 30 - "Problem Factory and Extensions"
-Cohesion: 0.25
-Nodes (7): ApiProblemFactory, Violation, ApiProblemFactoryTest, ObjectMapper, Test, DicomValidationViolations, Violation
+### Community 27 - "Testes Validação DICOM"
+Cohesion: 0.29
+Nodes (4): Override, Dcm4cheDicomBatchValidatorTest, Attributes, Test
 
-### Community 31 - "Generated Frontend Problem Types"
+### Community 28 - "Probe Problemas HTTP"
+Cohesion: 0.28
+Nodes (11): ApiProblemProbeResource, GET, Path, PermitAll, Response, Router, Payload, Consumes (+3 more)
+
+### Community 29 - "Tipos Problemas TypeScript"
 Cohesion: 0.12
 Nodes (15): DICOM_VALIDATION_VIOLATION_CODES, DicomValidationViolation, DicomValidationViolationCode, DicomValidationViolations, ProblemExtensionsByCode, ProblemExtensionsFor, ApiProblemCode, ClientProblemCode (+7 more)
 
-### Community 32 - "Golden TypeScript Fixtures"
-Cohesion: 0.12
-Nodes (15): DICOM_VALIDATION_VIOLATION_CODES, DicomValidationViolation, DicomValidationViolationCode, DicomValidationViolations, ProblemExtensionsByCode, ProblemExtensionsFor, ApiProblemCode, ClientProblemCode (+7 more)
-
-### Community 33 - "Catalog Tooling Manifest"
+### Community 30 - "Dependências Ferramenta Catálogo"
 Cohesion: 0.12
 Nodes (15): ajv, ajv-formats, dependencies, ajv, ajv-formats, name, packageManager, private (+7 more)
 
-### Community 34 - "STOW Gateway Failure Reasons"
-Cohesion: 0.44
-Nodes (5): ValidatedDicom, Override, HttpDicomArchiveGatewayTest, Test, StowResponseParser
-
-### Community 35 - "DICOM Validation Issue Codes"
-Cohesion: 0.17
-Nodes (10): Code, DUPLICATE_IDENTICAL, MALFORMED_DICOM, MISSING_SERIES_INSTANCE_UID, MISSING_SOP_CLASS_UID, MISSING_SOP_INSTANCE_UID, MISSING_STUDY_INSTANCE_UID, SOP_UID_COLLISION (+2 more)
-
-### Community 36 - "Backend Architecture Guard"
+### Community 31 - "Testes Arquitetura Backend"
 Cohesion: 0.23
 Nodes (3): BackendArchitectureTest, Test, JavaClasses
 
-### Community 37 - "Access Token Provider"
+### Community 32 - "Governança Catálogo Problemas"
+Cohesion: 0.19
+Nodes (15): Problem Catalog Skill (Codex and Antigravity), Problem Catalog Skill (Claude), DICOM Business Invariants, Evolution Backlog, Human Gate Workflow, Problem Catalog Governance Pointer, Type Reuse Criteria, Derived Identity Golden Rule (+7 more)
+
+### Community 33 - "Configuração Projeto BlackICE"
+Cohesion: 0.18
+Nodes (15): Backend Quarkus Job, Catalog Verification Job, Frontend Vue Job, Verify CI Workflow, Tooling node_modules Exclusion, Pinned Catalog Toolchain, Pinned Validation Dependencies, BlackICE PACS (+7 more)
+
+### Community 34 - "Provedor Token Acesso"
 Cohesion: 0.26
 Nodes (7): AccessTokenCredential, AccessTokenProvider, CurrentAccessToken, ApplicationScoped, Override, CurrentAccessTokenTest, Test
 
-### Community 38 - "Catalog CLI Test Harness"
+### Community 35 - "CLI Geração Catálogo"
 Cohesion: 0.20
 Nodes (12): DEFAULT_PATHS, FORBIDDEN_FLAGS, main(), resolvePaths(), serializeLock(), fixture, workspace(), fixture (+4 more)
 
-### Community 39 - "API Problem Response Filter"
-Cohesion: 0.30
-Nodes (6): ApiProblemResponseFilter, ContainerRequestContext, ContainerResponseContext, Override, ProblemType, Provider
+### Community 36 - "Arquitetura Produto BlackICE"
+Cohesion: 0.15
+Nodes (14): Backend Product BFF, BFF Session Security, DCM4CHEE DICOMweb Integration, API Problem Details Contract, W3C Trace Context Propagation, Study Worklist API, Frontend BFF Session, Local Stack E2E Testing (+6 more)
 
-### Community 40 - "UUIDv5 Identity Derivation"
+### Community 37 - "Resultados Ingestão"
+Cohesion: 0.16
+Nodes (14): IngestResult, InstanceResult, Outcome, COMPLETE, FAILED, PARTIAL, RejectedFile, StudyResult (+6 more)
+
+### Community 38 - "Testes Cliente Ingestão"
+Cohesion: 0.15
+Nodes (4): FakeXHR, mockResponse, problemJson(), problemResponse()
+
+### Community 39 - "Página Vue Ingestão"
+Cohesion: 0.14
+Nodes (9): allowsRetry, batch, busy, errorMessage, errorTraceId, limitWarning, totalBytes, totalFiles (+1 more)
+
+### Community 40 - "Estado Ingestão Frontend"
+Cohesion: 0.21
+Nodes (7): DEFAULT_API, DEFAULT_LIMITS, IngestApi, IngestBatch, IngestLimits, IngestPhase, useIngestBatch()
+
+### Community 41 - "Identidade UUIDv5 Problemas"
 Cohesion: 0.27
 Nodes (12): RFC-4122, RFC-9562, semanticErrors(), deriveProblemUrn(), deriveUuidV5(), DNS_NAMESPACE_UUID, formatUuid(), isProblemUrn() (+4 more)
 
-### Community 41 - "Catalog Schema Definitions"
+### Community 42 - "Esquemas Problemas API"
 Cohesion: 0.14
-Nodes (14): description, pattern, type, $defs, code, httpStatus, owner, uuid (+6 more)
+Nodes (14): $ref, $ref, properties, $ref, $ref, code, detail, httpStatus (+6 more)
 
-### Community 42 - "Keycloak and DCM4CHEE Infra"
+### Community 43 - "Infraestrutura Keycloak DCM4CHEE"
 Cohesion: 0.16
 Nodes (14): DCM4CHEE 5.34.3 Baseline, Keycloak input focus outline fix, Keycloak theme E2E regression suite, Same-origin Keycloak login, Product application Compose services, Shared infrastructure Compose services, DCM4CHEE Compose services, DCM4CHEE secure stack (+6 more)
 
-### Community 43 - "DICOM Validator Behaviour Tests"
-Cohesion: 0.40
-Nodes (3): Override, Dcm4cheDicomBatchValidatorTest, Test
+### Community 44 - "Violações Validação DICOM"
+Cohesion: 0.19
+Nodes (9): Code, DUPLICATE_IDENTICAL, MALFORMED_DICOM, MISSING_SERIES_INSTANCE_UID, MISSING_SOP_CLASS_UID, MISSING_SOP_INSTANCE_UID, MISSING_STUDY_INSTANCE_UID, SOP_UID_COLLISION (+1 more)
 
-### Community 44 - "API Trace Response Filter"
-Cohesion: 0.24
-Nodes (7): ApiTraceResponseFilter, ContainerRequestContext, ContainerResponseContext, Inject, Override, Provider, ContainerResponseFilter
-
-### Community 45 - "W3C Trace Propagation"
+### Community 45 - "Sessão BFF OIDC"
 Cohesion: 0.29
-Nodes (5): QuarkusTest, Test, W3cTraceContextInjectorTest, Builder, HttpServer
+Nodes (9): Authenticated, GET, Path, Response, SessionResource, SessionResponse, JsonWebToken, PermitAll (+1 more)
 
-### Community 46 - "E2E Login and Worklist Specs"
+### Community 46 - "Testes Frontend Login Worklist"
 Cohesion: 0.22
 Nodes (8): expectVerticallyCentered(), openBlackiceLogin(), requiredBox(), screenshotLoginCard(), showInvalidCredentials(), emptyFilters, emptyParams, page
 
-### Community 47 - "Graphify Community Labeling"
+### Community 47 - "Arquitetura Integração DICOMweb"
+Cohesion: 0.22
+Nodes (13): Archive Ecosystem, DCM4CHEE 5.34.3 Secure Baseline, OIDC Token Propagation, QIDO-RS, STOW-RS, WADO-RS, DICOM Domain Pack, Product Backend Boundary (+5 more)
+
+### Community 48 - "Rotulagem Comunidades Graphify"
 Cohesion: 0.17
 Nodes (12): Automatic Label Reuse Invalidation, Cluster-Only Workflow, Clustered Communities, Community Label Quality Gate, Community Labels, Community Membership Signatures, Current Community Summaries, Exact Community-Key Coverage (+4 more)
 
-### Community 48 - "CI Verification and Toolchain"
+### Community 49 - "Validador DICOM DCM4CHEE"
+Cohesion: 0.29
+Nodes (7): Dcm4cheDicomBatchValidator, ApplicationScoped, Attributes, UploadedDicom, ValidationException, Code, DicomBatchValidator
+
+### Community 50 - "Cliente API Ingestão"
 Cohesion: 0.24
-Nodes (12): Backend Quarkus Job, Catalog Verification Job, Frontend Vue Job, Verify CI Workflow, Pinned Catalog Toolchain, Pinned Validation Dependencies, BlackICE PACS, DCM4CHEE Archive Engine (+4 more)
+Nodes (9): fetchCsrfToken(), readCookie(), uploadStudies(), XhrFactory, fetchCsrfTokenMock, file(), importFailingWith(), selectFiles() (+1 more)
 
-### Community 49 - "Catalog Schema Root"
-Cohesion: 0.17
-Nodes (11): additionalProperties, description, $id, required, $schema, title, type, entries (+3 more)
-
-### Community 50 - "Problem Factory Trace Wiring"
-Cohesion: 0.22
-Nodes (5): Inject, ApplicationScoped, TraceContext, FixedTraceContext, Override
-
-### Community 52 - "Catalog Entries Array Schema"
-Cohesion: 0.18
-Nodes (11): description, items, type, $ref, description, items, minItems, type (+3 more)
-
-### Community 53 - "Backend Clean Architecture Design"
+### Community 51 - "Design Arquitetura Backend Modular"
 Cohesion: 0.18
 Nodes (10): Backend modular com Clean Architecture, Critérios de aceite, Decisão, Documentação de código, Fora de escopo, Limites e direção de dependências, Migração do fluxo de ingestão, Módulos de sessão e segurança (+2 more)
 
-### Community 54 - "Problem Catalog Governance Docs"
-Cohesion: 0.29
-Nodes (10): Problem Catalog Skill (Codex and Antigravity), Problem Catalog Skill (Claude), Domain Packs Agent Architecture, Problem Catalog Governance Pointer, Problem Catalog Domain Pack, Forbidden Data In Error Surfaces, Stable Public Text Policy, Domain Pack Convention (+2 more)
-
-### Community 55 - "Backend Runtime Configuration"
+### Community 52 - "Governança Problemas e Rastreamento"
 Cohesion: 0.20
-Nodes (10): Java and Maven toolchain, BlackICE backend BFF, Body Limit Above Application Limit, DICOMweb Gateway Endpoint, Ingest Batch Limits, Structured Trace Logging Format, Trace Context Without Export, Single Sanitized Logging (+2 more)
+Nodes (11): Atomic Error Contract Migration, Backend Problem Boundary, Cancelled Control Flow, Frontend Problem Parser, Implementation Verified, Official Problem Catalog, Problem Catalog Agent Workflow, RFC 9457 Problem Details Contract (+3 more)
 
-### Community 56 - "Maven Wrapper Script"
+### Community 53 - "Script Maven Wrapper"
 Cohesion: 0.33
 Nodes (6): mvnw script, clean(), die(), exec_maven(), set_java_home(), verbose()
 
-### Community 57 - "STOW Gateway Trace Injection"
-Cohesion: 0.33
-Nodes (7): HttpDicomArchiveGateway, ApplicationScoped, HttpClient, Inject, StowStudyResult, W3cTraceContextInjector, DicomArchiveGateway
+### Community 54 - "Porta Gateway STOW-RS"
+Cohesion: 0.27
+Nodes (4): DicomArchiveGateway, StowStudyResult, ValidatedDicom, MultipartRelatedBodyPublisher
 
-### Community 58 - "Archive Search Failure Reasons"
+### Community 55 - "Erros Busca Arquivo"
 Cohesion: 0.24
 Nodes (7): ArchiveSearchException, Reason, CONNECTION, HTTP_STATUS, INVALID_RESPONSE, QUERY_TOO_BROAD, TIMEOUT
 
-### Community 59 - "Synthetic DICOM E2E Fixtures"
-Cohesion: 0.40
-Nodes (7): createSyntheticDicom(), element(), LONG_VR, paddedText(), SyntheticDicomMetadata, text(), us()
+### Community 56 - "Tipos Problemas API"
+Cohesion: 0.20
+Nodes (10): API_ARCHIVE_OUTCOME_UNKNOWN, API_ARCHIVE_UNAVAILABLE, API_AUTHENTICATION_REQUIRED, API_CSRF_INVALID, API_DICOM_VALIDATION_FAILED, API Problem Types, API_SEARCH_INVALID, API_SEARCH_TOO_BROAD (+2 more)
 
-### Community 60 - "Catalog Entry Required Fields"
+### Community 57 - "Esquema Campos Problema"
+Cohesion: 0.20
+Nodes (10): description, pattern, type, $defs, code, owner, publicText, description (+2 more)
+
+### Community 58 - "Registro Problemas Catálogo"
 Cohesion: 0.20
 Nodes (10): required, code, description, extensionsSchemaRef, owner, replacedBy, retryPolicy, scope (+2 more)
 
-### Community 61 - "Manual DICOM Import Plan"
+### Community 59 - "Fluxo Ingestão DICOM"
 Cohesion: 0.20
 Nodes (10): Authenticated DICOM Ingest Flow, CSRF and OIDC Protection, DICOM Domain Review Gate, DICOM UID Preservation, Durable Jobs EVO-001, Frontend Ingest Workflow, Manual DICOM Import, Metadata Validation and Study Grouping (+2 more)
 
-### Community 62 - "Agent Authoring Skill Design"
+### Community 60 - "Design Skill Autoria Agentes"
 Cohesion: 0.20
 Nodes (9): Alterações documentais previstas, Conhecimento neutro e wrappers, Decisões, Desenho — skill de autoria de agentes, Fora de escopo, Objetivo, Segurança, governança e validação, Seleção de modelo no momento da mudança (+1 more)
 
-### Community 63 - "Catalog Identity and Gates"
-Cohesion: 0.22
-Nodes (9): DICOM Business Invariants, Evolution Backlog, Human Gate Workflow, Problem Identity Table, Type Reuse Criteria, Derived Identity Golden Rule, Problem Code Grammar, Registry Human Gates (+1 more)
-
-### Community 64 - "Trace Filter Tests"
-Cohesion: 0.47
-Nodes (3): ApiTraceResponseFilterTest, Test, MultivaluedMap
-
-### Community 65 - "Ingest Page Component"
-Cohesion: 0.22
-Nodes (4): batch, limitWarning, totalBytes, totalFiles
-
-### Community 66 - "Catalog Markdown Generator"
+### Community 61 - "Gerador Markdown Catálogo"
 Cohesion: 0.53
 Nodes (8): apiSection(), cell(), clientSection(), deprecationSection(), extensionsSection(), generateMarkdown(), identitySection(), table()
 
-### Community 67 - "Golden ProblemExtensions Fixture"
-Cohesion: 0.31
-Nodes (4): Override, ProblemType, None, ProblemExtensions
+### Community 62 - "Testes DICOM Validado"
+Cohesion: 0.29
+Nodes (4): BeforeEach, ParameterizedTest, Arguments, Path
 
-### Community 68 - "OIDC Session and CSRF Settings"
-Cohesion: 0.25
-Nodes (8): Keycloak OIDC Authentication, API Challenge Versus Login Redirect, CSRF Token Endpoint Configuration, OIDC BFF Session Configuration, PKCE S256 Required, Realm Roles Claim Mapping, API Problem Types Table, API Scope
-
-### Community 69 - "Catalog Root Properties"
+### Community 63 - "Esquema Metadados Catálogo"
 Cohesion: 0.25
 Nodes (8): description, $ref, properties, namespaceUuid, schemaVersion, const, description, type
 
-### Community 70 - "Backend Architecture Plan"
+### Community 64 - "Plano Backend Modular"
 Cohesion: 0.25
 Nodes (7): Backend Modular Clean Architecture Implementation Plan, Global Constraints, Task 1: Criar a guarda arquitetural que falha contra a estrutura atual, Task 2: Migrar ingestão para portas e adaptadores, deixando a guarda verde, Task 3: Documentar as fronteiras no código sem comentários redundantes, Task 4: Atualizar a documentação operacional e fechar a verificação, Task 5: Detalhar o módulo de ingestão por responsabilidade
 
-### Community 71 - "Commit Curator Design"
+### Community 65 - "Design Commit Curator"
 Cohesion: 0.25
 Nodes (7): Arquitetura, Commit Curator Design, Comportamento, Limites, Modelos, Objetivo, Validação
 
-### Community 72 - "Keycloak Windows Bootstrap Design"
+### Community 66 - "Bootstrap Keycloak Windows"
 Cohesion: 0.25
 Nodes (7): Bootstrap do Keycloak no Windows — Design, Decisão, Erros e segurança, Fluxo, Fora de escopo, Objetivo, Testes
 
-### Community 73 - "Contracts and Tooling Layout"
-Cohesion: 0.29
-Nodes (7): Tooling node_modules Exclusion, Published Contracts Directory, Engineering Tooling Directories, Monorepo Layout, BlackICE Problem Catalog, Problem Catalog Tooling Package, Registry As Single Source Of Truth
-
-### Community 74 - "DICOM Validation Ports"
+### Community 67 - "Modelos Validação DICOM"
 Cohesion: 0.38
 Nodes (3): UploadedDicom, DicomBatchValidator, DicomBatchValidation
 
-### Community 75 - "CSRF Resource Endpoint"
+### Community 68 - "Resultado Instância STOW"
+Cohesion: 0.29
+Nodes (6): Status, ACCEPTED, REJECTED, UNCONFIRMED, WARNING, StowInstanceResult
+
+### Community 69 - "Endpoint Token CSRF"
 Cohesion: 0.48
 Nodes (5): CsrfResource, Authenticated, GET, Path, Response
 
-### Community 76 - "CSRF Resource Tests"
+### Community 70 - "Testes Endpoint CSRF"
 Cohesion: 0.48
 Nodes (4): CsrfResourceTest, QuarkusTest, Test, TestSecurity
 
-### Community 77 - "Session Resource Tests"
+### Community 71 - "Testes Endpoint Sessão"
 Cohesion: 0.48
 Nodes (4): QuarkusTest, Test, TestSecurity, SessionResourceTest
 
-### Community 78 - "Ingest Frontend Types"
+### Community 72 - "Tipos Ingestão Frontend"
 Cohesion: 0.29
 Nodes (5): IngestOutcome, IngestResponse, InstanceStatus, StudyStatus, UploadHandle
 
-### Community 79 - "Keycloak Same-origin Plan"
+### Community 73 - "Problemas Cliente e Registro"
+Cohesion: 0.29
+Nodes (7): CLIENT_NETWORK_UNAVAILABLE, Client Problem Types, CLIENT_RESPONSE_INVALID, Problem Catalog, UUIDv5 Problem Identity, CLIENT Scope, Registry As Single Source Of Truth
+
+### Community 74 - "Esquema Catálogo Principal"
+Cohesion: 0.29
+Nodes (6): additionalProperties, description, $id, $schema, title, type
+
+### Community 75 - "Plano Login Keycloak"
 Cohesion: 0.29
 Nodes (6): Estrutura de arquivos, Global Constraints, Keycloak same-origin — Implementation Plan, Self-review, Task 1: Fase 1 — Keycloak same-origin sob `/auth`, Task 2: Fase 2 — renomear o realm para `blackice`
 
-### Community 80 - "Agent Authoring Skill Plan"
+### Community 76 - "Plano Skill Autoria Agentes"
 Cohesion: 0.29
 Nodes (6): Agent Authoring Skill Implementation Plan, Global Constraints, Task 1: Criar o Domain Pack canônico, Task 2: Criar wrappers de descoberta mínimos, Task 3: Integrar a convenção à documentação do repositório, Task 4: Validar a skill e as modificações
 
-### Community 81 - "Antigravity Agents Design"
+### Community 77 - "Design Agentes Antigravity"
 Cohesion: 0.29
 Nodes (6): Agentes Antigravity — desenho, Configuração, Conhecimento e documentação, Escopo, Objetivo, Verificação
 
-### Community 82 - "Claude Subagent Wrappers"
+### Community 78 - "Gate Arquitetura DICOM"
 Cohesion: 0.33
 Nodes (6): DICOM Domain Review, Human Semantic Gate, DICOMweb Backend Boundary, BlackICE Quarkus Backend, Cornerstone3D Viewer, Vue Reactivity Boundary
 
-### Community 83 - "Client Scope Classification"
+### Community 79 - "Política Login OIDC"
 Cohesion: 0.33
-Nodes (6): CLIENT Problem Types Table, CLIENT Scope, Problem Classification Decision Tree, Internal Failure Reasons Excluded, Operation Result Category, User Cancellation As Flow Control
+Nodes (6): OIDC Login Route Policy, Keycloak OIDC Provider, OIDC BFF Authentication, PKCE S256 Enforcement, Keycloak Realm Role Mapping, Secure OIDC Session Cookie
 
-### Community 84 - "Catalog Owner Definitions"
+### Community 80 - "Configuração Operacional HTTP"
+Cohesion: 0.33
+Nodes (6): Application-Level Payload Rejection, BlackICE Backend Runtime Configuration, CSRF Token Endpoint, Dynamic Test HTTP Port, HTTP API Runtime, Ingest Operational Limits
+
+### Community 81 - "Configuração Telemetria DICOMweb"
+Cohesion: 0.33
+Nodes (6): DCM4CHEE DICOMweb Gateway, DICOMweb Request Timeout, Local Trace Telemetry, OTLP Export Disabled, Structured Trace Logging, tracecontext-Only Propagation
+
+### Community 82 - "Probe Externo Problemas"
+Cohesion: 0.60
+Nodes (4): ExternalProblemProbeResource, GET, Path, PermitAll
+
+### Community 83 - "Backlog Evolução DICOM"
+Cohesion: 0.33
+Nodes (6): Evolution Backlog, Worklist Pagination Evolution, CSRF Double Submit Protection, Manual DICOM Import, STOW-RS Per Study, DICOM UID Validation
+
+### Community 84 - "Esquema Coleções Catálogo"
+Cohesion: 0.33
+Nodes (6): description, items, type, $ref, items, entries
+
+### Community 85 - "Esquema Extensões Problemas"
+Cohesion: 0.33
+Nodes (6): description, pattern, type, extensionsSchemaRef, null, string
+
+### Community 86 - "Categorias Domínio Frontend"
 Cohesion: 0.33
 Nodes (6): enum, frontend, ingest, platform, security, worklist
 
-### Community 85 - "Keycloak Theme Plans"
+### Community 87 - "Planos tema Keycloak"
 Cohesion: 0.33
 Nodes (6): Foundation Stack Plan, Keycloak Login Theme Plan, Keycloak Focus Outline Plan, Keycloak Theme E2E Plan, Keycloak Same-origin Plan, Keycloak Theme Design
 
-### Community 86 - "Keycloak Bootstrap Launchers"
+### Community 88 - "Bootstrap Keycloak multiplataforma"
 Cohesion: 0.33
 Nodes (6): Cross-platform Launchers, Keycloak Admin REST, Keycloak Windows Bootstrap, Pester Contract Test, Shared POSIX Configuration Core, Three-file Compose Configuration
 
-### Community 87 - "Antigravity Agents Plan"
+### Community 89 - "Implementação agentes Antigravity"
 Cohesion: 0.33
 Nodes (5): Antigravity Agents Implementation Plan, Global Constraints, Task 1: Criar os wrappers Antigravity, Task 2: Documentar o ponto de descoberta, Task 3: Confirmar descoberta pelo Antigravity
 
-### Community 89 - "Api Problem Record"
+### Community 90 - "Arquitetura modular monorepo"
 Cohesion: 0.50
-Nodes (3): ApiProblem, Override, JsonAnyGetter
+Nodes (5): Backend Modular Architecture, BlackICE Monorepo, Quarkus Module Architecture, Shared Error Boundary, Vue Feature Architecture
 
-### Community 90 - "Worklist Composable Tests"
+### Community 91 - "Resultado ingestão Vue"
+Cohesion: 0.40
+Nodes (3): labels, STUDY_FAILURE_LABELS, StudyFailure
+
+### Community 92 - "Testes composable worklist"
 Cohesion: 0.60
 Nodes (3): createStudy(), page(), pageWithPatient()
 
-### Community 91 - "Project Structure Rules"
+### Community 93 - "Esquema status HTTP"
 Cohesion: 0.40
-Nodes (5): Structural Antipatterns, Quarkus Module Dependency Rules, dev.blackice.shared Justified Exception, Shared Promotion Rule, Vue Feature Colocation Rules
+Nodes (5): httpStatus, description, maximum, minimum, type
 
-### Community 92 - "Session Query Note"
+### Community 94 - "Esquema proprietários catálogo"
+Cohesion: 0.40
+Nodes (5): description, minItems, type, uniqueItems, owners
+
+### Community 95 - "Política retry catálogo"
+Cohesion: 0.40
+Nodes (5): retryPolicy, description, enum, MANUAL, NEVER
+
+### Community 96 - "Metadados catálogo problemas"
+Cohesion: 0.40
+Nodes (5): required, entries, namespaceUuid, owners, schemaVersion
+
+### Community 97 - "Classificação problemas API"
+Cohesion: 0.40
+Nodes (5): API Scope, Problem Classification Decision Tree, Internal Failure Reasons Excluded, Operation Result Category, User Cancellation As Flow Control
+
+### Community 98 - "Consulta sessão Vue"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Como o frontend Vue obtém a sessão autenticada do backend?, Source Nodes
 
-### Community 93 - "DICOM UID Rules Query"
+### Community 99 - "Consulta regras DICOM"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?, Source Nodes
 
-### Community 94 - "Graphify Instructions Query"
+### Community 100 - "Consulta instruções Graphify"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Onde ficam as instruções operacionais do Graphify no BlackICE?, Source Nodes
 
-### Community 95 - "Antigravity DICOM Reviewer"
+### Community 101 - "Agente revisor DICOM"
 Cohesion: 0.50
 Nodes (3): Antes de revisar, Papel, Revisão
 
-### Community 96 - "Git and Graphify Packs"
+### Community 102 - "Integração Graphify Git"
 Cohesion: 0.50
 Nodes (4): Graphify Tooling, Incremental Graph Update, Commit Scope Policy, Git Domain Pack
 
-### Community 97 - "Catalog Entry Definition"
+### Community 103 - "Esquema entrada problemas"
 Cohesion: 0.50
 Nodes (4): entry, additionalProperties, allOf, type
 
-### Community 98 - "Catalog Public Text Schema"
+### Community 104 - "Esquema descrição problemas"
 Cohesion: 0.50
-Nodes (4): publicText, description, minLength, type
+Nodes (4): description, minLength, type, description
 
-### Community 99 - "Backend Modular Architecture Docs"
+### Community 105 - "Escopo problemas API"
+Cohesion: 0.50
+Nodes (4): scope, enum, API, CLIENT
+
+### Community 106 - "Status catálogo problemas"
+Cohesion: 0.50
+Nodes (4): status, enum, active, deprecated
+
+### Community 107 - "Tipo problema catalogado"
+Cohesion: 0.50
+Nodes (4): type, description, pattern, type
+
+### Community 108 - "Arquitetura backend Quarkus"
 Cohesion: 0.50
 Nodes (4): Modular Architecture, Quarkus Product Backend, Report Model, Backend Modular Architecture Plan
 
-### Community 100 - "Vue Frontend Domain Knowledge"
+### Community 109 - "Arquitetura frontend Vue DICOM"
 Cohesion: 0.50
 Nodes (4): Vue Feature Architecture, WADO-RS Viewer, Vue Frontend Domain Pack, Worklist QIDO-RS Plan
 
-### Community 101 - "Commit Curator Plan"
+### Community 110 - "Plano curador commits"
 Cohesion: 0.50
 Nodes (3): Commit Curator Implementation Plan, Global Constraints, Task 1: Domain Pack e wrappers de commit
 
-### Community 102 - "Keycloak Bootstrap Plan"
+### Community 111 - "Plano bootstrap Keycloak Windows"
 Cohesion: 0.50
 Nodes (3): Bootstrap do Keycloak no Windows Implementation Plan, Global Constraints, Task 1: Launchers multiplataforma com núcleo único
 
-### Community 103 - "TraceID Propagation Plan"
-Cohesion: 0.50
-Nodes (4): ApiTraceResponseFilter, DICOM domain reviewer gate, W3C TraceID propagation, W3cTraceContextInjector
+### Community 114 - "Arquitetura Domain Packs"
+Cohesion: 0.67
+Nodes (3): Domain Packs Agent Architecture, Domain Pack Convention, Thin Wrapper Golden Rule
 
-### Community 104 - "Problem Catalog Identity Design"
-Cohesion: 0.50
-Nodes (4): Catalog lock, Problem catalog, Problem catalog skill, UUIDv5 problem identity
-
-### Community 105 - "Quarkus Problem Boundary Design"
-Cohesion: 0.50
-Nodes (4): DICOM domain review, Quarkus API boundary, W3C TraceID propagation, W3cTraceContextInjector
-
-### Community 110 - "Claude Commit Curator"
+### Community 117 - "Convenções commits Claude"
 Cohesion: 0.67
 Nodes (3): Canonical Commit Body, Commit Conventions Domain Pack, Claude Commit Curator
 
-### Community 111 - "Graphify Update Runbook"
+### Community 118 - "Atualização incremental Graphify"
 Cohesion: 0.67
 Nodes (3): Cluster-only refresh, Incremental re-extraction runbook, Incremental merge integrity
 
-### Community 112 - "DICOM Hierarchy Semantics"
+### Community 119 - "Esquema UUID problemas"
+Cohesion: 0.67
+Nodes (3): uuid, pattern, type
+
+### Community 120 - "Hierarquia identidade DICOM"
 Cohesion: 0.67
 Nodes (3): DICOM Patient Study Series Instance Hierarchy, DICOM UID Identity, StudyInstanceUID
 
-### Community 113 - "Historical Specs Index"
+### Community 121 - "Planos integração Graphify"
 Cohesion: 0.67
 Nodes (3): Graphify Integration Plan, Commit Curator Plan, Historical Specs and Plans
 
-### Community 114 - "Shared Problem Contract Plan"
-Cohesion: 0.67
-Nodes (3): ApiProblem, ApiProblemFactory, ProblemResponseFactory
-
-### Community 115 - "Catalog Lock Plan"
-Cohesion: 0.67
-Nodes (3): Append-only catalog lock, Problem catalog, UUIDv5 problem URN
-
-### Community 116 - "Problem Code Generation Plan"
-Cohesion: 0.67
-Nodes (3): Problem catalog code generation, Java ProblemType, TypeScript problem types
-
-### Community 117 - "Frontend Problem Parser Design"
-Cohesion: 0.67
-Nodes (3): DICOM validation violations, Shared problem parser, Problem Details RFC 9457
+### Community 122 - "Resultados arquivo indisponível"
+Cohesion: 1.00
+Nodes (3): API_ARCHIVE_OUTCOME_UNKNOWN, API_ARCHIVE_UNAVAILABLE, Uncertain Archive Outcome
 
 ## Knowledge Gaps
-- **605 isolated node(s):** `ACCEPTED`, `WARNING`, `REJECTED`, `UNCONFIRMED`, `batch` (+600 more)
+- **622 isolated node(s):** `ACCEPTED`, `WARNING`, `REJECTED`, `UNCONFIRMED`, `SessionResponse` (+617 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **101 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **114 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ValidatedDicom` connect `STOW Gateway Failure Reasons` to `Ingest Use Case and Failures`, `DICOM Validation Ports`, `DICOM Validator Behaviour Tests`, `STOW Gateway Port and Results`, `W3C Trace Propagation`, `Multipart Related Publisher`, `STOW Gateway Trace Injection`, `DICOM Batch Validator Setup`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
-- **Why does `ApiProblemFactory` connect `Problem Factory and Extensions` to `Ingest Resource Boundary`, `Problem Factory Trace Wiring`, `API Problem Framework Coverage`, `API Problem Response Filter`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
-- **Are the 10 inferred relationships involving `ValidatedDicom` (e.g. with `.validate()` and `.an_unexpected_bug_is_not_disguised_as_a_connection_failure()`) actually correct?**
-  _`ValidatedDicom` has 10 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 8 inferred relationships involving `StudySearchRequest` (e.g. with `.invalidRequests()` and `.normalizes_filters_and_keeps_open_date_range()`) actually correct?**
-  _`StudySearchRequest` has 8 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 5 inferred relationships involving `IngestResult` (e.g. with `.an_archive_that_answered_with_an_unusable_body_is_not_reported_as_unavailable()` and `.batch_whose_valid_studies_all_fail_by_unavailability_returns_a_bare_503()`) actually correct?**
-  _`IngestResult` has 5 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `IngestStudiesUseCase` connect `Ingestão Concorrente e Respostas` to `Propagação Contexto Trace`, `Validador DICOM DCM4CHEE`, `Endpoint Ingestão e Problemas`?**
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
+- **Why does `StudySummary` connect `Interface Vue Worklist` to `Parser Respostas QIDO-RS`?**
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **What connects `ACCEPTED`, `WARNING`, `REJECTED` to the rest of the system?**
-  _605 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Ingest Resource Boundary` be split into smaller, more focused modules?**
-  _Cohesion score 0.05056179775280899 - nodes in this community are weakly interconnected._
+  _622 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Gateway STOW-RS e Parsing` be split into smaller, more focused modules?**
+  _Cohesion score 0.05387397677517609 - nodes in this community are weakly interconnected._
+- **Should `Ingestão Concorrente e Respostas` be split into smaller, more focused modules?**
+  _Cohesion score 0.0642873484328529 - nodes in this community are weakly interconnected._
+- **Should `Falhas API e Ingestão` be split into smaller, more focused modules?**
+  _Cohesion score 0.05088919288645691 - nodes in this community are weakly interconnected._
+- **Should `Endpoint Ingestão e Problemas` be split into smaller, more focused modules?**
+  _Cohesion score 0.05052631578947368 - nodes in this community are weakly interconnected._
