@@ -25,6 +25,21 @@ graphify-out/.graphify_python
 graphify-out/.graphify_root
 *.graphify-bak
 *.graphify.log
+# intermediários descartáveis da pipeline; não cobrir os artefatos portáveis
+# `.graphify_labels.json`, `.graphify_labels.json.sig` e `.graphify_learning.json`
+graphify-out/.graphify_analysis.json
+graphify-out/.graphify_ast.json
+graphify-out/.graphify_cached.json
+graphify-out/.graphify_chunk_*.json
+graphify-out/.graphify_detect.json
+graphify-out/.graphify_extract.json
+graphify-out/.graphify_incremental.json
+graphify-out/.graphify_old.json
+graphify-out/.graphify_semantic.json
+graphify-out/.graphify_semantic_new.json
+graphify-out/.graphify_uncached.txt
+graphify-out/.graphify_labels_fresh.json
+graphify-out/.graphify_labels_part_*.json
 # backup datado que o rebuild grava antes de sobrescrever o grafo curado
 graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 
@@ -43,4 +58,3 @@ graphify-out/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
 # python cache
 __pycache__/
 *.py[cod]
-
