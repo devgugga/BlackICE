@@ -155,14 +155,14 @@
     "semantic_hash": "e0baa46e48e323266433af786d950471"
   },
   "AGENTS.md": {
-    "mtime": 1787490940.522526,
-    "ast_hash": "9f132b1b69515fc35b68cb9e1d111891",
-    "semantic_hash": "9f132b1b69515fc35b68cb9e1d111891"
+    "mtime": 1787581350.3105512,
+    "ast_hash": "a6b13cce7f9db0137b9baaa57841c5bf",
+    "semantic_hash": "a6b13cce7f9db0137b9baaa57841c5bf"
   },
   "CLAUDE.md": {
-    "mtime": 1787424754.5460663,
-    "ast_hash": "db3947f076b28bc0b529cc4144fc7551",
-    "semantic_hash": "db3947f076b28bc0b529cc4144fc7551"
+    "mtime": 1787581350.311551,
+    "ast_hash": "07f944bffbb861aacbffb1089580adf5",
+    "semantic_hash": "07f944bffbb861aacbffb1089580adf5"
   },
   "README.md": {
     "mtime": 1787451131.577177,
@@ -190,9 +190,9 @@
     "semantic_hash": "1539a9c80e988a33e36d329fc217e728"
   },
   "docs/architecture/graphify.md": {
-    "mtime": 1787424754.549348,
-    "ast_hash": "76f7890592fb2b5b6a0d3d404a98fa85",
-    "semantic_hash": "76f7890592fb2b5b6a0d3d404a98fa85"
+    "mtime": 1787581302.6084023,
+    "ast_hash": "6ddcba93ff2e927d1c749e6d8ae14cb2",
+    "semantic_hash": "6ddcba93ff2e927d1c749e6d8ae14cb2"
   },
   "docs/architecture/project-structure.md": {
     "mtime": 1787514386.1897953,
