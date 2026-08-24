@@ -1,24 +1,8 @@
 {
-  "generated_at": "2026-08-09T23:09:11.607124+00:00",
+  "generated_at": "2026-08-24T15:12:32.408484+00:00",
   "nodes": {
-    "_claude_skills_graphify_skill_skill": {
-      "code_fingerprint": "ed077dbec56c6e09704adeedc308ab3704fea3db0e2bb944ec353f0c11b38e4b",
-      "label": "Graphify skill",
-      "last": "2026-07-27T18:43:05.282329+00:00",
-      "provenance": [
-        {
-          "date": "2026-07-27T18:43:05.282329+00:00",
-          "outcome": "useful",
-          "q": "Onde ficam as instruções operacionais do Graphify no BlackICE?"
-        }
-      ],
-      "score": 0.73739361,
-      "source_file": ".claude/skills/graphify/SKILL.md",
-      "status": "tentative",
-      "uses": 1
-    },
-    "apps_backend_src_main_java_dev_blackice_features_session_sessionresource_sessionresource": {
-      "code_fingerprint": "34f30cb58946c326b0770aa5777fad7523c57bb9e816f17d822a22ec228edcc6",
+    "apps_backend_src_main_java_dev_blackice_session_api_sessionresource_sessionresource": {
+      "code_fingerprint": "834f9874e1c36d7dd4b57ce5a1eac5ce445605343535570df5e150c944cf1cd0",
       "label": "SessionResource",
       "last": "2026-07-27T18:42:32.787677+00:00",
       "provenance": [
@@ -28,13 +12,13 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.737387202,
-      "source_file": "apps/backend/src/main/java/dev/blackice/features/session/SessionResource.java",
+      "score": 0.525414501,
+      "source_file": "apps/backend/src/main/java/dev/blackice/session/api/SessionResource.java",
       "status": "tentative",
       "uses": 1
     },
     "apps_frontend_src_features_home_homepage": {
-      "code_fingerprint": "a756a25d45a45e3c57fc05fe79ff02d90e56d15c2fa652792643e2e66bd301f0",
+      "code_fingerprint": "c5be9d9e0f92a893266307fbda138fc5dc3c3ba1df03695b0df6ec68233481ba",
       "label": "HomePage.vue",
       "last": "2026-07-27T18:42:32.787677+00:00",
       "provenance": [
@@ -44,13 +28,13 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.737387202,
+      "score": 0.525414501,
       "source_file": "apps/frontend/src/features/home/HomePage.vue",
       "status": "tentative",
       "uses": 1
     },
     "apps_frontend_src_features_session_session_api": {
-      "code_fingerprint": "d760aed547c2809d209e70ce2bde07e6beb216f718b1eb9211d4f8b001df86f1",
+      "code_fingerprint": "e9069dc7b8281b2c69b794cf330b3af7eb4fdd7c357828b1341f7de810e4a8f2",
       "label": "session.api.ts",
       "last": "2026-07-27T18:42:32.787677+00:00",
       "provenance": [
@@ -60,13 +44,13 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.737387202,
+      "score": 0.525414501,
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "status": "tentative",
       "uses": 1
     },
     "apps_frontend_src_features_session_session_api_fetchsession": {
-      "code_fingerprint": "d760aed547c2809d209e70ce2bde07e6beb216f718b1eb9211d4f8b001df86f1",
+      "code_fingerprint": "e9069dc7b8281b2c69b794cf330b3af7eb4fdd7c357828b1341f7de810e4a8f2",
       "label": "fetchSession()",
       "last": "2026-07-27T18:42:32.787677+00:00",
       "provenance": [
@@ -76,13 +60,13 @@
           "q": "Como o frontend Vue obtém a sessão autenticada do backend?"
         }
       ],
-      "score": 0.737387202,
+      "score": 0.525414501,
       "source_file": "apps/frontend/src/features/session/session.api.ts",
       "status": "tentative",
       "uses": 1
     },
     "claude_skills_graphify_references_hooks_graphify_hooks": {
-      "code_fingerprint": "2720dc0a15ab66ba57e2eea48d57d62aeebe63d0ed268b403cbcad3d2a887fe1",
+      "code_fingerprint": "b9a4e9f66813c6fc720589f1071d1a03c95756ab7101447e14e57291fe7844e5",
       "label": "Graphify Hooks",
       "last": "2026-07-27T18:43:05.282329+00:00",
       "provenance": [
@@ -92,29 +76,13 @@
           "q": "Onde ficam as instruções operacionais do Graphify no BlackICE?"
         }
       ],
-      "score": 0.73739361,
+      "score": 0.525419067,
       "source_file": ".claude/skills/graphify/references/hooks.md",
       "status": "tentative",
       "uses": 1
     },
-    "docs_domains_dicom_dicomweb_dicomweb_verbs": {
-      "code_fingerprint": "78adb4b9d09f8b8f71832caa9bab1ef6a2c28f3cc070ee2b4d6299669f8b8f27",
-      "label": "DICOMweb Verbs",
-      "last": "2026-07-27T18:42:43.310522+00:00",
-      "provenance": [
-        {
-          "date": "2026-07-27T18:42:43.310522+00:00",
-          "outcome": "useful",
-          "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
-        }
-      ],
-      "score": 0.737389277,
-      "source_file": "docs/domains/dicom/dicomweb.md",
-      "status": "tentative",
-      "uses": 1
-    },
     "docs_domains_dicom_dicomweb_qido_rs": {
-      "code_fingerprint": "78adb4b9d09f8b8f71832caa9bab1ef6a2c28f3cc070ee2b4d6299669f8b8f27",
+      "code_fingerprint": "f2ee88bf13db7f1635dbde35c6e3f11df463838c7fe23a6d4f9e2fe4e8b39c7f",
       "label": "QIDO-RS",
       "last": "2026-07-27T18:42:43.310522+00:00",
       "provenance": [
@@ -124,13 +92,13 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.737389277,
+      "score": 0.52541598,
       "source_file": "docs/domains/dicom/dicomweb.md",
       "status": "tentative",
       "uses": 1
     },
     "docs_domains_dicom_dicomweb_stow_rs": {
-      "code_fingerprint": "78adb4b9d09f8b8f71832caa9bab1ef6a2c28f3cc070ee2b4d6299669f8b8f27",
+      "code_fingerprint": "f2ee88bf13db7f1635dbde35c6e3f11df463838c7fe23a6d4f9e2fe4e8b39c7f",
       "label": "STOW-RS",
       "last": "2026-07-27T18:42:43.310522+00:00",
       "provenance": [
@@ -140,13 +108,13 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.737389277,
+      "score": 0.52541598,
       "source_file": "docs/domains/dicom/dicomweb.md",
       "status": "tentative",
       "uses": 1
     },
     "docs_domains_dicom_dicomweb_wado_rs": {
-      "code_fingerprint": "78adb4b9d09f8b8f71832caa9bab1ef6a2c28f3cc070ee2b4d6299669f8b8f27",
+      "code_fingerprint": "f2ee88bf13db7f1635dbde35c6e3f11df463838c7fe23a6d4f9e2fe4e8b39c7f",
       "label": "WADO-RS",
       "last": "2026-07-27T18:42:43.310522+00:00",
       "provenance": [
@@ -156,7 +124,7 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.737389277,
+      "score": 0.52541598,
       "source_file": "docs/domains/dicom/dicomweb.md",
       "status": "tentative",
       "uses": 1
@@ -172,8 +140,40 @@
           "q": "Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?"
         }
       ],
-      "score": 0.737389277,
+      "score": 0.52541598,
       "source_file": "docs/domains/dicom/semantics.md",
+      "status": "tentative",
+      "uses": 1
+    },
+    "docs_superpowers_specs_2026_08_22_worklist_qido_rs_design_worklist_e_busca_via_qido_rs_design_do_mvp_2": {
+      "code_fingerprint": "0b82f3ffd1f93c92682f95fd9b131cab9eed0fb8a7492350d3f45b16d9ad7da1",
+      "label": "Worklist e busca via QIDO-RS — design do MVP #2",
+      "last": "2026-08-24T15:09:58.401532+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-24T15:09:58.401532+00:00",
+          "outcome": "useful",
+          "q": "Codex, qual é o proximo passo do MVP?"
+        }
+      ],
+      "score": 0.999958817,
+      "source_file": "docs/superpowers/specs/2026-08-22-worklist-qido-rs-design.md",
+      "status": "tentative",
+      "uses": 1
+    },
+    "docs_superpowers_specs_2026_08_22_worklist_qido_rs_design_worklist_qido_rs": {
+      "code_fingerprint": "0b82f3ffd1f93c92682f95fd9b131cab9eed0fb8a7492350d3f45b16d9ad7da1",
+      "label": "Worklist QIDO-RS MVP",
+      "last": "2026-08-24T15:09:58.401532+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-24T15:09:58.401532+00:00",
+          "outcome": "useful",
+          "q": "Codex, qual é o proximo passo do MVP?"
+        }
+      ],
+      "score": 0.999958817,
+      "source_file": "docs/superpowers/specs/2026-08-22-worklist-qido-rs-design.md",
       "status": "tentative",
       "uses": 1
     }

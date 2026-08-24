@@ -425,9 +425,9 @@
     "semantic_hash": "c6871220489855f65d4c9edf3b65fc5a"
   },
   "docs/architecture/evolution-backlog.md": {
-    "mtime": 1787454097.3419952,
-    "ast_hash": "6df078e490aa7eaf167149a177b39c6c",
-    "semantic_hash": "6df078e490aa7eaf167149a177b39c6c"
+    "mtime": 1787589746.8713708,
+    "ast_hash": "b686d5c8849de50880eedda0ba34f750",
+    "semantic_hash": "b686d5c8849de50880eedda0ba34f750"
   },
   "docs/superpowers/specs/2026-08-09-manual-dicom-import-design.md": {
     "mtime": 1787424754.5523264,
@@ -1483,5 +1483,15 @@
     "mtime": 1787578467.360684,
     "ast_hash": "0de6ae69556754eeb7b32584f06167cd",
     "semantic_hash": "0de6ae69556754eeb7b32584f06167cd"
+  },
+  "docs/superpowers/plans/2026-08-24-study-viewer.md": {
+    "mtime": 1787590604.3464086,
+    "ast_hash": "b6a7451984b2191f21acb9ed534caa88",
+    "semantic_hash": "b6a7451984b2191f21acb9ed534caa88"
+  },
+  "docs/superpowers/specs/2026-08-24-study-viewer-design.md": {
+    "mtime": 1787589773.3978372,
+    "ast_hash": "6eff1e1ec6c734ff98ba12ca69747408",
+    "semantic_hash": "6eff1e1ec6c734ff98ba12ca69747408"
   }
 }
