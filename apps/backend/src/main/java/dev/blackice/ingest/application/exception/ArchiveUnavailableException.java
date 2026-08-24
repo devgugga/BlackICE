@@ -26,6 +26,8 @@ public final class ArchiveUnavailableException extends RuntimeException {
          * Reporting it as unavailability would invite a duplicate re-upload.
          */
         INVALID_RESPONSE,
+        /** Submission began, but the archive outcome could not be confirmed safely. */
+        OUTCOME_UNKNOWN,
         /** The execution thread was interrupted while waiting for the archive. */
         INTERRUPTED
     }

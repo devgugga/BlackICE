@@ -57,7 +57,38 @@ Contrato `GET /api/studies` (Worklist):
 - Endpoint autenticado (`@RolesAllowed("auth")`) para consulta paginada de estudos via QIDO-RS;
 - Aceita quatro filtros opcionais combináveis: `patientName`, `patientId`, `modality`, `dateFrom`/`dateTo`, além de `limit` (padrão 20) e `offset` (padrão 0);
 - Devolve metadados curados (`StudyPage`) com `items` e metadados de página (`limit`, `offset`, `hasPrevious`, `hasNext`);
-- Traduz falhas em payloads de erro seguros `{ "code": "...", "message": "..." }` com identificador de correlação `X-Request-ID`.
+- Traduz falhas para Problem Details RFC 9457 catalogados (ver seção adiante).
+
+Contrato de erro (todas as rotas `/api`):
+- Todo erro JSON `4xx/5xx` sai em `application/problem+json` com um tipo do
+  catálogo em `docs/contracts/problems/`; `type`, `code` e `status` sempre
+  identificam a mesma entrada;
+- Toda resposta `/api`, inclusive de sucesso, carrega `X-Trace-ID`, e o corpo
+  do problema repete o mesmo valor em `traceId`. `X-Request-ID` não existe mais;
+- `traceparent` W3C é a única entrada canônica de correlação e é propagado até
+  as chamadas DICOMweb; um `X-Trace-ID` enviado pelo cliente é sempre
+  substituído;
+- `title` e `detail` vêm do catálogo, em inglês e voltados ao operador. Eles
+  nunca derivam de uma exceção, e o frontend não os renderiza — as mensagens ao
+  usuário são PT-BR e vivem em `apps/frontend/src/shared/api/problems/`;
+- `GET /api/login` mantém seu redirect OIDC intencional e fica fora deste
+  contrato;
+- Alterar, criar ou depreciar um tipo passa pela skill `problem-catalog` e pelo
+  tooling em `.problem-catalog/`; nunca edite um arquivo gerado.
+
+Verificação do catálogo:
+
+```bash
+cd .problem-catalog && mise exec -- pnpm check
+```
+
+Verificação atômica do contrato, a partir da raiz do repositório:
+
+```bash
+cd .problem-catalog && mise exec -- pnpm check
+cd ../apps/backend && mise exec -- mvn test -Dquarkus.http.test-port=8082
+cd ../frontend && mise exec -- pnpm test && mise exec -- pnpm build
+```
 
 Regras operacionais e de verificação:
 - **Dados sintéticos**: Todos os testes e fixtures utilizam dados DICOM puramente sintéticos; nenhum dado real de paciente é permitido no repositório;

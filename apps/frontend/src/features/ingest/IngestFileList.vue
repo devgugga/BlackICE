@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   files: readonly File[];
+  busy: boolean;
 }>();
 
 defineEmits<{
@@ -17,7 +18,12 @@ const formatBytes = (bytes: number) =>
     <li v-for="(file, index) in files" :key="`${file.name}-${file.size}-${index}`">
       <span>{{ file.name }}</span>
       <span>{{ formatBytes(file.size) }}</span>
-      <button type="button" :aria-label="`Remover ${file.name}`" @click="$emit('remove', index)">
+      <button
+        type="button"
+        :aria-label="`Remover ${file.name}`"
+        :disabled="busy"
+        @click="$emit('remove', index)"
+      >
         Remover
       </button>
     </li>

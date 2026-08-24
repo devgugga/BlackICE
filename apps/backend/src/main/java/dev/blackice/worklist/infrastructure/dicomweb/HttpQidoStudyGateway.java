@@ -100,8 +100,7 @@ public class HttpQidoStudyGateway implements StudyQueryGateway {
             }
             throw new ArchiveSearchException(ArchiveSearchException.Reason.CONNECTION, e);
         }
-        // Sem catch genérico: um bug inesperado sobe para o fallback 500 da
-        // fronteira em vez de virar indisponibilidade do Archive.
+        // No generic catch: unexpected implementation bugs must reach the HTTP 500 fallback.
 
         int statusCode = response.statusCode();
         if (statusCode == 413) {
@@ -123,7 +122,7 @@ public class HttpQidoStudyGateway implements StudyQueryGateway {
 
         try {
             return responseParser.parse(response.body());
-        } catch (Exception e) {
+        } catch (QidoStudyResponseParser.InvalidResponseException e) {
             throw new ArchiveSearchException(ArchiveSearchException.Reason.INVALID_RESPONSE, e);
         }
     }

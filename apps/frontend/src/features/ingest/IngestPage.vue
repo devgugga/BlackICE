@@ -21,17 +21,20 @@ const errorTraceId = computed(() => batch.error.value?.traceId ?? null);
 const allowsRetry = computed(
   () => batch.error.value?.retryPolicy === 'MANUAL' && batch.files.value.length > 0,
 );
+const busy = computed(() => ['UPLOADING', 'PROCESSING'].includes(batch.phase.value));
 
 /**
  * Associa cada violação ao arquivo que o próprio usuário escolheu.
  *
  * <p>O backend envia apenas `itemIndex`, nunca o nome do arquivo: nomes podem
- * conter dado identificável. Quem tem os arquivos é esta tela.
+ * conter dado identificável. O índice pertence à ordem imutável do último lote
+ * submetido, não à lista editável que permanece na tela depois de uma falha.
  */
 const violations = computed(() =>
   (batch.error.value?.violations ?? []).map((violation) => ({
     ...violation,
-    filename: batch.files.value[violation.itemIndex]?.name ?? `Arquivo ${violation.itemIndex + 1}`,
+    filename:
+      batch.submittedFiles.value[violation.itemIndex]?.name ?? `Arquivo ${violation.itemIndex + 1}`,
   })),
 );
 
@@ -68,7 +71,7 @@ const handleReset = () => {
         type="file"
         multiple
         accept=".dcm,application/dicom"
-        :disabled="['UPLOADING', 'PROCESSING'].includes(batch.phase.value)"
+        :disabled="busy"
         @change="select"
       />
 
@@ -84,7 +87,7 @@ const handleReset = () => {
       </p>
     </section>
 
-    <IngestFileList :files="batch.files.value" @remove="handleRemove" />
+    <IngestFileList :files="batch.files.value" :busy="busy" @remove="handleRemove" />
 
     <progress
       v-if="batch.phase.value === 'UPLOADING'"

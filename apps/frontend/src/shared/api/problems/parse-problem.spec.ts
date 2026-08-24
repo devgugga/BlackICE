@@ -70,6 +70,23 @@ describe('apiErrorFromResponse', () => {
     expect(error).toMatchObject({ code: 'CLIENT_RESPONSE_INVALID', scope: 'CLIENT' });
   });
 
+  it.each([
+    'application/problem+json.evil',
+    'text/application/problem+json',
+  ])('recusa media type que apenas contém o token válido: %s', async (contentType) => {
+    const error = await apiErrorFromResponse(responseWith(problemBody(), { contentType }));
+
+    expect(error.code).toBe('CLIENT_RESPONSE_INVALID');
+  });
+
+  it('aceita o token do media type sem distinguir caixa e com parâmetros', async () => {
+    const error = await apiErrorFromResponse(
+      responseWith(problemBody(), { contentType: 'Application/Problem+Json; Charset=UTF-8' }),
+    );
+
+    expect(error.code).toBe('API_ARCHIVE_UNAVAILABLE');
+  });
+
   it('recusa JSON inválido', async () => {
     const error = await apiErrorFromResponse(responseWith('{ nao e json '));
 
@@ -160,6 +177,59 @@ describe('apiErrorFromResponse', () => {
     expect(error.violations).toEqual([
       { itemIndex: 0, code: 'MALFORMED_DICOM', message: 'The file is not valid DICOM.' },
     ]);
+  });
+
+  it.each([
+    { name: 'array vazio', violations: [] },
+    {
+      name: 'mensagem vazia',
+      violations: [{ itemIndex: 0, code: 'MALFORMED_DICOM', message: '' }],
+    },
+    {
+      name: 'propriedade adicional no item',
+      violations: [{ itemIndex: 0, code: 'MALFORMED_DICOM', message: 'Invalid.', filename: 'x.dcm' }],
+    },
+  ])('recusa extensão fora do schema: $name', async ({ violations }) => {
+    const error = await apiErrorFromResponse(
+      responseWith(
+        problemBody({
+          type: PROBLEM_TYPES.API_DICOM_VALIDATION_FAILED.type,
+          code: 'API_DICOM_VALIDATION_FAILED',
+          status: 422,
+          violations,
+        }),
+        { status: 422 },
+      ),
+    );
+
+    expect(error.code).toBe('CLIENT_RESPONSE_INVALID');
+  });
+
+  it('recusa a extensão de violações em Problem Type que não a declara', async () => {
+    const error = await apiErrorFromResponse(
+      responseWith(problemBody({
+        violations: [{ itemIndex: 0, code: 'MALFORMED_DICOM', message: 'Invalid.' }],
+      })),
+    );
+
+    expect(error.code).toBe('CLIENT_RESPONSE_INVALID');
+  });
+
+  it('recusa membro adicional da extensão de validação DICOM', async () => {
+    const error = await apiErrorFromResponse(
+      responseWith(
+        problemBody({
+          type: PROBLEM_TYPES.API_DICOM_VALIDATION_FAILED.type,
+          code: 'API_DICOM_VALIDATION_FAILED',
+          status: 422,
+          violations: [{ itemIndex: 0, code: 'MALFORMED_DICOM', message: 'Invalid.' }],
+          rejectedFilename: 'x.dcm',
+        }),
+        { status: 422 },
+      ),
+    );
+
+    expect(error.code).toBe('CLIENT_RESPONSE_INVALID');
   });
 });
 

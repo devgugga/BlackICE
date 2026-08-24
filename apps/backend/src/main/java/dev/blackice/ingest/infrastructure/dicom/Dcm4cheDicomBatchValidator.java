@@ -8,10 +8,14 @@ import dev.blackice.ingest.application.port.DicomBatchValidator;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.dcm4che3.data.Attributes;
 import org.dcm4che3.data.Tag;
+import org.dcm4che3.data.VR;
+import org.dcm4che3.data.Value;
 import org.dcm4che3.io.DicomInputStream;
+import org.dcm4che3.util.UIDUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
@@ -67,9 +71,9 @@ public class Dcm4cheDicomBatchValidator implements DicomBatchValidator {
                 candidatesBySopUid.computeIfAbsent(sop, k -> new ArrayList<>()).add(validated);
             } catch (ValidationException e) {
                 issues.add(DicomValidationIssue.of(itemIndex, upload.filename(), e.code));
-            } catch (Exception e) {
-                // A mensagem da exceção pode carregar caminho, UID ou conteúdo do
-                // arquivo: só o código estável atravessa a fronteira.
+            } catch (IOException e) {
+                // File and DICOM parsing failures are expected validation outcomes.
+                // The exception text is intentionally discarded because it may contain a path.
                 issues.add(DicomValidationIssue.of(
                     itemIndex, upload.filename(), DicomValidationIssue.Code.MALFORMED_DICOM));
             }
@@ -120,11 +124,30 @@ public class Dcm4cheDicomBatchValidator implements DicomBatchValidator {
     }
 
     private String requireUid(Attributes ds, int tag, DicomValidationIssue.Code code) {
-        String val = ds.getString(tag);
-        if (val == null || val.isBlank()) {
+        Object rawValue = ds.getValue(tag);
+        if (rawValue == null || rawValue == Value.NULL) {
             throw new ValidationException(code, "Required UID is missing: " + code);
         }
-        return val;
+        if (ds.getVR(tag) != VR.UI || !(rawValue instanceof byte[] encodedUid)
+            || (encodedUid.length & 1) != 0) {
+            throw new ValidationException(
+                DicomValidationIssue.Code.MALFORMED_DICOM,
+                "Required UID has an invalid DICOM UI value"
+            );
+        }
+
+        int uidLength = encodedUid.length;
+        if (uidLength > 0 && encodedUid[uidLength - 1] == (byte) VR.UI.paddingByte()) {
+            uidLength--;
+        }
+        String exactUid = new String(encodedUid, 0, uidLength, StandardCharsets.US_ASCII);
+        if (!UIDUtils.isValid(exactUid)) {
+            throw new ValidationException(
+                DicomValidationIssue.Code.MALFORMED_DICOM,
+                "Required UID has an invalid DICOM UI value"
+            );
+        }
+        return exactUid;
     }
 
     private static String calculateSha256(Path path) throws IOException {

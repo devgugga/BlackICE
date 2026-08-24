@@ -17,6 +17,7 @@ media type `application/problem+json`.
 | Code | HTTP | Retry | Owner | Title | Detail | Extensão | Status |
 | :-- | --: | :-- | :-- | :-- | :-- | :-- | :-- |
 | `API_ACCESS_DENIED` | 403 | `NEVER` | security | Access denied | You do not have permission to access this resource. | — | active |
+| `API_ARCHIVE_OUTCOME_UNKNOWN` | 502 | `NEVER` | platform | Archive outcome unknown | The imaging archive outcome could not be confirmed. | — | active |
 | `API_ARCHIVE_RESPONSE_INVALID` | 502 | `MANUAL` | platform | Invalid Archive response | The imaging archive returned an unexpected response. | — | active |
 | `API_ARCHIVE_UNAVAILABLE` | 503 | `MANUAL` | platform | Archive unavailable | The imaging archive is temporarily unavailable. | — | active |
 | `API_AUTHENTICATION_REQUIRED` | 401 | `NEVER` | security | Authentication required | Authentication is required to access this resource. | — | active |
@@ -67,6 +68,7 @@ acima. Ela nunca é informada à mão e nunca é reciclada.
 | Code | Type |
 | :-- | :-- |
 | `API_ACCESS_DENIED` | `urn:uuid:8c7666e3-0c02-5a7b-8a7e-d511314c4ccc` |
+| `API_ARCHIVE_OUTCOME_UNKNOWN` | `urn:uuid:f627ad94-4e6f-5b19-bdbc-2550eb221b63` |
 | `API_ARCHIVE_RESPONSE_INVALID` | `urn:uuid:8a220e49-3e80-5e59-83e5-43483c4a6dd8` |
 | `API_ARCHIVE_UNAVAILABLE` | `urn:uuid:8dd49378-697d-5e0e-aa0f-5ab72a5e98a6` |
 | `API_AUTHENTICATION_REQUIRED` | `urn:uuid:a665ee9e-36bf-599f-814a-e5d5da82f3cb` |

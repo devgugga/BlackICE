@@ -1112,3 +1112,23 @@ bloqueado por infraestrutura. Parar no Gate 5; não fazer merge sem autorizaçã
 - Consistência de tipos: `ProblemType`/`ProblemExtensions` gerados alimentam `ApiProblemFactory`; `ApiProblem` é consumido pelo parser; `ProblemCode` governa o mapa PT-BR; features guardam `ApiError`, nunca strings.
 - Escopo: exporter OTLP e Dev Services estão desligados; EVO-006 permanece backlog; cancelamento continua controle de fluxo; não há compatibilidade.
 - Gates: cada fase termina em aprovação humana; a Fase 3 inclui revisão DICOM read-only antes do gate.
+
+---
+
+## Adendo aprovado pelo humano — revisão DICOM: resultado incerto no Archive
+
+Este adendo complementa o plano histórico sem reescrever suas tarefas. O catálogo
+deve publicar `API_ARCHIVE_OUTCOME_UNKNOWN` com escopo `API`, descrição `O
+resultado de uma operação no Archive não pôde ser confirmado após o início da
+submissão.`, HTTP `502`, retry `NEVER`, owner `platform`, title `Archive outcome
+unknown`, detail `The imaging archive outcome could not be confirmed.` e nenhuma
+extensão.
+
+- Falha de conexão comprovada antes da submissão permanece
+  `API_ARCHIVE_UNAVAILABLE`.
+- Após o início da submissão, timeout, interrupção ou reset não pode afirmar que
+  nada foi armazenado.
+- Resultados confirmados são preservados; estudos incertos são representados sem
+  oferecer retry.
+- Sem resultado confirmável, usar `API_ARCHIVE_OUTCOME_UNKNOWN`; não oferecer
+  retentativa automática nem manual.

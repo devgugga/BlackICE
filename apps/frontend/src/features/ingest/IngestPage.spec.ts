@@ -3,7 +3,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import IngestPage from '@/features/ingest/IngestPage.vue';
 import { ApiError } from '@/shared/api/problems/api-error';
+import { parseProblem } from '@/shared/api/problems/parse-problem';
 import { PROBLEM_MESSAGES } from '@/shared/api/problems/problem-messages.pt-BR';
+import { PROBLEM_TYPES } from '@/shared/api/problems/problem-types.generated';
 
 const TRACE_ID = '4bf92f3577b34da6a3ce929d0e0e4736';
 
@@ -30,7 +32,7 @@ async function selectFiles(wrapper: ReturnType<typeof mount>, files: File[]): Pr
 
 async function importFailingWith(error: ApiError, names = ['exame.dcm']) {
   fetchCsrfTokenMock.mockResolvedValue('csrf-abc');
-  uploadStudiesMock.mockReturnValue({ promise: Promise.reject(error), abort: vi.fn() });
+  uploadStudiesMock.mockImplementation(() => ({ promise: Promise.reject(error), abort: vi.fn() }));
 
   const wrapper = mount(IngestPage);
   await selectFiles(wrapper, names.map(file));
@@ -71,6 +73,24 @@ describe('IngestPage', () => {
     expect(violations.text()).not.toContain('primeiro.dcm');
   });
 
+  it('mantem itemIndex associado ao lote submetido depois de remover um arquivo anterior', async () => {
+    const wrapper = await importFailingWith(
+      new ApiError('API_DICOM_VALIDATION_FAILED', {
+        violations: [
+          { itemIndex: 1, code: 'MALFORMED_DICOM', message: 'The file is not valid DICOM.' },
+        ],
+      }),
+      ['primeiro.dcm', 'segundo.dcm'],
+    );
+
+    await wrapper.get('button[aria-label="Remover primeiro.dcm"]').trigger('click');
+
+    const violations = wrapper.get('[data-testid="ingest-violations"]');
+    expect(violations.text()).toContain('segundo.dcm');
+    expect(violations.text()).not.toContain('primeiro.dcm');
+    expect(violations.text()).not.toContain('Arquivo 2');
+  });
+
   it('mostra o TraceID como referência quando disponível', async () => {
     const wrapper = await importFailingWith(
       new ApiError('API_INTERNAL_ERROR', { traceId: TRACE_ID }),
@@ -91,6 +111,36 @@ describe('IngestPage', () => {
     expect(
       never.find('[role="alert"]').findAll('button').some((b) => b.text() === 'Tentar novamente'),
     ).toBe(false);
+  });
+
+  it('mostra resultado incerto com referência segura e sem oferecer reenvio', async () => {
+    const rawDetail = 'The imaging archive outcome could not be confirmed.';
+    const error = parseProblem({
+      status: 502,
+      contentType: 'application/problem+json',
+      body: JSON.stringify({
+        type: PROBLEM_TYPES.API_ARCHIVE_OUTCOME_UNKNOWN.type,
+        title: 'Archive outcome unknown',
+        status: 502,
+        detail: rawDetail,
+        code: 'API_ARCHIVE_OUTCOME_UNKNOWN',
+        traceId: TRACE_ID,
+      }),
+      traceHeader: TRACE_ID,
+    });
+
+    expect(error).toBeInstanceOf(ApiError);
+    const wrapper = await importFailingWith(error);
+
+    const alert = wrapper.find('[role="alert"]');
+    expect(alert.text()).toContain(
+      'Não foi possível confirmar o resultado no Archive. Use a referência exibida para solicitar verificação.',
+    );
+    expect(alert.find('code').text()).toBe(TRACE_ID);
+    expect(wrapper.text()).not.toContain(rawDetail);
+    expect(alert.findAll('button').some((button) => button.text() === 'Tentar novamente')).toBe(
+      false,
+    );
   });
 
   it('cancelamento termina em CANCELLED, sem alerta de erro', async () => {

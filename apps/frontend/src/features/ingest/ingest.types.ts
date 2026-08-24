@@ -21,10 +21,17 @@ export interface IngestResponse {
     }>;
     /**
      * Razão interna pela qual o estudo não foi armazenado, presente apenas em
-     * resultados parciais. Não é um code do catálogo e não deve ser exibido:
-     * serve para diagnóstico, e a fronteira já traduziu a falha total.
+     * resultados parciais. Não é um code do catálogo; a UI o traduz para
+     * uma apresentação segura, e a fronteira já traduz a falha total.
      */
-    errorCode: 'TIMEOUT' | 'CONNECTION' | 'INTERRUPTED' | 'HTTP_STATUS' | 'INVALID_RESPONSE' | null;
+    errorCode:
+      | 'TIMEOUT'
+      | 'CONNECTION'
+      | 'INTERRUPTED'
+      | 'HTTP_STATUS'
+      | 'INVALID_RESPONSE'
+      | 'OUTCOME_UNKNOWN'
+      | null;
   }>;
   locallyRejectedFiles: Array<{
     itemIndex: number;

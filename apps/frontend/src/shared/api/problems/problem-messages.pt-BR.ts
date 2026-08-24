@@ -27,6 +27,8 @@ export const PROBLEM_MESSAGES = {
   API_MEDIA_TYPE_UNSUPPORTED: 'O formato do conteúdo enviado não é suportado.',
   API_DICOM_VALIDATION_FAILED: 'Nenhum arquivo enviado passou pela validação DICOM.',
   API_INTERNAL_ERROR: 'Ocorreu uma falha inesperada. Tente novamente.',
+  API_ARCHIVE_OUTCOME_UNKNOWN:
+    'Não foi possível confirmar o resultado no Archive. Use a referência exibida para solicitar verificação.',
   API_ARCHIVE_RESPONSE_INVALID: 'O Archive retornou uma resposta inválida.',
   API_ARCHIVE_UNAVAILABLE: 'O Archive está temporariamente indisponível.',
   CLIENT_NETWORK_UNAVAILABLE: 'Não foi possível alcançar o servidor.',

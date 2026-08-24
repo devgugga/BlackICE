@@ -18,6 +18,7 @@ const STUDY_FAILURE_LABELS: Record<StudyFailure, string> = {
   INTERRUPTED: 'Archive indisponível',
   HTTP_STATUS: 'Resposta inesperada do Archive',
   INVALID_RESPONSE: 'Resposta inesperada do Archive',
+  OUTCOME_UNKNOWN: 'Resultado do Archive não confirmado',
 };
 
 const studyFailureLabel = (code: StudyFailure) => STUDY_FAILURE_LABELS[code];
@@ -39,7 +40,7 @@ const labels: Record<InstanceStatus, string> = {
       <li>Válidos localmente: {{ result.summary.locallyValid }}</li>
       <li>Rejeitados localmente: {{ result.summary.locallyRejected }}</li>
       <li>Armazenados no Archive: {{ result.summary.archiveAccepted }}</li>
-      <li>Rejeitados pelo Archive: {{ result.summary.archiveRejected }}</li>
+      <li>Rejeitados ou sem confirmação no Archive: {{ result.summary.archiveRejected }}</li>
     </ul>
 
     <p>{{ result.summary.archiveAccepted }} armazenados</p>

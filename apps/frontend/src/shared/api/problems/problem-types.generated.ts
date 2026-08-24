@@ -11,6 +11,12 @@ export const PROBLEM_TYPES = {
     httpStatus: 403,
     retryPolicy: 'NEVER',
   },
+  API_ARCHIVE_OUTCOME_UNKNOWN: {
+    type: 'urn:uuid:f627ad94-4e6f-5b19-bdbc-2550eb221b63',
+    scope: 'API',
+    httpStatus: 502,
+    retryPolicy: 'NEVER',
+  },
   API_ARCHIVE_RESPONSE_INVALID: {
     type: 'urn:uuid:8a220e49-3e80-5e59-83e5-43483c4a6dd8',
     scope: 'API',

@@ -1,6 +1,7 @@
 package dev.blackice.worklist.api;
 
 import dev.blackice.security.application.AccessTokenProvider;
+import dev.blackice.shared.api.problem.ApiFailureLogCapture;
 import dev.blackice.worklist.application.exception.ArchiveSearchException;
 import dev.blackice.worklist.application.result.StudyPage;
 import dev.blackice.worklist.application.result.StudySummary;
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.blankOrNullString;
@@ -22,8 +25,10 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
@@ -33,6 +38,8 @@ import static org.mockito.Mockito.when;
 
 @QuarkusTest
 class WorklistResourceTest {
+
+    private static final String FAILURE_LOGGER = "dev.blackice.shared.api.problem.ApiFailureLogger";
 
     @InjectMock
     SearchStudiesUseCase useCase;
@@ -307,6 +314,63 @@ class WorklistResourceTest {
 
         assertNull(response.header("X-Request-ID"));
         assertEquals(response.jsonPath().getString("traceId"), response.header("X-Trace-ID"));
+    }
+
+    @Test
+    @TestSecurity(user = "dr.teste", roles = "auth")
+    void known_archive_failure_emits_exactly_one_safe_warn_event() {
+        String traceId = "8192f2b6129343ca9be36fd74be7a708";
+        when(accessToken.accessToken()).thenReturn("user-token");
+        when(useCase.search(any(), eq("user-token")))
+            .thenThrow(new ArchiveSearchException(
+                ArchiveSearchException.Reason.TIMEOUT,
+                new IllegalStateException("external-cause patient-secret 1.2.840.113619")));
+
+        try (ApiFailureLogCapture logs = ApiFailureLogCapture.start(FAILURE_LOGGER)) {
+            given()
+                .header("traceparent", "00-" + traceId + "-7b9a559cd4474348-01")
+                .queryParam("patientName", "MARIA-PATIENT-SECRET")
+                .when().get("/api/studies")
+                .then().statusCode(503);
+
+            List<LogRecord> events = logs.containing("traceId=" + traceId);
+            assertEquals(1, events.size());
+            assertEquals(Level.WARNING, events.getFirst().getLevel());
+            String event = logs.formatted(events.getFirst());
+            assertTrue(event.contains("code=API_ARCHIVE_UNAVAILABLE"));
+            assertTrue(event.contains("status=503"));
+            assertTrue(event.contains("method=GET"));
+            assertTrue(event.contains("route=/api/studies"));
+            assertTrue(event.contains("reason=TIMEOUT"));
+            assertFalse(event.contains("MARIA-PATIENT-SECRET"));
+            assertFalse(event.contains("1.2.840"));
+            assertFalse(event.contains("external-cause"));
+            assertNull(events.getFirst().getThrown());
+        }
+    }
+
+    @Test
+    @TestSecurity(user = "dr.teste", roles = "auth")
+    void invalid_search_emits_exactly_one_safe_info_event() {
+        String traceId = "96f725d0d0514392b29417b5ae8d1a1b";
+
+        try (ApiFailureLogCapture logs = ApiFailureLogCapture.start(FAILURE_LOGGER)) {
+            given()
+                .header("traceparent", "00-" + traceId + "-178596a0c80d4a91-01")
+                .queryParam("dateFrom", "PATIENT-SECRET-NOT-A-DATE")
+                .when().get("/api/studies")
+                .then().statusCode(400);
+
+            List<LogRecord> events = logs.containing("traceId=" + traceId);
+            assertEquals(1, events.size());
+            assertEquals(Level.INFO, events.getFirst().getLevel());
+            String event = logs.formatted(events.getFirst());
+            assertTrue(event.contains("code=API_SEARCH_INVALID"));
+            assertTrue(event.contains("status=400"));
+            assertTrue(event.contains("reason=INVALID_SEARCH"));
+            assertFalse(event.contains("PATIENT-SECRET-NOT-A-DATE"));
+            assertNull(events.getFirst().getThrown());
+        }
     }
 
     @Test

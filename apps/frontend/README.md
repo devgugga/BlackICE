@@ -18,8 +18,10 @@ mise exec -- pnpm install --frozen-lockfile
 ```powershell
 mise exec -- pnpm test
 mise exec -- pnpm build
+mise exec -- pnpm test:e2e:keycloak
 mise exec -- pnpm test:e2e:ingest
 mise exec -- pnpm test:e2e:worklist
+mise exec -- pnpm exec playwright test e2e/problem-details.spec.ts
 ```
 
 A suíte de testes E2E valida os fluxos completos utilizando fixtures DICOM
@@ -32,6 +34,22 @@ manipulado ou commitado.
 - `UPLOADING`: barra de progresso determinada com opção de cancelamento;
 - `PROCESSING`: envio concluído, aguardando resposta STOW-RS do Archive;
 - `COMPLETE` / `ERROR` / `CANCELLED`: apresentação dos resultados detalhados por estudo e opção de nova importação.
+
+## Tratamento de erros
+
+`src/shared/api/problems/` é a única fronteira de erro do SPA:
+
+- `parse-problem.ts` transforma qualquer resposta em `ApiError` tipado pelo
+  catálogo, ou em falha local `CLIENT_*` quando a resposta não corresponde ao
+  contrato. `fetch` e XHR usam o mesmo núcleo;
+- `problem-messages.pt-BR.ts` guarda o texto exibido ao usuário. O mapa é
+  exaustivo por construção: um code novo no catálogo quebra o build até ganhar
+  mensagem;
+- `*.generated.ts` vêm de `.problem-catalog/` e não são editados à mão;
+- o `detail` do backend nunca é renderizado; o TraceID aparece como referência
+  copiável apenas em falhas;
+- retentativa só é oferecida quando `retryPolicy === 'MANUAL'`;
+- cancelamento pedido pelo usuário é controle de fluxo, não erro.
 
 ### Worklist e busca (`/studies`):
 A página de Worklist consome o endpoint `GET /api/studies` via BFF e apresenta

@@ -23,22 +23,25 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.http.HttpClient;
+import java.net.http.HttpConnectTimeoutException;
 import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpTimeoutException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Flow;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -48,6 +51,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anySet;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
 class HttpDicomArchiveGatewayTest {
 
@@ -114,7 +123,7 @@ class HttpDicomArchiveGatewayTest {
                 ]}}
                 """.getBytes(StandardCharsets.UTF_8);
 
-            exchange.getResponseHeaders().set("Content-Type", "application/dicom+json");
+            exchange.getResponseHeaders().set("Content-Type", "Application/Dicom+Json; charset=UTF-8");
             exchange.sendResponseHeaders(200, response.length);
             try (OutputStream out = exchange.getResponseBody()) {
                 out.write(response);
@@ -219,18 +228,119 @@ class HttpDicomArchiveGatewayTest {
             () -> gateway.storeStudy("1.2.3", files, "token")
         );
 
-        // O archive respondeu 2xx: pode já ter gravado. Reportar indisponibilidade
-        // levaria o usuário a reenviar o lote e duplicar a ingestão.
-        assertEquals(ArchiveUnavailableException.Reason.INVALID_RESPONSE, ex.reason());
+        // A 2xx response cannot prove the archive did not store the submitted instance.
+        assertEquals("OUTCOME_UNKNOWN", ex.reason().name());
     }
 
     @Test
-    void timeout_throws_archive_unavailable_with_timeout_reason() throws Exception {
+    void missing_content_type_after_2xx_is_outcome_unknown() throws Exception {
+        respondToStore(200, null, validStowBody("1.2.3.1"));
+
+        ArchiveUnavailableException ex = assertThrows(ArchiveUnavailableException.class,
+            () -> gateway(HttpClient.newHttpClient(), new StowResponseParser())
+                .storeStudy("1.2.3", oneValidatedFile(), "token"));
+
+        assertEquals("OUTCOME_UNKNOWN", ex.reason().name());
+    }
+
+    @Test
+    void wrong_content_type_after_2xx_is_outcome_unknown() throws Exception {
+        respondToStore(200, "application/json", validStowBody("1.2.3.1"));
+
+        ArchiveUnavailableException ex = assertThrows(ArchiveUnavailableException.class,
+            () -> gateway(HttpClient.newHttpClient(), new StowResponseParser())
+                .storeStudy("1.2.3", oneValidatedFile(), "token"));
+
+        assertEquals("OUTCOME_UNKNOWN", ex.reason().name());
+    }
+
+    @Test
+    void unexpected_stow_parser_runtime_failure_propagates() throws Exception {
+        String responseBody = validStowBody("1.2.3.1");
+        respondToStore(200, "application/dicom+json", responseBody);
+        StowResponseParser brokenParser = mock(StowResponseParser.class);
+        when(brokenParser.parse(anyString(), anyString(), anySet()))
+            .thenThrow(new IllegalStateException("unexpected parser bug"));
+
+        assertThrows(IllegalStateException.class,
+            () -> gateway(HttpClient.newHttpClient(), brokenParser)
+                .storeStudy("1.2.3", oneValidatedFile(), "token"));
+    }
+
+    @Test
+    void connect_timeout_before_body_subscription_remains_timeout() throws Exception {
+        HttpClient client = throwingClient(new HttpConnectTimeoutException("connect timeout"), false);
+
+        ArchiveUnavailableException ex = assertThrows(ArchiveUnavailableException.class,
+            () -> gateway(client, new StowResponseParser())
+                .storeStudy("1.2.3", oneValidatedFile(), "token"));
+
+        assertEquals(ArchiveUnavailableException.Reason.TIMEOUT, ex.reason());
+    }
+
+    @Test
+    void connect_failure_before_body_subscription_remains_connection() throws Exception {
+        HttpClient client = throwingClient(new ConnectException("connect failure"), false);
+
+        ArchiveUnavailableException ex = assertThrows(ArchiveUnavailableException.class,
+            () -> gateway(client, new StowResponseParser())
+                .storeStudy("1.2.3", oneValidatedFile(), "token"));
+
+        assertEquals(ArchiveUnavailableException.Reason.CONNECTION, ex.reason());
+    }
+
+    @Test
+    void timeout_after_body_subscription_is_outcome_unknown() throws Exception {
+        HttpClient client = throwingClient(new HttpTimeoutException("request timeout"), true);
+
+        ArchiveUnavailableException ex = assertThrows(ArchiveUnavailableException.class,
+            () -> gateway(client, new StowResponseParser())
+                .storeStudy("1.2.3", oneValidatedFile(), "token"));
+
+        assertEquals("OUTCOME_UNKNOWN", ex.reason().name());
+    }
+
+    @Test
+    void connection_reset_after_body_subscription_is_outcome_unknown() throws Exception {
+        HttpClient client = throwingClient(new IOException("connection reset"), true);
+
+        ArchiveUnavailableException ex = assertThrows(ArchiveUnavailableException.class,
+            () -> gateway(client, new StowResponseParser())
+                .storeStudy("1.2.3", oneValidatedFile(), "token"));
+
+        assertEquals("OUTCOME_UNKNOWN", ex.reason().name());
+    }
+
+    @Test
+    void interruption_after_body_subscription_is_outcome_unknown_and_restores_interrupt() throws Exception {
+        HttpClient client = throwingClient(new InterruptedException("interrupted"), true);
+
+        try {
+            ArchiveUnavailableException ex = assertThrows(ArchiveUnavailableException.class,
+                () -> gateway(client, new StowResponseParser())
+                    .storeStudy("1.2.3", oneValidatedFile(), "token"));
+
+            assertEquals("OUTCOME_UNKNOWN", ex.reason().name());
+            assertTrue(Thread.currentThread().isInterrupted());
+        } finally {
+            Thread.interrupted();
+        }
+    }
+
+    @Test
+    void real_http_timeout_after_body_subscription_is_outcome_unknown() throws Exception {
+        CountDownLatch requestBodyReceived = new CountDownLatch(1);
+        CountDownLatch releaseResponse = new CountDownLatch(1);
         server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies/1.2.3", exchange -> {
             try {
-                Thread.sleep(300);
-            } catch (InterruptedException ignored) {}
-            exchange.getRequestBody().transferTo(OutputStream.nullOutputStream());
+                exchange.getRequestBody().transferTo(OutputStream.nullOutputStream());
+                requestBodyReceived.countDown();
+                releaseResponse.await();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                exchange.close();
+                return;
+            }
             byte[] response = "{}".getBytes(StandardCharsets.UTF_8);
             exchange.sendResponseHeaders(200, response.length);
             exchange.getResponseBody().write(response);
@@ -249,12 +359,17 @@ class HttpDicomArchiveGatewayTest {
             HttpClient.newHttpClient()
         );
 
-        ArchiveUnavailableException ex = assertThrows(
-            ArchiveUnavailableException.class,
-            () -> gateway.storeStudy("1.2.3", files, "token")
-        );
+        try {
+            ArchiveUnavailableException ex = assertThrows(
+                ArchiveUnavailableException.class,
+                () -> gateway.storeStudy("1.2.3", files, "token")
+            );
 
-        assertEquals(ArchiveUnavailableException.Reason.TIMEOUT, ex.reason());
+            assertTrue(requestBodyReceived.await(1, TimeUnit.SECONDS));
+            assertEquals("OUTCOME_UNKNOWN", ex.reason().name());
+        } finally {
+            releaseResponse.countDown();
+        }
     }
 
     @Test
@@ -283,25 +398,24 @@ class HttpDicomArchiveGatewayTest {
     }
 
     @Test
-    void missing_file_throws_connection_failure() {
+    void missing_local_file_is_sanitized_internal_failure_and_makes_no_http_call() {
         Path nonexistent = tempDir.resolve("missing.dcm");
         List<ValidatedDicom> files = List.of(
             new ValidatedDicom(0, nonexistent, "missing.dcm", 100, "1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage, "h")
         );
 
-        HttpDicomArchiveGateway gateway = new HttpDicomArchiveGateway(
-            baseUrl,
-            Duration.ofSeconds(2),
-            new StowResponseParser(),
-            HttpClient.newHttpClient()
-        );
+        HttpClient client = mock(HttpClient.class);
+        HttpDicomArchiveGateway gateway = gateway(client, new StowResponseParser());
 
-        ArchiveUnavailableException ex = assertThrows(
-            ArchiveUnavailableException.class,
+        IllegalStateException ex = assertThrows(
+            IllegalStateException.class,
             () -> gateway.storeStudy("1.2.3", files, "token")
         );
 
-        assertEquals(ArchiveUnavailableException.Reason.CONNECTION, ex.reason());
+        assertNull(ex.getCause());
+        assertFalse(ex.getMessage().contains(nonexistent.toString()));
+        assertFalse(ex.getMessage().contains("missing.dcm"));
+        verifyNoInteractions(client);
     }
 
     @Test
@@ -370,5 +484,65 @@ class HttpDicomArchiveGatewayTest {
             out.writeDataset(ds.createFileMetaInformation(UID.ExplicitVRLittleEndian), ds);
         }
         return path;
+    }
+
+    private List<ValidatedDicom> oneValidatedFile() throws IOException {
+        Path file = createDicomFile("1.2.3", "1.2.3.1", "1.2.3.1.1", (byte) 1);
+        return List.of(new ValidatedDicom(
+            0, file, "f.dcm", Files.size(file), "1.2.3", "1.2.3.1", "1.2.3.1.1",
+            UID.SecondaryCaptureImageStorage, "h"));
+    }
+
+    private HttpDicomArchiveGateway gateway(HttpClient client, StowResponseParser parser) {
+        return new HttpDicomArchiveGateway(baseUrl, Duration.ofSeconds(2), parser, client);
+    }
+
+    private void respondToStore(int status, String contentType, String body) {
+        server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies/1.2.3", exchange -> {
+            exchange.getRequestBody().transferTo(OutputStream.nullOutputStream());
+            byte[] response = body.getBytes(StandardCharsets.UTF_8);
+            if (contentType != null) {
+                exchange.getResponseHeaders().set("Content-Type", contentType);
+            }
+            exchange.sendResponseHeaders(status, response.length);
+            exchange.getResponseBody().write(response);
+            exchange.close();
+        });
+    }
+
+    private static String validStowBody(String sopUid) {
+        return "{\"00081199\":{\"vr\":\"SQ\",\"Value\":["
+            + "{\"00081155\":{\"vr\":\"UI\",\"Value\":[\"" + sopUid + "\"]}}]}}";
+    }
+
+    @SuppressWarnings("unchecked")
+    private static HttpClient throwingClient(Exception failure, boolean subscribeBody) throws Exception {
+        HttpClient client = mock(HttpClient.class);
+        when(client.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenAnswer(invocation -> {
+            HttpRequest request = invocation.getArgument(0);
+            if (subscribeBody) {
+                subscribeAndCancel(request.bodyPublisher().orElseThrow());
+            }
+            throw failure;
+        });
+        return client;
+    }
+
+    private static void subscribeAndCancel(HttpRequest.BodyPublisher publisher) {
+        publisher.subscribe(new Flow.Subscriber<>() {
+            @Override
+            public void onSubscribe(Flow.Subscription subscription) {
+                subscription.cancel();
+            }
+
+            @Override
+            public void onNext(ByteBuffer item) {}
+
+            @Override
+            public void onError(Throwable throwable) {}
+
+            @Override
+            public void onComplete() {}
+        });
     }
 }

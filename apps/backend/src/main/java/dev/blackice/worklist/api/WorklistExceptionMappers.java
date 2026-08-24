@@ -1,6 +1,7 @@
 package dev.blackice.worklist.api;
 
 import dev.blackice.shared.api.problem.ProblemResponseFactory;
+import dev.blackice.shared.api.problem.ApiFailureLogger;
 import dev.blackice.shared.api.problem.generated.ProblemType;
 import dev.blackice.worklist.application.exception.ArchiveSearchException;
 import dev.blackice.worklist.application.exception.InvalidStudySearchException;
@@ -9,30 +10,36 @@ import jakarta.ws.rs.core.Response;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 
 /**
- * Traduz as duas exceções conhecidas da Worklist em problemas catalogados.
+ * Translates the two known Worklist exceptions into catalogued problems.
  *
- * <p>Vários motivos internos convergem para o mesmo problema público, e isso é
- * correto: o catálogo descreve o que o consumidor observa, não a taxonomia de
- * exceções. Nada além destas duas é tratado aqui — um bug inesperado sobe para
- * o fallback `500` da fronteira compartilhada, em vez de ser disfarçado de
- * indisponibilidade do Archive.
+ * <p>Several internal reasons intentionally converge on one public problem because the catalog
+ * describes what the consumer observes, not the Java exception taxonomy. Anything else reaches
+ * the shared 500 fallback instead of being disguised as archive unavailability.</p>
  */
 public class WorklistExceptionMappers {
 
     @Inject
     ProblemResponseFactory problems;
 
+    @Inject
+    ApiFailureLogger failureLogger;
+
     @ServerExceptionMapper
     public Response invalidSearch(InvalidStudySearchException exception) {
-        return problems.response(ProblemType.API_SEARCH_INVALID);
+        ProblemType type = ProblemType.API_SEARCH_INVALID;
+        failureLogger.known(type, "GET", "/api/studies", ApiFailureLogger.Reason.INVALID_SEARCH);
+        return problems.response(type);
     }
 
     @ServerExceptionMapper
     public Response archiveSearch(ArchiveSearchException exception) {
-        return problems.response(switch (exception.reason()) {
+        ProblemType type = switch (exception.reason()) {
             case QUERY_TOO_BROAD -> ProblemType.API_SEARCH_TOO_BROAD;
             case INVALID_RESPONSE, HTTP_STATUS -> ProblemType.API_ARCHIVE_RESPONSE_INVALID;
             case TIMEOUT, CONNECTION -> ProblemType.API_ARCHIVE_UNAVAILABLE;
-        });
+        };
+        failureLogger.known(type, "GET", "/api/studies",
+            ApiFailureLogger.Reason.valueOf(exception.reason().name()));
+        return problems.response(type);
     }
 }

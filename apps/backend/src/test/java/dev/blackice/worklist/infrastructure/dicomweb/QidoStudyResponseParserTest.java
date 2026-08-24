@@ -13,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class QidoStudyResponseParserTest {
 
@@ -67,11 +70,19 @@ class QidoStudyResponseParserTest {
     }
 
     @Test
-    void returns_empty_list_for_empty_array_null_or_blank_body() {
-        assertTrue(parser.parse(null).isEmpty());
-        assertTrue(parser.parse("").isEmpty());
-        assertTrue(parser.parse("   ").isEmpty());
+    void returns_empty_list_for_empty_array() {
         assertTrue(parser.parse("[]").isEmpty());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "\t"})
+    void rejects_blank_http_200_body(String body) {
+        assertThrows(QidoStudyResponseParser.InvalidResponseException.class, () -> parser.parse(body));
+    }
+
+    @Test
+    void rejects_null_http_200_body() {
+        assertThrows(QidoStudyResponseParser.InvalidResponseException.class, () -> parser.parse(null));
     }
 
     @Test
@@ -172,11 +183,29 @@ class QidoStudyResponseParserTest {
         "[{\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"1.2.3.\"]}}]",
         "[{\"0020000D\":{\"vr\":\"UI\",\"Value\":[\".1.2.3\"]}}]",
         "[{\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"1..2.3\"]}}]",
+        "[{\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"1.02.3\"]}}]",
         "[{\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"123456\"]}}]",
         "[{\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"1.2.840.113619.2.55.3.2831155964.678.1234567890123456789012345678901234567890\"]}}]"
     })
     void rejects_invalid_study_instance_uids(String json) {
-        assertThrows(IllegalArgumentException.class, () -> parser.parse(json));
+        assertThrows(QidoStudyResponseParser.InvalidResponseException.class, () -> parser.parse(json));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {" 1.2.3", "1.2.3 ", "\t1.2.3", "1.2.3\t"})
+    void rejects_study_instance_uid_with_surrounding_whitespace(String uid) {
+        String json = "[{\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"" + uid + "\"]}}]";
+
+        assertThrows(QidoStudyResponseParser.InvalidResponseException.class, () -> parser.parse(json));
+    }
+
+    @Test
+    void propagates_unexpected_object_mapper_runtime_failure() throws Exception {
+        ObjectMapper brokenMapper = mock(ObjectMapper.class);
+        when(brokenMapper.readTree(anyString())).thenThrow(new IllegalStateException("unexpected parser bug"));
+        QidoStudyResponseParser brokenParser = new QidoStudyResponseParser(brokenMapper);
+
+        assertThrows(IllegalStateException.class, () -> brokenParser.parse("[]"));
     }
 
     @ParameterizedTest

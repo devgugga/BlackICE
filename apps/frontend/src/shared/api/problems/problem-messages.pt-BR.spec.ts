@@ -17,6 +17,12 @@ describe('mensagens PT-BR', () => {
     );
   });
 
+  it('orienta a solicitar verificação quando o resultado do Archive é incerto', () => {
+    expect(problemMessage('API_ARCHIVE_OUTCOME_UNKNOWN')).toBe(
+      'Não foi possível confirmar o resultado no Archive. Use a referência exibida para solicitar verificação.',
+    );
+  });
+
   it('não expõe jargão interno ao usuário', () => {
     for (const [code, message] of Object.entries(PROBLEM_MESSAGES)) {
       expect(message, `${code} vaza o code`).not.toContain('API_');

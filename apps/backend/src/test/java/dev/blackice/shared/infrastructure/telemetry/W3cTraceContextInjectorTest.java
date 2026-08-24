@@ -10,12 +10,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpServer;
+import dev.blackice.ingest.application.input.UploadedDicom;
+import dev.blackice.ingest.application.usecase.IngestStudiesUseCase;
+import dev.blackice.ingest.application.validation.DicomBatchValidation;
 import dev.blackice.ingest.application.validation.ValidatedDicom;
+import dev.blackice.ingest.infrastructure.ContextAwareVirtualThreadExecutorFactory;
 import dev.blackice.ingest.infrastructure.dicomweb.HttpDicomArchiveGateway;
 import dev.blackice.ingest.infrastructure.dicomweb.StowResponseParser;
 import dev.blackice.worklist.application.input.StudySearchRequest;
@@ -24,6 +30,7 @@ import dev.blackice.worklist.infrastructure.dicomweb.QidoQueryBuilder;
 import dev.blackice.worklist.infrastructure.dicomweb.QidoStudyResponseParser;
 
 import io.opentelemetry.api.GlobalOpenTelemetry;
+import io.opentelemetry.api.baggage.Baggage;
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.SpanContext;
 import io.opentelemetry.api.trace.TraceFlags;
@@ -34,6 +41,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @QuarkusTest
@@ -78,6 +86,19 @@ class W3cTraceContextInjectorTest {
     }
 
     @Test
+    void baggage_is_never_sent_to_the_archive() {
+        HttpRequest.Builder builder = HttpRequest.newBuilder(URI.create("http://archive.local/studies"));
+
+        try (Scope trace = knownSpan();
+             Scope baggage = Baggage.builder().put("patient-id", "sensitive").build().makeCurrent()) {
+            injector.inject(builder);
+        }
+
+        assertTrue(builder.build().headers().firstValue("baggage").isEmpty());
+        assertEquals(1, builder.build().headers().allValues("traceparent").size());
+    }
+
+    @Test
     void without_an_active_trace_no_header_is_invented() {
         HttpRequest.Builder builder = HttpRequest.newBuilder(URI.create("http://archive.local/studies"));
 
@@ -94,13 +115,20 @@ class W3cTraceContextInjectorTest {
         String base = "http://127.0.0.1:" + server.getAddress().getPort() + "/dcm4chee-arc/aets/DCM4CHEE/rs";
 
         server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies", exchange -> {
+            String responseBody;
             if ("POST".equals(exchange.getRequestMethod())) {
                 stowHeaders.set(exchange.getRequestHeaders());
                 exchange.getRequestBody().readAllBytes();
+                responseBody = """
+                    {"00081199":{"vr":"SQ","Value":[
+                      {"00081155":{"vr":"UI","Value":["1.2.840.10008.1.1.1"]}}
+                    ]}}
+                    """;
             } else {
                 qidoHeaders.set(exchange.getRequestHeaders());
+                responseBody = "[]";
             }
-            byte[] body = "[]".getBytes(StandardCharsets.UTF_8);
+            byte[] body = responseBody.getBytes(StandardCharsets.UTF_8);
             exchange.getResponseHeaders().add("Content-Type", "application/dicom+json");
             exchange.sendResponseHeaders(200, body.length);
             exchange.getResponseBody().write(body);
@@ -135,8 +163,65 @@ class W3cTraceContextInjectorTest {
     }
 
     @Test
-    void injection_uses_the_globally_configured_propagators() {
-        assertTrue(GlobalOpenTelemetry.getPropagators().getTextMapPropagator()
-            .fields().contains("traceparent"));
+    void ingest_stow_on_a_virtual_thread_keeps_the_active_trace_without_baggage() throws Exception {
+        HttpServer server = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
+        AtomicReference<Headers> stowHeaders = new AtomicReference<>();
+        String studyUid = "1.2.840.10008.2";
+        String endpoint = "/dcm4chee-arc/aets/DCM4CHEE/rs/studies/" + studyUid;
+        String base = "http://127.0.0.1:" + server.getAddress().getPort()
+            + "/dcm4chee-arc/aets/DCM4CHEE/rs";
+        server.createContext(endpoint, exchange -> {
+            stowHeaders.set(exchange.getRequestHeaders());
+            exchange.getRequestBody().readAllBytes();
+            byte[] body = """
+                {"00081199":{"vr":"SQ","Value":[
+                  {"00081155":{"vr":"UI","Value":["1.2.840.10008.2.1.1"]}}
+                ]}}
+                """.getBytes(StandardCharsets.UTF_8);
+            exchange.getResponseHeaders().add("Content-Type", "application/dicom+json");
+            exchange.sendResponseHeaders(200, body.length);
+            exchange.getResponseBody().write(body);
+            exchange.close();
+        });
+        server.start();
+
+        Path file = Files.createTempFile("trace-ingest", ".dcm");
+        Files.write(file, new byte[] {1, 2, 3});
+        AtomicBoolean gatewayRanOnVirtualThread = new AtomicBoolean();
+        ValidatedDicom validated = new ValidatedDicom(
+            0, file, "trace.dcm", Files.size(file), studyUid, studyUid + ".1", studyUid + ".1.1",
+            "1.2.840.10008.5.1.4.1.1.7", "h");
+        IngestStudiesUseCase useCase = new IngestStudiesUseCase(
+            uploads -> new DicomBatchValidation(Map.of(studyUid, List.of(validated)), List.of()),
+            (requestedStudyUid, files, token) -> {
+                gatewayRanOnVirtualThread.set(Thread.currentThread().isVirtual());
+                return new HttpDicomArchiveGateway(base, Duration.ofSeconds(5), new StowResponseParser(),
+                    HttpClient.newHttpClient()).storeStudy(requestedStudyUid, files, token);
+            },
+            new ContextAwareVirtualThreadExecutorFactory(),
+            1);
+
+        try (Scope trace = knownSpan();
+             Scope baggage = Baggage.builder().put("patient-id", "sensitive").build().makeCurrent()) {
+            useCase.ingest(List.of(new UploadedDicom(file, "trace.dcm", Files.size(file))), "token");
+        } finally {
+            server.stop(0);
+            Files.deleteIfExists(file);
+        }
+
+        assertNull(stowHeaders.get().getFirst("baggage"));
+        assertNull(stowHeaders.get().getFirst("X-Trace-ID"));
+        assertNull(stowHeaders.get().getFirst("X-Request-ID"));
+        assertTrue(gatewayRanOnVirtualThread.get());
+        assertEquals(1, stowHeaders.get().getOrDefault("traceparent", List.of()).size());
+        assertTrue(stowHeaders.get().getFirst("traceparent") != null
+            && stowHeaders.get().getFirst("traceparent").startsWith("00-" + TRACE_ID + "-"));
+    }
+
+    @Test
+    void globally_configured_propagators_are_limited_to_w3c_trace_context() {
+        assertEquals(
+            List.of("traceparent", "tracestate"),
+            GlobalOpenTelemetry.getPropagators().getTextMapPropagator().fields());
     }
 }

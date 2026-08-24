@@ -189,6 +189,23 @@ class HttpQidoStudyGatewayTest {
     }
 
     @Test
+    void unexpected_parser_runtime_failure_propagates() {
+        server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies", exchange ->
+            respond(exchange, 200, "application/dicom+json", VALID_QIDO_BODY));
+        QidoStudyResponseParser brokenParser = mock(QidoStudyResponseParser.class);
+        when(brokenParser.parse(VALID_QIDO_BODY)).thenThrow(new IllegalStateException("unexpected parser bug"));
+        HttpQidoStudyGateway gateway = new HttpQidoStudyGateway(
+            baseUrl,
+            Duration.ofSeconds(2),
+            new QidoQueryBuilder(),
+            brokenParser,
+            HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()
+        );
+
+        assertThrows(IllegalStateException.class, () -> gateway.search(request(), 21, "token"));
+    }
+
+    @Test
     void missing_study_instance_uid_throws_invalid_response() {
         server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies", exchange -> {
             String bodyWithoutUid = """

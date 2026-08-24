@@ -31,6 +31,8 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class HttpDicomArchiveGateway implements DicomArchiveGateway {
 
+    private static final String DICOM_JSON_MEDIA_TYPE = "application/dicom+json";
+
     private final String baseUrl;
     private final Duration requestTimeout;
     private final StowResponseParser parser;
@@ -83,15 +85,16 @@ public class HttpDicomArchiveGateway implements DicomArchiveGateway {
         try {
             bodyPublisher = MultipartRelatedBodyPublisher.publish(files, boundary);
         } catch (FileNotFoundException e) {
-            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.CONNECTION, e);
+            throw new IllegalStateException("Local DICOM upload is unavailable");
         }
+        SubmissionTrackingBodyPublisher trackedPublisher = new SubmissionTrackingBodyPublisher(bodyPublisher);
 
         HttpRequest.Builder builder = HttpRequest.newBuilder(uri)
             .timeout(requestTimeout)
             .header("Authorization", "Bearer " + accessToken)
-            .header("Accept", "application/dicom+json")
+            .header("Accept", DICOM_JSON_MEDIA_TYPE)
             .header("Content-Type", "multipart/related; type=\"application/dicom\"; boundary=" + boundary)
-            .POST(bodyPublisher);
+            .POST(trackedPublisher);
         traceContextInjector.inject(builder);
         HttpRequest request = builder.build();
 
@@ -99,26 +102,31 @@ public class HttpDicomArchiveGateway implements DicomArchiveGateway {
         try {
             response = httpClient.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
         } catch (HttpConnectTimeoutException e) {
-            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.TIMEOUT, e);
+            throw transportFailure(trackedPublisher, ArchiveUnavailableException.Reason.TIMEOUT, e);
         } catch (HttpTimeoutException e) {
-            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.TIMEOUT, e);
+            throw transportFailure(trackedPublisher, ArchiveUnavailableException.Reason.TIMEOUT, e);
         } catch (ConnectException e) {
-            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.CONNECTION, e);
+            throw transportFailure(trackedPublisher, ArchiveUnavailableException.Reason.CONNECTION, e);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.INTERRUPTED, e);
+            throw transportFailure(trackedPublisher, ArchiveUnavailableException.Reason.INTERRUPTED, e);
         } catch (IOException e) {
             if (e.getCause() instanceof HttpTimeoutException || e instanceof HttpTimeoutException) {
-                throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.TIMEOUT, e);
+                throw transportFailure(trackedPublisher, ArchiveUnavailableException.Reason.TIMEOUT, e);
             }
-            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.CONNECTION, e);
+            throw transportFailure(trackedPublisher, ArchiveUnavailableException.Reason.CONNECTION, e);
         }
-        // Sem catch genérico: um bug inesperado sobe para o fallback 500 da
-        // fronteira em vez de virar indisponibilidade do Archive.
+        // No generic catch: unexpected implementation bugs must reach the HTTP 500 fallback.
 
         int statusCode = response.statusCode();
         if (statusCode < 200 || statusCode >= 300) {
             throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.HTTP_STATUS, null);
+        }
+
+        String contentType = response.headers().firstValue("Content-Type").orElse("");
+        String mediaType = contentType.split(";", 2)[0].trim();
+        if (!DICOM_JSON_MEDIA_TYPE.equalsIgnoreCase(mediaType)) {
+            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.OUTCOME_UNKNOWN, null);
         }
 
         Set<String> submittedSopUids = files.stream()
@@ -127,10 +135,19 @@ public class HttpDicomArchiveGateway implements DicomArchiveGateway {
 
         try {
             return parser.parse(studyInstanceUid, response.body(), submittedSopUids);
-        } catch (Exception e) {
-            // O archive respondeu 2xx: as instâncias podem já ter sido gravadas.
-            // Isso não é indisponibilidade, e tratá-lo como tal induziria reenvio.
-            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.INVALID_RESPONSE, e);
+        } catch (StowResponseParser.InvalidResponseException e) {
+            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.OUTCOME_UNKNOWN, e);
         }
+    }
+
+    private static ArchiveUnavailableException transportFailure(
+        SubmissionTrackingBodyPublisher publisher,
+        ArchiveUnavailableException.Reason beforeSubmission,
+        Exception cause
+    ) {
+        ArchiveUnavailableException.Reason reason = publisher.submissionStarted()
+            ? ArchiveUnavailableException.Reason.OUTCOME_UNKNOWN
+            : beforeSubmission;
+        return new ArchiveUnavailableException(reason, cause);
     }
 }

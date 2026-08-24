@@ -1,13 +1,16 @@
 package dev.blackice.worklist.infrastructure.dicomweb;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.blackice.worklist.application.result.StudySummary;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.dcm4che3.util.UIDUtils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +26,17 @@ import java.util.regex.Pattern;
 @ApplicationScoped
 public class QidoStudyResponseParser {
 
+    /** Signals a structurally invalid DICOM JSON response from QIDO-RS. */
+    public static final class InvalidResponseException extends IllegalArgumentException {
+        InvalidResponseException(String message) {
+            super(message);
+        }
+
+        InvalidResponseException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
+
     private static final String STUDY_INSTANCE_UID = "0020000D";
     private static final String PATIENT_NAME = "00100010";
     private static final String PATIENT_ID = "00100020";
@@ -34,7 +48,6 @@ public class QidoStudyResponseParser {
     private static final String NUMBER_OF_STUDY_RELATED_SERIES = "00201206";
     private static final String NUMBER_OF_STUDY_RELATED_INSTANCES = "00201208";
 
-    private static final Pattern UID_PATTERN = Pattern.compile("^[0-9]+(\\.[0-9]+)+$");
     private static final Pattern TM_PATTERN = Pattern.compile("^(\\d{2})(?:(\\d{2})(?:(\\d{2})(\\.\\d{1,6})?)?)?$");
 
     private final ObjectMapper objectMapper;
@@ -53,22 +66,22 @@ public class QidoStudyResponseParser {
      *
      * @param body raw DICOM JSON response string from the archive
      * @return immutable list of parsed study summaries
-     * @throws IllegalArgumentException if the response is malformed, missing mandatory attributes, or has invalid VRs
+     * @throws InvalidResponseException if the response is malformed, missing mandatory attributes, or has invalid VRs
      */
     public List<StudySummary> parse(String body) {
         if (body == null || body.isBlank()) {
-            return List.of();
+            throw new InvalidResponseException("QIDO-RS response body is required");
         }
 
         JsonNode root;
         try {
             root = objectMapper.readTree(body);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid DICOM JSON response: " + e.getMessage(), e);
+        } catch (JsonProcessingException e) {
+            throw new InvalidResponseException("Invalid DICOM JSON response", e);
         }
 
         if (!root.isArray()) {
-            throw new IllegalArgumentException("DICOM JSON root must be a JSON array");
+            throw new InvalidResponseException("DICOM JSON root must be a JSON array");
         }
         if (root.isEmpty()) {
             return List.of();
@@ -77,7 +90,7 @@ public class QidoStudyResponseParser {
         List<StudySummary> studies = new ArrayList<>(root.size());
         for (JsonNode dataset : root) {
             if (!dataset.isObject()) {
-                throw new IllegalArgumentException("DICOM dataset item must be a JSON object");
+                throw new InvalidResponseException("DICOM dataset item must be a JSON object");
             }
 
             String studyInstanceUid = requireStudyUid(dataset);
@@ -114,14 +127,14 @@ public class QidoStudyResponseParser {
             return null;
         }
         if (!node.isObject()) {
-            throw new IllegalArgumentException("Tag " + tag + " must be a JSON object");
+            throw new InvalidResponseException("Tag " + tag + " must be a JSON object");
         }
         JsonNode vrNode = node.get("vr");
         if (vrNode == null || !vrNode.isTextual()) {
-            throw new IllegalArgumentException("Tag " + tag + " missing valid vr field");
+            throw new InvalidResponseException("Tag " + tag + " missing valid vr field");
         }
         if (expectedVr != null && !expectedVr.equalsIgnoreCase(vrNode.asText().trim())) {
-            throw new IllegalArgumentException(
+            throw new InvalidResponseException(
                 "Tag " + tag + " has invalid vr '" + vrNode.asText() + "', expected '" + expectedVr + "'");
         }
         return node;
@@ -130,19 +143,19 @@ public class QidoStudyResponseParser {
     private String requireStudyUid(JsonNode dataset) {
         JsonNode attr = attribute(dataset, STUDY_INSTANCE_UID, "UI");
         if (attr == null) {
-            throw new IllegalArgumentException("Missing mandatory StudyInstanceUID (0020,000D)");
+            throw new InvalidResponseException("Missing mandatory StudyInstanceUID (0020,000D)");
         }
         JsonNode valueNode = attr.get("Value");
         if (valueNode == null || !valueNode.isArray() || valueNode.isEmpty()) {
-            throw new IllegalArgumentException("Missing Value array in StudyInstanceUID (0020,000D)");
+            throw new InvalidResponseException("Missing Value array in StudyInstanceUID (0020,000D)");
         }
         JsonNode first = valueNode.get(0);
         if (first == null || !first.isTextual()) {
-            throw new IllegalArgumentException("StudyInstanceUID must be a string");
+            throw new InvalidResponseException("StudyInstanceUID must be a string");
         }
-        String uid = first.asText().trim();
-        if (uid.isEmpty() || uid.length() > 64 || !UID_PATTERN.matcher(uid).matches()) {
-            throw new IllegalArgumentException("Invalid DICOM StudyInstanceUID: " + uid);
+        String uid = first.asText();
+        if (!UIDUtils.isValid(uid)) {
+            throw new InvalidResponseException("Invalid DICOM StudyInstanceUID");
         }
         return uid;
     }
@@ -157,7 +170,7 @@ public class QidoStudyResponseParser {
             return null;
         }
         if (!val.isArray()) {
-            throw new IllegalArgumentException("Value in tag " + tag + " must be an array");
+            throw new InvalidResponseException("Value in tag " + tag + " must be an array");
         }
         if (val.isEmpty()) {
             return null;
@@ -167,7 +180,7 @@ public class QidoStudyResponseParser {
             return null;
         }
         if (!first.isTextual()) {
-            throw new IllegalArgumentException("Value in tag " + tag + " must contain text strings");
+            throw new InvalidResponseException("Value in tag " + tag + " must contain text strings");
         }
         String text = first.asText().trim();
         return text.isEmpty() ? null : text;
@@ -183,13 +196,13 @@ public class QidoStudyResponseParser {
             return List.of();
         }
         if (!val.isArray()) {
-            throw new IllegalArgumentException("Value in tag " + tag + " must be an array");
+            throw new InvalidResponseException("Value in tag " + tag + " must be an array");
         }
         List<String> list = new ArrayList<>(val.size());
         for (JsonNode item : val) {
             if (item != null && !item.isNull()) {
                 if (!item.isTextual()) {
-                    throw new IllegalArgumentException("Array item in tag " + tag + " must be a string");
+                    throw new InvalidResponseException("Array item in tag " + tag + " must be a string");
                 }
                 list.add(item.asText().trim());
             }
@@ -207,7 +220,7 @@ public class QidoStudyResponseParser {
             return null;
         }
         if (!val.isArray()) {
-            throw new IllegalArgumentException("Value in tag 00100010 must be an array");
+            throw new InvalidResponseException("Value in tag 00100010 must be an array");
         }
         if (val.isEmpty()) {
             return null;
@@ -234,7 +247,7 @@ public class QidoStudyResponseParser {
             }
             return null;
         }
-        throw new IllegalArgumentException("Person name Value item must be an object or string");
+        throw new InvalidResponseException("Person name Value item must be an object or string");
     }
 
     private Integer integer(JsonNode dataset, String tag) {
@@ -247,7 +260,7 @@ public class QidoStudyResponseParser {
             return null;
         }
         if (!val.isArray()) {
-            throw new IllegalArgumentException("Value in tag " + tag + " must be an array");
+            throw new InvalidResponseException("Value in tag " + tag + " must be an array");
         }
         if (val.isEmpty()) {
             return null;
@@ -263,10 +276,10 @@ public class QidoStudyResponseParser {
             try {
                 return Integer.parseInt(first.asText().trim());
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid integer in tag " + tag + ": " + first.asText(), e);
+                throw new InvalidResponseException("Invalid integer in tag " + tag, e);
             }
         }
-        throw new IllegalArgumentException("Integer in tag " + tag + " must be a number or string");
+        throw new InvalidResponseException("Integer in tag " + tag + " must be a number or string");
     }
 
     private String dicomDate(JsonNode dataset) {
@@ -275,13 +288,13 @@ public class QidoStudyResponseParser {
             return null;
         }
         if (!rawDate.matches("^\\d{8}$")) {
-            throw new IllegalArgumentException("Invalid DICOM DA format (expected YYYYMMDD): " + rawDate);
+            throw new InvalidResponseException("Invalid DICOM DA format");
         }
         try {
             LocalDate date = LocalDate.parse(rawDate, DateTimeFormatter.BASIC_ISO_DATE);
             return DateTimeFormatter.ISO_LOCAL_DATE.format(date);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid DICOM DA date: " + rawDate, e);
+        } catch (DateTimeParseException e) {
+            throw new InvalidResponseException("Invalid DICOM DA date", e);
         }
     }
 
@@ -292,11 +305,11 @@ public class QidoStudyResponseParser {
         }
         Matcher matcher = TM_PATTERN.matcher(rawTime);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException("Invalid DICOM TM format: " + rawTime);
+            throw new InvalidResponseException("Invalid DICOM TM format");
         }
         int hour = Integer.parseInt(matcher.group(1));
         if (hour < 0 || hour > 23) {
-            throw new IllegalArgumentException("Invalid hour in DICOM TM: " + rawTime);
+            throw new InvalidResponseException("Invalid hour in DICOM TM");
         }
         String minuteStr = matcher.group(2);
         if (minuteStr == null) {
@@ -304,7 +317,7 @@ public class QidoStudyResponseParser {
         }
         int minute = Integer.parseInt(minuteStr);
         if (minute < 0 || minute > 59) {
-            throw new IllegalArgumentException("Invalid minute in DICOM TM: " + rawTime);
+            throw new InvalidResponseException("Invalid minute in DICOM TM");
         }
         String secondStr = matcher.group(3);
         if (secondStr == null) {
@@ -312,7 +325,7 @@ public class QidoStudyResponseParser {
         }
         int second = Integer.parseInt(secondStr);
         if (second < 0 || second > 60) {
-            throw new IllegalArgumentException("Invalid second in DICOM TM: " + rawTime);
+            throw new InvalidResponseException("Invalid second in DICOM TM");
         }
         String fractionStr = matcher.group(4);
         if (fractionStr != null) {

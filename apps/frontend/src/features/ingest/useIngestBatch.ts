@@ -31,6 +31,7 @@ export interface IngestApi {
 export interface IngestBatch {
   phase: Readonly<Ref<IngestPhase>>;
   files: Readonly<Ref<readonly File[]>>;
+  submittedFiles: Readonly<Ref<readonly File[]>>;
   progress: Readonly<Ref<number>>;
   response: Readonly<Ref<IngestResponse | null>>;
   error: Readonly<Ref<ApiError | null>>;
@@ -58,14 +59,20 @@ export function useIngestBatch(
 ): IngestBatch {
   const phase = ref<IngestPhase>('SELECTING');
   const files = ref<readonly File[]>([]);
+  const submittedFiles = ref<readonly File[]>([]);
   const progress = ref<number>(0);
   const response = ref<IngestResponse | null>(null);
   const error = ref<ApiError | null>(null);
 
   let activeUpload: UploadHandle | null = null;
+  let activeGeneration = 0;
+
+  function isBusy(): boolean {
+    return phase.value === 'UPLOADING' || phase.value === 'PROCESSING';
+  }
 
   function addFiles(incoming: readonly File[]): 'MAX_FILES' | 'MAX_TOTAL_BYTES' | null {
-    if (incoming.length === 0) {
+    if (incoming.length === 0 || isBusy()) {
       return null;
     }
 
@@ -89,7 +96,7 @@ export function useIngestBatch(
   }
 
   function removeFile(index: number): void {
-    if (index < 0 || index >= files.value.length) {
+    if (isBusy() || index < 0 || index >= files.value.length) {
       return;
     }
 
@@ -104,6 +111,9 @@ export function useIngestBatch(
       return;
     }
 
+    const generation = ++activeGeneration;
+    const uploadFiles: readonly File[] = Object.freeze([...files.value]);
+    submittedFiles.value = uploadFiles;
     phase.value = 'UPLOADING';
     progress.value = 0;
     error.value = null;
@@ -111,11 +121,12 @@ export function useIngestBatch(
 
     try {
       const csrfToken = await api.fetchCsrfToken();
-      if ((phase.value as IngestPhase) === 'CANCELLED') {
+      if (generation !== activeGeneration) {
         return;
       }
 
-      const uploadHandle = api.uploadStudies(files.value, csrfToken, (percent) => {
+      const uploadHandle = api.uploadStudies(uploadFiles, csrfToken, (percent) => {
+        if (generation !== activeGeneration) return;
         const currentPhase = phase.value as IngestPhase;
         if (currentPhase !== 'UPLOADING' && currentPhase !== 'PROCESSING') {
           return;
@@ -129,7 +140,7 @@ export function useIngestBatch(
       activeUpload = uploadHandle;
       const res = await uploadHandle.promise;
 
-      if ((phase.value as IngestPhase) === 'CANCELLED') {
+      if (generation !== activeGeneration) {
         return;
       }
 
@@ -137,7 +148,7 @@ export function useIngestBatch(
       progress.value = 100;
       phase.value = 'COMPLETE';
     } catch (caught: unknown) {
-      if ((phase.value as IngestPhase) === 'CANCELLED') {
+      if (generation !== activeGeneration) {
         return;
       }
 
@@ -150,7 +161,7 @@ export function useIngestBatch(
       phase.value = 'ERROR';
       error.value = caught instanceof ApiError ? caught : new ApiError('CLIENT_UNEXPECTED_ERROR');
     } finally {
-      activeUpload = null;
+      if (generation === activeGeneration) activeUpload = null;
     }
   }
 
@@ -169,6 +180,7 @@ export function useIngestBatch(
   function cancel(): void {
     const currentPhase = phase.value as IngestPhase;
     if (currentPhase === 'UPLOADING' || currentPhase === 'PROCESSING') {
+      activeGeneration += 1;
       phase.value = 'CANCELLED';
       if (activeUpload) {
         activeUpload.abort();
@@ -178,11 +190,13 @@ export function useIngestBatch(
   }
 
   function reset(): void {
+    activeGeneration += 1;
     if (activeUpload) {
       activeUpload.abort();
       activeUpload = null;
     }
     files.value = [];
+    submittedFiles.value = [];
     progress.value = 0;
     response.value = null;
     error.value = null;
@@ -192,6 +206,7 @@ export function useIngestBatch(
   return {
     phase: readonly(phase) as Readonly<Ref<IngestPhase>>,
     files: readonly(files) as Readonly<Ref<readonly File[]>>,
+    submittedFiles: readonly(submittedFiles) as Readonly<Ref<readonly File[]>>,
     progress: readonly(progress) as Readonly<Ref<number>>,
     response: readonly(response) as unknown as Readonly<Ref<IngestResponse | null>>,
     error: readonly(error) as unknown as Readonly<Ref<ApiError | null>>,

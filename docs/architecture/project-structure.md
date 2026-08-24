@@ -99,8 +99,9 @@ apps/backend/src/
 │  ├─ session/
 │  │  └─ api/
 │  ├─ shared/
-│  │  └─ api/problem/
-│  │     └─ generated/
+│  │  ├─ api/problem/
+│  │  │  └─ generated/
+│  │  └─ infrastructure/telemetry/
 │  └─ worklist/
 │     ├─ api/
 │     ├─ application/
@@ -129,7 +130,7 @@ apps/frontend/src/
 │     └─ index.ts
 ├─ shared/
 │  └─ api/
-│     └─ problems/
+│     └─ problems/     ← parser, ApiError, mensagens PT-BR e tipos gerados
 ├─ features/
 │  ├─ session/
 │  │  ├─ session.api.ts
@@ -181,10 +182,11 @@ apps/frontend/src/
 - Não crie camadas globais `controller/`, `service/`, `repository`, `dto`,
   `validator` ou `exception`.
 - `dev.blackice.shared` existe por exceção justificada, não por antecipação: o
-  contrato de erro tem dois consumidores reais, `ingest` e `worklist`. Ele
-  hospeda apenas fronteira transversal e nunca regra de uma feature; mappers
-  específicos permanecem em `ingest.api`, `worklist.api` e nas demais features.
-  Um `shared` novo obedece à mesma prova de dois consumidores.
+  contrato de erro e a propagação de trace têm dois consumidores reais,
+  `ingest` e `worklist`. Ele hospeda apenas fronteira transversal —
+  `api.problem` e `infrastructure.telemetry` — e nunca regra de uma feature;
+  mappers específicos permanecem em `ingest.api`, `worklist.api` e nas demais
+  features. Um `shared` novo obedece à mesma prova de dois consumidores.
 
 ### Vue
 

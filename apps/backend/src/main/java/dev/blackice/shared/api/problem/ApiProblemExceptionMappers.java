@@ -9,73 +9,75 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 import io.vertx.ext.web.RoutingContext;
-import org.jboss.logging.Logger;
 import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 
 /**
- * Traduz falhas da camada REST em problemas catalogados.
+ * Translates REST-layer failures into catalogued problems.
  *
- * <p>Nenhuma mensagem de exceção chega ao cliente: os textos vêm sempre do
- * catálogo. O log acontece uma única vez, aqui, e carrega apenas code, status,
- * método e template de rota — nunca a URI com query, que leva a busca clínica.
+ * <p>Exception messages never reach the client: public text always comes from the catalog. The
+ * terminating boundary emits one event containing only the code, status, trace ID, HTTP method
+ * and route template. It never records a URI carrying a clinical query.</p>
  */
 public class ApiProblemExceptionMappers {
-
-    private static final Logger LOG = Logger.getLogger(ApiProblemExceptionMappers.class);
 
     @Inject
     ProblemResponseFactory problems;
 
+    @Inject
+    ApiFailureLogger failureLogger;
+
     @ServerExceptionMapper
     public Response unauthorized(UnauthorizedException exception, RoutingContext context) {
-        return handledHere(context) ? expected(ProblemType.API_AUTHENTICATION_REQUIRED) : null;
+        return handledHere(context) ? expected(ProblemType.API_AUTHENTICATION_REQUIRED, context) : null;
     }
 
     @ServerExceptionMapper
     public Response authenticationFailed(AuthenticationFailedException exception, RoutingContext context) {
-        return handledHere(context) ? expected(ProblemType.API_AUTHENTICATION_REQUIRED) : null;
+        return handledHere(context) ? expected(ProblemType.API_AUTHENTICATION_REQUIRED, context) : null;
     }
 
     @ServerExceptionMapper
     public Response forbidden(ForbiddenException exception, RoutingContext context) {
-        return handledHere(context) ? expected(ProblemType.API_ACCESS_DENIED) : null;
+        return handledHere(context) ? expected(ProblemType.API_ACCESS_DENIED, context) : null;
     }
 
     @ServerExceptionMapper
     public Response webApplication(WebApplicationException exception, RoutingContext context) {
+        if (!handledHere(context)) {
+            return exception.getResponse();
+        }
         int status = exception.getResponse().getStatus();
         if (status >= 500) {
-            return unexpected(exception);
+            return unexpected(exception, context);
         }
-        return handledHere(context) ? expected(forStatus(status)) : null;
+        return expected(forStatus(status), context);
     }
 
-    /**
-     * Falso para {@code /api/login}, cujo redirect OIDC e intencional, e para
-     * qualquer rota fora de {@code /api}, que nao pertence a este contrato.
-     */
+    /** Returns false for intentional OIDC login redirects and every route outside {@code /api}. */
     private static boolean handledHere(RoutingContext context) {
-        return context == null || ApiJavaScriptRequestChecker.isApiRequest(context);
+        return context != null && ApiJavaScriptRequestChecker.isApiRequest(context);
     }
 
-    /** Fallback: qualquer bug vira 500 catalogado, com stack trace só no log. */
+    /** Converts an unexpected API bug to a catalogued 500 and logs its stack trace once. */
     @ServerExceptionMapper(priority = jakarta.ws.rs.Priorities.USER + 1000)
-    public Response unexpected(Throwable exception) {
-        LOG.error("falha inesperada na fronteira /api", exception);
+    public Response unexpected(Throwable exception, RoutingContext context) {
+        if (!handledHere(context)) {
+            return Response.serverError().build();
+        }
+        failureLogger.unexpected(context.request().method().name(), "/api/*");
         return problems.response(ProblemType.API_INTERNAL_ERROR);
     }
 
-    private Response expected(ProblemType type) {
-        LOG.infov("falha esperada na fronteira /api: code={0}, status={1}",
-            type.code(), type.httpStatus());
+    private Response expected(ProblemType type, RoutingContext context) {
+        failureLogger.known(type, context.request().method().name(), "/api/*", ApiFailureLogger.Reason.REST);
         return problems.response(type);
     }
 
     /**
-     * Tipo catalogado de um status produzido pelo framework.
+     * Returns the catalogued type for a framework status.
      *
-     * <p>Compartilhado com o filtro de resposta e com o handler Vert.x, para que
-     * a mesma tabela decida em qualquer fase em que a falha nasça.
+     * <p>The REST response filter and Vert.x handler share this mapping so the same table applies
+     * regardless of the phase in which the failure originates.</p>
      */
     public static ProblemType forStatus(int status) {
         return switch (status) {

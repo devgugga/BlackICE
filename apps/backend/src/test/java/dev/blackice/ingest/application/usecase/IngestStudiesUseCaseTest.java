@@ -7,6 +7,7 @@ import dev.blackice.ingest.application.port.DicomBatchValidator;
 import dev.blackice.ingest.application.result.IngestResult;
 import dev.blackice.ingest.application.result.StowInstanceResult;
 import dev.blackice.ingest.application.result.StowStudyResult;
+import dev.blackice.ingest.application.validation.DicomBatchValidation;
 import dev.blackice.ingest.application.validation.ValidatedDicom;
 import dev.blackice.ingest.infrastructure.dicom.Dcm4cheDicomBatchValidator;
 import org.dcm4che3.data.Attributes;
@@ -23,10 +24,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -178,8 +184,7 @@ class IngestStudiesUseCaseTest {
         assertEquals(0, summary.archiveAccepted());
         assertEquals(2, summary.archiveRejected());
 
-        // A razão interna de cada estudo é preservada: é ela que permite à
-        // fronteira distinguir indisponibilidade de resposta inutilizável.
+        // Each internal reason is retained so the HTTP boundary can classify the outcome.
         for (IngestResult.StudyResult study : result.studies()) {
             assertEquals(IngestResult.StudyStatus.FAILED, study.status());
         }
@@ -247,7 +252,6 @@ class IngestStudiesUseCaseTest {
 
     @Test
     void concurrency_limit_is_respected() throws Exception {
-        gateway.sleepMs = 50;
         useCase = new IngestStudiesUseCase(validator, gateway, 1);
 
         Path p1 = dicom("1.2.3", "1.2.3.1", "1.2.3.1.1", (byte) 1);
@@ -267,6 +271,175 @@ class IngestStudiesUseCaseTest {
         assertEquals(IngestResult.Outcome.COMPLETE, result.outcome());
         assertEquals(1, gateway.maxConcurrentCalls.get());
         assertEquals(List.of("1.2.3", "1.2.4", "1.2.5", "1.2.6"), gateway.calledStudyUids);
+    }
+
+    @Test
+    void interruption_while_waiting_for_permit_preserves_submitted_result_and_marks_unsubmitted() throws Exception {
+        CountDownLatch firstStarted = new CountDownLatch(1);
+        CountDownLatch releaseFirst = new CountDownLatch(1);
+        List<String> calls = new CopyOnWriteArrayList<>();
+        DicomArchiveGateway blockingGateway = (studyUid, files, token) -> {
+            calls.add(studyUid);
+            firstStarted.countDown();
+            awaitGatewayRelease(releaseFirst);
+            return accepted(studyUid, files);
+        };
+        IngestStudiesUseCase coordinated = coordinatedUseCase(blockingGateway, 1, "1.2.3", "1.2.4", "1.2.5");
+        AtomicReference<IngestResult> result = new AtomicReference<>();
+        AtomicReference<Throwable> failure = new AtomicReference<>();
+        AtomicBoolean interruptAfterReturn = new AtomicBoolean();
+        CountDownLatch finished = new CountDownLatch(1);
+        Thread worker = Thread.ofPlatform().start(() -> {
+            try {
+                result.set(coordinated.ingest(dummyUploads(3), "token"));
+                interruptAfterReturn.set(Thread.currentThread().isInterrupted());
+            } catch (Throwable throwable) {
+                failure.set(throwable);
+            } finally {
+                finished.countDown();
+            }
+        });
+
+        assertTrue(firstStarted.await(2, TimeUnit.SECONDS));
+        worker.interrupt();
+        releaseFirst.countDown();
+        assertTrue(finished.await(2, TimeUnit.SECONDS));
+
+        assertNull(failure.get());
+        assertTrue(interruptAfterReturn.get());
+        assertEquals(List.of("1.2.3"), calls);
+        assertEquals(List.of("1.2.3", "1.2.4", "1.2.5"),
+            result.get().studies().stream().map(IngestResult.StudyResult::studyInstanceUid).toList());
+        assertEquals(1, result.get().studies().get(0).instances().size());
+        assertEquals(List.of("INTERRUPTED", "INTERRUPTED"),
+            result.get().studies().subList(1, 3).stream().map(IngestResult.StudyResult::errorCode).toList());
+    }
+
+    @Test
+    void interruption_during_future_get_collects_every_submitted_result_before_restoring_interrupt() throws Exception {
+        CountDownLatch bothStarted = new CountDownLatch(2);
+        CountDownLatch releaseBoth = new CountDownLatch(1);
+        DicomArchiveGateway blockingGateway = (studyUid, files, token) -> {
+            bothStarted.countDown();
+            awaitGatewayRelease(releaseBoth);
+            return accepted(studyUid, files);
+        };
+        IngestStudiesUseCase coordinated = coordinatedUseCase(blockingGateway, 2, "1.2.3", "1.2.4");
+        AtomicReference<IngestResult> result = new AtomicReference<>();
+        AtomicReference<Throwable> failure = new AtomicReference<>();
+        AtomicBoolean interruptAfterReturn = new AtomicBoolean();
+        CountDownLatch finished = new CountDownLatch(1);
+        Thread worker = Thread.ofPlatform().start(() -> {
+            try {
+                result.set(coordinated.ingest(dummyUploads(2), "token"));
+                interruptAfterReturn.set(Thread.currentThread().isInterrupted());
+            } catch (Throwable throwable) {
+                failure.set(throwable);
+            } finally {
+                finished.countDown();
+            }
+        });
+
+        assertTrue(bothStarted.await(2, TimeUnit.SECONDS));
+        worker.interrupt();
+        releaseBoth.countDown();
+        assertTrue(finished.await(2, TimeUnit.SECONDS));
+
+        assertNull(failure.get());
+        assertTrue(interruptAfterReturn.get());
+        assertEquals(IngestResult.Outcome.COMPLETE, result.get().outcome());
+        assertEquals(2, result.get().studies().size());
+        assertTrue(result.get().studies().stream().allMatch(study -> study.instances().size() == 1));
+    }
+
+    @Test
+    void interruption_is_restored_only_after_result_consolidation() throws Exception {
+        CountDownLatch bothStarted = new CountDownLatch(2);
+        CountDownLatch releaseBoth = new CountDownLatch(1);
+        DicomArchiveGateway blockingGateway = (studyUid, files, token) -> {
+            bothStarted.countDown();
+            awaitGatewayRelease(releaseBoth);
+            return accepted(studyUid, files);
+        };
+        AtomicBoolean interruptedDuringConsolidation = new AtomicBoolean();
+        Map<String, List<ValidatedDicom>> studies = new LinkedHashMap<>() {
+            @Override
+            public List<ValidatedDicom> get(Object studyUid) {
+                interruptedDuringConsolidation.set(Thread.currentThread().isInterrupted());
+                return super.get(studyUid);
+            }
+        };
+        studies.put("1.2.3", List.of(validated("1.2.3")));
+        studies.put("1.2.4", List.of(validated("1.2.4")));
+        DicomBatchValidator fixedValidator = uploads -> new DicomBatchValidation(studies, List.of());
+        IngestStudiesUseCase coordinated = new IngestStudiesUseCase(fixedValidator, blockingGateway, 2);
+        AtomicReference<IngestResult> result = new AtomicReference<>();
+        AtomicReference<Throwable> failure = new AtomicReference<>();
+        AtomicBoolean interruptAfterReturn = new AtomicBoolean();
+        CountDownLatch finished = new CountDownLatch(1);
+        Thread worker = Thread.ofPlatform().start(() -> {
+            try {
+                result.set(coordinated.ingest(dummyUploads(2), "token"));
+                interruptAfterReturn.set(Thread.currentThread().isInterrupted());
+            } catch (Throwable throwable) {
+                failure.set(throwable);
+            } finally {
+                finished.countDown();
+            }
+        });
+
+        assertTrue(bothStarted.await(2, TimeUnit.SECONDS));
+        worker.interrupt();
+        releaseBoth.countDown();
+        assertTrue(finished.await(2, TimeUnit.SECONDS));
+
+        assertNull(failure.get());
+        assertFalse(interruptedDuringConsolidation.get());
+        assertEquals(IngestResult.Outcome.COMPLETE, result.get().outcome());
+        assertEquals(2, result.get().summary().archiveAccepted());
+        assertTrue(interruptAfterReturn.get());
+    }
+
+    @Test
+    void interruption_before_unexpected_future_failure_rethrows_original_and_restores_interrupt() throws Exception {
+        CountDownLatch firstStarted = new CountDownLatch(1);
+        CountDownLatch releaseFirst = new CountDownLatch(1);
+        IllegalStateException unexpected = new IllegalStateException("unexpected storage bug");
+        DicomArchiveGateway gatewayWithUnexpectedFailure = (studyUid, files, token) -> {
+            if (studyUid.equals("1.2.3")) {
+                firstStarted.countDown();
+                awaitGatewayRelease(releaseFirst);
+                return accepted(studyUid, files);
+            }
+            throw unexpected;
+        };
+        IngestStudiesUseCase coordinated = coordinatedUseCase(
+            gatewayWithUnexpectedFailure,
+            2,
+            "1.2.3",
+            "1.2.4"
+        );
+        AtomicReference<Throwable> failure = new AtomicReference<>();
+        AtomicBoolean interruptAfterExceptionalExit = new AtomicBoolean();
+        CountDownLatch finished = new CountDownLatch(1);
+        Thread worker = Thread.ofPlatform().start(() -> {
+            try {
+                coordinated.ingest(dummyUploads(2), "token");
+            } catch (Throwable throwable) {
+                failure.set(throwable);
+                interruptAfterExceptionalExit.set(Thread.currentThread().isInterrupted());
+            } finally {
+                finished.countDown();
+            }
+        });
+
+        assertTrue(firstStarted.await(2, TimeUnit.SECONDS));
+        worker.interrupt();
+        releaseFirst.countDown();
+        assertTrue(finished.await(2, TimeUnit.SECONDS));
+
+        assertSame(unexpected, failure.get());
+        assertTrue(interruptAfterExceptionalExit.get());
     }
 
     @Test
@@ -316,7 +489,6 @@ class IngestStudiesUseCaseTest {
         final Map<String, StowStudyResult> customResults = new ConcurrentHashMap<>();
         final AtomicInteger activeCalls = new AtomicInteger();
         final AtomicInteger maxConcurrentCalls = new AtomicInteger();
-        volatile long sleepMs = 0;
 
         void fail(String studyUid, RuntimeException ex) {
             failures.put(studyUid, ex);
@@ -331,16 +503,7 @@ class IngestStudiesUseCaseTest {
             calledStudyUids.add(studyInstanceUid);
             int current = activeCalls.incrementAndGet();
             maxConcurrentCalls.accumulateAndGet(current, Math::max);
-            try {
-                if (sleepMs > 0) {
-                    Thread.sleep(sleepMs);
-                }
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.INTERRUPTED, e);
-            } finally {
-                activeCalls.decrementAndGet();
-            }
+            activeCalls.decrementAndGet();
 
             if (failures.containsKey(studyInstanceUid)) {
                 throw failures.get(studyInstanceUid);
@@ -354,6 +517,56 @@ class IngestStudiesUseCaseTest {
                 .map(f -> new StowInstanceResult(f.sopInstanceUid(), StowInstanceResult.Status.ACCEPTED, null))
                 .toList();
             return new StowStudyResult(studyInstanceUid, instances);
+        }
+    }
+
+    private IngestStudiesUseCase coordinatedUseCase(
+        DicomArchiveGateway coordinatedGateway,
+        int concurrency,
+        String... studyUids
+    ) {
+        Map<String, List<ValidatedDicom>> studies = new LinkedHashMap<>();
+        for (String studyUid : studyUids) {
+            studies.put(studyUid, List.of(validated(studyUid)));
+        }
+        DicomBatchValidator fixedValidator = uploads -> new DicomBatchValidation(studies, List.of());
+        return new IngestStudiesUseCase(fixedValidator, coordinatedGateway, concurrency);
+    }
+
+    private static ValidatedDicom validated(String studyUid) {
+        return new ValidatedDicom(
+            0,
+            Path.of("unused"),
+            "unused.dcm",
+            1,
+            studyUid,
+            studyUid + ".1",
+            studyUid + ".1.1",
+            UID.SecondaryCaptureImageStorage,
+            "hash"
+        );
+    }
+
+    private static List<UploadedDicom> dummyUploads(int count) {
+        List<UploadedDicom> uploads = new ArrayList<>(count);
+        for (int index = 0; index < count; index++) {
+            uploads.add(new UploadedDicom(Path.of("unused-" + index), "unused.dcm", 1));
+        }
+        return uploads;
+    }
+
+    private static StowStudyResult accepted(String studyUid, List<ValidatedDicom> files) {
+        return new StowStudyResult(studyUid, files.stream()
+            .map(file -> new StowInstanceResult(file.sopInstanceUid(), StowInstanceResult.Status.ACCEPTED, null))
+            .toList());
+    }
+
+    private static void awaitGatewayRelease(CountDownLatch release) {
+        try {
+            release.await();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new ArchiveUnavailableException(ArchiveUnavailableException.Reason.INTERRUPTED, e);
         }
     }
 }

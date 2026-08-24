@@ -24,6 +24,13 @@ public enum ProblemType {
             "Access denied",
             "You do not have permission to access this resource.",
             RetryPolicy.NEVER),
+    API_ARCHIVE_OUTCOME_UNKNOWN(
+            "urn:uuid:f627ad94-4e6f-5b19-bdbc-2550eb221b63",
+            ProblemScope.API,
+            502,
+            "Archive outcome unknown",
+            "The imaging archive outcome could not be confirmed.",
+            RetryPolicy.NEVER),
     API_ARCHIVE_RESPONSE_INVALID(
             "urn:uuid:8a220e49-3e80-5e59-83e5-43483c4a6dd8",
             ProblemScope.API,

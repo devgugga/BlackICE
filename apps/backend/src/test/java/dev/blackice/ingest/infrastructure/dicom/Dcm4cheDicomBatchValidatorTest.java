@@ -12,12 +12,17 @@ import org.dcm4che3.io.DicomOutputStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,16 +45,16 @@ class Dcm4cheDicomBatchValidatorTest {
     private Path dicom(String study, String series, String sop, String sopClass, byte pixel) throws Exception {
         Attributes ds = new Attributes();
         if (sopClass != null) {
-            ds.setString(Tag.SOPClassUID, VR.UI, sopClass);
+            setRawUid(ds, Tag.SOPClassUID, sopClass);
         }
         if (sop != null) {
-            ds.setString(Tag.SOPInstanceUID, VR.UI, sop);
+            setRawUid(ds, Tag.SOPInstanceUID, sop);
         }
         if (study != null) {
-            ds.setString(Tag.StudyInstanceUID, VR.UI, study);
+            setRawUid(ds, Tag.StudyInstanceUID, study);
         }
         if (series != null) {
-            ds.setString(Tag.SeriesInstanceUID, VR.UI, series);
+            setRawUid(ds, Tag.SeriesInstanceUID, series);
         }
         ds.setString(Tag.Modality, VR.CS, "OT");
         ds.setInt(Tag.Rows, VR.US, 1);
@@ -65,13 +70,18 @@ class Dcm4cheDicomBatchValidatorTest {
         String name = (sop != null ? sop : "nosop_" + System.nanoTime()) + "_" + pixel + ".dcm";
         Path path = temp.resolve(name);
         try (DicomOutputStream out = new DicomOutputStream(path.toFile())) {
-            Attributes fmi = null;
-            if (sopClass != null && sop != null) {
-                fmi = ds.createFileMetaInformation(UID.ExplicitVRLittleEndian);
-            }
-            out.writeDataset(fmi, ds);
+            out.writeDataset(null, ds);
         }
         return path;
+    }
+
+    private static void setRawUid(Attributes dataset, int tag, String uid) {
+        byte[] encoded = uid.getBytes(StandardCharsets.US_ASCII);
+        if ((encoded.length & 1) != 0) {
+            encoded = Arrays.copyOf(encoded, encoded.length + 1);
+            encoded[encoded.length - 1] = (byte) VR.UI.paddingByte();
+        }
+        dataset.setBytes(tag, VR.UI, encoded);
     }
 
     @Test
@@ -122,6 +132,13 @@ class Dcm4cheDicomBatchValidatorTest {
     }
 
     @Test
+    void unexpected_runtime_failure_propagates_instead_of_becoming_malformed_dicom() {
+        UploadedDicom invalidInternalInput = new UploadedDicom(null, "safe-test-name.dcm", 0);
+
+        assertThrows(NullPointerException.class, () -> validator.validate(List.of(invalidInternalInput)));
+    }
+
+    @Test
     void missing_required_uids_produce_stable_code() throws Exception {
         Path noStudy = dicom(null, "1.2.3.1", "1.2.3.1.1", (byte) 1);
         Path noSeries = dicom("1.2.3", null, "1.2.3.1.2", (byte) 2);
@@ -159,6 +176,65 @@ class Dcm4cheDicomBatchValidatorTest {
         assertEquals(3, validation.issues().get(3).itemIndex());
         assertEquals("noSopClass.dcm", validation.issues().get(3).filename());
         assertEquals(DicomValidationIssue.Code.MISSING_SOP_CLASS_UID, validation.issues().get(3).code());
+    }
+
+    @ParameterizedTest(name = "rejects invalid {0}")
+    @MethodSource("invalidRequiredUids")
+    void invalid_required_uids_produce_malformed_dicom_issue(
+        String attribute,
+        String study,
+        String series,
+        String sop,
+        String sopClass
+    ) throws Exception {
+        Path path = dicom(study, series, sop, sopClass, (byte) 7);
+
+        DicomBatchValidation validation = validator.validate(List.of(
+            new UploadedDicom(path, "invalid.dcm", Files.size(path))
+        ));
+
+        assertTrue(validation.validStudies().isEmpty(), attribute);
+        assertEquals(1, validation.issues().size(), attribute);
+        assertEquals(DicomValidationIssue.Code.MALFORMED_DICOM, validation.issues().getFirst().code(), attribute);
+    }
+
+    private static Stream<Arguments> invalidRequiredUids() {
+        String overlength = "1." + "2".repeat(63);
+        return Stream.of(
+            Arguments.of("StudyInstanceUID with leading whitespace",
+                " 1.2.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage),
+            Arguments.of("StudyInstanceUID with a leading-zero component",
+                "1.02.3", "1.2.3.1", "1.2.3.1.1", UID.SecondaryCaptureImageStorage),
+            Arguments.of("SeriesInstanceUID with trailing whitespace",
+                "1.2.3", "1.2.3.1 ", "1.2.3.1.1", UID.SecondaryCaptureImageStorage),
+            Arguments.of("SOPInstanceUID longer than 64 characters",
+                "1.2.3", "1.2.3.1", overlength, UID.SecondaryCaptureImageStorage),
+            Arguments.of("SOPClassUID with a leading-zero component",
+                "1.2.3", "1.2.3.1", "1.2.3.1.1", "1.02.840.10008.5.1.4.1.1.7")
+        );
+    }
+
+    @Test
+    void canonical_ui_null_padding_is_accepted_without_changing_uid_identity() throws Exception {
+        String oddLengthStudyUid = "1.2.3";
+        Path path = dicom(
+            oddLengthStudyUid,
+            "1.2.3.1",
+            "1.2.3.1.1",
+            UID.SecondaryCaptureImageStorage,
+            (byte) 8
+        );
+
+        DicomBatchValidation validation = validator.validate(List.of(
+            new UploadedDicom(path, "canonical-padding.dcm", Files.size(path))
+        ));
+
+        assertTrue(validation.issues().isEmpty());
+        assertEquals(oddLengthStudyUid, validation.validStudies().keySet().iterator().next());
+        assertEquals(
+            oddLengthStudyUid,
+            validation.validStudies().get(oddLengthStudyUid).getFirst().studyInstanceUid()
+        );
     }
 
     @Test
@@ -231,9 +307,9 @@ class Dcm4cheDicomBatchValidatorTest {
         assertFalse(validation.issues().isEmpty());
         for (DicomValidationIssue issue : validation.issues()) {
             assertFalse(issue.message().contains("1.2.3"),
-                "mensagem publica carrega UID: " + issue.message());
+                "Public message contains a UID: " + issue.message());
             assertFalse(issue.message().toLowerCase().contains("uid:"),
-                "mensagem publica carrega UID: " + issue.message());
+                "Public message contains a UID: " + issue.message());
         }
     }
 

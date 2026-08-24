@@ -1,7 +1,7 @@
 # Tratamento de erros e catálogo de problemas — Design
 
 **Data:** 2026-08-23
-**Status:** design aprovado para implementação
+**Status:** implementado e verificado em 2026-08-24
 **Escopo:** backend Quarkus, frontend Vue, contrato HTTP, TraceID, tooling e workflow de agentes
 
 ## Contexto
@@ -290,7 +290,11 @@ bootstrap aprovado. Todos os demais campos semânticos já estão autorizados.
 | `API_DICOM_VALIDATION_FAILED` | 422 | `NEVER` | ingest | DICOM validation failed | None of the uploaded files passed validation. | `dicom-validation-violations` |
 | `API_INTERNAL_ERROR` | 500 | `MANUAL` | platform | Internal server error | An unexpected error occurred. | — |
 | `API_ARCHIVE_RESPONSE_INVALID` | 502 | `MANUAL` | platform | Invalid Archive response | The imaging archive returned an unexpected response. | — |
+| `API_ARCHIVE_OUTCOME_UNKNOWN` | 502 | `NEVER` | platform | Archive outcome unknown | The imaging archive outcome could not be confirmed. | — |
 | `API_ARCHIVE_UNAVAILABLE` | 503 | `MANUAL` | platform | Archive unavailable | The imaging archive is temporarily unavailable. | — |
+
+Para `API_ARCHIVE_OUTCOME_UNKNOWN`, a descrição interna aprovada é `O resultado
+de uma operação no Archive não pôde ser confirmado após o início da submissão.`.
 
 O status `403` de `API_CSRF_INVALID` é deliberado: a requisição foi compreendida,
 mas sua execução foi recusada por falha na verificação de segurança. Ele
@@ -467,6 +471,16 @@ paciente em mensagens ou causas criadas pela aplicação.
   `API_ARCHIVE_UNAVAILABLE`;
 - upload vazio, limites e falhas inesperadas usam seus Problems catalogados;
 - resposta `503` não inclui UIDs, causas nem detalhes do Archive.
+
+### Resultado incerto no Archive
+
+Falha de conexão comprovada antes do início da submissão permanece
+`API_ARCHIVE_UNAVAILABLE`. Após o início da submissão, timeout, interrupção ou
+reset de conexão não permite afirmar que nada foi armazenado. A ingestão preserva
+os resultados confirmados e representa estudos incertos sem oferecer retentativa.
+Quando nenhum resultado puder ser confirmado, responde `502` com
+`API_ARCHIVE_OUTCOME_UNKNOWN`; esse código nunca oferece retentativa automática
+nem manual.
 
 ## Frontend Vue
 

@@ -11,6 +11,15 @@ import {
 } from './problem-types.generated';
 
 const PROBLEM_MEDIA_TYPE = 'application/problem+json';
+const BASE_PROBLEM_MEMBERS = new Set([
+  'type',
+  'title',
+  'status',
+  'detail',
+  'instance',
+  'code',
+  'traceId',
+]);
 
 /** Falha local usada sempre que a resposta não corresponde ao contrato. */
 function invalidResponse(traceId?: string): ApiError {
@@ -26,17 +35,22 @@ function isCataloguedCode(value: unknown): value is ProblemCode {
 }
 
 function parseViolations(value: unknown): readonly DicomValidationViolation[] | undefined {
-  if (!Array.isArray(value)) return undefined;
+  if (!Array.isArray(value) || value.length === 0) return undefined;
 
   const violations: DicomValidationViolation[] = [];
   for (const item of value) {
     if (item === null || typeof item !== 'object') return undefined;
-    const { itemIndex, code, message } = item as Record<string, unknown>;
+    const record = item as Record<string, unknown>;
+    if (Object.keys(record).some((key) => !['itemIndex', 'code', 'message'].includes(key))) {
+      return undefined;
+    }
+    const { itemIndex, code, message } = record;
     if (
       typeof itemIndex !== 'number'
       || !Number.isInteger(itemIndex)
       || itemIndex < 0
       || typeof message !== 'string'
+      || message.length === 0
       || !DICOM_VALIDATION_VIOLATION_CODES.includes(code as never)
     ) {
       return undefined;
@@ -44,6 +58,12 @@ function parseViolations(value: unknown): readonly DicomValidationViolation[] | 
     violations.push({ itemIndex, code: code as DicomValidationViolation['code'], message });
   }
   return violations;
+}
+
+function isProblemMediaType(contentType: string | null): boolean {
+  if (contentType === null) return false;
+  const [mediaType] = contentType.split(';', 1);
+  return mediaType?.trim().toLowerCase() === PROBLEM_MEDIA_TYPE;
 }
 
 /**
@@ -62,7 +82,7 @@ export function parseProblem(input: {
 }): ApiError {
   const headerTrace = isTraceId(input.traceHeader) ? input.traceHeader : undefined;
 
-  if (input.contentType === null || !input.contentType.includes(PROBLEM_MEDIA_TYPE)) {
+  if (!isProblemMediaType(input.contentType)) {
     return invalidResponse(headerTrace);
   }
 
@@ -101,11 +121,17 @@ export function parseProblem(input: {
   if (traceId !== undefined) options.traceId = traceId;
 
   if (payload.code === 'API_DICOM_VALIDATION_FAILED') {
+    const allowedMembers = new Set([...BASE_PROBLEM_MEMBERS, 'violations']);
+    if (Object.keys(payload).some((key) => !allowedMembers.has(key))) {
+      return invalidResponse(traceId);
+    }
     const violations = parseViolations(payload.violations);
     if (violations === undefined) {
       return invalidResponse(traceId);
     }
     options.violations = violations;
+  } else if (payload.violations !== undefined) {
+    return invalidResponse(traceId);
   }
 
   return new ApiError(payload.code, options);

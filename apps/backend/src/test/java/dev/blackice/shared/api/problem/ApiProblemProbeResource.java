@@ -1,5 +1,7 @@
 package dev.blackice.shared.api.problem;
 
+import io.vertx.ext.web.Router;
+import jakarta.enterprise.event.Observes;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.Consumes;
@@ -10,17 +12,17 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-/**
- * Recurso exclusivo de teste que provoca cada falha da matriz HTTP.
- *
- * <p>Ele existe para exercitar a fronteira de erro sem depender do
- * comportamento de uma feature real, e por isso vive apenas em
- * {@code src/test}.
- */
+/** Test-only resource that triggers the HTTP matrix without relying on a product feature. */
 @Path("/api/problem-probe")
 public class ApiProblemProbeResource {
 
-    /** Aceita e devolve JSON: usado para 400 malformado, 406 e 415. */
+    /** Registers a Vert.x failure that occurs before Quarkus REST dispatch. */
+    void registerPreRestProbe(@Observes Router router) {
+        router.get("/api/pre-rest-problem-probe")
+            .handler(context -> context.fail(400));
+    }
+
+    /** Accepts and returns JSON for malformed 400, 406 and 415 scenarios. */
     @POST
     @Path("/json")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -30,7 +32,7 @@ public class ApiProblemProbeResource {
         return Response.ok(payload).build();
     }
 
-    /** Só produz JSON: um {@code Accept} incompatível cai em 406. */
+    /** Produces only JSON so an incompatible {@code Accept} header becomes 406. */
     @GET
     @Path("/json")
     @Produces(MediaType.APPLICATION_JSON)
@@ -39,15 +41,19 @@ public class ApiProblemProbeResource {
         return Response.ok(new Payload("ok")).build();
     }
 
-    /** Falha inesperada: precisa virar 500 catalogado, sem vazar a mensagem. */
+    /** Triggers an unexpected failure that must become a catalogued 500 without response leakage. */
     @GET
     @Path("/fail")
     @PermitAll
     public Response fail() {
-        throw new IllegalStateException("patient-secret: Maria da Silva 1.2.840.10008.1.2");
+        IllegalStateException failure = new IllegalStateException(
+            "patient-secret: Maria da Silva 1.2.840.10008.1.2",
+            new IllegalArgumentException("external-cause patient-secret"));
+        failure.addSuppressed(new IllegalStateException("suppressed patient-secret"));
+        throw failure;
     }
 
-    /** Recusa por limite da aplicação, como fazem os limites da ingestão. */
+    /** Mimics an application-level payload refusal such as the ingest limits. */
     @GET
     @Path("/too-large")
     @PermitAll
@@ -55,7 +61,7 @@ public class ApiProblemProbeResource {
         return Response.status(Response.Status.REQUEST_ENTITY_TOO_LARGE).build();
     }
 
-    /** Exige a role de sessão: anônimo vira 401 e role errada vira 403. */
+    /** Requires the session role so anonymous and wrong-role requests become 401 and 403. */
     @GET
     @Path("/secured")
     @RolesAllowed("auth")

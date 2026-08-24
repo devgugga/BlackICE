@@ -1,11 +1,13 @@
 package dev.blackice.ingest.infrastructure.dicomweb;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.blackice.ingest.application.result.StowInstanceResult;
 import dev.blackice.ingest.application.result.StowStudyResult;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import org.dcm4che3.util.UIDUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -30,6 +32,17 @@ public class StowResponseParser {
     private static final String FAILURE_REASON = "00081197";
     private static final String WARNING_REASON = "00081196";
 
+    /** Signals a structurally invalid DICOM JSON response from STOW-RS. */
+    public static final class InvalidResponseException extends IllegalArgumentException {
+        InvalidResponseException(String message) {
+            super(message);
+        }
+
+        InvalidResponseException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
+
     private final ObjectMapper objectMapper;
 
     public StowResponseParser() {
@@ -48,27 +61,40 @@ public class StowResponseParser {
      * @param body raw DICOM JSON response string from the archive
      * @param submittedSopUids set of SOP Instance UIDs that were submitted in the request
      * @return the resolved {@link StowStudyResult} with per-instance outcomes
-     * @throws IllegalArgumentException if the response body cannot be parsed as valid JSON
+     * @throws InvalidResponseException if the response is not a structurally valid STOW-RS DICOM JSON result
      */
     public StowStudyResult parse(String studyInstanceUid, String body, Set<String> submittedSopUids) {
         Objects.requireNonNull(studyInstanceUid, "studyInstanceUid must not be null");
         Objects.requireNonNull(submittedSopUids, "submittedSopUids must not be null");
 
-        Map<String, StowInstanceResult> parsedInstances = new LinkedHashMap<>();
+        if (body == null || body.isBlank()) {
+            throw new InvalidResponseException("STOW-RS response body is required");
+        }
 
-        if (body != null && !body.isBlank()) {
-            try {
-                JsonNode root = objectMapper.readTree(body);
-                if (root.isArray() && !root.isEmpty()) {
-                    for (JsonNode item : root) {
-                        parseDataset(item, parsedInstances);
-                    }
-                } else if (root.isObject()) {
-                    parseDataset(root, parsedInstances);
+        JsonNode root;
+        try {
+            root = objectMapper.readTree(body);
+        } catch (JsonProcessingException e) {
+            throw new InvalidResponseException("Invalid DICOM JSON response", e);
+        }
+
+        Map<String, StowInstanceResult> parsedInstances = new LinkedHashMap<>();
+        if (root.isObject()) {
+            parseDataset(root, parsedInstances);
+        } else if (root.isArray() && !root.isEmpty()) {
+            for (JsonNode item : root) {
+                if (!item.isObject()) {
+                    throw new InvalidResponseException("STOW-RS dataset item must be a JSON object");
                 }
-            } catch (Exception e) {
-                throw new IllegalArgumentException("Invalid DICOM JSON response", e);
+                parseDataset(item, parsedInstances);
             }
+        } else {
+            throw new InvalidResponseException("STOW-RS response root must be an object or non-empty array");
+        }
+
+        boolean confirmsSubmittedSop = submittedSopUids.stream().anyMatch(parsedInstances::containsKey);
+        if (!confirmsSubmittedSop) {
+            throw new InvalidResponseException("STOW-RS response confirms no submitted SOP Instance UID");
         }
 
         List<StowInstanceResult> instances = new ArrayList<>(submittedSopUids.size());
@@ -85,51 +111,75 @@ public class StowResponseParser {
     }
 
     private void parseDataset(JsonNode dataset, Map<String, StowInstanceResult> parsedInstances) {
-        // First parse Referenced SOP Sequence (00081199)
-        JsonNode refSeq = dataset.path(REFERENCED_SOP_SEQUENCE).path("Value");
-        if (refSeq.isArray()) {
-            for (JsonNode item : refSeq) {
-                String sopUid = extractUid(item.path(SOP_INSTANCE_UID));
-                if (sopUid != null && !sopUid.isBlank()) {
-                    JsonNode warningNode = item.path(WARNING_REASON);
-                    Integer warningReason = extractInt(warningNode);
-                    if (warningReason != null || (!warningNode.isMissingNode() && !warningNode.isNull())) {
-                        parsedInstances.put(sopUid, new StowInstanceResult(sopUid, StowInstanceResult.Status.WARNING, warningReason));
-                    } else {
-                        parsedInstances.put(sopUid, new StowInstanceResult(sopUid, StowInstanceResult.Status.ACCEPTED, null));
-                    }
+        boolean hasReferenced = dataset.has(REFERENCED_SOP_SEQUENCE);
+        boolean hasFailed = dataset.has(FAILED_SOP_SEQUENCE);
+        if (!hasReferenced && !hasFailed) {
+            throw new InvalidResponseException("STOW-RS dataset has no result sequence");
+        }
+
+        if (hasReferenced) {
+            for (JsonNode item : sequenceItems(dataset, REFERENCED_SOP_SEQUENCE)) {
+                String sopUid = requireUid(item);
+                JsonNode warningNode = item.path(WARNING_REASON);
+                Integer warningReason = extractInt(warningNode);
+                if (warningReason != null || (!warningNode.isMissingNode() && !warningNode.isNull())) {
+                    parsedInstances.put(sopUid,
+                        new StowInstanceResult(sopUid, StowInstanceResult.Status.WARNING, warningReason));
+                } else {
+                    parsedInstances.put(sopUid,
+                        new StowInstanceResult(sopUid, StowInstanceResult.Status.ACCEPTED, null));
                 }
             }
         }
 
-        // Then parse Failed SOP Sequence (00081198) - overrides referenced sequence if contradictory
-        JsonNode failedSeq = dataset.path(FAILED_SOP_SEQUENCE).path("Value");
-        if (failedSeq.isArray()) {
-            for (JsonNode item : failedSeq) {
-                String sopUid = extractUid(item.path(SOP_INSTANCE_UID));
-                if (sopUid != null && !sopUid.isBlank()) {
+        // Failed SOP Sequence is parsed last so rejection wins if the response is contradictory.
+        if (hasFailed) {
+            for (JsonNode item : sequenceItems(dataset, FAILED_SOP_SEQUENCE)) {
+                String sopUid = requireUid(item);
                     Integer failureReason = extractInt(item.path(FAILURE_REASON));
-                    parsedInstances.put(sopUid, new StowInstanceResult(sopUid, StowInstanceResult.Status.REJECTED, failureReason));
-                }
+                parsedInstances.put(sopUid,
+                    new StowInstanceResult(sopUid, StowInstanceResult.Status.REJECTED, failureReason));
             }
         }
     }
 
-    private static String extractUid(JsonNode node) {
-        if (node == null || node.isMissingNode() || node.isNull()) {
-            return null;
+    private static JsonNode sequenceItems(JsonNode dataset, String tag) {
+        JsonNode attribute = dataset.get(tag);
+        if (attribute == null || !attribute.isObject()) {
+            throw new InvalidResponseException("STOW-RS sequence attribute must be an object");
         }
-        JsonNode val = node.has("Value") ? node.path("Value") : node;
-        if (val.isArray()) {
-            if (val.isEmpty()) {
-                return null;
+        JsonNode vr = attribute.get("vr");
+        if (vr == null || !vr.isTextual() || !"SQ".equalsIgnoreCase(vr.asText())) {
+            throw new InvalidResponseException("STOW-RS result sequence must use SQ VR");
+        }
+        JsonNode value = attribute.get("Value");
+        if (value == null || !value.isArray()) {
+            throw new InvalidResponseException("STOW-RS result sequence Value must be an array");
+        }
+        for (JsonNode item : value) {
+            if (!item.isObject()) {
+                throw new InvalidResponseException("STOW-RS sequence item must be a JSON object");
             }
-            val = val.get(0);
         }
-        if (val == null || val.isNull() || val.isMissingNode()) {
-            return null;
+        return value;
+    }
+
+    private static String requireUid(JsonNode item) {
+        JsonNode attribute = item.get(SOP_INSTANCE_UID);
+        if (attribute == null || !attribute.isObject()) {
+            throw new InvalidResponseException("STOW-RS sequence item is missing Referenced SOP Instance UID");
         }
-        return val.isTextual() ? val.asText() : val.asText();
+        JsonNode vr = attribute.get("vr");
+        JsonNode value = attribute.get("Value");
+        if (vr == null || !vr.isTextual() || !"UI".equalsIgnoreCase(vr.asText())
+            || value == null || !value.isArray() || value.isEmpty() || !value.get(0).isTextual()) {
+            throw new InvalidResponseException("STOW-RS Referenced SOP Instance UID is malformed");
+        }
+        String uid = value.get(0).asText();
+        if (!UIDUtils.isValid(uid)) {
+            throw new InvalidResponseException("STOW-RS Referenced SOP Instance UID is invalid");
+        }
+        return uid;
     }
 
     private static Integer extractInt(JsonNode node) {
