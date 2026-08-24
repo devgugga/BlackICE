@@ -78,11 +78,16 @@ mirror em `.claude/skills/graphify/` (Claude); não execute os instaladores
 oficiais isoladamente, pois `.graphify/setup.ps1` reaplica os ajustes validados
 para a versão fixada.
 
-Antes do commit de uma tarefa que altere código, configuração, documentação ou
-imagens, execute a atualização semântica `--update` pela skill e revise o diff de
-`graphify-out/`. Em linked worktrees essa etapa é obrigatoriamente manual: os
-hooks Git oficiais do Graphify (verificado até 0.9.32) se desativam nesse contexto, mesmo quando
-`graphify hook status` informa que estão instalados.
+Em trabalho de feature, não atualize o Graphify entre ciclos de implementação,
+testes, correções e revisão. Quando implementação, testes, revisões e gates
+estiverem estáveis, execute **uma única atualização semântica final** `--update`
+pela skill, revise o diff de `graphify-out/` e só então faça o commit da feature.
+As exceções são: pedido explícito `/graphify`, uso do grafo para investigação e
+uma fase independente que esteja concluída e vá receber commit próprio.
+
+Em linked worktrees essa atualização final é obrigatoriamente manual: os hooks
+Git oficiais do Graphify (verificado até 0.9.32) se desativam nesse contexto,
+mesmo quando `graphify hook status` informa que estão instalados.
 
 Em checkout normal, o hook pós-commit atualiza `graphify-out/` depois de um
 commit de código; o worktree fica sujo de propósito. Como esses artefatos são
@@ -144,4 +149,4 @@ Guidance (optional):
 - You may instead use other appropriate approaches, including direct source browsing, targeted search, and project documentation.
 - Dirty graphify-out/ files are expected after hooks or incremental updates; they do not prevent using Graphify when it is helpful.
 - If graphify-out/wiki/index.md exists, consider it for broad navigation; consider GRAPH_REPORT.md for broad architecture review or when focused graph queries are insufficient.
-- After modifying code, consider `graphify update .` to keep the graph current (AST-only, no API cost).
+- Follow the canonical update timing and commit protocol in the Graphify section above and in `docs/architecture/graphify.md`.

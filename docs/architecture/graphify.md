@@ -72,14 +72,35 @@ graphify explain "HomePage"
 
 ## Atualizar
 
+### Momento da atualização em uma feature
+
+A atualização de fechamento acontece **uma única vez**, depois que a
+implementação, os testes, as correções de revisão e os gates da feature estão
+estáveis, imediatamente antes do commit. Não execute o fluxo incremental entre
+rodadas intermediárias: cada execução semântica pode repetir extração,
+reagrupamento de comunidades e geração de labels sobre um estado que ainda será
+alterado.
+
+Só antecipe uma atualização quando:
+
+- o humano pedir explicitamente `/graphify`;
+- o grafo for necessário para investigar a tarefa em andamento; ou
+- uma fase independente estiver concluída e for receber seu próprio commit.
+
+Uma fase com commit próprio é uma unidade finalizada, não uma rodada provisória
+de implementação ou revisão. Depois de uma atualização antecipada para
+investigação, a feature ainda exige a atualização única de fechamento caso o
+conteúdo tenha mudado.
+
 Há duas rotas de atualização, com escopos diferentes:
 
 - Em um checkout Git normal, mudanças somente de código podem usar
   `graphify update .`; os hooks instalados também fazem essa atualização AST
   local, sem LLM. O hook pós-commit ignora configuração, documentação e imagens.
 - Em linked worktrees, os hooks oficiais retornam sem atualizar o
-  grafo, embora `graphify hook status` ainda mostre `installed`. Antes de cada
-  commit de tarefa, a atualização pela skill é obrigatória nesse contexto.
+  grafo, embora `graphify hook status` ainda mostre `installed`. No fechamento
+  de cada feature ou fase independente, a atualização pela skill é obrigatória
+  nesse contexto.
   **Continua valendo em `0.9.32`** — `graphify/hooks.py` ainda compara
   `--git-dir` com `--git-common-dir` e sai cedo quando diferem.
 - Para configuração, documentação, imagens ou qualquer mudança mista, use a skill:
@@ -103,10 +124,12 @@ Git nem artefatos a descartar.
 Como os artefatos portáveis de `graphify-out/` são versionados neste projeto, o
 protocolo é:
 
-1. Faça o commit da mudança de código.
-2. Aguarde o hook terminar, revise o diff de `graphify-out/` e valide que ele
-   representa a mudança.
-3. Faça um segundo commit, focado apenas na sincronização do grafo.
+1. Com a feature estável, execute uma vez a atualização semântica pela skill e
+   revise o diff de `graphify-out/`.
+2. Faça o commit da feature sem incluir `graphify-out/`.
+3. Aguarde o hook terminar. Se ele atualizar a camada AST, revise o diff final e
+   valide que ele ainda representa a mudança.
+4. Faça um segundo commit, focado apenas na sincronização do grafo.
 
 O hook do Graphify ignora commits que alteram somente `graphify-out/`, evitando
 um loop de reconstrução. Ele continua ignorando documentação, configuração e
