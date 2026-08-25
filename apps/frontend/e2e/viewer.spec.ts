@@ -173,7 +173,7 @@ test('opens a mixed study, renders CT, switches series and restores Worklist', a
 
   if (isMobile) {
     // Verificações no ambiente Mobile: Capability Gate ativo
-    await expect(page.getByRole('status')).toContainText(
+    await expect(page.locator('.capability-gate-message')).toContainText(
       'Use uma tela maior para visualizar as imagens deste estudo.',
     );
     // 0 requisições de instâncias e 0 de frames
@@ -357,7 +357,7 @@ test('mobile screen enforces capability gate without requesting instances or fra
   await page.goto('/studies/2.25.99999999999');
 
   // Capability gate presente
-  await expect(page.getByRole('status')).toContainText(
+  await expect(page.locator('.capability-gate-message')).toContainText(
     'Use uma tela maior para visualizar as imagens deste estudo.',
   );
 

@@ -17,9 +17,12 @@ por usuário no audit trail DICOM — e evita token exchange.
   webOrigin `http://${APP_HOST}`. Secret = `QUARKUS_OIDC_SECRET` (de `infra/.env`).
 - **`arc-audience`** — audience mapper no client acima, injetando **`dcm4chee-arc-rs`**
   (o client que protege a DICOMweb REST) no claim `aud`.
-- **`dr.teste` / `teste123`** — usuário de teste.
+- **`dr.teste` / `teste123`** — primeiro usuário de teste (autor / radiologista padrão).
+- **`dr.leitor` / `teste123`** — segundo usuário de teste (leitor / segundo ator), criado
+  para validar isolamento multi-ator em testes E2E, permissões somente-leitura em laudos
+  de terceiros e rejeição 403 em tentativas maliciosas de mutação direta.
 
-O script **não** atribui realm roles (decisão de gate humano — ver abaixo).
+O script atribui a realm role **`auth`** tanto para `dr.teste` quanto para `dr.leitor`.
 
 ### Por que `curl` e não `kcadm`
 
@@ -32,13 +35,15 @@ impressas). O Keycloak serve **HTTP em :8080 na rede interna** (atrás do Traefi
 REST). O root path do servidor é `/auth` — vale para os dois listeners, e por
 isso a base da Admin REST no script é `https://localhost:8843/auth`.
 
-## Roles (gate humano) — decisão registrada
+## Roles — decisão registrada
 
 O realm `blackice` tem, de custom, só **`auth`** e **`root`** (o resto é built-in do
-Keycloak; `dcm4chee-arc-rs` não expõe client-roles). Decisão: **`dr.teste` recebe a
-role `auth`** (usuário autenticado normal, papel realista de radiologista).
+Keycloak; `dcm4chee-arc-rs` não expõe client-roles). Decisão: **`dr.teste` e `dr.leitor`
+recebem a role `auth`** (usuários autenticados normais, papel realista de radiologista).
+Nenhum usuário de teste recebe role elevada de produto.
 
-Comando de atribuição (reproduzível; dentro do container `keycloak`):
+O script `configure-blackice-container.sh` já mapeia a role `auth` idempotentemente para ambos.
+Comando manual de atribuição (reproduzível; dentro do container `keycloak`):
 
 ```sh
 # obtenha um token admin (adm) e o id do usuário (USERID), então:
@@ -129,4 +134,4 @@ pwsh -File infra/keycloak/configure-blackice.ps1
 Os dois launchers exigem Docker Desktop/CLI disponível, `infra/.env` com
 `QUARKUS_OIDC_SECRET` e `APP_HOST`, e a stack do Keycloak/Archive em execução
 (ver `infra/dcm4chee/`). O launcher PowerShell é nativo e não requer WSL nem Git
-Bash. Depois, atribua a role `auth` ao `dr.teste` (comando acima).
+Bash. Os usuários de teste recebem a role `auth` automaticamente.

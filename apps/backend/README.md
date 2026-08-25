@@ -30,7 +30,7 @@ variáveis no shell. Depois execute:
 mise exec -- mvn quarkus:dev
 ```
 
-As variáveis OIDC e DICOMweb usadas pela configuração atual são:
+As variáveis OIDC, banco de dados e DICOMweb usadas pela configuração atual são:
 
 - `QUARKUS_OIDC_SECRET`: secret do client `blackice-quarkus`;
 - `QUARKUS_OIDC_ENCRYPTION_SECRET`: chave de ao menos 32 caracteres para
@@ -39,25 +39,44 @@ As variáveis OIDC e DICOMweb usadas pela configuração atual são:
   `application.properties`;
 - `QUARKUS_CSRF_TOKEN_SIGNATURE_KEY`: chave de ao menos 32 caracteres para assinar
   tokens CSRF emitidos por `/api/csrf`;
+- `QUARKUS_DATASOURCE_JDBC_URL`: URL JDBC do PostgreSQL do produto (`product-db`),
+  padrão `jdbc:postgresql://product-db:5432/${PRODUCT_DB}`;
+- `QUARKUS_DATASOURCE_USERNAME`: usuário do PostgreSQL do produto;
+- `QUARKUS_DATASOURCE_PASSWORD`: senha do PostgreSQL do produto;
 - `BLACKICE_DICOMWEB_BASE_URL`: URL base do endpoint DICOMweb do DCM4CHEE Archive
   (padrão `http://arc:8080/dcm4chee-arc/aets/DCM4CHEE/rs`).
 
-Propriedades configuráveis para importação e busca DICOM:
+Banco de dados de produto e migrações:
+- O banco de produto (`product-db`, PostgreSQL 17) armazena exclusivamente dados de negócio (laudos clínicos);
+- Migrações Flyway são executadas automaticamente na inicialização (`quarkus.flyway.migrate-at-start=true`), gerenciando a tabela `reports` e seus constraints (`V1__create_reports.sql`);
+- O Hibernate ORM valida o schema na inicialização (`quarkus.hibernate-orm.schema-management.strategy=validate`).
+
+Propriedades configuráveis para importação, busca DICOM e laudos:
 - `blackice.ingest.max-files` (padrão 500);
 - `blackice.ingest.max-total-bytes` (padrão 524288000 = 500 MB);
 - `blackice.ingest.max-concurrent-studies` (padrão 1);
 - `blackice.dicomweb.request-timeout` (padrão 60S);
-- `blackice.worklist.request-timeout` (padrão 10S).
+- `blackice.worklist.request-timeout` (padrão 10S);
+- `blackice.reports.archive-request-timeout` (padrão 10S).
 
-Dependências-chave das features `ingest` e `worklist`:
+Dependências-chave das features `ingest`, `worklist` e `reports`:
 - `org.dcm4che:dcm4che-core:5.34.3`: parser de metadados DICOM (bulk-data excluído);
-- `io.quarkus:quarkus-rest-csrf`: proteção CSRF de endpoints mutantes.
+- `io.quarkus:quarkus-rest-csrf`: proteção CSRF de endpoints mutantes;
+- `io.quarkus:quarkus-hibernate-orm-panache`: persistência JPA/Hibernate Panache;
+- `io.quarkus:quarkus-jdbc-postgresql`: driver JDBC PostgreSQL;
+- `io.quarkus:quarkus-flyway`: migrações relacionais versionadas.
 
 Contrato `GET /api/studies` (Worklist):
 - Endpoint autenticado (`@RolesAllowed("auth")`) para consulta paginada de estudos via QIDO-RS;
 - Aceita quatro filtros opcionais combináveis: `patientName`, `patientId`, `modality`, `dateFrom`/`dateTo`, além de `limit` (padrão 20) e `offset` (padrão 0);
 - Devolve metadados curados (`StudyPage`) com `items` e metadados de página (`limit`, `offset`, `hasPrevious`, `hasNext`);
 - Traduz falhas para Problem Details RFC 9457 catalogados (ver seção adiante).
+
+Contrato `GET/POST/PUT /api/studies/{studyUid}/report` (Laudos clínicos):
+- `GET /api/studies/{studyUid}/report`: consulta o laudo associado ao estudo; retorna `204 No Content` quando não houver laudo, ou `200 OK` com `ETag` forte opaco (`"<version>"`);
+- `POST /api/studies/{studyUid}/report`: cria o primeiro laudo (`DRAFT` ou `FINAL`); valida a existência do estudo no Archive via QIDO-RS e retorna `201 Created` com `ETag`;
+- `PUT /api/studies/{studyUid}/report`: atualiza rascunho ou finaliza com controle de concorrência otimista via header `If-Match: "<etag>"`; retorna `200 OK` com novo `ETag`, `412 Precondition Failed` em conflito de versão, `403 Forbidden` se o laudo já estiver finalizado ou pertencer a outro autor;
+- Limite de conteúdo de 32.000 caracteres/code points validado no backend (`API_PAYLOAD_TOO_LARGE`).
 
 Contrato de erro (todas as rotas `/api`):
 - Todo erro JSON `4xx/5xx` sai em `application/problem+json` com um tipo do
@@ -93,7 +112,8 @@ cd ../frontend && mise exec -- pnpm test && mise exec -- pnpm build
 Regras operacionais e de verificação:
 - **Dados sintéticos**: Todos os testes e fixtures utilizam dados DICOM puramente sintéticos; nenhum dado real de paciente é permitido no repositório;
 - **Observação de locks**: Concorrência entre STOW-RS e QIDO-RS é verificada no PostgreSQL do Archive (`arc-db`) via consulta de locks bloqueantes (`SELECT count(*) FROM pg_locks WHERE NOT granted;`), onde todas as amostras devem retornar `0`;
-- **Evolução de paginação**: Estratégias futuras de cursor, snapshot ou projeções dedicadas de leitura são governadas pelo item `EVO-005` do backlog de evolução.
+- **Evolução de paginação**: Estratégias futuras de cursor, snapshot ou projeções dedicadas de leitura são governadas pelo item [EVO-005](../../docs/architecture/evolution-backlog.md#evo-005) do backlog de evolução;
+- **Evolução de laudos**: Editor Markdown rico com autosave e invalidação lógica auditada de laudos são governados respectivamente pelos itens [EVO-011](../../docs/architecture/evolution-backlog.md#evo-011) e [EVO-012](../../docs/architecture/evolution-backlog.md#evo-012) do backlog de evolução.
 
 Não versione `.env` nem segredos.
 

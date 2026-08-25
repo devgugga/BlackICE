@@ -48,3 +48,76 @@ jobs:
           cache: true
       - run: cd apps/frontend && mise install
       - run: cd apps/frontend && mise exec -- pnpm install --frozen-lockfile && mise exec -- pnpm test && mise exec -- pnpm build
+
+  e2e:
+    name: end-to-end stack
+    needs: [catalog, backend, frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v3
+        with:
+          install: false
+          cache: true
+      - name: Setup environment and build backend package
+        run: |
+          echo "127.0.0.1 blackice.localhost" | sudo tee -a /etc/hosts
+          cp infra/.env.example infra/.env
+          cd apps/backend && mise install && mise exec -- mvn package -DskipTests
+      - name: Start stack
+        run: |
+          cd infra
+          docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml up -d --build
+      - name: Wait for stack readiness
+        run: |
+          echo "Aguardando prontidão dos serviços..."
+          ready=0
+          for i in $(seq 1 60); do
+            root_code=$(curl -s -o /dev/null -w "%{http_code}" http://blackice.localhost/ || true)
+            me_code=$(curl -s -o /dev/null -w "%{http_code}" http://blackice.localhost/api/me || true)
+            login_headers=$(curl -s -D - -o /dev/null http://blackice.localhost/api/login || true)
+            login_code=$(printf '%s' "$login_headers" | grep -i '^HTTP/' | tail -1 | awk '{print $2}')
+            location=$(printf '%s' "$login_headers" | grep -i '^location:' | awk '{print $2}' | tr -d '\r')
+
+            if [ "$root_code" = "200" ] && [ "$me_code" = "401" ] && [ "$login_code" = "302" ]; then
+              echo "Stack pronta na iteração $i (root=$root_code, me=$me_code, login=$login_code, location=$location)"
+              ready=1
+              break
+            fi
+            echo "Iteração $i: root=$root_code, me=$me_code, login=$login_code; aguardando..."
+            sleep 2
+          done
+          if [ "$ready" -ne 1 ]; then
+            echo "Falha: stack não ficou pronta no tempo esperado"
+            cd infra && docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml logs
+            exit 1
+          fi
+      - name: Configure Keycloak
+        run: |
+          bash infra/keycloak/configure-blackice.sh
+      - name: Install frontend dependencies and Playwright
+        run: |
+          cd apps/frontend
+          mise install
+          mise exec -- pnpm install --frozen-lockfile
+          mise exec -- pnpm exec playwright install --with-deps chromium
+      - name: Run E2E tests
+        run: |
+          cd apps/frontend
+          CI=true mise exec -- pnpm exec playwright test
+        env:
+          CI: "true"
+      - name: Upload Playwright artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-e2e-artifacts
+          path: |
+            apps/frontend/playwright-report/
+            apps/frontend/test-results/playwright/
+          retention-days: 7
+      - name: Teardown stack
+        if: always()
+        run: |
+          cd infra
+          docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml down --volumes

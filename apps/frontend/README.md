@@ -21,12 +21,24 @@ mise exec -- pnpm build
 mise exec -- pnpm test:e2e:keycloak
 mise exec -- pnpm test:e2e:ingest
 mise exec -- pnpm test:e2e:worklist
+mise exec -- pnpm test:e2e:viewer
+mise exec -- pnpm test:e2e:reports
 mise exec -- pnpm exec playwright test e2e/problem-details.spec.ts
 ```
 
 A suíte de testes E2E valida os fluxos completos utilizando fixtures DICOM
 sintéticas geradas em memória, garantindo que nenhum dado real de paciente seja
 manipulado ou commitado.
+
+### Matriz de Viewports dos Testes E2E:
+- **Desktop 1920×1080 (`chromium-desktop`)**: Split layout com viewport Cornerstone (largura >= 720px) e painel lateral de laudo clínico;
+- **Laptop 1366×768 (`chromium-1366`)**: Drawer overlay fechado por padrão com abertura e fechamento sem mutação geométrica do viewport;
+- **Tablet 1024×768 (`chromium-1024`)**: Drawer overlay com comportamento responsivo idêntico a 1366×768;
+- **Mobile 390×844 (`chromium-mobile`)**: Layout somente-laudo com Capability Gate ativo (0 requisições de instâncias/frames DICOM).
+
+### Identidades de teste:
+- `dr.teste` / `teste123`: usuário principal (autor);
+- `dr.leitor` / `teste123`: segundo ator para teste de permissões somente-leitura, concorrência e rejeição 403 em mutações não autorizadas.
 
 ### Estados da interface de importação (`/ingest`):
 - `SELECTING`: seleção de múltiplos arquivos `.dcm`;

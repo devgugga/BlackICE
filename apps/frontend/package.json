@@ -12,7 +12,8 @@
     "test:e2e:keycloak": "playwright test e2e/keycloak-login.spec.ts",
     "test:e2e:ingest": "playwright test e2e/manual-dicom-import.spec.ts",
     "test:e2e:worklist": "playwright test e2e/worklist.spec.ts",
-    "test:e2e:viewer": "playwright test e2e/viewer.spec.ts"
+    "test:e2e:viewer": "playwright test e2e/viewer.spec.ts",
+    "test:e2e:reports": "playwright test e2e/reports.spec.ts"
   },
   "pnpm": {
     "onlyBuiltDependencies": []

@@ -54,6 +54,16 @@ if [ -z "$(printf '%s' "$USERS" | grep -o '"username":"dr.teste"' || true)" ]; t
   echo "usuário dr.teste: criado"
 else echo "usuário dr.teste: já existe"; fi
 
+# 3.1) usuário de teste dr.leitor
+USERS_LEITOR=$(curl -f -k -s -H "$AH" "$api/users?username=dr.leitor&exact=true")
+if [ -z "$(printf '%s' "$USERS_LEITOR" | grep -o '"username":"dr.leitor"' || true)" ]; then
+  curl -f -k -s -H "$AH" -H "Content-Type: application/json" -X POST "$api/users" -d '{
+    "username":"dr.leitor","enabled":true,"firstName":"Leitor","lastName":"Radiologista",
+    "credentials":[{"type":"password","value":"teste123","temporary":false}]
+  }' >/dev/null
+  echo "usuário dr.leitor: criado"
+else echo "usuário dr.leitor: já existe"; fi
+
 # 4) tema de login SÓ neste client (o realm segue em j4care, para o Archive).
 CUR=$(curl -f -k -s -H "$AH" "$api/clients/$CID" | python3 -c 'import sys,json;print(json.load(sys.stdin).get("attributes",{}).get("login_theme",""))')
 if [ "$CUR" != "blackice" ]; then
@@ -81,4 +91,17 @@ if [ -z "$(printf '%s' "$USER_ROLES" | grep -o '"name":"auth"' || true)" ]; then
   echo "role auth atribuída a dr.teste"
 else echo "role auth: já atribuída a dr.teste"; fi
 
-echo "OK: config base e role auth prontas."
+# 6) role 'auth' para dr.leitor
+UID_LEITOR=$(printf '%s' "$USERS_LEITOR" | grep -o '"id":"[^"]*"' | head -1 | sed 's/.*:"//;s/"//')
+if [ -z "$UID_LEITOR" ]; then
+  USERS_LEITOR=$(curl -f -k -s -H "$AH" "$api/users?username=dr.leitor&exact=true")
+  UID_LEITOR=$(printf '%s' "$USERS_LEITOR" | grep -o '"id":"[^"]*"' | head -1 | sed 's/.*:"//;s/"//')
+fi
+USER_ROLES_LEITOR=$(curl -f -k -s -H "$AH" "$api/users/$UID_LEITOR/role-mappings/realm")
+if [ -z "$(printf '%s' "$USER_ROLES_LEITOR" | grep -o '"name":"auth"' || true)" ]; then
+  ROLE_AUTH=$(curl -k -s -H "$AH" "$api/roles/auth")
+  curl -k -s -H "$AH" -H "Content-Type: application/json" -X POST "$api/users/$UID_LEITOR/role-mappings/realm" -d "[$ROLE_AUTH]" >/dev/null
+  echo "role auth atribuída a dr.leitor"
+else echo "role auth: já atribuída a dr.leitor"; fi
+
+echo "OK: config base e role auth prontas para dr.teste e dr.leitor."

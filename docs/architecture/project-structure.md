@@ -75,62 +75,80 @@ aplicação em `apps/`.
 
 ## Estrutura atual dos módulos
 
-O backend é modular e possui `ingest`, `security`, `session`, `viewer` e `worklist`:
+O backend é modular e possui `ingest`, `reports`, `security`, `session`, `viewer` e `worklist`:
 
 ```text
 apps/backend/src/
-├─ main/java/dev/blackice/
-│  ├─ ingest/
-│  │  ├─ api/
-│  │  ├─ application/
-│  │  │  ├─ input/
-│  │  │  ├─ usecase/
-│  │  │  ├─ validation/
-│  │  │  ├─ result/
-│  │  │  ├─ exception/
-│  │  │  └─ port/
-│  │  └─ infrastructure/
-│  │     ├─ dicom/
-│  │     └─ dicomweb/
-│  ├─ security/
-│  │  ├─ api/
-│  │  ├─ application/
-│  │  └─ infrastructure/oidc/
-│  ├─ session/
-│  │  └─ api/
-│  ├─ shared/
-│  │  ├─ api/problem/
-│  │  │  └─ generated/
-│  │  └─ infrastructure/telemetry/
-│  ├─ viewer/
-│  │  ├─ api/
-│  │  ├─ application/
-│  │  │  ├─ exception/
-│  │  │  ├─ input/
-│  │  │  ├─ port/
-│  │  │  ├─ result/
-│  │  │  └─ usecase/
-│  │  └─ infrastructure/
-│  │     └─ dicomweb/
-│  └─ worklist/
-│     ├─ api/
-│     ├─ application/
-│     │  ├─ input/
-│     │  ├─ usecase/
-│     │  ├─ result/
-│     │  ├─ exception/
-│     │  └─ port/
-│     └─ infrastructure/dicomweb/
+├─ main/
+│  ├─ java/dev/blackice/
+│  │  ├─ ingest/
+│  │  │  ├─ api/
+│  │  │  ├─ application/
+│  │  │  │  ├─ input/
+│  │  │  │  ├─ usecase/
+│  │  │  │  ├─ validation/
+│  │  │  │  ├─ result/
+│  │  │  │  ├─ exception/
+│  │  │  │  └─ port/
+│  │  │  └─ infrastructure/
+│  │  │     ├─ dicom/
+│  │  │     └─ dicomweb/
+│  │  ├─ reports/
+│  │  │  ├─ api/
+│  │  │  ├─ application/
+│  │  │  │  ├─ exception/
+│  │  │  │  ├─ input/
+│  │  │  │  ├─ port/
+│  │  │  │  ├─ result/
+│  │  │  │  └─ usecase/
+│  │  │  ├─ domain/
+│  │  │  └─ infrastructure/
+│  │  │     ├─ dicomweb/
+│  │  │     └─ persistence/
+│  │  ├─ security/
+│  │  │  ├─ api/
+│  │  │  ├─ application/
+│  │  │  └─ infrastructure/oidc/
+│  │  ├─ session/
+│  │  │  └─ api/
+│  │  ├─ shared/
+│  │  │  ├─ api/problem/
+│  │  │  │  └─ generated/
+│  │  │  └─ infrastructure/telemetry/
+│  │  ├─ viewer/
+│  │  │  ├─ api/
+│  │  │  ├─ application/
+│  │  │  │  ├─ exception/
+│  │  │  │  ├─ input/
+│  │  │  │  ├─ port/
+│  │  │  │  ├─ result/
+│  │  │  │  └─ usecase/
+│  │  │  └─ infrastructure/
+│  │  │     └─ dicomweb/
+│  │  └─ worklist/
+│  │     ├─ api/
+│  │     ├─ application/
+│  │     │  ├─ input/
+│  │     │  ├─ usecase/
+│  │     │  ├─ result/
+│  │     │  ├─ exception/
+│  │     │  └─ port/
+│  │     └─ infrastructure/dicomweb/
+│  └─ resources/
+│     ├─ application.properties
+│     └─ db/migration/
+│        └─ V1__create_reports.sql
 └─ test/java/dev/blackice/
    ├─ architecture/
    ├─ ingest/
+   ├─ reports/
    ├─ security/
    ├─ session/
    ├─ viewer/
    └─ worklist/
 ```
 
-O frontend possui as features `session`, `home`, `ingest`, `viewer` e `worklist`, compostas pelo shell em
+O frontend possui as features `session`, `home`, `ingest`, `viewer`, `worklist` e `reports`, compostas pelo shell em
 `app/`:
 
 ```text
@@ -155,6 +173,18 @@ apps/frontend/src/
 │  │  ├─ ingest.api.spec.ts
 │  │  ├─ ingest.types.ts
 │  │  └─ useIngestBatch.ts
+│  ├─ reports/
+│  │  ├─ ReportEditor.vue
+│  │  ├─ ReportEditor.spec.ts
+│  │  ├─ ReportPanel.vue
+│  │  ├─ ReportPanel.spec.ts
+│  │  ├─ report.api.ts
+│  │  ├─ report.api.spec.ts
+│  │  ├─ report.types.ts
+│  │  ├─ useReportLayout.ts
+│  │  ├─ useReportLayout.spec.ts
+│  │  ├─ useStudyReport.ts
+│  │  └─ useStudyReport.spec.ts
 │  ├─ viewer/
 │  │  ├─ cornerstone/
 │  │  │  ├─ cornerstone-init.ts

@@ -10,6 +10,7 @@ export default defineConfig({
     'worklist.spec.ts',
     'problem-details.spec.ts',
     'viewer.spec.ts',
+    'reports.spec.ts',
   ],
   fullyParallel: false,
   workers: isCi ? 1 : undefined,
@@ -35,6 +36,22 @@ export default defineConfig({
       use: {
         browserName: 'chromium',
         viewport: { width: 1920, height: 1080 },
+      },
+    },
+    {
+      name: 'chromium-1366',
+      testMatch: ['reports.spec.ts'],
+      use: {
+        browserName: 'chromium',
+        viewport: { width: 1366, height: 768 },
+      },
+    },
+    {
+      name: 'chromium-1024',
+      testMatch: ['reports.spec.ts'],
+      use: {
+        browserName: 'chromium',
+        viewport: { width: 1024, height: 768 },
       },
     },
     {
