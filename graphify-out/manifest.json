@@ -30,9 +30,9 @@
     "semantic_hash": "eb9de388db84191cbe56ddfa19a7eb29"
   },
   "apps/frontend/src/app/App.vue": {
-    "mtime": 1787424754.5488229,
-    "ast_hash": "c21c69bde476e3e18bdf219e6c06803a",
-    "semantic_hash": "c21c69bde476e3e18bdf219e6c06803a"
+    "mtime": 1787667872.3950663,
+    "ast_hash": "10d212847fc75d8bbbe44ae9d4d12cd2",
+    "semantic_hash": "10d212847fc75d8bbbe44ae9d4d12cd2"
   },
   "apps/frontend/src/app/router/index.ts": {
     "mtime": 1787621505.1955013,
@@ -425,9 +425,9 @@
     "semantic_hash": "c6871220489855f65d4c9edf3b65fc5a"
   },
   "docs/architecture/evolution-backlog.md": {
-    "mtime": 1787589746.8713708,
-    "ast_hash": "b686d5c8849de50880eedda0ba34f750",
-    "semantic_hash": "b686d5c8849de50880eedda0ba34f750"
+    "mtime": 1787671823.5260344,
+    "ast_hash": "8d4511925f5d9d0ee1e3343069975347",
+    "semantic_hash": "8d4511925f5d9d0ee1e3343069975347"
   },
   "docs/superpowers/specs/2026-08-09-manual-dicom-import-design.md": {
     "mtime": 1787424754.5523264,
@@ -1790,14 +1790,14 @@
     "semantic_hash": "4447ef5d8d93a787ad89e6c313314e68"
   },
   "apps/frontend/src/features/viewer/DicomViewport.spec.ts": {
-    "mtime": 1787621225.6721146,
-    "ast_hash": "68859882aa2a13c3ae55825c6b30099c",
-    "semantic_hash": "68859882aa2a13c3ae55825c6b30099c"
+    "mtime": 1787668259.6057014,
+    "ast_hash": "4fa7b7e93ec8fef12dca2aeeab042328",
+    "semantic_hash": "4fa7b7e93ec8fef12dca2aeeab042328"
   },
   "apps/frontend/src/features/viewer/DicomViewport.vue": {
-    "mtime": 1787666177.9769883,
-    "ast_hash": "cc1fa79d23deb865749c85f13a296415",
-    "semantic_hash": "cc1fa79d23deb865749c85f13a296415"
+    "mtime": 1787668183.9953682,
+    "ast_hash": "25ca5d0c7f9b2eac4aca4b882b791659",
+    "semantic_hash": "25ca5d0c7f9b2eac4aca4b882b791659"
   },
   "apps/frontend/src/features/viewer/SeriesRail.spec.ts": {
     "mtime": 1787620702.0935667,
@@ -1820,14 +1820,14 @@
     "semantic_hash": "f82848cd10ca70629ef07eaf9f1bccda"
   },
   "apps/frontend/src/features/viewer/ViewerPage.spec.ts": {
-    "mtime": 1787621562.6563518,
-    "ast_hash": "45bf3cdceaa341688d41ae1604e77436",
-    "semantic_hash": "45bf3cdceaa341688d41ae1604e77436"
+    "mtime": 1787668333.5321555,
+    "ast_hash": "2d180c39bc4393739029dccea5ca1914",
+    "semantic_hash": "2d180c39bc4393739029dccea5ca1914"
   },
   "apps/frontend/src/features/viewer/ViewerPage.vue": {
-    "mtime": 1787621502.0815175,
-    "ast_hash": "b0e5a21b14aa9a0251ef7fabc8482feb",
-    "semantic_hash": "b0e5a21b14aa9a0251ef7fabc8482feb"
+    "mtime": 1787668233.0299852,
+    "ast_hash": "8d5f5258d2711253794d7325dfab4931",
+    "semantic_hash": "8d5f5258d2711253794d7325dfab4931"
   },
   "apps/frontend/src/features/viewer/ViewerToolbar.spec.ts": {
     "mtime": 1787620705.4154994,
@@ -1928,5 +1928,15 @@
     "mtime": 1787620992.771982,
     "ast_hash": "a61d414a07aa4b752bb3905309feabc8",
     "semantic_hash": "a61d414a07aa4b752bb3905309feabc8"
+  },
+  "docs/superpowers/plans/2026-08-25-authenticated-reports.md": {
+    "mtime": 1787673015.0877516,
+    "ast_hash": "10ef2c3ee69415d53e974c3fe3251515",
+    "semantic_hash": "10ef2c3ee69415d53e974c3fe3251515"
+  },
+  "docs/superpowers/specs/2026-08-25-authenticated-reports-design.md": {
+    "mtime": 1787671923.9178205,
+    "ast_hash": "029132d7b017352062dfae4959219434",
+    "semantic_hash": "029132d7b017352062dfae4959219434"
   }
 }
