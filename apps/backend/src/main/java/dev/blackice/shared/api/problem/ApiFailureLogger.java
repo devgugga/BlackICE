@@ -26,6 +26,8 @@ public class ApiFailureLogger {
         OUTCOME_UNKNOWN,
         LOCAL_VALIDATION,
         UNCLASSIFIED,
+        CONFLICT,
+        VERSION_CONFLICT,
         REST,
         PRE_REST
     }
