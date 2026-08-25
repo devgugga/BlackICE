@@ -192,6 +192,20 @@
       "replacedBy": null
     },
     {
+      "type": "urn:uuid:119682ee-985b-588b-a8a8-f293a1e8767f",
+      "code": "API_RESOURCE_CONFLICT",
+      "scope": "API",
+      "description": "A operação solicitada conflita com o estado atual do recurso.",
+      "httpStatus": 409,
+      "title": "Resource conflict",
+      "detail": "The resource state conflicts with the requested operation.",
+      "retryPolicy": "MANUAL",
+      "owner": "platform",
+      "extensionsSchemaRef": null,
+      "status": "active",
+      "replacedBy": null
+    },
+    {
       "type": "urn:uuid:25c41e16-7fd0-51f7-9731-1a9c0c0e8dd4",
       "code": "API_RESOURCE_NOT_FOUND",
       "scope": "API",
@@ -200,6 +214,20 @@
       "title": "Resource not found",
       "detail": "The requested resource was not found.",
       "retryPolicy": "NEVER",
+      "owner": "platform",
+      "extensionsSchemaRef": null,
+      "status": "active",
+      "replacedBy": null
+    },
+    {
+      "type": "urn:uuid:63e60c40-7d0c-5c6c-9f12-a3164650ce63",
+      "code": "API_RESOURCE_VERSION_CONFLICT",
+      "scope": "API",
+      "description": "A versão informada pelo cliente não corresponde à versão atual do recurso.",
+      "httpStatus": 412,
+      "title": "Resource version conflict",
+      "detail": "The resource was changed by another request. Reload it and review your changes.",
+      "retryPolicy": "MANUAL",
       "owner": "platform",
       "extensionsSchemaRef": null,
       "status": "active",

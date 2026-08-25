@@ -29,7 +29,9 @@ media type `application/problem+json`.
 | `API_PAYLOAD_TOO_LARGE` | 413 | `NEVER` | platform | Payload too large | The request exceeds the permitted size. | — | active |
 | `API_REPRESENTATION_NOT_ACCEPTABLE` | 406 | `NEVER` | platform | Representation not acceptable | The requested response format is not supported. | — | active |
 | `API_REQUEST_INVALID` | 400 | `NEVER` | platform | Invalid request | The request is invalid or malformed. | — | active |
+| `API_RESOURCE_CONFLICT` | 409 | `MANUAL` | platform | Resource conflict | The resource state conflicts with the requested operation. | — | active |
 | `API_RESOURCE_NOT_FOUND` | 404 | `NEVER` | platform | Resource not found | The requested resource was not found. | — | active |
+| `API_RESOURCE_VERSION_CONFLICT` | 412 | `MANUAL` | platform | Resource version conflict | The resource was changed by another request. Reload it and review your changes. | — | active |
 | `API_SEARCH_INVALID` | 400 | `NEVER` | worklist | Invalid search | Review the supplied search filters. | — | active |
 | `API_SEARCH_TOO_BROAD` | 413 | `NEVER` | worklist | Search too broad | Refine the search filters and try again. | — | active |
 | `API_UPLOAD_EMPTY` | 400 | `NEVER` | ingest | Empty upload | Select at least one file to upload. | — | active |
@@ -81,7 +83,9 @@ acima. Ela nunca é informada à mão e nunca é reciclada.
 | `API_PAYLOAD_TOO_LARGE` | `urn:uuid:db695bb8-95d6-56b3-b938-f76b77e2d09b` |
 | `API_REPRESENTATION_NOT_ACCEPTABLE` | `urn:uuid:9f6fda99-1849-58a1-85fe-deb9a5897740` |
 | `API_REQUEST_INVALID` | `urn:uuid:4ab4a9cc-9774-5c32-b0fa-83594c7bf6e1` |
+| `API_RESOURCE_CONFLICT` | `urn:uuid:119682ee-985b-588b-a8a8-f293a1e8767f` |
 | `API_RESOURCE_NOT_FOUND` | `urn:uuid:25c41e16-7fd0-51f7-9731-1a9c0c0e8dd4` |
+| `API_RESOURCE_VERSION_CONFLICT` | `urn:uuid:63e60c40-7d0c-5c6c-9f12-a3164650ce63` |
 | `API_SEARCH_INVALID` | `urn:uuid:5fdeb44a-6add-5d54-a7f4-5f15f7cdc830` |
 | `API_SEARCH_TOO_BROAD` | `urn:uuid:3059d5b4-bb73-52e9-b8ed-a73539b98460` |
 | `API_UPLOAD_EMPTY` | `urn:uuid:74e415dc-1966-5124-be1f-8732a25fc777` |

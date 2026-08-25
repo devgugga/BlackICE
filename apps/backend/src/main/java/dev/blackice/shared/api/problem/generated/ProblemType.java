@@ -108,6 +108,13 @@ public enum ProblemType {
             "Invalid request",
             "The request is invalid or malformed.",
             RetryPolicy.NEVER),
+    API_RESOURCE_CONFLICT(
+            "urn:uuid:119682ee-985b-588b-a8a8-f293a1e8767f",
+            ProblemScope.API,
+            409,
+            "Resource conflict",
+            "The resource state conflicts with the requested operation.",
+            RetryPolicy.MANUAL),
     API_RESOURCE_NOT_FOUND(
             "urn:uuid:25c41e16-7fd0-51f7-9731-1a9c0c0e8dd4",
             ProblemScope.API,
@@ -115,6 +122,13 @@ public enum ProblemType {
             "Resource not found",
             "The requested resource was not found.",
             RetryPolicy.NEVER),
+    API_RESOURCE_VERSION_CONFLICT(
+            "urn:uuid:63e60c40-7d0c-5c6c-9f12-a3164650ce63",
+            ProblemScope.API,
+            412,
+            "Resource version conflict",
+            "The resource was changed by another request. Reload it and review your changes.",
+            RetryPolicy.MANUAL),
     API_SEARCH_INVALID(
             "urn:uuid:5fdeb44a-6add-5d54-a7f4-5f15f7cdc830",
             ProblemScope.API,

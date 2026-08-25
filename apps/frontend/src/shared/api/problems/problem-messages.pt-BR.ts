@@ -20,6 +20,9 @@ export const PROBLEM_MESSAGES = {
   API_CSRF_INVALID:
     'Não foi possível verificar a requisição. Atualize a página e tente novamente.',
   API_RESOURCE_NOT_FOUND: 'O recurso solicitado não foi encontrado.',
+  API_RESOURCE_CONFLICT: 'O laudo está em um estado que não permite esta operação.',
+  API_RESOURCE_VERSION_CONFLICT:
+    'O laudo foi alterado em outra sessão. Revise a versão atual antes de continuar.',
   API_METHOD_NOT_ALLOWED: 'Esta operação não é permitida neste recurso.',
   API_REPRESENTATION_NOT_ACCEPTABLE: 'O formato de resposta solicitado não é suportado.',
   API_PAYLOAD_TOO_LARGE: 'O conteúdo enviado excede o limite permitido.',

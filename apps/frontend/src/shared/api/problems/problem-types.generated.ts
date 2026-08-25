@@ -83,11 +83,23 @@ export const PROBLEM_TYPES = {
     httpStatus: 400,
     retryPolicy: 'NEVER',
   },
+  API_RESOURCE_CONFLICT: {
+    type: 'urn:uuid:119682ee-985b-588b-a8a8-f293a1e8767f',
+    scope: 'API',
+    httpStatus: 409,
+    retryPolicy: 'MANUAL',
+  },
   API_RESOURCE_NOT_FOUND: {
     type: 'urn:uuid:25c41e16-7fd0-51f7-9731-1a9c0c0e8dd4',
     scope: 'API',
     httpStatus: 404,
     retryPolicy: 'NEVER',
+  },
+  API_RESOURCE_VERSION_CONFLICT: {
+    type: 'urn:uuid:63e60c40-7d0c-5c6c-9f12-a3164650ce63',
+    scope: 'API',
+    httpStatus: 412,
+    retryPolicy: 'MANUAL',
   },
   API_SEARCH_INVALID: {
     type: 'urn:uuid:5fdeb44a-6add-5d54-a7f4-5f15f7cdc830',

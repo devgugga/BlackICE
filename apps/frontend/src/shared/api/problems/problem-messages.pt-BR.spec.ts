@@ -29,6 +29,18 @@ describe('mensagens PT-BR', () => {
     );
   });
 
+  it('orienta quando a operação conflita com o estado do laudo', () => {
+    expect(problemMessage('API_RESOURCE_CONFLICT')).toBe(
+      'O laudo está em um estado que não permite esta operação.',
+    );
+  });
+
+  it('orienta quando o laudo foi alterado concorrentemente', () => {
+    expect(problemMessage('API_RESOURCE_VERSION_CONFLICT')).toBe(
+      'O laudo foi alterado em outra sessão. Revise a versão atual antes de continuar.',
+    );
+  });
+
   it('não expõe jargão interno ao usuário', () => {
     for (const [code, message] of Object.entries(PROBLEM_MESSAGES)) {
       expect(message, `${code} vaza o code`).not.toContain('API_');
