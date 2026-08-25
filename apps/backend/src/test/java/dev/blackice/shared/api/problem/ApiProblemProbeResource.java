@@ -27,7 +27,7 @@ public class ApiProblemProbeResource {
     @Path("/json")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @PermitAll
+    @RolesAllowed("auth")
     public Response json(Payload payload) {
         return Response.ok(payload).build();
     }

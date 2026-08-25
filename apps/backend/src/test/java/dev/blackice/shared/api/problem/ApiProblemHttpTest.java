@@ -62,13 +62,85 @@ class ApiProblemHttpTest {
             .header("X-Request-ID", nullValue());
     }
 
+    private String getCsrfToken() {
+        return given()
+            .when().get("/api/csrf")
+            .then().statusCode(204)
+            .extract().cookie("csrf-token");
+    }
+
     @Test
-    void malformed_json_becomes_a_catalogued_bad_request() {
+    @TestSecurity(user = "dr.teste", roles = "auth")
+    void malformed_json_with_valid_csrf_token_becomes_a_catalogued_bad_request() {
+        String csrf = getCsrfToken();
         assertProblem(
-            given().contentType("application/json").body("{ isso nao e json ")
+            given()
+                .cookie("csrf-token", csrf)
+                .header("X-CSRF-TOKEN", csrf)
+                .contentType("application/json").body("{ isso nao e json ")
                 .when().post("/api/problem-probe/json")
                 .then(),
             ProblemType.API_REQUEST_INVALID);
+    }
+
+    @Test
+    @TestSecurity(user = "dr.teste", roles = "auth")
+    void json_post_without_csrf_token_becomes_a_catalogued_csrf_problem() {
+        assertProblem(
+            given().contentType("application/json").body("{\"value\": \"test\"}")
+                .when().post("/api/problem-probe/json")
+                .then(),
+            ProblemType.API_CSRF_INVALID);
+    }
+
+    @Test
+    @TestSecurity(user = "dr.teste", roles = "auth")
+    void json_post_with_cookie_but_without_csrf_header_becomes_a_catalogued_csrf_problem() {
+        String csrf = getCsrfToken();
+        assertProblem(
+            given()
+                .cookie("csrf-token", csrf)
+                .contentType("application/json").body("{\"value\": \"test\"}")
+                .when().post("/api/problem-probe/json")
+                .then(),
+            ProblemType.API_CSRF_INVALID);
+    }
+
+    @Test
+    @TestSecurity(user = "dr.teste", roles = "auth")
+    void json_post_with_mismatched_csrf_token_becomes_a_catalogued_csrf_problem() {
+        String csrf = getCsrfToken();
+        assertProblem(
+            given()
+                .cookie("csrf-token", csrf)
+                .header("X-CSRF-TOKEN", "divergente")
+                .contentType("application/json").body("{\"value\": \"test\"}")
+                .when().post("/api/problem-probe/json")
+                .then(),
+            ProblemType.API_CSRF_INVALID);
+    }
+
+    @Test
+    @TestSecurity(user = "dr.teste", roles = "auth")
+    void json_post_with_valid_csrf_token_succeeds() {
+        String csrf = getCsrfToken();
+        given()
+            .cookie("csrf-token", csrf)
+            .header("X-CSRF-TOKEN", csrf)
+            .contentType("application/json").body("{\"value\": \"ok-json\"}")
+            .when().post("/api/problem-probe/json")
+            .then()
+            .statusCode(200)
+            .body("value", equalTo("ok-json"));
+    }
+
+    @Test
+    void get_requests_remain_unaffected_without_csrf_token() {
+        given()
+            .when().get("/api/problem-probe/json")
+            .then()
+            .statusCode(200)
+            .body("value", equalTo("ok"));
     }
 
     @Test
@@ -112,9 +184,14 @@ class ApiProblemHttpTest {
     }
 
     @Test
+    @TestSecurity(user = "dr.teste", roles = "auth")
     void unsupported_media_type_becomes_a_catalogued_problem() {
+        String csrf = getCsrfToken();
         assertProblem(
-            given().contentType("text/plain").body("texto simples")
+            given()
+                .cookie("csrf-token", csrf)
+                .header("X-CSRF-TOKEN", csrf)
+                .contentType("text/plain").body("texto simples")
                 .when().post("/api/problem-probe/json")
                 .then(),
             ProblemType.API_MEDIA_TYPE_UNSUPPORTED);
