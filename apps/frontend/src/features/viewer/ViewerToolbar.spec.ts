@@ -76,4 +76,21 @@ describe('ViewerToolbar', () => {
     expect(wrapper.emitted('reset')!.length).toBe(1);
     expect(wrapper.emitted('selectTool')).toBeFalsy();
   });
+
+  it('renders report toggle button and emits "toggleReport" when clicked', async () => {
+    const wrapper = mount(ViewerToolbar, {
+      props: { activeTool: 'WINDOW_LEVEL', isReportOpen: false },
+    });
+
+    const reportBtn = wrapper.find('[data-testid="toggle-report-btn"]');
+    expect(reportBtn.exists()).toBe(true);
+    expect(reportBtn.attributes('aria-pressed')).toBe('false');
+
+    await reportBtn.trigger('click');
+    expect(wrapper.emitted('toggleReport')).toBeTruthy();
+    expect(wrapper.emitted('toggleReport')!.length).toBe(1);
+
+    await wrapper.setProps({ isReportOpen: true });
+    expect(reportBtn.attributes('aria-pressed')).toBe('true');
+  });
 });

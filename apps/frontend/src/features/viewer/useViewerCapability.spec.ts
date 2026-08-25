@@ -22,9 +22,9 @@ describe('useViewerCapability', () => {
     } as unknown as MediaQueryList;
   }
 
-  function simulateViewport(width: number, orientation: 'landscape' | 'portrait'): MediaQueryList {
-    // Media query: '(min-width: 1024px), (min-width: 768px) and (orientation: landscape)'
-    const matches = width >= 1024 || (width >= 768 && orientation === 'landscape');
+  function simulateViewport(width: number): MediaQueryList {
+    // Media query: '(min-width: 1024px)'
+    const matches = width >= 1024;
     return createMediaQueryList(matches);
   }
 
@@ -51,62 +51,47 @@ describe('useViewerCapability', () => {
     window.matchMedia = matchMediaMock as unknown as typeof window.matchMedia;
 
     const { dispose } = useViewerCapability();
-    expect(matchMediaMock).toHaveBeenCalledWith(
-      '(min-width: 1024px), (min-width: 768px) and (orientation: landscape)',
-    );
-    expect(VIEWER_MEDIA_QUERY).toBe(
-      '(min-width: 1024px), (min-width: 768px) and (orientation: landscape)',
-    );
+    expect(matchMediaMock).toHaveBeenCalledWith('(min-width: 1024px)');
+    expect(VIEWER_MEDIA_QUERY).toBe('(min-width: 1024px)');
     dispose();
   });
 
-  it('permits rendering on 768px landscape', () => {
-    setMatchMedia(simulateViewport(768, 'landscape'));
-    const { canRenderViewer, dispose } = useViewerCapability();
+  it('permits rendering on any viewport width >= 1024px', () => {
+    setMatchMedia(simulateViewport(1024));
+    const exact1024 = useViewerCapability();
+    expect(exact1024.canRenderViewer.value).toBe(true);
+    exact1024.dispose();
 
-    expect(canRenderViewer.value).toBe(true);
-    dispose();
-  });
+    setMatchMedia(simulateViewport(1440));
+    const split1440 = useViewerCapability();
+    expect(split1440.canRenderViewer.value).toBe(true);
+    split1440.dispose();
 
-  it('permits rendering on any viewport width >= 1024px regardless of orientation', () => {
-    setMatchMedia(simulateViewport(1024, 'portrait'));
-    const portrait1024 = useViewerCapability();
-    expect(portrait1024.canRenderViewer.value).toBe(true);
-    portrait1024.dispose();
-
-    setMatchMedia(simulateViewport(1024, 'landscape'));
-    const landscape1024 = useViewerCapability();
-    expect(landscape1024.canRenderViewer.value).toBe(true);
-    landscape1024.dispose();
-
-    setMatchMedia(simulateViewport(1920, 'landscape'));
+    setMatchMedia(simulateViewport(1920));
     const desktop = useViewerCapability();
     expect(desktop.canRenderViewer.value).toBe(true);
     desktop.dispose();
   });
 
-  it('rejects rendering on 767px landscape', () => {
-    setMatchMedia(simulateViewport(767, 'landscape'));
-    const { canRenderViewer, dispose } = useViewerCapability();
+  it('rejects rendering on viewport widths below 1024px (1023px and 768px landscape blocked)', () => {
+    setMatchMedia(simulateViewport(1023));
+    const below1024 = useViewerCapability();
+    expect(below1024.canRenderViewer.value).toBe(false);
+    below1024.dispose();
 
-    expect(canRenderViewer.value).toBe(false);
-    dispose();
-  });
+    setMatchMedia(simulateViewport(768));
+    const landscape768 = useViewerCapability();
+    expect(landscape768.canRenderViewer.value).toBe(false);
+    landscape768.dispose();
 
-  it('rejects rendering on portrait widths below 1024px', () => {
-    setMatchMedia(simulateViewport(768, 'portrait'));
-    const tabletPortrait = useViewerCapability();
-    expect(tabletPortrait.canRenderViewer.value).toBe(false);
-    tabletPortrait.dispose();
-
-    setMatchMedia(simulateViewport(375, 'portrait'));
+    setMatchMedia(simulateViewport(375));
     const mobilePortrait = useViewerCapability();
     expect(mobilePortrait.canRenderViewer.value).toBe(false);
     mobilePortrait.dispose();
   });
 
   it('dynamically reacts to media query change events', () => {
-    const mql = simulateViewport(768, 'portrait'); // initially false
+    const mql = simulateViewport(768); // initially false
     setMatchMedia(mql);
 
     const { canRenderViewer, dispose } = useViewerCapability();
@@ -122,7 +107,7 @@ describe('useViewerCapability', () => {
   });
 
   it('cleans up event listeners on dispose', () => {
-    const mql = simulateViewport(1024, 'landscape');
+    const mql = simulateViewport(1024);
     setMatchMedia(mql);
 
     const { dispose } = useViewerCapability();
@@ -134,7 +119,7 @@ describe('useViewerCapability', () => {
   });
 
   it('never inspects navigator.userAgent', () => {
-    setMatchMedia(simulateViewport(1280, 'landscape'));
+    setMatchMedia(simulateViewport(1280));
     const { dispose } = useViewerCapability();
 
     expect(userAgentSpy).not.toHaveBeenCalled();

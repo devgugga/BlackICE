@@ -4,15 +4,18 @@ import type { ViewerTool } from './viewer.types';
 withDefaults(
   defineProps<{
     activeTool?: ViewerTool | null;
+    isReportOpen?: boolean;
   }>(),
   {
     activeTool: null,
+    isReportOpen: false,
   },
 );
 
 const emit = defineEmits<{
   (e: 'selectTool', tool: ViewerTool): void;
   (e: 'reset'): void;
+  (e: 'toggleReport'): void;
 }>();
 
 interface ToolItem {
@@ -91,6 +94,24 @@ const tools: readonly ToolItem[] = [
         <span class="tool-label">Redefinir</span>
       </button>
     </div>
+
+    <div class="toolbar-divider" role="separator" aria-orientation="vertical" />
+
+    <div class="report-group">
+      <button
+        type="button"
+        class="toolbar-btn report-btn"
+        :class="{ 'is-active': isReportOpen }"
+        data-testid="toggle-report-btn"
+        :aria-pressed="isReportOpen ? 'true' : 'false'"
+        :aria-label="isReportOpen ? 'Ocultar laudo' : 'Exibir laudo'"
+        :title="isReportOpen ? 'Ocultar laudo' : 'Exibir laudo'"
+        @click="emit('toggleReport')"
+      >
+        <span class="tool-icon" aria-hidden="true">📝</span>
+        <span class="tool-label">Laudo</span>
+      </button>
+    </div>
   </nav>
 </template>
 
@@ -108,7 +129,8 @@ const tools: readonly ToolItem[] = [
 }
 
 .tool-group,
-.action-group {
+.action-group,
+.report-group {
   display: flex;
   align-items: center;
   gap: 0.25rem;

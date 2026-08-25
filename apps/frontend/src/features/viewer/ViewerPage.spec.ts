@@ -1,16 +1,21 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { mount, flushPromises } from '@vue/test-utils';
-import { ref, readonly } from 'vue';
+import { ref, readonly, reactive } from 'vue';
 import ViewerPage from '@/features/viewer/ViewerPage.vue';
+import ReportPanel from '@/features/reports/ReportPanel.vue';
 import { fetchStudyViewer, fetchSeriesInstances } from '@/features/viewer/viewer.api';
+import { fetchStudyReport, createStudyReport, updateStudyReport } from '@/features/reports/report.api';
 import { loadDicomViewport } from '@/features/viewer/loadDicomViewport';
 import { ApiError } from '@/shared/api/problems/api-error';
 import { PROBLEM_MESSAGES } from '@/shared/api/problems/problem-messages.pt-BR';
 import type { StudyViewerSummary, ViewerSeriesInstances } from '@/features/viewer/viewer.types';
+import type { ReportSnapshot } from '@/features/reports/report.types';
 
 const pushMock = vi.fn();
 const backMock = vi.fn();
-let currentRouteParams: Record<string, string> = { studyUid: '1.2.840.113619.2.55.3.123' };
+let currentRouteParams = reactive<Record<string, string>>({
+  studyUid: '1.2.840.113619.2.55.3.123',
+});
 let currentRouteQuery: Record<string, string> = {};
 
 vi.mock('vue-router', () => ({
@@ -22,6 +27,8 @@ vi.mock('vue-router', () => ({
     params: currentRouteParams,
     query: currentRouteQuery,
   }),
+  onBeforeRouteLeave: vi.fn(),
+  onBeforeRouteUpdate: vi.fn(),
 }));
 
 vi.mock('@/features/viewer/viewer.api', () => ({
@@ -31,15 +38,33 @@ vi.mock('@/features/viewer/viewer.api', () => ({
 const fetchStudyViewerMock = vi.mocked(fetchStudyViewer);
 const fetchSeriesInstancesMock = vi.mocked(fetchSeriesInstances);
 
+vi.mock('@/features/reports/report.api', () => ({
+  fetchStudyReport: vi.fn(),
+  createStudyReport: vi.fn(),
+  updateStudyReport: vi.fn(),
+}));
+const fetchStudyReportMock = vi.mocked(fetchStudyReport);
+const createStudyReportMock = vi.mocked(createStudyReport);
+const updateStudyReportMock = vi.mocked(updateStudyReport);
+
+let viewportMountCount = 0;
+let viewportUnmountCount = 0;
 const mockViewportReset = vi.fn();
+
 vi.mock('@/features/viewer/loadDicomViewport', () => ({
   loadDicomViewport: vi.fn(async () => {
-    const { defineComponent, h } = await import('vue');
+    const { defineComponent, h, onMounted, onUnmounted } = await import('vue');
     return defineComponent({
       name: 'DicomViewport',
       props: ['instances', 'activeTool'],
       emits: ['failure'],
       setup(props, { emit, expose }) {
+        onMounted(() => {
+          viewportMountCount++;
+        });
+        onUnmounted(() => {
+          viewportUnmountCount++;
+        });
         expose({ reset: mockViewportReset });
         return () =>
           h('div', {
@@ -56,7 +81,7 @@ const loadDicomViewportMock = vi.mocked(loadDicomViewport);
 
 let canRenderViewerRef = ref(true);
 vi.mock('@/features/viewer/useViewerCapability', () => ({
-  VIEWER_MEDIA_QUERY: '(min-width: 1024px), (min-width: 768px) and (orientation: landscape)',
+  VIEWER_MEDIA_QUERY: '(min-width: 1024px)',
   useViewerCapability: () => ({
     get canRenderViewer() {
       return readonly(canRenderViewerRef);
@@ -129,13 +154,33 @@ function createSeriesInstances(seriesUid = '1.2.840.113619.2.55.3.123.1'): Viewe
   };
 }
 
+const sampleReportSnapshot: ReportSnapshot = {
+  report: {
+    studyInstanceUid: '1.2.840.113619.2.55.3.123',
+    authorDisplayName: 'dr.teste',
+    status: 'DRAFT',
+    content: 'Achados pulmonares normais.',
+    editable: true,
+    createdAt: '2026-08-25T14:00:00Z',
+    updatedAt: '2026-08-25T14:15:00Z',
+    finalizedAt: null,
+  },
+  etag: '"etag-123"',
+};
+
 describe('ViewerPage', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    viewportMountCount = 0;
+    viewportUnmountCount = 0;
     canRenderViewerRef = ref(true);
-    currentRouteParams = { studyUid: '1.2.840.113619.2.55.3.123' };
+    currentRouteParams.studyUid = '1.2.840.113619.2.55.3.123';
     currentRouteQuery = {};
     window.history.replaceState(null, '', '/studies/1.2.840.113619.2.55.3.123');
+
+    fetchStudyReportMock.mockResolvedValue(sampleReportSnapshot);
+    createStudyReportMock.mockResolvedValue(sampleReportSnapshot);
+    updateStudyReportMock.mockResolvedValue(sampleReportSnapshot);
   });
 
   it('exibe indicador de carregamento de estudo enquanto a busca do resumo estiver pendente', async () => {
@@ -491,5 +536,154 @@ describe('ViewerPage', () => {
 
     expect(pushMock).toHaveBeenCalledWith({ name: 'worklist' });
     expect(backMock).not.toHaveBeenCalled();
+  });
+
+  describe('Report Panel Composition and Cornerstone Isolation', () => {
+    it('carrega estudo e laudo em paralelo passando studyUid para ReportPanel', async () => {
+      fetchStudyViewerMock.mockResolvedValue(createStudySummary());
+      fetchSeriesInstancesMock.mockResolvedValue(createSeriesInstances());
+      fetchStudyReportMock.mockResolvedValue(sampleReportSnapshot);
+
+      const wrapper = mount(ViewerPage);
+      await flushPromises();
+
+      expect(fetchStudyViewerMock).toHaveBeenCalledWith('1.2.840.113619.2.55.3.123', expect.anything());
+      expect(fetchStudyReportMock).toHaveBeenCalledWith('1.2.840.113619.2.55.3.123', expect.anything());
+      expect(wrapper.find('[data-testid="report-panel"]').exists()).toBe(true);
+      expect(wrapper.find('textarea').element.value).toBe('Achados pulmonares normais.');
+      expect(wrapper.find('[data-testid="dicom-viewport"]').exists()).toBe(true);
+    });
+
+    it('mantém o visualizador e viewport ativos caso a busca do laudo falhe', async () => {
+      fetchStudyViewerMock.mockResolvedValue(createStudySummary());
+      fetchSeriesInstancesMock.mockResolvedValue(createSeriesInstances());
+      fetchStudyReportMock.mockRejectedValue(new ApiError('API_ARCHIVE_UNAVAILABLE'));
+
+      const wrapper = mount(ViewerPage);
+      await flushPromises();
+
+      expect(wrapper.find('[data-testid="dicom-viewport"]').exists()).toBe(true);
+      expect(wrapper.find('[aria-label="Painel de séries do estudo"]').exists()).toBe(true);
+      expect(wrapper.find('[data-testid="report-error"]').exists()).toBe(true);
+    });
+
+    it('mantém o painel de laudo utilizável caso a busca do resumo do estudo falhe', async () => {
+      fetchStudyViewerMock.mockRejectedValue(new ApiError('API_ARCHIVE_UNAVAILABLE'));
+      fetchStudyReportMock.mockResolvedValue(sampleReportSnapshot);
+
+      const wrapper = mount(ViewerPage);
+      await flushPromises();
+
+      expect(wrapper.find('.page-error').exists()).toBe(true);
+      expect(wrapper.find('[data-testid="dicom-viewport"]').exists()).toBe(false);
+      expect(wrapper.find('[data-testid="report-panel"]').exists()).toBe(true);
+      expect(wrapper.find('textarea').element.value).toBe('Achados pulmonares normais.');
+    });
+
+    it('em REPORT_ONLY exibe mensagem de tela maior ao lado do painel de laudo completo sem requisitar instâncias', async () => {
+      canRenderViewerRef = ref(false);
+      fetchStudyViewerMock.mockResolvedValue(createStudySummary());
+      fetchStudyReportMock.mockResolvedValue(sampleReportSnapshot);
+
+      const wrapper = mount(ViewerPage);
+      await flushPromises();
+
+      expect(fetchSeriesInstancesMock).not.toHaveBeenCalled();
+      expect(loadDicomViewportMock).not.toHaveBeenCalled();
+      expect(wrapper.find('[data-testid="dicom-viewport"]').exists()).toBe(false);
+      expect(wrapper.text()).toContain('Use uma tela maior para visualizar as imagens deste estudo.');
+      expect(wrapper.find('[data-testid="report-panel"]').exists()).toBe(true);
+      expect(wrapper.find('textarea').element.value).toBe('Achados pulmonares normais.');
+    });
+
+    it('abrir, fechar e reabrir o painel de laudos repetidamente não recria nem desmonta o viewport Cornerstone', async () => {
+      fetchStudyViewerMock.mockResolvedValue(createStudySummary());
+      fetchSeriesInstancesMock.mockResolvedValue(createSeriesInstances());
+      fetchStudyReportMock.mockResolvedValue(sampleReportSnapshot);
+
+      const wrapper = mount(ViewerPage, { attachTo: document.body });
+      await flushPromises();
+
+      expect(wrapper.find('[data-testid="dicom-viewport"]').exists()).toBe(true);
+      expect(viewportMountCount).toBe(1);
+      expect(viewportUnmountCount).toBe(0);
+
+      const toggleBtn = wrapper.find('[data-testid="toggle-report-btn"]');
+      expect(toggleBtn.exists()).toBe(true);
+
+      // Alterna visibilidade do laudo várias vezes
+      await toggleBtn.trigger('click');
+      await flushPromises();
+      expect(viewportMountCount).toBe(1);
+      expect(viewportUnmountCount).toBe(0);
+
+      await toggleBtn.trigger('click');
+      await flushPromises();
+      expect(viewportMountCount).toBe(1);
+      expect(viewportUnmountCount).toBe(0);
+
+      await toggleBtn.trigger('click');
+      await flushPromises();
+      expect(viewportMountCount).toBe(1);
+      expect(viewportUnmountCount).toBe(0);
+
+      // Reset/reload de instâncias não foram chamados pelo toggle
+      expect(mockViewportReset).not.toHaveBeenCalled();
+      expect(fetchSeriesInstancesMock).toHaveBeenCalledTimes(1);
+
+      // Desmonte da página desfaz viewport
+      wrapper.unmount();
+      expect(viewportUnmountCount).toBe(1);
+    });
+
+    it('redimensionar o painel split não recria viewport nem invoca reset ou recarga', async () => {
+      fetchStudyViewerMock.mockResolvedValue(createStudySummary());
+      fetchSeriesInstancesMock.mockResolvedValue(createSeriesInstances());
+      fetchStudyReportMock.mockResolvedValue(sampleReportSnapshot);
+
+      const wrapper = mount(ViewerPage);
+      await flushPromises();
+
+      expect(viewportMountCount).toBe(1);
+
+      const reportPanel = wrapper.findComponent(ReportPanel);
+      expect(reportPanel.exists()).toBe(true);
+
+      // Chama setPanelWidth no layout
+      reportPanel.vm.layout.setPanelWidth(600, 1920);
+      await flushPromises();
+
+      expect(viewportMountCount).toBe(1);
+      expect(viewportUnmountCount).toBe(0);
+      expect(mockViewportReset).not.toHaveBeenCalled();
+      expect(fetchSeriesInstancesMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('dispara recarregamento de estudo e laudo ao alterar studyUid na rota', async () => {
+      fetchStudyViewerMock.mockResolvedValue(createStudySummary());
+      fetchSeriesInstancesMock.mockResolvedValue(createSeriesInstances());
+      fetchStudyReportMock.mockResolvedValue(sampleReportSnapshot);
+
+      const wrapper = mount(ViewerPage);
+      await flushPromises();
+
+      expect(fetchStudyViewerMock).toHaveBeenCalledWith('1.2.840.113619.2.55.3.123', expect.anything());
+      expect(fetchStudyReportMock).toHaveBeenCalledWith('1.2.840.113619.2.55.3.123', expect.anything());
+      expect(wrapper.find('[data-testid="report-panel"]').exists()).toBe(true);
+
+      // Muda o UID da rota reativa
+      currentRouteParams.studyUid = '1.2.840.113619.2.55.3.999';
+      fetchStudyViewerMock.mockResolvedValue(
+        createStudySummary({ studyInstanceUid: '1.2.840.113619.2.55.3.999' }),
+      );
+      fetchSeriesInstancesMock.mockResolvedValue(
+        createSeriesInstances('1.2.840.113619.2.55.3.999.1'),
+      );
+      await flushPromises();
+
+      expect(fetchStudyViewerMock).toHaveBeenCalledWith('1.2.840.113619.2.55.3.999', expect.anything());
+      expect(fetchStudyReportMock).toHaveBeenCalledWith('1.2.840.113619.2.55.3.999', expect.anything());
+      expect(wrapper.find('[data-testid="report-panel"]').exists()).toBe(true);
+    });
   });
 });

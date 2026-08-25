@@ -10,6 +10,7 @@ import { useViewerCapability } from './useViewerCapability';
 import StudyHeader from './StudyHeader.vue';
 import SeriesRail from './SeriesRail.vue';
 import ViewerToolbar from './ViewerToolbar.vue';
+import ReportPanel from '@/features/reports/ReportPanel.vue';
 import type { ViewerTool } from './viewer.types';
 
 const DicomViewport = defineAsyncComponent(loadDicomViewport);
@@ -34,6 +35,14 @@ const {
 const activeTool = ref<ViewerTool>('WINDOW_LEVEL');
 const viewportError = ref<ApiError | null>(null);
 const viewportComponentRef = ref<{ reset?: () => void } | null>(null);
+const reportPanelRef = ref<InstanceType<typeof ReportPanel> | null>(null);
+
+const routeStudyUid = computed(() => (route?.params?.studyUid as string) || '');
+const isReportOpen = computed(() => reportPanelRef.value?.layout?.isOpen.value ?? false);
+
+function handleToggleReport(): void {
+  reportPanelRef.value?.layout?.toggle();
+}
 
 const summaryErrorMessage = computed(() =>
   error.value ? problemMessage(error.value.code) : '',
@@ -157,100 +166,113 @@ async function handleRetrySeries(): Promise<void> {
   <main class="viewer-page" aria-label="Visualizador de estudo">
     <StudyHeader :study="study" @back="handleBack" />
 
-    <!-- Capability gate para telas estreitas / mobile -->
-    <div
-      v-if="!canRenderViewer"
-      class="capability-gate-message"
-      role="status"
-    >
-      <p>Use uma tela maior para visualizar as imagens deste estudo.</p>
-    </div>
-
-    <!-- Erro em nível de página (falha no resumo do estudo) -->
-    <div
-      v-else-if="phase === 'ERROR' && study === null"
-      role="alert"
-      class="page-error"
-    >
-      <p class="error-title">{{ summaryErrorMessage }}</p>
-      <p v-if="summaryErrorTraceId" class="error-reference">
-        Referência: <code>{{ summaryErrorTraceId }}</code>
-      </p>
-      <button v-if="allowsSummaryRetry" type="button" class="retry-btn" @click="handleRetrySummary">
-        Tentar novamente
-      </button>
-    </div>
-
-    <!-- Carregamento inicial do estudo -->
-    <div
-      v-else-if="phase === 'LOADING_STUDY'"
-      role="status"
-      aria-live="polite"
-      class="page-loading"
-    >
-      <p>Carregando estudo…</p>
-    </div>
-
-    <!-- Área de trabalho completa quando o estudo estiver carregado -->
-    <div v-else-if="study !== null" class="viewer-workspace">
-      <SeriesRail
-        :series="study.series"
-        :selected-series-uid="selectedSeriesUid"
-        @select-series="handleSelectSeries"
-      />
-
-      <section class="viewport-area" aria-label="Área de visualização da série">
-        <ViewerToolbar
-          :active-tool="activeTool"
-          @select-tool="handleSelectTool"
-          @reset="handleReset"
-        />
-
-        <div class="viewport-container">
-          <!-- Mensagem quando não houver séries suportadas -->
-          <div
-            v-if="noSupportedSeries"
-            role="status"
-            class="unsupported-series-message"
-          >
-            <p>Nenhuma série suportada para visualização neste estudo.</p>
-          </div>
-
-          <!-- Erro confinado ao viewport -->
-          <div
-            v-else-if="currentViewportError !== null"
-            role="alert"
-            class="viewport-error"
-          >
-            <p class="error-title">{{ viewportErrorMessage }}</p>
-            <p v-if="viewportErrorTraceId" class="error-reference">
-              Referência: <code>{{ viewportErrorTraceId }}</code>
-            </p>
-            <button v-if="allowsViewportRetry" type="button" class="retry-btn" @click="handleRetrySeries">
-              Tentar novamente
-            </button>
-          </div>
-
-          <!-- Carregando imagens da série -->
-          <div
-            v-else-if="phase === 'LOADING_SERIES'"
-            role="status"
-            aria-live="polite"
-            class="series-loading"
-          >
-            <p>Carregando imagens da série…</p>
-          </div>
-
-          <!-- Viewport ativo -->
-          <DicomViewport
-            v-else-if="activeSeriesInstances"
-            ref="viewportComponentRef"
-            :instances="activeSeriesInstances"
-            :active-tool="activeTool"
-            @failure="handleViewportFailure"
-          />
+    <div class="viewer-layout-body" :class="{ 'is-report-only': !canRenderViewer }">
+      <!-- Área principal do visualizador -->
+      <div class="viewer-content-area">
+        <!-- Capability gate para telas estreitas / mobile -->
+        <div
+          v-if="!canRenderViewer"
+          class="capability-gate-message"
+          role="status"
+        >
+          <p>Use uma tela maior para visualizar as imagens deste estudo.</p>
         </div>
-      </section>
+
+        <!-- Erro em nível de página (falha no resumo do estudo) -->
+        <div
+          v-else-if="phase === 'ERROR' && study === null"
+          role="alert"
+          class="page-error"
+        >
+          <p class="error-title">{{ summaryErrorMessage }}</p>
+          <p v-if="summaryErrorTraceId" class="error-reference">
+            Referência: <code>{{ summaryErrorTraceId }}</code>
+          </p>
+          <button v-if="allowsSummaryRetry" type="button" class="retry-btn" @click="handleRetrySummary">
+            Tentar novamente
+          </button>
+        </div>
+
+        <!-- Carregamento inicial do estudo -->
+        <div
+          v-else-if="phase === 'LOADING_STUDY'"
+          role="status"
+          aria-live="polite"
+          class="page-loading"
+        >
+          <p>Carregando estudo…</p>
+        </div>
+
+        <!-- Área de trabalho completa quando o estudo estiver carregado -->
+        <div v-else-if="study !== null" class="viewer-workspace">
+          <SeriesRail
+            :series="study.series"
+            :selected-series-uid="selectedSeriesUid"
+            @select-series="handleSelectSeries"
+          />
+
+          <section class="viewport-area" aria-label="Área de visualização da série">
+            <ViewerToolbar
+              :active-tool="activeTool"
+              :is-report-open="isReportOpen"
+              @select-tool="handleSelectTool"
+              @reset="handleReset"
+              @toggle-report="handleToggleReport"
+            />
+
+            <div class="viewport-container">
+              <!-- Mensagem quando não houver séries suportadas -->
+              <div
+                v-if="noSupportedSeries"
+                role="status"
+                class="unsupported-series-message"
+              >
+                <p>Nenhuma série suportada para visualização neste estudo.</p>
+              </div>
+
+              <!-- Erro confinado ao viewport -->
+              <div
+                v-else-if="currentViewportError !== null"
+                role="alert"
+                class="viewport-error"
+              >
+                <p class="error-title">{{ viewportErrorMessage }}</p>
+                <p v-if="viewportErrorTraceId" class="error-reference">
+                  Referência: <code>{{ viewportErrorTraceId }}</code>
+                </p>
+                <button v-if="allowsViewportRetry" type="button" class="retry-btn" @click="handleRetrySeries">
+                  Tentar novamente
+                </button>
+              </div>
+
+              <!-- Carregando imagens da série -->
+              <div
+                v-else-if="phase === 'LOADING_SERIES'"
+                role="status"
+                aria-live="polite"
+                class="series-loading"
+              >
+                <p>Carregando imagens da série…</p>
+              </div>
+
+              <!-- Viewport ativo -->
+              <DicomViewport
+                v-else-if="activeSeriesInstances"
+                ref="viewportComponentRef"
+                :instances="activeSeriesInstances"
+                :active-tool="activeTool"
+                @failure="handleViewportFailure"
+              />
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Painel de Laudos independente -->
+      <ReportPanel
+        ref="reportPanelRef"
+        :study-uid="routeStudyUid"
+      />
     </div>
   </main>
 </template>
@@ -268,6 +290,34 @@ async function handleRetrySeries(): Promise<void> {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
+.viewer-layout-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  flex-direction: row;
+}
+
+.viewer-layout-body.is-report-only {
+  flex-direction: column;
+}
+
+.viewer-content-area {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.is-report-only .viewer-content-area {
+  flex: 0 0 auto;
+  height: auto;
+}
+
 .capability-gate-message {
   flex: 1;
   display: flex;
@@ -278,6 +328,13 @@ async function handleRetrySeries(): Promise<void> {
   font-size: 1.125rem;
   color: #a0aec0;
   background-color: #121417;
+}
+
+.is-report-only .capability-gate-message {
+  flex: 0 0 auto;
+  padding: 0.875rem 1.25rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid #2d3748;
 }
 
 .page-loading,
@@ -373,6 +430,9 @@ async function handleRetrySeries(): Promise<void> {
   display: flex;
   flex: 1;
   min-height: 0;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 

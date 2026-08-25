@@ -1,7 +1,6 @@
 import { ref, readonly, getCurrentScope, onScopeDispose, type Ref } from 'vue';
 
-export const VIEWER_MEDIA_QUERY =
-  '(min-width: 1024px), (min-width: 768px) and (orientation: landscape)';
+export const VIEWER_MEDIA_QUERY = '(min-width: 1024px)';
 
 export interface ViewerCapability {
   readonly canRenderViewer: Readonly<Ref<boolean>>;
