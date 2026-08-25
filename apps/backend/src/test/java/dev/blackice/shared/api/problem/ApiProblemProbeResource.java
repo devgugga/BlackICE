@@ -61,6 +61,22 @@ public class ApiProblemProbeResource {
         return Response.status(Response.Status.REQUEST_ENTITY_TOO_LARGE).build();
     }
 
+    /** Mimics a resource conflict. */
+    @GET
+    @Path("/conflict")
+    @PermitAll
+    public Response conflict() {
+        return Response.status(Response.Status.CONFLICT).build();
+    }
+
+    /** Mimics a precondition failed / version conflict. */
+    @GET
+    @Path("/precondition-failed")
+    @PermitAll
+    public Response preconditionFailed() {
+        return Response.status(Response.Status.PRECONDITION_FAILED).build();
+    }
+
     /** Requires the session role so anonymous and wrong-role requests become 401 and 403. */
     @GET
     @Path("/secured")

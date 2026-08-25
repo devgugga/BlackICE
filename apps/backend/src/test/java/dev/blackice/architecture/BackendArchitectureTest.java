@@ -117,4 +117,43 @@ class BackendArchitectureTest {
             .should().dependOnClassesThat().resideInAPackage("dev.blackice.viewer.infrastructure..")
             .check(classes);
     }
+
+    @Test
+    void reports_application_has_no_production_classes_in_root_package() {
+        noClasses()
+            .should().resideInAPackage("dev.blackice.reports.application")
+            .check(classes);
+    }
+
+    @Test
+    void reports_module_does_not_consume_security_infrastructure() {
+        noClasses().that().resideInAPackage("dev.blackice.reports..")
+            .should().dependOnClassesThat().resideInAPackage("dev.blackice.security.infrastructure..")
+            .check(classes);
+    }
+
+    @Test
+    void security_module_does_not_consume_reports_infrastructure() {
+        noClasses().that().resideInAPackage("dev.blackice.security..")
+            .should().dependOnClassesThat().resideInAPackage("dev.blackice.reports.infrastructure..")
+            .check(classes);
+    }
+
+    @Test
+    void reports_application_does_not_depend_on_reports_api_or_infrastructure() {
+        noClasses().that().resideInAPackage("dev.blackice.reports.application..")
+            .should().dependOnClassesThat().resideInAnyPackage(
+                "dev.blackice.reports.api..", "dev.blackice.reports.infrastructure..")
+            .check(classes);
+    }
+
+    @Test
+    void reports_module_does_not_consume_other_feature_infrastructures() {
+        noClasses().that().resideInAPackage("dev.blackice.reports..")
+            .should().dependOnClassesThat().resideInAnyPackage(
+                "dev.blackice.viewer.infrastructure..",
+                "dev.blackice.worklist.infrastructure..",
+                "dev.blackice.ingest.infrastructure..")
+            .check(classes);
+    }
 }

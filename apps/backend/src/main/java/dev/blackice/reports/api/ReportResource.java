@@ -5,9 +5,11 @@ import dev.blackice.reports.application.input.CreateReportCommand;
 import dev.blackice.reports.application.input.ReportActor;
 import dev.blackice.reports.application.input.ReportContent;
 import dev.blackice.reports.application.input.ReportStudyRef;
+import dev.blackice.reports.application.input.UpdateReportCommand;
 import dev.blackice.reports.application.result.StudyReportResult;
 import dev.blackice.reports.application.usecase.CreateStudyReportUseCase;
 import dev.blackice.reports.application.usecase.GetStudyReportUseCase;
+import dev.blackice.reports.application.usecase.UpdateStudyReportUseCase;
 import dev.blackice.reports.domain.ReportStatus;
 import dev.blackice.security.application.AccessTokenProvider;
 import io.smallrye.common.annotation.Blocking;
@@ -15,7 +17,9 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -35,8 +39,9 @@ import java.util.Optional;
  *
  * <p>Protected by the BFF session. GET requests query only the local product PostgreSQL database,
  * never contacting the DICOM archive. POST requests validate study existence in the archive via QIDO
- * before creating the report. Responses never leak clinical identifiers or authorization tokens
- * in logs and always set {@code Cache-Control: no-store}.</p>
+ * before creating the report. PUT requests mutate existing reports with optimistic concurrency via ETag
+ * precondition and never contact the DICOM archive. Responses never leak clinical identifiers or
+ * authorization tokens in logs and always set {@code Cache-Control: no-store}.</p>
  */
 @Path("/api/studies")
 @RolesAllowed("auth")
@@ -47,6 +52,7 @@ public class ReportResource {
 
     private final GetStudyReportUseCase getStudyReportUseCase;
     private final CreateStudyReportUseCase createStudyReportUseCase;
+    private final UpdateStudyReportUseCase updateStudyReportUseCase;
     private final CurrentReportActor currentReportActor;
     private final AccessTokenProvider accessTokenProvider;
     private final ReportRepresentationMapper responseMapper;
@@ -55,12 +61,14 @@ public class ReportResource {
     public ReportResource(
         GetStudyReportUseCase getStudyReportUseCase,
         CreateStudyReportUseCase createStudyReportUseCase,
+        UpdateStudyReportUseCase updateStudyReportUseCase,
         CurrentReportActor currentReportActor,
         AccessTokenProvider accessTokenProvider,
         ReportRepresentationMapper responseMapper
     ) {
         this.getStudyReportUseCase = Objects.requireNonNull(getStudyReportUseCase, "getStudyReportUseCase must not be null");
         this.createStudyReportUseCase = Objects.requireNonNull(createStudyReportUseCase, "createStudyReportUseCase must not be null");
+        this.updateStudyReportUseCase = Objects.requireNonNull(updateStudyReportUseCase, "updateStudyReportUseCase must not be null");
         this.currentReportActor = Objects.requireNonNull(currentReportActor, "currentReportActor must not be null");
         this.accessTokenProvider = Objects.requireNonNull(accessTokenProvider, "accessTokenProvider must not be null");
         this.responseMapper = Objects.requireNonNull(responseMapper, "responseMapper must not be null");
@@ -139,6 +147,56 @@ public class ReportResource {
 
         return baseResponse(Response.Status.CREATED)
             .location(location)
+            .entity(responseBody)
+            .tag(etag)
+            .build();
+    }
+
+    @PUT
+    @Path("/{studyInstanceUid}/report")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Blocking
+    public Response updateReport(
+        @PathParam("studyInstanceUid") String studyInstanceUid,
+        @HeaderParam("If-Match") String ifMatchHeader,
+        ReportRequest request
+    ) {
+        long started = System.nanoTime();
+        if (request == null || request.content() == null || request.status() == null) {
+            throw new InvalidReportRequestException();
+        }
+
+        long expectedVersion = ReportEtag.parseStrongSingle(ifMatchHeader);
+
+        ReportStatus status;
+        try {
+            status = ReportStatus.valueOf(request.status());
+        } catch (IllegalArgumentException e) {
+            throw new InvalidReportRequestException();
+        }
+
+        ReportStudyRef studyRef = new ReportStudyRef(studyInstanceUid);
+        ReportActor actor = currentReportActor.actor();
+        ReportContent content = new ReportContent(request.content());
+
+        UpdateReportCommand command = new UpdateReportCommand(
+            studyRef,
+            actor,
+            content,
+            status,
+            expectedVersion
+        );
+
+        StudyReportResult report = updateStudyReportUseCase.execute(command);
+
+        LOG.infov("study report update completed: route={0}, status={1}, durationMs={2}",
+            ROUTE_TEMPLATE, report.status(), elapsedMillis(started));
+
+        ReportResponse responseBody = responseMapper.toResponse(report);
+        EntityTag etag = ReportEtag.fromVersion(report.version());
+
+        return baseResponse(Response.Status.OK)
             .entity(responseBody)
             .tag(etag)
             .build();

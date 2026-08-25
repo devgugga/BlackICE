@@ -210,6 +210,20 @@ class ApiProblemHttpTest {
     }
 
     @Test
+    void a_framework_conflict_status_becomes_a_catalogued_problem() {
+        assertProblem(
+            given().when().get("/api/problem-probe/conflict").then(),
+            ProblemType.API_RESOURCE_CONFLICT);
+    }
+
+    @Test
+    void a_framework_precondition_failed_status_becomes_a_catalogued_problem() {
+        assertProblem(
+            given().when().get("/api/problem-probe/precondition-failed").then(),
+            ProblemType.API_RESOURCE_VERSION_CONFLICT);
+    }
+
+    @Test
     void an_unexpected_failure_becomes_a_catalogued_internal_error() {
         assertProblem(
             given().when().get("/api/problem-probe/fail").then(),

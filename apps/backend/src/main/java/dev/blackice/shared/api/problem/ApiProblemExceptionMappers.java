@@ -87,6 +87,8 @@ public class ApiProblemExceptionMappers {
             case 404 -> ProblemType.API_RESOURCE_NOT_FOUND;
             case 405 -> ProblemType.API_METHOD_NOT_ALLOWED;
             case 406 -> ProblemType.API_REPRESENTATION_NOT_ACCEPTABLE;
+            case 409 -> ProblemType.API_RESOURCE_CONFLICT;
+            case 412 -> ProblemType.API_RESOURCE_VERSION_CONFLICT;
             case 413 -> ProblemType.API_PAYLOAD_TOO_LARGE;
             case 415 -> ProblemType.API_MEDIA_TYPE_UNSUPPORTED;
             default -> status >= 500 ? ProblemType.API_INTERNAL_ERROR : ProblemType.API_REQUEST_INVALID;
