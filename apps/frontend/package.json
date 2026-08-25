@@ -11,9 +11,18 @@
     "test": "vitest run",
     "test:e2e:keycloak": "playwright test e2e/keycloak-login.spec.ts",
     "test:e2e:ingest": "playwright test e2e/manual-dicom-import.spec.ts",
-    "test:e2e:worklist": "playwright test e2e/worklist.spec.ts"
+    "test:e2e:worklist": "playwright test e2e/worklist.spec.ts",
+    "test:e2e:viewer": "playwright test e2e/viewer.spec.ts"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": []
   },
   "dependencies": {
+    "@cornerstonejs/core": "5.8.2",
+    "@cornerstonejs/dicom-image-loader": "5.8.2",
+    "@cornerstonejs/metadata": "5.8.2",
+    "@cornerstonejs/tools": "5.8.2",
+    "dicom-parser": "1.8.21",
     "vue": "^3.5.39",
     "vue-router": "^4.6.4"
   },

@@ -9,6 +9,7 @@ export default defineConfig({
     'manual-dicom-import.spec.ts',
     'worklist.spec.ts',
     'problem-details.spec.ts',
+    'viewer.spec.ts',
   ],
   fullyParallel: false,
   workers: isCi ? 1 : undefined,

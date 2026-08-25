@@ -344,4 +344,78 @@ describe('useWorklist', () => {
     expect(worklist.items.value).toEqual([]);
     expect(worklist.phase.value).toBe('LOADING'); // State was not modified by the late resolution
   });
+
+  it('permite carregar estudos com filtros e offset customizados via load()', async () => {
+    const api = vi.fn().mockResolvedValue(page({ offset: 40 }));
+    const worklist = useWorklist(api);
+    const filter = { ...EMPTY_FILTERS, patientName: 'ANA' };
+
+    await worklist.load(filter, 40);
+
+    expect(api).toHaveBeenCalledWith(
+      { filters: filter, limit: 20, offset: 40 },
+      expect.any(AbortSignal),
+    );
+    expect(worklist.appliedFilters.value).toEqual(filter);
+    expect(worklist.appliedOffset.value).toBe(40);
+    expect(worklist.phase.value).toBe('READY');
+  });
+
+  it('restaura o estado completo da worklist a partir de um snapshot sem chamar a API', () => {
+    const api = vi.fn();
+    const worklist = useWorklist(api);
+
+    const snapshot = {
+      key: 'modality=CT&offset=20',
+      filters: { ...EMPTY_FILTERS, modality: 'CT' },
+      page: page({ offset: 20, items: [createStudy({ patientName: 'RESTORED' })] }),
+    };
+
+    worklist.restoreSnapshot(snapshot);
+
+    expect(api).not.toHaveBeenCalled();
+    expect(worklist.phase.value).toBe('READY');
+    expect(worklist.items.value).toHaveLength(1);
+    expect(worklist.items.value[0].patientName).toBe('RESTORED');
+    expect(worklist.appliedFilters.value).toEqual(snapshot.filters);
+    expect(worklist.appliedOffset.value).toBe(20);
+    expect(worklist.page.value.offset).toBe(20);
+  });
+
+  it('restaura snapshot com lista vazia definindo fase como EMPTY', () => {
+    const api = vi.fn();
+    const worklist = useWorklist(api);
+
+    const snapshot = {
+      key: 'patientName=INEXISTENTE',
+      filters: { ...EMPTY_FILTERS, patientName: 'INEXISTENTE' },
+      page: page({ offset: 0, items: [] }),
+    };
+
+    worklist.restoreSnapshot(snapshot);
+
+    expect(api).not.toHaveBeenCalled();
+    expect(worklist.phase.value).toBe('EMPTY');
+    expect(worklist.items.value).toEqual([]);
+  });
+
+  it('restoreSnapshot aborta qualquer requisição anterior em andamento', () => {
+    const def = deferred<StudyPage>();
+    const api = vi.fn().mockReturnValue(def.promise);
+    const worklist = useWorklist(api);
+
+    worklist.loadRecent();
+    const signal = api.mock.calls[0][1] as AbortSignal;
+    expect(signal.aborted).toBe(false);
+
+    const snapshot = {
+      key: 'modality=MR',
+      filters: { ...EMPTY_FILTERS, modality: 'MR' },
+      page: page({ items: [createStudy({ patientName: 'SNAPSHOT_PATIENT' })] }),
+    };
+
+    worklist.restoreSnapshot(snapshot);
+    expect(signal.aborted).toBe(true);
+    expect(worklist.items.value[0].patientName).toBe('SNAPSHOT_PATIENT');
+  });
 });

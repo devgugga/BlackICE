@@ -75,7 +75,7 @@ aplicação em `apps/`.
 
 ## Estrutura atual dos módulos
 
-O backend é modular e possui `ingest`, `security`, `session` e `worklist`:
+O backend é modular e possui `ingest`, `security`, `session`, `viewer` e `worklist`:
 
 ```text
 apps/backend/src/
@@ -102,6 +102,16 @@ apps/backend/src/
 │  │  ├─ api/problem/
 │  │  │  └─ generated/
 │  │  └─ infrastructure/telemetry/
+│  ├─ viewer/
+│  │  ├─ api/
+│  │  ├─ application/
+│  │  │  ├─ exception/
+│  │  │  ├─ input/
+│  │  │  ├─ port/
+│  │  │  ├─ result/
+│  │  │  └─ usecase/
+│  │  └─ infrastructure/
+│  │     └─ dicomweb/
 │  └─ worklist/
 │     ├─ api/
 │     ├─ application/
@@ -116,10 +126,11 @@ apps/backend/src/
    ├─ ingest/
    ├─ security/
    ├─ session/
+   ├─ viewer/
    └─ worklist/
 ```
 
-O frontend possui as features `session`, `home`, `ingest` e `worklist`, compostas pelo shell em
+O frontend possui as features `session`, `home`, `ingest`, `viewer` e `worklist`, compostas pelo shell em
 `app/`:
 
 ```text
@@ -144,6 +155,31 @@ apps/frontend/src/
 │  │  ├─ ingest.api.spec.ts
 │  │  ├─ ingest.types.ts
 │  │  └─ useIngestBatch.ts
+│  ├─ viewer/
+│  │  ├─ cornerstone/
+│  │  │  ├─ cornerstone-init.ts
+│  │  │  ├─ viewer-metadata.ts
+│  │  │  ├─ viewer-metadata.spec.ts
+│  │  │  ├─ viewer-runtime.ts
+│  │  │  └─ viewer-runtime.spec.ts
+│  │  ├─ DicomViewport.vue
+│  │  ├─ DicomViewport.spec.ts
+│  │  ├─ loadDicomViewport.ts
+│  │  ├─ SeriesRail.vue
+│  │  ├─ SeriesRail.spec.ts
+│  │  ├─ StudyHeader.vue
+│  │  ├─ StudyHeader.spec.ts
+│  │  ├─ useStudyViewer.ts
+│  │  ├─ useStudyViewer.spec.ts
+│  │  ├─ useViewerCapability.ts
+│  │  ├─ useViewerCapability.spec.ts
+│  │  ├─ viewer.api.ts
+│  │  ├─ viewer.api.spec.ts
+│  │  ├─ ViewerPage.vue
+│  │  ├─ ViewerPage.spec.ts
+│  │  ├─ ViewerToolbar.vue
+│  │  ├─ ViewerToolbar.spec.ts
+│  │  └─ viewer.types.ts
 │  └─ worklist/
 │     ├─ WorklistPage.vue
 │     ├─ WorklistFilters.vue
@@ -182,11 +218,11 @@ apps/frontend/src/
 - Não crie camadas globais `controller/`, `service/`, `repository`, `dto`,
   `validator` ou `exception`.
 - `dev.blackice.shared` existe por exceção justificada, não por antecipação: o
-  contrato de erro e a propagação de trace têm dois consumidores reais,
-  `ingest` e `worklist`. Ele hospeda apenas fronteira transversal —
+  contrato de erro e a propagação de trace têm consumidores reais em `ingest`,
+  `worklist` e `viewer`. Ele hospeda apenas fronteira transversal —
   `api.problem` e `infrastructure.telemetry` — e nunca regra de uma feature;
-  mappers específicos permanecem em `ingest.api`, `worklist.api` e nas demais
-  features. Um `shared` novo obedece à mesma prova de dois consumidores.
+  mappers específicos permanecem em `ingest.api`, `viewer.api`, `worklist.api` e
+  nas demais features. Um `shared` novo obedece à mesma prova de dois consumidores.
 
 ### Vue
 
@@ -250,7 +286,7 @@ responsabilidade clara; `shared/utils/` genérico não é uma arquitetura.
 
 `shared/api/problems/` é o caso já aprovado: o parser de Problem Details, os
 tipos gerados e o mapa de mensagens PT-BR são consumidos por `session`,
-`worklist` e `ingest`. Os arquivos `*.generated.ts` são saída de
+`worklist`, `ingest` e `viewer`. Os arquivos `*.generated.ts` são saída de
 `.problem-catalog/` e não são editados à mão.
 
 ## Antipadrões

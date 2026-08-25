@@ -112,6 +112,11 @@ export const PROBLEM_TYPES = {
     scope: 'CLIENT',
     retryPolicy: 'MANUAL',
   },
+  CLIENT_DICOM_IMAGE_UNSUPPORTED: {
+    type: 'urn:uuid:0b4e5e44-26f3-599c-8e70-f10a305cf49c',
+    scope: 'CLIENT',
+    retryPolicy: 'NEVER',
+  },
   CLIENT_NETWORK_UNAVAILABLE: {
     type: 'urn:uuid:958f8ed3-f5ea-50a5-af1c-6828e25df077',
     scope: 'CLIENT',

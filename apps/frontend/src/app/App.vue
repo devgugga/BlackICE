@@ -1,1 +1,24 @@
-<template><RouterView /></template>
+<template>
+  <RouterView />
+</template>
+
+<style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+}
+</style>

@@ -12,6 +12,11 @@ public class ApiFailureLogger {
     /** Closed vocabulary of internal reasons that are safe to include in operator logs. */
     public enum Reason {
         INVALID_SEARCH,
+        INVALID_REQUEST,
+        AUTHENTICATION,
+        ACCESS_DENIED,
+        NOT_FOUND,
+        UNAVAILABLE,
         QUERY_TOO_BROAD,
         INVALID_RESPONSE,
         HTTP_STATUS,

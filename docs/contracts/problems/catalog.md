@@ -42,6 +42,7 @@ Falhas locais do browser. Não são respostas HTTP e por isso não possuem
 | Code | Retry | Owner | Significado | Status |
 | :-- | :-- | :-- | :-- | :-- |
 | `CLIENT_CSRF_COOKIE_MISSING` | `MANUAL` | frontend | O endpoint respondeu sem criar o cookie CSRF esperado. | active |
+| `CLIENT_DICOM_IMAGE_UNSUPPORTED` | `NEVER` | frontend | O browser recebeu uma imagem DICOM válida, mas o loader configurado não conseguiu decodificá-la ou renderizá-la. | active |
 | `CLIENT_NETWORK_UNAVAILABLE` | `MANUAL` | frontend | A requisição não alcançou o backend. | active |
 | `CLIENT_REQUEST_TIMEOUT` | `MANUAL` | frontend | O browser observou timeout. | active |
 | `CLIENT_RESPONSE_INVALID` | `MANUAL` | frontend | A resposta não corresponde ao contrato. | active |
@@ -85,6 +86,7 @@ acima. Ela nunca é informada à mão e nunca é reciclada.
 | `API_SEARCH_TOO_BROAD` | `urn:uuid:3059d5b4-bb73-52e9-b8ed-a73539b98460` |
 | `API_UPLOAD_EMPTY` | `urn:uuid:74e415dc-1966-5124-be1f-8732a25fc777` |
 | `CLIENT_CSRF_COOKIE_MISSING` | `urn:uuid:7c5107ac-deab-5dc7-b9b9-f87018515842` |
+| `CLIENT_DICOM_IMAGE_UNSUPPORTED` | `urn:uuid:0b4e5e44-26f3-599c-8e70-f10a305cf49c` |
 | `CLIENT_NETWORK_UNAVAILABLE` | `urn:uuid:958f8ed3-f5ea-50a5-af1c-6828e25df077` |
 | `CLIENT_REQUEST_TIMEOUT` | `urn:uuid:928412fe-24d7-5395-901f-4b0231d4dc8f` |
 | `CLIENT_RESPONSE_INVALID` | `urn:uuid:2c52e3d7-f437-5ff7-a3b0-55b896da2ae5` |

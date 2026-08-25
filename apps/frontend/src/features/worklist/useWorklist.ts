@@ -4,6 +4,7 @@ import { isIntentionalAbort } from '@/shared/api/problems/parse-problem';
 
 import { searchStudies } from './worklist.api';
 import type { StudyPage, StudySearchParams, StudySummary, WorklistFilters } from './worklist.types';
+import type { WorklistSnapshot } from './worklist-navigation';
 
 export type WorklistPhase = 'IDLE' | 'LOADING' | 'READY' | 'EMPTY' | 'ERROR';
 export type SearchStudies = (params: StudySearchParams, signal?: AbortSignal) => Promise<StudyPage>;
@@ -27,10 +28,12 @@ export interface WorklistComposable {
   appliedOffset: Readonly<Ref<number>>;
   loadRecent(): Promise<void>;
   search(filters: WorklistFilters): Promise<void>;
+  load(filters: WorklistFilters, offset?: number): Promise<void>;
   clear(): Promise<void>;
   next(): Promise<void>;
   previous(): Promise<void>;
   retry(): Promise<void>;
+  restoreSnapshot(snapshot: WorklistSnapshot): void;
   dispose(): void;
 }
 
@@ -50,7 +53,7 @@ export function useWorklist(api: SearchStudies = searchStudies): WorklistComposa
   const appliedFilters = ref<WorklistFilters>({ ...EMPTY_FILTERS });
   const appliedOffset = ref<number>(0);
 
-  async function load(filters: WorklistFilters, offset: number): Promise<void> {
+  async function load(filters: WorklistFilters, offset = 0): Promise<void> {
     activeController?.abort();
     const controller = new AbortController();
     activeController = controller;
@@ -73,6 +76,18 @@ export function useWorklist(api: SearchStudies = searchStudies): WorklistComposa
     } finally {
       if (generation === activeGeneration) activeController = null;
     }
+  }
+
+  function restoreSnapshot(snapshot: WorklistSnapshot): void {
+    activeGeneration++;
+    activeController?.abort();
+    activeController = null;
+    appliedFilters.value = { ...snapshot.filters };
+    appliedOffset.value = snapshot.page.page.offset;
+    items.value = snapshot.page.items;
+    page.value = snapshot.page.page;
+    phase.value = snapshot.page.items.length === 0 ? 'EMPTY' : 'READY';
+    error.value = null;
   }
 
   async function loadRecent(): Promise<void> {
@@ -116,10 +131,12 @@ export function useWorklist(api: SearchStudies = searchStudies): WorklistComposa
     appliedOffset: readonly(appliedOffset) as Readonly<Ref<number>>,
     loadRecent,
     search,
+    load,
     clear,
     next,
     previous,
     retry,
+    restoreSnapshot,
     dispose,
   };
 }

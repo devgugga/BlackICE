@@ -8,6 +8,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      events: fileURLToPath(new URL('./src/shared/polyfills/events.ts', import.meta.url)),
+      'node:events': fileURLToPath(new URL('./src/shared/polyfills/events.ts', import.meta.url)),
     },
   },
   server: {

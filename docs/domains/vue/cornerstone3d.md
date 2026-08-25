@@ -26,8 +26,15 @@ vazar memória.
 4. No componente: `onMounted` → pega a `<div>` via `ref`, cria/pega a
    `RenderingEngine`, habilita o viewport nesse elemento, seta a stack, associa o
    ToolGroup, `render()`.
-5. `onUnmounted` → **destrua** o viewport/rendering engine e remova listeners.
-   Falhar aqui vaza contexto WebGL e trava o navegador depois de alguns estudos.
+5. `onUnmounted` / troca de série → **destrua e limpe**: desative o prefetch
+   (`stackPrefetch.disable`), limpe as filas dos pools
+   (`imageRetrievalPoolManager.clearRequestStack`, `imageLoadPoolManager.clearRequestStack`),
+   remova anotações (`annotation.state.removeAllAnnotations`), destrua o `ToolGroup`
+   (`destroyToolGroup`), desabilite/destrua a `RenderingEngine` e limpe o metadata provider.
+   Falhar aqui vaza contexto WebGL, requests em background e trava o navegador.
+6. **Guard de capacidade:** inicialize a runtime WebGL/Cornerstone apenas em viewports
+   suportados (desktop e tablet paisagem ≥ 768px). Em telas estreitas/mobile, exiba aviso de
+   resolução sem instanciar Cornerstone nem alocar recursos WebGL.
 
 ## Gotcha crítico: reatividade do Vue × objetos Cornerstone
 
@@ -50,5 +57,6 @@ binding do mouse, não recriando o viewport.
 - [ ] `imageId` construído a partir de WADO-RS (não QIDO)?
 - [ ] Loader usa o proxy WADO de mesma origem, sem token no JavaScript?
 - [ ] Objetos Cornerstone fora da reatividade (`shallowRef`/`markRaw`)?
-- [ ] `onUnmounted` destrói rendering engine/viewport e limpa listeners?
+- [ ] `onUnmounted` destrói rendering engine/viewport, limpa pools de prefetch/load, anotações e metadata?
+- [ ] Runtime do viewer protegida por guard de resolução (sem WebGL em mobile restrito)?
 - [ ] `init()` do core/tools chamado uma vez, não por componente?

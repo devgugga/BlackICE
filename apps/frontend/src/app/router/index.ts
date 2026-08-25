@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '@/features/home/HomePage.vue';
 import IngestPage from '@/features/ingest/IngestPage.vue';
 import WorklistPage from '@/features/worklist/WorklistPage.vue';
+import ViewerPage from '@/features/viewer/ViewerPage.vue';
 import { fetchSession } from '@/features/session/session.api';
 
 const router = createRouter({
@@ -10,6 +11,7 @@ const router = createRouter({
     { path: '/', name: 'home', component: HomePage, meta: { protected: true } },
     { path: '/ingest', name: 'ingest', component: IngestPage, meta: { protected: true } },
     { path: '/studies', name: 'worklist', component: WorklistPage, meta: { protected: true } },
+    { path: '/studies/:studyUid', name: 'viewer', component: ViewerPage, meta: { protected: true } },
   ],
 });
 

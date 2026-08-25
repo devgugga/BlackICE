@@ -259,6 +259,17 @@
       "replacedBy": null
     },
     {
+      "type": "urn:uuid:0b4e5e44-26f3-599c-8e70-f10a305cf49c",
+      "code": "CLIENT_DICOM_IMAGE_UNSUPPORTED",
+      "scope": "CLIENT",
+      "description": "O browser recebeu uma imagem DICOM válida, mas o loader configurado não conseguiu decodificá-la ou renderizá-la.",
+      "retryPolicy": "NEVER",
+      "owner": "frontend",
+      "extensionsSchemaRef": null,
+      "status": "active",
+      "replacedBy": null
+    },
+    {
       "type": "urn:uuid:958f8ed3-f5ea-50a5-af1c-6828e25df077",
       "code": "CLIENT_NETWORK_UNAVAILABLE",
       "scope": "CLIENT",

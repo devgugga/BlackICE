@@ -2,9 +2,28 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { mount, flushPromises } from '@vue/test-utils';
 import WorklistPage from '@/features/worklist/WorklistPage.vue';
 import { searchStudies } from '@/features/worklist/worklist.api';
+import {
+  saveWorklistSnapshot,
+  restoreWorklistSnapshot,
+  clearWorklistSnapshot,
+} from '@/features/worklist/worklist-navigation';
 import { ApiError } from '@/shared/api/problems/api-error';
 import { PROBLEM_MESSAGES } from '@/shared/api/problems/problem-messages.pt-BR';
 import type { StudyPage, StudySummary } from '@/features/worklist/worklist.types';
+
+const pushMock = vi.fn();
+const replaceMock = vi.fn();
+let currentRouteQuery: Record<string, string | string[]> = {};
+
+vi.mock('vue-router', () => ({
+  useRouter: () => ({
+    push: pushMock,
+    replace: replaceMock,
+  }),
+  useRoute: () => ({
+    query: currentRouteQuery,
+  }),
+}));
 
 vi.mock('@/features/worklist/worklist.api', async (importOriginal) => {
   const actual = await importOriginal<typeof import('@/features/worklist/worklist.api')>();
@@ -81,7 +100,10 @@ function emptyPage(): StudyPage {
 describe('WorklistPage', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    currentRouteQuery = {};
+    clearWorklistSnapshot();
   });
+
 
   it('carrega recentes ao montar e busca somente no submit', async () => {
     searchStudiesMock.mockResolvedValue(pageWithOneStudy());
@@ -109,7 +131,7 @@ describe('WorklistPage', () => {
     const wrapper = mount(WorklistPage);
     await flushPromises();
     expect(wrapper.text()).toContain('Não informado');
-    expect(wrapper.find('[data-testid="open-study"]').exists()).toBe(false);
+    expect(wrapper.find('[data-testid="open-study"]').exists()).toBe(true);
     expect(wrapper.text()).not.toContain('1.2.840.113619.2.55.3.999.888');
   });
 
@@ -341,5 +363,133 @@ describe('WorklistPage', () => {
     await flushPromises();
 
     expect(wrapper.text()).toContain('Mais recentes primeiro');
+  });
+
+  it('navega para o viewer ao clicar em Abrir estudo', async () => {
+    const studyUid = '1.2.840.113619.2.55.3.604688435.123.1599720123.467';
+    searchStudiesMock.mockResolvedValue(pageWithOneStudy({ studyInstanceUid: studyUid }));
+    const wrapper = mount(WorklistPage);
+    await flushPromises();
+
+    const openBtn = wrapper.find('[data-testid="open-study"]');
+    await openBtn.trigger('click');
+
+    expect(pushMock).toHaveBeenCalledWith({
+      name: 'viewer',
+      params: { studyUid },
+    });
+  });
+
+  it('sincroniza a query da URL com router.replace e salva snapshot ao buscar e paginar', async () => {
+    searchStudiesMock.mockResolvedValue({
+      items: pageWithOneStudy().items,
+      page: { limit: 20, offset: 0, hasPrevious: false, hasNext: true },
+    });
+
+    const wrapper = mount(WorklistPage);
+    await flushPromises();
+    expect(replaceMock).toHaveBeenCalledWith({ query: {} });
+
+    // Busca com filtros
+    await wrapper.get('[name="patientName"]').setValue('MARIA');
+    await wrapper.get('[name="modality"]').setValue('CT');
+    await wrapper.get('form').trigger('submit');
+    await flushPromises();
+
+    expect(replaceMock).toHaveBeenLastCalledWith({
+      query: { patientName: 'MARIA', modality: 'CT' },
+    });
+
+    // Próxima página
+    searchStudiesMock.mockResolvedValue({
+      items: pageWithOneStudy().items,
+      page: { limit: 20, offset: 20, hasPrevious: true, hasNext: false },
+    });
+
+    const nextBtn = wrapper.find('[data-testid="pagination-next"]');
+    await nextBtn.trigger('click');
+    await flushPromises();
+
+    expect(replaceMock).toHaveBeenLastCalledWith({
+      query: { patientName: 'MARIA', modality: 'CT', offset: '20' },
+    });
+
+    // Limpar filtros
+    searchStudiesMock.mockResolvedValue(pageWithOneStudy());
+    const clearBtn = wrapper.findAll('button').find((b) => b.text().includes('Limpar'));
+    await clearBtn!.trigger('click');
+    await flushPromises();
+
+    expect(replaceMock).toHaveBeenLastCalledWith({
+      query: {},
+    });
+  });
+
+  it('hidrata o estado a partir do snapshot em cache quando a URL coincidir (sem chamar a API)', async () => {
+    const cachedPage = pageWithOneStudy({ patientName: 'CACHED_PATIENT' });
+    saveWorklistSnapshot({
+      key: 'patientName=SILVA',
+      filters: {
+        patientName: 'SILVA',
+        patientId: '',
+        modality: '',
+        dateFrom: '',
+        dateTo: '',
+      },
+      page: cachedPage,
+    });
+
+    currentRouteQuery = { patientName: 'SILVA' };
+
+    const wrapper = mount(WorklistPage);
+    await flushPromises();
+
+    expect(searchStudiesMock).not.toHaveBeenCalled();
+    expect(wrapper.find('[data-testid="study-table"]').exists()).toBe(true);
+    expect(wrapper.text()).toContain('CACHED_PATIENT');
+    expect((wrapper.get('[name="patientName"]').element as HTMLInputElement).value).toBe('SILVA');
+  });
+
+  it('executa busca via API em deep link quando não houver snapshot correspondente', async () => {
+    // Salva snapshot para chave diferente
+    saveWorklistSnapshot({
+      key: 'modality=MR',
+      filters: {
+        patientName: '',
+        patientId: '',
+        modality: 'MR',
+        dateFrom: '',
+        dateTo: '',
+      },
+      page: pageWithOneStudy({ patientName: 'OTHER' }),
+    });
+
+    currentRouteQuery = { patientName: 'DEEP_LINK_PATIENT', offset: '20' };
+    searchStudiesMock.mockResolvedValue(pageWithOneStudy({ patientName: 'DEEP_LINK_PATIENT' }));
+
+    const wrapper = mount(WorklistPage);
+    await flushPromises();
+
+    expect(searchStudiesMock).toHaveBeenCalledWith(
+      {
+        filters: {
+          patientName: 'DEEP_LINK_PATIENT',
+          patientId: '',
+          modality: '',
+          dateFrom: '',
+          dateTo: '',
+        },
+        limit: 20,
+        offset: 20,
+      },
+      expect.anything(),
+    );
+    expect(wrapper.text()).toContain('DEEP_LINK_PATIENT');
+    expect((wrapper.get('[name="patientName"]').element as HTMLInputElement).value).toBe('DEEP_LINK_PATIENT');
+
+    // Novo snapshot foi salvo
+    const restored = restoreWorklistSnapshot('offset=20&patientName=DEEP_LINK_PATIENT');
+    expect(restored).not.toBeNull();
+    expect(restored?.page.items[0].patientName).toBe('DEEP_LINK_PATIENT');
   });
 });

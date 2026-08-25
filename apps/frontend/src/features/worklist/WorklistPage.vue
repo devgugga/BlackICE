@@ -1,12 +1,23 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { problemMessage } from '@/shared/api/problems/problem-messages.pt-BR';
 
-import { useWorklist, EMPTY_FILTERS } from './useWorklist';
+import { useWorklist, EMPTY_FILTERS, PAGE_SIZE } from './useWorklist';
+import {
+  parseWorklistQuery,
+  canonicalWorklistQuery,
+  getWorklistCanonicalKey,
+  saveWorklistSnapshot,
+  restoreWorklistSnapshot,
+} from './worklist-navigation';
 import type { WorklistFilters as FiltersType } from './worklist.types';
 import WorklistFilters from './WorklistFilters.vue';
 import StudyList from './StudyList.vue';
 import StudyPagination from './StudyPagination.vue';
+
+const router = useRouter();
+const route = useRoute();
 
 const draftFilters = ref<FiltersType>({ ...EMPTY_FILTERS });
 const worklist = useWorklist();
@@ -26,17 +37,83 @@ const errorTraceId = computed(() => worklist.error.value?.traceId ?? null);
 // Repetir a mesma busca só é oferecido quando o catálogo diz que ajuda.
 const allowsRetry = computed(() => worklist.error.value?.retryPolicy === 'MANUAL');
 
+function saveCurrentSnapshotAndSyncRoute(): void {
+  const currentParams = {
+    filters: { ...worklist.appliedFilters.value },
+    limit: PAGE_SIZE,
+    offset: worklist.appliedOffset.value,
+  };
+  const key = getWorklistCanonicalKey(currentParams);
+  const canonicalQuery = canonicalWorklistQuery(currentParams);
+
+  saveWorklistSnapshot({
+    key,
+    filters: { ...worklist.appliedFilters.value },
+    page: {
+      items: worklist.items.value,
+      page: worklist.page.value,
+    },
+  });
+
+  router?.replace({ query: canonicalQuery });
+}
+
 async function handleSearch(): Promise<void> {
   await worklist.search(draftFilters.value);
+  if (worklist.phase.value === 'READY' || worklist.phase.value === 'EMPTY') {
+    saveCurrentSnapshotAndSyncRoute();
+  }
 }
 
 async function handleClear(): Promise<void> {
   draftFilters.value = { ...EMPTY_FILTERS };
   await worklist.clear();
+  if (worklist.phase.value === 'READY' || worklist.phase.value === 'EMPTY') {
+    saveCurrentSnapshotAndSyncRoute();
+  }
 }
 
-onMounted(() => {
-  worklist.loadRecent();
+async function handlePrevious(): Promise<void> {
+  await worklist.previous();
+  if (worklist.phase.value === 'READY' || worklist.phase.value === 'EMPTY') {
+    saveCurrentSnapshotAndSyncRoute();
+  }
+}
+
+async function handleNext(): Promise<void> {
+  await worklist.next();
+  if (worklist.phase.value === 'READY' || worklist.phase.value === 'EMPTY') {
+    saveCurrentSnapshotAndSyncRoute();
+  }
+}
+
+async function handleRetry(): Promise<void> {
+  await worklist.retry();
+  if (worklist.phase.value === 'READY' || worklist.phase.value === 'EMPTY') {
+    saveCurrentSnapshotAndSyncRoute();
+  }
+}
+
+function handleOpenStudy(studyUid: string): void {
+  router?.push({ name: 'viewer', params: { studyUid } });
+}
+
+onMounted(async () => {
+  const query = route?.query ?? {};
+  const currentParams = parseWorklistQuery(query);
+  const key = getWorklistCanonicalKey(currentParams);
+  const snapshot = restoreWorklistSnapshot(key);
+
+  if (snapshot) {
+    worklist.restoreSnapshot(snapshot);
+    draftFilters.value = { ...snapshot.filters };
+  } else {
+    draftFilters.value = { ...currentParams.filters };
+    await worklist.load(currentParams.filters, currentParams.offset);
+    if (worklist.phase.value === 'READY' || worklist.phase.value === 'EMPTY') {
+      saveCurrentSnapshotAndSyncRoute();
+    }
+  }
 });
 
 onUnmounted(() => {
@@ -81,7 +158,7 @@ onUnmounted(() => {
         <p v-if="errorTraceId" class="error-reference">
           Referência: <code>{{ errorTraceId }}</code>
         </p>
-        <button v-if="allowsRetry" type="button" @click="worklist.retry">
+        <button v-if="allowsRetry" type="button" @click="handleRetry">
           Tentar novamente
         </button>
       </div>
@@ -100,12 +177,12 @@ onUnmounted(() => {
       </p>
 
       <template v-else-if="worklist.phase.value === 'READY'">
-        <StudyList :items="worklist.items.value" />
+        <StudyList :items="worklist.items.value" @open="handleOpenStudy" />
         <StudyPagination
           :has-previous="worklist.page.value.hasPrevious"
           :has-next="worklist.page.value.hasNext"
-          @previous="worklist.previous"
-          @next="worklist.next"
+          @previous="handlePrevious"
+          @next="handleNext"
         />
       </template>
     </section>
@@ -192,7 +269,7 @@ onUnmounted(() => {
   padding: 0.5rem 1rem;
   background-color: #dc3545;
   color: #ffffff;
-  border: none;
+  border: 1px solid #dc3545;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.875rem;

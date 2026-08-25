@@ -143,6 +143,13 @@ public enum ProblemType {
             null,
             null,
             RetryPolicy.MANUAL),
+    CLIENT_DICOM_IMAGE_UNSUPPORTED(
+            "urn:uuid:0b4e5e44-26f3-599c-8e70-f10a305cf49c",
+            ProblemScope.CLIENT,
+            null,
+            null,
+            null,
+            RetryPolicy.NEVER),
     CLIENT_NETWORK_UNAVAILABLE(
             "urn:uuid:958f8ed3-f5ea-50a5-af1c-6828e25df077",
             ProblemScope.CLIENT,

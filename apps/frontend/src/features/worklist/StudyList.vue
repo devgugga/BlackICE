@@ -5,6 +5,10 @@ defineProps<{
   items: readonly StudySummary[];
 }>();
 
+const emit = defineEmits<{
+  (e: 'open', studyInstanceUid: string): void;
+}>();
+
 const informed = (value: string | number | null) => value ?? 'Não informado';
 const patientIdentifier = (study: StudySummary) =>
   [study.patientId, study.patientIdIssuer].filter(Boolean).join(' · ') || 'Não informado';
@@ -28,6 +32,7 @@ const studyDateTime = (study: StudySummary) =>
           <th scope="col">Descrição</th>
           <th scope="col">Data e hora</th>
           <th scope="col">Contagens</th>
+          <th scope="col">Ação</th>
         </tr>
       </thead>
       <tbody>
@@ -42,6 +47,16 @@ const studyDateTime = (study: StudySummary) =>
           <td>{{ informed(study.description) }}</td>
           <td>{{ studyDateTime(study) }}</td>
           <td>{{ counts(study) }}</td>
+          <td>
+            <button
+              type="button"
+              class="action-btn"
+              data-testid="open-study"
+              @click="emit('open', study.studyInstanceUid)"
+            >
+              Abrir estudo
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -64,6 +79,16 @@ const studyDateTime = (study: StudySummary) =>
           <p><span class="label">Data/Hora:</span> {{ studyDateTime(study) }}</p>
           <p><span class="label">Contagens:</span> {{ counts(study) }}</p>
         </div>
+        <footer class="card-footer">
+          <button
+            type="button"
+            class="action-btn"
+            data-testid="open-study"
+            @click="emit('open', study.studyInstanceUid)"
+          >
+            Abrir estudo
+          </button>
+        </footer>
       </article>
     </div>
   </div>
@@ -86,6 +111,7 @@ const studyDateTime = (study: StudySummary) =>
 .study-table td {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid #e0e0e0;
+  vertical-align: middle;
 }
 
 .study-table th {
@@ -96,6 +122,27 @@ const studyDateTime = (study: StudySummary) =>
 
 .study-table tbody tr:hover {
   background-color: #f5f8fc;
+}
+
+.action-btn {
+  padding: 0.375rem 0.75rem;
+  background-color: #0066cc;
+  color: #ffffff;
+  border: 1px solid #0055aa;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.action-btn:hover {
+  background-color: #0052a3;
+}
+
+.action-btn:focus-visible {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
 }
 
 .study-cards {
@@ -151,6 +198,14 @@ const studyDateTime = (study: StudySummary) =>
   .card-body .label {
     font-weight: 500;
     color: #666;
+  }
+
+  .card-footer {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 </style>

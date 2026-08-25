@@ -23,6 +23,12 @@ describe('mensagens PT-BR', () => {
     );
   });
 
+  it('orienta quando a imagem DICOM não é suportada', () => {
+    expect(problemMessage('CLIENT_DICOM_IMAGE_UNSUPPORTED')).toBe(
+      'Esta imagem DICOM não é compatível com este visualizador. Selecione outra série.',
+    );
+  });
+
   it('não expõe jargão interno ao usuário', () => {
     for (const [code, message] of Object.entries(PROBLEM_MESSAGES)) {
       expect(message, `${code} vaza o code`).not.toContain('API_');

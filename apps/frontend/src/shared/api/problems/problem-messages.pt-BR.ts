@@ -35,6 +35,8 @@ export const PROBLEM_MESSAGES = {
   CLIENT_REQUEST_TIMEOUT: 'A operação excedeu o tempo de espera.',
   CLIENT_RESPONSE_INVALID: 'O servidor retornou uma resposta inválida.',
   CLIENT_CSRF_COOKIE_MISSING: 'Não foi possível preparar a verificação de segurança.',
+  CLIENT_DICOM_IMAGE_UNSUPPORTED:
+    'Esta imagem DICOM não é compatível com este visualizador. Selecione outra série.',
   CLIENT_UNEXPECTED_ERROR: 'Ocorreu uma falha inesperada no navegador.',
 } satisfies Record<ProblemCode, string>;
 
