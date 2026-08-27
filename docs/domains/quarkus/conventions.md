@@ -1,105 +1,60 @@
-# Quarkus — convenções de backend
+# Quarkus: Backend Conventions & Architecture
 
-O Quarkus é o backend **de produto**: domínio próprio (metadados de negócio,
-laudos, permissões) em PostgreSQL, consumindo o DCM4CHEE **só via DICOMweb**.
-Semântica DICOM: ver `docs/domains/dicom/` — este backend deve respeitá-la.
+Quarkus serves as the **product backend and Backend-For-Frontend (BFF)**: maintaining business domain entities (reports, business metadata, user permissions) on a dedicated PostgreSQL database, while communicating with DCM4CHEE **strictly via DICOMweb**. For DICOM semantics, consult `docs/domains/dicom/`.
 
-## Estrutura modular
+## Modular Structure
 
-O backend é organizado por módulo de negócio em `dev.blackice.<module>`. Um
-módulo começa simples e ganha subpacotes apenas quando eles expressam uma
-fronteira real: `api` para HTTP, `application` para o caso de uso,
-`application.port` para contratos que ele consome e `infrastructure` para os
-adaptadores. Quando o fluxo possuir responsabilidades distintas, `application`
-separa `input`, `usecase`, `validation`, `result` e `exception`; isso é interno
-ao módulo, não uma árvore técnica global. A direção é
-`api -> application <- infrastructure`; a aplicação não importa HTTP nem
-implementações concretas. A borda HTTP traduz `result` em status e payload.
+The backend is structured by business capability under `dev.blackice.<module>`. A module starts flat and introduces subpackages only when distinct boundaries emerge: `api` for HTTP/REST resources, `application` for use cases, `application.port` for input/output contracts, and `infrastructure` for external adapters. When workflows contain separated concerns, `application` divides into `input`, `usecase`, `validation`, `result`, and `exception`. Dependency flow is strictly `api -> application <- infrastructure`. Application logic never imports REST resources or concrete infrastructure implementations; the HTTP boundary maps domain `result` models into HTTP response codes and payloads.
 
-`domain/` é interno ao módulo e só existe para regras puras, identidades ou
-invariantes independentes de framework e I/O. Testes espelham o pacote em
-`src/test/java`. Não crie pacotes técnicos globais `controller/`, `service/` ou
-`repository/`, nem `shared` sem dois consumidores reais.
+`domain/` is internal to a module and exists solely for pure business models, domain entities, and framework-independent invariants. Tests mirror package structure in `src/test/java`. Never create global layered packages such as `controller/`, `service/`, or `repository/`, nor premature `shared` packages without at least two distinct consumers.
 
-A estrutura operacional e a receita para adicionar um módulo estão em
-[`docs/architecture/project-structure.md`](../../architecture/project-structure.md).
-Este Domain Pack mantém as convenções específicas de Quarkus sem duplicar a
-regra geral.
+The canonical operational guide lives in [`docs/architecture/project-structure.md`](../../architecture/project-structure.md).
 
-## Java documentation and comments
+## Java Documentation and Comments
 
-All Javadoc, code comments, test names and backend-generated messages must be
-written in English. Use Javadoc for public contracts, DICOM or security
-invariants, and non-obvious adapter behavior. Comments explain intent or a
-constraint that the code cannot express; do not narrate individual statements.
-Repository documentation remains in Portuguese unless its audience requires
-English.
+All Javadoc, code comments, test names, and backend-generated messages must be written in English. Use Javadoc for public contracts, DICOM or security invariants, and non-obvious adapter behaviors. Comments explain architectural rationale or constraints that the code cannot self-express; avoid narrating self-evident statements.
 
-## Extensões e papéis
+## Extensions and Roles
 
-- `quarkus-rest` (Jakarta REST) — API para o frontend Vue.
-- `quarkus-hibernate-orm-panache` + `quarkus-jdbc-postgresql` — domínio próprio.
-- `quarkus-oidc` em **modo web-app (BFF)** — executa Authorization Code + PKCE,
-  guarda estado e tokens em cookies criptografados HttpOnly no browser. Com
-  `split-tokens`, os tokens são distribuídos entre cookies; não existe store
-  server-side. O access token nunca é acessível ao JavaScript. Ver
-  [`docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md`](../../superpowers/specs/2026-07-23-blackice-backend-frontend-design.md).
-- `quarkus-rest-client` (MicroProfile REST Client) — client tipado para o DICOMweb
-  do DCM4CHEE (QIDO/WADO/STOW).
-- **Identidade para o DCM4CHEE (a verificar na implementação):** no modo web-app
-  **não há bearer de entrada** — só o cookie. O access token da sessão é recuperado
-  pelo Quarkus a partir dos cookies criptografados durante o processamento no
-  servidor e usado na chamada DICOMweb. Como esse token tem *audience* do cliente
-  Quarkus e o archive valida contra o **seu próprio** cliente Keycloak, é preciso
-  **audience compartilhado** ou **token exchange**
-  (`quarkus-oidc-token-propagation` expõe `exchange-token`). Decisão de config
-  Keycloak vai ao gate humano.
+- `quarkus-rest` (Jakarta REST): High-performance REST APIs for the Vue frontend.
+- `quarkus-hibernate-orm-panache` + `quarkus-jdbc-postgresql`: Product domain persistence.
+- `quarkus-oidc` in **web-app (BFF) mode**: Executes Authorization Code flow + PKCE, storing encrypted session state and tokens across secure `HttpOnly` cookies. With `split-tokens`, tokens are divided across browser cookies without requiring server-side session stores. Access tokens are never exposed to client-side JavaScript.
+- `quarkus-rest-client` (MicroProfile REST Client): Strongly typed client for DCM4CHEE DICOMweb REST services (QIDO-RS, WADO-RS, STOW-RS).
+- **Identity Propagation to DCM4CHEE:** In web-app mode, there is no inbound bearer token (only encrypted cookies). The session access token is unpacked server-side by Quarkus during request dispatch and attached as a Bearer token in DICOMweb calls. To satisfy DCM4CHEE token validation, Keycloak uses a **shared audience** (`blackice-quarkus` includes `dcm4chee-arc-rs` in its `aud` claim).
 
-## Fronteira de responsabilidade (crítico)
+## Boundary of Responsibility (Critical)
 
-- **Não** armazene pixel data no banco do Quarkus. O cofre de imagens é o DCM4CHEE.
-- O banco do Quarkus guarda **referências + negócio**: o laudo, o autor, timestamps,
-  e o vínculo com o estudo via **`StudyInstanceUID`** (chave estável — ver
-  `docs/domains/dicom/semantics.md`). Nunca gere esse UID; use o que veio do archive.
-- Busca/worklist é **proxy/agregação** sobre QIDO-RS; pagine no servidor
-  (`limit`/`offset`), não traga tudo para filtrar em memória.
-- Ingestão encaminha para **STOW-RS** e **verifica `FailedSOPSequence`** na resposta
-  antes de reportar sucesso.
+- **Never** store raw pixel data in the Quarkus product database. The single source of truth for medical imaging objects is DCM4CHEE.
+- The Quarkus database strictly stores **business records**: diagnostic reports, authors, timestamps, draft/final states, and references to studies anchored on **`StudyInstanceUID`** (stable DICOM primary key; see `docs/domains/dicom/semantics.md`). Never invent this UID; use the one returned by the archive.
+- Study search/worklists act as an **aggregation proxy** over QIDO-RS; paginate on the server (`limit`/`offset`) rather than buffering records into memory.
+- Ingestion forwards to **STOW-RS** and **inspects `FailedSOPSequence`** in the response before acknowledging success.
 
-## Autenticação e propagação de token
+## Authentication and Security
 
-- Endpoints protegidos com `@Authenticated`/roles do Keycloak via `quarkus-oidc`.
-- Ao chamar o DCM4CHEE, **encaminhe a identidade do usuário** (propagação ou token
-  exchange — ver Extensões acima) — nunca uma credencial de serviço fixa para ações
-  que representam um usuário, senão a auditoria do archive perde o autor real.
-- **CSRF (obrigatório no BFF):** como a sessão é cookie HttpOnly, todo endpoint que
-  muda estado (STOW, criar/editar laudo) precisa de proteção CSRF — cookies
-  `SameSite` + filtro CSRF do Quarkus.
+- Endpoints protected with `@Authenticated` and Keycloak realm roles via `quarkus-oidc`.
+- When invoking DCM4CHEE, **forward the authenticated user's identity** via token propagation; never use a static service account for actions representing human operators to preserve the DICOM audit trail.
+- **CSRF Protection:** State-changing endpoints (`POST`, `PUT`, `DELETE`) enforce signed HMAC CSRF tokens (`X-CSRF-Token` header) alongside `SameSite` cookies.
 
-## Modelagem de laudo (MVP)
+## Report Domain Model
 
 ```
-Report (Laudo)
-  id
-  studyInstanceUid   ← vínculo com o estudo no DCM4CHEE (não FK física; UID DICOM)
-  authorId           ← subject do token OIDC
-  status             ← rascunho/finalizado
-  content            ← texto do laudo
+Report
+  id                 ← UUID primary key
+  studyInstanceUid   ← Study reference in DCM4CHEE (stable DICOM UID, not physical FK)
+  authorId           ← User subject claim from OIDC token
+  status             ← DRAFT | FINAL
+  content            ← Diagnostic report text (max 32,000 characters)
+  version            ← Version counter for ETag / If-Match optimistic concurrency
   createdAt / updatedAt
 ```
 
-- O laudo referencia o estudo **por `StudyInstanceUID`**, não por um ID interno do
-  archive. Assim sobrevive a re-sincronizações.
+- Clinical reports reference studies **strictly by `StudyInstanceUID`**, ensuring integrity across archive re-synchronization.
 
-## Config e dev
+## Review Checklist
 
-- Config em `application.properties`; use Dev Services para Postgres/Keycloak em dev.
-- Perfis (`%dev`, `%prod`) para URLs do DCM4CHEE/Keycloak.
-
-## Checklist de revisão (além do checklist DICOM)
-
-- [ ] Pixel data vazando para o banco do Quarkus?
-- [ ] Laudo vinculado por `StudyInstanceUID` (não por ID interno do archive)?
-- [ ] Token do usuário propagado ao DCM4CHEE (não credencial de serviço)?
-- [ ] Resposta do STOW checando falhas antes de reportar sucesso?
-- [ ] QIDO paginado no servidor?
+- [ ] Is raw pixel data leaking into the Quarkus product database?
+- [ ] Are clinical reports linked by `StudyInstanceUID` (not internal archive database IDs)?
+- [ ] Is the authenticated user's OIDC token propagated to DCM4CHEE?
+- [ ] Does STOW ingestion check `FailedSOPSequence` before reporting success?
+- [ ] Are QIDO queries paginated server-side via `limit`/`offset`?
+- [ ] Are mutating endpoints protected by CSRF verification?

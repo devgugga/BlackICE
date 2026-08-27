@@ -1,137 +1,49 @@
-# Config Keycloak do BlackICE (realm `blackice`)
+# Keycloak Configuration for BlackICE (`blackice` realm)
 
-Configuração aplicada ao **mesmo realm** que o Archive usa. Esse realm chamava-se
-`dcm4chee` e foi renomeado in place para `blackice` pelo spec 2026-08-07 (Task 2,
-Fase 2), para que o nome do produto de terceiro não aparecesse na URL de login. A
-condição que importa não mudou: **um único realm** para os dois, sustentando o
-**audience compartilhado** (ver
-[design](../../docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md)).
-Isso continua sendo o que impede um realm separado — um token emitido por outro
-realm não valida no Archive, e trocar para service account custaria a atribuição
-por usuário no audit trail DICOM — e evita token exchange.
+Configuration applied to the **same realm** used by the Archive. This single-realm architecture sustains the **shared audience** model (see [design specs](../../docs/superpowers/specs/2026-07-23-blackice-backend-frontend-design.md)). A token issued by another realm would fail validation against DCM4CHEE Archive, and falling back to a service account would eliminate authentic per-user audit trails in DICOM records.
 
-## O que `configure-blackice.sh` cria (idempotente)
+## Resources Created by `configure-blackice.sh` (Idempotent)
 
-- **`blackice-quarkus`** — client confidencial (BFF). Standard flow + PKCE (S256),
-  `directAccessGrants` OFF, `serviceAccounts` OFF. Redirect `http://${APP_HOST}/api/*`,
-  webOrigin `http://${APP_HOST}`. Secret = `QUARKUS_OIDC_SECRET` (de `infra/.env`).
-- **`arc-audience`** — audience mapper no client acima, injetando **`dcm4chee-arc-rs`**
-  (o client que protege a DICOMweb REST) no claim `aud`.
-- **`dr.teste` / `teste123`** — primeiro usuário de teste (autor / radiologista padrão).
-- **`dr.leitor` / `teste123`** — segundo usuário de teste (leitor / segundo ator), criado
-  para validar isolamento multi-ator em testes E2E, permissões somente-leitura em laudos
-  de terceiros e rejeição 403 em tentativas maliciosas de mutação direta.
+- **`blackice-quarkus`**: Confidential client (BFF). Standard Authorization Code flow + PKCE (S256), `directAccessGrants` OFF, `serviceAccounts` OFF. Redirect URI `http://${APP_HOST}/api/*`, webOrigin `http://${APP_HOST}`. Secret = `QUARKUS_OIDC_SECRET` (from `infra/.env`).
+- **`arc-audience`**: Audience mapper on the client above, injecting **`dcm4chee-arc-rs`** (the client protecting the DICOMweb REST API) into the `aud` token claim.
+- **`dr.teste` / `teste123`**: Primary clinical test user (author / radiologist).
+- **`dr.leitor` / `teste123`**: Secondary clinical test user (reader / second actor), created to validate multi-actor isolation in E2E suites, read-only guards on third-party reports, and 403 Forbidden enforcement on unauthorized mutations.
 
-O script atribui a realm role **`auth`** tanto para `dr.teste` quanto para `dr.leitor`.
+The script idempotently assigns the realm role **`auth`** to both `dr.teste` and `dr.leitor`.
 
-### Por que `curl` e não `kcadm`
+### Why `curl` Instead of `kcadm`
 
-O cert do Keycloak é self-signed e **sem SAN** para `localhost`; a verificação de
-hostname do `kcadm` rejeita. Usamos a **Admin REST via `curl -k`** (ignora
-cert/hostname), executada **dentro do container** `keycloak`, obtendo o token admin
-das vars `KEYCLOAK_ADMIN`/`KEYCLOAK_ADMIN_PASSWORD` do próprio container (nunca
-impressas). O Keycloak serve **HTTP em :8080 na rede interna** (atrás do Traefik, em
-`http://${APP_HOST}/auth`) **e HTTPS na 8843** (backchannel do Archive e Admin
-REST). O root path do servidor é `/auth` — vale para os dois listeners, e por
-isso a base da Admin REST no script é `https://localhost:8843/auth`.
+Keycloak uses a self-signed certificate without Subject Alternative Names (SAN) for `localhost`, which causes `kcadm` hostname verification to fail. We interact with the **Admin REST API via `curl -k`** executed **inside the `keycloak` container**, obtaining the admin token directly from container environment variables. Keycloak serves HTTP on port `8080` internally (behind Traefik at `http://${APP_HOST}/auth`) and HTTPS on port `8843` (Archive backchannel). The root path is `/auth`.
 
-## Roles — decisão registrada
+## Role Strategy
 
-O realm `blackice` tem, de custom, só **`auth`** e **`root`** (o resto é built-in do
-Keycloak; `dcm4chee-arc-rs` não expõe client-roles). Decisão: **`dr.teste` e `dr.leitor`
-recebem a role `auth`** (usuários autenticados normais, papel realista de radiologista).
-Nenhum usuário de teste recebe role elevada de produto.
+The `blackice` realm features custom roles **`auth`** and **`root`**. Decision: **`dr.teste` and `dr.leitor` receive the `auth` role** (standard authenticated users representing radiologists). Neither test persona receives elevated root privileges.
 
-O script `configure-blackice-container.sh` já mapeia a role `auth` idempotentemente para ambos.
-Comando manual de atribuição (reproduzível; dentro do container `keycloak`):
+## End-to-End Auth Validation
 
-```sh
-# obtenha um token admin (adm) e o id do usuário (USERID), então:
-ROLE=$(curl -k -s -H "$AH" "$api/roles/auth")
-curl -k -s -H "$AH" -H "Content-Type: application/json" \
-  -X POST "$api/users/$USERID/role-mappings/realm" -d "[$ROLE]"
-```
+A token for `dr.teste` issued through `blackice-quarkus`:
+- Carries `"aud":"dcm4chee-arc-rs"` and `"preferred_username":"dr.teste"`;
+- When calling `GET http://arc:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies`, returns **`204 No Content`** (authenticated and authorized), not `401 Unauthorized`.
 
-Se algum fluxo (provavelmente STOW) travar por permissão, adicionar `root`.
+This validates that the **shared audience pattern works** and that the **`auth` role successfully authorizes DICOMweb requests**. `directAccessGrants` remains strictly disabled in production flow.
 
-## ✅ Validação end-to-end (audience + authz)
+## `blackice` Login Theme
 
-Antes de qualquer código Quarkus/Vue, provamos a suposição de auth mais crítica.
-Habilitando `directAccessGrants` **temporariamente**, um token de `dr.teste` emitido
-pelo `blackice-quarkus`:
+Located at `infra/keycloak/themes/blackice/login/`, mounted read-only into `/opt/keycloak/themes/blackice`. Child theme of `keycloak.v2` (PatternFly v5), without copying FreeMarker templates:
 
-- sai com `"aud":"dcm4chee-arc-rs"` e `"preferred_username":"dr.teste"`;
-- ao chamar `GET http://arc:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies` (rede interna)
-  retorna **`204`** (autenticado + autorizado; sem estudos ainda), **não `401`**.
+- **Localization**: UI labels and title strings live in `messages/messages_en.properties`;
+- **Styling**: `resources/css/blackice.css` defines the product design tokens (`--bi-*`).
 
-Isso confirma: **audience compartilhado funciona** e a role **`auth` autoriza
-DICOMweb**. `directAccessGrants` foi **revertido para `false`** após o teste — o BFF
-não deve permitir password grant no fluxo real.
+## Applying Configuration
 
-## Tema de login `blackice`
-
-Vive em `infra/keycloak/themes/blackice/login/`, bind-montado read-only em
-`/opt/keycloak/themes/blackice`. Tema filho de `keycloak.v2` (PatternFly v5), sem
-nenhum template FreeMarker copiado — o que economiza um diff a cada upgrade.
-
-- **Texto** (wordmark, assinatura, rótulos em PT-BR) vem de
-  `messages/messages_en.properties`. `loginTitleHtml` é chave de mensagem, e o
-  `kcSanitize` desta build preserva `<span>` com `class` — por isso o wordmark é
-  texto real, e não `content:` em CSS.
-- **Aparência** vem de `resources/css/blackice.css`, que define os tokens `--bi-*`
-  do produto.
-
-### Três armadilhas
-
-1. **`styles=` substitui a lista do pai, não concatena.** Por isso o
-   `theme.properties` re-lista `css/styles.css` (arquivo do `keycloak.v2`, não
-   nosso) antes do nosso. Nunca criar um `styles.css` neste tema: isso sombreia o
-   do pai e perde os ajustes dele — é o bug que o tema `j4care` tem.
-2. **O escopo é por client.** `login_theme=blackice` está no client
-   `blackice-quarkus`, aplicado pelo `configure-blackice.sh`. O realm segue em
-   `loginTheme: j4care`, que é o que o login do Archive usa. Para **remover** o
-   atributo é preciso enviar `""` no PUT — omitir a chave devolve 204 sem apagar.
-3. **Cache de tema.** A imagem roda `kc.sh start` (modo produção) e cacheia temas
-   e templates. As três env `KC_SPI_THEME_*` no compose desligam isso; sem elas,
-   editar CSS não surte efeito até um restart. São **dev-only**: num deploy real,
-   remover e assar o tema na imagem.
-
-### Idioma
-
-O conteúdo do bundle é PT-BR num arquivo chamado `messages_en.properties`, de
-propósito. O realm tem `internationalizationEnabled: false`, então `en` é o único
-bundle consultado. Ligar i18n de verdade é setting de realm e adicionaria seletor
-de idioma também no login do Archive.
-
-### Como desfazer
-
-Remover os arquivos do tema e o bind mount **não basta**: o atributo
-`login_theme=blackice` fica gravado no client `blackice-quarkus`, que vive no
-banco do Keycloak (volume `dcm4chee-keycloak-data`), não no disco. Sem o tema em
-`/opt/keycloak/themes/blackice`, o client fica apontando para um tema inexistente.
-
-É preciso desfazer pela Admin REST, do mesmo jeito que `configure-blackice.sh`
-aplica: GET da representação inteira do client, setar `login_theme: ""` no
-atributo e PUT de volta. Omitir a chave `login_theme` no PUT devolve `204` mas
-**não apaga** o atributo — só um valor vazio explícito remove (ver comentário na
-seção 4 de `configure-blackice.sh`, linhas 77-78). Feito isso, o client volta a
-herdar `loginTheme: j4care` do realm.
-
-## Como aplicar
-
-No Bash:
+Via Bash:
 
 ```sh
 bash infra/keycloak/configure-blackice.sh
 ```
 
-No PowerShell:
+Via PowerShell:
 
 ```powershell
 pwsh -File infra/keycloak/configure-blackice.ps1
 ```
-
-Os dois launchers exigem Docker Desktop/CLI disponível, `infra/.env` com
-`QUARKUS_OIDC_SECRET` e `APP_HOST`, e a stack do Keycloak/Archive em execução
-(ver `infra/dcm4chee/`). O launcher PowerShell é nativo e não requer WSL nem Git
-Bash. Os usuários de teste recebem a role `auth` automaticamente.

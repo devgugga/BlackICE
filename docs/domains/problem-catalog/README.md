@@ -1,57 +1,44 @@
-# Domain Pack: Catálogo de problemas ✗
+# Domain Pack: Problem Catalog ✗
 
-Fonte da verdade sobre **como classificar, reutilizar, criar e depreciar** os
-tipos de problema publicados pelo BlackICE.
+Source of truth for **classifying, reusing, creating, and deprecating** RFC 9457 Problem Details types in BlackICE.
 
-**Project-scoped:** o método é geral, mas este pack cita o registry, o tooling e
-os owners deste repositório. Ao transferir, leve o método e recrie o registry.
+**Project-scoped:** The methodology is portable, but this pack references the registry, tooling, and governance specific to this repository.
 
-## Documentos
+## Documents
 
-- [`classification.md`](./classification.md) — a árvore decisória entre API,
-  CLIENT, resultado e cancelamento, e quando reutilizar em vez de criar.
-- [`registry.md`](./registry.md) — gramática dos códigos, campos obrigatórios,
-  identidade UUIDv5, lock, depreciação e os gates que autorizam cada comando.
-- [`security.md`](./security.md) — o que pode aparecer em texto público, em
-  extensão e em log; e o que nunca pode.
+- [`classification.md`](./classification.md): Decision tree between API, CLIENT, result, and cancellation failures, and when to reuse vs. create a new type.
+- [`registry.md`](./registry.md): Code grammar, mandatory fields, deterministic UUIDv5 identity, lock file, deprecation, and human gates.
+- [`security.md`](./security.md): Public client exposure rules, extension boundaries, and log masking requirements.
 
-## O que este pack **não** contém
+## What this Pack does NOT contain
 
-A lista de problemas. Ela vive no registry, e duplicá-la aqui criaria uma
-segunda fonte da verdade que envelheceria:
+The list of concrete problem types. That list lives exclusively in the registry:
 
-- `docs/contracts/problems/catalog.json` — fonte machine-readable;
-- `docs/contracts/problems/catalog.md` — a mesma lista, gerada para leitura
-  humana;
-- `docs/contracts/problems/catalog.lock.json` — o que já está publicado e
-  congelado.
+- `docs/contracts/problems/catalog.json`: Machine-readable canonical source;
+- `docs/contracts/problems/catalog.md`: Generated human-readable documentation;
+- `docs/contracts/problems/catalog.lock.json`: Published, frozen types.
 
-Para consultar um problema, leia o catálogo. Para saber o que pode ser feito com
-ele, leia este pack.
+To inspect existing problems, view the catalog. To understand catalog governance, read this pack.
 
 ## Tooling
 
-`.problem-catalog/` é um pacote Node ESM isolado, com Node e pnpm fixados. É
-tooling de engenharia, não código de produto. Comandos:
+`.problem-catalog/` is an isolated Node ESM package with pinned Node and pnpm versions:
 
 ```bash
 cd .problem-catalog
-mise exec -- pnpm check       # valida sem escrever
-mise exec -- pnpm generate    # regenera catálogo, lock, markdown, Java e TypeScript
-mise exec -- pnpm add ...     # acrescenta uma entrada aprovada
+mise exec -- pnpm check       # Validates catalog and lock without writing
+mise exec -- pnpm generate    # Regenerates lock, markdown, Java, and TypeScript artifacts
+mise exec -- pnpm add ...     # Adds an approved problem entry
 mise exec -- pnpm deprecate ...
 ```
 
-## Quem consome este pack
+## Consumers of this Pack
 
 - Claude: `.claude/skills/problem-catalog/SKILL.md`
-- Codex e Antigravity: `.agents/skills/problem-catalog/SKILL.md`
+- Codex & Antigravity: `.agents/skills/problem-catalog/SKILL.md`
 
-Ambas são wrappers finos: mandam ler e aplicar estes documentos. Nenhuma delas
-repete uma regra daqui nem enumera códigos.
+Both are thin wrappers that instruct agents to read and apply these documents.
 
-## Regra de ouro
+## Golden Rule
 
-> Nenhum humano e nenhum agente escreve um UUID, edita um arquivo gerado ou
-> altera um campo imutável. A identidade é derivada pelo tooling; o resto é
-> decisão humana registrada em spec.
+> Neither human nor AI agent ever invents a UUID manually, edits a generated file, or alters an immutable field. Identity is derived deterministically by tooling; all changes require an approved specification.

@@ -1,21 +1,17 @@
 # Domain Pack: Vue ♻️
 
-Fonte da verdade sobre o **frontend Vue 3 + Vite** e o **viewer Cornerstone3D**.
-**Reutilizável:** o viewer consome uma interface DICOMweb compatível e pode ser
-adaptado a outros projetos de imagem médica. No BlackICE, ele usa o caminho WADO
-estreito proxied pelo Quarkus; o browser não acessa o DCM4CHEE diretamente.
+Source of truth for the **Vue 3 + Vite frontend** and the **Cornerstone3D medical viewer**.
+**Reusable:** The viewer consumes a standard DICOMweb endpoint and can be adapted to other medical imaging applications. In BlackICE, it consumes the secure WADO-RS frame proxy exposed by Quarkus; the browser never connects to DCM4CHEE directly.
 
-## Documentos
+## Documents
 
-- [`conventions.md`](./conventions.md) — Vue 3 (Composition API + `<script setup>`),
-  TypeScript, Vite, Pinia, estrutura de pastas e composables.
-- [`cornerstone3d.md`](./cornerstone3d.md) — integração do Cornerstone3D em
-  componentes Vue: rendering engine, viewports, image loaders (WADO-RS),
-  ferramentas, e os gotchas de reatividade.
+- [`conventions.md`](./conventions.md): Vue 3 (Composition API + `<script setup>`), TypeScript, Vite, Pinia, project structure, and composables.
+- [`cornerstone3d.md`](./cornerstone3d.md): Cornerstone3D integration inside Vue components: rendering engine lifecycle, viewports, WADO-RS image loaders, tools, and Vue reactivity gotchas.
 
-## Quem consome este pack
+## Consumers of this Pack
 
 - Claude: `.claude/agents/vue/dicom-viewer-frontend.md`
 - Codex: `.codex/agents/vue/dicom-viewer-frontend.toml`
+- Antigravity: `.agents/agents/dicom-viewer-frontend/agent.md`
 
-Ambos são especialistas **implementadores** do viewer/UI.
+All are **specialized implementers** of the viewer and clinical user interface.

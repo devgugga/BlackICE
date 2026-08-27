@@ -1,39 +1,37 @@
-# Infraestrutura BlackICE
+# BlackICE Infrastructure
 
-Os três arquivos Compose são usados juntos:
+The three Compose manifests are composed together:
 
-- `compose.yml`: fundação compartilhada (`traefik`, `docker-proxy` e `product-db`).
-- `dcm4chee/compose.yml`: archive seguro e dependências (`ldap`, `mariadb`, `keycloak`, `arc-db` e `arc`).
-- `compose.apps.yml`: aplicações BlackICE (`backend` Quarkus e `frontend` SPA Vue).
+- `compose.yml`: Shared foundation (`traefik`, `docker-proxy`, and `product-db`).
+- `dcm4chee/compose.yml`: Secured DICOM Archive stack and dependencies (`ldap`, `mariadb`, `keycloak`, `arc-db`, and `arc`).
+- `compose.apps.yml`: BlackICE product applications (`backend` Quarkus BFF and `frontend` Vue SPA).
 
-Crie `infra/.env` localmente a partir de `.env.example`. O arquivo
-`.env.example` é apenas o modelo; nunca versione `.env`.
+Create `infra/.env` locally from `.env.example`. The `.env.example` file is an example template; never commit `.env` or plaintext secrets.
 
-## Banco de dados de produto (`product-db`)
+## Product Database (`product-db`)
 
-O serviço `product-db` (PostgreSQL 17) é dedicado exclusivamente aos dados de negócio
-do produto BlackICE (laudos clínicos), separado do banco do Archive (`arc-db`) e do Keycloak (`mariadb`):
+The `product-db` service (PostgreSQL 17) is strictly dedicated to BlackICE business domain data (clinical reports), segregated from the Archive database (`arc-db`) and Keycloak database (`mariadb`):
 
-- **Variáveis**: `PRODUCT_DB`, `PRODUCT_DB_USER`, `PRODUCT_DB_PASSWORD` (de `infra/.env`);
-- **Healthcheck**: `pg_isready -U ${PRODUCT_DB_USER} -d ${PRODUCT_DB}` (intervalo 5s, timeout 3s, 10 retentativas);
-- **Prontidão e migrações**: O container `backend` aguarda a condição `service_healthy` do `product-db` e executa automaticamente as migrações Flyway (`V1__create_reports.sql`) no startup antes de expor os endpoints.
+- **Environment Variables**: `PRODUCT_DB`, `PRODUCT_DB_USER`, `PRODUCT_DB_PASSWORD` (configured in `infra/.env`);
+- **Healthcheck**: `pg_isready -U ${PRODUCT_DB_USER} -d ${PRODUCT_DB}` (interval 5s, timeout 3s, 10 retries);
+- **Readiness & Migrations**: The `backend` container awaits `service_healthy` from `product-db` and automatically runs Flyway migrations (`V1__create_reports.sql`) on startup before exposing REST endpoints.
 
-## Subir a stack
+## Starting the Stack
 
 ```powershell
 cd infra
 docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml up -d --build
 ```
 
-## Configurar Keycloak
+## Keycloak Provisioning
 
-Após subir a stack, execute o configurador idempotente para provisionar o client `blackice-quarkus`, o mapper `arc-audience` e os usuários de teste `dr.teste` e `dr.leitor` com a role `auth`:
+After launching the stack, run the idempotent configuration script to provision the `blackice-quarkus` client, the `arc-audience` mapper, and the test personas `dr.teste` and `dr.leitor` with the `auth` realm role:
 
 ```bash
 bash infra/keycloak/configure-blackice.sh
 ```
 
-## Validar a configuração
+## Validating Compose Configuration
 
 ```powershell
 cd infra

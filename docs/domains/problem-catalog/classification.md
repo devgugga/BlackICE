@@ -1,85 +1,58 @@
-# Classificação e reutilização
+# Classification and Reuse
 
-Antes de tocar no registry, decida **o que** você tem em mãos. A maior parte das
-ocorrências não é um problema novo, e boa parte não é problema nenhum.
+Before touching the problem catalog registry, classify the failure condition. Most runtime events are not new problem types, and many are not errors at all.
 
-## Árvore decisória
+## Decision Tree
 
 ```text
-Resposta HTTP observável? API
-Falha local de transporte/parser/browser? CLIENT
-Operação concluída completa ou parcialmente? resultado
-Usuário cancelou? cancelamento
+Observable HTTP 4xx/5xx response? -> API
+Local transport / network / parser failure in browser? -> CLIENT
+Operation completed (fully or partially)? -> Result
+User intentionally aborted? -> Cancellation
 ```
 
-Percorra na ordem e pare na primeira resposta afirmativa.
+Evaluate sequentially and halt at the first matching branch.
 
-### API
+### API Problems
 
-O backend respondeu — ou responderia — com um status `4xx/5xx` sob `/api`. É a
-única categoria que vira `application/problem+json`. Toda entrada `API_*` tem
-`httpStatus`, `title` e `detail`.
+The backend answered (or will answer) with a `4xx` or `5xx` status under `/api`. This is the only category transformed into RFC 9457 `application/problem+json`. Every `API_*` entry mandates `httpStatus`, `title`, and `detail`.
 
-### CLIENT
+### CLIENT Problems
 
-A falha nasceu no browser e não existe resposta HTTP para descrever: a requisição
-não chegou, estourou o tempo, ou a resposta não corresponde ao contrato. Entradas
-`CLIENT_*` **não** têm `httpStatus`, `title` nem `detail`, porque não são
-respostas HTTP.
+The failure occurred entirely inside the browser without a valid HTTP response (network timeout, connection refusal, unparseable payload). `CLIENT_*` entries **do not** have `httpStatus`, `title`, or `detail`, because they are not HTTP responses.
 
-Uma resposta HTTP recebida mas inválida é `CLIENT`, não `API`: o que falhou foi a
-confiança no contrato, não o recurso.
+### Operational Results
 
-### Resultado
+The operation executed and produced a structured outcome, including partial success. A batch ingestion where some files succeed and others fail returns `200 OK` with a detailed result model, not an HTTP problem.
 
-A operação aconteceu e tem algo a relatar — inclusive sucesso parcial. Um lote de
-ingestão em que alguns arquivos entraram e outros não é `200` com o resultado, não
-um problema. Só vire problema quando **nada** pôde ser feito.
+### User Cancellation
 
-### Cancelamento
+The operator intentionally aborted an in-flight operation. This is standard control flow (`CANCELLED`), requiring no Problem Details, no `ApiError`, and no error logging.
 
-O usuário pediu para parar. É controle de fluxo: leva a `CANCELLED`, sem Problem
-Details, sem `ApiError` e sem log de erro. Cancelamento não é falha.
+## Internal Motives vs. Public Catalog
 
-## Motivos internos não entram no catálogo
+Internal reason enums (`TIMEOUT`, `CONNECTION`, `HTTP_STATUS`, `INVALID_RESPONSE`) belong to internal module exceptions. Multiple internal reasons frequently map to the same public problem type, which is expected. The catalog captures what consumers observe, not internal Java exception taxonomies.
 
-`TIMEOUT`, `CONNECTION`, `HTTP_STATUS`, `INVALID_RESPONSE` e semelhantes são
-razões internas de exceções e resultados dos módulos. Vários deles convergem para
-o mesmo problema público, e isso é correto — o catálogo descreve o que o
-consumidor observa, não a taxonomia de exceções Java.
+Domain and application layers remain HTTP-agnostic. Application exceptions never carry HTTP status codes, URNs, or TraceIDs; mapping occurs strictly in the REST API layer mappers.
 
-Domínio e aplicação não conhecem HTTP: uma exceção de aplicação nunca carrega
-status, URN ou TraceID. A tradução acontece nos mappers da fronteira `api`.
+## Reuse is the Standard Path
 
-## Reutilizar é o caso normal
+A problem type represents a **global semantic meaning**. Ingestion and Worklist share `API_ARCHIVE_UNAVAILABLE` because meaning, status, and client remediation actions are identical.
 
-Um tipo representa **um significado global**. Ingestão e Worklist compartilham
-`API_ARCHIVE_UNAVAILABLE` porque significado, status e ação esperada são os
-mesmos. O nome não recebe prefixo de feature sem necessidade semântica; o módulo
-que introduziu o problema pode ser o `owner`, e isso basta.
+Before proposing a new problem type, evaluate existing entries for:
 
-Antes de propor uma entrada nova, procure no catálogo por:
+1. **Semantic meaning:** Would the client interpret the error identically?
+2. **HTTP status code:** Is the HTTP status identical?
+3. **Remediation action:** Should the client take the exact same corrective step?
 
-1. **significado** — o consumidor entenderia a mesma coisa?
-2. **status HTTP** — a resposta seria a mesma?
-3. **ação esperada** — o consumidor faria a mesma coisa a seguir?
+If all three match, reuse the existing entry.
 
-Se as três respostas forem "sim", reutilize. Mostre a entrada reutilizável ao
-humano antes de sugerir qualquer alternativa.
+## When to Create a New Type
 
-## Quando criar um tipo novo
+Only when **at least one** of the following differs from all existing catalog entries:
 
-Só quando **pelo menos um** destes muda em relação a todas as entradas
-existentes:
-
-- significado público;
-- status HTTP;
-- ação esperada do cliente;
-- retry policy;
-- schema de extensões.
-
-Precisão de diagnóstico interno não é motivo. Se dois casos levam o consumidor à
-mesma tela e à mesma decisão, eles são o mesmo problema, e a distinção pertence
-ao log ou à extensão — não a um code novo.
-
-Criar um tipo exige spec aprovada. Ver [`registry.md`](./registry.md).
+- Public semantic meaning;
+- HTTP status code;
+- Client remediation action;
+- Retry policy;
+- Custom extension schema.

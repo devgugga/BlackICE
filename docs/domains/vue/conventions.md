@@ -1,18 +1,15 @@
-# Vue 3 — convenções de frontend
+# Vue 3: Frontend Architecture & Conventions
 
-Stack: **Vue 3 + Vite + TypeScript**, Composition API com `<script setup>`, Pinia
-para estado, Vue Router. SPA autenticado (sem SSR).
+Stack: **Vue 3 + Vite + TypeScript**, Composition API using `<script setup>`, Pinia for state management, and Vue Router. Authenticated client-side SPA (no SSR).
 
-## Estilo de componente
+## Component Conventions
 
-- Sempre `<script setup lang="ts">`. Sem Options API.
-- Lógica reutilizável de uma feature vai para **composables** colocalizados
-  nessa feature, não para mixins nem para dentro de componentes gigantes.
-- Componente faz uma coisa. Se um `.vue` passa de ~200–250 linhas ou mistura
-  responsabilidades (fetch + render + estado global), quebre.
-- Props tipadas via `defineProps<{...}>()`; eventos via `defineEmits<{...}>()`.
+- Always use `<script setup lang="ts">`. Never use the legacy Options API.
+- Reusable logic belongs in **composables** collocated within their respective feature folder.
+- Single responsibility: If a `.vue` single file component exceeds ~200–250 lines or mixes concerns (fetching + complex layout + domain state), break it down.
+- Strictly type props via `defineProps<{...}>()` and emit definitions via `defineEmits<{...}>()`.
 
-## Estrutura feature-first
+## Feature-First Monorepo Structure
 
 ```
 src/
@@ -22,41 +19,31 @@ src/
       index.ts
   features/
     <name>/
-      # API, tipos, composables, componentes e testes do fluxo
+      # API clients, types, composables, UI components, and unit tests
   main.ts
 ```
 
-- `app/` contém apenas o shell e a composição de rotas.
-- API, tipos, stores, composables, componentes e testes de um fluxo ficam
-  colocalizados em `features/<name>/`.
-- Testes unitários ficam ao lado do arquivo testado.
-- Imports internos usam o alias `@/`, configurado no TypeScript e no Vite.
-- Código só é promovido a `shared/` depois de ter dois consumidores reais.
+- `app/` strictly holds the application shell and route composition.
+- API clients, types, stores, composables, components, and tests for a given clinical workflow are collocated inside `features/<name>/`.
+- Unit tests (`*.spec.ts`) sit directly beside the tested file.
+- Internal imports use the `@/` path alias configured in TypeScript and Vite.
+- Code is promoted to `shared/` only when there are at least two distinct consumers.
 
-A árvore vigente e a receita para adicionar uma feature estão em
-[`docs/architecture/project-structure.md`](../../architecture/project-structure.md).
+The canonical directory layout and feature creation guide live in [`docs/architecture/project-structure.md`](../../architecture/project-structure.md).
 
-## Estado
+## State Management
 
-- **Pinia** para estado compartilhado quando a feature exigir; mantenha o store
-  dentro da feature enquanto ele pertencer a um único fluxo.
-- Estado local do componente com `ref`/`reactive`; nada de store global para o que
-  é efêmero de um componente.
-- Não guarde objetos grandes/externos (WebGL, RenderingEngine do Cornerstone) em
-  estado **reativo** — ver `cornerstone3d.md` (gotcha de reatividade).
+- **Pinia** for cross-component shared state when a feature requires it; keep stores inside the feature folder as long as they belong to that single workflow.
+- Component-local state uses `ref` / `reactive`; avoid polluting global stores with ephemeral UI state.
+- **Never wrap heavy non-reactive objects** (WebGL contexts, Cornerstone `RenderingEngine`, native handles) in Vue reactive proxies (`ref`/`reactive`) — see `cornerstone3d.md`.
 
-## Data fetching e auth
+## Data Fetching & BFF Authentication
 
-- O frontend usa a sessão BFF via cookie HttpOnly. Nenhum access token vive no
-  JavaScript; chamadas usam mesma origem e `/api/me` é a fonte da sessão.
-- Clients HTTP ficam na feature que os utiliza e enviam as credenciais de cookie
-  quando necessário.
-- QIDO-RS (busca/worklist) é paginado no servidor — passe `limit`/`offset`, não
-  traga tudo. Ver `docs/domains/dicom/dicomweb.md`.
+- The frontend communicates via the same origin using secure `HttpOnly` session cookies. No OIDC access tokens are stored in JavaScript; `/api/me` is the single source of session truth.
+- HTTP API clients live inside their respective feature folders and pass credentials automatically.
+- QIDO-RS queries (search/worklist) must paginate on the server with `limit`/`offset`. Never fetch the entire dataset to slice client-side. See `docs/domains/dicom/dicomweb.md`.
 
-## Qualidade
+## Quality & Memory Lifecycle
 
-- TypeScript estrito. Tipos começam colocalizados na feature e só migram para
-  `shared/` com pelo menos dois consumidores reais.
-- Componentes de imagem médica: cuidado com memória — sempre limpe recursos no
-  `onUnmounted` (ver viewer).
+- Strict TypeScript mode enabled.
+- Medical imaging viewports: prevent memory leaks by guaranteeing proper disposal of rendering engines, tool groups, and canvas contexts inside `onUnmounted` lifecycle hooks.

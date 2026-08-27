@@ -1,42 +1,29 @@
-# Layouts por plataforma
+# Platform Layouts & Discovery
 
-Verifique a documentação oficial e o runtime instalado no momento da mudança.
-Formatos e locais de descoberta são contrato da ferramenta, não convenção
-inventada pelo projeto.
+Discovery paths and configuration formats are defined by official platform contracts, not arbitrary repository conventions.
 
 ## Claude Code
 
-- Subagente versionado: `.claude/agents/<dominio>/<nome>.md`.
-- Skill versionada: `.claude/skills/<nome>/SKILL.md`.
-- Subagentes usam Markdown com frontmatter YAML. Restrinja ferramentas e
-  permissões ao papel; a configuração de modelo deve obedecer aos aliases ou
-  IDs aceitos pelo runtime atual.
+- Versioned subagents: `.claude/agents/<domain>/<name>.md`.
+- Versioned skills: `.claude/skills/<name>/SKILL.md`.
+- Subagents use Markdown with YAML frontmatter. Restrict tools and permissions to the specific role; model identifiers must conform to aliases or IDs accepted by the installed runtime.
 
-Referência: [subagentes do Claude Code](https://code.claude.com/docs/en/sub-agents).
+Reference: [Claude Code subagents](https://code.claude.com/docs/en/sub-agents).
 
-## Codex
+## OpenAI Codex
 
-- Subagente versionado: `.codex/agents/<dominio>/<nome>.toml`.
-- Neste repositório, os arquivos TOML sob `.codex/agents/` podem ser agrupados
-  recursivamente por domínio; preserve `name` único e valide o TOML.
-- Skill compartilhada: `.agents/skills/<nome>/SKILL.md`.
+- Versioned subagents: `.codex/agents/<domain>/<name>.toml`.
+- TOML files can be grouped recursively by domain under `.codex/agents/`; preserve unique `name` keys and validate TOML syntax.
+- Shared skills: `.agents/skills/<name>/SKILL.md`.
 
-Verifique a versão local e a configuração efetiva antes de definir `model` ou
-`model_reasoning_effort`: a disponibilidade depende do cliente, da conta e de
-eventuais allowlists.
+Verify local client capabilities before setting `model` or `model_reasoning_effort`.
 
-Referência: [subagentes do Codex](https://learn.chatgpt.com/docs/agent-configuration/subagents).
+Reference: [Codex subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents).
 
-## Antigravity
+## Google Antigravity
 
-- Subagente versionado: `.agents/agents/<nome>/agent.md`.
-- Skill versionada: `.agents/skills/<nome>/SKILL.md`.
-- Agentes usam Markdown com frontmatter YAML. Use somente os tiers, ferramentas
-  e políticas aceitos pela versão atual; confira `agy models` antes de concluir
-  uma escolha de modelo.
+- Versioned custom agents: `.agents/agents/<name>/agent.md`.
+- Versioned skills: `.agents/skills/<name>/SKILL.md`.
+- Agents use Markdown with YAML frontmatter. Use only supported tiers (`flash_lite`, `flash`, `inherit`, `pro`), tools, and policies supported by the active Antigravity CLI.
 
-Não introduza agrupamentos adicionais abaixo de `.agents/agents/` sem confirmar
-na documentação atual que serão descobertos pelo runtime.
-
-Referências: [skills do Antigravity](https://antigravity.google/docs/skills) e
-[custom agents](https://antigravity.google/blog/introducing-custom-agents).
+References: [Antigravity skills](https://antigravity.google/docs/skills) and [Custom agents](https://antigravity.google/blog/introducing-custom-agents).

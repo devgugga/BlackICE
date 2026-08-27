@@ -1,152 +1,93 @@
-# BlackICE — AGENTS.md
+# BlackICE: AGENTS.md
 
-> **Fonte canônica e tool-agnostic** de instruções para qualquer agente de IA que
-> trabalhe neste repositório (Claude Code, Codex, GLM, …). O `CLAUDE.md` importa
-> este arquivo. Mantenha as regras aqui; ferramentas específicas apenas apontam
-> para cá e para `docs/domains/`.
+> **Canonical, tool-agnostic source of truth** for all AI agents working in this repository (Claude Code, OpenAI Codex, Google Antigravity, GLM, etc.). `CLAUDE.md` imports this file. Keep core behavioral rules here; tool-specific configurations simply link to this file and `docs/domains/`.
 
-## O que é o BlackICE
+## What is BlackICE
 
-PACS (Picture Archiving and Communication System) de portfólio/aprendizado.
+A modern, high-fidelity Healthcare PACS (*Picture Archiving and Communication System*) platform.
 
-- **Motor DICOM:** DCM4CHEE Archive 5.x — faz o trabalho DICOM pesado (storage,
-  C-STORE, query/retrieve, DICOMweb). **Não reimplementamos isso.**
-- **Backend:** Quarkus, como backend **de produto** com domínio próprio
-  (pacientes/metadados de negócio, laudos, permissões) em PostgreSQL próprio.
-  Consome o DCM4CHEE **apenas via DICOMweb** (STOW-RS, QIDO-RS, WADO-RS).
-- **Frontend:** Vue 3 + Vite (SPA autenticado). Viewer com Cornerstone3D.
-- **Auth:** Keycloak (OIDC/SSO) — Quarkus via `quarkus-oidc`; DCM4CHEE integra
-  nativamente com Keycloak.
+- **DICOM Core Engine:** DCM4CHEE Archive 5.x handles heavy DICOM workflows (storage, C-STORE, DIMSE query/retrieve, and DICOMweb). **We do not re-implement this core engine.**
+- **Backend:** Quarkus 3 (Java 21) serves as the **product backend & BFF**, maintaining business domain models (patient metadata, clinical reports, optimistic concurrency, and permissions) in a dedicated PostgreSQL database. It communicates with DCM4CHEE **strictly over DICOMweb** (STOW-RS, QIDO-RS, WADO-RS).
+- **Frontend:** Vue 3 + Vite + TypeScript (authenticated SPA) with medical viewport rendering powered by Cornerstone3D.
+- **Auth:** Keycloak (OIDC/SSO): Quarkus integrates via `quarkus-oidc`; DCM4CHEE integrates natively with Keycloak in a shared-audience realm.
 
-MVP (4 fluxos ponta-a-ponta): (1) ingestão via STOW-RS, (2) worklist + busca via
-QIDO-RS, (3) viewer do estudo com Cornerstone3D, (4) laudos + autenticação.
+MVP (4 end-to-end flows): (1) ingestion via STOW-RS, (2) study worklist & search via QIDO-RS, (3) medical study viewer with Cornerstone3D, (4) clinical reports with ETag concurrency + OIDC authentication.
 
-## Estrutura do repositório
+## Repository Structure
 
-`docs/architecture/project-structure.md` é a fonte canônica operacional. Leia-a
-antes de criar ou mover código.
+`docs/architecture/project-structure.md` is the canonical operational guide. Review it before creating or relocating code.
 
-- `apps/backend/`: API/BFF Quarkus.
-- `apps/frontend/`: SPA Vue 3 + Vite.
-- `infra/`: composição e configuração operacional local.
-- `docs/`: arquitetura, Domain Packs e registros históricos.
+- `apps/backend/`: Quarkus API & BFF.
+- `apps/frontend/`: Vue 3 + Vite SPA.
+- `infra/`: Local container orchestration and compose topology.
+- `docs/`: Architecture documentation, Domain Packs, and design records.
 
-Não crie novas pastas raiz de aplicação nem camadas técnicas globais como
-`controller/`, `service/` e `repository/`. As receitas completas para features
-Quarkus e Vue estão no documento canônico.
+Do not introduce new application root directories or global layered directories (such as `controller/`, `service/`, or `repository/`).
 
-## Arquitetura de agentes: "Domain Packs"
+## Agent Architecture: "Domain Packs"
 
-O conhecimento vive **uma vez**, em markdown neutro, e é reaproveitado por todas
-as ferramentas e (parte dele) por projetos futuros. Ver `docs/domains/README.md`.
+Domain knowledge lives **once**, in neutral Markdown, and is reused by all AI agents and tools. See `docs/domains/README.md`.
 
 ```
-docs/domains/<dominio>/   ← conhecimento portável (fonte da verdade)
-.claude/agents/<dominio>/ ← subagentes Claude (wrappers finos → leem os docs)
-.codex/agents/<dominio>/  ← subagentes Codex (wrappers finos → leem os docs)
-.agents/agents/<nome>/    ← subagentes Antigravity (wrappers finos → leem os docs)
-.claude/skills/           ← skills Claude (workflows repetíveis; nomeadas por domínio)
-.agents/skills/           ← skills Codex/Antigravity (wrappers finos → leem os docs)
+docs/domains/<domain>/    ← Portable knowledge base (Single Source of Truth)
+.claude/agents/<domain>/  ← Claude Code subagents (thin wrappers referencing docs)
+.codex/agents/<domain>/   ← OpenAI Codex subagents (thin wrappers referencing docs)
+.agents/agents/<name>/    ← Antigravity subagents (thin wrappers referencing docs)
+.claude/skills/           ← Claude skills (repeatable workflows by domain)
+.agents/skills/           ← Codex / Antigravity skills (thin wrappers referencing docs)
 ```
 
-**Regra de ouro:** um agente/skill nunca duplica conhecimento. Seu corpo diz
-"aplique `docs/domains/<x>/*.md`". Corrigiu uma regra? Corrige no doc, e todos os
-wrappers herdam.
+**Golden Rule:** An agent or skill never duplicates domain rules. Its instructions state "apply `docs/domains/<x>/*.md`". If a rule changes, edit the markdown doc once, and all agent wrappers inherit it immediately.
 
-Domínios atuais: `dicom/` (♻️ reutilizável), `vue/` (♻️ reutilizável),
-`quarkus/` (específico deste projeto — não transfere para outros backends),
-`git/` (♻️ reutilizável), `agent-authoring/` (♻️ reutilizável) e
-`problem-catalog/` (específico deste projeto).
+Current domains: `dicom/` (reusable), `vue/` (reusable), `quarkus/` (project-scoped), `git/` (reusable), `agent-authoring/` (reusable), and `problem-catalog/` (project-scoped).
 
-## Catálogo de problemas
+## RFC 9457 Problem Catalog
 
-Todo erro JSON `4xx/5xx` sob `/api` é um tipo catalogado, em Problem Details
-RFC 9457. A política vive em `docs/domains/problem-catalog/`; o registry e os
-artefatos gerados, em `docs/contracts/problems/`; o tooling, em
-`.problem-catalog/`. Use a skill `problem-catalog` (`.claude/skills/` ou
-`.agents/skills/`) antes de classificar, reutilizar, criar ou depreciar um tipo.
+Every JSON `4xx/5xx` HTTP error under `/api` is a cataloged Problem Details type (RFC 9457). The policy lives in `docs/domains/problem-catalog/`; the registry and generated artifacts live in `docs/contracts/problems/`; and the tooling lives in `.problem-catalog/`. Use the `problem-catalog` skill before adding, reusing, or deprecating a problem type.
 
-Nunca escreva um UUID à mão, nunca edite um arquivo gerado e nunca altere um
-campo imutável. Uma spec aprovada que enumere o tipo é o gate de `add`;
-depreciação e mudança de campo imutável exigem gate humano novo.
+Never invent UUIDs manually, never edit generated files directly, and never alter immutable fields.
 
 ## Graphify
 
-Leia `docs/architecture/graphify.md` antes de instalar, atualizar ou regenerar o
-grafo. Use a skill project-scoped em `.agents/skills/graphify/` (Codex) ou seu
-mirror em `.claude/skills/graphify/` (Claude); não execute os instaladores
-oficiais isoladamente, pois `.graphify/setup.ps1` reaplica os ajustes validados
-para a versão fixada.
+Review `docs/architecture/graphify.md` before installing, updating, or querying the knowledge graph. Use the project-scoped skill in `.agents/skills/graphify/` or `.claude/skills/graphify/`.
 
-Em trabalho de feature, não atualize o Graphify entre ciclos de implementação,
-testes, correções e revisão. Quando implementação, testes, revisões e gates
-estiverem estáveis, execute **uma única atualização semântica final** `--update`
-pela skill, revise o diff de `graphify-out/` e só então faça o commit da feature.
-As exceções são: pedido explícito `/graphify`, uso do grafo para investigação e
-uma fase independente que esteja concluída e vá receber commit próprio.
+During feature development, do not update Graphify across every intermediate test/edit cycle. Once implementation, tests, and reviews are stable, run a single final update (`--update`), review the diff in `graphify-out/`, and commit.
 
-Em linked worktrees essa atualização final é obrigatoriamente manual: os hooks
-Git oficiais do Graphify (verificado até 0.9.32) se desativam nesse contexto,
-mesmo quando `graphify hook status` informa que estão instalados.
+## DICOM Invariants (Summary; details in `docs/domains/dicom/`)
 
-Em checkout normal, o hook pós-commit atualiza `graphify-out/` depois de um
-commit de código; o worktree fica sujo de propósito. Como esses artefatos são
-versionados, revise-os e faça um **segundo commit focado** para sincronizar o
-grafo. O hook ignora um commit que altere somente `graphify-out/`; não o
-desinstale nem tente ocultar esse diff sem autorização humana. Consulte
-`docs/architecture/graphify.md#fluxo-de-commits-com-o-hook`.
+These are **clinical correctness rules**. Violating them corrupts patient data:
 
-## Invariantes de DICOM (resumo — detalhes em `docs/domains/dicom/`)
+1. **UIDs originate from the archive/acquisition (never invent them).** `StudyInstanceUID`, `SeriesInstanceUID`, and `SOPInstanceUID` represent identity. When creating new objects, generate valid DICOM UIDs with a registered root.
+2. **Respect the DICOM hierarchy:** Patient → Study → Series → Instance. A series belongs to exactly one `Modality`. `StudyInstanceUID` is the primary stable key for a study.
+3. **Respect DICOMweb verbs:** Query = QIDO-RS; Retrieve pixels = WADO-RS; Store = STOW-RS. Do not interchange them.
+4. **`PatientID` is not globally unique** without its Issuer.
+5. **Do not re-encode pixel data** without understanding the Transfer Syntax.
 
-Estas são regras de **correção de negócio**. Violá-las corrompe dados de paciente.
+## Workflow (Roles & Human Gates)
 
-1. **UIDs vêm do archive/da aquisição — nunca invente.** `StudyInstanceUID`,
-   `SeriesInstanceUID`, `SOPInstanceUID` são identidade. Ao criar objetos novos,
-   gere UIDs com gerador DICOM válido (raiz registrada), nunca strings aleatórias.
-2. **Respeite a hierarquia** Paciente → Estudo → Série → Instância. Uma série tem
-   uma única `Modality`. `StudyInstanceUID` é a chave estável de um estudo.
-3. **Cada verbo DICOMweb tem seu papel:** buscar = QIDO-RS; recuperar pixels =
-   WADO-RS; armazenar = STOW-RS. Não troque um pelo outro.
-4. **`PatientID` não é globalmente único** sem o issuer. Não assuma unicidade.
-5. **Não re-encode pixel data** sem entender o Transfer Syntax.
+The human engineer (repo owner) is the **orchestrator and business domain validator**. Agents implement; decisions involving DICOM semantics and clinical data integrity are **presented at checkpoints/gates for human validation**, never auto-decided.
 
-## Workflow (papéis e gates)
+Loop: Brainstorming → Phased Implementation Plan → Subagent Execution → Human Gate at phase conclusion. Specs reside in `docs/superpowers/specs/`.
 
-O humano (dono do repo) é o **orquestrador e o validador de lógica de negócio**.
-Os agentes implementam; decisões de semântica DICOM e integridade de dados de
-paciente são **apresentadas nos gates** para aprovação humana, nunca auto-decididas.
+## Evolution Backlog
 
-Loop: brainstorming → plano em fases → implementação por subagentes → gate humano
-ao fim de cada fase. Specs em `docs/superpowers/specs/`.
+Before planning a feature or refactor, consult `docs/architecture/evolution-backlog.md`. When an architectural improvement is deferred to protect MVP focus, create or update a cataloged entry (with ID, rationale, and objective resume trigger).
 
-## Backlog de evolução
+An entry in the backlog **does not authorize immediate implementation**. Agents must propose it to the human engineer for prioritization first.
 
-Antes de planejar uma feature, consulte
-`docs/architecture/evolution-backlog.md`. Quando uma melhoria relevante for
-adiada para manter um MVP focado, crie ou atualize uma entrada com ID, motivo,
-gatilho objetivo de retomada e spec de origem. A spec referencia o ID central em
-vez de duplicar a justificativa.
+## General Conventions
 
-Um item no backlog **não autoriza sua implementação**. Agentes devem apresentá-lo
-ao humano para priorização antes de alterar código, configuração ou escopo.
+- Keep commits small, focused, and purposeful; do not commit without explicit human authorization.
+- When touching DICOM/DICOMweb logic, review `docs/domains/dicom/` and consult the `dicom-domain-reviewer` before gates.
+- Never store raw pixel data in the Quarkus product database; store references (UIDs) and business metadata (clinical reports).
 
-## Convenções gerais
+## Graphify
 
-- Commits pequenos e focados; não commitar sem pedido explícito do humano.
-- Ao tocar em DICOM/DICOMweb, consulte `docs/domains/dicom/` e passe pelo
-  revisor de domínio antes do gate.
-- Não coloque pixel data no banco do Quarkus; guarde referências (UIDs) + dados
-  de negócio (laudos).
-
-## graphify
-
-This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+This project maintains a knowledge graph at `graphify-out/` with god nodes, community structure, and cross-file relationships.
 
 When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
 
 Guidance (optional):
-- For codebase questions, consider `graphify query "<question>"` when graphify-out/graph.json exists. `graphify path "<A>" "<B>"` and `graphify explain "<concept>"` can provide focused relationship and concept views.
-- You may instead use other appropriate approaches, including direct source browsing, targeted search, and project documentation.
-- Dirty graphify-out/ files are expected after hooks or incremental updates; they do not prevent using Graphify when it is helpful.
-- If graphify-out/wiki/index.md exists, consider it for broad navigation; consider GRAPH_REPORT.md for broad architecture review or when focused graph queries are insufficient.
-- Follow the canonical update timing and commit protocol in the Graphify section above and in `docs/architecture/graphify.md`.
+- For codebase questions, consider `graphify query "<question>"` when `graphify-out/graph.json` exists. `graphify path "<A>" "<B>"` and `graphify explain "<concept>"` provide focused relationship and concept views.
+- You may also use targeted search, file inspection, and project documentation.
+- Review and synchronize `graphify-out/` according to `docs/architecture/graphify.md`.

@@ -1,10 +1,14 @@
-# Frontend BlackICE
+# BlackICE Frontend
 
-SPA do BlackICE construída com Vue 3, Vite e TypeScript.
+<p align="center">
+  Language / Idioma: <b>🇺🇸 English</b> | <a href="README.pt-BR.md">🇧🇷 Português</a>
+</p>
+
+BlackICE Single Page Application (SPA) built with Vue 3, Vite, and TypeScript.
 
 ## Toolchain
 
-O `mise.toml` fixa Node 24 e pnpm:
+`mise.toml` pins Node 24 and pnpm:
 
 ```powershell
 mise install
@@ -13,7 +17,7 @@ mise exec -- pnpm --version
 mise exec -- pnpm install --frozen-lockfile
 ```
 
-## Testar e construir
+## Testing & Building
 
 ```powershell
 mise exec -- pnpm test
@@ -26,77 +30,73 @@ mise exec -- pnpm test:e2e:reports
 mise exec -- pnpm exec playwright test e2e/problem-details.spec.ts
 ```
 
-A suíte de testes E2E valida os fluxos completos utilizando fixtures DICOM
-sintéticas geradas em memória, garantindo que nenhum dado real de paciente seja
-manipulado ou commitado.
+The Playwright end-to-end (E2E) test suite validates complete clinical workflows using in-memory generated synthetic DICOM fixtures, ensuring that no real patient information is ever handled or committed.
 
-### Matriz de Viewports dos Testes E2E:
-- **Desktop 1920×1080 (`chromium-desktop`)**: Split layout com viewport Cornerstone (largura >= 720px) e painel lateral de laudo clínico;
-- **Laptop 1366×768 (`chromium-1366`)**: Drawer overlay fechado por padrão com abertura e fechamento sem mutação geométrica do viewport;
-- **Tablet 1024×768 (`chromium-1024`)**: Drawer overlay com comportamento responsivo idêntico a 1366×768;
-- **Mobile 390×844 (`chromium-mobile`)**: Layout somente-laudo com Capability Gate ativo (0 requisições de instâncias/frames DICOM).
+### E2E Test Viewport Matrix:
+- **Desktop 1920×1080 (`chromium-desktop`)**: Split layout with Cornerstone viewport (width >= 720px) and side-by-side clinical report editor;
+- **Laptop 1366×768 (`chromium-1366`)**: Drawer overlay closed by default, opening and closing smoothly without triggering viewport canvas distortion;
+- **Tablet 1024×768 (`chromium-1024`)**: Drawer overlay responsive layout matching 1366×768 behavior;
+- **Mobile 390×844 (`chromium-mobile`)**: Report-only layout with active Capability Gate (0 DICOM instance or frame network requests).
 
-### Identidades de teste:
-- `dr.teste` / `teste123`: usuário principal (autor);
-- `dr.leitor` / `teste123`: segundo ator para teste de permissões somente-leitura, concorrência e rejeição 403 em mutações não autorizadas.
+### Test User Personas:
+- `dr.teste` / `teste123`: Primary radiologist / authoring persona;
+- `dr.leitor` / `teste123`: Second clinical actor for testing read-only locks, concurrency conflicts, and 403 Forbidden enforcement on unauthorized mutations.
 
-### Estados da interface de importação (`/ingest`):
-- `SELECTING`: seleção de múltiplos arquivos `.dcm`;
-- `READY`: arquivos validados localmente prontos para envio;
-- `UPLOADING`: barra de progresso determinada com opção de cancelamento;
-- `PROCESSING`: envio concluído, aguardando resposta STOW-RS do Archive;
-- `COMPLETE` / `ERROR` / `CANCELLED`: apresentação dos resultados detalhados por estudo e opção de nova importação.
+## Frontend Capabilities & Views
 
-## Tratamento de erros
+### 1. DICOM Ingestion (`/ingest`)
+Manual upload interface for direct STOW-RS transmission:
+- **Finite State Machine Lifecycle**:
+  - `SELECTING`: Multi-file drag-and-drop or file picker selection;
+  - `READY`: Local client-side DICOM validation (essential headers) before transmission;
+  - `UPLOADING`: Determinate progress bar with real-time percentage and cancellation support;
+  - `PROCESSING`: Network upload completed, awaiting Archive persistence and ingestion response;
+  - `COMPLETE` / `ERROR` / `CANCELLED`: Consolidated summary grouped by study with reset actions.
 
-`src/shared/api/problems/` é a única fronteira de erro do SPA:
+### 2. Clinical Worklist & Search (`/studies`)
+Paginated DICOM study discovery via the BFF (`GET /api/studies`):
+- **Combinable Filters**: Patient Name (`SILVA^JOAO`), Patient ID with Issuer (`ID^^^ISSUER`), Modality (`CT`, `MR`, `CR`, `OT`), and Date Range (YYYY-MM-DD);
+- **Count-Free Pagination**: 20-item pages with lookahead detection requesting 21 records to determine `hasNext` without slow database count queries;
+- **Responsive Views**: Full tabular data layout on desktop (`study-table`) and compact summary cards on small screens (`study-cards`).
 
-- `parse-problem.ts` transforma qualquer resposta em `ApiError` tipado pelo
-  catálogo, ou em falha local `CLIENT_*` quando a resposta não corresponde ao
-  contrato. `fetch` e XHR usam o mesmo núcleo;
-- `problem-messages.pt-BR.ts` guarda o texto exibido ao usuário. O mapa é
-  exaustivo por construção: um code novo no catálogo quebra o build até ganhar
-  mensagem;
-- `*.generated.ts` vêm de `.problem-catalog/` e não são editados à mão;
-- o `detail` do backend nunca é renderizado; o TraceID aparece como referência
-  copiável apenas em falhas;
-- retentativa só é oferecida quando `retryPolicy === 'MANUAL'`;
-- cancelamento pedido pelo usuário é controle de fluxo, não erro.
+### 3. Cornerstone3D Medical Viewport (`/viewer/:studyUid`)
+Interactive medical imaging viewport integrated with Cornerstone3D 5.x:
+- **Rendering & WADO-RS Proxy**: Consumes the secure `/api/dicomweb/.../frames/1` endpoint with authenticated streaming;
+- **Diagnostic Tooling**: Contrast/Brightness adjustments (*Window/Level*), *Zoom*, *Pan*, *Reset*, and series navigator;
+- **Capability Gate**: On mobile screens (< 768px), disables the heavy WebGL/Cornerstone pipeline to prioritize report review and metadata inspection with bandwidth and CPU savings;
+- **Viewport Canvas Isolation**: Side drawer interactions preserve exact WebGL canvas dimensions without geometric mutation.
 
-### Worklist e busca (`/studies`):
-A página de Worklist consome o endpoint `GET /api/studies` via BFF e apresenta
-estudos DICOM paginados com suporte a quatro filtros combináveis:
-- **Nome do paciente**: busca textual (ex.: `SILVA^JOAO`);
-- **ID do paciente**: identificador do paciente (suporta qualificação com issuer `ID^^^ISSUER`);
-- **Modalidade**: filtro por modalidade de estudo (ex.: `CT`, `MR`, `OT`, etc.);
-- **Intervalo de datas**: campos `Data inicial` e `Data final` (formato AAAA-MM-DD).
+### 4. Clinical Diagnostic Reports (`/studies/:studyUid/report` & Side Drawer)
+Clinical diagnostic reporting module with relational persistence and concurrency guarantees:
+- **Reactive Editor**: Text / Markdown editor with live character counter and strict 32,000 character limit;
+- **Document Lifecycle**: Smooth state transitions between editable drafts (`DRAFT`) and finalized clinical records (`FINAL`);
+- **Optimistic Concurrency (`ETag` / `If-Match`)**: Every mutation validates the document version; on concurrent conflicts, the UI catches `412 Precondition Failed` and offers safe reload without data loss;
+- **Accessible Finalization Modal**: Focus-managed modal dialogue with keyboard trap, Escape dismissal, and explicit confirmation;
+- **Multi-Actor Isolation**: Visual authorship indicators (`dr.teste`) with disabled controls and 403 mutation guards for secondary actors (`dr.leitor`);
+- **Draft Preservation**: Local client-side preservation safeguarding drafts against accidental tab navigation.
 
-A paginação é orientada a páginas de 20 itens (`limit=20`, `offset=0, 20, 40...`) com
-detecção de próxima página por busca de 21 registros, sem consultas adicionais de contagem
-(`count`), e timeout padrão de 10 segundos configurado em `blackice.worklist.request-timeout`.
-A interface adapta a visualização automaticamente: tabela em telas desktop (`study-table`)
-e cartões resumidos em telas móveis (`study-cards`).
+## Error Handling & RFC 9457 Problem Catalog
 
-A evolução de estratégias de paginação (cursor/snapshot/projeção dedicada de leitura)
-é governada pelo item `EVO-005` do backlog de evolução.
+`src/shared/api/problems/` is the single centralized error boundary for the SPA:
 
-## Desenvolvimento
+- `parse-problem.ts` maps any HTTP `4xx/5xx` response into a catalog-typed `ApiError`, or a local `CLIENT_*` failure if the response violates the contract. Both `fetch` and XHR share this parsing core;
+- `problem-messages.pt-BR.ts` contains user-friendly localized messages. The mapping is exhaustive by design: adding a new problem code breaks the TypeScript build until a localized text is provided;
+- `*.generated.ts` are automatically produced by `.problem-catalog/` tooling and are never manually modified;
+- Backend operator details (`detail`) are strictly hidden from end-users; the `TraceID` is presented as a copyable support reference on failures;
+- Retry actions are only presented when `retryPolicy === 'MANUAL'`;
+- Operator-initiated cancellations are treated as natural flow control, never as errors.
+
+## Local Development
 
 ```powershell
 mise exec -- pnpm dev
 ```
 
-## E2E na stack local
+## E2E Testing with Local Stack
 
-Os testes E2E consomem uma stack BlackICE já ativa; eles não iniciam, aguardam nem derrubam
-serviços. A responsabilidade é da execução local ou do job de CI.
+E2E tests consume an existing running BlackICE stack; they do not spin up or tear down services automatically.
 
-Os manifests canônicos ficam em `infra/`: `compose.yml` (fundação
-compartilhada), `dcm4chee/compose.yml` (archive e dependências) e
-`compose.apps.yml` (aplicações BlackICE). A partir da raiz do repositório, suba
-a stack e aguarde frontend, backend e o início do OIDC responderem. A checagem
-não segue redirects: `200` em `/`, `401` esperado em `/api/me` sem sessão e
-`302` de `/api/login` para o endpoint de autorização do Keycloak.
+Canonical Compose files reside in `infra/`: `compose.yml` (shared foundation), `dcm4chee/compose.yml` (Archive and dependencies), and `compose.apps.yml` (BlackICE applications). From the repository root, start the stack and wait for the frontend, backend, and OIDC endpoints to become healthy:
 
 ```powershell
 Set-Location infra
@@ -124,14 +124,13 @@ foreach ($attempt in 1..30) {
 }
 
 if (-not $isReady) {
-  throw 'Stack não ficou pronta: esperado / = 200, /api/me = 401 e /api/login = 302 para o Keycloak.'
+  throw 'Stack is not ready: expected / = 200, /api/me = 401, and /api/login = 302 to Keycloak.'
 }
 ```
 
-Depois, a partir de `apps/frontend`, instale as dependências e execute os testes
-na imagem Linux pinada — nunca no browser de um runner Linux arbitrário:
+Then, from `apps/frontend`, install dependencies and run E2E suites inside the pinned Playwright Linux Docker container:
 
-### E2E do Tema de Login Keycloak
+### Keycloak Login Theme E2E
 ```powershell
 Set-Location ../apps/frontend
 mise exec -- pnpm install --frozen-lockfile
@@ -144,7 +143,7 @@ docker run --rm --network host `
   npx playwright test e2e/keycloak-login.spec.ts
 ```
 
-### E2E da Worklist e Importação Concorrente
+### Worklist & Ingestion E2E
 ```powershell
 Set-Location ../apps/frontend
 mise exec -- pnpm install --frozen-lockfile
@@ -157,53 +156,33 @@ docker run --rm --network host `
   npx playwright test e2e/worklist.spec.ts
 ```
 
-O alvo padrão é `http://blackice.localhost`. Para outro ambiente, substitua o
-valor de `BLACKICE_E2E_URL` no comando Docker. Para atualizar baselines visuais, use a
-mesma imagem pinada e acrescente `--update-snapshots`; execuções normais nunca
-criam snapshots ausentes.
-
-### Observação de Locks Concorrentes no Archive
-Durante a execução de operações concorrentes de importação (STOW-RS) e consulta (QIDO-RS),
-monitore a ausência de locks bloqueantes no PostgreSQL do Archive executando a partir de `infra/`:
+### Archive Concurrent Lock Contention Verification
+During concurrent STOW-RS ingestion and QIDO-RS search runs, verify the absence of blocking locks in Archive PostgreSQL by running from `infra/`:
 
 ```bash
 docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml exec -T arc-db sh -lc \
   'for sample in $(seq 1 20); do psql -At -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1 -c "SELECT count(*) FROM pg_locks WHERE NOT granted;"; sleep 0.5; done'
 ```
 
-**Interpretação**: Todas as 20 linhas de saída devem ser `0`. Locks concedidos normais (`AccessShareLock`)
-são esperados; qualquer contagem não nula (`> 0`) indica contenção bloqueante que requer diagnóstico.
+**Interpretation**: All 20 output lines must return `0`. Normal granted locks (`AccessShareLock`) are expected; any non-zero count (`> 0`) indicates blocking lock contention.
 
-### Contrato para qualquer CI
+### CI Contract
 
-O job deve:
+The CI job must:
 
-1. em `infra/`, subir a stack com `docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml up -d --build`;
-2. aguardar, sem seguir redirects, `/ = 200`, `/api/me = 401` sem sessão e `/api/login = 302` com `Location` para `http://blackice.localhost/auth/realms/blackice/protocol/openid-connect/auth?...`;
-3. em `apps/frontend/`, executar `pnpm install --frozen-lockfile`;
-4. executar os testes E2E com `CI=true` dentro de `mcr.microsoft.com/playwright:v1.62.0-noble`;
-5. publicar `apps/frontend/playwright-report/` e `apps/frontend/test-results/playwright/` em falhas;
-6. no cleanup do próprio job, em `infra/`, executar `docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml down`.
+1. In `infra/`, launch the stack with `docker compose -f compose.yml -f dcm4chee/compose.yml -f compose.apps.yml up -d --build`;
+2. Wait without following redirects for `/ = 200`, `/api/me = 401` without session, and `/api/login = 302` pointing to Keycloak;
+3. In `apps/frontend/`, run `pnpm install --frozen-lockfile`;
+4. Execute E2E tests with `CI=true` inside `mcr.microsoft.com/playwright:v1.62.0-noble`;
+5. Publish `apps/frontend/playwright-report/` and test artifacts upon failure;
+6. In job cleanup, run `docker compose ... down`.
 
-Os snapshots são baselines Linux. Gere atualizações somente na imagem
-`mcr.microsoft.com/playwright:v1.62.0-noble`, usando `--update-snapshots`, e
-revise os PNGs antes de versioná-los.
+## Architecture & Code Organization
 
-## Organização
+The application shell lives in `src/app/`. Each clinical capability is modularized under `src/features/<name>/`, colocation of API endpoints, types, components, composables, and tests. Internal paths use the `@/` alias, and routes are declared in `src/app/router/index.ts`.
 
-O shell mínimo fica em `src/app/`. Cada fluxo fica em
-`src/features/<name>/`, com API, tipos, componentes, composables e testes
-colocalizados. Imports internos usam `@/`, e páginas são registradas pelo router
-em `src/app/router/index.ts`.
+Refer to the [canonical project structure](../../docs/architecture/project-structure.md) before adding a feature and [Vue conventions](../../docs/domains/vue/conventions.md) before touching the viewer or session flows.
 
-Leia a [estrutura canônica](../../docs/architecture/project-structure.md) antes
-de adicionar uma feature e as
-[convenções Vue](../../docs/domains/vue/conventions.md) antes de alterar o
-viewer ou o fluxo de sessão.
+## BFF Session
 
-## Sessão BFF
-
-O frontend chama o backend na mesma origem. `/api/me` é a fonte da sessão e
-`/api/login` inicia o login quando o usuário está anônimo. A sessão é enviada em
-cookie HttpOnly; nenhum access token fica disponível no browser ou é persistido
-pelo JavaScript.
+The frontend communicates with the backend on the same origin. `/api/me` provides session details and `/api/login` initiates login when unauthenticated. The session is managed via a secure `HttpOnly` cookie; no access tokens are exposed to JavaScript.

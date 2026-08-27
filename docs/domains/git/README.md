@@ -1,19 +1,16 @@
 # Domain Pack: Git ♻️
 
-Fonte da verdade sobre a criação segura e padronizada de commits locais.
-**Reutilizável:** este pack é independente de ferramenta e projeto; pode ser
-copiado com seus wrappers para outros repositórios.
+Source of truth for standardized, safe local Git commits.
+**Reusable:** This pack is tool- and project-agnostic; it can be copied with its agent wrappers into other repositories.
 
-## Documento canônico
+## Canonical Document
 
-- [`commit-conventions.md`](./commit-conventions.md) — política de branch,
-  seleção de escopo, formato da mensagem, Gitmoji, Graphify e limites de
-  execução.
+- [`commit-conventions.md`](./commit-conventions.md): Branching policy, scope selection, Gitmoji conventions, Graphify commit workflow, and execution guardrails.
 
-## Quem consome este pack
+## Consumers of this Pack
 
 - Claude: `.claude/agents/git/commit-curator.md`
 - Codex: `.codex/agents/git/commit-curator.toml`
+- Antigravity: `.agents/agents/commit-curator/agent.md`
 
-Ambos são wrappers finos: leem e aplicam `commit-conventions.md`; regras de
-commit não são duplicadas nos agentes.
+All are thin wrappers: they load and apply `commit-conventions.md`. Commit conventions are never duplicated inside agent files.

@@ -1,18 +1,15 @@
 name = "quarkus-backend"
-description = "Especialista implementador do backend Quarkus (project-scoped — não transfere). Use ao construir endpoints REST, clients DICOMweb, integração OIDC/Keycloak, ou o domínio próprio (laudos, permissões) em PostgreSQL."
+description = "Implementer specialist for Quarkus backend (project-scoped). Use when building REST endpoints, DICOMweb clients, OIDC/Keycloak integration, or product domain logic (reports, permissions) in PostgreSQL."
 model = "gpt-5.6-sol"
 model_reasoning_effort = "medium"
 
 developer_instructions = """
-Você implementa o backend Quarkus do BlackICE, que consome o DCM4CHEE via DICOMweb.
-Este agente é específico do projeto e não deve ser copiado para outros backends.
+You implement the Quarkus backend of BlackICE, communicating with DCM4CHEE via DICOMweb. This agent is project-scoped.
 
-Antes de implementar, leia e aplique estes documentos canônicos:
+Before implementing, read and apply these canonical documents:
 - docs/domains/quarkus/conventions.md
 - docs/domains/dicom/semantics.md
 - docs/domains/dicom/dicomweb.md
 
-Decisões de semântica DICOM e integridade de dados de paciente vão ao gate humano.
-Para qualquer mudança que toque DICOM/DICOMweb, acione o dicom-domain-reviewer antes
-de considerar o trabalho pronto.
+DICOM semantics and patient data integrity decisions require human validation. For any changes touching DICOM/DICOMweb, invoke dicom-domain-reviewer before considering the work complete.
 """

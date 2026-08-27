@@ -1,76 +1,35 @@
-# Seleção de modelo
+# Model Selection & Routing
 
-## Regra central
+## Core Principle
 
-Para cada agente criado ou alterado, pesquise o estado atual de Anthropic,
-OpenAI e Google antes de escolher. Selecione, em cada plataforma solicitada, o
-modelo ou tier de **menor custo elegível** para a tarefa. “Mais novo” e “mais
-capaz” não são, por si, justificativa para custo maior.
+For every created or modified agent, verify the current model availability across Anthropic, OpenAI, and Google before selecting. In each targeted platform, select the **lowest-cost eligible model or tier** capable of executing the task. Newer or larger models are not, on their own, justification for higher token costs.
 
-Não mantenha neste documento uma tabela de modelos, preços ou rankings. Eles
-mudam rapidamente e seriam uma fonte de decisão desatualizada.
+Do not maintain a static pricing or model leaderboard in this document, as model capabilities and pricing change rapidly.
 
-## Pesquisa obrigatória
+## Mandatory Research Protocol
 
-Na mesma sessão que propõe a alteração, consulte fontes oficiais atuais de cada
-fornecedor:
+In the same session proposing the change, consult the official documentation for each provider:
 
-| Fornecedor | Consultar | Também verificar localmente |
+| Provider | Documentation Focus | Local Environment Verification |
 | :-- | :-- | :-- |
-| Anthropic | documentação de subagentes, configuração e custos | aliases/IDs permitidos, política e plano da conta |
-| OpenAI | documentação de subagentes Codex, modelos e preços quando publicados | versão do Codex, allowlists e modelos/esforços que o cliente expõe |
-| Google | documentação de custom agents/skills e catálogo aplicável | `agy models` e os tiers aceitos pelo frontmatter |
+| Anthropic | Subagent configurations, supported models, and costs | Account plan allowances and CLI alias support |
+| OpenAI | Codex subagent configuration, model identifiers, and pricing | Codex CLI version and supported model/reasoning tiers |
+| Google | Antigravity custom agents and skills documentation | `agy models` and frontmatter tier mappings (`flash_lite`, `flash`, `inherit`, `pro`) |
 
-Fontes de partida oficiais: [Claude subagents](https://code.claude.com/docs/en/sub-agents),
-[custos Claude Code](https://code.claude.com/docs/en/costs),
-[Codex subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents),
-[preços OpenAI](https://platform.openai.com/docs/pricing),
-[Antigravity custom agents](https://antigravity.google/blog/introducing-custom-agents)
-e [Antigravity skills](https://antigravity.google/docs/skills).
+An option is ineligible if unavailable in the active environment, deprecated, or rejected by that platform's schema validator.
 
-Uma opção é inelegível se estiver indisponível no ambiente, descontinuada ou não
-for aceita no campo de configuração daquela plataforma. Tiers não são modelos:
-registre o modelo efetivo observado quando o runtime o expuser.
+## Workload Classification
 
-## Classificação e roteamento
+1. Identify tools, permissions, blast radius, and domain judgment requirements.
+2. Classify the workload:
+   - **Simple / Mechanical:** Repetitive transformations, documentation formatting, structured lookups.
+   - **Routine:** Standard feature implementation, isolated bugfixes with explicit test coverage.
+   - **Complex / High Risk:** Multi-step refactors, architectural changes, security, or domain-critical semantics.
+   - **Specialized:** Deep multi-factor reasoning (always subject to human gates when touching clinical data).
+3. Select the lowest-cost candidate capable of fulfilling the task with minimal required tool permissions.
 
-1. Defina a responsabilidade, ferramentas, permissões, impacto e necessidade
-   de julgamento de domínio.
-2. Classifique a carga:
-   - **simples/repetitiva:** transformação pequena, inventário, resumo ou tarefa
-     mecânica bem delimitada;
-   - **rotineira:** implementação ou revisão comum com testes e limites claros;
-   - **complexa/de alto risco:** investigação ambígua, múltiplas etapas,
-     arquitetura, segurança ou semântica de domínio;
-   - **especializada:** exige raciocínio profundo, mas continua sujeita a gate
-     humano quando há dados de paciente ou decisão clínica.
-3. Escolha o candidato de menor preço capaz de cumprir a classe, com o menor
-   esforço de raciocínio suficiente e as ferramentas mínimas.
-4. Prefira um modelo econômico para a classe simples. Para classes maiores,
-   compare qualidade, latência, custo e disponibilidade reais — não o nome do
-   fornecedor.
+Critical tasks never bypass human review gates; scaling up model tiers does not replace domain validation.
 
-Uma tarefa crítica não dispensa revisão humana; aumentar o modelo não substitui
-um gate de domínio. Inversamente, um modelo avançado não deve ser usado para uma
-tarefa barata só por ser o padrão da sessão.
+## Escalation Governance
 
-## Proposta e escalonamento
-
-Antes de gravar a configuração, apresente ao humano:
-
-```text
-Papel e tarefa:
-Plataforma:
-Classificação:
-Candidato econômico elegível:
-Modelo/tier e esforço configuráveis:
-Disponibilidade local verificada em:
-Pesquisa: data + URLs oficiais
-Justificativa de custo/capacidade:
-Gate ou permissão que exige aprovação:
-```
-
-Não altere o modelo de um agente existente sem autorização explícita. Só proponha
-escalonamento depois de evidência concreta — falha reproduzível, limitação de
-ferramenta, qualidade insuficiente ou risco que a classe atual não cobre — e
-apresente a alternativa e seu impacto de custo antes de aplicá-la.
+Never alter an existing agent's model tier without explicit human authorization. Only propose escalation with concrete evidence (reproducible test failure, tool limitation, or context deficiency) and disclose cost implications beforehand.

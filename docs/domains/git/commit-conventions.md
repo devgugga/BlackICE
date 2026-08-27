@@ -1,186 +1,81 @@
-# Convenções de commit
+# Git Commit Conventions
 
-Este documento é a fonte de verdade para agentes que criam commits locais.
+This document is the canonical source of truth for agents authoring and curating local Git commits.
 
-## Autoridade e branch
+## Authority and Branching Rules
 
-1. Examine a branch atual antes de agir.
-2. Em uma branch de trabalho, crie o commit local ao concluir uma tarefa com
-   alterações versionáveis e verificadas.
-3. Em `main`, só crie um commit com autorização explícita do humano, exceto se
-   houver autorização anterior, inequívoca e ainda aplicável no contexto ativo.
-4. Não crie branches, não altere o histórico existente e nunca faça push.
+1. Inspect the active branch before taking action.
+2. On a dedicated working branch, author the local commit upon completing a verified task with versionable changes.
+3. On the `main` branch, only create a commit with explicit human authorization, unless prior, unequivocal authorization exists in the active session context.
+4. Do not create branches, rewrite historical commits, or execute `git push`.
 
-## Seleção segura do escopo
+## Safe Scope Selection
 
-1. Inspecione `git status` e os diffs antes de selecionar arquivos.
-2. Inclua somente as mudanças comprovadamente relacionadas à tarefa concluída.
-3. Não misture trabalho alheio ou sem relação em uma árvore compartilhada.
-4. Quando não for possível separar o escopo com segurança, pare e explique o
-   motivo; não crie um commit parcial ou ambíguo.
+1. Inspect `git status` and diffs before selecting and staging files.
+2. Stage strictly the changes directly related to the completed task.
+3. Never mix unrelated edits or foreign work into a shared worktree.
+4. If it is impossible to separate the scope safely, stop and explain why; never produce ambiguous or partial commits.
 
-## Pré-requisitos
+## Prerequisites
 
-1. Execute as validações relevantes e registre somente resultados comprovados.
-2. Antes de commitar arquivos versionados, atualize o Graphify conforme
-   `AGENTS.md` e `docs/architecture/graphify.md` e revise o diff de
-   `graphify-out/`.
-3. **Não julgue quais artefatos do Graphify são "portáveis".** Essa decisão já
-   está tomada no `.gitignore`: o que é estado local está ignorado, e todo
-   arquivo de `graphify-out/` que o Git rastreia é portável por definição.
-   Inclua **todos** os arquivos rastreados que a atualização modificou; na
-   dúvida, confirme com `git ls-files graphify-out/`. Nunca deixe um arquivo
-   rastreado modificado para trás — ele contamina o próximo commit.
+1. Run relevant automated checks and log verified outputs.
+2. Before committing versioned changes, update Graphify in accordance with `AGENTS.md` and `docs/architecture/graphify.md`, reviewing the diff in `graphify-out/`.
+3. Include **all** tracked files modified by the Graphify update; never leave tracked Graphify artifacts behind.
 
-## Mensagem do commit
+## Commit Message Format
 
-1. Escolha o gitmoji pela tabela da seção seguinte. Ela decide; não delibere.
-2. Use o **caractere literal** do emoji (`🎉`), nunca o shortcode (`:tada:`).
-3. Crie o commit diretamente; não exiba nem proponha a mensagem para aprovação.
-4. Escreva em português um título no formato:
+1. Select the Gitmoji directly from the table below.
+2. Use the **literal emoji character** (`🎉`), never the colon shortcode (`:tada:`).
+3. Commit directly without asking for message confirmation.
+4. Write the title in Portuguese or English following the convention:
 
    ```text
-   gitmoji verbo resultado: contexto
+   gitmoji verb outcome: context
    ```
 
-5. Não invente capacidades, testes ou garantias não demonstrados pelo diff e
-   pelas validações executadas.
+5. Never claim features, tests, or guarantees unsupported by the diff.
 
-### Escolha do gitmoji
+### Gitmoji Selection
 
-Casos recorrentes deste repositório. **Se uma linha se aplica, use-a** — não
-pondere alternativas. Só consulte [Gitmoji](https://gitmoji.dev/) quando
-nenhuma linha servir, e então use o significado publicado lá.
-
-| Gitmoji | Quando |
+| Gitmoji | When to Use |
 | :-- | :-- |
-| `📝` | Qualquer mudança só de `.md` — docs, specs, planos, Domain Packs, corpo de agente. |
-| `✨` | Capacidade nova em código executável. |
-| `🐛` | Correção de bug. |
-| `♻️` | Refatoração sem mudança de comportamento observável. |
-| `🔧` | Configuração: compose, `.env`, `.gitignore`, scripts de infra. |
-| `🔐` | Auth, OIDC, Keycloak, realms, escopos, segredos. |
-| `✅` | Adicionar ou corrigir testes. |
-| `🚚` | Mover ou renomear arquivos e diretórios. |
-| `⬆️` | Subir versão de dependência ou baseline de ferramenta. |
-| `🕸️` | Sincronização do grafo do Graphify (ver a regra própria adiante). |
+| `📝` | Any documentation-only change (`.md` docs, specs, plans, domain packs, agent instructions). |
+| `✨` | New user-facing capability in executable code. |
+| `🐛` | Bugfix. |
+| `♻️` | Refactoring without observable behavioral change. |
+| `🔧` | Configuration: Compose, `.env`, `.gitignore`, tooling scripts. |
+| `🔐` | Auth, OIDC, Keycloak, realms, scopes, secrets. |
+| `✅` | Adding or correcting automated tests. |
+| `🚚` | Moving or renaming files and directories. |
+| `⬆️` | Upgrading dependencies or toolchain baselines. |
+| `🕸️` | Graphify knowledge graph synchronization. |
 
-**Desempate — classifique pelo efeito da mudança, não pelo assunto dela.** Um
-commit que altera somente arquivos `.md` é `📝` mesmo que o texto descreva uma
-funcionalidade nova, um bug ou uma regra de segurança. `✨`, `🐛` e `🔐` exigem
-que o comportamento do sistema tenha mudado, não só a descrição dele.
+### Commit Body (Mandatory)
 
-Quando o diff cruza categorias, escolha pela mudança que domina o commit. Se
-duas dominam em igual medida, o escopo está grande demais: divida.
+The body is **mandatory** for every commit touching code, configuration, infrastructure, or documentation.
 
-### Corpo (obrigatório)
+Use the structured sections in this order:
 
-O corpo é **obrigatório** em todo commit que altere código, configuração,
-infraestrutura ou documentação. Título sozinho só é aceito no commit de
-sincronização do grafo (ver adiante). Se você não consegue escrever o corpo, o
-escopo do commit não foi entendido — pare, releia o diff e recomece.
-
-Escreva cada seção como `### <emoji> <nome>`, separando seções consecutivas com
-uma linha `---`. Use apenas as seções abaixo, sempre nesta ordem, e inclua
-somente as que o diff comprova:
-
-| Seção | Quando usar |
+| Section | When to Use |
 | :-- | :-- |
-| `### ✅ Novas funcionalidades` | Capacidade que não existia antes. |
-| `### 💡 Melhorias na arquitetura` | Estrutura, fronteiras, decisões de desenho. |
-| `### 🧼 Boas práticas e validações` | Higiene, testes, healthchecks, `.gitignore`. |
-| `### 🔐 Permissões e controle de acesso` | Auth, OIDC, realms, escopos, segredos. |
-| `### 🚀 Resultado` | **Sempre presente.** |
+| `### ✅ Novas funcionalidades` (or `### ✅ New features`) | New capabilities added. |
+| `### 💡 Melhorias na arquitetura` (or `### 💡 Architecture improvements`) | Structural changes, boundaries, design decisions. |
+| `### 🧼 Boas práticas e validações` (or `### 🧼 Best practices & validations`) | Code hygiene, tests, healthchecks, linting. |
+| `### 🔐 Permissões e controle de acesso` (or `### 🔐 Security & Access Control`) | Auth, OIDC, roles, secrets. |
+| `### 🚀 Resultado` (or `### 🚀 Outcome`) | **Always present.** Summary of repository state and next steps. |
 
-Regras de conteúdo:
+Wrap all lines at **76 columns**.
 
-- Ao menos uma seção temática **mais** `Resultado`. `Resultado` nunca é omitida.
-- Seções temáticas usam bullets; cada bullet descreve uma mudança verificável no
-  diff, com o artefato concreto entre crases (arquivo, serviço, variável).
-- `Resultado` é um parágrafo corrido — o estado em que o repositório ficou e o
-  que passa a ser possível a seguir. Não repita os bullets.
-- Negrito apenas em componentes e versões (`**Traefik v3.1**`), não para ênfase.
-- **Quebre toda linha em 76 colunas**, inclusive dentro de bullets e do
-  parágrafo de `Resultado`. Continuação de bullet indenta 2 espaços. Git não
-  reflui o corpo: uma linha longa vira uma linha longa em `git log`, no
-  `git blame` e em qualquer forge.
+### Graph Synchronization Commit
 
-### Exemplo canônico
-
-```text
-🎉 estabelece a fundação da infraestrutura: rede blackice, traefik e postgres
-
-### ✅ Novas funcionalidades
-
-* Scaffolding do monorepo com diretórios `backend/`, `frontend/` e `infra/`.
-* Orquestração da infraestrutura via `docker-compose.yml` com
-  **Traefik v3.1** e **PostgreSQL 17**.
-
----
-
-### 💡 Melhorias na arquitetura
-
-* Estabelecimento da rede Docker `blackice` como ponto de integração
-  (same-origin).
-* **Traefik v3.1** como reverse proxy centralizado (porta 80, dashboard DEV
-  em `:8081`).
-* **PostgreSQL 17** dedicado aos dados do produto Quarkus, isolado do
-  archive DCM4CHEE.
-* Persistência via volume nomeado `product-db-data`.
-
----
-
-### 🧼 Boas práticas e validações
-
-* `.gitignore` para artefatos de build (`node_modules/`, `dist/`, `target/`)
-  e segredos (`infra/.env`).
-* `.env.example` como template seguro (`APP_HOST`, credenciais de produto,
-  OIDC secret).
-* Healthcheck do PostgreSQL para garantir disponibilidade antes dos
-  dependentes.
-
----
-
-### 🚀 Resultado
-
-A fundação de infraestrutura do BlackICE está pronta: rede Docker
-`blackice`, Traefik como borda, PostgreSQL do produto isolado e gestão de
-segredos via `.env`. Pronto para a integração dos serviços backend e
-frontend.
-```
-
-### Commit de sincronização do grafo
-
-O segundo commit focado que carrega **apenas** `graphify-out/**` é a única
-exceção à obrigatoriedade do corpo. Ele usa exatamente:
+The dedicated commit carrying **strictly** `graphify-out/**` is the sole exception to the mandatory body rule:
 
 ```text
 🕸️ sincroniza grafo de conhecimento
 ```
 
-Sem corpo. Se o commit tocar qualquer arquivo fora de `graphify-out/`, ele não
-é um commit de sincronização e as regras normais valem integralmente.
+No body required.
 
-## Relato ao orquestrador
+## Attribution
 
-Você cria o commit sem exibir a mensagem para aprovação, então este relato é a
-única janela do humano sobre o que você fez. Ao terminar, devolva:
-
-1. A saída de `git log -1 --stat` do commit criado.
-2. Uma linha por arquivo deixado de fora, com o motivo.
-3. As validações executadas e o resultado real de cada uma.
-
-Se você parou sem commitar, informe o motivo e o estado em que deixou a árvore.
-
-## Alcance destas regras
-
-Estas convenções valem **daqui para a frente**. O histórico existente contém
-commits em shortcode (`:spider_web:`) e corpos com outra renderização (`##` sem
-emoji); nada disso deve ser reescrito — o histórico é imutável por política.
-Pelo mesmo motivo, **não use `git log` como referência de formato**: o exemplo
-canônico acima é a única fonte.
-
-## Atribuição
-
-É absolutamente proibido incluir trailers `Co-authored-by`, `Co-authored-by:`
-ou qualquer outra atribuição de coautoria no commit.
+It is strictly forbidden to append `Co-authored-by` or similar co-authorship trailers to commits.

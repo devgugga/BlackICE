@@ -1,9 +1,8 @@
-# DICOM — semântica e invariantes
+# DICOM: Semantics and Invariants
 
-Regras de **correção de negócio**. Violá-las corrompe dados de paciente ou quebra
-interoperabilidade. Um revisor deve tratar qualquer violação como bloqueante.
+These are **clinical correctness rules**. Violating them corrupts patient data or breaks system interoperability. Reviewers must treat any violation as a blocking defect.
 
-## Modelo de dados (hierarquia)
+## Data Model (Hierarchy)
 
 ```
 Patient            (PatientID [+ IssuerOfPatientID], PatientName …)
@@ -12,58 +11,41 @@ Patient            (PatientID [+ IssuerOfPatientID], PatientName …)
             └─ Instance / SOP (SOPInstanceUID, SOPClassUID, pixel data …)
 ```
 
-- **Um estudo** agrupa tudo de um exame; sua chave estável é `StudyInstanceUID`.
-- **Uma série** tem **uma única `Modality`** (CT, MR, US, CR, DX, …) e uma
-  orientação/aquisição coerente. Não misture modalidades numa série.
-- **Uma instância** é um objeto SOP (tipicamente uma imagem, mas pode ser SR, PDF
-  encapsulado, KO, PR …). `SOPClassUID` diz o tipo; `SOPInstanceUID` a identidade.
+- **A Study** groups all series and instances of a single clinical examination; its primary stable key is `StudyInstanceUID`.
+- **A Series** contains **exactly one `Modality`** (CT, MR, US, CR, DX, etc.) and a single coherent spatial acquisition. Never mix modalities within a series.
+- **An Instance** is an individual SOP object (typically an image frame, but can be a Structured Report (SR), Encapsulated PDF, Key Object (KO), Presentation State (PR), etc.). `SOPClassUID` defines the type; `SOPInstanceUID` defines the identity.
 
-## UIDs — a regra mais importante
+## UIDs: The Most Critical Invariant
 
-- `StudyInstanceUID`, `SeriesInstanceUID`, `SOPInstanceUID` são **identidade
-  imutável**. Vêm da modalidade na aquisição ou do archive.
-- **Nunca fabrique um UID** em código de aplicação para representar algo que já
-  existe. Buscar um estudo = usar o UID que o archive retornou (via QIDO).
-- Ao **criar um objeto novo** (raro no MVP), gere o UID com um **gerador DICOM
-  válido**, ancorado numa **raiz de organização registrada** (`<org root>.<sufixo>`),
-  máx. 64 chars, apenas dígitos e pontos, sem zero à esquerda em cada componente.
-  Nunca use UUID cru, timestamp solto ou string aleatória como UID.
-- UID é **case-sensitive** e comparado como string exata. Não normalize.
+- `StudyInstanceUID`, `SeriesInstanceUID`, and `SOPInstanceUID` represent **immutable identity**. They originate from the modality during acquisition or from the PACS Archive.
+- **Never fabricate or invent a UID** in application code to represent existing objects. Searching or loading a study requires using the UID returned by the archive (via QIDO-RS).
+- When **creating a new object**, generate the UID with a **valid DICOM UID generator** anchored on a **registered organization root** (`<org root>.<suffix>`), maximum 64 characters, containing only digits and dots, with no leading zeros in individual components. Never use raw UUIDs, random strings, or timestamps as UIDs.
+- UIDs are **case-sensitive** and compared as exact strings. Do not normalize casing.
 
-## Identidade de paciente
+## Patient Identity
 
-- `PatientID` **não é globalmente único** por si só — só é único dentro do domínio
-  de um `IssuerOfPatientID`. Não assuma unicidade global nem use `PatientID` como
-  PK sem o issuer.
-- `PatientName` (VR `PN`) é estruturado com `^`:
-  `Sobrenome^Nome^NomeDoMeio^Prefixo^Sufixo`. Não trate como texto livre ao
-  fazer matching.
+- `PatientID` is **not globally unique** on its own: it is only unique within the domain of an `IssuerOfPatientID`. Never assume global uniqueness or use `PatientID` as a primary key without its issuer.
+- `PatientName` (VR `PN`) is structured using `^` delimiters:
+  `LastName^FirstName^MiddleName^Prefix^Suffix`. Do not treat it as unstructured plain text during matching.
 
-## Tags, VRs e formatos
+## Tags, VRs, and Formats
 
-- Tags são `(gggg,eeee)` (grupo, elemento). Cada tag tem um **VR** (Value
-  Representation) que define o formato. Respeite o VR ao ler/escrever.
-- Datas/horas: `DA` = `YYYYMMDD`; `TM` = `HHMMSS.FFFFFF`; `DT` = combinação.
-  Não converta cegamente para ISO sem preservar a semântica.
-- `IS`/`DS` são números **em string**; `US`/`UL`/`SS`/`SL` são binários.
-- **Character set:** `SpecificCharacterSet` (0008,0005) define a codificação de
-  campos de texto. Não assuma UTF-8/Latin-1.
+- Tags are structured as `(gggg,eeee)` (group, element). Each tag possesses a **VR** (Value Representation) defining its format. Respect the VR during read/write operations.
+- Dates & Times: `DA` = `YYYYMMDD`; `TM` = `HHMMSS.FFFFFF`; `DT` = combined timestamp. Do not blindly convert to ISO-8601 without preserving DICOM semantics.
+- `IS`/`DS` are numbers **stored as strings**; `US`/`UL`/`SS`/`SL` are binary numbers.
+- **Character Encoding:** `SpecificCharacterSet` (0008,0005) defines the encoding of textual attributes. Never assume UTF-8 or Latin-1 without checking.
 
-## Pixel data e Transfer Syntax
+## Pixel Data and Transfer Syntax
 
-- O **Transfer Syntax** define encoding + compressão dos pixels (Implicit/Explicit
-  VR, Little/Big Endian, JPEG Lossless, JPEG 2000, RLE …).
-- **Não re-encode nem transcodifique** pixel data sem necessidade e sem entender o
-  Transfer Syntax de origem e destino. Transcodificação lossy é perda irreversível
-  de informação diagnóstica.
-- Renderização para tela (window/level, LUT) é apresentação — **não** altera os
-  pixels armazenados.
+- The **Transfer Syntax** specifies the pixel data encoding and compression (Implicit/Explicit VR, Little/Big Endian, JPEG Lossless, JPEG 2000, RLE, etc.).
+- **Do not re-encode or transcode** pixel data without explicit architectural necessity and complete understanding of source and destination transfer syntaxes. Lossy transcoding introduces irreversible loss of diagnostic information.
+- Viewport presentation rendering (*Window/Level*, LUT transformations) is client-side presentation: it **never** mutates stored pixel values.
 
-## Checklist de revisão (o que o revisor procura)
+## Review Checklist (What Reviewers Look For)
 
-- [ ] Algum UID sendo gerado/inventado onde deveria vir do archive?
-- [ ] `PatientID` usado como identificador único sem issuer?
-- [ ] Série assumindo múltiplas modalidades, ou modalidade hardcoded errada?
-- [ ] Datas/nomes DICOM parseados com formato errado (ISO em vez de DA/PN)?
-- [ ] Transcodificação/re-encode de pixels sem justificativa?
-- [ ] Hierarquia paciente→estudo→série→instância quebrada no modelo/queries?
+- [ ] Is any UID being invented or randomly generated where it should originate from the Archive?
+- [ ] Is `PatientID` used as a primary key without `IssuerOfPatientID`?
+- [ ] Does a series assume multiple modalities or use hardcoded wrong modalities?
+- [ ] Are DICOM dates and names parsed with invalid format assumptions (ISO strings instead of DA/PN)?
+- [ ] Is pixel data being transcoded or re-encoded without justification?
+- [ ] Is the Patient -> Study -> Series -> Instance hierarchy broken in models or queries?

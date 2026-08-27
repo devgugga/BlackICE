@@ -1,19 +1,15 @@
 # Domain Pack: Quarkus ✗ (project-scoped)
 
-Fonte da verdade sobre o **backend Quarkus** do BlackICE. **Não é reutilizável:**
-é project-scoped porque descreve decisões específicas do BlackICE/Quarkus. Este
-pack fica para trás quando o conhecimento DICOM/Vue for copiado para outro
-projeto.
+Source of truth for the **Quarkus backend** in BlackICE. **Not reusable:** This pack is project-scoped because it captures specific BlackICE architectural and design decisions.
 
-## Documentos
+## Documents
 
-- [`conventions.md`](./conventions.md) — Quarkus como backend de produto,
-  integração OIDC/Keycloak, client DICOMweb para o DCM4CHEE, modelagem de laudos.
+- [`conventions.md`](./conventions.md): Quarkus as a product backend/BFF, Keycloak OIDC integration, DICOMweb client for DCM4CHEE, and clinical reports domain modeling.
 
-## Quem consome este pack
+## Consumers of this Pack
 
 - Claude: `.claude/agents/quarkus/quarkus-backend.md`
 - Codex: `.codex/agents/quarkus/quarkus-backend.toml`
+- Antigravity: `.agents/agents/quarkus-backend/agent.md`
 
-Especialista **implementador** do backend. As regras de **semântica DICOM** não
-estão aqui — estão em `docs/domains/dicom/`, que este backend também deve respeitar.
+Backend **implementer specialists**. Core **DICOM semantic rules** live in `docs/domains/dicom/`, which this backend must strictly respect.

@@ -1,61 +1,27 @@
-# DCM4CHEE Archive — baseline do BlackICE
+# DCM4CHEE Archive: Architectural Baseline
 
-## Versão fixada
+## Pinned Release
 
-O BlackICE adota **DCM4CHEE Archive 5.34.3** como baseline da integração. A release
-foi publicada pelo projeto dcm4che em **2026-04-24** e está marcada como `Latest` no
-repositório oficial.
+BlackICE pins **DCM4CHEE Archive 5.34.3** as its core integration baseline.
 
-Para uma implantação Docker protegida que exponha a UI e os serviços REST, a imagem
-do Archive deve ser fixada em:
+For secure containerized deployment exposing DICOMweb REST services, the Archive image is pinned to:
 
 ```text
 dcm4che/dcm4chee-arc-psql:5.34.3-secure
 ```
 
-Nunca use a tag mutável `latest` em ambiente reproduzível. A infraestrutura atual é
-composta pelos manifests `infra/compose.yml`, `infra/dcm4chee/compose.yml` e
-`infra/compose.apps.yml`. O manifest do Archive materializa a baseline 5.34.3 ao
-referenciar exatamente a tag `5.34.3-secure`.
+Never use mutable `latest` tags in reproducible environments.
 
-## Ecossistema publicado com a release
+## Component Topology
 
-A release 5.34.3 também publica os seguintes componentes para a sua stack Docker:
+The 5.34.3 release topology includes:
 
-- `dcm4che/slapd-dcm4chee:2.6.10-34.3` para a configuração LDAP;
-- `dcm4che/postgres-dcm4chee:17.4-34` para o PostgreSQL do Archive — a release
-  publica imagens de PostgreSQL 11 a 17; o BlackICE fixa a **17.4-34** (mais recente
-  suportada) como baseline. Este é o Postgres **do DCM4CHEE**, distinto do banco de
-  produto do Quarkus;
-- `dcm4che/keycloak:25.0.6` para o Keycloak obrigatório da baseline segura do
-  BlackICE;
-- `mariadb:10.11.4` como banco do Keycloak — o compose *secure* oficial inclui este
-  5º serviço (o Keycloak não usa o Postgres do Archive). Confirmado ao subir a stack;
-- WildFly 39.0.1.Final como atualização interna da release do Archive.
+- `dcm4che/slapd-dcm4chee:2.6.10-34.3`: LDAP schema and configuration store;
+- `dcm4che/postgres-dcm4chee:17.4-34`: PostgreSQL database dedicated exclusively to DCM4CHEE metadata (strictly isolated from the Quarkus product database);
+- `dcm4che/keycloak:25.0.6`: Keycloak OIDC identity server;
+- `mariadb:10.11.4`: Database backing Keycloak;
+- WildFly 39.0.1.Final internal application server runtime.
 
-> **Atenção à versão do Keycloak:** a tag da **release 5.34.3** é `25.0.6` (confirmado
-> na página da release). O *wiki HEAD* do dcm4che pode exibir `26.0.6`, pois acompanha
-> o `master`, não a release fixada. Para a baseline do BlackICE vale a release: **25.0.6**.
+## DICOMweb Boundary
 
-Essas versões são registradas como referências de compatibilidade da release, não como
-uma autorização para montar a infraestrutura sem definir persistência, segredos,
-certificados, backup e política de atualização.
-
-A imagem `5.34.3-secure` pressupõe a integração OIDC com Keycloak. Assim, a stack do
-BlackICE deve configurar o issuer e os clientes do Keycloak antes de expor UI ou
-serviços DICOMweb; isso mantém a autenticação Bearer, a propagação de token e a
-auditoria definidas pelo projeto.
-
-## Impacto para a integração do produto
-
-O BlackICE usa o Archive como motor DICOM e o acessa por DICOMweb: STOW-RS para
-ingestão, QIDO-RS para consulta e WADO-RS para recuperação. A correção dessas
-integrações continua definida no Domain Pack reutilizável em `docs/domains/dicom/`;
-esta página não altera seus invariantes.
-
-## Fontes oficiais
-
-- [Release 5.34.3](https://github.com/dcm4che/dcm4chee-arc-light/releases/tag/5.34.3)
-- [Instalação do DCM4CHEE Archive](https://github.com/dcm4che/dcm4chee-arc-light/wiki/Installation)
-- [Histórico da documentação de instalação — atualização para 5.34.3](https://github.com/dcm4che/dcm4chee-arc-light/wiki/Installation/_history)
-- [Binários 5.x](https://sourceforge.net/projects/dcm4che/files/dcm4chee-arc-light5/)
+BlackICE treats DCM4CHEE strictly as an upstream DICOM engine accessed via DICOMweb (STOW-RS for ingestion, QIDO-RS for queries, and WADO-RS for frame retrieval). Detailed DICOM invariants and semantics live in `docs/domains/dicom/`.

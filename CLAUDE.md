@@ -1,42 +1,33 @@
 @AGENTS.md
 
-# Notas específicas do Claude Code
+# Claude Code Specific Notes
 
-As regras do projeto estão em `AGENTS.md` (importado acima) e o conhecimento de
-domínio em `docs/domains/`. Este arquivo cobre só o que é específico do Claude Code.
+Project-wide behavioral rules are defined in `AGENTS.md` (imported above), and domain knowledge resides in `docs/domains/`. This document specifies Claude Code-specific bindings.
 
-## Subagentes disponíveis (`.claude/agents/`)
+## Available Subagents (`.claude/agents/`)
 
-| Subagente | Papel | Quando usar |
+| Subagent | Role | When to Use |
 | :-- | :-- | :-- |
-| `dicom-domain-reviewer` | Validador **read-only** de semântica DICOM/DICOMweb | Proativamente, após escrever qualquer código que toque DICOM (ingestão, query, retrieve, mapeamento de tags). Pré-filtra erros de domínio antes do gate humano. |
-| `dicom-viewer-frontend` | Especialista implementador Cornerstone3D + Vue | Ao construir/alterar o viewer ou componentes que renderizam imagem médica. |
-| `quarkus-backend` | Implementador do backend Quarkus (**project-scoped**, não transfere) | Ao construir endpoints, clients DICOMweb, entidades de laudo, config OIDC. |
-| `commit-curator` | Normaliza commits locais com Gitmoji | Ao concluir tarefa verificada em branch de trabalho; em `main`, requer autorização humana. |
+| `dicom-domain-reviewer` | Read-only validator for DICOM/DICOMweb semantics | Proactively, after writing code touching DICOM (ingestion, query, retrieve, tag mapping). Pre-filters domain issues before human gates. |
+| `dicom-viewer-frontend` | Implementer specialist for Cornerstone3D + Vue 3 | When building or altering the medical viewer or imaging components. |
+| `quarkus-backend` | Implementer specialist for Quarkus backend (**project-scoped**) | When building REST endpoints, DICOMweb clients, report entities, or OIDC configuration. |
+| `commit-curator` | Normalizes local commits with Gitmoji | When concluding verified tasks on a development branch; on `main`, requires human confirmation. |
 
-Todos são **wrappers finos**: leem `docs/domains/<domínio>/*.md` e aplicam. Para
-mudar comportamento, edite o doc de domínio, não o subagente.
+All subagents are **thin wrappers**: they load `docs/domains/<domain>/*.md` and apply those canonical rules. To change agent behavior, edit the domain docs, not the subagent wrappers.
 
 ## Skills (`.claude/skills/`)
 
-Home pronta para workflows repetíveis (ainda não criados). Convenção: nomeie por
-domínio — `dicom-*`, `vue-*`, `quarkus-*` — e faça a skill referenciar
-`docs/domains/<domínio>/`. Ex. futuros: `dicom-scaffold-endpoint`,
-`vue-add-viewer-tool`. Ver `docs/domains/README.md` para o padrão de criação.
+Repeatable workflows for Claude Code. Convention: name by domain (`dicom-*`, `vue-*`, `quarkus-*`) and reference `docs/domains/<domain>/`.
 
-## Portabilidade com Codex
+## Portability with OpenAI Codex & Google Antigravity
 
-Os subagentes Codex vivem em `.codex/agents/*.toml` (formato próprio) e apontam
-para os **mesmos** `docs/domains/`. Ao editar conhecimento, edite só os docs —
-ambos os lados herdam. Ao criar um subagente novo, espelhe nos dois formatos.
+Codex subagents live in `.codex/agents/*.toml` and Antigravity agents live in `.agents/agents/`. All point to the **same** `docs/domains/` source of truth. When updating domain knowledge, edit the docs once: all agents inherit the changes immediately.
 
-## graphify
+## Graphify
 
-This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+This project maintains a knowledge graph at `graphify-out/` with god nodes, community structure, and cross-file relationships.
 
 Guidance (optional):
-- For codebase questions, consider `graphify query "<question>"` when graphify-out/graph.json exists. `graphify path "<A>" "<B>"` and `graphify explain "<concept>"` can provide focused relationship and concept views.
-- You may instead use other appropriate approaches, including direct source browsing, targeted search, and project documentation.
-- If graphify-out/wiki/index.md exists, consider it for broad navigation; consider GRAPH_REPORT.md for broad architecture review or when focused graph queries are insufficient.
-- Follow the canonical update timing and commit protocol in `AGENTS.md` and `docs/architecture/graphify.md`.
-- A post-commit hook intentionally changes tracked `graphify-out/` artifacts after code commits; review and commit that graph synchronization separately. Follow the canonical protocol in `docs/architecture/graphify.md#fluxo-de-commits-com-o-hook`; do not disable the hook just to keep the worktree clean.
+- For codebase questions, consider `graphify query "<question>"` when `graphify-out/graph.json` exists. `graphify path "<A>" "<B>"` and `graphify explain "<concept>"` provide focused relationship and concept views.
+- You may also use direct source browsing, targeted search, and project documentation.
+- Review and synchronize `graphify-out/` according to `docs/architecture/graphify.md`.

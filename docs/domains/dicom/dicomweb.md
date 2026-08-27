@@ -1,66 +1,51 @@
-# DICOMweb — STOW / QIDO / WADO
+# DICOMweb: STOW-RS / QIDO-RS / WADO-RS
 
-Os serviços REST do DICOM. O DCM4CHEE expõe todos. **Cada verbo tem um papel; não
-troque um pelo outro.** Regra mnemônica: **S**TOW=guardar, **Q**IDO=buscar,
-**WADO**=recuperar pixels.
+Standard DICOM RESTful web services. DCM4CHEE Archive exposes all three. **Each service has a distinct purpose; do not interchange them.** Mnemonic: **S**TOW = Store, **Q**IDO = Query, **WADO** = Retrieve.
 
-## QIDO-RS — buscar (query)
+## QIDO-RS: Query (Search)
 
-`GET` que **procura** e retorna **metadados JSON** (`application/dicom+json`).
-Nunca retorna pixels. É o motor da **worklist e da busca**.
+`GET` requests that **search** and return **JSON metadata** (`application/dicom+json`). Never returns pixel data. Drives the **clinical worklist and study search**.
 
 - `GET /studies?PatientID=...&StudyDate=...&ModalitiesInStudy=CT&limit=20&offset=0`
 - `GET /studies/{StudyInstanceUID}/series`
 - `GET /studies/{StudyInstanceUID}/series/{SeriesInstanceUID}/instances`
-- Filtre com atributos DICOM como query params; pagine com `limit`/`offset`.
-- Peça campos extras com `includefield`. Resposta é array de objetos onde cada tag
-  é `"0020000D": {"vr":"UI","Value":["1.2.3..."]}`.
+- Filter using DICOM attributes as query parameters; paginate with `limit` / `offset`.
+- Request extra tags with `includefield`. Response is an array of JSON objects where each tag is formatted as `"0020000D": {"vr":"UI","Value":["1.2.3..."]}`.
 
-**Use para:** listar/filtrar estudos, montar a árvore estudo→série→instância antes
-de abrir o viewer. **Não use** para trazer imagem.
+**Use for:** Listing and filtering studies; assembling the Study -> Series -> Instance hierarchy before launching the viewer. **Do not use** to fetch raw image data.
 
-## WADO-RS — recuperar (retrieve)
+## WADO-RS: Retrieve (Fetch Data)
 
-`GET` que **entrega os dados**, incluindo **pixel data** (`multipart/related`) ou
-metadados/rendered.
+`GET` requests that **deliver actual DICOM payloads**, including **raw pixel data** (`multipart/related`) or rendered images.
 
-- Instância DICOM completa: `GET /studies/{u}/series/{u}/instances/{u}`
-- Frames de pixel: `GET /studies/{u}/series/{u}/instances/{u}/frames/{n}`
-- Metadados de um estudo/série: `.../metadata`
-- Imagem já renderizada (consumo web simples): `.../rendered` (JPEG/PNG)
-- Bulk data por referência: endpoint `/bulkdata`.
+- Full DICOM Instance: `GET /studies/{u}/series/{u}/instances/{u}`
+- Pixel Frames: `GET /studies/{u}/series/{u}/instances/{u}/frames/{n}`
+- Bulk Metadata: `.../metadata`
+- Server-rendered image (basic web display): `.../rendered` (JPEG/PNG)
+- Bulk data references: `/bulkdata` endpoint.
 
-**Use para:** alimentar o viewer (Cornerstone consome `imageId` do tipo
-`wadors:.../frames/1`). **Não use** para buscar/filtrar — isso é QIDO.
+**Use for:** Feeding medical viewports (Cornerstone3D consumes `imageId` strings formatted like `wadors:.../frames/1`). **Do not use** for searching or filtering (use QIDO-RS).
 
-## STOW-RS — armazenar (store)
+## STOW-RS: Store (Ingest)
 
-`POST` que **envia objetos DICOM** para o archive.
+`POST` requests that **transmit DICOM objects** to the PACS Archive.
 
-- `POST /studies` com corpo `multipart/related; type="application/dicom"`, cada
-  parte é um arquivo DICOM (`.dcm`). Opcional: `POST /studies/{StudyInstanceUID}`
-  para forçar o estudo alvo.
-- Resposta é um dataset de referência listando SOPs aceitos/rejeitados
-  (`ReferencedSOPSequence` / `FailedSOPSequence`). **Sempre verifique falhas** —
-  200 não garante que tudo entrou.
+- `POST /studies` with a `multipart/related; type="application/dicom"` body, where each part is a DICOM file (`.dcm`). Optional: `POST /studies/{StudyInstanceUID}` to enforce ingestion into a targeted study.
+- Response is a reference dataset enumerating accepted and rejected SOP instances (`ReferencedSOPSequence` / `FailedSOPSequence`). **Always inspect for failures**: HTTP `200` does not guarantee every instance was accepted.
 
-**Use para:** a ingestão do MVP (arrastar `.dcm` → backend → STOW).
+**Use for:** Manual file ingestion (drag-and-drop `.dcm` -> Quarkus BFF -> STOW-RS).
 
-## Autenticação (Keycloak / OIDC)
+## Authentication (Keycloak / OIDC)
 
-- O DCM4CHEE protegido por Keycloak espera **Bearer token** OIDC.
-- No BlackICE, o browser envia ao Quarkus somente o cookie de sessão `HttpOnly`
-  same-origin; o access token é inacessível ao JavaScript.
-- O Quarkus recupera o access token da sessão OIDC server-side e o propaga (ou
-  troca) ao chamar o DCM4CHEE. Não use credenciais de serviço fixas para ações que
-  representam um usuário — quebra a auditoria.
-- O browser não chama o Archive diretamente: toda chamada DICOMweb passa pelo
-  Quarkus, e o CORS relevante é entre browser e backend.
+- Keycloak-secured DCM4CHEE endpoints require a **Bearer token**.
+- In BlackICE, the browser communicates exclusively with Quarkus using a secure `HttpOnly` same-origin session cookie; access tokens are never exposed to client-side JavaScript.
+- Quarkus extracts the user's access token server-side and forwards it when executing DICOMweb calls. Do not use static service credentials for actions representing human operators, as this invalidates the DICOM audit trail.
+- The browser never interacts with DCM4CHEE directly: all DICOMweb calls flow through the Quarkus BFF.
 
-## Erros comuns (o revisor sinaliza)
+## Common Mistakes (What Reviewers Flag)
 
-- [ ] Usar WADO onde deveria ser QIDO (buscar trazendo pixel) ou vice-versa.
-- [ ] Ignorar `FailedSOPSequence` numa resposta de STOW (falsa sensação de sucesso).
-- [ ] Montar `imageId` do viewer a partir de QIDO em vez de WADO-RS.
-- [ ] Não propagar o token OIDC do usuário na chamada DICOMweb.
-- [ ] Paginar QIDO no cliente (trazer tudo e cortar) em vez de `limit`/`offset`.
+- [ ] Using WADO where QIDO was required (fetching pixels during queries) or vice versa.
+- [ ] Ignoring `FailedSOPSequence` in STOW responses (false impression of total success).
+- [ ] Constructing Cornerstone `imageId` from QIDO endpoints instead of WADO-RS frame URLs.
+- [ ] Failing to propagate the authenticated user's OIDC token in downstream DICOMweb calls.
+- [ ] Performing client-side pagination (fetching all records and slicing) instead of server-side `limit`/`offset`.

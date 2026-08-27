@@ -1,57 +1,37 @@
-# Domain Packs — convenção de agentes
+# Domain Packs: Agent Knowledge Architecture
 
-Este diretório é o **núcleo de conhecimento** do projeto. Cada subpasta é um
-"domain pack" autocontido, e é a **fonte única da verdade** para aquele domínio.
-Subagentes (Claude, Codex e Antigravity) e skills são apenas **wrappers finos**
-que leem estes documentos — eles nunca duplicam o conteúdo.
+This directory serves as the **core knowledge base** for the project. Each subdirectory is a self-contained "Domain Pack", representing the **single source of truth** for that domain. AI agents (Claude Code, OpenAI Codex, and Google Antigravity) and skills are **thin wrappers** that read these markdown files; they never duplicate domain logic.
 
-## Por que assim
+## Why This Architecture
 
-- **Portabilidade entre ferramentas.** Subagentes do Claude (markdown em
-  `.claude/agents/`), do Codex (TOML em `.codex/agents/`) e do Antigravity
-  (Markdown com YAML em `.agents/agents/`) têm **formatos diferentes e
-  incompatíveis**. O que é portável é o markdown neutro daqui.
-- **Reuso entre projetos.** Os packs marcados ♻️ transferem para outros projetos
-  (ex.: o PACS em Django). Basta copiar a pasta do domínio e os wrappers; o
-  conhecimento vai intacto.
-- **Manutenção.** Uma regra mora em um lugar. Corrigiu? Todos os agentes herdam.
+- **Multi-Agent Portability**: Claude Code subagents (`.claude/agents/*.md`), Codex subagents (`.codex/agents/*.toml`), and Antigravity agents (`.agents/agents/*/agent.md`) use **different configurations**. Neutral Markdown documents in this directory are 100% portable across all AI tools.
+- **Cross-Project Reusability**: Packs marked with ♻️ are portable to other medical imaging projects. Copy the domain pack and its agent wrappers, and domain knowledge remains intact.
+- **Maintainability**: A domain rule lives in exactly one place. Fix it once, and all AI agents inherit the change immediately.
 
-## Domínios
+## Domain Overview
 
-| Pack | Reutilizável | Conteúdo |
+| Pack | Reusable | Content |
 | :-- | :-- | :-- |
-| `dicom/` | ♻️ sim | Semântica DICOM/DICOMweb (UIDs, hierarquia, STOW/QIDO/WADO). |
-| `vue/` | ♻️ sim | Vue 3 + Vite; viewer Cornerstone3D. |
-| `quarkus/` | ✗ project-scoped | Quarkus + Keycloak/OIDC + client DICOMweb. Não transfere. |
-| `git/` | ♻️ sim | Convenções para commits locais seguros, com Gitmoji e escopo controlado. |
-| `agent-authoring/` | ♻️ sim | Criação de agentes/skills, layouts e seleção econômica de modelos. |
-| `problem-catalog/` | ✗ project-scoped | Classificação, identidade, lock e segurança dos tipos de problema HTTP. |
+| `dicom/` | ♻️ Yes | DICOM / DICOMweb semantics (UIDs, hierarchical models, STOW / QIDO / WADO). |
+| `vue/` | ♻️ Yes | Vue 3 + Vite patterns; Cornerstone3D medical viewport integration. |
+| `quarkus/` | ✗ Project-scoped | Quarkus BFF + Keycloak OIDC + DICOMweb client conventions. |
+| `git/` | ♻️ Yes | Conventions for safe local commits with Gitmoji and scoped commit messages. |
+| `agent-authoring/` | ♻️ Yes | Agent & skill authoring patterns, discovery layouts, and model routing. |
+| `problem-catalog/` | ✗ Project-scoped | RFC 9457 Problem Details classification, registry governance, and tooling. |
 
-## Como adicionar um domínio novo
+## Adding a New Domain Pack
 
-1. Crie `docs/domains/<novo>/` com um `README.md` (o que é, é reutilizável?) e os
-   docs de conhecimento.
-2. Crie os wrappers que referenciam esses docs:
-   - Claude subagente: `.claude/agents/<novo>/<nome>.md` (frontmatter + corpo que
-     manda ler `docs/domains/<novo>/*.md`).
-   - Codex subagente: `.codex/agents/<novo>/<nome>.toml`
-     (`developer_instructions` mandando ler os mesmos docs).
-   - Antigravity subagente: `.agents/agents/<nome>/agent.md` (frontmatter YAML +
-     corpo que manda ler os mesmos docs). Use uma pasta por agente: esse é o
-     layout oficialmente suportado para descoberta.
-3. Registre o subagente na tabela do `CLAUDE.md`, quando houver wrapper Claude.
+1. Create `docs/domains/<new-domain>/` with a `README.md` and domain markdown files.
+2. Create the corresponding thin agent wrappers:
+   - Claude subagent: `.claude/agents/<new-domain>/<name>.md` (instructing to read `docs/domains/<new-domain>/*.md`).
+   - Codex subagent: `.codex/agents/<new-domain>/<name>.toml` (`developer_instructions` instructing to read the same docs).
+   - Antigravity agent: `.agents/agents/<name>/agent.md` (YAML frontmatter instructing to read the same docs).
+3. Register the subagent in `CLAUDE.md` and `AGENTS.md`.
 
-## Como adicionar uma skill
+## Adding a Skill
 
-Skills são workflows repetíveis que rodam no contexto principal (não isolado).
-Crie o wrapper Claude em `.claude/skills/<dominio>-<verbo>/SKILL.md` e, quando o
-workflow também servir Codex/Antigravity, um wrapper espelhado em
-`.agents/skills/<dominio>-<verbo>/SKILL.md`. Ambos referenciam
-`docs/domains/<dominio>/`. Mantenha a skill fina — o passo-a-passo mora nela,
-mas as **regras** moram no Domain Pack.
+Skills are repeatable workflows executed in the main agent context. Create `.claude/skills/<domain>-<verb>/SKILL.md` and `.agents/skills/<domain>-<verb>/SKILL.md` referencing `docs/domains/<domain>/`. Keep the skill thin: workflow steps live in the skill, while **canonical business and domain rules** live in the Domain Pack.
 
-## Regra de ouro
+## Golden Rule
 
-> Wrapper aponta para o doc. Conhecimento nunca é copiado para dentro de um agente
-> ou skill. Se você se pegar colando regra de domínio num `.md` de agente, pare e
-> mova para o domain pack.
+> Agent wrappers point to the domain documents. Domain knowledge is never copied directly into an agent wrapper or skill prompt. If you find yourself writing business domain rules inside an agent configuration file, move them into the corresponding Domain Pack.

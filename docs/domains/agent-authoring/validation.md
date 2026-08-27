@@ -1,38 +1,20 @@
-# Validação de uma alteração
+# Agent & Skill Validation
 
-Execute as verificações proporcionais ao papel e registre somente resultados
-observados. Uma alteração não está pronta por ter um frontmatter sintaticamente
-válido.
+Execute checks proportional to the agent's scope and record verified results. A configuration is not complete simply because its frontmatter passes syntax parsing.
 
-## Checklist
+## Verification Checklist
 
-1. Confirme que o pedido define papel, gatilho, consumidores, ferramentas,
-   permissões e limites.
-2. Leia os Domain Packs referenciados e confirme que o wrapper não duplica seu
-   conhecimento.
-3. Faça e apresente a pesquisa atual de Anthropic, OpenAI e Google conforme
-   [`model-selection.md`](./model-selection.md), incluindo disponibilidade local
-   e justificativa do menor candidato elegível.
-4. Valide o formato da plataforma: YAML para Markdown com frontmatter e
-   `tomllib` para TOML. Confira `name`, `description` e os campos aceitos pela
-   versão instalada.
-5. Confirme o local de descoberta em
-   [`platform-layouts.md`](./platform-layouts.md). Use somente CLIs disponíveis;
-   uma ferramenta ausente é uma limitação registrada, não um motivo para simular
-   descoberta.
-6. Revise as ferramentas e permissões: leitura por padrão; escrita, comandos,
-   rede e efeitos externos somente quando comprovadamente necessários.
-7. Para alterações versionadas, execute `git diff --check`, atualize Graphify
-   conforme `AGENTS.md` e revise todos os artefatos versionados alterados.
+1. Verify that the agent definition specifies role, trigger description, consumers, tools, permissions, and operational constraints.
+2. Inspect referenced Domain Packs and ensure the wrapper does not duplicate domain rules.
+3. Conduct and present multi-provider model research following [`model-selection.md`](./model-selection.md), including local environment verification and cost justification for the lowest-cost eligible candidate.
+4. Validate target platform formats: valid YAML frontmatter for Markdown, and valid TOML syntax for Codex configs.
+5. Verify discovery paths against [`platform-layouts.md`](./platform-layouts.md).
+6. Enforce least privilege for tools: read-only by default; file write, command execution, and network access only when strictly required.
+7. Run `git diff --check`, update Graphify per `AGENTS.md`, and audit all versioned artifacts.
 
-## Cenários de pressão
+## Guardrails under Pressure
 
-- Um pedido para “usar o melhor modelo” deve resultar em uma classificação e na
-  comparação com o menor candidato elegível, não em uma escolha automática de
-  topo de linha.
-- Um pedido para copiar regras DICOM para um prompt deve mover a regra para o
-  Domain Pack e manter o wrapper como referência.
-- Um pedido para usar um modelo anunciado, mas indisponível no runtime, deve
-  registrar a inelegibilidade e escolher somente entre candidatos configuráveis.
-- Um pedido que amplia permissões, custo ou um modelo existente deve parar no
-  gate humano antes da gravação.
+- A prompt requesting the "best model" must result in workload classification and cost-effective selection, not an automatic top-tier allocation.
+- A prompt requesting to copy DICOM rules into a prompt must move the rule to `docs/domains/dicom/` and keep the agent wrapper thin.
+- A prompt requesting an unverified or locally unavailable model identifier must document ineligibility and pick from verified candidates.
+- Any change increasing permissions, operational cost, or modifying core agents must pause at a human review gate prior to commit.

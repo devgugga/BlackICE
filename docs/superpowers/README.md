@@ -1,13 +1,7 @@
-# Specs e planos
+# Design Specs and Plans
 
-Os diretórios `specs/` e `plans/` são registros históricos, não instruções
-operacionais atuais. Eles explicam como o projeto chegou ao estado vigente.
+The `specs/` and `plans/` directories are historical architectural records, not current operational instructions. They document the design decisions and milestones that led to the platform's current state.
 
-A fonte operacional para criar ou mover código é
-[`docs/architecture/project-structure.md`](../architecture/project-structure.md).
-As regras de domínio vigentes permanecem em [`docs/domains/`](../domains/).
+The canonical operational guide for creating or relocating code is [`docs/architecture/project-structure.md`](../architecture/project-structure.md). Active domain rules live in [`docs/domains/`](../domains/).
 
-Em documentos anteriores a 2026-07-25, caminhos sob `backend/` e `frontend/`
-correspondem hoje a `apps/backend/` e `apps/frontend/`. Novos trabalhos devem
-usar os caminhos atuais e não devem reescrever silenciosamente specs ou planos
-concluídos.
+In documents dated prior to 2026-07-25, paths referencing `backend/` and `frontend/` map to `apps/backend/` and `apps/frontend/`. New work must use the modern paths and must not retroactively modify finalized historical specifications.

@@ -1,62 +1,41 @@
-# Cornerstone3D dentro do Vue
+# Cornerstone3D Integration within Vue 3
 
-Como integrar o **Cornerstone3D** (`@cornerstonejs/core`, `@cornerstonejs/tools`,
-`@cornerstonejs/dicom-image-loader`) em componentes Vue 3 sem furar performance nem
-vazar memória.
+How to integrate **Cornerstone3D** (`@cornerstonejs/core`, `@cornerstonejs/tools`, `@cornerstonejs/dicom-image-loader`) into Vue 3 components while avoiding memory leaks and performance bottlenecks.
 
-## Peças do Cornerstone3D
+## Cornerstone3D Core Concepts
 
-- **`RenderingEngine`** — orquestra a renderização WebGL. Normalmente uma por app.
-- **Viewport** — onde a imagem aparece, ligado a um elemento DOM (uma `<div>`).
-  - `Stack` viewport: navega por uma pilha 2D de `imageId`s (o caso do MVP).
-  - `Volume` viewport: reconstrução 3D/MPR (avançado; fora do MVP).
-- **Image loaders** — resolvem `imageId`s. Para DICOMweb use o loader
-  `wadors:` (WADO-RS). Ex.: `wadors:https://host/dicomweb/studies/{u}/series/{u}/instances/{u}/frames/1`.
-- **Tools + ToolGroup** — WindowLevel, Zoom, Pan, StackScroll, Length (medição), etc.
-  Ferramentas são registradas e associadas a um ToolGroup, que é ligado ao viewport.
+- **`RenderingEngine`**: Orchestrates WebGL rendering. Typically one instance per application lifecycle.
+- **Viewport**: Display canvas attached to a DOM element (`<div>`).
+  - `Stack` Viewport: Navigates a 2D sequence of `imageId`s (standard MVP use case).
+  - `Volume` Viewport: 3D / Multi-Planar Reconstruction (MPR).
+- **Image Loaders**: Resolve image schemes. For DICOMweb, use the `wadors:` loader (e.g. `wadors:https://host/api/dicomweb/studies/{u}/series/{u}/instances/{u}/frames/1`).
+- **Tools + ToolGroup**: WindowLevel, Zoom, Pan, StackScroll, Length measurements, etc. Tools are registered globally and assigned to a `ToolGroup` attached to the viewport.
 
-## Fluxo de montagem (padrão)
+## Component Mounting Lifecycle
 
-1. `init()` do core e dos tools **uma vez** na inicialização do app.
-2. Configure o `dicom-image-loader` para o caminho WADO estreito de mesma origem
-   proxied pelo Quarkus. A sessão BFF segue no cookie HttpOnly; nenhum access
-   token é lido ou injetado pelo JavaScript.
-3. Monte `imageId`s a partir de **WADO-RS** (nunca de QIDO — QIDO é só metadado).
-   A lista de instâncias/frames vem de uma query QIDO; os pixels vêm de WADO.
-4. No componente: `onMounted` → pega a `<div>` via `ref`, cria/pega a
-   `RenderingEngine`, habilita o viewport nesse elemento, seta a stack, associa o
-   ToolGroup, `render()`.
-5. `onUnmounted` / troca de série → **destrua e limpe**: desative o prefetch
-   (`stackPrefetch.disable`), limpe as filas dos pools
-   (`imageRetrievalPoolManager.clearRequestStack`, `imageLoadPoolManager.clearRequestStack`),
-   remova anotações (`annotation.state.removeAllAnnotations`), destrua o `ToolGroup`
-   (`destroyToolGroup`), desabilite/destrua a `RenderingEngine` e limpe o metadata provider.
-   Falhar aqui vaza contexto WebGL, requests em background e trava o navegador.
-6. **Guard de capacidade:** inicialize a runtime WebGL/Cornerstone apenas em viewports
-   suportados (desktop e tablet paisagem ≥ 768px). Em telas estreitas/mobile, exiba aviso de
-   resolução sem instanciar Cornerstone nem alocar recursos WebGL.
+1. Invoke `init()` for core and tools **once** during application startup.
+2. Configure `dicom-image-loader` to point to the secure same-origin WADO frame proxy endpoint exposed by Quarkus. The BFF session remains in the `HttpOnly` cookie; no access tokens are read or injected in client JavaScript.
+3. Build `imageId`s using **WADO-RS** frame URLs (never QIDO, as QIDO delivers only JSON metadata). The list of instance/frame UIDs comes from QIDO; actual pixel payloads come from WADO.
+4. Inside the component: `onMounted` -> capture the `<div>` element via template `ref`, instantiate/retrieve the `RenderingEngine`, enable the viewport on the element, set the stack, attach the `ToolGroup`, and call `render()`.
+5. `onUnmounted` / Series switching -> **Destroy and clean up**: disable prefetching (`stackPrefetch.disable`), purge pool queues (`imageRetrievalPoolManager.clearRequestStack`, `imageLoadPoolManager.clearRequestStack`), remove annotations (`annotation.state.removeAllAnnotations`), destroy the `ToolGroup` (`destroyToolGroup`), disable the `RenderingEngine`, and clear metadata providers. Failure to do so leaks WebGL contexts and triggers browser crashes.
+6. **Capability Gate:** Initialize the WebGL/Cornerstone runtime only on supported viewport dimensions (desktop and landscape tablets >= 768px). On narrow mobile screens, display a clinical capability notice without instantiating Cornerstone or allocating WebGL memory.
 
-## Gotcha crítico: reatividade do Vue × objetos Cornerstone
+## Critical Gotcha: Vue Reactivity vs. Cornerstone Objects
 
-O sistema de reatividade do Vue 3 embrulha objetos em `Proxy`. **Nunca** coloque
-`RenderingEngine`, viewports, volumes ou ToolGroups em `ref`/`reactive`/`data`
-reativo — o proxy quebra a identidade dos objetos WebGL e degrada performance.
+Vue 3's reactivity system wraps objects in JavaScript `Proxy` instances. **Never** place `RenderingEngine`, viewports, volumes, or `ToolGroup` objects inside `ref()`, `reactive()`, or reactive Pinia stores: the Proxy breaks internal WebGL instance identity and degrades rendering performance.
 
-- Guarde essas instâncias com **`shallowRef`** ou marque com **`markRaw`**.
-- O que pode ser reativo: IDs (strings), índice do frame atual, presets de
-  window/level, estado da UI (ferramenta ativa). Os **objetos** do Cornerstone, não.
+- Store these instances using **`shallowRef`** or mark them with **`markRaw`**.
+- What should be reactive: string IDs, active frame indices, Window/Level presets, active UI tool names. The Cornerstone internal engine objects must remain non-reactive.
 
-## Ferramentas mínimas do MVP
+## Standard MVP Tools
 
-WindowLevel (janela/nível), Zoom, Pan, StackScroll (navegar séries/frames) e Length
-(medição básica). Um ToolGroup por viewport; troque a ferramenta ativa mudando o
-binding do mouse, não recriando o viewport.
+WindowLevel (contrast/brightness), Zoom, Pan, StackScroll (series/frame navigation), and Length (measurement). One `ToolGroup` per viewport; change active tools by updating mouse bindings rather than recreating the viewport.
 
-## Checklist de revisão
+## Review Checklist
 
-- [ ] `imageId` construído a partir de WADO-RS (não QIDO)?
-- [ ] Loader usa o proxy WADO de mesma origem, sem token no JavaScript?
-- [ ] Objetos Cornerstone fora da reatividade (`shallowRef`/`markRaw`)?
-- [ ] `onUnmounted` destrói rendering engine/viewport, limpa pools de prefetch/load, anotações e metadata?
-- [ ] Runtime do viewer protegida por guard de resolução (sem WebGL em mobile restrito)?
-- [ ] `init()` do core/tools chamado uma vez, não por componente?
+- [ ] `imageId` constructed from WADO-RS frame URLs (not QIDO)?
+- [ ] Image loader uses the same-origin WADO proxy without client-side token injection?
+- [ ] Cornerstone objects isolated from Vue reactivity (`shallowRef` or `markRaw`)?
+- [ ] `onUnmounted` destroys rendering engine/viewport, clears prefetch/load pools, annotations, and metadata?
+- [ ] Viewer runtime protected by resolution Capability Gate (no WebGL instantiation on mobile)?
+- [ ] `init()` for core/tools executed exactly once on app boot?
