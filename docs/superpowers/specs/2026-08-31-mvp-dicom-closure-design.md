@@ -84,11 +84,14 @@ instâncias de outro.
 A varredura de instâncias continua usando `limit` e `offset` no Archive. Cada
 resposta deve ser validada antes de acumular seus itens:
 
-- um header HTTP `Warning` cujo warn-code seja `299` torna a resposta inválida;
+- um header HTTP `Warning` cujo warn-code seja `299` informa que há resultados
+  adicionais e obriga a continuação da paginação;
 - SOP Instance UID repetido entre páginas torna a resposta inválida;
-- uma página cheia avança exatamente pelo número de itens recebidos;
-- uma página menor que o limite encerra a paginação somente quando não há
-  indicador de truncamento;
+- qualquer página não vazia com `299` avança exatamente pelo número de itens
+  recebidos, ainda que o Archive aplique `maxResults` menor que o `limit` pedido;
+- uma resposta sem `299` encerra a paginação;
+- uma página vazia acompanhada de `299` é contraditória e invalida a resposta;
+- `299` em consultas não paginadas de estudo ou séries invalida a resposta;
 - `NumberOfSeriesRelatedInstances` é solicitado para cada série e é obrigatório
   para a prova de completude desta classificação;
 - para cada série, a contagem declarada deve coincidir com a quantidade única de
@@ -97,6 +100,9 @@ resposta deve ser validada antes de acumular seus itens:
 Ausência de contagem comparável, truncamento ou divergência de contagem converge
 para resposta inválida do Archive. O sistema não classifica uma amostra parcial
 como série suportada.
+
+Essas regras seguem DICOM PS3.18 §8.3.4.4: `Warning: 299` sinaliza resultados
+restantes, e `offset` avança pela quantidade efetivamente recebida.
 
 ## WADO metadata: VR, VM e valores físicos
 
