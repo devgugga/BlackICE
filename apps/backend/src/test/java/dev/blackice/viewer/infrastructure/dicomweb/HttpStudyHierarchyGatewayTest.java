@@ -161,6 +161,25 @@ class HttpStudyHierarchyGatewayTest {
         assertEquals(ArchiveViewerException.Reason.INVALID_RESPONSE, ex.reason());
     }
 
+    @Test
+    void find_study_rejects_different_study_instance_uid() {
+        server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies", exchange ->
+            respond(
+                exchange,
+                200,
+                DICOM_JSON,
+                "[{\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"1.2.3.999\"]}}]"
+            )
+        );
+
+        ArchiveViewerException error = assertThrows(
+            ArchiveViewerException.class,
+            () -> gateway(Duration.ofSeconds(2), 500).findStudy(STUDY_REF, "token")
+        );
+        assertEquals(ArchiveViewerException.Reason.INVALID_RESPONSE, error.reason());
+        assertFalse(error.getMessage().contains(STUDY_UID));
+    }
+
     // ==========================================
     // findSeries Tests
     // ==========================================

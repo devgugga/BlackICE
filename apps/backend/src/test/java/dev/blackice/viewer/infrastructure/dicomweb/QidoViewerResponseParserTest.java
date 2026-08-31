@@ -112,6 +112,23 @@ class QidoViewerResponseParserTest {
         assertThrows(QidoViewerResponseParser.InvalidResponseException.class, () -> parser.parseStudy(invalidUid));
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {" 1.2.3", "1.2.3 ", "\t1.2.3"})
+    void rejects_uid_that_would_require_normalization(String uid) {
+        String json = "[{\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"" + uid + "\"]}}]";
+        QidoViewerResponseParser.InvalidResponseException error = assertThrows(
+            QidoViewerResponseParser.InvalidResponseException.class,
+            () -> parser.parseStudy(json)
+        );
+        assertFalse(error.getMessage().contains("1.2.3"));
+    }
+
+    @Test
+    void rejects_uid_with_vm_greater_than_one() {
+        String json = "[{\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"1.2.3\",\"1.2.4\"]}}]";
+        assertThrows(QidoViewerResponseParser.InvalidResponseException.class, () -> parser.parseStudy(json));
+    }
+
     @Test
     void rejects_study_with_invalid_da_or_tm_format() {
         String invalidDa = """

@@ -107,6 +107,9 @@ public class HttpStudyHierarchyGateway implements StudyHierarchyGateway {
         if (result == null) {
             throw new ArchiveViewerException(ArchiveViewerException.Reason.NOT_FOUND);
         }
+        if (!study.studyInstanceUid().equals(result.studyInstanceUid())) {
+            throw new ArchiveViewerException(ArchiveViewerException.Reason.INVALID_RESPONSE);
+        }
 
         return result;
     }

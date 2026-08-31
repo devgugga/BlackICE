@@ -228,8 +228,14 @@ public class QidoViewerResponseParser {
     }
 
     private String requiredUid(JsonNode dataset, String tag) {
-        String value = firstText(dataset, tag, "UI");
-        if (value == null || !UIDUtils.isValid(value)) {
+        JsonNode attr = attribute(dataset, tag, "UI");
+        JsonNode values = attr == null ? null : attr.get("Value");
+        if (values == null || !values.isArray() || values.size() != 1
+            || !values.get(0).isTextual()) {
+            throw new InvalidResponseException("Missing or invalid DICOM UID");
+        }
+        String value = values.get(0).asText();
+        if (value.isEmpty() || !value.equals(value.strip()) || !UIDUtils.isValid(value)) {
             throw new InvalidResponseException("Missing or invalid DICOM UID");
         }
         return value;
