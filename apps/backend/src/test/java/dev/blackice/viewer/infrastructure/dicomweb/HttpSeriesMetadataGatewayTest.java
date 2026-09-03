@@ -87,7 +87,9 @@ class HttpSeriesMetadataGatewayTest {
                 "00280101": { "vr": "US", "Value": [12] },
                 "00280102": { "vr": "US", "Value": [11] },
                 "00280103": { "vr": "US", "Value": [1] },
-                "00280030": { "vr": "DS", "Value": [0.5, 0.5] }
+                "00280030": { "vr": "DS", "Value": [0.5, 0.5] },
+                "00281052": { "vr": "DS", "Value": [-1024] },
+                "00281053": { "vr": "DS", "Value": [1] }
               }
             ]
             """.formatted(STUDY_UID, SERIES_UID, SOP_UID, CT_SOP_CLASS);
