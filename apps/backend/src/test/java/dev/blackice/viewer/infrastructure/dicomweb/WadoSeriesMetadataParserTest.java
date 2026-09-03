@@ -598,6 +598,16 @@ class WadoSeriesMetadataParserTest {
         assertEquals(1, parser.parse(body, SERIES_REF).size());
     }
 
+    @Test
+    void requires_supported_linear_window_for_dx_for_presentation() throws Exception {
+        String withoutWindow = removeTag(
+            removeTag(baseDatasetJson(DX_SOP_CLASS, SOP_UID), "00281050"),
+            "00281051");
+
+        assertThrows(InvalidArchiveMetadataException.class,
+            () -> parser.parse(withoutWindow, SERIES_REF));
+    }
+
     @ParameterizedTest(name = "{0}")
     @MethodSource("invalidUsValues")
     void rejects_invalid_us_json_values(String description, String body) {

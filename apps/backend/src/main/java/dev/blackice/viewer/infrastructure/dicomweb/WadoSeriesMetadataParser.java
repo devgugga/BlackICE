@@ -187,7 +187,8 @@ public class WadoSeriesMetadataParser {
                 || (hasWindowCenter && windowCenter.size() != windowWidth.size())
                 || (hasWindowWidth && windowWidth.stream().anyMatch(width -> width < 1.0d))
                 || (voiLutFunction != null && !"LINEAR".equals(voiLutFunction))
-                || (dataset.has(VOI_LUT_SEQUENCE) && !hasWindowCenter)) {
+                || (!hasWindowCenter && (dataset.has(VOI_LUT_SEQUENCE)
+                    || DX_IMAGE_STORAGE_FOR_PRESENTATION.equals(sopClassUid)))) {
                 throw new InvalidArchiveMetadataException("Invalid linear window metadata");
             }
 
