@@ -122,6 +122,9 @@ public class SpatialInstanceOrder {
         if (rowNorm <= MIN_VECTOR_NORM || colNorm <= MIN_VECTOR_NORM) {
             return null;
         }
+        if (Math.abs(rowNorm - 1.0d) > EPSILON || Math.abs(colNorm - 1.0d) > EPSILON) {
+            return null;
+        }
 
         double[] normRow = normalize(row, rowNorm);
         double[] normCol = normalize(col, colNorm);

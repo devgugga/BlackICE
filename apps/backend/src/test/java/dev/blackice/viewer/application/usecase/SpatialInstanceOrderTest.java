@@ -65,18 +65,16 @@ class SpatialInstanceOrderTest {
     }
 
     @Test
-    void sort_normalizes_non_unit_vectors_and_tolerates_small_orientation_differences_within_1e4() {
-        // Vector with magnitude != 1.0
-        double[] iop1 = new double[]{2.0, 0.0, 0.0, 0.0, 3.0, 0.0};
-        // Vector with small perturbation < 1e-4
-        double[] iop2 = new double[]{1.00001, 0.00001, 0.0, 0.0, 0.99999, 0.0};
+    void fallback_ordering_when_orientation_vectors_are_not_unit_length() {
+        double[] nonUnit = new double[]{2, 0, 0, 0, 3, 0};
+        ViewerInstance projectedFirst = createInstance(
+            "1.2.3.1", 2, new double[]{0, 0, -10}, nonUnit);
+        ViewerInstance fallbackFirst = createInstance(
+            "1.2.3.2", 1, new double[]{0, 0, 10}, nonUnit);
 
-        ViewerInstance slice1 = createInstance("1.2.3.1", 1, new double[]{0, 0, -10.0}, iop1);
-        ViewerInstance slice2 = createInstance("1.2.3.2", 2, new double[]{0, 0, 10.0}, iop2);
-
-        List<ViewerInstance> sorted = order.sort(List.of(slice2, slice1));
+        List<ViewerInstance> sorted = order.sort(List.of(projectedFirst, fallbackFirst));
         assertEquals(
-            List.of("1.2.3.1", "1.2.3.2"),
+            List.of("1.2.3.2", "1.2.3.1"),
             sorted.stream().map(ViewerInstance::sopInstanceUid).toList()
         );
     }
