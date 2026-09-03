@@ -134,6 +134,69 @@ class StowResponseParserTest {
         assertEquals(272, result.instances().get(0).reason());
     }
 
+    @Test
+    void rejected_result_is_not_overwritten_by_later_accepted_dataset() {
+        String body = """
+            [
+              {"00081198":{"vr":"SQ","Value":[
+                {"00081155":{"vr":"UI","Value":["1.2.3.1"]},
+                 "00081197":{"vr":"US","Value":[272]}}
+              ]}},
+              {"00081199":{"vr":"SQ","Value":[
+                {"00081155":{"vr":"UI","Value":["1.2.3.1"]}}
+              ]}}
+            ]
+            """;
+
+        StowStudyResult result = parser.parse(
+            "1.2.3", body, new LinkedHashSet<>(List.of("1.2.3.1")));
+
+        assertEquals(StowInstanceResult.Status.REJECTED, result.instances().getFirst().status());
+        assertEquals(272, result.instances().getFirst().reason());
+    }
+
+    @Test
+    void accepted_result_is_overwritten_by_later_rejected_dataset() {
+        String body = """
+            [
+              {"00081199":{"vr":"SQ","Value":[
+                {"00081155":{"vr":"UI","Value":["1.2.3.1"]}}
+              ]}},
+              {"00081198":{"vr":"SQ","Value":[
+                {"00081155":{"vr":"UI","Value":["1.2.3.1"]},
+                 "00081197":{"vr":"US","Value":[272]}}
+              ]}}
+            ]
+            """;
+
+        StowStudyResult result = parser.parse(
+            "1.2.3", body, new LinkedHashSet<>(List.of("1.2.3.1")));
+
+        assertEquals(StowInstanceResult.Status.REJECTED, result.instances().getFirst().status());
+        assertEquals(272, result.instances().getFirst().reason());
+    }
+
+    @Test
+    void warning_result_is_not_overwritten_by_later_accepted_dataset() {
+        String body = """
+            [
+              {"00081199":{"vr":"SQ","Value":[
+                {"00081155":{"vr":"UI","Value":["1.2.3.1"]},
+                 "00081196":{"vr":"US","Value":[45056]}}
+              ]}},
+              {"00081199":{"vr":"SQ","Value":[
+                {"00081155":{"vr":"UI","Value":["1.2.3.1"]}}
+              ]}}
+            ]
+            """;
+
+        StowStudyResult result = parser.parse(
+            "1.2.3", body, new LinkedHashSet<>(List.of("1.2.3.1")));
+
+        assertEquals(StowInstanceResult.Status.WARNING, result.instances().getFirst().status());
+        assertEquals(45056, result.instances().getFirst().reason());
+    }
+
     @ParameterizedTest
     @NullAndEmptySource
     @ValueSource(strings = {" ", "\t"})

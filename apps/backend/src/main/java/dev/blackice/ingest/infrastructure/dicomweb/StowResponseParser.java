@@ -123,10 +123,10 @@ public class StowResponseParser {
                 JsonNode warningNode = item.path(WARNING_REASON);
                 Integer warningReason = extractInt(warningNode);
                 if (warningReason != null || (!warningNode.isMissingNode() && !warningNode.isNull())) {
-                    parsedInstances.put(sopUid,
+                    mergeResult(parsedInstances,
                         new StowInstanceResult(sopUid, StowInstanceResult.Status.WARNING, warningReason));
                 } else {
-                    parsedInstances.put(sopUid,
+                    mergeResult(parsedInstances,
                         new StowInstanceResult(sopUid, StowInstanceResult.Status.ACCEPTED, null));
                 }
             }
@@ -136,11 +136,27 @@ public class StowResponseParser {
         if (hasFailed) {
             for (JsonNode item : sequenceItems(dataset, FAILED_SOP_SEQUENCE)) {
                 String sopUid = requireUid(item);
-                    Integer failureReason = extractInt(item.path(FAILURE_REASON));
-                parsedInstances.put(sopUid,
+                Integer failureReason = extractInt(item.path(FAILURE_REASON));
+                mergeResult(parsedInstances,
                     new StowInstanceResult(sopUid, StowInstanceResult.Status.REJECTED, failureReason));
             }
         }
+    }
+
+    private static void mergeResult(Map<String, StowInstanceResult> results,
+                                    StowInstanceResult candidate) {
+        results.merge(candidate.sopInstanceUid(), candidate,
+            (current, incoming) -> severity(incoming.status()) > severity(current.status())
+                ? incoming : current);
+    }
+
+    private static int severity(StowInstanceResult.Status status) {
+        return switch (status) {
+            case ACCEPTED -> 0;
+            case WARNING -> 1;
+            case REJECTED -> 2;
+            case UNCONFIRMED -> throw new IllegalArgumentException("UNCONFIRMED is not parsed from STOW");
+        };
     }
 
     private static JsonNode sequenceItems(JsonNode dataset, String tag) {
