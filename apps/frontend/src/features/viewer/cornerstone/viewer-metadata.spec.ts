@@ -119,6 +119,13 @@ describe('viewer-metadata', () => {
     });
   });
 
+  it('does not invent modality LUT values when rescale is absent', () => {
+    const instance = { ...baseInstance, rescaleIntercept: null, rescaleSlope: null };
+    const [imageId] = registerInstancesMetadata([instance], STUDY_UID, SERIES_UID);
+
+    expect(getViewerMetadata('modalityLutModule', imageId)).toBeUndefined();
+  });
+
   describe('metadata clearing and unknown queries', () => {
     it('returns undefined for unregistered imageIds or unknown module types', () => {
       expect(getViewerMetadata('imagePlaneModule', 'wadors:/unknown')).toBeUndefined();

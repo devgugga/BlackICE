@@ -78,9 +78,12 @@ export function getViewerMetadata(type: string, imageId: string): unknown {
     }
 
     case 'modalityLutModule': {
+      if (instance.rescaleIntercept === null || instance.rescaleSlope === null) {
+        return undefined;
+      }
       return {
-        rescaleIntercept: instance.rescaleIntercept ?? 0,
-        rescaleSlope: instance.rescaleSlope ?? 1,
+        rescaleIntercept: instance.rescaleIntercept,
+        rescaleSlope: instance.rescaleSlope,
       };
     }
 
