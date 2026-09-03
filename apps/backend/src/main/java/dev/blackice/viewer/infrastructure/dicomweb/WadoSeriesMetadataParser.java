@@ -22,6 +22,8 @@ import java.util.Set;
 @ApplicationScoped
 public class WadoSeriesMetadataParser {
 
+    private static final String CT_IMAGE_STORAGE = "1.2.840.10008.5.1.4.1.1.2";
+
     private static final Set<String> SUPPORTED_IMAGE_SOP_CLASSES = Set.of(
         "1.2.840.10008.5.1.4.1.1.1",     // Computed Radiography Image Storage
         "1.2.840.10008.5.1.4.1.1.1.1",   // Digital X-Ray Image Storage - For Presentation
@@ -109,28 +111,28 @@ public class WadoSeriesMetadataParser {
             }
 
             // Reject multi-frame
-            Integer numberOfFrames = optionalInteger(dataset, NUMBER_OF_FRAMES);
+            Integer numberOfFrames = optionalInteger(dataset, NUMBER_OF_FRAMES, "IS");
             if (numberOfFrames != null) {
                 if (numberOfFrames <= 0 || numberOfFrames > 1) {
                     throw new InvalidArchiveMetadataException("Unsupported multi-frame or invalid numberOfFrames");
                 }
             }
 
-            Integer instanceNumber = optionalInteger(dataset, INSTANCE_NUMBER);
-            Integer rows = requiredInteger(dataset, ROWS);
-            Integer columns = requiredInteger(dataset, COLUMNS);
-            Integer samplesPerPixel = requiredInteger(dataset, SAMPLES_PER_PIXEL);
+            Integer instanceNumber = optionalInteger(dataset, INSTANCE_NUMBER, "IS");
+            Integer rows = requiredInteger(dataset, ROWS, "US");
+            Integer columns = requiredInteger(dataset, COLUMNS, "US");
+            Integer samplesPerPixel = requiredInteger(dataset, SAMPLES_PER_PIXEL, "US");
             String photometricInterpretation = requiredString(dataset, PHOTOMETRIC_INTERPRETATION);
-            Integer bitsAllocated = requiredInteger(dataset, BITS_ALLOCATED);
-            Integer bitsStored = requiredInteger(dataset, BITS_STORED);
-            Integer highBit = requiredInteger(dataset, HIGH_BIT);
-            Integer pixelRepresentation = requiredInteger(dataset, PIXEL_REPRESENTATION);
+            Integer bitsAllocated = requiredInteger(dataset, BITS_ALLOCATED, "US");
+            Integer bitsStored = requiredInteger(dataset, BITS_STORED, "US");
+            Integer highBit = requiredInteger(dataset, HIGH_BIT, "US");
+            Integer pixelRepresentation = requiredInteger(dataset, PIXEL_REPRESENTATION, "US");
 
             Integer planarConfiguration = null;
             if (samplesPerPixel > 1) {
-                planarConfiguration = requiredInteger(dataset, PLANAR_CONFIGURATION);
+                planarConfiguration = requiredInteger(dataset, PLANAR_CONFIGURATION, "US");
             } else {
-                planarConfiguration = optionalInteger(dataset, PLANAR_CONFIGURATION);
+                planarConfiguration = optionalInteger(dataset, PLANAR_CONFIGURATION, "US");
             }
 
             double[] imagePositionPatient = optionalDoubleArray(dataset, IMAGE_POSITION_PATIENT, 3, false);
@@ -141,6 +143,13 @@ public class WadoSeriesMetadataParser {
             Double rescaleSlope = optionalDouble(dataset, RESCALE_SLOPE);
             List<Double> windowCenter = optionalDoubleList(dataset, WINDOW_CENTER);
             List<Double> windowWidth = optionalDoubleList(dataset, WINDOW_WIDTH);
+
+            boolean hasIntercept = rescaleIntercept != null;
+            boolean hasSlope = rescaleSlope != null;
+            if (hasIntercept != hasSlope || (hasSlope && rescaleSlope == 0.0d)
+                || (CT_IMAGE_STORAGE.equals(sopClassUid) && !hasIntercept)) {
+                throw new InvalidArchiveMetadataException("Invalid modality rescale metadata");
+            }
 
             instances.add(new ViewerInstance(
                 sopInstanceUid,
@@ -185,13 +194,17 @@ public class WadoSeriesMetadataParser {
         return root;
     }
 
-    private JsonNode attribute(JsonNode dataset, String tag) {
+    private JsonNode attribute(JsonNode dataset, String tag, String expectedVr) {
         JsonNode node = dataset.get(tag);
         if (node == null || node.isNull() || node.isMissingNode()) {
             return null;
         }
         if (!node.isObject()) {
             throw new InvalidArchiveMetadataException("Tag node must be a JSON object");
+        }
+        JsonNode vr = node.get("vr");
+        if (vr == null || !vr.isTextual() || !expectedVr.equals(vr.asText())) {
+            throw new InvalidArchiveMetadataException("Tag has unexpected vr");
         }
         return node;
     }
@@ -205,21 +218,21 @@ public class WadoSeriesMetadataParser {
     }
 
     private String optionalUid(JsonNode dataset, String tag) {
-        JsonNode attr = attribute(dataset, tag);
+        JsonNode attr = attribute(dataset, tag, "UI");
         if (attr == null) {
             return null;
         }
         JsonNode val = attr.get("Value");
-        if (val == null || val.isNull() || val.isMissingNode() || !val.isArray() || val.isEmpty()) {
-            return null;
+        if (val == null || !val.isArray() || val.size() != 1) {
+            throw new InvalidArchiveMetadataException("UID Value must contain exactly one item");
         }
         JsonNode first = val.get(0);
         if (first == null || !first.isTextual()) {
             throw new InvalidArchiveMetadataException("UID Value must be textual");
         }
-        String uid = first.asText().trim();
+        String uid = first.asText();
         if (uid.isEmpty()) {
-            return null;
+            throw new InvalidArchiveMetadataException("UID Value must not be empty");
         }
         if (!UIDUtils.isValid(uid)) {
             throw new InvalidArchiveMetadataException("Malformed UID format");
@@ -236,13 +249,13 @@ public class WadoSeriesMetadataParser {
     }
 
     private String optionalString(JsonNode dataset, String tag) {
-        JsonNode attr = attribute(dataset, tag);
+        JsonNode attr = attribute(dataset, tag, "CS");
         if (attr == null) {
             return null;
         }
         JsonNode val = attr.get("Value");
-        if (val == null || val.isNull() || val.isMissingNode() || !val.isArray() || val.isEmpty()) {
-            return null;
+        if (val == null || !val.isArray() || val.size() != 1) {
+            throw new InvalidArchiveMetadataException("Value must contain exactly one item");
         }
         JsonNode first = val.get(0);
         if (first == null || !first.isTextual()) {
@@ -252,26 +265,26 @@ public class WadoSeriesMetadataParser {
         return text.isEmpty() ? null : text;
     }
 
-    private Integer requiredInteger(JsonNode dataset, String tag) {
-        Integer value = optionalInteger(dataset, tag);
+    private Integer requiredInteger(JsonNode dataset, String tag, String expectedVr) {
+        Integer value = optionalInteger(dataset, tag, expectedVr);
         if (value == null) {
             throw new InvalidArchiveMetadataException("Missing mandatory integer tag");
         }
         return value;
     }
 
-    private Integer optionalInteger(JsonNode dataset, String tag) {
-        JsonNode attr = attribute(dataset, tag);
+    private Integer optionalInteger(JsonNode dataset, String tag, String expectedVr) {
+        JsonNode attr = attribute(dataset, tag, expectedVr);
         if (attr == null) {
             return null;
         }
         JsonNode val = attr.get("Value");
-        if (val == null || val.isNull() || val.isMissingNode() || !val.isArray() || val.isEmpty()) {
-            return null;
+        if (val == null || !val.isArray() || val.size() != 1) {
+            throw new InvalidArchiveMetadataException("Integer Value must contain exactly one item");
         }
         JsonNode first = val.get(0);
         if (first == null || first.isNull()) {
-            return null;
+            throw new InvalidArchiveMetadataException("Integer Value item must not be null");
         }
         if (first.isIntegralNumber()) {
             return first.asInt();
@@ -287,17 +300,17 @@ public class WadoSeriesMetadataParser {
     }
 
     private Double optionalDouble(JsonNode dataset, String tag) {
-        JsonNode attr = attribute(dataset, tag);
+        JsonNode attr = attribute(dataset, tag, "DS");
         if (attr == null) {
             return null;
         }
         JsonNode val = attr.get("Value");
-        if (val == null || val.isNull() || val.isMissingNode() || !val.isArray() || val.isEmpty()) {
-            return null;
+        if (val == null || !val.isArray() || val.size() != 1) {
+            throw new InvalidArchiveMetadataException("Decimal Value must contain exactly one item");
         }
         JsonNode first = val.get(0);
         if (first == null || first.isNull()) {
-            return null;
+            throw new InvalidArchiveMetadataException("Decimal Value item must not be null");
         }
         double d;
         if (first.isNumber()) {
@@ -318,13 +331,13 @@ public class WadoSeriesMetadataParser {
     }
 
     private List<Double> optionalDoubleList(JsonNode dataset, String tag) {
-        JsonNode attr = attribute(dataset, tag);
+        JsonNode attr = attribute(dataset, tag, "DS");
         if (attr == null) {
             return null;
         }
         JsonNode val = attr.get("Value");
-        if (val == null || val.isNull() || val.isMissingNode() || !val.isArray() || val.isEmpty()) {
-            return null;
+        if (val == null || !val.isArray() || val.isEmpty()) {
+            throw new InvalidArchiveMetadataException("Decimal Value must contain at least one item");
         }
         List<Double> list = new ArrayList<>(val.size());
         for (JsonNode item : val) {
@@ -352,15 +365,12 @@ public class WadoSeriesMetadataParser {
     }
 
     private double[] optionalDoubleArray(JsonNode dataset, String tag, int expectedLength, boolean mustBePositive) {
-        JsonNode attr = attribute(dataset, tag);
+        JsonNode attr = attribute(dataset, tag, "DS");
         if (attr == null) {
             return null;
         }
         JsonNode val = attr.get("Value");
-        if (val == null || val.isNull() || val.isMissingNode() || !val.isArray() || val.isEmpty()) {
-            return null;
-        }
-        if (val.size() != expectedLength) {
+        if (val == null || !val.isArray() || val.size() != expectedLength) {
             throw new InvalidArchiveMetadataException("Unexpected array length for tag");
         }
         double[] array = new double[expectedLength];

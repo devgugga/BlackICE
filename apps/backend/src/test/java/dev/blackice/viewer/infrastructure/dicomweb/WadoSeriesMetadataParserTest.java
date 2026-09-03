@@ -1,14 +1,21 @@
 package dev.blackice.viewer.infrastructure.dicomweb;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import dev.blackice.viewer.application.exception.InvalidArchiveMetadataException;
 import dev.blackice.viewer.application.input.ViewerSeriesRef;
 import dev.blackice.viewer.application.result.ViewerInstance;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,6 +30,7 @@ class WadoSeriesMetadataParserTest {
     private static final String SERIES_UID = "1.2.840.113619.2.55.3.604688435.124";
     private static final String SOP_UID = "1.2.840.113619.2.55.3.604688435.126";
     private static final String CT_SOP_CLASS = "1.2.840.10008.5.1.4.1.1.2";
+    private static final String MR_SOP_CLASS = "1.2.840.10008.5.1.4.1.1.4";
     private static final String FOR_UID = "1.2.840.113619.2.55.3.604688435.127";
 
     private static final ViewerSeriesRef SERIES_REF = new ViewerSeriesRef(STUDY_UID, SERIES_UID);
@@ -112,7 +120,7 @@ class WadoSeriesMetadataParserTest {
                 "00281051": { "vr": "DS", "Value": ["400.0", "350.0"] }
               }
             ]
-            """.formatted(STUDY_UID, SERIES_UID, SOP_UID, CT_SOP_CLASS);
+            """.formatted(STUDY_UID, SERIES_UID, SOP_UID, MR_SOP_CLASS);
 
         List<ViewerInstance> instances = parser.parse(body, SERIES_REF);
         assertEquals(1, instances.size());
@@ -168,6 +176,8 @@ class WadoSeriesMetadataParserTest {
                 "00280101": { "vr": "US", "Value": [16] },
                 "00280102": { "vr": "US", "Value": [15] },
                 "00280103": { "vr": "US", "Value": [0] },
+                "00281052": { "vr": "DS", "Value": [-1024] },
+                "00281053": { "vr": "DS", "Value": [1] },
                 "7FE00010": { "vr": "OB", "BulkDataURI": "http://arc:8080/dcm4chee-arc/aets/DCM4CHEE/rs/studies/1/series/2/instances/3/bulkdata" },
                 "00080008": { "vr": "CS", "Value": ["ORIGINAL", "PRIMARY", "AXIAL"] }
               }
@@ -197,7 +207,9 @@ class WadoSeriesMetadataParserTest {
                 "00280100": { "vr": "US", "Value": [8] },
                 "00280101": { "vr": "US", "Value": [8] },
                 "00280102": { "vr": "US", "Value": [7] },
-                "00280103": { "vr": "US", "Value": [0] }
+                "00280103": { "vr": "US", "Value": [0] },
+                "00281052": { "vr": "DS", "Value": [-1024] },
+                "00281053": { "vr": "DS", "Value": [1] }
               }
             ]
             """.formatted(STUDY_UID, SERIES_UID, SOP_UID, CT_SOP_CLASS);
@@ -418,11 +430,66 @@ class WadoSeriesMetadataParserTest {
         assertThrows(InvalidArchiveMetadataException.class, () -> parser.parse(badIop, SERIES_REF));
     }
 
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("invalidConsumedMetadata")
+    void parse_rejects_invalid_consumed_attribute(String description, String body) {
+        assertThrows(InvalidArchiveMetadataException.class, () -> parser.parse(body, SERIES_REF));
+    }
+
+    static Stream<Arguments> invalidConsumedMetadata() throws JsonProcessingException {
+        String base = baseDatasetJsonStatic(CT_SOP_CLASS, SOP_UID, STUDY_UID, SERIES_UID);
+        return Stream.of(
+            Arguments.of("StudyInstanceUID with LO vr", replaceVr(base, "0020000D", "LO")),
+            Arguments.of("StudyInstanceUID with VM 2", replaceValue(base, "0020000D", "[\"" + STUDY_UID + "\",\"1.2.3\"]")),
+            Arguments.of("Rows with IS vr", replaceVr(base, "00280010", "IS")),
+            Arguments.of("InstanceNumber with null value", replaceValue(base, "00200013", "[null]")),
+            Arguments.of("ImagePositionPatient with FL vr", replaceVr(base, "00200032", "FL")),
+            Arguments.of("ImagePositionPatient with VM 2", replaceValue(base, "00200032", "[0,0]")),
+            Arguments.of("FrameOfReferenceUID with empty value", replaceValue(base, "00200052", "[\"\"]")),
+            Arguments.of("WindowCenter with IS vr", replaceVr(base, "00281050", "IS")),
+            Arguments.of("RescaleSlope with VM 2", replaceValue(base, "00281053", "[1,2]"))
+        );
+    }
+
+    @Test
+    void rejects_ct_without_rescale_pair() throws Exception {
+        assertThrows(InvalidArchiveMetadataException.class,
+            () -> parser.parse(removeTag(baseDatasetJson(CT_SOP_CLASS, SOP_UID), "00281052"), SERIES_REF));
+        assertThrows(InvalidArchiveMetadataException.class,
+            () -> parser.parse(removeTag(baseDatasetJson(CT_SOP_CLASS, SOP_UID), "00281053"), SERIES_REF));
+    }
+
+    @Test
+    void preserves_absent_rescale_pair_for_mr() throws Exception {
+        String body = removeTag(
+            removeTag(baseDatasetJson(MR_SOP_CLASS, SOP_UID), "00281052"),
+            "00281053");
+        ViewerInstance instance = parser.parse(body, SERIES_REF).getFirst();
+        assertNull(instance.rescaleIntercept());
+        assertNull(instance.rescaleSlope());
+    }
+
+    @Test
+    void rejects_zero_rescale_slope() throws Exception {
+        String body = replaceValue(baseDatasetJson(CT_SOP_CLASS, SOP_UID), "00281053", "[0]");
+        assertThrows(InvalidArchiveMetadataException.class,
+            () -> parser.parse(body, SERIES_REF));
+    }
+
     private String baseDatasetJson(String sopClassUid, String sopInstanceUid) {
         return baseDatasetJson(sopClassUid, sopInstanceUid, STUDY_UID, SERIES_UID);
     }
 
     private String baseDatasetJson(String sopClassUid, String sopInstanceUid, String studyUid, String seriesUid) {
+        return baseDatasetJsonStatic(sopClassUid, sopInstanceUid, studyUid, seriesUid);
+    }
+
+    private static String baseDatasetJsonStatic(
+        String sopClassUid,
+        String sopInstanceUid,
+        String studyUid,
+        String seriesUid
+    ) {
         return """
             [
               {
@@ -437,10 +504,16 @@ class WadoSeriesMetadataParserTest {
                 "00280100": { "vr": "US", "Value": [16] },
                 "00280101": { "vr": "US", "Value": [16] },
                 "00280102": { "vr": "US", "Value": [15] },
-                "00280103": { "vr": "US", "Value": [0] }
+                "00280103": { "vr": "US", "Value": [0] },
+                "00200032": { "vr": "DS", "Value": [0, 0, 0] },
+                "00200052": { "vr": "UI", "Value": ["%s"] },
+                "00200013": { "vr": "IS", "Value": [1] },
+                "00281052": { "vr": "DS", "Value": [-1024] },
+                "00281053": { "vr": "DS", "Value": [1] },
+                "00281050": { "vr": "DS", "Value": [40] }
               }
             ]
-            """.formatted(studyUid, seriesUid, sopInstanceUid, sopClassUid);
+            """.formatted(studyUid, seriesUid, sopInstanceUid, sopClassUid, FOR_UID);
     }
 
     private String datasetMissingTag(String tagToRemove) {
@@ -457,6 +530,8 @@ class WadoSeriesMetadataParserTest {
         appendTagIfDifferent(sb, "00280101", "US", "[16]", tagToRemove);
         appendTagIfDifferent(sb, "00280102", "US", "[15]", tagToRemove);
         appendTagIfDifferent(sb, "00280103", "US", "[0]", tagToRemove);
+        appendTagIfDifferent(sb, "00281052", "DS", "[-1024]", tagToRemove);
+        appendTagIfDifferent(sb, "00281053", "DS", "[1]", tagToRemove);
         // remove trailing comma
         int lastComma = sb.lastIndexOf(",");
         if (lastComma > 0) {
@@ -470,5 +545,26 @@ class WadoSeriesMetadataParserTest {
         if (!tag.equals(tagToRemove)) {
             sb.append("    \"").append(tag).append("\": { \"vr\": \"").append(vr).append("\", \"Value\": ").append(value).append(" },\n");
         }
+    }
+
+    private static String removeTag(String body, String tag) throws JsonProcessingException {
+        JsonNode root = new ObjectMapper().readTree(body);
+        ((ObjectNode) root.get(0)).remove(tag);
+        return root.toString();
+    }
+
+    private static String replaceValue(String body, String tag, String valueJson)
+        throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(body);
+        ((ObjectNode) root.get(0).get(tag)).set("Value", mapper.readTree(valueJson));
+        return root.toString();
+    }
+
+    private static String replaceVr(String body, String tag, String vr) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(body);
+        ((ObjectNode) root.get(0).get(tag)).put("vr", vr);
+        return root.toString();
     }
 }
