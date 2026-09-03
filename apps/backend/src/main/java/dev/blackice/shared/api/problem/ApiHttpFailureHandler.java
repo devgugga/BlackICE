@@ -41,8 +41,10 @@ public class ApiHttpFailureHandler {
         router.route("/api/*").failureHandler(this::writeProblemForFailure);
     }
 
-    private void writeProblemForFailure(RoutingContext context) {
-        if (!ApiJavaScriptRequestChecker.isApiRequest(context) || context.response().ended()) {
+    void writeProblemForFailure(RoutingContext context) {
+        if (!ApiJavaScriptRequestChecker.isApiRequest(context)
+            || context.response().ended()
+            || context.response().headWritten()) {
             context.next();
             return;
         }

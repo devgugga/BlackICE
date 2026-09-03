@@ -6,6 +6,7 @@ import dev.blackice.viewer.application.exception.ArchiveViewerException;
 import dev.blackice.viewer.application.input.ViewerInstanceRef;
 import dev.blackice.viewer.application.result.FrameStream;
 import dev.blackice.viewer.application.usecase.RetrieveFrameUseCase;
+import io.quarkus.test.common.http.TestHTTPResource;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.security.TestSecurity;
@@ -14,10 +15,18 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
@@ -63,6 +72,9 @@ class WadoFrameResourceTest {
 
     @InjectMock
     AccessTokenProvider accessTokenProvider;
+
+    @TestHTTPResource("/")
+    URI baseUri;
 
     @Test
     @DisplayName("anonymous frame request receives 401 problem")
@@ -338,30 +350,37 @@ class WadoFrameResourceTest {
     @Test
     @TestSecurity(user = "dr.teste", roles = "auth")
     @DisplayName("body throwing after first chunk is not replaced by Problem Details")
-    void body_throwing_after_first_chunk_is_not_replaced_by_problem_details() {
-        int chunkCommitSize = 64 * 1024;
+    void body_throwing_after_first_chunk_is_not_replaced_by_problem_details() throws Exception {
+        int firstChunkSize = 8 * 1024;
+        CountDownLatch releaseFailure = new CountDownLatch(1);
         InputStream throwingStream = new InputStream() {
-            private int bytesRead = 0;
+            private boolean firstChunk = true;
 
             @Override
             public int read() throws IOException {
-                if (bytesRead++ < chunkCommitSize) {
-                    return 'A';
-                }
-                throw new IOException("Simulated network stream break mid-transfer");
+                byte[] singleByte = new byte[1];
+                int read = read(singleByte, 0, 1);
+                return read == -1 ? -1 : Byte.toUnsignedInt(singleByte[0]);
             }
 
             @Override
-            public int read(byte[] b, int off, int len) throws IOException {
-                if (bytesRead >= chunkCommitSize) {
-                    throw new IOException("Simulated network stream break mid-transfer");
+            public int read(byte[] bytes, int offset, int length) throws IOException {
+                if (firstChunk) {
+                    firstChunk = false;
+                    int count = Math.min(length, firstChunkSize);
+                    Arrays.fill(bytes, offset, offset + count, (byte) 'A');
+                    return count;
                 }
-                int toRead = Math.min(len, chunkCommitSize - bytesRead);
-                for (int i = 0; i < toRead; i++) {
-                    b[off + i] = 'A';
+
+                try {
+                    if (!releaseFailure.await(10, TimeUnit.SECONDS)) {
+                        throw new IOException("Timed out waiting to release simulated stream failure");
+                    }
+                } catch (InterruptedException interrupted) {
+                    Thread.currentThread().interrupt();
+                    throw new IOException("Interrupted while waiting to fail the simulated stream", interrupted);
                 }
-                bytesRead += toRead;
-                return toRead;
+                throw new IOException("Simulated network stream break mid-transfer");
             }
         };
 
@@ -369,16 +388,44 @@ class WadoFrameResourceTest {
         when(retrieveFrameUseCase.execute(eq(INSTANCE_REF), eq("user-token")))
             .thenReturn(new FrameStream(SAMPLE_CONTENT_TYPE, throwingStream));
 
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder(baseUri.resolve(FRAME_URL.substring(1)))
+            .GET()
+            .build();
+        HttpResponse<InputStream> response;
         try {
-            Response response = given()
-                .when().get(FRAME_URL)
-                .andReturn();
+            response = client.sendAsync(request, HttpResponse.BodyHandlers.ofInputStream())
+                .get(10, TimeUnit.SECONDS);
+        } catch (Exception requestFailure) {
+            releaseFailure.countDown();
+            throw requestFailure;
+        }
 
-            String body = response.getBody().asString();
-            assertFalse(body.contains("\"code\":\"API_"));
-        } catch (Exception expected) {
-            // Broken connection or stream termination as expected
-            assertTrue(expected.getMessage() != null || expected instanceof IOException);
+        try (InputStream body = response.body()) {
+            assertEquals(200, response.statusCode());
+            assertEquals(
+                SAMPLE_CONTENT_TYPE,
+                response.headers().firstValue("Content-Type").orElseThrow()
+            );
+            assertFalse(response.headers().firstValue("Content-Type").orElseThrow()
+                .contains("application/problem+json"));
+
+            releaseFailure.countDown();
+            ByteArrayOutputStream received = new ByteArrayOutputStream();
+            try {
+                body.transferTo(received);
+            } catch (IOException expectedTruncation) {
+                // The connection may surface the deliberately truncated stream as an IOException.
+            }
+
+            byte[] receivedBytes = received.toByteArray();
+            assertTrue(receivedBytes.length > 0);
+            for (byte value : receivedBytes) {
+                assertEquals('A', Byte.toUnsignedInt(value));
+            }
+            assertFalse(new String(receivedBytes, StandardCharsets.UTF_8).contains("\"code\":\"API_"));
+        } finally {
+            releaseFailure.countDown();
         }
     }
 }
