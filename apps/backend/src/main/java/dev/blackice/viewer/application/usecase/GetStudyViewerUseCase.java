@@ -97,7 +97,7 @@ public class GetStudyViewerUseCase {
                 throw new InvalidArchiveMetadataException("No instances found for series");
             }
 
-            if (series.instanceCount() != null && !series.instanceCount().equals(instancesForSeries.size())) {
+            if (!Integer.valueOf(instancesForSeries.size()).equals(series.instanceCount())) {
                 throw new InvalidArchiveMetadataException("Inconsistent instance count for series");
             }
 

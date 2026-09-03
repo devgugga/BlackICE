@@ -195,7 +195,8 @@ class QidoViewerResponseParserTest {
         String json = """
             [
               {
-                "0020000E": { "vr": "UI", "Value": ["1.2.3.1"] }
+                "0020000E": { "vr": "UI", "Value": ["1.2.3.1"] },
+                "00201209": { "vr": "IS", "Value": ["1"] }
               }
             ]
             """;
@@ -207,7 +208,39 @@ class QidoViewerResponseParserTest {
         assertNull(series.get(0).seriesNumber());
         assertNull(series.get(0).modality());
         assertNull(series.get(0).description());
-        assertNull(series.get(0).instanceCount());
+        assertEquals(1, series.get(0).instanceCount());
+    }
+
+    @Test
+    void rejects_series_without_number_of_series_related_instances() {
+        String json = "[{\"0020000E\":{\"vr\":\"UI\",\"Value\":[\"1.2.3.1\"]}}]";
+
+        assertThrows(QidoViewerResponseParser.InvalidResponseException.class, () -> parser.parseSeries(json));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "-1", "1.5", "abc"})
+    void rejects_non_positive_or_non_integral_related_instance_count(String count) {
+        String json = "[{\"0020000E\":{\"vr\":\"UI\",\"Value\":[\"1.2.3.1\"]},"
+            + "\"00201209\":{\"vr\":\"IS\",\"Value\":[\"" + count + "\"]}}]";
+
+        assertThrows(QidoViewerResponseParser.InvalidResponseException.class, () -> parser.parseSeries(json));
+    }
+
+    @Test
+    void rejects_related_instance_count_with_wrong_vr() {
+        String json = "[{\"0020000E\":{\"vr\":\"UI\",\"Value\":[\"1.2.3.1\"]},"
+            + "\"00201209\":{\"vr\":\"UL\",\"Value\":[1]}}]";
+
+        assertThrows(QidoViewerResponseParser.InvalidResponseException.class, () -> parser.parseSeries(json));
+    }
+
+    @Test
+    void rejects_related_instance_count_with_vm_greater_than_one() {
+        String json = "[{\"0020000E\":{\"vr\":\"UI\",\"Value\":[\"1.2.3.1\"]},"
+            + "\"00201209\":{\"vr\":\"IS\",\"Value\":[1,2]}}]";
+
+        assertThrows(QidoViewerResponseParser.InvalidResponseException.class, () -> parser.parseSeries(json));
     }
 
     @Test

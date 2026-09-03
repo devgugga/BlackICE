@@ -138,7 +138,7 @@ public class QidoViewerResponseParser {
             Integer seriesNumber = integer(dataset, SERIES_NUMBER);
             String modality = firstText(dataset, MODALITY, "CS");
             String description = firstText(dataset, SERIES_DESCRIPTION, "LO");
-            Integer instanceCount = integer(dataset, NUMBER_OF_SERIES_RELATED_INSTANCES);
+            Integer instanceCount = requiredPositiveInteger(dataset, NUMBER_OF_SERIES_RELATED_INSTANCES);
 
             list.add(new SeriesMetadata(
                 seriesInstanceUid,
@@ -337,6 +337,33 @@ public class QidoViewerResponseParser {
             }
         }
         throw new InvalidResponseException("Integer in tag must be a number or string");
+    }
+
+    private Integer requiredPositiveInteger(JsonNode dataset, String tag) {
+        JsonNode attr = attribute(dataset, tag, "IS");
+        JsonNode values = attr == null ? null : attr.get("Value");
+        if (values == null || !values.isArray() || values.size() != 1) {
+            throw new InvalidResponseException("Missing or invalid positive integer in tag");
+        }
+
+        JsonNode value = values.get(0);
+        int parsed;
+        if (value.isIntegralNumber() && value.canConvertToInt()) {
+            parsed = value.intValue();
+        } else if (value.isTextual()) {
+            try {
+                parsed = Integer.parseInt(value.asText().trim());
+            } catch (NumberFormatException e) {
+                throw new InvalidResponseException("Invalid positive integer format in tag", e);
+            }
+        } else {
+            throw new InvalidResponseException("Positive integer in tag must be a number or string");
+        }
+
+        if (parsed <= 0) {
+            throw new InvalidResponseException("Positive integer in tag must be greater than zero");
+        }
+        return parsed;
     }
 
     private Integer numberOfFrames(JsonNode dataset) {

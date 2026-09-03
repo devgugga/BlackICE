@@ -217,6 +217,20 @@ class GetStudyViewerUseCaseTest {
     }
 
     @Test
+    void rejects_series_without_declared_instance_count() {
+        String seriesUid = "1.2.3.1";
+        when(gateway.findStudy(studyRef, TOKEN)).thenReturn(sampleStudyMetadata());
+        when(gateway.findSeries(studyRef, TOKEN)).thenReturn(List.of(
+            new SeriesMetadata(seriesUid, 1, "CT", "AXIAL", null)
+        ));
+        when(gateway.findInstances(studyRef, TOKEN)).thenReturn(List.of(
+            new InstanceIdentityMetadata(seriesUid, "1.2.3.1.1", CT_SOP_CLASS, 1)
+        ));
+
+        assertThrows(InvalidArchiveMetadataException.class, () -> useCase.execute(studyRef, TOKEN));
+    }
+
+    @Test
     @DisplayName("throws InvalidArchiveMetadataException when gateway returns null metadata")
     void rejects_null_gateway_responses() {
         when(gateway.findStudy(studyRef, TOKEN)).thenReturn(null);

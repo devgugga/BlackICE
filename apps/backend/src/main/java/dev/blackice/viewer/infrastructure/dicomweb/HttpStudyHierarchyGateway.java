@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * HTTP DICOMweb adapter that queries study hierarchy and paginated instance identities using QIDO-RS.
@@ -33,6 +34,7 @@ import java.util.Set;
 public class HttpStudyHierarchyGateway implements StudyHierarchyGateway {
 
     private static final String DICOM_JSON_MEDIA_TYPE = "application/dicom+json";
+    private static final Pattern WARNING_299 = Pattern.compile("^\\s*299(?:\\s|$)");
 
     private final String baseUrl;
     private final Duration requestTimeout;
@@ -90,6 +92,10 @@ public class HttpStudyHierarchyGateway implements StudyHierarchyGateway {
         URI uri = queryBuilder.study(baseUrl, study);
         HttpResponse<String> response = executeGet(uri, accessToken);
 
+        if (hasMoreResults(response)) {
+            throw new ArchiveViewerException(ArchiveViewerException.Reason.INVALID_RESPONSE);
+        }
+
         int statusCode = response.statusCode();
         if (statusCode == 204) {
             throw new ArchiveViewerException(ArchiveViewerException.Reason.NOT_FOUND);
@@ -122,6 +128,10 @@ public class HttpStudyHierarchyGateway implements StudyHierarchyGateway {
         URI uri = queryBuilder.series(baseUrl, study);
         HttpResponse<String> response = executeGet(uri, accessToken);
 
+        if (hasMoreResults(response)) {
+            throw new ArchiveViewerException(ArchiveViewerException.Reason.INVALID_RESPONSE);
+        }
+
         int statusCode = response.statusCode();
         if (statusCode == 204) {
             return List.of();
@@ -148,6 +158,7 @@ public class HttpStudyHierarchyGateway implements StudyHierarchyGateway {
         while (true) {
             URI uri = queryBuilder.instances(baseUrl, study, pageSize, offset);
             HttpResponse<String> response = executeGet(uri, accessToken);
+            boolean moreResults = hasMoreResults(response);
 
             List<InstanceIdentityMetadata> pageInstances;
             int statusCode = response.statusCode();
@@ -162,6 +173,10 @@ public class HttpStudyHierarchyGateway implements StudyHierarchyGateway {
                 }
             }
 
+            if (pageInstances.isEmpty() && moreResults) {
+                throw new ArchiveViewerException(ArchiveViewerException.Reason.INVALID_RESPONSE);
+            }
+
             for (InstanceIdentityMetadata instance : pageInstances) {
                 if (!seenSopUids.add(instance.sopInstanceUid())) {
                     throw new ArchiveViewerException(ArchiveViewerException.Reason.INVALID_RESPONSE);
@@ -169,10 +184,10 @@ public class HttpStudyHierarchyGateway implements StudyHierarchyGateway {
                 allInstances.add(instance);
             }
 
-            if (pageInstances.size() < pageSize) {
+            if (!moreResults) {
                 break;
             }
-            offset += pageSize;
+            offset += pageInstances.size();
         }
 
         return List.copyOf(allInstances);
@@ -230,5 +245,10 @@ public class HttpStudyHierarchyGateway implements StudyHierarchyGateway {
         if (!DICOM_JSON_MEDIA_TYPE.equals(mediaType)) {
             throw new ArchiveViewerException(ArchiveViewerException.Reason.INVALID_RESPONSE);
         }
+    }
+
+    private static boolean hasMoreResults(HttpResponse<?> response) {
+        return response.headers().allValues("Warning").stream()
+            .anyMatch(value -> WARNING_299.matcher(value).find());
     }
 }

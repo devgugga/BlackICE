@@ -180,6 +180,28 @@ class HttpStudyHierarchyGatewayTest {
         assertFalse(error.getMessage().contains(STUDY_UID));
     }
 
+    @Test
+    void find_study_rejects_warning_299() {
+        server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies", exchange -> {
+            exchange.getResponseHeaders().add(
+                "Warning",
+                "299 dcm4chee: There are 1 additional results that can be requested"
+            );
+            respond(
+                exchange,
+                200,
+                DICOM_JSON,
+                "[{\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"" + STUDY_UID + "\"]}}]"
+            );
+        });
+
+        ArchiveViewerException error = assertThrows(
+            ArchiveViewerException.class,
+            () -> gateway(Duration.ofSeconds(2), 500).findStudy(STUDY_REF, "token")
+        );
+        assertEquals(ArchiveViewerException.Reason.INVALID_RESPONSE, error.reason());
+    }
+
     // ==========================================
     // findSeries Tests
     // ==========================================
@@ -222,6 +244,29 @@ class HttpStudyHierarchyGatewayTest {
         assertTrue(series.isEmpty());
     }
 
+    @Test
+    void find_series_rejects_warning_299() {
+        server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies/" + STUDY_UID + "/series", exchange -> {
+            exchange.getResponseHeaders().add(
+                "Warning",
+                "299 dcm4chee: There are 1 additional results that can be requested"
+            );
+            respond(
+                exchange,
+                200,
+                DICOM_JSON,
+                "[{\"0020000E\":{\"vr\":\"UI\",\"Value\":[\"1.2.3.1\"]},"
+                    + "\"00201209\":{\"vr\":\"IS\",\"Value\":[1]}}]"
+            );
+        });
+
+        ArchiveViewerException error = assertThrows(
+            ArchiveViewerException.class,
+            () -> gateway(Duration.ofSeconds(2), 500).findSeries(STUDY_REF, "token")
+        );
+        assertEquals(ArchiveViewerException.Reason.INVALID_RESPONSE, error.reason());
+    }
+
     // ==========================================
     // findInstances and Pagination Tests
     // ==========================================
@@ -252,7 +297,7 @@ class HttpStudyHierarchyGatewayTest {
     }
 
     @Test
-    void find_instances_paginates_until_short_page() {
+    void find_instances_continues_after_non_empty_page_with_warning_299() {
         List<String> requestedOffsets = new ArrayList<>();
 
         server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies/" + STUDY_UID + "/instances", exchange -> {
@@ -273,6 +318,10 @@ class HttpStudyHierarchyGatewayTest {
                       }
                     ]
                     """;
+                exchange.getResponseHeaders().add(
+                    "Warning",
+                    "299 dcm4chee: There are 1 additional results that can be requested"
+                );
                 respond(exchange, 200, DICOM_JSON, page0);
             } else if (query.contains("offset=2")) {
                 requestedOffsets.add("2");
@@ -302,6 +351,65 @@ class HttpStudyHierarchyGatewayTest {
     }
 
     @Test
+    void find_instances_advances_by_received_size_when_archive_max_results_is_smaller() {
+        List<String> requestedOffsets = new ArrayList<>();
+
+        server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies/" + STUDY_UID + "/instances", exchange -> {
+            String query = exchange.getRequestURI().getRawQuery();
+            if (query.contains("offset=0")) {
+                requestedOffsets.add("0");
+                exchange.getResponseHeaders().add(
+                    "Warning",
+                    "299 dcm4chee: There are 1 additional results that can be requested"
+                );
+                respond(
+                    exchange,
+                    200,
+                    DICOM_JSON,
+                    "[{\"0020000E\":{\"vr\":\"UI\",\"Value\":[\"1.2.3.1\"]},"
+                        + "\"00080018\":{\"vr\":\"UI\",\"Value\":[\"1.2.3.1.1\"]},"
+                        + "\"00080016\":{\"vr\":\"UI\",\"Value\":[\"1.2.840.10008.5.1.4.1.1.2\"]}}]"
+                );
+            } else if (query.contains("offset=1")) {
+                requestedOffsets.add("1");
+                respond(
+                    exchange,
+                    200,
+                    DICOM_JSON,
+                    "[{\"0020000E\":{\"vr\":\"UI\",\"Value\":[\"1.2.3.1\"]},"
+                        + "\"00080018\":{\"vr\":\"UI\",\"Value\":[\"1.2.3.1.2\"]},"
+                        + "\"00080016\":{\"vr\":\"UI\",\"Value\":[\"1.2.840.10008.5.1.4.1.1.2\"]}}]"
+                );
+            } else {
+                respond(exchange, 200, DICOM_JSON, "[]");
+            }
+        });
+
+        List<InstanceIdentityMetadata> instances =
+            gateway(Duration.ofSeconds(2), 2).findInstances(STUDY_REF, "token");
+
+        assertEquals(List.of("0", "1"), requestedOffsets);
+        assertEquals(2, instances.size());
+    }
+
+    @Test
+    void find_instances_rejects_empty_page_with_warning_299() {
+        server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies/" + STUDY_UID + "/instances", exchange -> {
+            exchange.getResponseHeaders().add(
+                "Warning",
+                "299 dcm4chee: There are 1 additional results that can be requested"
+            );
+            respond(exchange, 200, DICOM_JSON, "[]");
+        });
+
+        ArchiveViewerException error = assertThrows(
+            ArchiveViewerException.class,
+            () -> gateway(Duration.ofSeconds(2), 2).findInstances(STUDY_REF, "token")
+        );
+        assertEquals(ArchiveViewerException.Reason.INVALID_RESPONSE, error.reason());
+    }
+
+    @Test
     void find_instances_rejects_duplicate_sop_instance_uid_across_pages() {
         server.createContext("/dcm4chee-arc/aets/DCM4CHEE/rs/studies/" + STUDY_UID + "/instances", exchange -> {
             String query = exchange.getRequestURI().getRawQuery();
@@ -320,6 +428,10 @@ class HttpStudyHierarchyGatewayTest {
                       }
                     ]
                     """;
+                exchange.getResponseHeaders().add(
+                    "Warning",
+                    "299 dcm4chee: There are 1 additional results that can be requested"
+                );
                 respond(exchange, 200, DICOM_JSON, page0);
             } else {
                 String page1WithDuplicate = """
