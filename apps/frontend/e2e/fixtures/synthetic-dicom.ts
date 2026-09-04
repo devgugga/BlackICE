@@ -42,6 +42,7 @@ export interface SyntheticDicomMetadata {
   seriesDescription?: string;
   seriesNumber?: number;
   instanceNumber?: number;
+  pixelDataBytes?: number;
 }
 
 export function createSyntheticDicom(
@@ -50,6 +51,18 @@ export function createSyntheticDicom(
   sopUid: string,
   metadata: SyntheticDicomMetadata = {},
 ): Buffer {
+  const pixelDataBytes = metadata.pixelDataBytes ?? 1;
+  const columns = metadata.pixelDataBytes === undefined ? 1 : 2048;
+  const rows = pixelDataBytes / columns;
+  if (!Number.isInteger(rows) || rows < 1 || rows > 0xffff) {
+    throw new RangeError(
+      'pixelDataBytes must be a positive multiple of 2048 within DICOM Rows limits',
+    );
+  }
+  const pixelData = Buffer.alloc(
+    pixelDataBytes % 2 === 0 ? pixelDataBytes : pixelDataBytes + 1,
+  );
+
   const metaBody = Buffer.concat([
     element(0x0002, 0x0001, 'OB', Buffer.from([0, 1])),
     text(0x0002, 0x0002, 'UI', SECONDARY_CAPTURE),
@@ -95,13 +108,13 @@ export function createSyntheticDicom(
     text(0x0020, 0x0013, 'IS', String(metadata.instanceNumber ?? 1)),
     us(0x0028, 0x0002, 1),
     text(0x0028, 0x0004, 'CS', 'MONOCHROME2'),
-    us(0x0028, 0x0010, 1),
-    us(0x0028, 0x0011, 1),
+    us(0x0028, 0x0010, rows),
+    us(0x0028, 0x0011, columns),
     us(0x0028, 0x0100, 8),
     us(0x0028, 0x0101, 8),
     us(0x0028, 0x0102, 7),
     us(0x0028, 0x0103, 0),
-    element(0x7fe0, 0x0010, 'OB', Buffer.from([0, 0])),
+    element(0x7fe0, 0x0010, 'OB', pixelData),
   );
 
   const dataset = Buffer.concat(datasetElements);
