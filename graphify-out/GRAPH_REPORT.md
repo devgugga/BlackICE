@@ -1,1112 +1,1118 @@
-# Graph Report - .  (2026-08-25)
+# Graph Report - .  (2026-09-04)
 
 ## Corpus Check
-- 462 files · ~245,114 words
+- 469 files · ~252,317 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 3421 nodes · 7293 edges · 365 communities (228 shown, 137 thin omitted)
-- Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 682 edges (avg confidence: 0.79)
+- 3545 nodes · 7448 edges · 373 communities (227 shown, 146 thin omitted)
+- Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 656 edges (avg confidence: 0.79)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
-- AfterEach
-- HttpQidoStudyGateway.java
-- ApiProblemFactory
-- StudyList.vue
-- synthetic dicom.ts
-- InvalidStudySearchException.ja
-- CurrentReportActor.java
-- ApiProblemResponseFilter.java
-- InvalidArchiveMetadataExceptio
-- Quarkus Backend CI Job
-- generated/ProblemType.java
-- QidoViewerResponseParser.java
-- .fromVersion()
-- WadoFrameResource.java
-- dicom validation violations.sc
-- IngestStudiesUseCaseTest.java
-- InvalidReportRequestException.
-- SeriesSupport.java
-- ReportInputsTest.java
-- loadDicomViewport.ts
-- InstanceIdentityMetadata.java
-- DisplayName
-- ReportContent
-- Agent authoring skill
-- .actor()
-- ViewerInstance.java
-- ArchiveUnavailableException.ja
-- IngestResult.java
-- ArchiveViewerException.java
-- ReportPanel.vue
-- ValidatedDicom.java
-- .reason()
-- ViewerStudyRef
-- TaskExecutorFactory.java
-- ContextAwareVirtualThreadExecu
-- ReportExceptionMappers.java
-- CreateReportCommand
-- ViewerSeriesRef
-- UploadedDicom.java
-- BackendArchitectureTest.java
-- viewer runtime.spec.ts
-- catalog.js
-- 2026 08 22 worklist qido rs de
-- loadSchema()
-- HttpDicomArchiveGateway.java
-- ReportRepository.java
-- Override
-- ReportEditor.vue
-- 2026 08 22 worklist qido rs.md
-- 2026 08 07 keycloak same origi
-- compareCodes()
-- generate typescript.js
-- .parse()
-- StudyHierarchyGateway.java
-- HttpDicomFrameGatewayTest
-- Reason
-- .sort()
-- tsconfig.node.json
-- golden/ProblemType.java
-- Problem Catalog Skill (Codex a
-- .reason() (2)
-- ApiProblem.java
-- WorklistResource.java
-- devDependencies
-- viewer.api.ts
-- tsconfig.app.json
-- ApiProblemExceptionMappers.jav
-- Props
-- ViewerPage.spec.ts
-- $ref
-- UpdateReportCommand
-- HttpDicomFrameGateway.java
-- golden/problem extensions.gene
-- ajv
-- ReportEtag.java
-- PanacheReportRepository.java
-- ApiFailureLogger.java
-- ApiTraceResponseFilter.java
-- HttpStudyHierarchyGateway.java
-- ReportResourceGetTest.java
-- ReportMutationOptions
-- cornerstone init.ts
-- AccessTokenCredential
-- IngestResource.java
-- IngestResponseMapper.java
-- ViewerResource.java
-- dependencies
-- RFC 4122
-- description
-- DEFAULT PATHS
-- StowResponseParser.java
-- ReportRepresentationMapper.jav
-- IngestPage.vue
-- useIngestBatch.ts
-- entry
-- keycloak login.spec.ts
-- ingest.api.spec.ts
-- generate java.js
-- Automatic Label Reuse Invalida
-- Atualização semântica final do
-- HttpSeriesMetadataGateway.java
-- ViewerRuntime
-- Archive Ecosystem
-- catalog.schema.json
-- description (2)
-- ApiProblem
-- Dcm4cheDicomBatchValidator.jav
-- generated/ProblemExtensions.ja
-- ViewerExceptionMappers.java
-- events.ts
-- 2026 08 22 backend modular cle
-- Atomic Error Contract Migratio
-- mvnw
-- ApiJavaScriptRequestChecker.ja
-- .members()
-- ArchiveSearchException.java
-- ApiTraceResponseFilterTest.jav
-- scripts
-- report.api.ts
-- SeriesRail.vue
-- Authenticated DICOM Ingest Flo
-- 2026 08 22 agent authoring ski
-- .ArchiveViewerException()
-- InvalidViewerRequestException.
-- useViewerCapability.ts
-- generate markdown.js
-- ApiProblemFactory.java
-- ProblemResponseFactory.java
-- frontend/package.json
-- StudyHeader.vue
-- WorklistPage.spec.ts
-- 2026 08 22 backend modular cle (2)
-- 2026 08 09 commit curator desi
-- 2026 08 09 keycloak windows bo
-- CsrfResource.java
-- CsrfResourceTest.java
-- SessionResourceTest.java
-- ingest.types.ts
-- useStudyViewer()
-- owner
-- 2026 08 07 keycloak same origi (2)
-- 2026 08 22 agent authoring ski (2)
-- Phase 1 Backend QIDO WADO
-- 2026 08 22 antigravity agents
+- Report Resource
+- Wado Series Metadata Parser
+- Http Qido Study Gateway
+- Http Dicom Frame Gateway
+- Api Problem Probe Resource
+- problem ts
+- Worklist Page vue
+- Study Search Request
+- Http Study Hierarchy Gateway
+- Qido Viewer Response Parser
+- Api Problem Http
+- Problem Type
+- dicom validation violations schema
+- Viewer Study Ref
+- Studies Use Case
+- Report Study Ref
+- Spatial Instance Order
+- Version Backend
+- Report Repository
+- classify Backend
+- Study Viewer Use Case
+- Display Name
+- Resource Backend
+- Archive Viewer Exception
+- Viewer Instance
+- Viewer Page vue
+- QIDO RS Query Service
+- Report Resource java
+- Invalid Report Request Exception
+- md Documentation
+- Http Series Metadata Gateway
+- Worklist Resource
+- Wado Frame Resource
+- Http Dicom Archive Gateway
+- Report Panel vue
+- find By Study Instance
+- Dcm4che Dicom Batch Validator
+- Report Exception Mappers
+- Validated Dicom
+- Stow Response Parser
+- Backend Architecture
+- catalog js
+- Worklist e busca via
+- cli js
+- Viewer Resource java
+- Report Editor vue
+- Phase Backend QIDO vertical
+- Black ICE Login same
+- lock js
+- generate typescript js
+- W3c Trace Context Injector
+- Cornerstone3 D
+- Studies Use Case Studies Backend
+- AUTHENTICATION Backend
+- Options Frontend
+- golden Problem Type java
+- Report Backend
+- Api Problem Factory
+- Worklist Resource java
+- dev Frontend
+- viewer api ts
+- Options Frontend include Frontend
+- Http Dicom Archive Archive Backend
+- Api Problem Exception Mappers
+- use Report Layout ts
+- viewer types ts
+- Dicom Viewport vue
+- Viewer Page spec ts
+- replaced By
+- Stow Response Parser Dataset Backend
+- golden problem types generated
+- problem catalog package
+- Response Mapper
+- Report Etag java
+- Api Failure Logger
+- Trace Context
+- Viewer Resource java Invalid Backend
+- Report Resource java Report Backend
+- use Study Report ts
+- viewer runtime ts
+- End to End Stack
+- Current Access Token
+- Resource java
+- vue Frontend
+- uuid v5 js
+- owners Documentation
+- generation js
+- Result Backend
+- Study Report Use Case
+- Http Series Metadata Http Backend
+- Api Failure Log Capture
+- Page vue
+- Batch Frontend
+- required Documentation
+- Code Backend
+- Submission Tracking Body Publisher
+- worklist api spec ts
+- Fake XHR
+- generate java js
+- Community Labels
+- Traefik Gateway
+- catalog schema
+- defs Documentation
+- Dcm4che Dicom Batch Dcm4che Backend
+- Http Dicom Archive store Backend
+- Problem Extensions
+- Routing Context
+- Event Emitter
+- Backend modular com Clean
+- RFC Problem Details Contract
+- mvnw Backend
+- Problem Extensions members Repository
+- Archive Search Exception
+- Api Trace Response Filter
+- build Frontend
+- report api ts
+- Series Rail vue
+- Authenticated DICOM Flow
+- DICOM MVP Closure
+- Decis es
+- Task Executor Factory
+- Archive Viewer Exception AUTHENTICATION Backend
+- use Viewer Capability spec
+- Agent Authoring Domain Pack
+- Failure Classification
+- generate markdown js
+- Api Problem Factory Api Backend
+- Problem Response Factory
+- frontend package
+- Study Header vue
+- Worklist Page spec ts
+- Global Constraints
+- Commit Curator Design
+- Bootstrap do Keycloak no
+- DICOM Invariants
+- Csrf Resource java
+- Csrf Resource
+- Session Resource
+- types ts
+- Study Viewer Controller
+- owner Documentation
+- Keycloak same origin Implementation
+- Global Constraints Agent Documentation
+- Cornerstone Stack Viewport
+- Agentes Antigravity desenho
 - DICOM Domain Review
-- ExternalProblemProbeResource.j
-- IngestPage.spec.ts
-- viewer.api.spec.ts
-- description (3)
-- Foundation Stack Plan
+- service Unavailable
+- Page spec ts
+- viewer api spec ts
+- extensions Schema Ref
+- Problem Catalog Registry
+- Keycloak Theme Design
 - Cross platform Launchers
-- 2026 08 22 antigravity agents.
-- FixedTraceContext
-- IngestResult.vue
-- report.api.spec.ts
-- useWorklist.spec.ts
-- httpStatus
-- retryPolicy
-- query 20260727 184232 como o f
-- query 20260727 184243 quais re
-- query 20260727 184305 onde fic
-- Tooling node modules Exclusion
-- dicom domain reviewer/agent.md
-- EVO 011: Editor Markdown rico
-- description (4)
-- schemaVersion
-- scope
-- type
-- Modular Architecture
-- DCM4CHEE 5.34.3 Baseline
-- 2026 08 09 commit curator.md
-- 2026 08 09 keycloak windows bo (2)
-- Keycloak input focus outline f
-- CSRF Double Submit Protection
-- Intermediários descartáveis da
-- dicom viewer frontend/agent.md
-- quarkus backend/agent.md
-- Hook pós commit e sincronizaçã
-- ingest.api.ts
-- useIngestBatch.spec.ts
-- csrf.ts
-- csrf.spec.ts
-- tsconfig.json
-- Canonical Commit Body
-- Cluster only refresh
-- DICOM Patient Study Series Ins
-- Vue Feature Architecture
-- Graphify Integration Plan
-- Study Viewer Implementation Pl
-- API ARCHIVE OUTCOME UNKNOWN
+- Global Constraints Antigravity Documentation
+- Fixed Trace Context
+- Result vue
+- report api spec ts
+- use Worklist spec ts
+- http Status
+- retry Policy
+- Q Como o frontend
+- Q Quais regras do
+- Q Onde ficam as
+- dicom domain reviewer agent
+- Feature Modular Architecture
+- description Documentation
+- schema Version
+- scope Documentation
+- type Documentation
+- Global Constraints Commit Documentation
+- Global Constraints Bootstrap Documentation
+- Black ICE login CSS
+- Manual DICOM Import
+- Labels e learning port
+- dicom viewer frontend agent
+- quarkus backend agent md
+- Problem Details API Contract
+- Same Origin BFF Session
+- api ts
+- use Batch spec ts
+- csrf ts
+- problem Frontend
+- tsconfig Frontend
+- Claude Commit Curator
+- Incremental re extraction runbook
+- Product Database
+- DCM4 CHEE Secure Stack
+- MVP Study Viewer
+- API ARCHIVE UNAVAILABLE
+- Commit Curator
 - Folder Watcher
 - Graph Exports
 - Graph Query
 - Incremental Re extraction
 - Graphify skill
-- commit curator/agent.md
-- .agents/skills/agent authoring
-- Apache Maven 3.9.16 Distributi
-- DICOMweb Gateway Configuration
-- @vitejs/plugin vue
-- playwright.config.ts
-- BlackICE Favicon
-- index.ts
-- index.spec.ts
-- HomePage.vue
-- session.types.ts
-- .claude/skills/agent authoring
-- Thin Agent Wrappers
-- Model Routing
-- Pixel Data Preservation
-- Commit Scope Policy
-- Catalog Lock Immutability
-- Read Only Continuous Verificat
-- Single Sanitized Logging
-- Project Structure Plan
-- Agent Authoring Skill Plan
+- Problem Catalog Skill Claude
+- Claude Skills
+- Pinned Catalog Toolchain
+- Papel Agent
+- Agent authoring
+- Maven Wrapper
+- DICOMweb Gateway
+- vitejs plugin vue
+- is Ci
+- Lightning Bolt
+- router Frontend
+- fetch Session Mock
+- username Frontend
+- Session Response
+- Agent authoring claude Claude
+- Git Commit Conventions
+- Monorepo Design
+- Commit Curator Plan
+- Antigravity Agents Plan
 - Atomic Contract Migration
-- Phase 0 Client Problem Contrac
-- Container Admin REST Script
-- Backend modular Clean Architec
+- Viewer Problem Details Contract
+- DCM4 CHEE Compose services
+- Keycloak Windows Bootstrap
+- Backend modular Clean Architecture
 - API DICOM VALIDATION FAILED
-- Shared infrastructure Compose
-- configure blackice container.s
-- configure blackice.sh script
-- commit curator agent
-- dicom domain reviewer agent
-- dicom viewer frontend agent
-- quarkus backend agent
+- Docker API compatibility proxy
+- configure blackice container sh
+- configure blackice sh
 - Semantic extraction
 - Cross Repository Graph Merge
-- Post Commit Graph Hook
+- Commit Graph Hook
 - Media Transcription
-- Claude skills
 - Codex DICOM domain reviewer
 - Codex commit curator
 - Codex Quarkus backend agent
-- Codex DICOM viewer frontend ag
-- Codex multi agent configuratio
-- AccessTokenProvider
-- Backend Container Build Artifa
+- Codex DICOM viewer frontend
+- Codex multi agent
+- Tooling node modules Exclusion
+- Backend Container Build Artifacts
 - Backend Ignore Rules
 - Java and Maven toolchain
 - JVM backend container
 - Quarkus Legacy JAR Container
 - Quarkus Native Micro Container
 - Native backend container
-- DicomArchiveGateway
-- DicomBatchValidator
-- StowStudyResult
-- UploadedDicom
-- ValidatedDicom
-- ProblemType
-- Logger
-- ObjectMapper
-- ProblemType (2)
-- Logger (2)
-- ProblemType (3)
-- ContainerRequestContext
-- ContainerResponseContext
-- ProblemType (4)
-- Provider
-- StudySummary
-- Quarkus REST CSRF Configuratio
-- Test
-- ProblemType (5)
-- PermitAll
-- Router
-- W3cTraceContextInjector
-- SearchStudiesUseCase
-- StudyPage
-- Frontend Dockerfile Multistage
+- Dicom Archive Gateway
+- Dicom Batch Validator
+- Stow Study Result
+- Uploaded Dicom
+- Validated Dicom Component Repository
+- Stow Study Result Component Repository
+- Problem Type Component Repository
+- Logger Repository
+- Problem Type Repository Cluster 275
+- Router Repository
+- Routing Context Component Repository
+- Logger Repository Component Repository
+- Problem Type Repository Cluster 279
+- Container Request Context
+- Container Response Context
+- Problem Type Repository Cluster 282
+- Provider Repository
+- Study Viewer Summary
+- Viewer Series Summary
+- Http Client
+- Http Response
+- Override Repository
+- W3c Trace Context Component Repository
+- Study Summary
+- Quarkus REST CSRF
+- Test Repository
+- Problem Type Repository Cluster 310
+- Permit All
+- Router Repository Component Repository
+- W3c Trace Repository Cluster 313
+- Access Token Provider
+- Quarkus Repository
+- Security Repository
+- Search Studies Use Case
+- Study Page
+- Frontend Dockerfile Multistage Build
 - Frontend Docker Context Rules
 - Frontend Ignore Rules
 - Frontend Mount Point
 - Node and pnpm Versions
-- Frontend Dependencies
-- Frontend PNPM Workspace Config
+- Frontend Frontend
+- Frontend PNPM Workspace
 - Social platform icon sprite
+- Hook p s commit
+- Orienta o opcional do
 - Graphify Add and Watch
 - Graphify Exports
-- Semantic Extraction
+- Semantic Extraction Component Claude
 - Cross repository Merge
 - Graphify Hooks
 - Graphify Query
 - Graphify Transcription
 - Graphify Output Exclusion
-- Consumes
-- Platform Discovery Layout
-- PatientID with IssuerOfPatient
-- Registry As Single Source Of T
-- Extension Data Minimalism
-- Cornerstone3D Vue Integration
-- Codex Subagent Configuration
-- Problem Catalog Implementation
-- BlackICE PACS Architecture Dec
+- Consumes Repository
+- EVO Multi frame and
+- EVO Multi viewport Viewer
+- EVO DICOM Structured Report
+- Patient ID and Issuer
+- Git Domain Pack
+- Codex Subagent
+- Backend Modular Architecture Plan
+- Worklist QIDO RS Plan
+- Problem Catalog Implementation Plan
+- Historical Specs and Plans
+- Black ICE PACS Architecture
 - Shared Realm Audience
-- Graphify project scoped integr
-- Commit Curator
-- Agent authoring skill (2)
+- Graphify project scoped integration
+- Commit Curator Component Documentation
+- Agent authoring skill
 - Antigravity agents
-- DICOM UID Identity Preservatio
+- DICOM UID Identity Preservation
 - Ephemeral Length Measurements
-- GET
+- GET Repository
 - Graphify Merge Driver
-- Graphify Output Recursion Excl
-- BlackICE login messages
-- Logger (3)
-- dev.blackice:blackice backend
-- POST
-- QuarkusTest
-- BlackICE PACS
-- Reason (2)
-- RolesAllowed
-- TestSecurity
-- ValueSource
+- Graphify Output Recursion Exclusion
+- Black ICE login messages
+- Black ICE Compose Topology
+- Logger Repository Repository Cluster 367
+- dev blackice blackice backend
+- POST Repository
+- Reason Repository
+- Roles Allowed
+- Source Repository
 
 ## God Nodes (most connected - your core abstractions)
 1. `ReportStudyRef` - 59 edges
-2. `ArchiveViewerException` - 48 edges
+2. `WadoSeriesMetadataParserTest` - 54 edges
 3. `ProblemType` - 40 edges
 4. `InvalidReportRequestException` - 38 edges
 5. `ReportActor` - 34 edges
 6. `ReportContent` - 33 edges
-7. `InvalidArchiveMetadataException` - 32 edges
-8. `ViewerResourceTest` - 31 edges
-9. `StowResponseParser` - 30 edges
-10. `ViewerStudyRef` - 29 edges
+7. `StowResponseParser` - 32 edges
+8. `ArchiveViewerException` - 31 edges
+9. `ViewerResourceTest` - 31 edges
+10. `HttpStudyHierarchyGatewayTest` - 31 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Problem Catalog Skill (Codex and Antigravity)` --semantically_similar_to--> `Problem Catalog Skill (Claude)`  [INFERRED] [semantically similar]
   .agents/skills/problem-catalog/SKILL.md → .claude/skills/problem-catalog/SKILL.md
-- `Graphify project setup` --references--> `Graphify skill`  [EXTRACTED]
-  .graphify/setup.ps1 → .agents/skills/graphify/SKILL.md
-- `Skill Creation Convention` --references--> `Problem Catalog Skill (Claude)`  [INFERRED]
-  docs/domains/README.md → .claude/skills/problem-catalog/SKILL.md
-- `DCM4CHEE 5.34.3 Baseline` --conceptually_related_to--> `DCM4CHEE secure stack`  [INFERRED]
-  docs/superpowers/plans/2026-07-23-dcm4chee-5-34-3.md → infra/dcm4chee/README.md
-- `Tooling node_modules Exclusion` --references--> `Problem Catalog Tooling Package`  [INFERRED]
-  .problem-catalog/.gitignore → docs/domains/problem-catalog/README.md
+- `Arquitetura BlackICE` --semantically_similar_to--> `BlackICE Architecture`  [INFERRED] [semantically similar]
+  README.pt-BR.md → README.md
+- `DICOMweb Integration` --semantically_similar_to--> `DCM4CHEE Archive`  [INFERRED] [semantically similar]
+  apps/backend/README.md → README.md
+- `EVO-005 Scalable Worklist Pagination` --semantically_similar_to--> `Clinical Worklist and Search`  [INFERRED] [semantically similar]
+  docs/architecture/evolution-backlog.md → apps/frontend/README.md
+- `EVO-011 Rich Markdown Report Editor` --semantically_similar_to--> `Clinical Diagnostic Reports`  [INFERRED] [semantically similar]
+  docs/architecture/evolution-backlog.md → apps/frontend/README.md
 
 ## Import Cycles
 - None detected.
 
 ## Hyperedges (group relationships)
-- **BFF OIDC Authentication Pipeline** — infra_keycloak_readme_client_blackice_quarkus, apps_backend_src_main_resources_application_oidc_configuration, apps_frontend_readme_bff_session_flow, infra_compose_apps_split_channel_auth_networking [EXTRACTED 0.95]
-- **RFC 9457 Problem Details Contract Flow** — docs_contracts_problems_catalog_problem_catalog_registry, apps_backend_readme_error_contract, apps_frontend_readme_frontend_problem_handling, _github_workflows_verify_job_catalog [EXTRACTED 0.95]
-- **Product Database and Migration Stack** — infra_readme_product_db_service, apps_backend_src_main_resources_application_product_db_datasource, apps_backend_readme_product_db_persistence, infra_compose_apps_backend_service [EXTRACTED 0.95]
+- **BlackICE Same-Origin Request Architecture** — readme_traefik_gateway, readme_quarkus_bff, readme_keycloak_oidc, readme_dcm4chee_archive [EXTRACTED 1.00]
+- **Agent Domain Pack Governance** — agents_domain_packs, agents_dicom_invariants, agents_human_validation_gates [EXTRACTED 1.00]
+- **Frontend Clinical Workflows** — apps_frontend_readme_dicom_ingestion, apps_frontend_readme_worklist_search, apps_frontend_readme_cornerstone_viewport, apps_frontend_readme_clinical_reports [EXTRACTED 1.00]
+- **DICOMweb Service Roles** — docs_domains_dicom_dicomweb_qido_rs, docs_domains_dicom_dicomweb_wado_rs, docs_domains_dicom_dicomweb_stow_rs [EXTRACTED 1.00]
+- **Agent Authoring Governance** — docs_domains_agent_authoring_conventions_agent_authoring_boundaries, docs_domains_agent_authoring_model_selection_cost_effective_model_routing, docs_domains_agent_authoring_platform_layouts_platform_discovery_layouts, docs_domains_agent_authoring_validation_agent_validation_checklist [EXTRACTED 1.00]
+- **Problem Catalog Governance** — docs_domains_problem_catalog_readme_problem_catalog_registry, docs_domains_problem_catalog_registry_uuidv5_identity, docs_domains_problem_catalog_registry_catalog_lock, docs_domains_problem_catalog_registry_problem_deprecation, docs_domains_problem_catalog_registry_generated_problem_artifacts [EXTRACTED 1.00]
+- **DICOM MVP Closure Controls** — docs_superpowers_specs_2026_08_31_mvp_dicom_closure_design_exact_dicom_uid_identity, docs_superpowers_specs_2026_08_31_mvp_dicom_closure_design_qido_complete_pagination, docs_superpowers_specs_2026_08_31_mvp_dicom_closure_design_wado_metadata_validation, docs_superpowers_specs_2026_08_31_mvp_dicom_closure_design_stow_result_precedence, docs_superpowers_specs_2026_08_31_mvp_dicom_closure_design_spatial_order_fallback [EXTRACTED 1.00]
+- **Secure DICOMweb Access Flow** — infra_keycloak_readme_shared_realm_architecture, infra_keycloak_readme_blackice_quarkus_client, infra_keycloak_readme_arc_audience_mapper, docs_domains_quarkus_conventions_quarkus_oidc_bff, docs_domains_quarkus_conventions_shared_audience, docs_domains_quarkus_conventions_dicomweb_rest_client [EXTRACTED 1.00]
+- **BFF OIDC Authentication Pipeline** — apps_backend_src_main_resources_application_oidc_configuration, infra_compose_apps_split_channel_auth_networking [EXTRACTED 0.95]
+- **RFC 9457 Problem Details Contract Flow** — docs_contracts_problems_catalog_problem_catalog_registry, _github_workflows_verify_job_catalog [EXTRACTED 0.95]
 - **Study Viewer DICOMweb Delivery Flow** — docs_superpowers_specs_2026_08_24_study_viewer_design_qido_hierarchy_classification, docs_superpowers_specs_2026_08_24_study_viewer_design_wado_metadata_and_frame_proxy, docs_superpowers_specs_2026_08_24_study_viewer_design_cornerstone_stack_viewport [EXTRACTED 1.00]
 - **Study Viewer Implementation Phases** — docs_superpowers_plans_2026_08_24_study_viewer_phase_0_client_problem_contract, docs_superpowers_plans_2026_08_24_study_viewer_phase_1_backend_qido_wado, docs_superpowers_plans_2026_08_24_study_viewer_phase_2_frontend_cornerstone, docs_superpowers_plans_2026_08_24_study_viewer_phase_3_integration_and_graphify [EXTRACTED 1.00]
-- **Protocolo final de sincronização Graphify** — docs_architecture_graphify_momento_atualizacao_feature, docs_architecture_graphify_feature_commit_sem_grafo, docs_architecture_graphify_fluxo_commits_hook, docs_architecture_graphify_segundo_commit_sincronizacao [EXTRACTED 1.00]
 - **Problem Details Contract Implementation** — docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_problem_details_contract, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_problem_catalog, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_backend_problem_boundary, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_frontend_problem_parser [EXTRACTED 1.00]
 - **Trace Context Flow** — docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_w3c_traceparent, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_traceid_end_to_end, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_backend_problem_boundary, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_frontend_problem_parser [EXTRACTED 1.00]
 - **Unknown Archive Outcome Contract** — docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_uncertain_archive_outcome, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_api_archive_outcome_unknown, docs_superpowers_specs_2026_08_23_error_handling_problem_catalog_design_api_archive_unavailable [EXTRACTED 1.00]
 - **Atomic Problem Contract Migration** — docs_superpowers_plans_2026_08_23_error_handling_problem_catalog_implementation_plan, docs_superpowers_plans_2026_08_23_error_handling_problem_catalog_atomic_contract_migration, docs_superpowers_plans_2026_08_23_error_handling_problem_catalog_phased_delivery [EXTRACTED 1.00]
-- **Problem Catalog Governance Pack** — docs_domains_problem_catalog_readme_problem_catalog_domain_pack, docs_domains_problem_catalog_classification_decision_tree, docs_domains_problem_catalog_registry_code_grammar, docs_domains_problem_catalog_security_forbidden_data [EXTRACTED 1.00]
-- **Problem Classification Categories** — docs_domains_problem_catalog_classification_api_scope, docs_domains_problem_catalog_classification_client_scope, docs_domains_problem_catalog_classification_operation_result, docs_domains_problem_catalog_classification_user_cancellation [EXTRACTED 1.00]
-- **DICOMweb Operations** — docs_domains_dicom_dicomweb_qido_rs, docs_domains_dicom_dicomweb_wado_rs, docs_domains_dicom_dicomweb_stow_rs [EXTRACTED 1.00]
 - **Keycloak Login Theme Delivery** — docs_superpowers_plans_2026_07_26_keycloak_login_theme_keycloak_login_theme_plan, docs_superpowers_plans_2026_07_27_keycloak_input_focus_outline_focus_outline_plan, docs_superpowers_plans_2026_07_27_keycloak_theme_e2e_ui_regression_theme_e2e_plan, docs_superpowers_specs_2026_07_26_keycloak_login_theme_design_keycloak_theme_design [INFERRED 0.85]
 - **Keycloak Cross-platform Configuration Flow** — docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_shared_posix_configuration_core, docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_cross_platform_launchers, docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_three_file_compose_configuration, docs_superpowers_plans_2026_08_09_keycloak_windows_bootstrap_keycloak_admin_rest [EXTRACTED 1.00]
 - **Manual DICOM Ingest BFF Flow** — docs_superpowers_plans_2026_08_09_manual_dicom_import_authenticated_dicom_ingest_flow, docs_superpowers_plans_2026_08_09_manual_dicom_import_frontend_ingest_workflow, docs_superpowers_plans_2026_08_09_manual_dicom_import_metadata_validation_and_study_grouping, docs_superpowers_plans_2026_08_09_manual_dicom_import_streaming_stow_rs_gateway, docs_superpowers_plans_2026_08_09_manual_dicom_import_csrf_and_oidc_protection [EXTRACTED 1.00]
 - **Manual Import Security Flow** — docs_superpowers_specs_2026_08_09_manual_dicom_import_design_manual_dicom_import, docs_superpowers_specs_2026_08_09_manual_dicom_import_design_csrf_protection [EXTRACTED 1.00]
 - **DICOM Delivery Roles** — _claude_agents_dicom_dicom_domain_reviewer_dicom_domain_review, _claude_agents_quarkus_quarkus_backend_quarkus_backend, _claude_agents_vue_dicom_viewer_frontend_cornerstone_viewer [INFERRED 0.85]
-- **DICOM Patient Identity Safety** — docs_domains_dicom_semantics_dicom_patient_study_series_instance_hierarchy, docs_domains_dicom_semantics_dicom_uid_identity, docs_domains_dicom_semantics_patientid_with_issuer [EXTRACTED 1.00]
 
-## Communities (365 total, 137 thin omitted)
+## Communities (373 total, 146 thin omitted)
 
-### Community 0 - "AfterEach"
+### Community 0 - "Report Resource"
 Cohesion: 0.05
-Nodes (37): AfterEach, ArchiveStudyLookupException, Reason, ARCHIVE_AUTH_FAILED, ARCHIVE_INVALID_RESPONSE, ARCHIVE_UNAVAILABLE, HttpStudyExistenceGateway, ApplicationScoped (+29 more)
+Nodes (38): AfterEach, ArchiveStudyLookupException, Reason, ARCHIVE_AUTH_FAILED, ARCHIVE_INVALID_RESPONSE, ARCHIVE_UNAVAILABLE, ReportConflictException, StudyNotFoundException (+30 more)
 
-### Community 1 - "HttpQidoStudyGateway.java"
+### Community 1 - "Wado Series Metadata Parser"
+Cohesion: 0.07
+Nodes (18): ApplicationScoped, Inject, JsonNode, ObjectMapper, Pattern, ViewerInstance, ViewerSeriesRef, WadoSeriesMetadataParser (+10 more)
+
+### Community 2 - "Http Qido Study Gateway"
 Cohesion: 0.07
 Nodes (29): HttpQidoStudyGateway, ApplicationScoped, HttpClient, Inject, Override, StudySearchRequest, W3cTraceContextInjector, InvalidResponseException (+21 more)
 
-### Community 2 - "ApiProblemFactory"
-Cohesion: 0.08
-Nodes (24): ApiProblemFactory, IngestResourceTest, AccessTokenProvider, IngestResult, ProblemResponseFactory, QuarkusTest, Test, TestSecurity (+16 more)
+### Community 3 - "Http Dicom Frame Gateway"
+Cohesion: 0.07
+Nodes (33): AccessTokenProvider, Blocking, GET, Inject, Logger, Path, Response, RolesAllowed (+25 more)
 
-### Community 3 - "StudyList.vue"
+### Community 4 - "Api Problem Probe Resource"
 Cohesion: 0.06
-Nodes (45): emit, emit, EMPTY_FILTERS, PAGE_SIZE, SearchStudies, useWorklist(), WorklistComposable, WorklistPhase (+37 more)
+Nodes (41): ApiFailureLogger, ApiProblem, CurrentReportActor, ApplicationScoped, Inject, ApiJavaScriptRequestChecker, ApplicationScoped, Override (+33 more)
 
-### Community 4 - "synthetic dicom.ts"
+### Community 5 - "problem ts"
 Cohesion: 0.06
 Nodes (43): createSyntheticCtSlice(), createSyntheticDicom(), CT_IMAGE_STORAGE, element(), LONG_VR, paddedText(), SyntheticCtSliceMetadata, SyntheticDicomMetadata (+35 more)
 
-### Community 5 - "InvalidStudySearchException.ja"
+### Community 6 - "Worklist Page vue"
+Cohesion: 0.06
+Nodes (45): emit, emit, EMPTY_FILTERS, PAGE_SIZE, SearchStudies, useWorklist(), WorklistComposable, WorklistPhase (+37 more)
+
+### Community 7 - "Study Search Request"
 Cohesion: 0.08
-Nodes (25): InvalidStudySearchException, StudySearchRequest, StudyQueryGateway, PageMetadata, StudyPage, StudySummary, ApplicationScoped, Inject (+17 more)
+Nodes (24): InvalidStudySearchException, StudySearchRequest, StudyQueryGateway, PageMetadata, StudyPage, StudySummary, ApplicationScoped, Inject (+16 more)
 
-### Community 6 - "CurrentReportActor.java"
-Cohesion: 0.09
-Nodes (27): CurrentReportActor, ApplicationScoped, Inject, Authenticated, GET, Path, Response, SessionResource (+19 more)
+### Community 8 - "Http Study Hierarchy Gateway"
+Cohesion: 0.10
+Nodes (21): HttpStudyHierarchyGateway, ApplicationScoped, Inject, InstanceIdentityMetadata, Pattern, SeriesMetadata, StudyMetadata, URI (+13 more)
 
-### Community 7 - "ApiProblemResponseFilter.java"
+### Community 9 - "Qido Viewer Response Parser"
+Cohesion: 0.11
+Nodes (14): InvalidResponseException, ApplicationScoped, Inject, InstanceIdentityMetadata, JsonNode, ObjectMapper, Pattern, SeriesMetadata (+6 more)
+
+### Community 10 - "Api Problem Http"
 Cohesion: 0.10
 Nodes (12): ApiProblemResponseFilter, Override, ApiProblemHttpTest, QuarkusTest, Test, TestSecurity, ContainerRequestContext, ContainerRequestFilter (+4 more)
 
-### Community 8 - "InvalidArchiveMetadataExceptio"
-Cohesion: 0.12
-Nodes (12): InvalidArchiveMetadataException, ApplicationScoped, Inject, JsonNode, ObjectMapper, ViewerInstance, WadoSeriesMetadataParser, BeforeEach (+4 more)
-
-### Community 9 - "Quarkus Backend CI Job"
-Cohesion: 0.06
-Nodes (40): Quarkus Backend CI Job, Problem Catalog CI Job, End-to-End Stack CI Job, Vue Frontend CI Job, Verify CI Workflow, BlackICE Backend Architecture, Backend Error Handling Contract, Backend Modular Architecture Direction (+32 more)
-
-### Community 10 - "generated/ProblemType.java"
+### Community 11 - "Problem Type"
 Cohesion: 0.06
 Nodes (35): URI, ProblemScope, API, CLIENT, ProblemType, API_ACCESS_DENIED, API_ARCHIVE_OUTCOME_UNKNOWN, API_ARCHIVE_RESPONSE_INVALID (+27 more)
 
-### Community 11 - "QidoViewerResponseParser.java"
-Cohesion: 0.15
-Nodes (9): InvalidResponseException, ApplicationScoped, Inject, JsonNode, ObjectMapper, QidoViewerResponseParser, Test, QidoViewerResponseParserTest (+1 more)
-
-### Community 12 - ".fromVersion()"
-Cohesion: 0.18
-Nodes (11): ReportAccessDeniedException, ReportNotFoundException, ReportVersionConflictException, AccessTokenProvider, DisplayName, ParameterizedTest, QuarkusTest, Test (+3 more)
-
-### Community 13 - "WadoFrameResource.java"
-Cohesion: 0.10
-Nodes (22): AccessTokenProvider, Blocking, GET, Inject, Logger, Path, Response, RolesAllowed (+14 more)
-
-### Community 14 - "dicom validation violations.sc"
+### Community 12 - "dicom validation violations schema"
 Cohesion: 0.05
 Nodes (38): additionalProperties, description, enum, description, $id, description, minimum, type (+30 more)
 
-### Community 15 - "IngestStudiesUseCaseTest.java"
-Cohesion: 0.15
-Nodes (12): FakeDicomArchiveGateway, IngestStudiesUseCaseTest, BeforeEach, DicomBatchValidator, Override, StowStudyResult, Test, UploadedDicom (+4 more)
+### Community 13 - "Viewer Study Ref"
+Cohesion: 0.14
+Nodes (11): ViewerStudyRef, StudyHierarchyGateway, SeriesMetadata, StudyMetadata, ApplicationScoped, URI, QidoViewerQueryBuilder, ParameterizedTest (+3 more)
 
-### Community 16 - "InvalidReportRequestException."
-Cohesion: 0.17
-Nodes (11): InvalidReportRequestException, ReportConflictException, StudyNotFoundException, ReportActor, StudyExistenceGateway, StudyReportResult, Inject, Report (+3 more)
+### Community 14 - "Studies Use Case"
+Cohesion: 0.16
+Nodes (10): FakeDicomArchiveGateway, IngestStudiesUseCaseTest, BeforeEach, DicomBatchValidator, Override, StowStudyResult, Test, UploadedDicom (+2 more)
 
-### Community 17 - "SeriesSupport.java"
-Cohesion: 0.17
-Nodes (13): SeriesSupport, UnsupportedReason, IMAGE_SOP_CLASS_UNSUPPORTED, MULTI_FRAME, NON_IMAGE_OBJECT, ApplicationScoped, SeriesSupportClassifier, BeforeEach (+5 more)
+### Community 15 - "Report Study Ref"
+Cohesion: 0.22
+Nodes (10): ReportActor, ReportContent, ReportStudyRef, DisplayName, Test, ReportTest, DisplayName, QuarkusTest (+2 more)
 
-### Community 18 - "ReportInputsTest.java"
+### Community 16 - "Spatial Instance Order"
+Cohesion: 0.16
+Nodes (9): InstanceGeometry, ApplicationScoped, ViewerInstance, ProjectedInstance, SpatialInstanceOrder, BeforeEach, Test, ViewerInstance (+1 more)
+
+### Community 17 - "Version Backend"
+Cohesion: 0.24
+Nodes (9): ReportVersionConflictException, AccessTokenProvider, DisplayName, ParameterizedTest, QuarkusTest, Test, TestSecurity, ValueSource (+1 more)
+
+### Community 18 - "Report Repository"
+Cohesion: 0.18
+Nodes (16): CreateReportCommand, ReportRepository, StudyExistenceGateway, CreateStudyReportUseCase, ApplicationScoped, Inject, CreateStudyReportTransactionTest, DisplayName (+8 more)
+
+### Community 19 - "classify Backend"
+Cohesion: 0.16
+Nodes (14): InstanceIdentityMetadata, SeriesSupport, UnsupportedReason, IMAGE_SOP_CLASS_UNSUPPORTED, MULTI_FRAME, NON_IMAGE_OBJECT, ApplicationScoped, SeriesSupportClassifier (+6 more)
+
+### Community 20 - "Study Viewer Use Case"
+Cohesion: 0.16
+Nodes (17): GetStudyViewerUseCase, ApplicationScoped, Inject, SeriesSupportClassifier, StudyHierarchyGateway, ViewerStudyRef, GetStudyViewerUseCaseTest, BeforeEach (+9 more)
+
+### Community 21 - "Display Name"
 Cohesion: 0.16
 Nodes (16): DisplayName, NullAndEmptySource, ParameterizedTest, Test, ValueSource, ReportActorTests, ReportContentTests, ReportInputsTest (+8 more)
 
-### Community 19 - "loadDicomViewport.ts"
+### Community 22 - "Resource Backend"
+Cohesion: 0.20
+Nodes (9): ApiProblemFactory, IngestResourceTest, AccessTokenProvider, IngestResult, ProblemResponseFactory, QuarkusTest, Test, TestSecurity (+1 more)
+
+### Community 23 - "Archive Viewer Exception"
+Cohesion: 0.24
+Nodes (6): ArchiveViewerException, ViewerSeriesInstances, DisplayName, Test, TestSecurity, ViewerResourceTest
+
+### Community 24 - "Viewer Instance"
+Cohesion: 0.13
+Nodes (12): SeriesMetadataGateway, Override, ViewerInstance, ViewerSeriesInstances, GetSeriesInstancesUseCase, ApplicationScoped, Inject, ViewerSeriesInstances (+4 more)
+
+### Community 25 - "Viewer Page vue"
 Cohesion: 0.07
 Nodes (22): loadDicomViewport(), activeTool, allowsSummaryRetry, allowsViewportRetry, { canRenderViewer }, currentViewportError, DicomViewport, handleRetrySummary() (+14 more)
 
-### Community 20 - "InstanceIdentityMetadata.java"
-Cohesion: 0.11
-Nodes (15): SeriesAvailability, SUPPORTED, UNSUPPORTED, StudyMetadata, StudyViewerSummary, ViewerSeriesSummary, GetStudyViewerUseCase, ApplicationScoped (+7 more)
+### Community 26 - "QIDO RS Query Service"
+Cohesion: 0.09
+Nodes (30): BlackICE Backend BFF, DICOMweb Backend Boundary, Product PostgreSQL Database, Clinical Diagnostic Reports, Cornerstone3D Medical Viewport, DICOM Ingestion Workflow, BlackICE Frontend SPA, Mobile Viewer Capability Gate (+22 more)
 
-### Community 21 - "DisplayName"
-Cohesion: 0.22
-Nodes (5): DisplayName, StudyViewerSummary, Test, TestSecurity, ViewerResourceTest
+### Community 27 - "Report Resource java"
+Cohesion: 0.15
+Nodes (19): ReportRequest, AccessTokenProvider, Consumes, GET, Inject, Logger, Path, POST (+11 more)
 
-### Community 22 - "ReportContent"
-Cohesion: 0.24
-Nodes (9): ReportContent, ReportStudyRef, DisplayName, Test, ReportTest, DisplayName, QuarkusTest, Test (+1 more)
+### Community 28 - "Invalid Report Request Exception"
+Cohesion: 0.14
+Nodes (13): ApplicationScoped, ReportRepresentationMapper, ReportResponse, InvalidReportRequestException, StudyReportResult, ApplicationScoped, ApplicationScoped, ReportStatus (+5 more)
 
-### Community 23 - "Agent authoring skill"
+### Community 29 - "md Documentation"
 Cohesion: 0.08
 Nodes (23): Agent authoring skill, Claude agent authoring skill, Convenções de autoria de agentes, Escopo e autorização, Fonte única de verdade, Forma de um wrapper, Fronteiras, Classificação e roteamento (+15 more)
 
-### Community 24 - ".actor()"
-Cohesion: 0.16
-Nodes (18): ReportRequest, AccessTokenProvider, Consumes, GET, Inject, Logger, Path, POST (+10 more)
+### Community 30 - "Http Series Metadata Gateway"
+Cohesion: 0.18
+Nodes (9): HttpSeriesMetadataGatewayTest, AfterEach, BeforeEach, HttpExchange, HttpServer, SuppressWarnings, Test, ViewerSeriesRef (+1 more)
 
-### Community 25 - "ViewerInstance.java"
-Cohesion: 0.17
-Nodes (8): Override, HttpSeriesMetadataGatewayTest, AfterEach, BeforeEach, HttpExchange, HttpServer, SuppressWarnings, Test
+### Community 31 - "Worklist Resource"
+Cohesion: 0.19
+Nodes (9): AccessTokenProvider, QuarkusTest, Test, TestSecurity, WorklistResourceTest, ArchiveSearchException, SearchStudiesUseCase, StudyPage (+1 more)
 
-### Community 26 - "ArchiveUnavailableException.ja"
-Cohesion: 0.10
-Nodes (16): ArchiveUnavailableException, Reason, CONNECTION, HTTP_STATUS, INTERRUPTED, INVALID_RESPONSE, OUTCOME_UNKNOWN, TIMEOUT (+8 more)
+### Community 32 - "Wado Frame Resource"
+Cohesion: 0.23
+Nodes (9): AccessTokenProvider, DisplayName, Test, URI, WadoFrameResourceTest, QuarkusTest, RetrieveFrameUseCase, TestSecurity (+1 more)
 
-### Community 27 - "IngestResult.java"
-Cohesion: 0.09
-Nodes (23): IngestResult, InstanceResult, Outcome, COMPLETE, FAILED, PARTIAL, RejectedFile, StudyResult (+15 more)
-
-### Community 28 - "ArchiveViewerException.java"
+### Community 33 - "Http Dicom Archive Gateway"
 Cohesion: 0.27
-Nodes (7): ArchiveViewerException, AccessTokenProvider, DisplayName, QuarkusTest, Test, TestSecurity, WadoFrameResourceTest
+Nodes (4): HttpDicomArchiveGatewayTest, SuppressWarnings, Test, ValidatedDicom
 
-### Community 29 - "ReportPanel.vue"
+### Community 34 - "Report Panel vue"
 Cohesion: 0.11
 Nodes (18): allowsRetry, closeReloadModal(), errorMessage, errorTraceId, handleConfirmReload(), handleFinalize(), handleRetry(), handleSaveDraft() (+10 more)
 
-### Community 30 - "ValidatedDicom.java"
-Cohesion: 0.18
-Nodes (8): Override, Dcm4cheDicomBatchValidatorTest, Attributes, BeforeEach, ParameterizedTest, Test, Arguments, Path
-
-### Community 31 - ".reason()"
-Cohesion: 0.26
-Nodes (5): HttpStudyHierarchyGatewayTest, HttpExchange, HttpServer, SuppressWarnings, Test
-
-### Community 32 - "ViewerStudyRef"
+### Community 35 - "find By Study Instance"
 Cohesion: 0.22
-Nodes (8): ViewerStudyRef, ApplicationScoped, URI, QidoViewerQueryBuilder, ParameterizedTest, Test, ValueSource, QidoViewerQueryBuilderTest
+Nodes (8): ReportAccessDeniedException, ReportNotFoundException, UpdateReportCommand, BeforeEach, DisplayName, ExtendWith, Test, UpdateStudyReportUseCaseTest
 
-### Community 33 - "TaskExecutorFactory.java"
-Cohesion: 0.18
-Nodes (13): TaskExecutorFactory, IngestStudiesUseCase, InterruptState, ApplicationScoped, IngestResult, Inject, StudyAttempt, StudyTask (+5 more)
+### Community 36 - "Dcm4che Dicom Batch Validator"
+Cohesion: 0.19
+Nodes (7): Override, Dcm4cheDicomBatchValidatorTest, Attributes, BeforeEach, ParameterizedTest, Test, Path
 
-### Community 34 - "ContextAwareVirtualThreadExecu"
-Cohesion: 0.16
-Nodes (12): ContextAwareVirtualThreadExecutorFactory, ApplicationScoped, Override, W3cTraceContextInjector, QuarkusTest, Test, W3cTraceContextInjectorTest, Builder (+4 more)
-
-### Community 35 - "ReportExceptionMappers.java"
+### Community 37 - "Report Exception Mappers"
 Cohesion: 0.31
 Nodes (8): ProblemResponseFactory, Response, RoutingContext, ServerExceptionMapper, ReportExceptionMappers, ReportPayloadTooLargeException, JsonMappingException, ProcessingException
 
-### Community 36 - "CreateReportCommand"
-Cohesion: 0.20
-Nodes (13): CreateReportCommand, CreateStudyReportUseCase, ApplicationScoped, CreateStudyReportTransactionTest, DisplayName, QuarkusTest, Test, CreateStudyReportUseCaseTest (+5 more)
-
-### Community 37 - "ViewerSeriesRef"
-Cohesion: 0.19
-Nodes (11): ViewerSeriesRef, SeriesMetadataGateway, ViewerSeriesInstances, GetSeriesInstancesUseCase, ApplicationScoped, Inject, ViewerSeriesInstances, GetSeriesInstancesUseCaseTest (+3 more)
-
-### Community 38 - "UploadedDicom.java"
+### Community 38 - "Validated Dicom"
 Cohesion: 0.10
 Nodes (13): UploadedDicom, DicomArchiveGateway, DicomBatchValidator, Status, ACCEPTED, REJECTED, UNCONFIRMED, WARNING (+5 more)
 
-### Community 39 - "BackendArchitectureTest.java"
+### Community 39 - "Stow Response Parser"
+Cohesion: 0.21
+Nodes (6): BeforeEach, ParameterizedTest, Test, ValueSource, StowResponseParserTest, NullAndEmptySource
+
+### Community 40 - "Backend Architecture"
 Cohesion: 0.16
 Nodes (3): BackendArchitectureTest, Test, JavaClasses
 
-### Community 40 - "viewer runtime.spec.ts"
-Cohesion: 0.14
-Nodes (13): mocks, mocks, FetchSeriesInstances, FetchStudyViewer, StudyViewerComposable, StudyViewerSummary, ViewerPhase, ViewerSeriesInstances (+5 more)
-
-### Community 41 - "catalog.js"
+### Community 41 - "catalog js"
 Cohesion: 0.11
 Nodes (21): API_KEY_ORDER, canonicalJson(), CLIENT_KEY_ORDER, CONTRACTS_DIR, loadCatalog(), loadExtensionSchemas(), normalizeEntry(), orderKeys() (+13 more)
 
-### Community 42 - "2026 08 22 worklist qido rs de"
+### Community 42 - "Worklist e busca via"
 Cohesion: 0.09
 Nodes (22): Arquitetura, Autenticação, privacidade e observabilidade, Backend, Backend, Buscar estudos, Contrato HTTP, Critérios de aceite, Desempenho e concorrência (+14 more)
 
-### Community 43 - "loadSchema()"
+### Community 43 - "cli js"
 Cohesion: 0.20
 Nodes (21): loadSchema(), normalizeCatalog(), serializeCatalog(), validateCatalog(), addEntry(), bootstrapCatalog(), buildEntry(), checkWorkspace() (+13 more)
 
-### Community 44 - "HttpDicomArchiveGateway.java"
-Cohesion: 0.23
-Nodes (10): HttpDicomArchiveGateway, ApplicationScoped, HttpClient, Inject, Override, StowStudyResult, ValidatedDicom, W3cTraceContextInjector (+2 more)
-
-### Community 45 - "ReportRepository.java"
+### Community 44 - "Viewer Resource java"
 Cohesion: 0.18
-Nodes (10): ReportRepository, GetStudyReportUseCase, ApplicationScoped, Inject, Inject, GetStudyReportUseCaseTest, BeforeEach, DisplayName (+2 more)
+Nodes (12): AccessTokenProvider, Blocking, GET, Inject, Logger, Path, Response, RolesAllowed (+4 more)
 
-### Community 46 - "Override"
-Cohesion: 0.16
-Nodes (7): Override, ViewerInstance, InstanceGeometry, ApplicationScoped, ProjectedInstance, SpatialInstanceOrder, ViewerSeriesInstances
-
-### Community 47 - "ReportEditor.vue"
+### Community 45 - "Report Editor vue"
 Cohesion: 0.11
 Nodes (18): cancelButtonRef, closeConfirmModal(), codePointCount, confirmButtonRef, emit, handleConfirmFinalize(), handleInput(), handleModalKeydown() (+10 more)
 
-### Community 48 - "2026 08 22 worklist qido rs.md"
+### Community 46 - "Phase Backend QIDO vertical"
 Cohesion: 0.09
 Nodes (21): Backend production, Backend tests, File Map, Frontend production and tests, Global Constraints, Integration and operational files, Phase 1 — Backend QIDO vertical slice, Phase 1 human gate (+13 more)
 
-### Community 49 - "2026 08 07 keycloak same origi"
+### Community 47 - "Black ICE Login same"
 Cohesion: 0.09
 Nodes (21): Alternativas descartadas, `apps/backend/src/main/resources/application.properties`, BlackICE — Login same-origin: tirar o Keycloak da barra de endereços, Custo honesto, Custo honesto (revisado), Decisões, Estado atual (verificado em 2026-08-07, stack no ar), Fase 1 — Same-origin atrás do Traefik (+13 more)
 
-### Community 50 - "compareCodes()"
+### Community 48 - "lock js"
 Cohesion: 0.17
 Nodes (19): compareCodes(), fingerprint(), assertAllowedTransition(), assertExtensionFingerprints(), assertImmutableFields(), assertNoRemovedEntries(), assertOnlyActiveToDeprecated(), compareLock() (+11 more)
 
-### Community 51 - "generate typescript.js"
+### Community 49 - "generate typescript js"
 Cohesion: 0.23
 Nodes (20): definition(), deprecationTag(), enumConstants(), enumConstName(), enumFields(), enumTypeName(), generateTypeScript(), generateTypeScriptExtensions() (+12 more)
 
-### Community 52 - ".parse()"
+### Community 50 - "W3c Trace Context Injector"
+Cohesion: 0.19
+Nodes (10): W3cTraceContextInjector, QuarkusTest, Test, W3cTraceContextInjectorTest, Builder, DicomBatchValidation, QidoStudyResponseParser, StowResponseParser (+2 more)
+
+### Community 51 - "Cornerstone3 D"
+Cohesion: 0.10
+Nodes (21): CSRF Protection, DICOMweb REST Client, Modular Backend Structure, Quarkus OIDC BFF, Shared Audience Token Propagation, Quarkus Product Backend, Feature-first Frontend Structure, Frontend Memory Lifecycle (+13 more)
+
+### Community 52 - "Studies Use Case Studies Backend"
 Cohesion: 0.23
-Nodes (6): BeforeEach, ParameterizedTest, Test, ValueSource, StowResponseParserTest, NullAndEmptySource
+Nodes (10): IngestStudiesUseCase, InterruptState, ApplicationScoped, IngestResult, Inject, StudyAttempt, StudyTask, ArchiveUnavailableException (+2 more)
 
-### Community 53 - "StudyHierarchyGateway.java"
-Cohesion: 0.37
-Nodes (8): StudyHierarchyGateway, InstanceIdentityMetadata, SeriesMetadata, StudyViewerSummary, ViewerSeriesSummary, GetStudyViewerUseCaseTest, DisplayName, Test
-
-### Community 54 - "HttpDicomFrameGatewayTest"
-Cohesion: 0.34
-Nodes (3): HttpDicomFrameGatewayTest, SuppressWarnings, Test
-
-### Community 55 - "Reason"
+### Community 53 - "AUTHENTICATION Backend"
 Cohesion: 0.10
 Nodes (20): Reason, ACCESS_DENIED, AUTHENTICATION, CONFLICT, CONNECTION, HTTP_STATUS, INTERRUPTED, INVALID_REQUEST (+12 more)
 
-### Community 56 - ".sort()"
-Cohesion: 0.28
-Nodes (4): BeforeEach, Test, ViewerInstance, SpatialInstanceOrderTest
-
-### Community 57 - "tsconfig.node.json"
+### Community 54 - "Options Frontend"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection, noEmit, noFallthroughCasesInSwitch (+11 more)
 
-### Community 58 - "golden/ProblemType.java"
+### Community 55 - "golden Problem Type java"
 Cohesion: 0.12
 Nodes (15): URI, ProblemScope, API, CLIENT, ProblemType, API_ARCHIVE_UNAVAILABLE, API_DICOM_VALIDATION_FAILED, API_SEARCH_INVALID (+7 more)
 
-### Community 59 - "Problem Catalog Skill (Codex a"
-Cohesion: 0.12
-Nodes (19): Problem Catalog Skill (Codex and Antigravity), Problem Catalog Skill (Claude), API Scope, CLIENT Scope, Problem Classification Decision Tree, Internal Failure Reasons Excluded, Operation Result Category, Type Reuse Criteria (+11 more)
+### Community 56 - "Report Backend"
+Cohesion: 0.21
+Nodes (9): Report, ApplicationScoped, Override, PanacheReportRepository, ReportEntity, Entity, PanacheEntityBase, Table (+1 more)
 
-### Community 60 - ".reason() (2)"
-Cohesion: 0.31
-Nodes (4): HttpDicomArchiveGatewayTest, BodyPublisher, HttpClient, SuppressWarnings
-
-### Community 61 - "ApiProblem.java"
+### Community 57 - "Api Problem Factory"
 Cohesion: 0.23
 Nodes (8): ApiProblem, Override, ApiProblemFactoryTest, ObjectMapper, Test, JsonAnyGetter, DicomValidationViolations, Violation
 
-### Community 62 - "WorklistResource.java"
+### Community 58 - "Worklist Resource java"
 Cohesion: 0.20
 Nodes (13): AccessTokenProvider, Blocking, GET, Inject, Logger, Path, Produces, Response (+5 more)
 
-### Community 63 - "devDependencies"
+### Community 59 - "dev Frontend"
 Cohesion: 0.11
 Nodes (19): devDependencies, jsdom, @playwright/test, @types/node, typescript, vite, vitest, @vue/test-utils (+11 more)
 
-### Community 64 - "viewer.api.ts"
+### Community 60 - "viewer api ts"
 Cohesion: 0.25
 Nodes (18): fetchSeriesInstances(), fetchStudyViewer(), isNonEmptyString(), isNonNegativeInteger(), isNullableInteger(), isNullableNumber(), isNullableNumberArray(), isNullableString() (+10 more)
 
-### Community 65 - "tsconfig.app.json"
+### Community 61 - "Options Frontend include Frontend"
 Cohesion: 0.11
 Nodes (18): compilerOptions, allowArbitraryExtensions, baseUrl, erasableSyntaxOnly, ignoreDeprecations, noFallthroughCasesInSwitch, noUnusedLocals, noUnusedParameters (+10 more)
 
-### Community 66 - "ApiProblemExceptionMappers.jav"
+### Community 62 - "Http Dicom Archive Archive Backend"
+Cohesion: 0.12
+Nodes (13): ArchiveUnavailableException, Reason, CONNECTION, HTTP_STATUS, INTERRUPTED, INVALID_RESPONSE, OUTCOME_UNKNOWN, TIMEOUT (+5 more)
+
+### Community 63 - "Api Problem Exception Mappers"
 Cohesion: 0.33
 Nodes (9): ApiProblemExceptionMappers, ProblemResponseFactory, Response, RoutingContext, ServerExceptionMapper, AuthenticationFailedException, ForbiddenException, UnauthorizedException (+1 more)
 
-### Community 67 - "Props"
+### Community 64 - "use Report Layout ts"
 Cohesion: 0.18
 Nodes (11): Props, DEFAULT_REPORT_WIDTH, DRAWER_MEDIA_QUERY, MIN_REPORT_WIDTH, MIN_VIEWPORT_WIDTH, ReportLayoutController, ReportLayoutMode, createMediaQueryList() (+3 more)
 
-### Community 68 - "ViewerPage.spec.ts"
+### Community 65 - "viewer types ts"
+Cohesion: 0.19
+Nodes (9): mocks, mocks, FetchSeriesInstances, FetchStudyViewer, StudyViewerComposable, StudyViewerSummary, ViewerPhase, ViewerSeriesInstances (+1 more)
+
+### Community 66 - "Dicom Viewport vue"
+Cohesion: 0.12
+Nodes (9): ViewerRuntime, annotationCount, emit, props, viewportRef, ViewerTool, emit, ToolItem (+1 more)
+
+### Community 67 - "Viewer Page spec ts"
 Cohesion: 0.11
 Nodes (13): backMock, canRenderViewerRef, createStudyReportMock, currentRouteParams, currentRouteQuery, fetchSeriesInstancesMock, fetchStudyReportMock, fetchStudyViewerMock (+5 more)
 
-### Community 69 - "$ref"
+### Community 68 - "replaced By"
 Cohesion: 0.11
 Nodes (18): $ref, $ref, properties, $ref, $ref, code, detail, httpStatus (+10 more)
 
-### Community 70 - "UpdateReportCommand"
-Cohesion: 0.41
-Nodes (5): UpdateReportCommand, DisplayName, ExtendWith, Test, UpdateStudyReportUseCaseTest
-
-### Community 71 - "HttpDicomFrameGateway.java"
+### Community 69 - "Stow Response Parser Dataset Backend"
 Cohesion: 0.24
-Nodes (8): HttpDicomFrameGateway, ApplicationScoped, HttpClient, HttpResponse, Inject, Override, URI, W3cTraceContextInjector
+Nodes (8): InvalidResponseException, ApplicationScoped, Inject, JsonNode, ObjectMapper, StowResponseParser, JsonProcessingException, StowStudyResult
 
-### Community 72 - "golden/problem extensions.gene"
+### Community 70 - "golden problem types generated"
 Cohesion: 0.12
 Nodes (15): DICOM_VALIDATION_VIOLATION_CODES, DicomValidationViolation, DicomValidationViolationCode, DicomValidationViolations, ProblemExtensionsByCode, ProblemExtensionsFor, ApiProblemCode, ClientProblemCode (+7 more)
 
-### Community 73 - "ajv"
+### Community 71 - "problem catalog package"
 Cohesion: 0.12
 Nodes (15): ajv, ajv-formats, dependencies, ajv, ajv-formats, name, packageManager, private (+7 more)
 
-### Community 74 - "ReportEtag.java"
+### Community 72 - "Response Mapper"
+Cohesion: 0.28
+Nodes (8): IngestResponseMapper, ApplicationScoped, IngestResult, Inject, ProblemResponseFactory, ProblemType, Response, ProblemExtensions
+
+### Community 73 - "Report Etag java"
 Cohesion: 0.22
 Nodes (7): ReportEtag, NullAndEmptySource, ParameterizedTest, Test, ValueSource, ReportEtagTest, EntityTag
 
-### Community 75 - "PanacheReportRepository.java"
-Cohesion: 0.23
-Nodes (8): ApplicationScoped, Override, PanacheReportRepository, ReportEntity, Entity, PanacheEntityBase, Table, Transactional
-
-### Community 76 - "ApiFailureLogger.java"
+### Community 74 - "Api Failure Logger"
 Cohesion: 0.22
 Nodes (8): ApiFailureLogger, ApplicationScoped, Inject, Logger, ProblemResponseFactory, Response, ServerExceptionMapper, WorklistExceptionMappers
 
-### Community 77 - "ApiTraceResponseFilter.java"
+### Community 75 - "Trace Context"
 Cohesion: 0.21
 Nodes (9): ApiTraceResponseFilter, ContainerRequestContext, ContainerResponseContext, Inject, Override, Provider, ApplicationScoped, TraceContext (+1 more)
 
-### Community 78 - "HttpStudyHierarchyGateway.java"
-Cohesion: 0.27
-Nodes (8): HttpStudyHierarchyGateway, ApplicationScoped, HttpClient, HttpResponse, Inject, Override, URI, W3cTraceContextInjector
+### Community 76 - "Viewer Resource java Invalid Backend"
+Cohesion: 0.17
+Nodes (9): InvalidArchiveMetadataException, SeriesAvailability, SUPPORTED, UNSUPPORTED, StudyViewerSummary, ViewerSeriesSummary, AccessTokenProvider, QuarkusTest (+1 more)
 
-### Community 79 - "ReportResourceGetTest.java"
+### Community 77 - "Report Resource java Report Backend"
 Cohesion: 0.36
 Nodes (6): AccessTokenProvider, DisplayName, QuarkusTest, Test, TestSecurity, ReportResourceGetTest
 
-### Community 80 - "ReportMutationOptions"
+### Community 78 - "use Study Report ts"
 Cohesion: 0.24
 Nodes (11): ReportMutationOptions, ReportSnapshot, ReportStatus, StudyReport, createMediaQueryList(), setupViewportWidth(), DEFAULT_API, ReportPhase (+3 more)
 
-### Community 81 - "cornerstone init.ts"
-Cohesion: 0.30
+### Community 79 - "viewer runtime ts"
+Cohesion: 0.29
 Nodes (12): initCornerstoneOnce(), initializeAll(), buildImageId(), clearMetadata(), getViewerMetadata(), initMetadataProvider(), metadataRegistry, registerInstancesMetadata() (+4 more)
 
-### Community 82 - "AccessTokenCredential"
+### Community 80 - "End to End Stack"
+Cohesion: 0.19
+Nodes (15): Quarkus Backend CI Job, Problem Catalog CI Job, End-to-End Stack CI Job, Vue Frontend CI Job, Verify CI Workflow, HTTP Auth Security Policies, Quarkus OIDC BFF Configuration, PostgreSQL Datasource Configuration (+7 more)
+
+### Community 81 - "Current Access Token"
 Cohesion: 0.26
 Nodes (7): AccessTokenCredential, AccessTokenProvider, CurrentAccessToken, ApplicationScoped, Override, CurrentAccessTokenTest, Test
 
-### Community 83 - "IngestResource.java"
+### Community 82 - "Resource java"
 Cohesion: 0.25
 Nodes (12): IngestResource, AccessTokenProvider, Blocking, Consumes, Inject, Logger, Path, POST (+4 more)
 
-### Community 84 - "IngestResponseMapper.java"
-Cohesion: 0.30
-Nodes (7): IngestResponseMapper, ApplicationScoped, IngestResult, Inject, ProblemResponseFactory, ProblemType, Response
-
-### Community 85 - "ViewerResource.java"
-Cohesion: 0.30
-Nodes (10): AccessTokenProvider, Blocking, GET, Inject, Logger, Path, Response, RolesAllowed (+2 more)
-
-### Community 86 - "dependencies"
+### Community 83 - "vue Frontend"
 Cohesion: 0.13
 Nodes (15): dependencies, @cornerstonejs/core, @cornerstonejs/dicom-image-loader, @cornerstonejs/metadata, @cornerstonejs/tools, dicom-parser, vue, vue-router (+7 more)
 
-### Community 87 - "RFC 4122"
+### Community 84 - "uuid v5 js"
 Cohesion: 0.26
 Nodes (13): RFC-4122, RFC-9562, semanticErrors(), createNamespaceUuid(), deriveProblemUrn(), deriveUuidV5(), DNS_NAMESPACE_UUID, formatUuid() (+5 more)
 
-### Community 88 - "description"
+### Community 85 - "owners Documentation"
 Cohesion: 0.14
 Nodes (15): description, items, type, $ref, description, $ref, description, items (+7 more)
 
-### Community 89 - "DEFAULT PATHS"
+### Community 86 - "generation js"
 Cohesion: 0.20
 Nodes (12): DEFAULT_PATHS, FORBIDDEN_FLAGS, main(), resolvePaths(), serializeLock(), fixture, workspace(), fixture (+4 more)
 
-### Community 90 - "StowResponseParser.java"
-Cohesion: 0.30
-Nodes (7): InvalidResponseException, ApplicationScoped, Inject, JsonNode, ObjectMapper, StowStudyResult, StowResponseParser
+### Community 87 - "Result Backend"
+Cohesion: 0.16
+Nodes (14): IngestResult, InstanceResult, Outcome, COMPLETE, FAILED, PARTIAL, RejectedFile, StudyResult (+6 more)
 
-### Community 91 - "ReportRepresentationMapper.jav"
-Cohesion: 0.24
-Nodes (6): ApplicationScoped, ReportRepresentationMapper, ReportResponse, ObjectMapper, Test, ReportRepresentationMapperTest
+### Community 88 - "Study Report Use Case"
+Cohesion: 0.34
+Nodes (5): GetStudyReportUseCaseTest, BeforeEach, DisplayName, ExtendWith, Test
 
-### Community 92 - "IngestPage.vue"
+### Community 89 - "Http Series Metadata Http Backend"
+Cohesion: 0.27
+Nodes (8): HttpSeriesMetadataGateway, ApplicationScoped, HttpClient, HttpResponse, Inject, Override, URI, W3cTraceContextInjector
+
+### Community 90 - "Api Failure Log Capture"
+Cohesion: 0.27
+Nodes (7): ApiFailureLogCapture, Logger, Override, Formatter, Handler, Level, LogRecord
+
+### Community 91 - "Page vue"
 Cohesion: 0.14
 Nodes (9): allowsRetry, batch, busy, errorMessage, errorTraceId, limitWarning, totalBytes, totalFiles (+1 more)
 
-### Community 93 - "useIngestBatch.ts"
+### Community 92 - "Batch Frontend"
 Cohesion: 0.21
 Nodes (7): DEFAULT_API, DEFAULT_LIMITS, IngestApi, IngestBatch, IngestLimits, IngestPhase, useIngestBatch()
 
-### Community 94 - "entry"
+### Community 93 - "required Documentation"
 Cohesion: 0.14
 Nodes (14): entry, additionalProperties, allOf, required, type, code, description, extensionsSchemaRef (+6 more)
 
-### Community 95 - "keycloak login.spec.ts"
+### Community 94 - "Code Backend"
+Cohesion: 0.19
+Nodes (9): Code, DUPLICATE_IDENTICAL, MALFORMED_DICOM, MISSING_SERIES_INSTANCE_UID, MISSING_SOP_CLASS_UID, MISSING_SOP_INSTANCE_UID, MISSING_STUDY_INSTANCE_UID, SOP_UID_COLLISION (+1 more)
+
+### Community 95 - "Submission Tracking Body Publisher"
+Cohesion: 0.21
+Nodes (6): Override, SubmissionTrackingBodyPublisher, BodyPublisher, BodyPublisher, ByteBuffer, Subscriber
+
+### Community 96 - "worklist api spec ts"
 Cohesion: 0.22
 Nodes (8): expectVerticallyCentered(), openBlackiceLogin(), requiredBox(), screenshotLoginCard(), showInvalidCredentials(), emptyFilters, emptyParams, page
 
-### Community 97 - "generate java.js"
+### Community 98 - "generate java js"
 Cohesion: 0.28
 Nodes (12): appliesToBody(), componentType(), constant(), deprecationTag(), extensionVariant(), generateJava(), generateJavaExtensions(), header() (+4 more)
 
-### Community 98 - "Automatic Label Reuse Invalida"
+### Community 99 - "Community Labels"
 Cohesion: 0.17
 Nodes (12): Automatic Label Reuse Invalidation, Cluster-Only Workflow, Clustered Communities, Community Label Quality Gate, Community Labels, Community Membership Signatures, Current Community Summaries, Exact Community-Key Coverage (+4 more)
 
-### Community 99 - "Atualização semântica final do"
+### Community 100 - "Traefik Gateway"
 Cohesion: 0.17
-Nodes (12): Atualização semântica final do Graphify, Exceções à atualização final do Graphify, Atualização manual em linked worktrees, Orientação opcional do Graphify, Exceções à atualização final, Commit da feature sem graphify-out, Fluxo de commits com o hook, Hook ignora commits só do grafo (+4 more)
+Nodes (12): Backend Product BFF, DICOMweb Integration, Problem Details Contract, Product Database, BlackICE Architecture, DCM4CHEE Archive, Keycloak OIDC, Arquitetura BlackICE (+4 more)
 
-### Community 100 - "HttpSeriesMetadataGateway.java"
-Cohesion: 0.30
-Nodes (7): HttpSeriesMetadataGateway, ApplicationScoped, HttpClient, HttpResponse, Inject, URI, W3cTraceContextInjector
-
-### Community 101 - "ViewerRuntime"
-Cohesion: 0.17
-Nodes (5): ViewerRuntime, annotationCount, emit, props, viewportRef
-
-### Community 102 - "Archive Ecosystem"
-Cohesion: 0.23
-Nodes (12): Archive Ecosystem, DCM4CHEE 5.34.3 Secure Baseline, OIDC Token Propagation, QIDO-RS, STOW-RS, WADO-RS, DICOM Domain Pack, Product Backend Boundary (+4 more)
-
-### Community 103 - "catalog.schema.json"
+### Community 101 - "catalog schema"
 Cohesion: 0.17
 Nodes (11): additionalProperties, description, $id, required, $schema, title, type, entries (+3 more)
 
-### Community 104 - "description (2)"
+### Community 102 - "defs Documentation"
 Cohesion: 0.17
 Nodes (12): description, pattern, type, $defs, code, publicText, uuid, description (+4 more)
 
-### Community 105 - "ApiProblem"
-Cohesion: 0.29
-Nodes (7): ApiProblem, ApiHttpFailureHandler, ApplicationScoped, Router, RoutingContext, ObjectMapper, ProblemExtensions
-
-### Community 106 - "Dcm4cheDicomBatchValidator.jav"
+### Community 103 - "Dcm4che Dicom Batch Dcm4che Backend"
 Cohesion: 0.29
 Nodes (7): Dcm4cheDicomBatchValidator, ApplicationScoped, Attributes, UploadedDicom, ValidationException, Code, DicomBatchValidator
 
-### Community 107 - "generated/ProblemExtensions.ja"
+### Community 104 - "Http Dicom Archive store Backend"
+Cohesion: 0.31
+Nodes (8): HttpDicomArchiveGateway, ApplicationScoped, HttpClient, Inject, Override, StowStudyResult, ValidatedDicom, W3cTraceContextInjector
+
+### Community 105 - "Problem Extensions"
 Cohesion: 0.25
 Nodes (6): DicomValidationViolations, Override, ProblemType, None, ProblemExtensions, Violation
 
-### Community 108 - "ViewerExceptionMappers.java"
+### Community 106 - "Routing Context"
 Cohesion: 0.51
 Nodes (5): Response, ViewerExceptionMappers, ProblemResponseFactory, RoutingContext, ServerExceptionMapper
 
-### Community 110 - "2026 08 22 backend modular cle"
+### Community 108 - "Backend modular com Clean"
 Cohesion: 0.18
 Nodes (10): Backend modular com Clean Architecture, Critérios de aceite, Decisão, Documentação de código, Fora de escopo, Limites e direção de dependências, Migração do fluxo de ingestão, Módulos de sessão e segurança (+2 more)
 
-### Community 111 - "Atomic Error Contract Migratio"
+### Community 109 - "RFC Problem Details Contract"
 Cohesion: 0.20
 Nodes (11): Atomic Error Contract Migration, Backend Problem Boundary, Cancelled Control Flow, Frontend Problem Parser, Implementation Verified, Official Problem Catalog, Problem Catalog Agent Workflow, RFC 9457 Problem Details Contract (+3 more)
 
-### Community 112 - "mvnw"
+### Community 110 - "mvnw Backend"
 Cohesion: 0.33
 Nodes (6): mvnw script, clean(), die(), exec_maven(), set_java_home(), verbose()
 
-### Community 113 - "ApiJavaScriptRequestChecker.ja"
-Cohesion: 0.38
-Nodes (6): ApiJavaScriptRequestChecker, ApplicationScoped, Override, RoutingContext, ChallengeData, JavaScriptRequestChecker
-
-### Community 114 - ".members()"
+### Community 111 - "Problem Extensions members Repository"
 Cohesion: 0.27
 Nodes (4): Override, ProblemType, None, ProblemExtensions
 
-### Community 115 - "ArchiveSearchException.java"
+### Community 112 - "Archive Search Exception"
 Cohesion: 0.24
 Nodes (7): ArchiveSearchException, Reason, CONNECTION, HTTP_STATUS, INVALID_RESPONSE, QUERY_TOO_BROAD, TIMEOUT
 
-### Community 116 - "ApiTraceResponseFilterTest.jav"
+### Community 113 - "Api Trace Response Filter"
 Cohesion: 0.40
 Nodes (3): ApiTraceResponseFilterTest, Test, MultivaluedMap
 
-### Community 117 - "scripts"
+### Community 114 - "build Frontend"
 Cohesion: 0.20
 Nodes (10): scripts, build, dev, preview, test, test:e2e:ingest, test:e2e:keycloak, test:e2e:reports (+2 more)
 
-### Community 118 - "report.api.ts"
+### Community 115 - "report api ts"
 Cohesion: 0.44
 Nodes (9): createStudyReport(), extractRequiredEtag(), fetchStudyReport(), isNonEmptyString(), isNullableDateString(), isRecord(), isValidDateString(), parseStudyReport() (+1 more)
 
-### Community 119 - "SeriesRail.vue"
+### Community 116 - "Series Rail vue"
 Cohesion: 0.24
 Nodes (6): emit, handleSelect(), isCollapsed, props, toggleCollapse(), UnsupportedReason
 
-### Community 120 - "Authenticated DICOM Ingest Flo"
+### Community 117 - "Authenticated DICOM Flow"
 Cohesion: 0.20
 Nodes (10): Authenticated DICOM Ingest Flow, CSRF and OIDC Protection, DICOM Domain Review Gate, DICOM UID Preservation, Durable Jobs EVO-001, Frontend Ingest Workflow, Manual DICOM Import, Metadata Validation and Study Grouping (+2 more)
 
-### Community 121 - "2026 08 22 agent authoring ski"
+### Community 118 - "DICOM MVP Closure"
+Cohesion: 0.20
+Nodes (10): MVP DICOM Closure Plan, RED GREEN REFACTOR, Playwright Stack Validation, Sandbox Validation Handoff, DICOM MVP Closure, Exact DICOM UID Identity, QIDO Complete Pagination, Spatial Order Fallback (+2 more)
+
+### Community 119 - "Decis es"
 Cohesion: 0.20
 Nodes (9): Alterações documentais previstas, Conhecimento neutro e wrappers, Decisões, Desenho — skill de autoria de agentes, Fora de escopo, Objetivo, Segurança, governança e validação, Seleção de modelo no momento da mudança (+1 more)
 
-### Community 122 - ".ArchiveViewerException()"
+### Community 120 - "Task Executor Factory"
+Cohesion: 0.28
+Nodes (5): TaskExecutorFactory, ContextAwareVirtualThreadExecutorFactory, ApplicationScoped, Override, FunctionalInterface
+
+### Community 121 - "Archive Viewer Exception AUTHENTICATION Backend"
 Cohesion: 0.22
 Nodes (8): Reason, ACCESS_DENIED, AUTHENTICATION, CONNECTION, INVALID_RESPONSE, NOT_FOUND, TIMEOUT, UNAVAILABLE
 
-### Community 123 - "InvalidViewerRequestException."
-Cohesion: 0.25
-Nodes (3): InvalidViewerRequestException, AccessTokenProvider, QuarkusTest
-
-### Community 124 - "useViewerCapability.ts"
+### Community 122 - "use Viewer Capability spec"
 Cohesion: 0.33
 Nodes (5): createMediaQueryList(), simulateViewport(), useViewerCapability(), VIEWER_MEDIA_QUERY, ViewerCapability
 
-### Community 125 - "generate markdown.js"
+### Community 123 - "Agent Authoring Domain Pack"
+Cohesion: 0.25
+Nodes (9): Graph Synchronization Protocol, Graphify Knowledge Graph Tooling, Agent Authoring Boundaries, Cost-Effective Model Routing, Cross-Platform Agent Discovery Layouts, Agent Authoring Domain Pack, Agent Validation Checklist, Domain Packs (+1 more)
+
+### Community 124 - "Failure Classification"
+Cohesion: 0.22
+Nodes (9): API Problem Details, Client Problems, Failure Classification, Operational Results, Problem Type Reuse, User Cancellation, HTTP Perimeter Logging, PHI-safe Error Handling (+1 more)
+
+### Community 125 - "generate markdown js"
 Cohesion: 0.53
 Nodes (8): apiSection(), cell(), clientSection(), deprecationSection(), extensionsSection(), generateMarkdown(), identitySection(), table()
 
-### Community 126 - "ApiProblemFactory.java"
+### Community 126 - "Api Problem Factory Api Backend"
 Cohesion: 0.32
 Nodes (5): ApiProblemFactory, ApplicationScoped, Inject, ProblemType, Violation
 
-### Community 127 - "ProblemResponseFactory.java"
+### Community 127 - "Problem Response Factory"
 Cohesion: 0.39
 Nodes (5): ApplicationScoped, Inject, ProblemType, Response, ProblemResponseFactory
 
-### Community 128 - "frontend/package.json"
+### Community 128 - "frontend package"
 Cohesion: 0.25
 Nodes (7): name, packageManager, pnpm, onlyBuiltDependencies, private, type, version
 
-### Community 129 - "StudyHeader.vue"
+### Community 129 - "Study Header vue"
 Cohesion: 0.25
 Nodes (6): emit, patientIdentifier, patientName, props, studyDateTime, studyDescription
 
-### Community 130 - "WorklistPage.spec.ts"
+### Community 130 - "Worklist Page spec ts"
 Cohesion: 0.25
 Nodes (4): currentRouteQuery, pushMock, replaceMock, searchStudiesMock
 
-### Community 131 - "2026 08 22 backend modular cle (2)"
+### Community 131 - "Global Constraints"
 Cohesion: 0.25
 Nodes (7): Backend Modular Clean Architecture Implementation Plan, Global Constraints, Task 1: Criar a guarda arquitetural que falha contra a estrutura atual, Task 2: Migrar ingestão para portas e adaptadores, deixando a guarda verde, Task 3: Documentar as fronteiras no código sem comentários redundantes, Task 4: Atualizar a documentação operacional e fechar a verificação, Task 5: Detalhar o módulo de ingestão por responsabilidade
 
-### Community 132 - "2026 08 09 commit curator desi"
+### Community 132 - "Commit Curator Design"
 Cohesion: 0.25
 Nodes (7): Arquitetura, Commit Curator Design, Comportamento, Limites, Modelos, Objetivo, Validação
 
-### Community 133 - "2026 08 09 keycloak windows bo"
+### Community 133 - "Bootstrap do Keycloak no"
 Cohesion: 0.25
 Nodes (7): Bootstrap do Keycloak no Windows — Design, Decisão, Erros e segurança, Fluxo, Fora de escopo, Objetivo, Testes
 
-### Community 134 - "CsrfResource.java"
+### Community 134 - "DICOM Invariants"
+Cohesion: 0.29
+Nodes (7): DICOM Domain Reviewer, DICOMweb Semantic Review, DICOM Viewer Frontend Agent, Quarkus Backend Agent, DICOM Invariants, Domain Packs, Human Validation Gates
+
+### Community 135 - "Csrf Resource java"
 Cohesion: 0.48
 Nodes (5): CsrfResource, Authenticated, GET, Path, Response
 
-### Community 135 - "CsrfResourceTest.java"
+### Community 136 - "Csrf Resource"
 Cohesion: 0.48
 Nodes (4): CsrfResourceTest, QuarkusTest, Test, TestSecurity
 
-### Community 136 - "SessionResourceTest.java"
+### Community 137 - "Session Resource"
 Cohesion: 0.48
 Nodes (4): QuarkusTest, Test, TestSecurity, SessionResourceTest
 
-### Community 137 - "ingest.types.ts"
+### Community 138 - "types ts"
 Cohesion: 0.29
 Nodes (5): IngestOutcome, IngestResponse, InstanceStatus, StudyStatus, UploadHandle
 
-### Community 139 - "owner"
+### Community 140 - "owner Documentation"
 Cohesion: 0.29
 Nodes (7): owner, enum, frontend, ingest, platform, security, worklist
 
-### Community 140 - "2026 08 07 keycloak same origi (2)"
+### Community 141 - "Keycloak same origin Implementation"
 Cohesion: 0.29
 Nodes (6): Estrutura de arquivos, Global Constraints, Keycloak same-origin — Implementation Plan, Self-review, Task 1: Fase 1 — Keycloak same-origin sob `/auth`, Task 2: Fase 2 — renomear o realm para `blackice`
 
-### Community 141 - "2026 08 22 agent authoring ski (2)"
+### Community 142 - "Global Constraints Agent Documentation"
 Cohesion: 0.29
 Nodes (6): Agent Authoring Skill Implementation Plan, Global Constraints, Task 1: Criar o Domain Pack canônico, Task 2: Criar wrappers de descoberta mínimos, Task 3: Integrar a convenção à documentação do repositório, Task 4: Validar a skill e as modificações
 
-### Community 142 - "Phase 1 Backend QIDO WADO"
+### Community 143 - "Cornerstone Stack Viewport"
 Cohesion: 0.38
 Nodes (7): Phase 1 Backend QIDO WADO, Phase 2 Frontend Cornerstone, Cornerstone Stack Viewport, Hybrid Viewer Architecture, QIDO Hierarchy Classification, Responsive Viewer Gate, WADO Metadata and Frame Proxy
 
-### Community 143 - "2026 08 22 antigravity agents "
+### Community 144 - "Agentes Antigravity desenho"
 Cohesion: 0.29
 Nodes (6): Agentes Antigravity — desenho, Configuração, Conhecimento e documentação, Escopo, Objetivo, Verificação
 
-### Community 144 - "DICOM Domain Review"
+### Community 145 - "DICOM Domain Review"
 Cohesion: 0.33
 Nodes (6): DICOM Domain Review, Human Semantic Gate, DICOMweb Backend Boundary, BlackICE Quarkus Backend, Cornerstone3D Viewer, Vue Reactivity Boundary
 
-### Community 145 - "ExternalProblemProbeResource.j"
+### Community 146 - "service Unavailable"
 Cohesion: 0.60
 Nodes (4): ExternalProblemProbeResource, GET, Path, PermitAll
 
-### Community 146 - "IngestPage.spec.ts"
+### Community 147 - "Page spec ts"
 Cohesion: 0.47
 Nodes (5): fetchCsrfTokenMock, file(), importFailingWith(), selectFiles(), uploadStudiesMock
 
-### Community 148 - "description (3)"
+### Community 149 - "extensions Schema Ref"
 Cohesion: 0.33
 Nodes (6): description, pattern, type, extensionsSchemaRef, null, string
 
-### Community 149 - "Foundation Stack Plan"
+### Community 150 - "Problem Catalog Registry"
+Cohesion: 0.33
+Nodes (6): Problem Catalog, Problem Catalog Registry, Problem Catalog Lock File, Generated Problem Artifacts, Problem Type Deprecation, Deterministic UUIDv5 Identity
+
+### Community 151 - "Keycloak Theme Design"
 Cohesion: 0.33
 Nodes (6): Foundation Stack Plan, Keycloak Login Theme Plan, Keycloak Focus Outline Plan, Keycloak Theme E2E Plan, Keycloak Same-origin Plan, Keycloak Theme Design
 
-### Community 150 - "Cross platform Launchers"
+### Community 152 - "Cross platform Launchers"
 Cohesion: 0.33
 Nodes (6): Cross-platform Launchers, Keycloak Admin REST, Keycloak Windows Bootstrap, Pester Contract Test, Shared POSIX Configuration Core, Three-file Compose Configuration
 
-### Community 151 - "2026 08 22 antigravity agents."
+### Community 153 - "Global Constraints Antigravity Documentation"
 Cohesion: 0.33
 Nodes (5): Antigravity Agents Implementation Plan, Global Constraints, Task 1: Criar os wrappers Antigravity, Task 2: Documentar o ponto de descoberta, Task 3: Confirmar descoberta pelo Antigravity
 
-### Community 153 - "IngestResult.vue"
+### Community 155 - "Result vue"
 Cohesion: 0.40
 Nodes (3): labels, STUDY_FAILURE_LABELS, StudyFailure
 
-### Community 154 - "report.api.spec.ts"
+### Community 156 - "report api spec ts"
 Cohesion: 0.50
 Nodes (4): mockDraftReport, mockFinalReport, problemJson(), problemResponse()
 
-### Community 155 - "useWorklist.spec.ts"
+### Community 157 - "use Worklist spec ts"
 Cohesion: 0.60
 Nodes (3): createStudy(), page(), pageWithPatient()
 
-### Community 156 - "httpStatus"
+### Community 158 - "http Status"
 Cohesion: 0.40
 Nodes (5): httpStatus, description, maximum, minimum, type
 
-### Community 157 - "retryPolicy"
+### Community 159 - "retry Policy"
 Cohesion: 0.40
 Nodes (5): retryPolicy, description, enum, MANUAL, NEVER
 
-### Community 158 - "query 20260727 184232 como o f"
+### Community 160 - "Q Como o frontend"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Como o frontend Vue obtém a sessão autenticada do backend?, Source Nodes
 
-### Community 159 - "query 20260727 184243 quais re"
+### Community 161 - "Q Quais regras do"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Quais regras do BlackICE governam StudyInstanceUID e os verbos DICOMweb?, Source Nodes
 
-### Community 160 - "query 20260727 184305 onde fic"
+### Community 162 - "Q Onde ficam as"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Onde ficam as instruções operacionais do Graphify no BlackICE?, Source Nodes
 
-### Community 161 - "Tooling node modules Exclusion"
-Cohesion: 0.50
-Nodes (4): Tooling node_modules Exclusion, Pinned Catalog Toolchain, Pinned Validation Dependencies, Problem Catalog Tooling Package
-
-### Community 162 - "dicom domain reviewer/agent.md"
+### Community 163 - "dicom domain reviewer agent"
 Cohesion: 0.50
 Nodes (3): Antes de revisar, Papel, Revisão
 
-### Community 164 - "EVO 011: Editor Markdown rico "
-Cohesion: 0.83
-Nodes (4): EVO-011: Editor Markdown rico para laudos, EVO-012: Invalidação lógica de laudos com auditoria, Authenticated Reports Implementation Plan (MVP #4), Laudos autenticados — design do MVP #4
+### Community 164 - "Feature Modular Architecture"
+Cohesion: 0.50
+Nodes (4): Feature Modular Backend Architecture, Feature Modular Architecture, API Application Infrastructure Dependency Rule, Shared Code Promotion Rule
 
-### Community 165 - "description (4)"
+### Community 166 - "description Documentation"
 Cohesion: 0.50
 Nodes (4): description, minLength, type, description
 
-### Community 166 - "schemaVersion"
+### Community 167 - "schema Version"
 Cohesion: 0.50
 Nodes (4): schemaVersion, const, description, type
 
-### Community 167 - "scope"
+### Community 168 - "scope Documentation"
 Cohesion: 0.50
 Nodes (4): scope, enum, API, CLIENT
 
-### Community 168 - "type"
+### Community 169 - "type Documentation"
 Cohesion: 0.50
 Nodes (4): type, description, pattern, type
 
-### Community 169 - "Modular Architecture"
-Cohesion: 0.50
-Nodes (4): Modular Architecture, Quarkus Product Backend, Report Model, Backend Modular Architecture Plan
-
-### Community 170 - "DCM4CHEE 5.34.3 Baseline"
-Cohesion: 0.50
-Nodes (4): DCM4CHEE 5.34.3 Baseline, Same-origin Keycloak login, DCM4CHEE Compose services, DCM4CHEE secure stack
-
-### Community 171 - "2026 08 09 commit curator.md"
+### Community 170 - "Global Constraints Commit Documentation"
 Cohesion: 0.50
 Nodes (3): Commit Curator Implementation Plan, Global Constraints, Task 1: Domain Pack e wrappers de commit
 
-### Community 172 - "2026 08 09 keycloak windows bo (2)"
+### Community 171 - "Global Constraints Bootstrap Documentation"
 Cohesion: 0.50
 Nodes (3): Bootstrap do Keycloak no Windows Implementation Plan, Global Constraints, Task 1: Launchers multiplataforma com núcleo único
 
-### Community 173 - "Keycloak input focus outline f"
+### Community 172 - "Black ICE login CSS"
 Cohesion: 0.50
 Nodes (4): Keycloak input focus outline fix, Keycloak theme E2E regression suite, BlackICE login CSS theme, BlackICE theme properties
 
-### Community 174 - "CSRF Double Submit Protection"
+### Community 173 - "Manual DICOM Import"
 Cohesion: 0.50
 Nodes (4): CSRF Double Submit Protection, Manual DICOM Import, STOW-RS Per Study, DICOM UID Validation
 
-### Community 175 - "Intermediários descartáveis da"
+### Community 174 - "Labels e learning port"
 Cohesion: 0.67
 Nodes (4): Intermediários descartáveis da pipeline Graphify, Padrões de exclusão Graphify, Política de intermediários Graphify, Labels e learning portáveis
 
-### Community 178 - "Hook pós commit e sincronizaçã"
+### Community 177 - "Problem Details API Contract"
 Cohesion: 0.67
-Nodes (3): Hook pós-commit e sincronização do grafo, Segundo commit de sincronização do grafo, Hook pós-commit intencional
+Nodes (3): Problem Details API Contract, W3C traceparent Propagation, Frontend Problem Error Boundary
 
-### Community 184 - "Canonical Commit Body"
+### Community 178 - "Same Origin BFF Session"
+Cohesion: 0.67
+Nodes (3): Same-Origin BFF Session, E2E Local Stack Contract, Authenticated DICOMweb BFF Boundary
+
+### Community 184 - "Claude Commit Curator"
 Cohesion: 0.67
 Nodes (3): Canonical Commit Body, Commit Conventions Domain Pack, Claude Commit Curator
 
-### Community 185 - "Cluster only refresh"
+### Community 185 - "Incremental re extraction runbook"
 Cohesion: 0.67
 Nodes (3): Cluster-only refresh, Incremental re-extraction runbook, Incremental merge integrity
 
-### Community 186 - "DICOM Patient Study Series Ins"
+### Community 186 - "Product Database"
 Cohesion: 0.67
-Nodes (3): DICOM Patient Study Series Instance Hierarchy, DICOM UID Identity, StudyInstanceUID
+Nodes (3): Clinical Report, Product Database, Product Database Service
 
-### Community 187 - "Vue Feature Architecture"
+### Community 187 - "DCM4 CHEE Secure Stack"
 Cohesion: 0.67
-Nodes (3): Vue Feature Architecture, Vue Frontend Domain Pack, Worklist QIDO-RS Plan
+Nodes (3): DCM4CHEE 5.34.3 Baseline, DCM4CHEE Secure Stack, Pinned Image Tags
 
-### Community 188 - "Graphify Integration Plan"
-Cohesion: 0.67
-Nodes (3): Graphify Integration Plan, Commit Curator Plan, Historical Specs and Plans
-
-### Community 189 - "Study Viewer Implementation Pl"
+### Community 188 - "MVP Study Viewer"
 Cohesion: 0.67
 Nodes (3): Study Viewer Implementation Plan, Phase 3 Integration and Graphify, MVP 3 Study Viewer
 
-### Community 190 - "API ARCHIVE OUTCOME UNKNOWN"
+### Community 189 - "API ARCHIVE UNAVAILABLE"
 Cohesion: 1.00
 Nodes (3): API_ARCHIVE_OUTCOME_UNKNOWN, API_ARCHIVE_UNAVAILABLE, Uncertain Archive Outcome
 
 ## Knowledge Gaps
-- **752 isolated node(s):** `ACCEPTED`, `WARNING`, `REJECTED`, `UNCONFIRMED`, `SessionResponse` (+747 more)
+- **767 isolated node(s):** `ACCEPTED`, `WARNING`, `REJECTED`, `UNCONFIRMED`, `SessionResponse` (+762 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **137 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **146 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ProblemType` connect `generated/ProblemType.java` to `ApiProblemExceptionMappers.jav`, `ReportExceptionMappers.java`, `ApiProblemResponseFilter.java`, `ViewerExceptionMappers.java`, `ApiFailureLogger.java`?**
+- **Why does `ProblemType` connect `Problem Type` to `Report Exception Mappers`, `Api Failure Logger`, `Api Problem Http`, `Routing Context`, `Api Problem Exception Mappers`?**
+  _High betweenness centrality (0.039) - this node is a cross-community bridge._
+- **Why does `InvalidReportRequestException` connect `Invalid Report Request Exception` to `find By Study Instance`, `Api Problem Probe Resource`, `Report Exception Mappers`, `Study Report Use Case`, `Report Etag java`, `Report Study Ref`, `Version Backend`, `Report Repository`, `Display Name`, `Report Backend`, `Report Resource java`?**
+  _High betweenness centrality (0.030) - this node is a cross-community bridge._
+- **Why does `ArchiveViewerException` connect `Archive Viewer Exception` to `Archive Viewer Exception AUTHENTICATION Backend`, `Http Dicom Frame Gateway`, `Routing Context`, `Viewer Resource java Invalid Backend`, `Viewer Instance`, `Http Series Metadata Http Backend`, `Http Series Metadata Gateway`?**
   _High betweenness centrality (0.028) - this node is a cross-community bridge._
-- **Why does `ArchiveViewerException` connect `ArchiveViewerException.java` to `HttpSeriesMetadataGateway.java`, `ViewerSeriesRef`, `HttpDicomFrameGateway.java`, `ViewerExceptionMappers.java`, `WadoFrameResource.java`, `HttpStudyHierarchyGateway.java`, `InstanceIdentityMetadata.java`, `DisplayName`, `ViewerInstance.java`, `.ArchiveViewerException()`, `InvalidViewerRequestException.`, `.reason()`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
-- **Why does `ReportStudyRef` connect `ReportContent` to `AfterEach`, `CreateReportCommand`, `UpdateReportCommand`, `PanacheReportRepository.java`, `ReportRepository.java`, `ReportResourceGetTest.java`, `InvalidReportRequestException.`, `ReportInputsTest.java`, `.actor()`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
 - **Are the 23 inferred relationships involving `ReportStudyRef` (e.g. with `.createReport()` and `.getReport()`) actually correct?**
   _`ReportStudyRef` has 23 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 11 inferred relationships involving `ReportActor` (e.g. with `.preserves_valid_actor_fields()` and `.rejects_invalid_display_name()`) actually correct?**
   _`ReportActor` has 11 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `ACCEPTED`, `WARNING`, `REJECTED` to the rest of the system?**
-  _752 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `AfterEach` be split into smaller, more focused modules?**
-  _Cohesion score 0.05426774483378257 - nodes in this community are weakly interconnected._
+  _767 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Report Resource` be split into smaller, more focused modules?**
+  _Cohesion score 0.050614250614250615 - nodes in this community are weakly interconnected._
