@@ -1,0 +1,13 @@
+[network]
+allow = [
+  "registry.npmjs.org",
+  "registry.yarnpkg.com",
+  "repo.maven.apache.org",
+  "repo1.maven.org",
+  "api.adoptium.net",
+  "dlcdn.apache.org",
+]
+
+[docker]
+mode = "nested"
+publish_ports = ["18080:80", 8081]

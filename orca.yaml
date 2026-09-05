@@ -1,0 +1,7 @@
+environmentRecipes:
+  - id: agent-sandbox
+    name: Agent Sandbox
+    create:  ./scripts/orca-vm/create.sh
+    destroy: ./scripts/orca-vm/destroy.sh
+    suspend: ./scripts/orca-vm/suspend.sh
+    resume:  ./scripts/orca-vm/resume.sh
