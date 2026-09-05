@@ -71,6 +71,7 @@ public class WadoSeriesMetadataParser {
     private static final String WINDOW_CENTER = "00281050";
     private static final String WINDOW_WIDTH = "00281051";
     private static final String VOI_LUT_FUNCTION = "00281056";
+    private static final String VOI_LUT_SEQUENCE = "00283010";
 
     private final ObjectMapper objectMapper;
 
@@ -185,7 +186,8 @@ public class WadoSeriesMetadataParser {
             if (hasWindowCenter != hasWindowWidth
                 || (hasWindowCenter && windowCenter.size() != windowWidth.size())
                 || (hasWindowWidth && windowWidth.stream().anyMatch(width -> width < 1.0d))
-                || (voiLutFunction != null && !"LINEAR".equals(voiLutFunction))) {
+                || (voiLutFunction != null && !"LINEAR".equals(voiLutFunction))
+                || (dataset.has(VOI_LUT_SEQUENCE) && !hasWindowCenter)) {
                 throw new InvalidArchiveMetadataException("Invalid linear window metadata");
             }
 

@@ -575,6 +575,29 @@ class WadoSeriesMetadataParserTest {
         assertEquals(1, parser.parse(linear, SERIES_REF).size());
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {CT_SOP_CLASS, MR_SOP_CLASS, CR_SOP_CLASS, DX_SOP_CLASS})
+    void rejects_voi_lut_sequence_without_supported_linear_window(String sopClassUid) throws Exception {
+        String unsignedImage = replaceValue(
+            baseDatasetJson(sopClassUid, SOP_UID),
+            "00280103",
+            "[0]");
+        String lutOnly = addValidVoiLutSequence(
+            removeTag(removeTag(unsignedImage, "00281050"), "00281051")
+        );
+
+        assertThrows(InvalidArchiveMetadataException.class,
+            () -> parser.parse(lutOnly, SERIES_REF));
+    }
+
+    @Test
+    void accepts_voi_lut_sequence_when_supported_linear_window_is_also_present() throws Exception {
+        String body = addValidVoiLutSequence(
+            replaceValue(baseDatasetJson(CT_SOP_CLASS, SOP_UID), "00280103", "[0]"));
+
+        assertEquals(1, parser.parse(body, SERIES_REF).size());
+    }
+
     @ParameterizedTest(name = "{0}")
     @MethodSource("invalidUsValues")
     void rejects_invalid_us_json_values(String description, String body) {
@@ -778,6 +801,21 @@ class WadoSeriesMetadataParserTest {
         attribute.set("Value", mapper.readTree(valueJson));
         ((ObjectNode) root.get(0)).set(tag, attribute);
         return root.toString();
+    }
+
+    private static String addValidVoiLutSequence(String body) throws JsonProcessingException {
+        return addAttribute(
+            body,
+            "00283010",
+            "SQ",
+            """
+                [{
+                  "00283002": { "vr": "US", "Value": [1, 0, 16] },
+                  "00283003": { "vr": "LO", "Value": ["Default VOI LUT"] },
+                  "00283006": { "vr": "OW", "InlineBinary": "AAA=" }
+                }]
+                """
+        );
     }
 
     private static String replaceValueWithRawNumber(String body, String tag, String rawNumber)

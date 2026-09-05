@@ -138,6 +138,8 @@ ou valor inválido invalida toda a resposta.
 O frontend não apresenta valores armazenados como HU ou outra unidade calibrada
 sem metadata que prove essa transformação.
 
+O suporte completo a VOI LUT Sequence fica adiado em `EVO-013`.
+
 ## STOW: consolidação determinística
 
 O parser pode aceitar a forma objeto e a forma array já suportadas, mas agrega o
